@@ -13,7 +13,7 @@ export async function build(root: string = process.cwd()) {
   const [clientBundle, serverBundle] = await bundle(root)
   // 引入 server-entry 产物 js
   const serverEntryPath = path.join(root, '.temp', 'ssr-entry.js')
-  const { renderInServer } = require(serverEntryPath)
+  const { renderInServer } = await import(serverEntryPath)
   // 服务端渲染，产出
   await renderPage(renderInServer, root, clientBundle)
 }

@@ -1,6 +1,6 @@
 import { join } from 'path'
 
-export const PACKAGE_ROOT_PATH = join(__dirname, '..', '..', '..')
+export const PACKAGE_ROOT_PATH = join(__dirname, '..')
 
 export const DEFAULT_HTML_PATH = join(PACKAGE_ROOT_PATH, 'template.html')
 
