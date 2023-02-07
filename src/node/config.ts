@@ -1,7 +1,7 @@
 import { resolve } from 'path'
 import fs from 'fs-extra'
 import { loadConfigFromFile } from 'vite'
-import { UserConfig } from '../shared/types/index'
+import { SiteConfig, UserConfig } from '../shared/types/index'
 
 type RawConfig =
   | UserConfig
@@ -18,7 +18,24 @@ export async function resolveConfig(
 ) {
   const [configPath, userConfig] = await resolveUserConfig(root, command, mode)
 
-  return userConfig
+  const siteConfig: SiteConfig = {
+    root,
+    configPath: configPath,
+    siteData: resolveSiteData(userConfig as UserConfig),
+  }
+  return siteConfig
+}
+
+/**
+ * 解析网站默认用户配置
+ */
+export function resolveSiteData(userConfig: UserConfig): UserConfig {
+  return {
+    title: userConfig.title || 'hhx-docs库',
+    description: userConfig.description || 'SSG 博客库',
+    themeConfig: userConfig.themeConfig || {},
+    vite: userConfig.vite || {},
+  }
 }
 
 export async function resolveUserConfig(

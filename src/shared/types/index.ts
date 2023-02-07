@@ -1,4 +1,12 @@
 import { UserConfig as ViteConfiguration } from 'vite'
+/**
+ * 网站配置
+ */
+export interface SiteConfig {
+  root: string
+  configPath: string
+  siteData: UserConfig
+}
 
 /**
  * 用户配置

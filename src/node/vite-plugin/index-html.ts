@@ -2,6 +2,9 @@ import { readFile } from 'fs/promises'
 import { Plugin } from 'vite'
 import { CLIENT_ENTRY_PATH, DEFAULT_HTML_PATH } from '../constants'
 
+/**
+ * 拦截开发时请求进行模板html处理
+ */
 export function pluginIndexHtml(): Plugin {
   return {
     name: 'hhx-docs:index-html',

@@ -5,6 +5,11 @@
     "module": "commonjs" /* Specify what module code is generated. */,
     "rootDir": "." /* Specify the root folder within your source files. */,
     "jsx": "react-jsx", // 开启react-jsx
-    "esModuleInterop": true // 开启 esm 默认导入
+    "esModuleInterop": true, // 开启 esm 默认导入
+    // 路径别名，两个需要一起配置
+    "baseUrl": "src",
+    "paths": {
+      "shared/*": ["shared/*"]
+    }
   }
 }

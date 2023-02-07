@@ -1,3 +1,6 @@
-export default {
-  a: 1,
-}
+import { defineConfig } from '../dist'
+
+export default defineConfig({
+  title: 'docs',
+  description: 'hot',
+})
