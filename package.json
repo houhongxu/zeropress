@@ -1,0 +1,13 @@
+{
+  "name": "hhxpress",
+  "version": "1.0.0",
+  "description": "hhxpress",
+  "main": "index.js",
+  "scripts": {},
+  "bin": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {}
+}
