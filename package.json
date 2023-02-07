@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsup --watch",
-    "build": "tsup"
+    "build": "tsup",
+    "test:unit": "vitest run",
+    "test:comment": "直接使用vitest命令可以开启监听模式",
+    "prepare:e2e": "tsx scripts/prepare-e2e.ts",
+    "test:e2e": "playwright test"
   },
   "bin": {
     "hhx-docs": "bin/cli.js"
@@ -14,13 +18,17 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@playwright/test": "1.26.1",
     "@types/fs-extra": "^11.0.1",
     "@types/node": "^18.11.19",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
+    "execa": "^6.1.0",
     "rollup": "^3.14.0",
     "tsup": "^6.5.0",
-    "typescript": "^4.9.5"
+    "tsx": "^3.12.3",
+    "typescript": "^4.9.5",
+    "vitest": "^0.28.4"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^3.1.0",
