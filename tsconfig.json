@@ -4,6 +4,7 @@
     "target": "ESNext" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
     "module": "commonjs" /* Specify what module code is generated. */,
     "rootDir": "src" /* Specify the root folder within your source files. */,
-    "jsx": "react-jsx" // 开启react-jsx
+    "jsx": "react-jsx", // 开启react-jsx
+    "esModuleInterop": true // 开启 esm 默认导入
   }
 }
