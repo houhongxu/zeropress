@@ -1,0 +1,24 @@
+{
+  "name": "hhx-docs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc -w",
+    "build": "tsc -w"
+  },
+  "bin": {
+    "hhx-docs": "bin/cli.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.11.19",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "cac": "^6.7.14",
+    "vite": "^4.1.1"
+  }
+}
