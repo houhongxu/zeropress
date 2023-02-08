@@ -15,7 +15,7 @@ export async function createDevServer(
   const config = await resolveConfig(root, 'serve', 'development')
 
   return createViteDevServer({
-    root,
+    root: PACKAGE_ROOT_PATH,
     plugins: [
       pluginIndexHtml(),
       pluginReact(),

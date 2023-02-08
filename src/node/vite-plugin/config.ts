@@ -1,6 +1,7 @@
-import { relative } from 'path'
+import { PACKAGE_ROOT_PATH } from 'node/constants'
+import path, { relative } from 'path'
 import { Plugin } from 'vite'
-import { SiteConfig } from '../../shared/types/index'
+import { SiteConfig } from 'shared/types/index'
 
 const SITE_DATA_ID = 'hhx-docs:site-data'
 const RESOLVED_SITE_DATA_ID = '\0' + 'hhx-docs:site-data'
@@ -10,10 +11,26 @@ const RESOLVED_SITE_DATA_ID = '\0' + 'hhx-docs:site-data'
  */
 export function pluginConfig(
   config: SiteConfig,
-  restartServer: () => Promise<void>
+  restartServer?: () => Promise<void>
 ): Plugin {
   return {
     name: 'hhx-docs:config',
+    // 处理配置文件，解析ts路径别名@runtime
+    config() {
+      return {
+        root: PACKAGE_ROOT_PATH,
+        resolve: {
+          alias: {
+            '@runtime': path.join(
+              PACKAGE_ROOT_PATH,
+              'src',
+              'runtime',
+              'index.ts'
+            ),
+          },
+        },
+      }
+    },
     // 解析模块id
     resolveId(id) {
       if (id === SITE_DATA_ID) {

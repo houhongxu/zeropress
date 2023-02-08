@@ -9,7 +9,8 @@
     // 路径别名，两个需要一起配置
     "baseUrl": "src",
     "paths": {
-      "shared/*": ["shared/*"]
+      "shared/*": ["shared/*"],
+      "@runtime": ["./runtime/index.ts"]
     }
   }
 }

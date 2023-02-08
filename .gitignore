@@ -2,3 +2,5 @@ node_modules
 .history
 .vscode
 dist
+build
+.temp
