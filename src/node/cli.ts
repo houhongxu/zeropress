@@ -40,8 +40,6 @@ cli
 cli
   .command('build [root]', 'build for production / 构建生产环境包')
   .action(async (root: string) => {
-    console.log(root)
-
     try {
       // 获取完整路径，resolve会从根路径开始补充路径
       root = path.resolve(root)

@@ -10,7 +10,7 @@ function renderInBrowser() {
     throw new Error('#root element not found')
   }
   createRoot(containerEl).render(
-    // 根据浏览器url访问路由
+    // 根据浏览器url访问注册的路由
     <BrowserRouter>
       <App />
     </BrowserRouter>

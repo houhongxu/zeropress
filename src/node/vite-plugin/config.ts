@@ -7,7 +7,7 @@ const SITE_DATA_ID = 'hhx-docs:site-data'
 const RESOLVED_SITE_DATA_ID = '\0' + 'hhx-docs:site-data'
 
 /**
- * 通过虚拟模块使客户端可以访问配置文件
+ * 通过虚拟模块使客户端可以访问配置文件并处理配置文件
  */
 export function pluginConfig(
   config: SiteConfig,
@@ -15,7 +15,7 @@ export function pluginConfig(
 ): Plugin {
   return {
     name: 'hhx-docs:config',
-    // 处理配置文件，解析ts路径别名@runtime
+    // 处理配置文件，固定文件根目录，解析ts路径别名@runtime
     config() {
       return {
         root: PACKAGE_ROOT_PATH,

@@ -36,6 +36,7 @@ export async function bundle(root: string, config: SiteConfig) {
     },
     build: {
       ssr: isServer,
+      // 打包因为plugin-config路径固定为根路径
       outDir: isServer ? path.join(root, '.temp') : 'build',
       rollupOptions: {
         input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,

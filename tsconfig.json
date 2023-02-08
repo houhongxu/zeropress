@@ -10,6 +10,8 @@
     "baseUrl": "src",
     "paths": {
       "shared/*": ["shared/*"],
+      "node/*": ["node/*"],
+      // 这个别名在vite配置插件里也需要配置
       "@runtime": ["./runtime/index.ts"]
     }
   }

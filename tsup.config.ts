@@ -14,4 +14,8 @@ export default defineConfig({
   dts: true,
   shims: true, // 注入兼容esm与cjs的polyfill
   clean: true,
+  // 解决esm内使用require的问题
+  // banner: {
+  //   js: 'import { createRequire } from "module"; const require = createRequire(import.meta.url);',
+  // },
 })
