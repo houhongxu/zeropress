@@ -52,10 +52,11 @@ export class RouteService {
   }
 
   // 生成路由数据导出代码
+  // loadable是运行时导入库
+
   generateRoutesCode() {
     return `
   import React from 'react';
-  // 运行时导入库
   import loadable from '@loadable/component';
   ${this.#routeData
     .map((route, index) => {
