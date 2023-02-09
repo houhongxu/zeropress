@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsup --watch",
-    "build": "tsup",
+    "dev": "rm -rf dist && tsup --watch",
+    "build": "rm -rf dist && tsup",
     "test:unit": "vitest run",
     "test:comment": "直接使用vitest命令可以开启监听模式",
     "prepare:e2e": "tsx scripts/prepare-e2e.ts",
@@ -24,14 +24,19 @@
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "execa": "^6.1.0",
+    "rehype-stringify": "^9.0.3",
+    "remark-parse": "^10.0.1",
+    "remark-rehype": "^10.1.0",
     "rollup": "^3.14.0",
     "tsup": "^6.5.0",
     "tsx": "^3.12.3",
     "typescript": "^4.9.5",
+    "unified": "^10.1.2",
     "vitest": "^0.28.4"
   },
   "dependencies": {
     "@loadable/component": "^5.15.3",
+    "@mdx-js/rollup": "2.1.3",
     "@vitejs/plugin-react": "^3.1.0",
     "cac": "^6.7.14",
     "fast-glob": "^3.2.12",
@@ -39,10 +44,11 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.1",
-    "rehype-stringify": "^9.0.3",
-    "remark-parse": "^10.0.1",
-    "remark-rehype": "^10.1.0",
-    "unified": "^10.1.2",
+    "rehype-autolink-headings": "^6.1.1",
+    "rehype-slug": "^5.1.0",
+    "remark-frontmatter": "^4.0.1",
+    "remark-gfm": "^3.0.1",
+    "remark-mdx-frontmatter": "^2.1.1",
     "vite": "^4.1.1"
   }
 }
