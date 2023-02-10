@@ -46,3 +46,7 @@ A note[^1]
 - [x] done
 - [x] done
 - [x] done
+
+```js
+console.error(`Failed to load user config: ${e} / 加载用户配置失败：${e}`)
+```

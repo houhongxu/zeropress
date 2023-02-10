@@ -52,9 +52,6 @@ export const rehypePluginPreWrapper: Plugin<[], Root> = () => {
           // 拷贝pre
           clonedNode,
         ]
-
-        // 删除code的className
-        codeNode.properties.className = ''
       }
     })
   }

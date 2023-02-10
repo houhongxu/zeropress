@@ -24,11 +24,13 @@ export async function build(root: string = process.cwd(), config: SiteConfig) {
  */
 export async function bundle(root: string, config: SiteConfig) {
   // 获取打包配置
-  const resolveViteConfig = (isServer: boolean): InlineConfig => ({
+  const resolveViteConfig = async (
+    isServer: boolean
+  ): Promise<InlineConfig> => ({
     mode: 'production',
     root,
     // 注意加上pluginReact这个插件，自动注入 import React from 'react'，避免 React is not defined 的错误
-    plugins: createVitePlugins(config),
+    plugins: await createVitePlugins(config),
     ssr: {
       // 注意加上这个配置，防止 cjs 产物中 require ESM 的产物，通过一起打包仅cjs产物的方法，因为 react-router-dom 的产物为 ESM 格式
       noExternal: ['react-router-dom'],
@@ -54,9 +56,9 @@ export async function bundle(root: string, config: SiteConfig) {
     // 获取双端产物，并发速度更快
     const [clientBundle, serverBundle] = await Promise.all([
       // client
-      viteBuild(resolveViteConfig(false)),
+      viteBuild(await resolveViteConfig(false)),
       // server
-      viteBuild(resolveViteConfig(true)),
+      viteBuild(await resolveViteConfig(true)),
     ])
     return [clientBundle, serverBundle] as [RollupOutput, RollupOutput]
   } catch (e) {

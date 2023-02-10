@@ -6,8 +6,10 @@ import rehypePluginSlug from 'rehype-slug'
 import remarkPluginMDXFrontMatter from 'remark-mdx-frontmatter'
 import remarkPluginFrontmatter from 'remark-frontmatter'
 import { rehypePluginPreWrapper } from './rehypePlugins/preWrapper'
+import { rehypePluginShiki } from './rehypePlugins/shiki'
+import shiki from 'shiki'
 
-export function rollupPluginMdx() {
+export async function rollupPluginMdx() {
   return pluginMdx({
     remarkPlugins: [
       // 渲染链接列表下划线表格等github风格md
@@ -34,6 +36,12 @@ export function rollupPluginMdx() {
         },
       ],
       rehypePluginPreWrapper,
+      [
+        rehypePluginShiki,
+        {
+          highlighter: await shiki.getHighlighter({ theme: 'github-dark' }),
+        },
+      ],
     ],
   }) as unknown as Plugin
 }

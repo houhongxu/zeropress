@@ -5,7 +5,7 @@ import { pluginConfig } from './vite-plugin/config'
 import { pluginRoutes } from './vite-plugin/routes'
 import { createPluginMdx } from './vite-plugin/mdx'
 
-export function createVitePlugins(
+export async function createVitePlugins(
   config: SiteConfig,
   restartServer?: () => Promise<void>
 ) {
@@ -18,6 +18,6 @@ export function createVitePlugins(
     pluginRoutes({
       root: config.root,
     }),
-    createPluginMdx(),
+    await createPluginMdx(),
   ]
 }
