@@ -15,7 +15,7 @@ export function pluginConfig(
 ): Plugin {
   return {
     name: 'hhx-docs:config',
-    // 处理配置文件，固定文件根目录，解析ts路径别名@runtime
+    // 处理配置文件，固定文件根目录来避免vite静态资源服务影响路由，解析ts路径别名@runtime
     config() {
       return {
         root: PACKAGE_ROOT_PATH,

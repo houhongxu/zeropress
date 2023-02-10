@@ -14,17 +14,18 @@ cli
   .command('[root]', 'start dev server / 开启开发环境服务器')
   .alias('dev')
   .action(async (root: string) => {
+    // 将createServer传入createDevServer进行重启热更新并重新读取配置
     const createServer = async () => {
       // 动态导入createDevServer,重新读取配置
       const { createDevServer } = await import('./dev.js')
 
-      // 重启开发服务器
+      // 重启热更新并重新读取配置
       const restartServer = async () => {
         await server.close()
         await createServer()
       }
 
-      // 获取vite-dev-server实例
+      // 获取vite-dev-server实例，传入重启热更新函数
       const server = await createDevServer(root, restartServer)
 
       // 开启开发监听服务
