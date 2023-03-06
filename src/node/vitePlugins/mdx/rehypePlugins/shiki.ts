@@ -8,6 +8,9 @@ interface Options {
   highlighter: shiki.Highlighter
 }
 
+/**
+ * 代码块高亮插件
+ */
 export const rehypePluginShiki: Plugin<[Options], Root> = ({ highlighter }) => {
   return (tree) => {
     visit(tree, 'element', (node, index, parent) => {

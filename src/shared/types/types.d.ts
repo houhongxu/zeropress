@@ -4,6 +4,6 @@ declare module 'hhx-docs:site-data' {
   export default siteData
 }
 declare module 'hhx-docs:routes' {
-  import type { Route } from 'node/vite-plugin/routes'
+  import type { Route } from 'node/vitePlugins/routes'
   export const routes: Route[]
 }

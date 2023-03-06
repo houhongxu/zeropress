@@ -8,6 +8,7 @@ import remarkPluginFrontmatter from 'remark-frontmatter'
 import { rehypePluginPreWrapper } from './rehypePlugins/preWrapper'
 import { rehypePluginShiki } from './rehypePlugins/shiki'
 import shiki from 'shiki'
+import { remarkPluginToc } from './remarkPlugins/toc'
 
 export async function rollupPluginMdx() {
   return pluginMdx({
@@ -18,6 +19,8 @@ export async function rollupPluginMdx() {
       remarkPluginFrontmatter,
       // 解析mdx元信息导出成变量，name增加元信息包裹对象名,title=>frontmatter:{title:'xxx'}
       [remarkPluginMDXFrontMatter, { name: 'frontmatter' }],
+      // 提取toc并导出
+      remarkPluginToc,
     ],
     rehypePlugins: [
       // 标题增加id

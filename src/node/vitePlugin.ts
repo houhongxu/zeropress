@@ -1,10 +1,10 @@
 import { SiteConfig } from 'shared/types'
-import { pluginIndexHtml } from './vite-plugin/index-html'
+import { pluginIndexHtml } from './vitePlugins/indexHtml'
 import pluginReact from '@vitejs/plugin-react'
-import { pluginConfig } from './vite-plugin/config'
-import { pluginRoutes } from './vite-plugin/routes'
-import { createPluginMdx } from './vite-plugin/mdx'
-
+import { pluginConfig } from './vitePlugins/config'
+import { pluginRoutes } from './vitePlugins/routes'
+import { createPluginMdx } from './vitePlugins/mdx'
+/** */
 export async function createVitePlugins(
   config: SiteConfig,
   restartServer?: () => Promise<void>
