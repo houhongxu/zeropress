@@ -12,6 +12,7 @@ export interface Route {
 
 interface PluginOptions {
   root: string
+  isSSR: boolean
 }
 
 /**
@@ -36,7 +37,7 @@ export function pluginRoutes(options: PluginOptions): Plugin {
     load(id: string) {
       if (id === RESOLVED_CONVENTIONAL_ROUTE_ID) {
         // 返回导出路由数据的代码
-        return routeService.generateRoutesCode()
+        return routeService.generateRoutesCode(options.isSSR ?? false)
       }
     },
   }

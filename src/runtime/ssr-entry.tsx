@@ -4,11 +4,12 @@ import { App } from './app'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom/server'
 
-// 目前是location单路由打包
-export function renderInServer() {
+export function renderInServer(pagePath: string) {
   return renderToString(
-    <StaticRouter location={'/guide'}>
+    <StaticRouter location={pagePath}>
       <App />
     </StaticRouter>
   )
 }
+
+export { routes } from 'hhx-docs:routes'
