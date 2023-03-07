@@ -24,3 +24,9 @@ cd 进入当前文件夹
 1. join 是把各个 path 片段连接在一起， resolve 把'/'当成根目录
 
 2. resolve 在传入的第一参数为非根路径时，会返回一个带当前目录路径的绝对路径，而 join 仅仅用于路径拼接
+
+## vite 版本
+
+需要 vite3.1.4
+
+对应的插件需要 @vitejs/plugin-react 2.2.0
