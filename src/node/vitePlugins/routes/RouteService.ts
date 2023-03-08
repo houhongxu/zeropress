@@ -70,7 +70,7 @@ export class RouteService {
   export const routes = [
   ${this.#routeData
     .map((route, index) => {
-      return `{ path: '${route.routePath}', element: React.createElement(Route${index}) }`
+      return `{ path: '${route.routePath}', element: React.createElement(Route${index}),preload:()=>import('${route.absolutePath}') }`
     })
     .join(',\n')}
   ];

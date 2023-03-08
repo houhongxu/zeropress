@@ -31,7 +31,8 @@ export async function bundle(root: string, config: SiteConfig) {
     mode: 'production',
     root,
     // 注意加上pluginReact这个插件，自动注入 import React from 'react'，避免 React is not defined 的错误
-    plugins: await createVitePlugins(config, undefined, isServer),
+    // TODO 类型问题
+    plugins: (await createVitePlugins(config, undefined, isServer)) as any,
     ssr: {
       // 注意加上这个配置，防止 cjs 产物中 require ESM 的产物，通过一起打包仅cjs产物的方法，因为 react-router-dom 的产物为 ESM 格式
       noExternal: ['react-router-dom'],
