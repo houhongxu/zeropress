@@ -16,7 +16,7 @@ export async function createVitePlugins(
   isSSR = false
 ) {
   return [
-    pluginUnocss(unocssOptions),
+    pluginUnocss(unocssOptions) as any, // TODO 解决类型问题
     pluginIndexHtml(),
     pluginReact({
       jsxRuntime: 'automatic',

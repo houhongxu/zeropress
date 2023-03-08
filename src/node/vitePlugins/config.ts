@@ -29,6 +29,11 @@ export function pluginConfig(
             ),
           },
         },
+        css: {
+          modules: {
+            localsConvention: 'camelCaseOnly',
+          },
+        },
       }
     },
     // 解析模块id

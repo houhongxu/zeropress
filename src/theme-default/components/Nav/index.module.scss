@@ -1,0 +1,20 @@
+.link:hover {
+  color: var(--hhx-docs-c-brand);
+  transition: color 0.2s;
+}
+
+.link {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.social-link-icon {
+  display: flex;
+  fill: currentColor;
+  transition: color 0.2s;
+  color: var(--hhx-docs-c-text-2);
+  &:hover {
+    color: var(--hhx-docs-c-text-1);
+  }
+}
