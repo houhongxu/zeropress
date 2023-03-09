@@ -1,6 +1,7 @@
 import { usePageData } from '@runtime'
 import { NavItemWithLink } from 'shared/types'
 import styles from './index.module.scss'
+import { SwitchApperance } from './SwitchAppearance'
 
 export function Nav() {
   const { siteData } = usePageData()
@@ -30,9 +31,15 @@ export function Nav() {
             ))}
           </div>
 
-          <div>dark</div>
+          <div before="menu-item-before" flex="~">
+            <SwitchApperance></SwitchApperance>
+          </div>
 
-          <div className={styles.socialLinkIcon}>
+          <div
+            className={styles.socialLinkIcon}
+            before="menu-item-before"
+            ml="2"
+          >
             <a href="/">
               <div className="i-carbon-logo-github w-5 h-5 fill-current"></div>
             </a>

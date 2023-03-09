@@ -10,5 +10,16 @@ export const unocssOptions: VitePluginConfig = {
         [`border-${w}`]: '1px solid var(--hhx-docs-c-divider-light)',
       }),
     ],
+    [
+      'menu-item-before',
+      {
+        'margin-right': '12px',
+        'margin-left': '12px',
+        width: '1px',
+        height: '24px',
+        'background-color': 'var(--hhx-docs-c-divider-light)',
+        content: '" "',
+      },
+    ],
   ],
 }
