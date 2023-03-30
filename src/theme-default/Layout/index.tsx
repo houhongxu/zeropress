@@ -3,6 +3,7 @@ import { usePageData } from '../../runtime'
 import 'uno.css'
 import '../styles/base.css'
 import '../styles/vars.css'
+import { HomeLayout } from './HomeLayout'
 
 export function Layout() {
   const pageData = usePageData()
@@ -10,7 +11,7 @@ export function Layout() {
 
   const getContent = () => {
     if (pageType === 'home') {
-      return <div>主页</div>
+      return <HomeLayout></HomeLayout>
     } else if (pageType === 'doc') {
       return <div>正文</div>
     } else {
