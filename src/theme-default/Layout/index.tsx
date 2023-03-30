@@ -4,6 +4,7 @@ import 'uno.css'
 import '../styles/base.css'
 import '../styles/vars.css'
 import { HomeLayout } from './HomeLayout'
+import { DocLayout } from './DocLayout'
 
 export function Layout() {
   const pageData = usePageData()
@@ -13,7 +14,7 @@ export function Layout() {
     if (pageType === 'home') {
       return <HomeLayout></HomeLayout>
     } else if (pageType === 'doc') {
-      return <div>正文</div>
+      return <DocLayout></DocLayout>
     } else {
       return <div>404</div>
     }

@@ -11,8 +11,25 @@ export default defineConfig({
       },
       {
         text: '指南',
-        link: '/',
+        link: '/guide/',
       },
     ],
+    sidebar: {
+      '/guide/': [
+        {
+          text: '教程',
+          items: [
+            {
+              text: '快速上手',
+              link: '/guide/A',
+            },
+            {
+              text: '如何安装',
+              link: '/guide/B',
+            },
+          ],
+        },
+      ],
+    },
   },
 })

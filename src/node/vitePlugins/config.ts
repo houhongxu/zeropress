@@ -1,7 +1,9 @@
-import { PACKAGE_ROOT_PATH } from 'node/constants'
+import { PACKAGE_ROOT_PATH, PUBLIC_DIR_PATH } from 'node/constants'
 import path, { relative } from 'path'
 import { Plugin } from 'vite'
 import { SiteConfig } from 'shared/types/index'
+import fs from 'fs-extra'
+import sirv from 'sirv'
 
 const SITE_DATA_ID = 'hhx-docs:site-data'
 const RESOLVED_SITE_DATA_ID = '\0' + 'hhx-docs:site-data'
@@ -69,6 +71,13 @@ export function pluginConfig(
 
         // 重点: 重启 Dev Server需要重新读取配置
         await restartServer()
+      }
+    },
+
+    configureServer(server) {
+      const publicDir = path.join(config.root, PUBLIC_DIR_PATH)
+      if (fs.pathExistsSync(publicDir)) {
+        server.middlewares.use(sirv(publicDir))
       }
     },
   }

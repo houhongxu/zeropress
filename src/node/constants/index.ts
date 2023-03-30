@@ -17,3 +17,5 @@ export const SERVER_ENTRY_PATH = join(
   'runtime',
   'ssr-entry.tsx'
 )
+
+export const PUBLIC_DIR_PATH = 'public'
