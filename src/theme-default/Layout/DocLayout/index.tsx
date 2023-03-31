@@ -1,6 +1,8 @@
-import { usePageData } from '@runtime'
+import { usePageData, Content } from '@runtime'
 import { useLocation } from 'react-router-dom'
-import { Sidebar } from '../../components/Sidebar'
+import { DocFooter } from '../../components/DocFooter'
+import { Sidebar } from '../../components/Sidebar/index'
+import styles from './index.module.scss'
 
 export function DocLayout() {
   const { siteData } = usePageData()
@@ -17,6 +19,14 @@ export function DocLayout() {
   return (
     <div>
       <Sidebar sidebarData={matchedSidebar} pathname={pathname} />
+      <div className={styles.content}>
+        <div>
+          <div className="hhx-docs-doc">
+            <Content />
+          </div>
+          <DocFooter></DocFooter>
+        </div>
+      </div>
     </div>
   )
 }

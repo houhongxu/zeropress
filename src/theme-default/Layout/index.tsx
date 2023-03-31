@@ -23,7 +23,13 @@ export function Layout() {
   return (
     <div>
       <Nav />
-      {getContent()}
+      <section
+        style={{
+          paddingTop: 'var(--hhx-docs-nav-height)',
+        }}
+      >
+        {getContent()}
+      </section>
     </div>
   )
 }
