@@ -36,3 +36,4 @@ cd 进入当前文件夹
 - [ ] fornt-matter 中 hero 只有 name+text 属性时 无法生成页面
 - [ ] 根据 docs 内的 md 文件动态生成侧边栏
 - [ ] 折叠侧边栏点击范围扩大，需要在 configPlugin 里读取路由？还是用路由插件？
+- [ ] ## md 文件标题显示问题
