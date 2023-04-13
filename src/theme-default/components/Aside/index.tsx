@@ -1,14 +1,15 @@
 import { Header } from 'shared/types'
 import { useEffect, useRef } from 'react'
 import { bindingAsideScroll, scrollToTarget } from '../../logic/asideScroll'
+import { useHeaders } from '../../logic/useHeaders'
 
 interface AsideProps {
   headers: Header[]
 }
 
 export function Aside(props: AsideProps) {
-  const { headers = [] } = props
-  console.log(headers)
+  const { headers: rawHeaders = [] } = props
+  const headers = useHeaders(rawHeaders)
 
   // 是否展示大纲栏
   const hasOutline = headers.length > 0

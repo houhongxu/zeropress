@@ -6,8 +6,6 @@ import { parse } from 'acorn'
 import { MdxjsEsm } from 'mdast-util-mdxjs-esm'
 import { Program } from 'mdast-util-mdxjs-esm/lib'
 
-const slugger = new Slugger()
-
 interface TocItem {
   id: string
   text: string
@@ -71,6 +69,8 @@ export const remarkPluginToc: Plugin<[], Root> = () => {
             }
           })
           .join('')
+
+        const slugger = new Slugger()
 
         // 获取独一无二的id
         const id = slugger.slug(originText)

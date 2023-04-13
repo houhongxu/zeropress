@@ -1,14 +1,18 @@
 // 会将renderInServer()返回结果注入服务端产物内
 
-import { App } from './app'
+import { App, initPageData } from './app'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom/server'
+import { DataContext } from './hooks'
 
-export function renderInServer(pagePath: string) {
+export async function renderInServer(pagePath: string) {
+  const pageData = await initPageData(pagePath)
   return renderToString(
-    <StaticRouter location={pagePath}>
-      <App />
-    </StaticRouter>
+    <DataContext.Provider value={pageData}>
+      <StaticRouter location={pagePath}>
+        <App />
+      </StaticRouter>
+    </DataContext.Provider>
   )
 }
 

@@ -3,6 +3,9 @@ const classList = document.documentElement.classList
 const APPEARANCE_KEY = 'appearance'
 
 const setClassList = (isDark = false) => {
+  // 防止 SSR 阶段报 document is not defined 的错误
+  const classList = document.documentElement.classList
+
   if (isDark) {
     classList.add('dark')
   } else {
@@ -23,6 +26,8 @@ if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
 }
 
 export function toggle() {
+  const classList = document.documentElement.classList
+
   if (classList.contains('dark')) {
     setClassList(false)
     localStorage.setItem(APPEARANCE_KEY, 'light')
