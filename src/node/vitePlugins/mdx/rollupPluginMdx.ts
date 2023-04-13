@@ -23,7 +23,7 @@ export async function rollupPluginMdx() {
       remarkPluginToc,
     ],
     rehypePlugins: [
-      // 标题增加id
+      // 标题增加id，github-slugger风格id
       rehypePluginSlug,
       // 标题增加对应id的锚点
       [

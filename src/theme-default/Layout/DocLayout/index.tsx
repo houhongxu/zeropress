@@ -7,6 +7,7 @@ import { Aside } from '../../components/Aside/index'
 
 export function DocLayout() {
   const { siteData, toc } = usePageData()
+
   const sidebarData = siteData.themeConfig?.sidebar || {}
   const { pathname } = useLocation()
   const matchedSidebarKey = Object.keys(sidebarData).find((key) => {

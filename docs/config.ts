@@ -20,6 +20,10 @@ export default defineConfig({
           text: '教程',
           items: [
             {
+              text: '指南',
+              link: '/guide/',
+            },
+            {
               text: '快速上手',
               link: '/guide/A',
             },
