@@ -1,4 +1,4 @@
-// 脚手架
+// 脚手架 https://github.com/vitejs/vite/blob/main/packages/vite/src/node/cli.ts
 
 import cac from 'cac'
 import { createViteServer } from './dev'

@@ -14,10 +14,15 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^18.15.11",
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "@vitejs/plugin-react": "^3.1.0",
     "cac": "^6.7.14",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "vite": "^4.2.2"
   }
 }

@@ -7,11 +7,11 @@
 
 ## MVP 版本
 
-- CLI 脚手架搭建；
+- CLI 脚手架搭建
 
 - 基于 Vite 的 DevServer 封装
 
-- 项目基本目录结构搭建
+- HTML 模板插件 与 支持热更新
 
 - React 主题组件的渲染
 
