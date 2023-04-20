@@ -1,5 +1,0 @@
-{
-  "compilerOptions": {
-    "jsx": "react-jsx" // TS 就不会要求我们显式添加 import React from 'react'语句
-  }
-}
