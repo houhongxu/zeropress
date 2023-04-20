@@ -1,6 +1,6 @@
 // 读取模板html返回给浏览器并支持热更新 https://github.com/vitejs/vite/blob/main/packages/vite/src/node/server/middlewares/indexHtml.ts
 
-import { readFile } from 'fs/promises'
+import { readFile } from 'fs-extra'
 import { Plugin } from 'vite'
 import { CLIENT_ENTRY_PATH, DEFAULT_HTML_PATH } from '../constants'
 
@@ -10,8 +10,6 @@ export function vitePluginIndexHtml(): Plugin {
     apply: 'serve', // 仅在开发（serve）时调用，构建（build）不调用
     // 插入入口 script 标签
     transformIndexHtml(html) {
-      console.log(CLIENT_ENTRY_PATH)
-
       return {
         html,
         tags: [

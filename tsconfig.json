@@ -4,6 +4,8 @@
     "module": "commonjs", // ts编译为js的模块规定
     "outDir": "dist", // 编译输出的文件夹
     "rootDir": "src", // 编译的文件夹
-    "jsx": "react-jsx" // 支持react-jsx
+    "jsx": "react-jsx", // 支持react-jsx
+    "noImplicitAny": true,
+    "esModuleInterop": true
   }
 }
