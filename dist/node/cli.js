@@ -1,5 +1,5 @@
 "use strict";
-// 脚手架
+// 脚手架 https://github.com/vitejs/vite/blob/main/packages/vite/src/node/cli.ts
 Object.defineProperty(exports, "__esModule", { value: true });
 const cac_1 = require("cac");
 const dev_1 = require("./dev");
