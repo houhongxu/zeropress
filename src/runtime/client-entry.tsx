@@ -13,4 +13,6 @@ function renderInBrower() {
   createRoot(rootDom).render(<App></App>)
 }
 
+// TODO 使用react-hydrate同构
+
 renderInBrower()

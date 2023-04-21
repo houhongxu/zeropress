@@ -5,14 +5,14 @@ import { build as viteBuild, InlineConfig } from 'vite'
 import vitePluginReact from '@vitejs/plugin-react'
 import { CLIENT_ENTRY_PATH, SERVER_ENTRY_PATH } from './constants'
 import path from 'path'
-import { ensureDir, remove, writeFile } from 'fs-extra'
+import fse from 'fs-extra' // fse不支持具名直接导入函数 https://github.com/jprichardson/node-fs-extra/issues/746#issuecomment-923250293
 
 export async function build(root: string) {
   const [clientBundle] = await bundle(root)
 
   // 提前服务端产物的渲染函数
   const SERVER_BUNDLE_PATH = path.join(root, '.temp', 'server-entry.js')
-  const { renderInServer } = require(SERVER_BUNDLE_PATH)
+  const { renderInServer } = await import(SERVER_BUNDLE_PATH)
 
   await renderPage(renderInServer, root, clientBundle)
 }
@@ -85,7 +85,7 @@ async function renderPage(
     </body>
   </html>`.trim()
 
-  await ensureDir(path.join(root, 'build'))
-  await writeFile(path.join(root, 'build/index.html'), html)
-  await remove(path.join(root, '.temp'))
+  await fse.ensureDir(path.join(root, 'build'))
+  await fse.writeFile(path.join(root, 'build/index.html'), html)
+  await fse.remove(path.join(root, '.temp'))
 }

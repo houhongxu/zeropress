@@ -4,7 +4,8 @@
   "description": "hhxpress",
   "main": "index.js",
   "scripts": {
-    "dev": "tsc --watch"
+    "dev": "tsup --watch",
+    "build": "tsup"
   },
   "bin": {
     "hhxpress": "bin/hhxpress.js"
@@ -17,6 +18,7 @@
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "rollup": "^3.20.6",
+    "tsup": "^6.7.0",
     "typescript": "^5.0.4"
   },
   "dependencies": {
