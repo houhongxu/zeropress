@@ -1,6 +1,6 @@
 // 读取模板html返回给浏览器并支持热更新 https://github.com/vitejs/vite/blob/main/packages/vite/src/node/server/middlewares/indexHtml.ts
 
-import { readFile } from 'fs-extra'
+import fse from 'fs-extra'
 import { Plugin } from 'vite'
 import { CLIENT_ENTRY_PATH, DEFAULT_HTML_PATH } from '../constants'
 
@@ -30,7 +30,7 @@ export function vitePluginIndexHtml(): Plugin {
         // 在中间件中返回读取到的html模板
         server.middlewares.use(async (req, res, next) => {
           try {
-            let html = await readFile(DEFAULT_HTML_PATH, 'utf-8')
+            let html = await fse.readFile(DEFAULT_HTML_PATH, 'utf-8')
 
             // 应用 Vite 内建 HTML 转换来支持边界到模板html的热更新，多了一行 <script type="module" src="/@vite/client"></script>
             html = await server.transformIndexHtml(

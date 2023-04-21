@@ -1,6 +1,8 @@
+// 路径常量，相对于dist文件夹
+
 import path from 'path'
 
-export const PACKAGE_ROOT_PATH = path.join(__dirname, '..', '..', '..')
+export const PACKAGE_ROOT_PATH = path.join(__dirname, '..')
 
 export const DEFAULT_HTML_PATH = path.join(PACKAGE_ROOT_PATH, 'template.html')
 
