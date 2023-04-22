@@ -15,7 +15,7 @@ export async function build(root: string) {
   // 即node文件夹不应该引入runtime文件夹的文件
 
   // 导入服务端产物的渲染函数
-  const SERVER_BUNDLE_PATH = path.join(root, '.temp', 'server-entry.js')
+  const SERVER_BUNDLE_PATH = path.resolve(root, '.temp', 'server-entry.js')
   const { renderInServer } = await import(SERVER_BUNDLE_PATH)
 
   await renderPage(renderInServer, root, clientBundle)
@@ -71,7 +71,7 @@ async function renderPage(
 
   console.log(`Rendering page in server side / 服务端渲染页面中 ...`)
 
-  // 获取包含react应用的模板html
+  // 获取包含react应用的构建时的模板html
   const appHtml = renderInServer()
 
   const html = `
@@ -92,4 +92,6 @@ async function renderPage(
   await fse.ensureDir(path.join(root, 'build'))
   await fse.writeFile(path.join(root, 'build/index.html'), html)
   await fse.remove(path.join(root, '.temp'))
+
+  console.log(`build success / 构建成功`)
 }
