@@ -10,7 +10,7 @@ const cli = cac('hhxpress')
 
 cli
   .command('[root]', 'Start Dev Server')
-  .alias('dev')
+  .alias('dev') // root默认应该为命令行当前路径
   .action(async (root = process.cwd()) => {
     // 创建vite静态服务
     const server = await createViteServer(root)
