@@ -24,3 +24,6 @@
 ## config 解析
 
 - [x] 使用 vite jsapi-loadConfigFromFile 进行配置解析
+- [x] 增加配置类型提示函数 definConfig
+- [x] 开发配置插件支持 UI 获取配置数据
+- [ ] 配置插件支持热更新

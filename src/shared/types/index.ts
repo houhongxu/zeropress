@@ -1,4 +1,9 @@
 import { UserConfig as ViteConfig } from 'vite'
+export interface SiteConfig {
+  root: string
+  configPath: string
+  configData: UserConfig
+}
 
 export interface UserConfig {
   title?: string
