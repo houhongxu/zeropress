@@ -6,6 +6,8 @@
     "rootDir": "src", // 编译的文件夹
     "jsx": "react-jsx", // 支持react-jsx
     "noImplicitAny": true, // 推断的any报错提示
-    "esModuleInterop": true // esm支持直接导入cjs
+    "esModuleInterop": true, // esm支持直接导入cjs
+    "isolatedModules": true, // https://cn.vitejs.dev/guide/features.html#typescript-compiler-options
+    "baseUrl": "src" // 支持相对src的简单路径
   }
 }

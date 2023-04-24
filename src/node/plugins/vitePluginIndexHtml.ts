@@ -6,7 +6,7 @@ import { CLIENT_ENTRY_PATH, DEFAULT_HTML_PATH } from '../constants'
 
 export function vitePluginIndexHtml(): Plugin {
   return {
-    name: 'vite-plugin-index-html',
+    name: 'hhxpress:vite-plugin-index-html',
     apply: 'serve', // 仅在开发（serve）时调用，构建（build）不调用
     // 插入入口 script 标签
     transformIndexHtml(html) {
