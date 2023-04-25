@@ -2,7 +2,8 @@
 
 import { createRoot } from 'react-dom/client'
 import { App } from './App'
-import configData from 'virtual:config'
+import configData from 'virtual:user-config'
+import { BrowserRouter } from 'react-router-dom'
 
 function renderInBrower() {
   const rootDom = document.getElementById('root')
@@ -13,7 +14,11 @@ function renderInBrower() {
     throw new Error('#root dom element not found / 未找到名为root的dom节点')
   }
 
-  createRoot(rootDom).render(<App></App>)
+  createRoot(rootDom).render(
+    <BrowserRouter>
+      <App></App>
+    </BrowserRouter>,
+  )
 }
 
 // TODO 使用react-hydrate同构
