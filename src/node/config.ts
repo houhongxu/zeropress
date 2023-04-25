@@ -20,12 +20,16 @@ export async function resolveSiteConfig(
   command: ConfigEnv['command'],
   mode: ConfigEnv['mode'],
 ) {
-  const [configPath, userConfig] = await resolveUserConfig(root, command, mode)
+  const [userConfigPath, userConfig] = await resolveUserConfig(
+    root,
+    command,
+    mode,
+  )
 
   const siteConfig: SiteConfig = {
     root,
-    configPath,
-    configData: resolveDefaultConfig(userConfig),
+    userConfigPath,
+    userConfig: resolveDefaultConfig(userConfig),
   }
 
   return siteConfig

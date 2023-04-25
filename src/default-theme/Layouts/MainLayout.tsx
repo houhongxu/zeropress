@@ -1,13 +1,16 @@
-import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Content } from 'runtime/Content'
 
 export function MainLayout() {
-  const [count, setCount] = useState(0)
   return (
     <div>
-      <h1>This is Layout Component</h1>
+      <>Mainlayout</>
+      <Content></Content>
       <div>
-        {count}
-        <button onClick={() => setCount(count + 1)}>Add Count</button>
+        <Link to="guide">guide</Link>
+      </div>
+      <div>
+        <Link to="guide/a">guide/a</Link>
       </div>
     </div>
   )

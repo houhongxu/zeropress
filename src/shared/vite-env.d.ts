@@ -2,8 +2,8 @@
 
 /// <reference types="vite/client" />
 
-declare module 'virtual:config' {
+declare module 'virtual:user-config' {
   import type { UserConfig } from 'shared/types'
-  const config: UserConfig
-  export default config
+  const userConfig: UserConfig
+  export default userConfig
 }

@@ -2,7 +2,14 @@
 
 import { renderToString } from 'react-dom/server'
 import { App } from './App'
+import { StaticRouter } from 'react-router-dom/server'
 
 export function renderInServer() {
-  return renderToString(<App></App>)
+  return renderToString(
+    // TODO location应该是根据客户端url
+    // https://reactrouter.com/en/main/router-components/static-router
+    <StaticRouter location={'/'}>
+      <App></App>
+    </StaticRouter>,
+  )
 }
