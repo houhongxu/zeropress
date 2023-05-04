@@ -2,13 +2,13 @@
 
 import { RollupOutput } from 'rollup'
 import { build as viteBuild, InlineConfig } from 'vite'
-import vitePluginReact from '@vitejs/plugin-react'
 import { CLIENT_ENTRY_PATH, SERVER_ENTRY_PATH } from './constants'
 import path from 'path'
 import fse from 'fs-extra' // fse不支持具名直接导入函数 https://github.com/jprichardson/node-fs-extra/issues/746#issuecomment-923250293
 import { resolveSiteConfig } from './config'
 import { SiteConfig } from 'shared/types'
-import { vitePluginUserConfig } from './plugins/vitePluginConfig'
+import { createPlugins } from './plugin'
+import { Route } from './plugins/vitePluginRoutes'
 
 export async function build(root: string) {
   const siteConfig = await resolveSiteConfig(root, 'build', 'production')
@@ -21,9 +21,13 @@ export async function build(root: string) {
 
   // 导入服务端产物的渲染函数
   const SERVER_BUNDLE_PATH = path.join(root, '.temp', 'server-entry.js')
-  const { renderInServer } = await import(SERVER_BUNDLE_PATH)
+  const { renderInServer, routes } = await import(SERVER_BUNDLE_PATH)
 
-  await renderPage(renderInServer, root, clientBundle)
+  try {
+    await renderPageHtml(renderInServer, routes, root, clientBundle)
+  } catch (e) {
+    console.log('Render page error / 渲染页面失败 \n', e)
+  }
 }
 
 /**
@@ -31,10 +35,12 @@ export async function build(root: string) {
  */
 export async function bundle(root: string, siteConfig: SiteConfig) {
   // 配置文件
-  const resolveViteConfig = (isServer: boolean): InlineConfig => ({
+  const resolveViteConfig = async (
+    isServer: boolean,
+  ): Promise<InlineConfig> => ({
     root,
     mode: 'production',
-    plugins: [vitePluginReact(), vitePluginUserConfig(siteConfig)],
+    plugins: await createPlugins(siteConfig, undefined, isServer),
     ssr: {
       noExternal: ['react-router-dom'], // 避免node-cjs环境执行esm包，https://cn.vitejs.dev/config/ssr-options.html#ssr-noexternal
     },
@@ -55,8 +61,8 @@ export async function bundle(root: string, siteConfig: SiteConfig) {
 
   try {
     const [clientBundle, serverBundle] = await Promise.all([
-      viteBuild(resolveViteConfig(false)),
-      viteBuild(resolveViteConfig(true)),
+      viteBuild(await resolveViteConfig(false)),
+      viteBuild(await resolveViteConfig(true)),
     ])
 
     return [clientBundle, serverBundle] as [RollupOutput, RollupOutput]
@@ -68,22 +74,27 @@ export async function bundle(root: string, siteConfig: SiteConfig) {
 /**
  * 服务端渲染出入口html
  */
-async function renderPage(
+export async function renderPageHtml(
   renderInServer: () => string,
+  routes: Route[],
   root: string,
   clientBundle: RollupOutput,
 ) {
+  console.log(`Rendering page in server side / 服务端渲染页面中 ...`)
+
   // 获取客户端入口chunk
   const clientEntryChunk = clientBundle.output.find(
     (chunk) => chunk.type === 'chunk' && chunk.isEntry,
   )
 
-  console.log(`Rendering page in server side / 服务端渲染页面中 ...`)
+  // 写入每个路由的html的异步任务
+  const writeRouteHtmls = routes.map(async (route) => {
+    const routePath = route.path
 
-  // 获取包含react应用的构建时的模板html
-  const appHtml = renderInServer()
+    // 获取包含react应用的构建时的模板html
+    const appHtml = renderInServer()
 
-  const html = `
+    const html = `
   <!DOCTYPE html>
   <html>
     <head>
@@ -96,11 +107,17 @@ async function renderPage(
       <div id="root">${appHtml}</div>
       <script type="module" src="/${clientEntryChunk?.fileName}"></script>
     </body>
-  </html>`.trim()
+  </html>
+  `.trim()
 
-  await fse.ensureDir(path.join(root, 'build'))
-  await fse.writeFile(path.join(root, 'build/index.html'), html)
-  // await fse.remove(path.join(root, '.temp'))
+    // 写入服务端html文件
+    const fileName = routePath.endsWith('/')
+      ? `${routePath}index.html`
+      : `${routePath}.html`
 
-  console.log(`build success / 构建成功`)
+    await fse.ensureDir(path.join(root, 'build', path.dirname(fileName)))
+    await fse.writeFile(path.join(root, 'build', fileName), html)
+  })
+
+  return Promise.all(writeRouteHtmls)
 }

@@ -55,14 +55,18 @@ export class RouteService {
   }
 
   // 生成虚拟模块代码
-  generateRoutesCode() {
+  generateRoutesCode(ssr = false) {
     return `
     import React from 'react';
-    import loadable from '@loadable/component'; // 组件懒加载
-
+    ${
+      ssr ? '' : 'import loadable from "@loadable/component";'
+    } // 仅客户端组件懒加载
+    
     ${this.#routeData
       .map((route, index) => {
-        return `const Route${index} = loadable(() => import('${route.absolutePath}'));`
+        return ssr
+          ? `import Route${index} from "${route.absolutePath}";`
+          : `const Route${index} = loadable(() => import('${route.absolutePath}'));`
       })
       .join('\n')}
 

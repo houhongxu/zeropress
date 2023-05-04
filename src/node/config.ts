@@ -64,10 +64,10 @@ async function resolveUserConfig(
 
 function resolveDefaultConfig(userConfig: UserConfig): UserConfig {
   return {
-    title: userConfig.title ?? 'HhxPress',
-    description: userConfig.description ?? 'SSG FrameWork',
-    themeConfig: userConfig.themeConfig ?? {},
-    vite: userConfig.vite ?? {},
+    title: userConfig.title || 'HhxPress',
+    description: userConfig.description || 'SSG FrameWork',
+    themeConfig: userConfig.themeConfig || {},
+    vite: userConfig.vite || {},
   }
 }
 

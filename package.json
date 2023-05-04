@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup",
-    "preview": "npx serve docs/build"
+    "preview": "hhxpress build docs && npx serve docs/build"
   },
   "bin": {
     "hhxpress": "bin/hhxpress.js"

@@ -3,6 +3,7 @@
 import { renderToString } from 'react-dom/server'
 import { App } from './App'
 import { StaticRouter } from 'react-router-dom/server'
+import routes from 'virtual:routes'
 
 export function renderInServer() {
   return renderToString(
@@ -13,3 +14,5 @@ export function renderInServer() {
     </StaticRouter>,
   )
 }
+
+export { routes }
