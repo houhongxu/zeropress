@@ -1,6 +1,7 @@
+import { createElement } from 'react'
 import { Link } from 'react-router-dom'
 import { Content } from 'runtime/Content'
-
+createElement
 export function MainLayout() {
   return (
     <div>

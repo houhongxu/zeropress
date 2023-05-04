@@ -1,8 +1,8 @@
-// 读取用户配置给ui消费
+// 读取 用户配置 给ui消费
 import { PACKAGE_ROOT_PATH } from 'node/constants'
 import path from 'path'
 import { Plugin } from 'vite'
-import { SiteConfig } from '../../shared/types'
+import { SiteConfig } from 'shared/types'
 
 const CONFIG_ID = 'virtual:user-config'
 const RESOLVED_CONFIG_ID = '\0' + 'virtual:user-config' // vite继承的rollup生态的约定https://cn.vitejs.dev/guide/api-plugin.html#virtual-modules-convention

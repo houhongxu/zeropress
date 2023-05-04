@@ -7,3 +7,9 @@ declare module 'virtual:user-config' {
   const userConfig: UserConfig
   export default userConfig
 }
+
+declare module 'virtual:routes' {
+  import { RouteObject } from 'react-router-dom'
+  const routes: RouteObject[]
+  export default routes
+}
