@@ -4,13 +4,12 @@ import fse from 'fs-extra'
 import path from 'path'
 import { loadConfigFromFile, ConfigEnv } from 'vite'
 import { SiteConfig, UserConfig } from 'shared/types/index'
+import { SUPPORT_CONFIG_FILE } from './constants'
 
 type RawConfig =
   | UserConfig
   | Promise<UserConfig>
   | (() => UserConfig | Promise<UserConfig>)
-
-const SUPPORT_CONFIG_FILE = ['config.ts', 'config.js']
 
 /**
  * 解析配置文件

@@ -6,6 +6,7 @@ import vitePluginReact from '@vitejs/plugin-react' // vitePluginReact来支持�
 import { resolveSiteConfig } from './config'
 import { vitePluginUserConfig } from './plugins/vitePluginConfig'
 import { PACKAGE_ROOT_PATH } from './constants'
+import { vitePluginRoutes } from './plugins/vitePluginRoutes'
 
 /**
  * 创建vite静态服务
@@ -26,6 +27,7 @@ export async function createViteServer(
       vitePluginIndexHtml(),
       vitePluginReact(),
       vitePluginUserConfig(siteConfig, restartServer),
+      vitePluginRoutes(root),
     ],
   })
 }

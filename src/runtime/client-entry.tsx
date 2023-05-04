@@ -8,7 +8,7 @@ import { BrowserRouter } from 'react-router-dom'
 function renderInBrower() {
   const rootDom = document.getElementById('root')
 
-  console.log('siteConfig配置信息：', configData)
+  console.log('用户配置：', configData)
 
   if (!rootDom) {
     throw new Error('#root dom element not found / 未找到名为root的dom节点')

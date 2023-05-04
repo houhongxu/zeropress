@@ -19,3 +19,5 @@ export const SERVER_ENTRY_PATH = path.join(
   'runtime',
   'server-entry.tsx',
 )
+
+export const SUPPORT_CONFIG_FILE = ['config.ts', 'config.js']
