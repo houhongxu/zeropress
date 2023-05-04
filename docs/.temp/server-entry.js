@@ -1486,11 +1486,12 @@ function encodeLocation(to) {
     hash: path.hash || ""
   };
 }
-function renderInServer() {
+function renderInServer(routePath) {
   return server.renderToString(
-    // TODO location应该是根据客户端url
     // https://reactrouter.com/en/main/router-components/static-router
-    /* @__PURE__ */ jsx(StaticRouter, { location: "/", children: /* @__PURE__ */ jsx(App, {}) })
+    // BrowserRouter 使用的是 History API 记录位置，而 History API 是属于浏览器的 API ，在 SSR 的环境下，服务端不能使用浏览器 API
+    // 通过初始传入的 location 地址找到相应组件
+    /* @__PURE__ */ jsx(StaticRouter, { location: routePath, children: /* @__PURE__ */ jsx(App, {}) })
   );
 }
 exports.renderInServer = renderInServer;

@@ -75,7 +75,7 @@ export async function bundle(root: string, siteConfig: SiteConfig) {
  * 服务端渲染出入口html
  */
 export async function renderPageHtml(
-  renderInServer: () => string,
+  renderInServer: (routePath: string) => string,
   routes: Route[],
   root: string,
   clientBundle: RollupOutput,
@@ -92,7 +92,7 @@ export async function renderPageHtml(
     const routePath = route.path
 
     // 获取包含react应用的构建时的模板html
-    const appHtml = renderInServer()
+    const appHtml = renderInServer(routePath)
 
     const html = `
   <!DOCTYPE html>
