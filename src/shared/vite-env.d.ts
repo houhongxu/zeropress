@@ -2,6 +2,7 @@
 
 /// <reference types="vite/client" />
 
+
 declare module 'virtual:user-config' {
   import type { UserConfig } from 'shared/types'
   const userConfig: UserConfig
@@ -9,7 +10,7 @@ declare module 'virtual:user-config' {
 }
 
 declare module 'virtual:routes' {
-  import { RouteObject } from 'react-router-dom'
-  const routes: RouteObject[]
+  import { Route } from 'node/plugins/vitePluginRoutes'
+  const routes: Route[]
   export default routes
 }

@@ -7,6 +7,7 @@ import { resolveSiteConfig } from './config'
 import { vitePluginUserConfig } from './plugins/vitePluginConfig'
 import { PACKAGE_ROOT_PATH } from './constants'
 import { vitePluginRoutes } from './plugins/vitePluginRoutes'
+import { createPlugins } from './plugin'
 
 /**
  * 创建vite静态服务
@@ -23,11 +24,6 @@ export async function createViteServer(
     server: {
       host: true, // 开启局域网与公网ip
     },
-    plugins: [
-      vitePluginIndexHtml(),
-      vitePluginReact(),
-      vitePluginUserConfig(siteConfig, restartServer),
-      vitePluginRoutes(root),
-    ],
+    plugins: await createPlugins(siteConfig, restartServer),
   })
 }

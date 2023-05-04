@@ -1398,30 +1398,21 @@ function useFormAction(action, _temp2) {
   }
   return createPath(path);
 }
-function Index() {
-  return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("h1", { children: "Index(/guide)" }) });
-}
 function A() {
   return /* @__PURE__ */ jsx("h1", { children: "Hello, route A(/guide/a)" });
 }
-function B() {
-  return /* @__PURE__ */ jsx("h1", { children: "Hello, route B(/)" });
+function Index$1() {
+  return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("h1", { children: "Index(/guide)" }) });
+}
+function Index() {
+  return /* @__PURE__ */ jsx("h1", { children: "Hello, route Index(/)" });
 }
 const routes = [
-  // TODO 约定式路由自动读取文件生成路由
-  {
-    path: "/guide",
-    element: /* @__PURE__ */ jsx(Index, {})
-  },
-  {
-    path: "/guide/a",
-    element: /* @__PURE__ */ jsx(A, {})
-  },
-  {
-    path: "/",
-    element: /* @__PURE__ */ jsx(B, {})
-  }
+  { path: "/guide/a", element: React.createElement(A) },
+  { path: "/guide/", element: React.createElement(Index$1) },
+  { path: "/", element: React.createElement(Index) }
 ];
+console.log("路由配置：", routes);
 const Content = () => {
   const routeElement = useRoutes(routes);
   return routeElement;
@@ -1503,3 +1494,4 @@ function renderInServer() {
   );
 }
 exports.renderInServer = renderInServer;
+exports.routes = routes;
