@@ -24,6 +24,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "@mdx-js/rollup": "^2.3.0",
     "@types/fs-extra": "^11.0.1",
     "@vitejs/plugin-react": "^3.1.0",
     "cac": "^6.7.14",
@@ -32,6 +33,14 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
+    "rehype-autolink-headings": "^6.1.1",
+    "rehype-pretty-code": "^0.9.5",
+    "rehype-slug": "^5.1.0",
+    "remark-frontmatter": "^4.0.1",
+    "remark-gfm": "^3.0.1",
+    "remark-mdx-frontmatter": "^3.0.0",
+    "shiki": "^0.14.2",
+    "unified": "^10.1.2",
     "vite": "^4.2.2"
   }
 }

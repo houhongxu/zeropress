@@ -35,12 +35,10 @@ export async function build(root: string) {
  */
 export async function bundle(root: string, siteConfig: SiteConfig) {
   // 配置文件
-  const resolveViteConfig = async (
-    isServer: boolean,
-  ): Promise<InlineConfig> => ({
+  const resolveViteConfig = (isServer: boolean): InlineConfig => ({
     root,
     mode: 'production',
-    plugins: await createPlugins(siteConfig, undefined, isServer),
+    plugins: createPlugins(siteConfig, undefined, isServer),
     ssr: {
       noExternal: ['react-router-dom'], // 避免node-cjs环境执行esm包，https://cn.vitejs.dev/config/ssr-options.html#ssr-noexternal
     },
@@ -61,8 +59,8 @@ export async function bundle(root: string, siteConfig: SiteConfig) {
 
   try {
     const [clientBundle, serverBundle] = await Promise.all([
-      viteBuild(await resolveViteConfig(false)),
-      viteBuild(await resolveViteConfig(true)),
+      viteBuild(resolveViteConfig(false)),
+      viteBuild(resolveViteConfig(true)),
     ])
 
     return [clientBundle, serverBundle] as [RollupOutput, RollupOutput]

@@ -3,8 +3,9 @@ import { vitePluginIndexHtml } from './plugins/vitePluginIndexHtml'
 import vitePluginReact from '@vitejs/plugin-react' // vitePluginReact来支持边界到react的热更新
 import { vitePluginUserConfig } from './plugins/vitePluginConfig'
 import { vitePluginRoutes } from './plugins/vitePluginRoutes'
+import { createVitePluginMdx } from './plugins/vitePluginMdx'
 
-export async function createPlugins(
+export function createPlugins(
   siteConfig: SiteConfig,
   restartServer?: () => Promise<void>,
   isSSR = false,
@@ -14,5 +15,6 @@ export async function createPlugins(
     vitePluginReact(),
     vitePluginUserConfig(siteConfig, restartServer),
     vitePluginRoutes(siteConfig.root, isSSR),
+    createVitePluginMdx(),
   ]
 }
