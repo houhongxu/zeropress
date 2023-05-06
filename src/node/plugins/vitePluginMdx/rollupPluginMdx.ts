@@ -6,10 +6,16 @@ import rehypePluginAutolinkHeadings from 'rehype-autolink-headings'
 import remarkFrontmatter from 'remark-frontmatter'
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
 import rehypePrettyCode from 'rehype-pretty-code'
+import { remarkPluginMdxToc } from './remarkPluginMdxToc'
 
 export function createRollupPluginMdx(): Plugin {
   return rollupPluginMdx({
-    remarkPlugins: [remarkPluginGFM, remarkFrontmatter, remarkMdxFrontmatter],
+    remarkPlugins: [
+      remarkPluginGFM,
+      remarkFrontmatter,
+      remarkMdxFrontmatter,
+      remarkPluginMdxToc,
+    ],
     rehypePlugins: [
       rehypePluginSlug,
       [
