@@ -2,15 +2,9 @@
 title: 'custom title'
 ---
 
-## Code
-
-```js
-console.log(123)
-```
-
 # GFM
 
-## Autolink literals
+## [Autolink](/index) literals
 
 www.example.com, https://example.com, and contact@example.com.
 
@@ -20,7 +14,7 @@ A note[^1]
 
 [^1]: Big note.
 
-## Strikethrough
+## Strike `through`
 
 ~one~ or ~~two~~ tildes.
 
@@ -34,21 +28,12 @@ A note[^1]
 
 - [ ] to do
 - [x] done
-- [ ] to do
-- [x] done
-- [x] done
-- [x] done
-- [x] done
-- [x] done
-- [x] done
-- [x] done
-- [x] done
-- [x] done
-- [x] done
-- [x] done
-- [x] done
-- [x] done
-- [x] done
-- [x] done
-- [x] done
-- [x] done
+
+```ts
+import { Plugin } from 'vite'
+import { pluginMdxRollup } from './pluginMdxRollup'
+
+export async function pluginMdx(): Promise<Plugin[]> {
+  return [await pluginMdxRollup()]
+}
+```
