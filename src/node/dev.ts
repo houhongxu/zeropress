@@ -24,6 +24,7 @@ export async function createViteServer(
     server: {
       host: true, // 开启局域网与公网ip
     },
+
     plugins: createPlugins(siteConfig, restartServer),
   })
 }

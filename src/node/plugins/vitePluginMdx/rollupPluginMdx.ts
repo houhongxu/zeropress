@@ -19,6 +19,7 @@ export function createRollupPluginMdx(): Plugin {
     rehypePlugins: [
       rehypePluginSlug,
       [
+        // https://github.com/rehypejs/rehype-autolink-headings#api
         rehypePluginAutolinkHeadings,
         {
           properties: {
@@ -31,6 +32,7 @@ export function createRollupPluginMdx(): Plugin {
         },
       ],
       [
+        // https://rehype-pretty-code.netlify.app/
         rehypePrettyCode,
         {
           theme: 'nord',
