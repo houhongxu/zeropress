@@ -3,8 +3,13 @@ import 'virtual:uno.css'
 import { createElement } from 'react'
 import { Link } from 'react-router-dom'
 import { Content } from 'runtime/Content'
+import { usePageData } from 'runtime/hooks'
 createElement
+
 export function MainLayout() {
+  const pageData = usePageData()
+  console.log(pageData)
+
   return (
     <div>
       <div p="2" m="4" bg="emerald-500">

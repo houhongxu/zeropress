@@ -5,7 +5,7 @@ import { vitePluginUserConfig } from './plugins/vitePluginConfig'
 import { vitePluginRoutes } from './plugins/vitePluginRoutes'
 import { createVitePluginMdx } from './plugins/vitePluginMdx'
 import UnoCSS from 'unocss/vite'
-import unoConfig from './unocss.config'
+import { unoConfig } from './unocss.config'
 
 export function createPlugins(
   siteConfig: SiteConfig,

@@ -1,11 +1,15 @@
 // 扫描文件目录 生成路由对象代码 给ui消费
 
-import { createElement } from 'react'
+import { PageModule } from 'shared/types'
 import { Plugin } from 'vite'
 import { RouteService } from './RouteService'
 export interface Route {
   path: string
   element: React.ReactElement
+  /**
+   * 通过import()导入页面模块
+   */
+  preload: () => Promise<PageModule>
 }
 
 const ROUTES_ID = 'virtual:routes'

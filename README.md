@@ -34,7 +34,7 @@
 - [x] 配置路径别名
 - [x] 服务端配置路由
 - [x] 完善配置路由构建
-- [x] 自动化生成约定式路由的插件
+- [x] 自动化生成约定式路由的插件，支持 UI 获取生成的路由配置
 - [x] 多路由构建
 
 ## mdx
@@ -43,3 +43,14 @@
 - [x] 常用插件支持：代码块，标题跳转，frontmatter，gfm
 - [x] 自定义插件 remarkPluginMdxToc 未使用 remark-slug 对应的 id 生成库 https://github.com/DCsunset/remark-mdx-toc
 - [x] 自定义插件 vitePluginMdxHMR
+
+## ui
+
+- [x] 接入 unocss
+- [x] UI 获取 pageData
+- [ ] 导航栏
+- [ ] 深色模式
+- [ ] 首页
+- [ ] 约定式侧边栏
+- [ ] 正文
+- [ ] TOC
