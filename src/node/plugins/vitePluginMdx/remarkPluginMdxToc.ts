@@ -44,6 +44,8 @@ export const remarkPluginMdxToc: Plugin<[], Root> = () => {
   return (tree) => {
     const toc: TocItem[] = []
 
+    // https://github.com/syntax-tree/unist-util-visit#use
+    // https://github.com/syntax-tree/mdast#heading
     visit(tree, 'heading', (node) => {
       if (!node.depth || !node.children) {
         return
@@ -81,7 +83,7 @@ export const remarkPluginMdxToc: Plugin<[], Root> = () => {
       type: 'mdxjsEsm',
       value: '',
       data: {
-        // acorn解析为esast节点
+        // acorn解析为esast节点 https://github.com/acornjs/acorn/tree/master/acorn/#interface
         estree: parse(insertCode, {
           ecmaVersion: 'latest',
           sourceType: 'module',

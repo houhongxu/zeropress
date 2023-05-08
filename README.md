@@ -41,4 +41,5 @@
 
 - [x] mdx 支持
 - [x] 常用插件支持：代码块，标题跳转，frontmatter，gfm
-- [x] 自定义插件 remarkPluginMdxToc https://github.com/DCsunset/remark-mdx-toc 未使用 remark-slug 对应的 id 生成库
+- [x] 自定义插件 remarkPluginMdxToc 未使用 remark-slug 对应的 id 生成库 https://github.com/DCsunset/remark-mdx-toc
+- [x] 自定义插件 vitePluginMdxHMR
