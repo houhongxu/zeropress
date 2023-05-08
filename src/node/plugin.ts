@@ -4,6 +4,8 @@ import vitePluginReact from '@vitejs/plugin-react' // vitePluginReact来支持�
 import { vitePluginUserConfig } from './plugins/vitePluginConfig'
 import { vitePluginRoutes } from './plugins/vitePluginRoutes'
 import { createVitePluginMdx } from './plugins/vitePluginMdx'
+import UnoCSS from 'unocss/vite'
+import unoConfig from './unocss.config'
 
 export function createPlugins(
   siteConfig: SiteConfig,
@@ -11,6 +13,7 @@ export function createPlugins(
   isSSR = false,
 ) {
   return [
+    UnoCSS(unoConfig), // https://unocss.dev/integrations/vite#react
     vitePluginIndexHtml(),
     vitePluginReact(),
     vitePluginUserConfig(siteConfig, restartServer),
