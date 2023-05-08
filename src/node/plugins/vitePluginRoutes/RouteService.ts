@@ -2,7 +2,7 @@ import FastGlob from 'fast-glob'
 import { SUPPORT_CONFIG_FILE } from 'node/constants'
 import path from 'path'
 
-interface RouteMeta {
+interface RouteItem {
   /**
    * 路由路径
    */
@@ -18,7 +18,7 @@ interface RouteMeta {
  */
 export class RouteService {
   #scanDir: string
-  #routeData: RouteMeta[] = []
+  #routeData: RouteItem[] = []
 
   constructor(scanDir: string) {
     this.#scanDir = scanDir
@@ -73,7 +73,11 @@ export class RouteService {
       const routes = [
       ${this.#routeData
         .map((route, index) => {
-          return `{ path: '${route.routePath}', element: React.createElement(Route${index}) }`
+          return `{ 
+            path: '${route.routePath}',
+            element: React.createElement(Route${index}),
+            preload:()=>import('${route.absolutePath}')
+           }`
         })
         .join(',\n')}
       ]

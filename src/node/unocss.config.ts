@@ -1,6 +1,6 @@
-import { defineConfig } from 'unocss'
+import { UserConfig } from 'unocss'
 import { presetAttributify, presetUno, presetIcons } from 'unocss'
 
-export default defineConfig({
+export const unoConfig: UserConfig = {
   presets: [presetAttributify(), presetUno(), presetIcons()],
-})
+}
