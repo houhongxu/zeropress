@@ -31,11 +31,6 @@ export function vitePluginUserConfig(
         resolve: {
           alias: {
             runtime: path.join(PACKAGE_ROOT_PATH, 'src', 'runtime'),
-            'default-theme': path.join(
-              PACKAGE_ROOT_PATH,
-              'src',
-              'default-theme',
-            ),
           },
         },
       }

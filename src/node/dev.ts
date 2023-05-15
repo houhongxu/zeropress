@@ -1,12 +1,8 @@
 // 热更新 https://cn.vitejs.dev/guide/api-javascript.html#vitedevserver
 
 import { createServer } from 'vite'
-import { vitePluginIndexHtml } from './plugins/vitePluginIndexHtml'
-import vitePluginReact from '@vitejs/plugin-react' // vitePluginReact来支持边界到react的热更新
 import { resolveSiteConfig } from './config'
-import { vitePluginUserConfig } from './plugins/vitePluginConfig'
 import { PACKAGE_ROOT_PATH } from './constants'
-import { vitePluginRoutes } from './plugins/vitePluginRoutes'
 import { createPlugins } from './plugin'
 
 /**
