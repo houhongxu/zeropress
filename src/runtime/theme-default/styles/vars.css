@@ -1,0 +1,356 @@
+ /* https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css */
+
+ /* 通过css变量控制主题 */
+
+
+/**
+ * Colors Base
+ *
+ * These are the pure base color presets. Most of the time, you should not be
+ * using these colors directly in the theme but rather use "Colors Theme"
+ * instead because those are "Theme (light or dark)" dependant.
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --hp-c-white: #ffffff;
+  --hp-c-white-soft: #f9f9f9;
+  --hp-c-white-mute: #f1f1f1;
+
+  --hp-c-black: #1a1a1a;
+  --hp-c-black-pure: #000000;
+  --hp-c-black-soft: #242424;
+  --hp-c-black-mute: #2f2f2f;
+
+  --hp-c-gray: #8e8e8e;
+  --hp-c-gray-light-1: #aeaeae;
+  --hp-c-gray-light-2: #c7c7c7;
+  --hp-c-gray-light-3: #d1d1d1;
+  --hp-c-gray-light-4: #e5e5e5;
+  --hp-c-gray-light-5: #f2f2f2;
+  --hp-c-gray-dark-1: #636363;
+  --hp-c-gray-dark-2: #484848;
+  --hp-c-gray-dark-3: #3a3a3a;
+  --hp-c-gray-dark-4: #282828;
+  --hp-c-gray-dark-5: #202020;
+
+  --hp-c-divider-light-1: rgba(60, 60, 60, 0.29);
+  --hp-c-divider-light-2: rgba(60, 60, 60, 0.12);
+  --hp-c-divider-dark-1: rgba(84, 84, 84, 0.65);
+  --hp-c-divider-dark-2: rgba(84, 84, 84, 0.48);
+
+  --hp-c-indigo: #213547;
+  --hp-c-indigo-soft: #476582;
+  --hp-c-indigo-light: #aac8e4;
+  --hp-c-indigo-lighter: #c9def1;
+  --hp-c-indigo-dark: #1d2f3f;
+  --hp-c-indigo-darker: #14212e;
+
+  --hp-c-text-light-1: var(--hp-c-indigo);
+  --hp-c-text-light-2: rgba(60, 60, 60, 0.7);
+  --hp-c-text-light-3: rgba(60, 60, 60, 0.33);
+  --hp-c-text-light-4: rgba(60, 60, 60, 0.18);
+
+  --hp-c-text-dark-1: rgba(255, 255, 255, 0.87);
+  --hp-c-text-dark-2: rgba(235, 235, 235, 0.6);
+  --hp-c-text-dark-3: rgba(235, 235, 235, 0.38);
+  --hp-c-text-dark-4: rgba(235, 235, 235, 0.18);
+
+  --hp-c-green: #21b8a3;
+  --hp-c-green-light: #41c6b0;
+  --hp-c-green-lighter: #41c6b0;
+  --hp-c-green-dark: #149684;
+  --hp-c-green-darker: #149684;
+  --hp-c-green-dimm: #062521;
+
+  --hp-c-green-dimm-1: rgba(66, 184, 131, 0.5);
+  --hp-c-green-dimm-2: rgba(66, 184, 131, 0.25);
+  --hp-c-green-dimm-3: rgba(66, 184, 131, 0.05);
+
+  --hp-c-blue: #646cff;
+  --hp-c-blue-light: #747bff;
+  --hp-c-blue-lighter: #9499ff;
+  --hp-c-blue-lightest: #bcc0ff;
+  --hp-c-blue-dark: #535bf2;
+  --hp-c-blue-darker: #454ce1;
+  --hp-c-blue-dimm: rgba(100, 108, 255, 0.08);
+
+  --hp-c-yellow: #ffc517;
+  --hp-c-yellow-light: #fcd253;
+  --hp-c-yellow-lighter: #fcfc7c;
+  --hp-c-yellow-darker: #ad850e;
+  --hp-c-yellow-dimm-1: rgba(255, 197, 23, 0.5);
+  --hp-c-yellow-dimm-2: rgba(255, 197, 23, 0.25);
+  --hp-c-yellow-dimm-3: rgba(255, 197, 23, 0.05);
+
+  --hp-c-red: #ed3c50;
+  --hp-c-red-light: #f54e82;
+  --hp-c-red-lighter: #fd1d7c;
+  --hp-c-red-darker: #ab2131;
+  --hp-c-red-dimm-1: rgba(237, 60, 80, 0.5);
+  --hp-c-red-dimm-2: rgba(237, 60, 80, 0.25);
+  --hp-c-red-dimm-3: rgba(237, 60, 80, 0.05);
+}
+
+/**
+ * Colors Theme
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --hp-c-bg: var(--hp-c-white);
+  --hp-c-bg-soft: var(--hp-c-white-soft);
+  --hp-c-bg-mute: var(--hp-c-white-mute);
+  --hp-c-bg-alt: var(--hp-c-white-soft);
+
+  --hp-c-divider: var(--hp-c-divider-light-1);
+  --hp-c-divider-light: var(--hp-c-divider-light-2);
+
+  --hp-c-text-1: var(--hp-c-text-light-1);
+  --hp-c-text-2: var(--hp-c-text-light-2);
+  --hp-c-text-3: var(--hp-c-text-light-3);
+  --hp-c-text-4: var(--hp-c-text-light-4);
+
+  --hp-c-text-code: var(--hp-c-indigo-soft);
+
+  --hp-c-brand: var(--hp-c-green);
+  --hp-c-brand-light: var(--hp-c-green-light);
+  --hp-c-brand-lighter: var(--hp-c-green-lighter);
+  --hp-c-brand-dark: var(--hp-c-green-dark);
+  --hp-c-brand-darker: var(--hp-c-green-darker);
+}
+
+.dark {
+  --hp-c-bg: var(--hp-c-black-soft);
+  --hp-c-bg-soft: var(--hp-c-black-mute);
+  --hp-c-bg-mute: var(--hp-c-gray-dark-3);
+  --hp-c-bg-alt: var(--hp-c-black);
+
+  --hp-c-divider: var(--hp-c-divider-dark-1);
+  --hp-c-divider-light: var(--hp-c-divider-dark-2);
+
+  --hp-c-divider-inverse: var(--hp-c-divider-light-1);
+  --hp-c-divider-inverse-light: var(--hp-c-divider-light-2);
+
+  --hp-c-text-1: var(--hp-c-text-dark-1);
+  --hp-c-text-2: var(--hp-c-text-dark-2);
+  --hp-c-text-3: var(--hp-c-text-dark-3);
+  --hp-c-text-4: var(--hp-c-text-dark-4);
+
+  --hp-c-text-inverse-1: var(--hp-c-text-light-1);
+  --hp-c-text-inverse-2: var(--hp-c-text-light-2);
+  --hp-c-text-inverse-3: var(--hp-c-text-light-3);
+  --hp-c-text-inverse-4: var(--hp-c-text-light-4);
+
+  --hp-c-text-code: var(--hp-c-indigo-lighter);
+}
+
+/**
+ * Typography
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --hp-font-family-base: 'Inter var experimental', 'Inter var', -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --hp-font-family-mono: Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/**
+ * Layouts
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --hp-layout-max-width: 1440px;
+}
+
+/**
+ * Component: Code
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --hp-code-line-height: 1.7;
+  --hp-code-font-size: 0.875em;
+
+  --hp-code-block-color: var(--hp-c-text-dark-1);
+  --hp-code-block-bg: #292d3e;
+
+  --hp-code-line-highlight-color: rgba(0, 0, 0, 0.5);
+  --hp-code-line-number-color: var(--hp-c-text-dark-3);
+
+  --hp-code-copy-code-hover-bg: rgba(255, 255, 255, 0.05);
+  --hp-code-copy-code-active-text: var(--hp-c-text-dark-2);
+}
+
+/**
+ * Icons
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --hp-icon-copy: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' height='20' width='20' stroke='rgba(128,128,128,1)' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2'/%3E%3C/svg%3E");
+  --hp-icon-copied: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' height='20' width='20' stroke='rgba(128,128,128,1)' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2m-6 9 2 2 4-4'/%3E%3C/svg%3E");
+  --hp-icon-tip: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M512 960C264.58 960 64 759.42 64 512S264.58 64 512 64s448 200.58 448 448-200.58 448-448 448z m0-832c-212.08 0-384 171.92-384 384s171.92 384 384 384 384-171.92 384-384-171.92-384-384-384z m0 112c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z m0 160c-17.67 0-32 14.33-32 32v320c0 17.67 14.33 32 32 32 17.67 0 32-14.33 32-32V432c0-17.67-14.33-32-32-32z' fill='%2321b8a3'/%3E%3C/svg%3E");
+}
+
+.dark {
+  --hp-code-block-bg: var(--hp-c-bg-alt);
+}
+
+/**
+ * Z-indexes
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --hp-z-index-local-nav: 10;
+  --hp-z-index-nav: 20;
+  --hp-z-index-layout-top: 30;
+  --hp-z-index-backdrop: 40;
+  --hp-z-index-sidebar: 50;
+  --hp-z-index-footer: 60;
+}
+
+/**
+ * Component: Button
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --hp-button-brand-border: var(--hp-c-brand-light);
+  --hp-button-brand-text: var(--hp-c-text-dark-1);
+  --hp-button-brand-bg: var(--hp-c-brand);
+  --hp-button-brand-hover-border: var(--hp-c-brand-light);
+  --hp-button-brand-hover-text: var(--hp-c-text-dark-1);
+  --hp-button-brand-hover-bg: var(--hp-c-brand-light);
+  --hp-button-brand-active-border: var(--hp-c-brand-light);
+  --hp-button-brand-active-text: var(--hp-c-text-dark-1);
+  --hp-button-brand-active-bg: var(--hp-button-brand-bg);
+
+  --hp-button-alt-border: var(--hp-c-gray-light-3);
+  --hp-button-alt-text: var(--hp-c-text-light-1);
+  --hp-button-alt-bg: var(--hp-c-gray-light-5);
+  --hp-button-alt-hover-border: var(--hp-c-gray-light-3);
+  --hp-button-alt-hover-text: var(--hp-c-text-light-1);
+  --hp-button-alt-hover-bg: var(--hp-c-gray-light-4);
+  --hp-button-alt-active-border: var(--hp-c-gray-light-3);
+  --hp-button-alt-active-text: var(--hp-c-text-light-1);
+  --hp-button-alt-active-bg: var(--hp-c-gray-light-3);
+
+  --hp-button-sponsor-border: var(--hp-c-gray-light-3);
+  --hp-button-sponsor-text: var(--hp-c-text-light-2);
+  --hp-button-sponsor-bg: transparent;
+  --hp-button-sponsor-hover-border: var(--hp-c-sponsor);
+  --hp-button-sponsor-hover-text: var(--hp-c-sponsor);
+  --hp-button-sponsor-hover-bg: transparent;
+  --hp-button-sponsor-active-border: var(--hp-c-sponsor);
+  --hp-button-sponsor-active-text: var(--hp-c-sponsor);
+  --hp-button-sponsor-active-bg: transparent;
+}
+
+.dark {
+  --hp-button-brand-border: var(--hp-c-brand-light);
+  --hp-button-brand-text: var(--hp-c-text-dark-1);
+  --hp-button-brand-bg: var(--hp-c-brand-dark);
+  --hp-button-brand-hover-border: var(--hp-c-brand-lighter);
+  --hp-button-brand-hover-text: var(--hp-c-text-dark-1);
+  --hp-button-brand-hover-bg: var(--hp-c-brand);
+  --hp-button-brand-active-border: var(--hp-c-brand-lighter);
+  --hp-button-brand-active-text: var(--hp-c-text-dark-1);
+  --hp-button-brand-active-bg: var(--hp-button-brand-bg);
+
+  --hp-button-alt-border: var(--hp-c-gray-dark-2);
+  --hp-button-alt-text: var(--hp-c-text-dark-1);
+  --hp-button-alt-bg: var(--hp-c-bg-mute);
+  --hp-button-alt-hover-border: var(--hp-c-gray-dark-2);
+  --hp-button-alt-hover-text: var(--hp-c-text-dark-1);
+  --hp-button-alt-hover-bg: var(--hp-c-gray-dark-2);
+  --hp-button-alt-active-border: var(--hp-c-gray-dark-2);
+  --hp-button-alt-active-text: var(--hp-c-text-dark-1);
+  --hp-button-alt-active-bg: var(--hp-button-alt-bg);
+
+  --hp-button-sponsor-border: var(--hp-c-gray-dark-1);
+  --hp-button-sponsor-text: var(--hp-c-text-dark-2);
+}
+
+/**
+ * Component: Custom Block
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --hp-custom-block-code-font-size: 13px;
+
+  --hp-custom-block-info-border: var(--hp-c-divider-light);
+  --hp-custom-block-info-text: var(--hp-c-text-2);
+  --hp-custom-block-info-bg: var(--hp-c-white-soft);
+  --hp-custom-block-info-code-bg: var(--hp-c-gray-light-4);
+
+  --hp-custom-block-tip-border: var(--hp-c-green-dimm-1);
+  --hp-custom-block-tip-text: var(--hp-c-green-darker);
+  --hp-custom-block-tip-bg: var(--hp-c-green-dimm-3);
+  --hp-custom-block-tip-code-bg: var(--hp-custom-block-tip-bg);
+
+  --hp-custom-block-warning-border: var(--hp-c-yellow-dimm-1);
+  --hp-custom-block-warning-text: var(--hp-c-yellow-darker);
+  --hp-custom-block-warning-bg: var(--hp-c-yellow-dimm-3);
+  --hp-custom-block-warning-code-bg: var(--hp-custom-block-warning-bg);
+
+  --hp-custom-block-danger-border: var(--hp-c-red-dimm-1);
+  --hp-custom-block-danger-text: var(--hp-c-red-darker);
+  --hp-custom-block-danger-bg: var(--hp-c-red-dimm-3);
+  --hp-custom-block-danger-code-bg: var(--hp-custom-block-danger-bg);
+}
+
+.dark {
+  --hp-custom-block-info-border: var(--hp-c-divider-light);
+  --hp-custom-block-info-bg: var(--hp-c-black-mute);
+  --hp-custom-block-info-code-bg: var(--hp-c-gray-dark-4);
+
+  --hp-custom-block-tip-border: var(--hp-c-green-dimm-2);
+  --hp-custom-block-tip-text: var(--hp-c-green-light);
+
+  --hp-custom-block-warning-border: var(--hp-c-yellow-dimm-2);
+  --hp-custom-block-warning-text: var(--hp-c-yellow-light);
+
+  --hp-custom-block-danger-border: var(--hp-c-red-dimm-2);
+  --hp-custom-block-danger-text: var(--hp-c-red-light);
+}
+
+/**
+ * Component: Nav
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --hp-nav-height: 56px;
+}
+
+/**
+ * Component: Sidebar
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --hp-sidebar-width: 272px;
+}
+
+/**
+ * Component: Home
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --hp-home-hero-name-color: transparent;
+  --hp-home-hero-name-background: -webkit-linear-gradient(
+    120deg,
+    var(--hp-c-brand) 30%,
+    #41d1ff
+  );
+
+  --hp-home-hero-image-background-image: none;
+  --hp-home-hero-image-filter: none;
+}
+
+/**
+ * Shadows
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --hp-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --hp-shadow-2: 0 3px 12px rgba(0, 0, 0, 0.07), 0 1px 4px rgba(0, 0, 0, 0.07);
+  --hp-shadow-3: 0 12px 32px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08);
+  --hp-shadow-4: 0 14px 44px rgba(0, 0, 0, 0.12), 0 3px 9px rgba(0, 0, 0, 0.12);
+  --hp-shadow-5: 0 18px 56px rgba(0, 0, 0, 0.16), 0 4px 12px rgba(0, 0, 0, 0.16);
+}
