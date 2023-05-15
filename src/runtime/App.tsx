@@ -1,7 +1,7 @@
 // react应用，导入不可以用baseUrl路径简化，因为runtime文件夹内容并未由ts打包，而是由vite-build构建
 
 import { matchRoutes } from 'react-router-dom'
-import { MainLayout } from 'runtime/theme-default/Layouts'
+import { MainLayout } from 'runtime/theme-default/Layouts/MainLayout'
 import { PageData } from 'shared/types'
 import routes from 'virtual:routes'
 import userConfig from 'virtual:user-config'
@@ -21,7 +21,7 @@ export async function initPageData(routePath: string): Promise<PageData> {
     const moduleInfo = await matched[0].route.preload()
 
     return {
-      pageType: 'doc',
+      pageType: moduleInfo.frontmatter?.pageType || 'doc',
       routePath,
       userConfig,
       frontmatter: moduleInfo.frontmatter,
