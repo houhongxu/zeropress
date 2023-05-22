@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup",
-    "preview": "hhxpress build docs && npx serve docs/build"
+    "preview": "hhxpress build site && npx serve site/build"
   },
   "bin": {
     "hhxpress": "bin/hhxpress.js"
@@ -17,7 +17,6 @@
   "devDependencies": {
     "@iconify-json/carbon": "^1.1.16",
     "@loadable/component": "^5.15.3",
-    "@types/classnames": "^2.3.1",
     "@types/mdast": "^3.0.11",
     "@types/node": "^18.15.11",
     "@types/react": "^18.0.37",
@@ -49,6 +48,7 @@
     "remark-gfm": "^3.0.1",
     "remark-mdx-frontmatter": "^3.0.0",
     "shiki": "^0.14.2",
+    "sirv": "^2.0.3",
     "unified": "^10.1.2",
     "unist-util-visit": "^4.1.2",
     "unocss": "^0.51.12",
