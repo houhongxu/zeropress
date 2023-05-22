@@ -10,14 +10,14 @@ export const CLIENT_ENTRY_PATH = path.join(
   PACKAGE_ROOT_PATH,
   'src',
   'runtime',
-  'client-entry.tsx',
+  'entry-client.tsx',
 )
 
 export const SERVER_ENTRY_PATH = path.join(
   PACKAGE_ROOT_PATH,
   'src',
   'runtime',
-  'server-entry.tsx',
+  'entry-server.tsx',
 )
 
 export const SUPPORT_CONFIG_FILE = ['config.ts', 'config.js']

@@ -40,5 +40,5 @@ export function createRollupPluginMdx(): Plugin {
         },
       ],
     ],
-  })
+  }) as unknown as Plugin
 }

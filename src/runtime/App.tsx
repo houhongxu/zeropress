@@ -24,10 +24,11 @@ export async function initPageData(routePath: string): Promise<PageData> {
       pageType: moduleInfo.frontmatter?.pageType || 'doc',
       routePath,
       userConfig,
+      routes,
       frontmatter: moduleInfo.frontmatter,
       toc: moduleInfo.toc,
     }
   }
 
-  return { pageType: '404', routePath, userConfig }
+  return { pageType: '404', routePath, userConfig, routes }
 }

@@ -16,7 +16,7 @@ export async function build(root: string) {
   const [clientBundle] = await bundle(root, siteConfig)
 
   // 为什么导出js后再导入执行，不能直接导入原tsx文件执行
-  // 直接引用 ssr-entry.tsx 是可以的，但不推荐。server-entry 本质上是跑在 node 环境里面的，而框架的代码通过 tsup 构建也是跑在 node 环境，所以在 island 框架里面直接引 server-entry 是可以的。不过不推荐这种做法，尽量把库构建和应用的构建分开，server-entry 应该属于应用构建的范畴
+  // 直接引用 ssr-entry.tsx 是可以的，但不推荐。entry-server 本质上是跑在 node 环境里面的，而框架的代码通过 tsup 构建也是跑在 node 环境，所以在 island 框架里面直接引 server-entry 是可以的。不过不推荐这种做法，尽量把库构建和应用的构建分开，server-entry 应该属于应用构建的范畴
   // 即node文件夹不应该引入runtime文件夹的文件
 
   // 导入服务端产物的渲染函数
