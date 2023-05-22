@@ -16,7 +16,7 @@ export async function createViteServer(
   const siteConfig = await resolveSiteConfig(root, 'serve', 'development')
 
   return createServer({
-    root: PACKAGE_ROOT_PATH, // 避免vite静态资源服务与路由冲突，如服务路径为docs， :5173/a 经过路由逻辑返回:5173/a.tsx，而静态资源会让:5173/a.tsx返回文件内容，切换静态资源路径不在docs可以避免
+    root: PACKAGE_ROOT_PATH, // 避免vite静态资源服务与路由冲突，如服务路径为tsx返回文件内容，切换静态资源路径不在site可以避免， :5173/a 经过路由逻辑返回:5173/a.tsx，而静态资源会让:5173/a.tsx返回文件内容，切换静态资源路径不在site可以避免
     server: {
       host: true, // 开启局域网与公网ip
     },

@@ -6,11 +6,11 @@ export function Nav() {
   const { userConfig } = usePageData()
   const nav = userConfig.themeConfig.nav || []
   return (
-    <header className="w-full" fixed pos="top-0 left-0">
+    <header className="w-full z-10" fixed pos="top-0 left-0">
       <div className="flex items-center justify-between px-32px h-56px divider-bottom">
         <a
           href="/"
-          className="flex items-center w-full h-full text-1rem font-600"
+          className="flex items-center w-full h-full font-600"
           hover="opacity-60"
           transition="opacity duration-250"
         >
@@ -28,9 +28,9 @@ export function Nav() {
         </div>
 
         <div
-          className="flex color-[var(--hp-c-text-2)]"
+          className="flex  text-[var(--hp-c-text-2)]"
           before="menu-item-before"
-          hover="color-[var(--hp-c-text-1)]"
+          hover="text-[var(--hp-c-text-1)]"
           transition="colors duration-250"
         >
           <a href="/">

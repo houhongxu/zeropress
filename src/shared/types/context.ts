@@ -1,10 +1,12 @@
 import { UserConfig } from './config'
 import { ComponentType } from 'react'
+import { Route } from 'node/plugins/vitePluginRoutes'
 
 export interface PageData {
   pageType: PageType
   routePath: string
   userConfig: UserConfig
+  routes:Route[]
   frontmatter?: FrontMatter
   toc?: TocItem[]
 }
