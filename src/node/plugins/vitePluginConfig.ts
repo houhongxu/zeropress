@@ -3,6 +3,8 @@ import { PACKAGE_ROOT_PATH } from 'node/constants'
 import path from 'path'
 import { Plugin } from 'vite'
 import { SiteConfig } from 'shared/types'
+import fse from 'fs-extra'
+import sirv from 'sirv'
 
 const CONFIG_ID = 'virtual:user-config'
 const RESOLVED_CONFIG_ID = '\0' + 'virtual:user-config' // vite继承的rollup生态的约定https://cn.vitejs.dev/guide/api-plugin.html#virtual-modules-convention
@@ -31,6 +33,7 @@ export function vitePluginUserConfig(
         resolve: {
           alias: {
             runtime: path.join(PACKAGE_ROOT_PATH, 'src', 'runtime'),
+            shared: path.join(PACKAGE_ROOT_PATH, 'src', 'shared'),
           },
         },
       }
@@ -51,6 +54,16 @@ export function vitePluginUserConfig(
 
         // 重启 Dev Server
         await restartServer()
+      }
+    },
+    configureServer(server) {
+      // https://cn.vitejs.dev/guide/api-plugin.html#configureserver
+      // 兼容基于connect的中间件 https://cn.vitejs.dev/guide/ssr.html#setting-up-the-dev-server
+      // 基于connect的静态资源服务中间件 https://github.com/lukeed/sirv
+      const publicDir = path.join(siteConfig.root, 'public')
+
+      if (fse.pathExistsSync(publicDir)) {
+        server.middlewares.use(sirv(publicDir))
       }
     },
   }
