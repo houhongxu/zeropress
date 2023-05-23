@@ -12,13 +12,13 @@ export function DocLayout() {
     .map((route) => route.path)
     .filter((path) => path.startsWith('/docs'))
 
-  const sidebarData: SidebarItem[] = paths2tree(paths).items
+  const sidebarData = paths2tree(paths).items
 
   // console.log(routes)
   // console.log(sidebarData)
 
   return (
-    <div className="mt-56px">
+    <div className="pt-nav">
       <Sidebar sidebarData={sidebarData} pathname={pathname}></Sidebar>
     </div>
   )

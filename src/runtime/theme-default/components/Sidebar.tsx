@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { SidebarItem as SidebarItemType } from 'shared/types'
 
 interface SidebarProps {
-  sidebarData: SidebarItemType[]
+  sidebarData?: SidebarItemType[]
   pathname: string
 }
 
@@ -14,7 +14,7 @@ export function Sidebar({ sidebarData, pathname }: SidebarProps) {
       un-md="opacity-100 translate-x-0 pt-nav pb-128px w-sidebar bg-bg-alt"
     >
       <nav>
-        {sidebarData.map((sidebarGroupData) => (
+        {sidebarData?.map((sidebarGroupData) => (
           <SidebarGroup
             key={sidebarGroupData.text}
             {...sidebarGroupData}
