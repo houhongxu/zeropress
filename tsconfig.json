@@ -8,6 +8,7 @@
     "noImplicitAny": true, // 推断的any报错提示
     "esModuleInterop": true, // esm支持直接导入cjs
     "isolatedModules": true, // https://cn.vitejs.dev/guide/features.html#typescript-compiler-options
-    "baseUrl": "src" // 支持相对src的简单路径，但是实际的路径解析需要配置vite-config配置路径别名alias
+    "baseUrl": "src", // 支持相对src的简单路径，但是实际的路径解析需要配置vite-config配置路径别名alias
+    "strict": true // 严格模式才检测可选类型等undefined
   }
 }

@@ -25,27 +25,17 @@ function Switch({ children, onClick, className }: SwitchProps) {
       {...(onClick ? { onClick } : {})}
       className={classNames(
         className,
-        'rounded-[11px] w-40px h-22px bg-[var(--hp-c-bg-mute)]',
+        'relative block rounded-11px w-40px h-22px bg-bg-mute flex-shrink-0 border-1px border-solid border-divider-default transition-colors duration-250',
       )}
-      shrink="0"
-      relative
-      block
-      border="1px solid [var(--hp-c-divider)]"
-      transition="colors duration-250"
-      hover="border-[var(--hp-c-gray)]"
+      un-hover="border-gray-default"
     >
       <span
-        className="w-18px h-18px rounded-1/2 bg-[var(--hp-c-white)] shadow-[var(--hp-shadow-1)]"
-        absolute
-        pos="top-1px left-1px"
-        transition="all duration-250"
-        dark="bg-[var(--hp-c-black)] translate-x-18px"
+        className="absolute top-1px left-1px w-18px h-18px bg-bg-inverse rounded-1/2 shadow-1 transition-all duration-250"
+        un-dark="translate-x-18px"
       >
         <span
-          relative
-          block
-          className="w-full h-full rounded-1/2 overflow-hidden"
-          un-children="w-12px h-12px color-[var(--hp-c-text-2)] absolute top-3px left-3px transition-opacity duration-250 dark:color-[var(--hp-c-text-1)] first:opacity-100 first:dark:opacity-0  last:opacity-0 last:dark:opacity-100"
+          className="relative block w-full h-full rounded-1/2 overflow-hidden"
+          un-children="w-12px h-12px text-text-2 absolute top-3px left-3px transition-opacity duration-250 dark:text-text-1 first:opacity-100 first:dark:opacity-0 last:opacity-0 last:dark:opacity-100"
         >
           {children}
         </span>

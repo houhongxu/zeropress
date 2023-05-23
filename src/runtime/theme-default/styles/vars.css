@@ -1,7 +1,6 @@
- /* https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css */
+/* https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css */
 
- /* 通过css变量控制主题 */
-
+/* 通过css变量控制主题 */
 
 /**
  * Colors Base
@@ -100,6 +99,7 @@
   --hp-c-bg-soft: var(--hp-c-white-soft);
   --hp-c-bg-mute: var(--hp-c-white-mute);
   --hp-c-bg-alt: var(--hp-c-white-soft);
+  --hp-c-bg-inverse: var(--hp-c-white);
 
   --hp-c-divider: var(--hp-c-divider-light-1);
   --hp-c-divider-light: var(--hp-c-divider-light-2);
@@ -108,7 +108,6 @@
   --hp-c-text-2: var(--hp-c-text-light-2);
   --hp-c-text-3: var(--hp-c-text-light-3);
   --hp-c-text-4: var(--hp-c-text-light-4);
-
   --hp-c-text-code: var(--hp-c-indigo-soft);
 
   --hp-c-brand: var(--hp-c-green);
@@ -123,23 +122,15 @@
   --hp-c-bg-soft: var(--hp-c-black-mute);
   --hp-c-bg-mute: var(--hp-c-gray-dark-3);
   --hp-c-bg-alt: var(--hp-c-black);
+  --hp-c-bg-inverse: var(--hp-c-black-pure);
 
   --hp-c-divider: var(--hp-c-divider-dark-1);
   --hp-c-divider-light: var(--hp-c-divider-dark-2);
-
-  --hp-c-divider-inverse: var(--hp-c-divider-light-1);
-  --hp-c-divider-inverse-light: var(--hp-c-divider-light-2);
 
   --hp-c-text-1: var(--hp-c-text-dark-1);
   --hp-c-text-2: var(--hp-c-text-dark-2);
   --hp-c-text-3: var(--hp-c-text-dark-3);
   --hp-c-text-4: var(--hp-c-text-dark-4);
-
-  --hp-c-text-inverse-1: var(--hp-c-text-light-1);
-  --hp-c-text-inverse-2: var(--hp-c-text-light-2);
-  --hp-c-text-inverse-3: var(--hp-c-text-light-3);
-  --hp-c-text-inverse-4: var(--hp-c-text-light-4);
-
   --hp-c-text-code: var(--hp-c-indigo-lighter);
 }
 
@@ -152,14 +143,6 @@
     BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
     'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   --hp-font-family-mono: Menlo, Monaco, Consolas, 'Courier New', monospace;
-}
-
-/**
- * Layouts
- * -------------------------------------------------------------------------- */
-
-:root {
-  --hp-layout-max-width: 1440px;
 }
 
 /**
@@ -180,6 +163,10 @@
   --hp-code-copy-code-active-text: var(--hp-c-text-dark-2);
 }
 
+.dark {
+  --hp-code-block-bg: var(--hp-c-bg-alt);
+}
+
 /**
  * Icons
  * -------------------------------------------------------------------------- */
@@ -188,23 +175,6 @@
   --hp-icon-copy: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' height='20' width='20' stroke='rgba(128,128,128,1)' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2'/%3E%3C/svg%3E");
   --hp-icon-copied: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' height='20' width='20' stroke='rgba(128,128,128,1)' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2m-6 9 2 2 4-4'/%3E%3C/svg%3E");
   --hp-icon-tip: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M512 960C264.58 960 64 759.42 64 512S264.58 64 512 64s448 200.58 448 448-200.58 448-448 448z m0-832c-212.08 0-384 171.92-384 384s171.92 384 384 384 384-171.92 384-384-171.92-384-384-384z m0 112c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z m0 160c-17.67 0-32 14.33-32 32v320c0 17.67 14.33 32 32 32 17.67 0 32-14.33 32-32V432c0-17.67-14.33-32-32-32z' fill='%2321b8a3'/%3E%3C/svg%3E");
-}
-
-.dark {
-  --hp-code-block-bg: var(--hp-c-bg-alt);
-}
-
-/**
- * Z-indexes
- * -------------------------------------------------------------------------- */
-
-:root {
-  --hp-z-index-local-nav: 10;
-  --hp-z-index-nav: 20;
-  --hp-z-index-layout-top: 30;
-  --hp-z-index-backdrop: 40;
-  --hp-z-index-sidebar: 50;
-  --hp-z-index-footer: 60;
 }
 
 /**
