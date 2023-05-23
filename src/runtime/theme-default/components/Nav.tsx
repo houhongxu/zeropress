@@ -4,34 +4,32 @@ import { SwitchAppearance } from './SwitchAppearance'
 
 export function Nav() {
   const { userConfig } = usePageData()
-  const nav = userConfig.themeConfig.nav || []
+  const nav = userConfig.themeConfig?.nav || []
   return (
-    <header className="w-full z-10" fixed pos="top-0 left-0">
-      <div className="flex items-center justify-between px-32px h-56px divider-bottom">
+    <header className="w-full z-10 fixed top-0 left-0">
+      <div className="flex items-center justify-between px-32px h-nav divider-bottom">
         <a
           href="/"
-          className="flex items-center w-full h-full font-600"
-          hover="opacity-60"
-          transition="opacity duration-250"
+          className="flex items-center w-full h-full font-600 transition-opacity duration-250"
+          un-hover="opacity-60"
         >
           HHXPRESS
         </a>
 
-        <div className="h-full" flex="">
+        <div className="h-full flex">
           {nav.map((item) => (
             <NavItem key={item.link} {...item}></NavItem>
           ))}
         </div>
 
-        <div flex before="menu-item-before">
+        <div className="flex" un-before="menu-item-before">
           <SwitchAppearance></SwitchAppearance>
         </div>
 
         <div
-          className="flex  text-[var(--hp-c-text-2)]"
-          before="menu-item-before"
-          hover="text-[var(--hp-c-text-1)]"
-          transition="colors duration-250"
+          className="flex text-text-2 transition-colors duration-250"
+          un-before="menu-item-before"
+          un-hover="text-text-1"
         >
           <a href="/">
             <div className="i-carbon-logo-github w-25px h-25px"></div>
@@ -47,10 +45,8 @@ function NavItem({ link, text }: NavItemType) {
     <div className="h-full mx-12px">
       <a
         href={link}
-        className="h-full flex items-center whitespace-nowrap text-14px font-500"
-        block
-        transition="colors duration-250"
-        hover="color-[var(--hp-c-brand)]"
+        className="block h-full before:contents flex items-center whitespace-nowrap text-14px font-500 transition-colors duration-250"
+        un-hover="text-brand-default"
       >
         {text}
       </a>

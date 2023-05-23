@@ -21,7 +21,6 @@
     "@types/node": "^18.15.11",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
-    "@unocss/transformer-attributify-jsx": "^0.51.12",
     "@vitejs/plugin-react": "^4.0.0",
     "rollup": "^3.20.6",
     "tsup": "^6.7.0",

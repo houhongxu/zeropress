@@ -57,9 +57,19 @@
 
 ## TODO
 
-- [ ] 配置 uno 变量
-- [ ] 更改组件写法，{}:Type 方式无法识别可选类型
-- [ ] 避免 uno 使用 css 变量或者使用 text-$xxx 语法
+- [x] 配置 uno 变量
+- [x] 开启 ts 严格模式识别可选类型
+- [x] 避免 uno 使用 css 变量或者使用 text-$xxx 语法
+- [x] 取消 uno-attr 方式，适配很差，有些变量不生效需要加 un-，有些加了 un-失效
 - [ ] 生成侧边栏数据的函数
 - [ ] 文档多级菜单
-- [ ] 取消 uno-attr 方式，适配很差，有些变量不生效需要加 un-，有些加了 un-失效
+
+## unocss 痛点
+
+- uno-attr 方式，适配很差，有些变量不生效需要加 un-，有些加了 un-失效
+- 抽离配置时 uno 插件无效，不知道使用 config.js 是否能生效
+- 使用 windi 插件时配置 theme 没有智能提示，attr 有前缀时也没有 https://github.com/unocss/unocss/issues/2619
+- 配置不能用 key 是 'xxx-xxx'的方式，起码 bg 不行
+- spacing 配置 不能用在 height 与 width
+- breakpoints 配置 不支持 css 变量
+- zIndex 配置无效
