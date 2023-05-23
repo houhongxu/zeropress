@@ -6,7 +6,7 @@ export interface PageData {
   pageType: PageType
   routePath: string
   userConfig: UserConfig
-  routes:Route[]
+  routes: Route[]
   frontmatter?: FrontMatter
   toc?: TocItem[]
 }
@@ -32,6 +32,29 @@ export interface FrontMatter {
   pageType?: PageType
   sidebar?: boolean
   outline?: boolean
+  features?: Feature[]
+  hero?: Hero
 }
 
 export type PageType = 'home' | 'doc' | 'custom' | '404'
+
+export interface Feature {
+  icon: string
+  title: string
+  details: string
+}
+
+export interface Hero {
+  name: string
+  text: string
+  tagline: string
+  image?: {
+    src: string
+    alt: string
+  }
+  actions: {
+    text: string
+    link: string
+    theme: 'brand' | 'alt'
+  }[]
+}

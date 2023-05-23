@@ -201,16 +201,6 @@
   --hp-button-alt-active-border: var(--hp-c-gray-light-3);
   --hp-button-alt-active-text: var(--hp-c-text-light-1);
   --hp-button-alt-active-bg: var(--hp-c-gray-light-3);
-
-  --hp-button-sponsor-border: var(--hp-c-gray-light-3);
-  --hp-button-sponsor-text: var(--hp-c-text-light-2);
-  --hp-button-sponsor-bg: transparent;
-  --hp-button-sponsor-hover-border: var(--hp-c-sponsor);
-  --hp-button-sponsor-hover-text: var(--hp-c-sponsor);
-  --hp-button-sponsor-hover-bg: transparent;
-  --hp-button-sponsor-active-border: var(--hp-c-sponsor);
-  --hp-button-sponsor-active-text: var(--hp-c-sponsor);
-  --hp-button-sponsor-active-bg: transparent;
 }
 
 .dark {
@@ -233,9 +223,6 @@
   --hp-button-alt-active-border: var(--hp-c-gray-dark-2);
   --hp-button-alt-active-text: var(--hp-c-text-dark-1);
   --hp-button-alt-active-bg: var(--hp-button-alt-bg);
-
-  --hp-button-sponsor-border: var(--hp-c-gray-dark-1);
-  --hp-button-sponsor-text: var(--hp-c-text-dark-2);
 }
 
 /**
@@ -302,15 +289,8 @@
  * -------------------------------------------------------------------------- */
 
 :root {
-  --hp-home-hero-name-color: transparent;
-  --hp-home-hero-name-background: -webkit-linear-gradient(
-    120deg,
-    var(--hp-c-brand) 30%,
-    #41d1ff
-  );
-
-  --hp-home-hero-image-background-image: none;
-  --hp-home-hero-image-filter: none;
+  --hp-home-hero-name-background-from: var(--hp-c-brand);
+  --hp-home-hero-name-background-to: #41d1ff;
 }
 
 /**
