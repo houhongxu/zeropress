@@ -3,10 +3,10 @@ import '../styles/base.css'
 import '../styles/vars.css'
 import '../styles/doc.css'
 
-import { usePageData } from 'runtime/hooks'
 import { Nav } from '../components/Nav'
 import { HomeLayout } from './HomeLayout'
 import { DocLayout } from './DocLayout'
+import { usePageData } from '../hooks/usePageData'
 
 export function MainLayout() {
   const { pageType } = usePageData()
@@ -22,7 +22,7 @@ export function MainLayout() {
   }
 
   return (
-    <div>
+    <div className="pt-nav">
       <Nav></Nav>
       {getContent()}
     </div>

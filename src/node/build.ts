@@ -26,14 +26,18 @@ export async function build(root: string) {
   try {
     await renderPageHtml(renderInServer, routes, root, clientBundle)
   } catch (e) {
-    console.log('Render page error / 渲染页面失败 \n', e)
+    console.log('Render page error / 渲染页面失败')
+    throw e
   }
 }
 
 /**
  * 客户端与服务端打包
  */
-export async function bundle(root: string, siteConfig: SiteConfig) {
+export async function bundle(
+  root: string,
+  siteConfig: SiteConfig,
+): Promise<[RollupOutput, RollupOutput]> {
   // 配置文件
   const resolveViteConfig = (isServer: boolean): InlineConfig => ({
     root,
@@ -55,7 +59,7 @@ export async function bundle(root: string, siteConfig: SiteConfig) {
     },
   })
 
-  console.log(`Building client + server bundles / 构建客户端与服务端包中 ...`)
+  console.log(`Bundling client + server bundles / 打包客户端与服务端包中 ...`)
 
   try {
     const [clientBundle, serverBundle] = await Promise.all([
@@ -65,7 +69,8 @@ export async function bundle(root: string, siteConfig: SiteConfig) {
 
     return [clientBundle, serverBundle] as [RollupOutput, RollupOutput]
   } catch (e) {
-    console.log(e)
+    console.error(`Failed to bundle / 打包失败`)
+    throw e
   }
 }
 

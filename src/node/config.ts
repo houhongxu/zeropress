@@ -43,10 +43,14 @@ async function resolveUserConfig(
   mode: ConfigEnv['mode'],
 ) {
   // 获取路径
-  const configPath = getUserConfigPath(root)
+  const userConfigPath = getUserConfigPath(root)
 
   // 读取配置文件并解析
-  const result = await loadConfigFromFile({ command, mode }, configPath, root)
+  const result = await loadConfigFromFile(
+    { command, mode },
+    userConfigPath,
+    root,
+  )
 
   if (result) {
     // vite源码中判断了result https://github.com/vitejs/vite/blob/main/packages/vite/src/node/config.ts#L411
@@ -56,9 +60,9 @@ async function resolveUserConfig(
       ? rawConfig()
       : rawConfig)) as UserConfig
 
-    return [configPath, userConfig] as const
+    return [userConfigPath, userConfig] as const
   } else {
-    return [configPath, {} as UserConfig] as const
+    return [userConfigPath, {} as UserConfig] as const
   }
 }
 
@@ -80,9 +84,13 @@ function getUserConfigPath(root: string) {
       (file) => path.resolve(root, file), // 补全路径
     ).find(fse.pathExistsSync) // 找到存在的配置路径
 
+    if (!configPath) {
+      throw Error(`Failed to find user config / 未找到配置文件`)
+    }
+
     return configPath
   } catch (e) {
-    console.error(`Failed to load user config / 加载配置文件失败: ${e}`)
+    console.error(`Failed to load user config / 加载配置文件失败`)
     throw e
   }
 }

@@ -5,7 +5,7 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: '主页', link: '/' },
-      { text: '文档', link: '/docs' },
+      { text: '文档', link: '/docs/' },
     ],
   },
 })

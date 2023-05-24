@@ -18,7 +18,7 @@ export function HomeFeature({ features }: FeatureProps) {
               un-md="w-1/2"
               un-lg="w-1/3"
             >
-              <article className="bg-bg-soft border-1px border-solid border-bg-soft rounded-12px p-24px h-full">
+              <article className="bg-bg-soft border-px border-bg-soft rounded-12px p-24px h-full">
                 <div
                   className="bg-gray-light-4 rounded-6px mb-20px w-48px h-48px text-3xl flex-center"
                   un-dark="bg-white"

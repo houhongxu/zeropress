@@ -1,5 +1,7 @@
 /* https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/base.css */
 
+/* 重置浏览器默认样式，配置深色主题与部分背景色 */
+
 *,
 ::before,
 ::after {

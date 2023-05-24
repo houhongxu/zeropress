@@ -1,3 +1,406 @@
-.autolink-header {
+/* https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/components/vp-doc.css */
+
+/* 正文的各种样式，通过css给子便签提供 */
+
+/**
+ * Headings
+ * -------------------------------------------------------------------------- */
+
+.hp-doc h1,
+.hp-doc h2,
+.hp-doc h3,
+.hp-doc h4,
+.hp-doc h5,
+.hp-doc h6 {
+  position: relative;
+  font-weight: 600;
+  outline: none;
+}
+
+.hp-doc h1 {
+  letter-spacing: -0.02em;
+  line-height: 40px;
+  font-size: 28px;
+  margin-bottom: 40px;
+}
+
+.hp-doc h2 {
+  margin: 48px 0 16px;
+  /* padding-top: 24px; */
+  letter-spacing: -0.02em;
+  line-height: 32px;
+  font-size: 24px;
+}
+
+.hp-doc h3 {
+  margin: 32px 0 0;
+  letter-spacing: -0.01em;
+  line-height: 28px;
+  font-size: 20px;
+}
+
+.hp-doc .autolink-header {
+  float: left;
+  margin-left: -0.87em;
+  padding-right: 0.23em;
+  font-weight: 500;
+  opacity: 0;
+  transition: color 0.25s, opacity 0.25s;
+}
+
+.hp-doc h1:hover .autolink-header,
+.hp-doc h1 .autolink-header:focus,
+.hp-doc h2:hover .autolink-header,
+.hp-doc h2 .autolink-header:focus,
+.hp-doc h3:hover .autolink-header,
+.hp-doc h3 .autolink-header:focus,
+.hp-doc h4:hover .autolink-header,
+.hp-doc h4 .autolink-header:focus,
+.hp-doc h5:hover .autolink-header,
+.hp-doc h5 .autolink-header:focus,
+.hp-doc h6:hover .autolink-header,
+.hp-doc h6 .autolink-header:focus {
+  opacity: 1;
+}
+
+@media (min-width: 960px) {
+  .hp-doc h1 {
+    letter-spacing: -0.02em;
+    line-height: 40px;
+    font-size: 32px;
+  }
+}
+
+/**
+   * Paragraph and inline elements
+   * -------------------------------------------------------------------------- */
+
+.hp-doc p,
+.hp-doc summary {
+  margin: 16px 0;
+}
+
+.hp-doc p {
+  z-index: 2;
+  line-height: 28px;
+}
+
+.hp-doc blockquote {
+  margin: 16px 0;
+  border-left: 2px solid var(--hp-c-divider);
+  padding-left: 16px;
+  transition: border-color 0.5s;
+}
+
+.hp-doc blockquote > p {
+  margin: 0;
+  font-size: 16px;
+  color: var(--hp-c-text-2);
+  transition: color 0.5s;
+}
+
+.hp-doc a {
+  font-weight: 500;
   color: var(--hp-c-brand);
+  text-decoration-style: dotted;
+  transition: color 0.25s;
+}
+
+.hp-doc a:hover {
+  color: var(--hp-c-brand-dark);
+}
+
+.hp-doc strong {
+  font-weight: 600;
+}
+
+/**
+   * Lists
+   * -------------------------------------------------------------------------- */
+
+.hp-doc ul,
+.hp-doc ol {
+  padding-left: 1.25rem;
+  margin: 16px 0;
+}
+
+.hp-doc ul {
+  list-style: disc;
+}
+
+.hp-doc ol {
+  list-style: decimal;
+}
+
+.hp-doc li + li {
+  margin-top: 8px;
+}
+
+.hp-doc li > ol,
+.hp-doc li > ul {
+  margin: 8px 0 0;
+}
+
+/**
+   * Table
+   * -------------------------------------------------------------------------- */
+
+.hp-doc table {
+  display: block;
+  border-collapse: collapse;
+  margin: 20px 0;
+  overflow-x: auto;
+}
+
+.hp-doc tr {
+  border-top: 1px solid var(--hp-c-divider);
+  transition: background-color 0.5s;
+}
+
+.hp-doc tr:nth-child(2n) {
+  background-color: var(--hp-c-bg-soft);
+}
+
+.hp-doc th,
+.hp-doc td {
+  border: 1px solid var(--hp-c-divider);
+  padding: 12px 16px;
+}
+
+.hp-doc th {
+  font-size: 16px;
+  font-weight: 600;
+  background-color: var(--hp-c-white-soft);
+}
+
+.dark .hp-doc th {
+  background-color: var(--hp-c-black);
+}
+
+/**
+   * Decorational elements
+   * -------------------------------------------------------------------------- */
+
+.hp-doc hr {
+  margin: 16px 0;
+  border: none;
+  border-top: 1px solid var(--hp-c-divider-light);
+}
+
+/**
+   * Custom Block
+   * -------------------------------------------------------------------------- */
+
+.hp-doc .custom-block {
+  margin: 16px 0;
+}
+
+.hp-doc .custom-block p {
+  margin: 8px 0;
+  line-height: 24px;
+}
+
+.hp-doc .custom-block p:first-child {
+  margin: 0;
+}
+
+.hp-doc .custom-block a {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  transition: opacity 0.25s;
+}
+
+.hp-doc .custom-block a:hover {
+  opacity: 0.6;
+}
+
+.hp-doc .custom-block code {
+  font-size: var(--hp-custom-block-code-font-size);
+  font-weight: 700;
+  color: inherit;
+}
+
+.hp-doc .custom-block div[class*='language-'] {
+  margin: 8px 0;
+}
+
+.hp-doc .custom-block div[class*='language-'] code {
+  font-weight: 400;
+  background-color: transparent;
+}
+
+/**
+   * Code
+   * -------------------------------------------------------------------------- */
+
+/* inline code */
+.hp-doc :not(pre, h1, h2, h3, h4, h5, h6) > code {
+  font-size: var(--hp-code-font-size);
+}
+
+.hp-doc :not(pre, div) > code {
+  border-radius: 4px;
+  padding: 3px 6px;
+  color: var(--hp-c-text-code);
+  background-color: var(--hp-c-bg-mute);
+  transition: color 0.5s, background-color 0.5s;
+}
+
+.hp-doc h1 > code,
+.hp-doc h2 > code,
+.hp-doc h3 > code {
+  font-size: 0.9em;
+}
+
+.hp-doc a > code {
+  color: var(--hp-c-brand);
+  transition: color 0.25s;
+}
+
+.hp-doc a:hover > code {
+  color: var(--hp-c-brand-dark);
+}
+
+.hp-doc div[class*='language-'] {
+  position: relative;
+  margin: 16px -24px;
+  background-color: var(--hp-code-block-bg);
+  overflow-x: auto;
+  transition: background-color 0.5s;
+}
+
+@media (min-width: 640px) {
+  .hp-doc div[class*='language-'] {
+    border-radius: 8px;
+    margin: 16px 0;
+  }
+}
+
+@media (max-width: 639px) {
+  .hp-doc li div[class*='language-'] {
+    border-radius: 8px 0 0 8px;
+  }
+}
+
+.hp-doc div[class*='language-'] + div[class*='language-'],
+.hp-doc div[class$='-api'] + div[class*='language-'],
+.hp-doc div[class*='language-'] + div[class$='-api'] > div[class*='language-'] {
+  margin-top: -8px;
+}
+
+.hp-doc [class*='language-'] pre,
+.hp-doc [class*='language-'] code {
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+.hp-doc [class*='language-'] pre {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 16px 0;
+  background: transparent;
+  overflow-x: auto;
+}
+
+.hp-doc [class*='language-'] code {
+  display: block;
+  padding: 0 24px;
+  width: fit-content;
+  min-width: 100%;
+  line-height: var(--hp-code-line-height);
+  font-size: var(--hp-code-font-size);
+  color: var(--hp-code-block-color);
+  transition: color 0.5s;
+}
+
+.hp-doc [class*='language-'] code .highlighted {
+  background-color: var(--hp-code-line-highlight-color);
+  transition: background-color 0.5s;
+  margin: 0 -24px;
+  padding: 0 24px;
+  width: calc(100% + 2 * 24px);
+  display: inline-block;
+}
+
+.hp-doc [class*='language-'] > button.copy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 3;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+  background-color: var(--hp-code-block-bg);
+  opacity: 0;
+  cursor: pointer;
+  background-image: var(--hp-icon-copy);
+  background-position: 50%;
+  background-size: 20px;
+  background-repeat: no-repeat;
+  transition: opacity 0.4s;
+}
+
+.hp-doc [class*='language-']:hover > button.copy,
+.hp-doc [class*='language-'] > button.copy:focus {
+  opacity: 1;
+}
+
+.hp-doc [class*='language-'] > button.copy:hover {
+  background-color: var(--hp-code-copy-code-hover-bg);
+}
+
+.hp-doc [class*='language-'] > button.copy.copied,
+.hp-doc [class*='language-'] > button.copy:hover.copied {
+  border-radius: 0 4px 4px 0;
+  background-color: var(--hp-code-copy-code-hover-bg);
+  background-image: var(--hp-icon-copied);
+}
+
+.hp-doc [class*='language-'] > button.copy.copied::before,
+.hp-doc [class*='language-'] > button.copy:hover.copied::before {
+  position: relative;
+  left: -65px;
+  display: block;
+  border-radius: 4px 0 0 4px;
+  padding-top: 8px;
+  width: 64px;
+  height: 40px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--hp-code-copy-code-active-text);
+  background-color: var(--hp-code-copy-code-hover-bg);
+  white-space: nowrap;
+  content: 'Copied';
+}
+
+.hp-doc [class*='language-'] > span.lang {
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  z-index: 2;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--hp-c-text-dark-3);
+  transition: color 0.4s, opacity 0.4s;
+}
+
+.hp-doc [class*='language-']:hover > button.copy + span.lang,
+.hp-doc [class*='language-'] > button.copy:focus + span.lang {
+  opacity: 0;
 }

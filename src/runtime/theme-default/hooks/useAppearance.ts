@@ -13,14 +13,18 @@ if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
 /**
  * 切换主题，缓存在localStorage
  */
-export function toggleAppearance() {
-  // https://developer.mozilla.org/zh-CN/docs/Web/API/DOMTokenList
-  if (classList.contains('dark')) {
-    setClassListDark(false)
-    localStorage.setItem(APPEARANCE_KEY, 'light') // 用户选择时肯定是浏览器环境
-  } else {
-    setClassListDark()
-    localStorage.setItem(APPEARANCE_KEY, 'dark')
+export function useAppearance() {
+  return {
+    toggle() {
+      // https://developer.mozilla.org/zh-CN/docs/Web/API/DOMTokenList
+      if (classList.contains('dark')) {
+        setClassListDark(false)
+        localStorage.setItem(APPEARANCE_KEY, 'light') // 用户选择时肯定是浏览器环境
+      } else {
+        setClassListDark()
+        localStorage.setItem(APPEARANCE_KEY, 'dark')
+      }
+    },
   }
 }
 

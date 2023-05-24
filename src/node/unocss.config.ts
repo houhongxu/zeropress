@@ -17,10 +17,12 @@ export const unoConfig: UserConfig = {
       'mr-12px ml-12px w-1px h-24px bg-divider-light content-[""]',
     'gradient-title':
       'bg-gradient-to-rb from-home-hero-name-background-from to-home-hero-name-background-to bg-clip-text text-transparent',
+    'border-px': 'border-1px border-solid',
   },
   theme: {
+    // key不能使用 'xxx-xxx'格式
     colors: {
-      // 包含dark主题的
+      // 包含dark主题的，vscode显示颜色的功能会显示dark的颜色，不影响代码
       bg: {
         default: 'var(--hp-c-bg)',
         soft: 'var(--hp-c-bg-soft)',
@@ -33,11 +35,7 @@ export const unoConfig: UserConfig = {
         light: 'var(--hp-c-divider-light)',
         dark: 'var(--hp-c-divider-dark)',
       },
-      brand: {
-        default: 'var(--hp-c-brand)',
-        light: 'var(--hp-c-brand-light)',
-        dark: 'var(--hp-c-brand-dark)',
-      },
+
       text: {
         1: 'var(--hp-c-text-1)',
         2: 'var(--hp-c-text-2)',
@@ -45,7 +43,6 @@ export const unoConfig: UserConfig = {
         4: 'var(--hp-c-text-4)',
         code: 'var(--hp-c-text-code)',
       },
-
       button: {
         brand: {
           border: 'var(--hp-button-brand-border)',
@@ -88,6 +85,11 @@ export const unoConfig: UserConfig = {
           4: 'var(--hp-c-gray-light-4)',
         },
       },
+      brand: {
+        default: 'var(--hp-c-brand)',
+        light: 'var(--hp-c-brand-light)',
+        dark: 'var(--hp-c-brand-dark)',
+      },
       home: {
         hero: {
           name: {
@@ -99,17 +101,12 @@ export const unoConfig: UserConfig = {
         },
       },
     },
-
     boxShadow: {
       1: '0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06)',
       2: '0 3px 12px rgba(0, 0, 0, 0.07), 0 1px 4px rgba(0, 0, 0, 0.07)',
       3: '0 12px 32px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08)',
       4: '0 14px 44px rgba(0, 0, 0, 0.12), 0 3px 9px rgba(0, 0, 0, 0.12)',
       5: '0 18px 56px rgba(0, 0, 0, 0.16), 0 4px 12px rgba(0, 0, 0, 0.16)',
-    },
-    breakpoints: {
-      md: '960px',
-      lg: '1440px',
     },
     height: {
       nav: 'var(--hp-nav-height)',
@@ -119,7 +116,14 @@ export const unoConfig: UserConfig = {
     },
     spacing: {
       nav: 'var(--hp-nav-height)',
-      sidebar: 'var(--hp-sidebar-width)',
+      sidebar: 'var(--hp-sidebar-width)', // 在w与h中无法使用
+    },
+    zIndex: {
+      // 配置无效
+    },
+    breakpoints: {
+      md: '560px',
+      lg: '1440px', // 无法用css变量
     },
   },
 }
