@@ -47,7 +47,8 @@ cli
 
       await build(root)
     } catch (e) {
-      console.log(e)
+      console.error(`Failed to build / 构建失败`)
+      throw e
     }
   })
 

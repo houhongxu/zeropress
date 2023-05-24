@@ -2,11 +2,12 @@
 
 import classNames from 'classnames'
 import { ReactNode } from 'react'
-import { toggleAppearance } from '../logic/toggleAppearance'
+import { useAppearance } from '../hooks/useAppearance'
 
 export function SwitchAppearance() {
+  const { toggle } = useAppearance()
   return (
-    <Switch onClick={toggleAppearance}>
+    <Switch onClick={toggle}>
       <div className="i-carbon-sun"></div>
       <div className="i-carbon-moon"></div>
     </Switch>
@@ -25,7 +26,7 @@ function Switch({ children, onClick, className }: SwitchProps) {
       {...(onClick ? { onClick } : {})}
       className={classNames(
         className,
-        'relative block rounded-11px w-40px h-22px bg-bg-mute flex-shrink-0 border-1px border-solid border-divider-default transition-colors duration-250',
+        'relative block rounded-11px w-40px h-22px bg-bg-mute flex-shrink-0 border-px border-divider-default transition-colors duration-250',
       )}
       un-hover="border-gray-default"
     >

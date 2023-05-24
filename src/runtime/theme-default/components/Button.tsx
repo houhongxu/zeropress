@@ -41,7 +41,7 @@ export function Button({
         className,
         themeStyles[theme],
         sizeStyles[size],
-        'inlinne-block border-1px border-solid text-center font-500 whitespace-nowrap transition-colors duration-250 active:duration-100',
+        'inlinne-block border-px text-center font-500 whitespace-nowrap transition-colors duration-250 active:duration-100',
       ),
       href,
     },

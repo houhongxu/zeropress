@@ -1,5 +1,5 @@
-import { usePageData } from 'runtime/hooks'
 import { NavItem as NavItemType } from 'shared/types'
+import { usePageData } from '../hooks/usePageData'
 import { SwitchAppearance } from './SwitchAppearance'
 
 export function Nav() {
@@ -7,7 +7,7 @@ export function Nav() {
   const nav = userConfig.themeConfig?.nav || []
   return (
     <header className="w-full z-10 fixed top-0 left-0">
-      <div className="flex items-center justify-between px-32px h-nav divider-bottom">
+      <div className="flex items-center justify-between px-32px h-nav divider-bottom bg-bg-default">
         <a
           href="/"
           className="flex items-center w-full h-full font-600 transition-opacity duration-250"
