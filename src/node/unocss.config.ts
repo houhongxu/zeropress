@@ -113,6 +113,7 @@ export const unoConfig: UserConfig = {
     },
     width: {
       sidebar: 'var(--hp-sidebar-width)',
+      toc: 'var(--hp-toc-width)',
     },
     spacing: {
       nav: 'var(--hp-nav-height)',
@@ -122,7 +123,7 @@ export const unoConfig: UserConfig = {
       // 配置无效
     },
     breakpoints: {
-      md: '560px',
+      md: '960px',
       lg: '1440px', // 无法用css变量
     },
   },

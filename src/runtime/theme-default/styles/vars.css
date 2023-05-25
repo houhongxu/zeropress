@@ -287,12 +287,20 @@
 }
 
 /**
+ * Component: Toc
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --hp-toc-width: 268px;
+}
+
+/**
  * Component: Home
  * -------------------------------------------------------------------------- */
 
 :root {
   --hp-home-hero-name-background-from: var(--hp-c-brand);
-  --hp-home-hero-name-background-to: #41d1ff;
+  --hp-home-hero-name-background-to: #002fa7;
 }
 
 /**
