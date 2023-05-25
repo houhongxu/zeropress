@@ -1,9 +1,8 @@
-import { initial } from 'lodash-es'
 import { useRef } from 'react'
 import { TocItem } from 'shared/types'
 import { isArrayEmpty } from 'shared/utils'
 import { useTocHmr } from '../hooks/useTocHmr'
-import { useTocScroll } from '../hooks/useTocScroll'
+import { scrollToTarget, useTocScroll } from '../hooks/useTocScroll'
 
 interface TocProps {
   toc?: TocItem[]
@@ -63,6 +62,11 @@ function TocLi({ item }: { item: TocItem }) {
         un-hover="text-text-1"
         style={{
           paddingLeft: (item.depth - 2) * 12,
+        }}
+        onClick={(e) => {
+          e.preventDefault()
+          const target = document.getElementById(item.id)
+          target && scrollToTarget(target)
         }}
       >
         {item.text}

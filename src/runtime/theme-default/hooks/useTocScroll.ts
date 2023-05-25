@@ -1,6 +1,8 @@
 import { RefObject, useEffect } from 'react'
 import { throttle } from 'lodash-es'
 
+const NAV_HEIGHT = 56
+
 /**
  * 开启toc滚动高亮
  */
@@ -52,8 +54,6 @@ function highlightToc(
   const headers = Array.from(
     document.querySelectorAll<HTMLAnchorElement>('.autolink-header'),
   ).filter((item) => item.parentElement?.tagName !== 'H1')
-
-  const NAV_HEIGHT = 56
 
   // 最后一个header没到底时
   const isBottom =
@@ -130,4 +130,26 @@ function highlightTocItem(
 function clearTocHighlight(tocHighlight: HTMLDivElement) {
   tocHighlight.style.top = `33px`
   tocHighlight.style.opacity = '0'
+}
+
+export function scrollToTarget(target: HTMLElement, isSmooth: boolean = false) {
+  // https://developer.mozilla.org/zh-CN/docs/Web/API/Window/getComputedStyle
+  const targetPaddingTop = parseInt(
+    window.getComputedStyle(target).paddingTop,
+    10,
+  )
+
+  // https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getBoundingClientRect
+  const targetTop =
+    window.scrollY +
+    target.getBoundingClientRect().top +
+    targetPaddingTop -
+    NAV_HEIGHT
+
+  // https://developer.mozilla.org/zh-CN/docs/Web/API/Window/scrollTo
+  window.scrollTo({
+    left: 0,
+    top: targetTop,
+    behavior: isSmooth ? 'smooth' : 'auto',
+  })
 }
