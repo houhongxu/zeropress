@@ -1,13 +1,17 @@
+import { initial } from 'lodash-es'
 import { useRef } from 'react'
 import { TocItem } from 'shared/types'
 import { isArrayEmpty } from 'shared/utils'
+import { useTocHmr } from '../hooks/useTocHmr'
 import { useTocScroll } from '../hooks/useTocScroll'
 
 interface TocProps {
   toc?: TocItem[]
 }
 
-export function DocToc({ toc }: TocProps) {
+export function DocToc({ toc: initialToc = [] }: TocProps) {
+  const toc = useTocHmr(initialToc)
+
   const hasToc = !isArrayEmpty(toc)
 
   const highlightRef = useRef<HTMLDivElement>(null)

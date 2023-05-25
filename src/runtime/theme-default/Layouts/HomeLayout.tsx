@@ -1,6 +1,6 @@
 import { HomeFeature } from '../components/HomeFeature'
 import { HomeHero } from '../components/HomeHero'
-import { usePageData } from '../hooks/usePageData'
+import { usePageData } from '../../hooks/usePageData'
 
 export function HomeLayout() {
   const { frontmatter } = usePageData()

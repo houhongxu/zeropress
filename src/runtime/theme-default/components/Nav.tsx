@@ -1,5 +1,5 @@
 import { NavItem as NavItemType } from 'shared/types'
-import { usePageData } from '../hooks/usePageData'
+import { usePageData } from '../../hooks/usePageData'
 import { SwitchAppearance } from './SwitchAppearance'
 
 export function Nav() {

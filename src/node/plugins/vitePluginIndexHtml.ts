@@ -29,6 +29,8 @@ export function vitePluginIndexHtml(): Plugin {
       return () => {
         // 在中间件中返回读取到的html模板
         server.middlewares.use(async (req, res, next) => {
+          if (!req.url) return next()
+
           try {
             let html = await fse.readFile(DEFAULT_HTML_PATH, 'utf-8')
 

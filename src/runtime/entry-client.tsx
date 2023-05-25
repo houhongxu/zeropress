@@ -3,7 +3,7 @@
 import { createRoot } from 'react-dom/client'
 import { App, initPageData } from './App'
 import { BrowserRouter } from 'react-router-dom'
-import { PageDataContext } from './theme-default/hooks/usePageData'
+import { PageDataContext } from './hooks/usePageData'
 
 async function renderInBrower() {
   const rootDom = document.getElementById('root')
