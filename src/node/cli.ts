@@ -46,9 +46,9 @@ cli
       root = path.resolve(root)
 
       await build(root)
-    } catch (e) {
+    } catch (e: any) {
       console.error(`Failed to build / 构建失败`)
-      throw e
+      throw new Error(e)
     }
   })
 

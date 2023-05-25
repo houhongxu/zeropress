@@ -1,5 +1,5 @@
 import { SidebarItem } from 'shared/types'
-import { usePageData } from './usePageData'
+import { usePageData } from '../../hooks/usePageData'
 
 export function useSidebarData() {
   const { routes } = usePageData()

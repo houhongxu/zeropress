@@ -25,9 +25,9 @@ export async function build(root: string) {
 
   try {
     await renderPageHtml(renderInServer, routes, root, clientBundle)
-  } catch (e) {
+  } catch (e: any) {
     console.log('Render page error / 渲染页面失败')
-    throw e
+    throw new Error(e)
   }
 }
 
@@ -44,7 +44,7 @@ export async function bundle(
     mode: 'production',
     plugins: createPlugins(siteConfig, undefined, isServer),
     ssr: {
-      noExternal: ['react-router-dom'], // 避免node-cjs环境执行esm包，https://cn.vitejs.dev/config/ssr-options.html#ssr-noexternal
+      noExternal: ['react-router-dom', 'lodash-es'], // 避免node-cjs环境执行esm包，https://cn.vitejs.dev/config/ssr-options.html#ssr-noexternal
     },
     build: {
       minify: false, // TODO minify临时配置方便查看
@@ -68,9 +68,9 @@ export async function bundle(
     ])
 
     return [clientBundle, serverBundle] as [RollupOutput, RollupOutput]
-  } catch (e) {
+  } catch (e: any) {
     console.error(`Failed to bundle / 打包失败`)
-    throw e
+    throw new Error(e)
   }
 }
 
@@ -78,7 +78,7 @@ export async function bundle(
  * 服务端渲染出入口html
  */
 export async function renderPageHtml(
-  renderInServer: (routePath: string) => string,
+  renderInServer: (routePath: string) => Promise<string>,
   routes: Route[],
   root: string,
   clientBundle: RollupOutput,
@@ -95,7 +95,7 @@ export async function renderPageHtml(
     const routePath = route.path
 
     // 获取包含react应用的构建时的模板html
-    const appHtml = renderInServer(routePath)
+    const appHtml = await renderInServer(routePath)
 
     const html = `
   <!DOCTYPE html>

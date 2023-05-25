@@ -45,6 +45,8 @@ export function vitePluginUserConfig(
         watchedFiles.some((path) => id.includes(path))
 
       if (include(ctx.file)) {
+        if (!restartServer) return
+
         console.log(
           `\n${path.relative(
             root,

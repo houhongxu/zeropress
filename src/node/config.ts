@@ -89,9 +89,9 @@ function getUserConfigPath(root: string) {
     }
 
     return configPath
-  } catch (e) {
+  } catch (e: any) {
     console.error(`Failed to load user config / 加载配置文件失败`)
-    throw e
+    throw new Error(e)
   }
 }
 

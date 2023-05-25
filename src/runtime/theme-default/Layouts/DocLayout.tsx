@@ -3,7 +3,7 @@ import { Content } from 'runtime/Content'
 import { DocFooter } from '../components/DocFooter'
 import { DocToc } from '../components/DocToc'
 import { Sidebar } from '../components/Sidebar'
-import { usePageData } from '../hooks/usePageData'
+import { usePageData } from '../../hooks/usePageData'
 import { useSidebarData } from '../hooks/useSidebarData'
 
 export function DocLayout() {

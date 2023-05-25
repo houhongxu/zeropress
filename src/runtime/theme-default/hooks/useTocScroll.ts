@@ -1,5 +1,9 @@
 import { RefObject, useEffect } from 'react'
+import { throttle } from 'lodash-es'
 
+/**
+ * 开启toc滚动高亮
+ */
 export function useTocScroll(
   tocHighlightRef: RefObject<HTMLDivElement>,
   tocContainerRef: RefObject<HTMLDivElement>,
@@ -22,26 +26,29 @@ export function useTocScroll(
   }, [])
 }
 
+/**
+ * 获取toc滚动高亮的事件监听开关
+ */
 function getTocScrollEvent(
   tocHighlight: HTMLDivElement,
   tocItems: HTMLAnchorElement[],
 ) {
+  const throttled = throttle(() => highlightToc(tocHighlight, tocItems), 100)
+
   return {
-    add: () =>
-      window.addEventListener('scroll', () =>
-        highlightToc(tocHighlight, tocItems),
-      ),
-    remove: () =>
-      window.removeEventListener('scroll', () =>
-        highlightToc(tocHighlight, tocItems),
-      ),
+    add: () => window.addEventListener('scroll', throttled),
+    remove: () => window.removeEventListener('scroll', throttled),
   }
 }
 
+/**
+ * 高亮toc
+ */
 function highlightToc(
   tocHighlight: HTMLDivElement,
   tocItems: HTMLAnchorElement[],
 ) {
+  // 获取标题，因为类型所以用性能差的querySA，因为在useEffect查不了dom，而又不建议用useLayoutEffect，所以在监听回调函数中查询
   const headers = Array.from(
     document.querySelectorAll<HTMLAnchorElement>('.autolink-header'),
   ).filter((item) => item.parentElement?.tagName !== 'H1')
@@ -52,12 +59,12 @@ function highlightToc(
   const isBottom =
     document.documentElement.scrollTop + window.innerHeight >=
     document.documentElement.scrollHeight
-
   if (isBottom) {
     highlightTocItem(tocHighlight, tocItems, headers, headers.length - 1)
     return
   }
 
+  // 每次滚动都遍历headers查找在视口的header，然后高亮对应的tocItem
   for (let i = 0; i < headers.length; i++) {
     const currentHeader = headers[i]
     const nextHeader = headers[i + 1]
@@ -67,7 +74,7 @@ function highlightToc(
 
     // 第一个header之前
     if (scrollTop < currentHeaderTop) {
-      clearHighlight(tocHighlight)
+      clearTocHighlight(tocHighlight)
       break
     }
 
@@ -88,6 +95,9 @@ function highlightToc(
   }
 }
 
+/**
+ * 高亮header对应的tocItem
+ */
 function highlightTocItem(
   tocHighlight: HTMLDivElement,
   tocItems: HTMLAnchorElement[],
@@ -114,7 +124,10 @@ function highlightTocItem(
   }
 }
 
-function clearHighlight(tocHighlight: HTMLDivElement) {
+/**
+ * 清除toc所有高亮
+ */
+function clearTocHighlight(tocHighlight: HTMLDivElement) {
   tocHighlight.style.top = `33px`
   tocHighlight.style.opacity = '0'
 }
