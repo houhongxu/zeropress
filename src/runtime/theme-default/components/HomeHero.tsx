@@ -7,7 +7,7 @@ interface HeroProps {
 
 export function HomeHero({ hero }: HeroProps) {
   return (
-    <div className="pt-28px px-64px pb-64px">
+    <div className="p-64px">
       <div className="flex max-w-1152px mx-auto">
         <div className="flex flex-col max-w-592px">
           <h1 className="text-6xl font-700 max-w-576px">

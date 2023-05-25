@@ -6,7 +6,7 @@ interface FeatureProps {
 
 export function HomeFeature({ features }: FeatureProps) {
   return (
-    <div className=" px-64px">
+    <div className="px-64px pb-32px">
       <div className="max-w-1152px mx-auto flex flex-wrap -translate-x-8px">
         {features?.map((feature) => {
           const { icon, title, details } = feature
@@ -26,7 +26,7 @@ export function HomeFeature({ features }: FeatureProps) {
                   {icon}
                 </div>
                 <h2 className="font-700">{title}</h2>
-                <p className="text-sm leading-6 text-text-2 font-500 pt-8px">
+                <p className="text-14px leading-24px text-text-2 font-500 pt-8px">
                   {details}
                 </p>
               </article>

@@ -4,6 +4,7 @@
 
 - 支持 mdx2，docusaurus2 只支持 v1，vitepress1 不支持
 - 减少 js 体积的孤岛架构
+- 约定式侧边栏
 
 ## MVP 版本
 
