@@ -1,13 +1,15 @@
+import { isBrowser } from 'shared/utils'
+
 const APPEARANCE_KEY = 'hhxpress-appearance'
 
 /**
  * 切换主题，缓存在localStorage
  */
 export function useAppearance() {
-  const classList = document.documentElement.classList
-
   return {
     toggle() {
+      const classList = document.documentElement.classList
+
       // https://developer.mozilla.org/zh-CN/docs/Web/API/DOMTokenList
       if (classList.contains('dark')) {
         setClassListDark(classList, false)
@@ -33,7 +35,7 @@ function setClassListDark(classList: DOMTokenList, isDark = true) {
 // ---
 
 // 判断为浏览器环境时且加载js文件时（执行一次）
-if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+if (isBrowser() && typeof localStorage !== 'undefined') {
   // https://developer.mozilla.org/zh-CN/docs/Web/API/Document/documentElement
   const classList = document.documentElement.classList
   updateAppearance(classList)

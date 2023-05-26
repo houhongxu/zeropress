@@ -20,7 +20,7 @@ export async function build(root: string) {
   // 即node文件夹不应该引入runtime文件夹的文件
 
   // 导入服务端产物的渲染函数
-  const SERVER_BUNDLE_PATH = path.join(root, '.temp', 'server-entry.js')
+  const SERVER_BUNDLE_PATH = path.join(root, '.temp', 'entry-server.js')
   const { renderInServer, routes } = await import(SERVER_BUNDLE_PATH)
 
   try {

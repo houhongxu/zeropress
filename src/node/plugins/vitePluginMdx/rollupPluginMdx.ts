@@ -23,7 +23,7 @@ export function createRollupPluginMdx(): Plugin {
         rehypePluginAutolinkHeadings,
         {
           properties: {
-            class: 'autolink-header',
+            class: 'autolink-header', // TODO 滚动到正确位置
           },
           content: {
             type: 'text',
