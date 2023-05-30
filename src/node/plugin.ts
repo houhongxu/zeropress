@@ -6,6 +6,9 @@ import { vitePluginRoutes } from './plugins/vitePluginRoutes'
 import { createVitePluginMdx } from './plugins/vitePluginMdx'
 import UnoCSS from 'unocss/vite'
 import { unoConfig } from './unocss.config'
+import path from 'path'
+import { PACKAGE_ROOT_PATH } from './constants'
+import babelPluginIsland from './plugins/babelPluginIsland'
 
 export function createPlugins(
   siteConfig: SiteConfig,
@@ -15,7 +18,15 @@ export function createPlugins(
   return [
     UnoCSS(unoConfig), // https://unocss.dev/integrations/vite#react
     vitePluginIndexHtml(),
-    vitePluginReact(),
+    vitePluginReact({
+      jsxRuntime: 'automatic',
+      jsxImportSource: isSSR
+        ? path.join(PACKAGE_ROOT_PATH, 'src', 'runtime')
+        : 'react',
+      babel: {
+        plugins: [babelPluginIsland],
+      },
+    }),
     vitePluginUserConfig(siteConfig, restartServer),
     vitePluginRoutes(siteConfig.root, isSSR),
     createVitePluginMdx(),

@@ -9,8 +9,8 @@ export function useTocHmr(initToc: TocItem[]) {
       import.meta.hot?.on(
         'mdx-changed',
         ({ filePath }: { filePath: string }) => {
-          // TODO 参数是干什么的？未知原因ignore失效
-          // 客户端可以使用import()
+          // TODO 未知原因ignore失效
+          // 客户端可以使用import()，添加参数是为了避免浏览器请求缓存
           import(/* @vite-ignore */ `${filePath}?import&t=${Date.now()}`).then(
             (module) => {
               setToc(module.toc)

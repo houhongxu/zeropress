@@ -1,10 +1,10 @@
 import { useRef } from 'react'
-import { TocItem } from 'shared/types'
+import { PropsWithIsland, TocItem } from 'shared/types'
 import { isArrayEmpty } from 'shared/utils'
 import { useTocHmr } from '../hooks/useTocHmr'
 import { scrollToTarget, useTocScroll } from '../hooks/useTocScroll'
 
-interface TocProps {
+interface TocProps extends PropsWithIsland {
   toc?: TocItem[]
 }
 
