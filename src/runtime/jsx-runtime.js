@@ -6,26 +6,26 @@ import * as jsxRuntime from 'react/jsx-runtime'
 const originJsx = jsxRuntime.jsx
 const originJsxs = jsxRuntime.jsxs
 
-export const data = {
+export const islandData = {
   // 记录 island 组件的数据
   islandProps: [],
   // 记录 island 组件的路径信息
-  islandIdToPath: {},
+  islandNameToPropMap: {},
 }
 
 const internalJsx = (originJsx, type, props, ...args) => {
   if (props && props.__island) {
-    data.islandProps.push(props)
+    islandData.islandProps.push(props)
 
-    const id = type.name
-    data['islandIdToPath'][id] = props.__island
+    const name = type.name
+    islandData['islandNameToPropMap'][name] = props.__island
 
     delete props.__island
 
     // island组件添加div包裹
     return originJsx('div', {
-      // 组件的 ID 以及 props 数据在 islandProps 中的位置
-      __island: `${id}:${data.islandProps.length - 1}`,
+      // 组件的 name 以及 props 数据在 islandProps 中的位置
+      __island: `${name}:${islandData.islandProps.length - 1}`,
       children: originJsx(type, props, ...args),
     })
   }
@@ -39,6 +39,6 @@ export const Fragment = jsxRuntime.Fragment
 
 // 渲染不同页面前应该清空island数据
 export const clearIslandData = () => {
-  data.islandProps = []
-  data.islandToPathMap = {}
+  islandData.islandProps = []
+  islandData.islandNameToPropMap = {}
 }
