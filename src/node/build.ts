@@ -2,13 +2,18 @@
 
 import { RollupOutput } from 'rollup'
 import { build as viteBuild, InlineConfig } from 'vite'
-import { CLIENT_ENTRY_PATH, SERVER_ENTRY_PATH } from './constants'
+import {
+  CLIENT_ENTRY_PATH,
+  MASK_SPLITTER,
+  SERVER_ENTRY_PATH,
+} from './constants'
 import path from 'path'
 import fse from 'fs-extra' // fse不支持具名直接导入函数 https://github.com/jprichardson/node-fs-extra/issues/746#issuecomment-923250293
 import { resolveSiteConfig } from './config'
 import { SiteConfig } from 'shared/types'
 import { createPlugins } from './plugin'
 import { Route } from './plugins/vitePluginRoutes'
+import { Plugin } from 'vite'
 
 export async function build(root: string) {
   const siteConfig = await resolveSiteConfig(root, 'build', 'production')
@@ -78,7 +83,11 @@ export async function bundle(
  * 服务端渲染出入口html
  */
 export async function renderPageHtml(
-  renderInServer: (routePath: string) => Promise<string>,
+  renderInServer: (routePath: string) => Promise<{
+    appHtml: string
+    islandProps: any[]
+    islandNameToPath: Record<string, string>
+  }>,
   routes: Route[],
   root: string,
   clientBundle: RollupOutput,
@@ -94,8 +103,12 @@ export async function renderPageHtml(
   const writeRouteHtmls = routes.map(async (route) => {
     const routePath = route.path
 
-    // 获取包含react应用的构建时的模板html
-    const appHtml = await renderInServer(routePath)
+    // 获取包含react应用的构建时的模板html，island组件的数据
+    const { appHtml, islandProps, islandNameToPath } = await renderInServer(
+      routePath,
+    )
+    // 打包island组件
+    await bundleIslands(root, islandNameToPath)
 
     const html = `
   <!DOCTYPE html>
@@ -123,4 +136,67 @@ export async function renderPageHtml(
   })
 
   return Promise.all(writeRouteHtmls)
+}
+
+async function bundleIslands(
+  root: string,
+  islandNameToPropMap: Record<string, string>,
+) {
+  // 根据 islandNameToPropMap 拼接模块代码内容
+  const islandsInjectCode = `${Object.entries(islandNameToPropMap)
+    .map(
+      ([islandName, islandProp]) =>
+        `import { ${islandName} } from '${islandProp}'`,
+    )
+    .join('')}
+    window['ISLANDS'] = {${Object.keys(islandNameToPropMap).join(',')}}
+    window['ISLAND_PROPS'] = JSON.parse(
+      document.getElementById('island-props').textContent
+    );
+    `
+
+  // 加载我们拼接的 islands 注册模块的代码
+  const INJECT_ID = 'virtual:inject'
+
+  const plugin: Plugin = {
+    name: 'hhxpress:inject',
+    enforce: 'post', // 在所有插件后调用 https://cn.vitejs.dev/guide/api-plugin.html#plugin-ordering
+    resolveId(id) {
+      // 处理island组件
+      if (id.includes(MASK_SPLITTER)) {
+        const [importPath, importer] = id.split(MASK_SPLITTER)
+
+        // 关于this.resolve https://rollupjs.org/plugin-development/#resolveid
+        // 忽略当前插件让其他插件进行解析
+        return this.resolve(importPath, importer, { skipSelf: true })
+      }
+
+      // 解析虚拟模块
+      if (id === INJECT_ID) {
+        return id
+      }
+    },
+    load(id) {
+      if (id === INJECT_ID) {
+        return islandsInjectCode
+      }
+    },
+    generateBundle(_, bundle) {
+      // https://rollupjs.org/plugin-development/#generatebundle
+      Object.keys(bundle).forEach(
+        (key) => bundle[key].type === 'asset' && delete bundle[key],
+      )
+    },
+  }
+
+  return viteBuild({
+    mode: 'production',
+    build: {
+      outDir: path.join(root, '.temp'),
+      rollupOptions: {
+        input: INJECT_ID, // 导入虚拟模块用插件处理 https://rollupjs.org/configuration-options/#input
+      },
+    },
+    plugins: [plugin],
+  })
 }

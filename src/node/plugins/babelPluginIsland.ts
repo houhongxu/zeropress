@@ -50,9 +50,10 @@ export default declare((api) => {
 
       // 根据作用域信息拿到组件引入的位置
       if (binding?.path.parent.type === 'ImportDeclaration') {
-        // 定位到 import 语句之后，拿到组件对应的引入路径
-        const source = binding.path.parent.source
-
+        // 定位到 import 语句之后，拿到组件的引入路径
+        const importPath = binding.path.parent.source
+        // 组件的引入者
+        const importer = state.filename || ''
         // 修改__islan 属性为路径
         const attributes = (path.container as JSXElement).openingElement
           .attributes
@@ -61,7 +62,7 @@ export default declare((api) => {
           const name = (attribute as JSXAttribute).name.name
           if (name === '__island') {
             ;(attribute as JSXAttribute).value = stringLiteral(
-              `${source.value}${MASK_SPLITTER}${state.filename || ''}`,
+              `${importPath.value}${MASK_SPLITTER}${importer}`,
             )
           }
         })

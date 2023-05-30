@@ -10,11 +10,10 @@ export async function renderInServer(routePath: string) {
   const pageData = await initPageData(routePath)
 
   // 每个页面清空上一个页面的island数据
-  const { clearIslandData, data } = await import('./jsx-runtime')
-  const { islandProps, islandIdToPath } = data
+  const { clearIslandData, islandData } = await import('./jsx-runtime')
   clearIslandData()
 
-  return renderToString(
+  const appHtml = renderToString(
     // https://reactrouter.com/en/main/router-components/static-router
     // BrowserRouter 使用的是 History API 记录位置，而 History API 是属于浏览器的 API ，在 SSR 的环境下，服务端不能使用浏览器 API
     // 通过初始传入的 location 地址找到相应组件
@@ -24,6 +23,11 @@ export async function renderInServer(routePath: string) {
       </StaticRouter>
     </PageDataContext.Provider>,
   )
+
+  return {
+    appHtml,
+    ...islandData,
+  }
 }
 
 export { routes }
