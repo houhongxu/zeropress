@@ -25,7 +25,7 @@ export function DocLayout() {
         </div>
 
         <div className="sticky flex-shrink-0 top-88px h-100vh overflow-x-hidden overflow-y-auto">
-          <DocToc toc={toc}></DocToc>
+          <DocToc toc={toc} __island></DocToc>
         </div>
       </div>
     </div>

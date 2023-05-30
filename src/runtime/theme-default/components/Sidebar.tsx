@@ -17,7 +17,7 @@ export function Sidebar({ sidebarData, pathname }: SidebarProps) {
         {sidebarData?.map((sidebarGroupData) => (
           <SidebarGroup
             key={sidebarGroupData.text}
-            {...sidebarGroupData}
+            data={sidebarGroupData}
             pathname={pathname}
           ></SidebarGroup>
         ))}
@@ -27,11 +27,13 @@ export function Sidebar({ sidebarData, pathname }: SidebarProps) {
 }
 
 function SidebarGroup({
-  text,
-  link,
-  items,
+  data,
   pathname,
-}: SidebarItemType & { pathname: string }) {
+}: {
+  data: SidebarItemType
+  pathname: string
+}) {
+  const { text, link, items } = data
   return (
     <section className="divider-top mt-16px" un-first="border-0 mt-0">
       <Link href={link}>
@@ -42,7 +44,7 @@ function SidebarGroup({
         {items?.map((item) => (
           <SidebarItem
             key={item.text}
-            {...item}
+            data={item}
             pathname={pathname}
           ></SidebarItem>
         ))}
@@ -52,10 +54,13 @@ function SidebarGroup({
 }
 
 function SidebarItem({
-  text,
-  link,
+  data,
   pathname,
-}: SidebarItemType & { pathname: string }) {
+}: {
+  data: SidebarItemType
+  pathname: string
+}) {
+  const { text, link } = data
   const active = link === pathname
   return (
     <div className="ml-20px">

@@ -21,3 +21,5 @@ export const SERVER_ENTRY_PATH = path.join(
 )
 
 export const SUPPORT_CONFIG_FILE = ['config.ts', 'config.js']
+
+export const MASK_SPLITTER = '!!ISLAND!!'

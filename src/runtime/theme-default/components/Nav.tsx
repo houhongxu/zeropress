@@ -18,7 +18,7 @@ export function Nav() {
 
         <div className="h-full flex">
           {nav.map((item) => (
-            <NavItem key={item.link} {...item}></NavItem>
+            <NavItem key={item.link} item={item}></NavItem>
           ))}
         </div>
 
@@ -40,7 +40,8 @@ export function Nav() {
   )
 }
 
-function NavItem({ link, text }: NavItemType) {
+function NavItem({ item }: { item: NavItemType }) {
+  const { text, link } = item
   return (
     <div className="h-full mx-12px">
       <a
