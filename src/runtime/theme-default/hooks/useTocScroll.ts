@@ -11,14 +11,14 @@ export function useTocScroll(
   tocContainerRef: RefObject<HTMLDivElement>,
 ) {
   useEffect(() => {
-    const tocHighlight = tocHighlightRef.current
-    const tocContainer = tocContainerRef.current
+    const tocHighlightDom = tocHighlightRef.current
+    const tocContainerDom = tocContainerRef.current
 
-    if (!tocHighlight || !tocContainer) return
+    if (!tocHighlightDom || !tocContainerDom) return
 
-    const tocItems = Array.from(tocContainer.getElementsByTagName('a'))
+    const tocItemDoms = Array.from(tocContainerDom.getElementsByTagName('a'))
 
-    const { add, remove } = getTocScrollEvent(tocHighlight, tocItems) // 在useEffect中才能拿到对应的dom
+    const { add, remove } = getTocScrollEvent(tocHighlightDom, tocItemDoms) // 在useEffect中才能拿到对应的dom
 
     add()
 
@@ -32,10 +32,13 @@ export function useTocScroll(
  * 获取toc滚动高亮的事件监听开关
  */
 function getTocScrollEvent(
-  tocHighlight: HTMLDivElement,
-  tocItems: HTMLAnchorElement[],
+  tocHighlightDom: HTMLDivElement,
+  tocItemDoms: HTMLAnchorElement[],
 ) {
-  const throttled = throttle(() => highlightToc(tocHighlight, tocItems), 100)
+  const throttled = throttle(
+    () => highlightToc(tocHighlightDom, tocItemDoms),
+    100,
+  )
 
   return {
     add: () => window.addEventListener('scroll', throttled),
@@ -47,11 +50,11 @@ function getTocScrollEvent(
  * 高亮toc
  */
 function highlightToc(
-  tocHighlight: HTMLDivElement,
-  tocItems: HTMLAnchorElement[],
+  tocHighlightDom: HTMLDivElement,
+  tocItemDoms: HTMLAnchorElement[],
 ) {
   // 获取标题，因为类型所以用性能差的querySA，因为在useEffect查不了dom，而又不建议用useLayoutEffect，所以在监听回调函数中查询
-  const headers = Array.from(
+  const headerDoms = Array.from(
     document.querySelectorAll<HTMLAnchorElement>('.autolink-header'),
   ).filter((item) => item.parentElement?.tagName !== 'H1')
 
@@ -60,36 +63,41 @@ function highlightToc(
     document.documentElement.scrollTop + window.innerHeight >=
     document.documentElement.scrollHeight
   if (isBottom) {
-    highlightTocItem(tocHighlight, tocItems, headers, headers.length - 1)
+    highlightTocItem(
+      tocHighlightDom,
+      tocItemDoms,
+      headerDoms,
+      headerDoms.length - 1,
+    )
     return
   }
 
   // 每次滚动都遍历headers查找在视口的header，然后高亮对应的tocItem
-  for (let i = 0; i < headers.length; i++) {
-    const currentHeader = headers[i]
-    const nextHeader = headers[i + 1]
+  for (let i = 0; i < headerDoms.length; i++) {
+    const currentHeaderDom = headerDoms[i]
+    const nextHeaderDom = headerDoms[i + 1]
     const scrollTop = Math.ceil(window.scrollY)
     const currentHeaderTop =
-      (currentHeader.parentElement?.offsetTop ?? NAV_HEIGHT) - NAV_HEIGHT
+      (currentHeaderDom.parentElement?.offsetTop ?? NAV_HEIGHT) - NAV_HEIGHT
 
     // 第一个header之前
     if (scrollTop < currentHeaderTop) {
-      clearTocHighlight(tocHighlight)
+      clearTocHighlight(tocHighlightDom)
       break
     }
 
     // 最后一个header
-    if (!nextHeader) {
-      highlightTocItem(tocHighlight, tocItems, headers, i)
+    if (!nextHeaderDom) {
+      highlightTocItem(tocHighlightDom, tocItemDoms, headerDoms, i)
       break
     }
 
     const nextHeaderTop =
-      (nextHeader.parentElement?.offsetTop ?? NAV_HEIGHT) - NAV_HEIGHT
+      (nextHeaderDom.parentElement?.offsetTop ?? NAV_HEIGHT) - NAV_HEIGHT
 
     // 第一个header开始，每两个header之间
     if (scrollTop >= currentHeaderTop && scrollTop < nextHeaderTop) {
-      highlightTocItem(tocHighlight, tocItems, headers, i)
+      highlightTocItem(tocHighlightDom, tocItemDoms, headerDoms, i)
       break
     }
   }
@@ -99,13 +107,13 @@ function highlightToc(
  * 高亮header对应的tocItem
  */
 function highlightTocItem(
-  tocHighlight: HTMLDivElement,
-  tocItems: HTMLAnchorElement[],
-  headers: HTMLAnchorElement[],
+  tocHighlightDom: HTMLDivElement,
+  tocItemDoms: HTMLAnchorElement[],
+  headerDoms: HTMLAnchorElement[],
   headerIndex: number,
 ) {
-  const tocItemHrefs = tocItems.map((item) => item.getAttribute('href'))
-  const header = headers[headerIndex]
+  const tocItemHrefs = tocItemDoms.map((item) => item.getAttribute('href'))
+  const header = headerDoms[headerIndex]
 
   if (header) {
     const headerHref = header.getAttribute('href')
@@ -114,12 +122,12 @@ function highlightTocItem(
     const tocIndex = tocItemHrefs.findIndex(
       (tocItemHref) => tocItemHref === headerHref,
     )
-    const tocItem = tocItems[tocIndex]
+    const tocItemDom = tocItemDoms[tocIndex]
 
     // 高亮tocItem
-    if (tocIndex > -1 && tocItem && tocHighlight) {
-      tocHighlight.style.top = `${33 + tocIndex * 28}px`
-      tocHighlight.style.opacity = '1'
+    if (tocIndex > -1 && tocItemDom && tocHighlightDom) {
+      tocHighlightDom.style.top = `${33 + tocIndex * 28}px`
+      tocHighlightDom.style.opacity = '1'
     }
   }
 }
@@ -127,9 +135,9 @@ function highlightTocItem(
 /**
  * 清除toc所有高亮
  */
-function clearTocHighlight(tocHighlight: HTMLDivElement) {
-  tocHighlight.style.top = `33px`
-  tocHighlight.style.opacity = '0'
+function clearTocHighlight(tocHighlightDom: HTMLDivElement) {
+  tocHighlightDom.style.top = `33px`
+  tocHighlightDom.style.opacity = '0'
 }
 
 export function scrollToTarget(target: HTMLElement, isSmooth: boolean = false) {

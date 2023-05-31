@@ -4,7 +4,7 @@ import { renderToString } from 'react-dom/server'
 import { App, initPageData } from './App'
 import { StaticRouter } from 'react-router-dom/server'
 import routes from 'virtual:routes'
-import { PageDataContext } from './hooks/usePageData'
+import { PageDataContext } from './usePageData'
 
 export async function renderInServer(routePath: string) {
   const pageData = await initPageData(routePath)

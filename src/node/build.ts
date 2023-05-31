@@ -4,8 +4,10 @@ import { RollupOutput } from 'rollup'
 import { build as viteBuild, InlineConfig } from 'vite'
 import {
   CLIENT_ENTRY_PATH,
+  CLIENT_OUTPUT_DIR,
   MASK_SPLITTER,
   SERVER_ENTRY_PATH,
+  SERVER_OUTPUT_DIR,
 } from './constants'
 import path from 'path'
 import fse from 'fs-extra' // fse不支持具名直接导入函数 https://github.com/jprichardson/node-fs-extra/issues/746#issuecomment-923250293
@@ -16,7 +18,11 @@ import { Route } from './plugins/vitePluginRoutes'
 import { Plugin } from 'vite'
 
 export async function build(root: string) {
-  const siteConfig = await resolveSiteConfig(root, 'build', 'production')
+  const siteConfig = await resolveSiteConfig(
+    root,
+    CLIENT_OUTPUT_DIR,
+    'production',
+  )
 
   const [clientBundle] = await bundle(root, siteConfig)
 
@@ -25,7 +31,11 @@ export async function build(root: string) {
   // 即node文件夹不应该引入runtime文件夹的文件
 
   // 导入服务端产物的渲染函数
-  const SERVER_BUNDLE_PATH = path.join(root, '.temp', 'entry-server.js')
+  const SERVER_BUNDLE_PATH = path.join(
+    root,
+    SERVER_OUTPUT_DIR,
+    'entry-server.js',
+  )
   const { renderInServer, routes } = await import(SERVER_BUNDLE_PATH)
 
   try {
@@ -54,7 +64,9 @@ export async function bundle(
     build: {
       minify: false, // TODO minify临时配置方便查看
       ssr: isServer,
-      outDir: isServer ? path.join(root, '.temp') : path.join(root, 'build'), // 在目标路径下生成
+      outDir: isServer
+        ? path.join(root, SERVER_OUTPUT_DIR)
+        : path.join(root, CLIENT_OUTPUT_DIR), // 在目标路径下生成
       rollupOptions: {
         input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
         output: {
@@ -86,7 +98,7 @@ export async function renderPageHtml(
   renderInServer: (routePath: string) => Promise<{
     appHtml: string
     islandProps: any[]
-    islandNameToPath: Record<string, string>
+    islandNameToPropsMap: Record<string, string>
   }>,
   routes: Route[],
   root: string,
@@ -104,11 +116,19 @@ export async function renderPageHtml(
     const routePath = route.path
 
     // 获取包含react应用的构建时的模板html，island组件的数据
-    const { appHtml, islandProps, islandNameToPath } = await renderInServer(
-      routePath,
+    const {
+      appHtml,
+      islandProps = [],
+      islandNameToPropsMap,
+    } = await renderInServer(routePath)
+
+    // 获取样式资源
+    const styleAssets = clientBundle.output.filter(
+      (chunk) => chunk.type === 'asset' && chunk.fileName.endsWith('.css'),
     )
-    // 打包island组件
-    await bundleIslands(root, islandNameToPath)
+    // 打包island组件，获取island打包代码
+    const islandBundle = await bundleIslands(root, islandNameToPropsMap)
+    const islandCode = (islandBundle as RollupOutput).output[0].code
 
     const html = `
   <!DOCTYPE html>
@@ -118,10 +138,15 @@ export async function renderPageHtml(
       <meta name="viewport" content="width=device-width,initial-scale=1">
       <title>title</title>
       <meta name="description" content="xxx">
+      ${styleAssets
+        .map((assets) => `<link rel="stylesheet" href="/${assets.fileName}">`)
+        .join('\n')}
     </head>
     <body>
       <div id="root">${appHtml}</div>
+      <script type="module">${islandCode}</script>
       <script type="module" src="/${clientEntryChunk?.fileName}"></script>
+      <script id="island-props">${JSON.stringify(islandProps)}</script>
     </body>
   </html>
   `.trim()
@@ -131,25 +156,32 @@ export async function renderPageHtml(
       ? `${routePath}index.html`
       : `${routePath}.html`
 
-    await fse.ensureDir(path.join(root, 'build', path.dirname(fileName)))
-    await fse.writeFile(path.join(root, 'build', fileName), html)
+    await fse.ensureDir(
+      path.join(root, CLIENT_OUTPUT_DIR, path.dirname(fileName)),
+    )
+    await fse.writeFile(path.join(root, CLIENT_OUTPUT_DIR, fileName), html)
   })
 
   return Promise.all(writeRouteHtmls)
 }
 
+/**
+ * 打包island组件
+ */
 async function bundleIslands(
   root: string,
-  islandNameToPropMap: Record<string, string>,
+  islandNameToPropsMap: Record<string, string>,
 ) {
-  // 根据 islandNameToPropMap 拼接模块代码内容
-  const islandsInjectCode = `${Object.entries(islandNameToPropMap)
+  // 根据 islandNameToPropsMap 拼接模块代码内容
+  const islandInjectCode = `${Object.entries(islandNameToPropsMap)
     .map(
       ([islandName, islandProp]) =>
         `import { ${islandName} } from '${islandProp}'`,
     )
     .join('')}
-    window['ISLANDS'] = {${Object.keys(islandNameToPropMap).join(',')}}
+    window['ISLANDS_NAME_TO_PROPS_MAP'] = {${Object.keys(
+      islandNameToPropsMap,
+    ).join(',')}}
     window['ISLAND_PROPS'] = JSON.parse(
       document.getElementById('island-props').textContent
     );
@@ -178,7 +210,7 @@ async function bundleIslands(
     },
     load(id) {
       if (id === INJECT_ID) {
-        return islandsInjectCode
+        return islandInjectCode
       }
     },
     generateBundle(_, bundle) {
@@ -189,10 +221,16 @@ async function bundleIslands(
     },
   }
 
+  // 静态资源拷贝到打包路径
+  const publicDir = path.join(root, 'public')
+  if (fse.pathExistsSync(publicDir)) {
+    await fse.copy(publicDir, path.join(root, CLIENT_OUTPUT_DIR))
+  }
+
   return viteBuild({
     mode: 'production',
     build: {
-      outDir: path.join(root, '.temp'),
+      outDir: path.join(root, SERVER_OUTPUT_DIR),
       rollupOptions: {
         input: INJECT_ID, // 导入虚拟模块用插件处理 https://rollupjs.org/configuration-options/#input
       },

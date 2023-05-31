@@ -1,4 +1,4 @@
-import { isBrowser } from 'shared/utils'
+import { isBrowser } from '../utils'
 
 const APPEARANCE_KEY = 'hhxpress-appearance'
 

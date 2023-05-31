@@ -10,7 +10,7 @@ export const islandData = {
   // 记录 island 组件的数据
   islandProps: [],
   // 记录 island 组件的路径信息
-  islandNameToPropMap: {},
+  islandNameToPropsMap: {},
 }
 
 const internalJsx = (originJsx, type, props, ...args) => {
@@ -18,7 +18,7 @@ const internalJsx = (originJsx, type, props, ...args) => {
     islandData.islandProps.push(props)
 
     const name = type.name
-    islandData['islandNameToPropMap'][name] = props.__island
+    islandData['islandNameToPropsMap'][name] = props.__island
 
     delete props.__island
 
@@ -40,5 +40,5 @@ export const Fragment = jsxRuntime.Fragment
 // 渲染不同页面前应该清空island数据
 export const clearIslandData = () => {
   islandData.islandProps = []
-  islandData.islandNameToPropMap = {}
+  islandData.islandNameToPropsMap = {}
 }
