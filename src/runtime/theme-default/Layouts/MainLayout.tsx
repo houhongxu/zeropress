@@ -6,7 +6,7 @@ import '../styles/doc.css'
 import { Nav } from '../components/Nav'
 import { HomeLayout } from './HomeLayout'
 import { DocLayout } from './DocLayout'
-import { usePageData } from '../../hooks/usePageData'
+import { usePageData } from '../../usePageData'
 
 export function MainLayout() {
   const { pageType } = usePageData()

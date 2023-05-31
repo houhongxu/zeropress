@@ -1,8 +1,8 @@
 import { useRef } from 'react'
 import { PropsWithIsland, TocItem } from 'shared/types'
-import { isArrayEmpty } from 'shared/utils'
 import { useTocHmr } from '../hooks/useTocHmr'
 import { scrollToTarget, useTocScroll } from '../hooks/useTocScroll'
+import { isArrayEmpty } from '../utils'
 
 interface TocProps extends PropsWithIsland {
   toc?: TocItem[]
@@ -65,8 +65,8 @@ function TocLi({ item }: { item: TocItem }) {
         }}
         onClick={(e) => {
           e.preventDefault()
-          const target = document.getElementById(item.id)
-          target && scrollToTarget(target)
+          const targetDom = document.getElementById(item.id)
+          targetDom && scrollToTarget(targetDom)
         }}
       >
         {item.text}
