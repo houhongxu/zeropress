@@ -3,6 +3,7 @@
 import cac from 'cac'
 import path from 'path'
 import { build } from './build'
+import { preview } from './preview'
 
 // 配置命令
 
@@ -54,4 +55,16 @@ cli
     }
   })
 
+cli
+  .command('preview [root]', 'Preview Production Build')
+  .option('--port <port>', 'port to use for preview server')
+  .action(async (root = process.cwd(), { port }: { port?: number }) => {
+    try {
+      root = path.resolve(root)
+      await build(root)
+      await preview(root, { port })
+    } catch (e: any) {
+      throw new Error(e)
+    }
+  })
 cli.parse()

@@ -122,9 +122,12 @@ export async function renderPageHtml(
     (chunk) => chunk.type === 'chunk' && chunk.isEntry,
   )
 
+  // 添加404页面的路由
+  const allRoutes = [...routes, { path: '/404' }]
+
   // 写入每个路由的html的异步任务
   return Promise.all(
-    routes.map(async (route) => {
+    allRoutes.map(async (route) => {
       const routePath = route.path
 
       // 标题栏上下文

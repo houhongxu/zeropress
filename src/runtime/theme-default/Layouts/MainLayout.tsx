@@ -8,6 +8,7 @@ import { HomeLayout } from './HomeLayout'
 import { DocLayout } from './DocLayout'
 import { usePageData } from '../../usePageData'
 import { Helmet } from 'react-helmet-async'
+import { NotFoundLayout } from './NotFoundLayout'
 
 export function MainLayout() {
   const { pageType, title } = usePageData()
@@ -18,7 +19,7 @@ export function MainLayout() {
     } else if (pageType === 'doc') {
       return <DocLayout></DocLayout>
     } else {
-      return <div>404 页面</div>
+      return <NotFoundLayout></NotFoundLayout>
     }
   }
 
