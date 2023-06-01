@@ -25,27 +25,6 @@ function paths2tree(paths: string[]): SidebarItem {
     link: '/docs/',
     items: [
       {
-        text: 'depth',
-        items: [
-          {
-            text: 'next',
-            items: [{ text: 'floor', link: '/docs/depth/next/floor' }],
-          },
-          {
-            text: 'set',
-            link: '/docs/depth/set',
-          },
-        ],
-      },
-      {
-        text: 'intro',
-        link: '/docs/intro',
-      },
-      {
-        text: 'sec',
-        link: '/docs/sec/',
-      },
-      {
         text: 'test',
         items: [
           {

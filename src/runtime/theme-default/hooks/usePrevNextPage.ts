@@ -10,19 +10,6 @@ export function usePrevNextPage() {
 
   const titles = [
     { text: 'docs', link: '/docs/' },
-    { text: 'floor', link: '/docs/depth/next/floor' },
-    {
-      text: 'set',
-      link: '/docs/depth/set',
-    },
-    {
-      text: 'intro',
-      link: '/docs/intro',
-    },
-    {
-      text: 'sec',
-      link: '/docs/sec/',
-    },
     {
       text: 'md',
       link: '/docs/test/md',

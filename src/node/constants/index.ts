@@ -26,3 +26,11 @@ export const MASK_SPLITTER = '!!ISLAND!!'
 
 export const CLIENT_OUTPUT_DIR = 'build'
 export const SERVER_OUTPUT_DIR = '.temp'
+
+// 不通过vite打包，手动打包的react相关依赖
+export const EXTERNALS = [
+  'react',
+  'react-dom',
+  'react-dom/client',
+  'react/jsx-runtime',
+]
