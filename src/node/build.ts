@@ -5,14 +5,16 @@ import { build as viteBuild, InlineConfig } from 'vite'
 import {
   CLIENT_ENTRY_PATH,
   CLIENT_OUTPUT_DIR,
+  EXTERNALS,
   MASK_SPLITTER,
+  PACKAGE_ROOT_PATH,
   SERVER_ENTRY_PATH,
   SERVER_OUTPUT_DIR,
 } from './constants'
 import path from 'path'
 import fse from 'fs-extra' // fse不支持具名直接导入函数 https://github.com/jprichardson/node-fs-extra/issues/746#issuecomment-923250293
 import { resolveSiteConfig } from './config'
-import { SiteConfig } from 'shared/types'
+import { RenderInServerRelsult, SiteConfig } from 'shared/types'
 import { createPlugins } from './plugin'
 import { Route } from './plugins/vitePluginRoutes'
 import { Plugin } from 'vite'
@@ -72,6 +74,7 @@ export async function bundle(
         output: {
           format: isServer ? 'cjs' : 'esm', // 服务端是运行在node所以用cjs
         },
+        external: EXTERNALS,
       },
     },
   })
@@ -83,6 +86,18 @@ export async function bundle(
       viteBuild(resolveViteConfig(false)),
       viteBuild(resolveViteConfig(true)),
     ])
+    // 静态资源拷贝到打包路径
+    const publicDir = path.join(root, 'public')
+
+    if (await fse.pathExists(publicDir)) {
+      await fse.copy(publicDir, path.join(root, CLIENT_OUTPUT_DIR))
+    }
+
+    // vendors产物拷贝到打包路径，通过npm script 命令打包出了vendors文件夹所以不用判断是否存在
+    await fse.copy(
+      path.join(PACKAGE_ROOT_PATH, 'vendors'),
+      path.join(root, CLIENT_OUTPUT_DIR),
+    )
 
     return [clientBundle, serverBundle] as [RollupOutput, RollupOutput]
   } catch (e: any) {
@@ -91,15 +106,8 @@ export async function bundle(
   }
 }
 
-/**
- * 服务端渲染出入口html
- */
 export async function renderPageHtml(
-  renderInServer: (routePath: string) => Promise<{
-    appHtml: string
-    islandProps: any[]
-    islandNameToPropsMap: Record<string, string>
-  }>,
+  renderInServer: (url: string) => Promise<RenderInServerRelsult>,
   routes: Route[],
   root: string,
   clientBundle: RollupOutput,
@@ -112,129 +120,138 @@ export async function renderPageHtml(
   )
 
   // 写入每个路由的html的异步任务
-  const writeRouteHtmls = routes.map(async (route) => {
-    const routePath = route.path
+  return Promise.all(
+    routes.map(async (route) => {
+      const routePath = route.path
 
-    // 获取包含react应用的构建时的模板html，island组件的数据
-    const {
-      appHtml,
-      islandProps = [],
-      islandNameToPropsMap,
-    } = await renderInServer(routePath)
+      // 获取包含react应用的构建时的模板html，island组件的数据
+      const {
+        appHtml,
+        islandNameToPropsMap,
+        islandProps = [],
+      } = await renderInServer(routePath)
 
-    // 获取样式资源
-    const styleAssets = clientBundle.output.filter(
-      (chunk) => chunk.type === 'asset' && chunk.fileName.endsWith('.css'),
-    )
-    // 打包island组件，获取island打包代码
-    const islandBundle = await bundleIslands(root, islandNameToPropsMap)
-    const islandCode = (islandBundle as RollupOutput).output[0].code
+      // 获取样式资源
+      const styleAssets = clientBundle.output.filter(
+        (chunk) => chunk.type === 'asset' && chunk.fileName.endsWith('.css'),
+      )
 
-    const html = `
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      <title>title</title>
-      <meta name="description" content="xxx">
-      ${styleAssets
-        .map((assets) => `<link rel="stylesheet" href="/${assets.fileName}">`)
-        .join('\n')}
-    </head>
-    <body>
-      <div id="root">${appHtml}</div>
-      <script type="module">${islandCode}</script>
-      <script type="module" src="/${clientEntryChunk?.fileName}"></script>
-      <script id="island-props">${JSON.stringify(islandProps)}</script>
-    </body>
-  </html>
-  `.trim()
+      // 打包island组件，获取island打包代码
+      const islandBundle = await bundleIslands(root, islandNameToPropsMap)
+      const islandsCode = (islandBundle as RollupOutput).output[0].code
 
-    // 写入服务端html文件
-    const fileName = routePath.endsWith('/')
-      ? `${routePath}index.html`
-      : `${routePath}.html`
+      const normalizeVendorFilename = (fileName: string) =>
+        fileName.replace(/\//g, '_')
 
-    await fse.ensureDir(
-      path.join(root, CLIENT_OUTPUT_DIR, path.dirname(fileName)),
-    )
-    await fse.writeFile(path.join(root, CLIENT_OUTPUT_DIR, fileName), html)
-  })
+      // 解决react多实例问题，引入手动预打包的react相关代码 https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/script/type/importmap
+      const html = `
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>title</title>
+    <meta name="description" content="xxx">
+    ${styleAssets
+      .map((item) => `<link rel="stylesheet" href="/${item.fileName}">`)
+      .join('\n')}
+    <script type="importmap">
+      {
+        "imports": {
+          ${EXTERNALS.map(
+            (name) => `"${name}": "/${normalizeVendorFilename(name) + '.js'}"`,
+          ).join(',')}
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root">${appHtml}</div>
+    <script type="module">${islandsCode}</script>
+    <script type="module" src="/${clientEntryChunk?.fileName}"></script>
+    <script id="island-props">${JSON.stringify(islandProps)}</script>
+  </body>
+</html>`.trim()
 
-  return Promise.all(writeRouteHtmls)
+      const fileName = routePath.endsWith('/')
+        ? `${routePath}index.html`
+        : `${routePath}.html`
+
+      await fse.ensureDir(path.join(root, 'build', path.dirname(fileName)))
+      await fse.writeFile(path.join(root, 'build', fileName), html)
+    }),
+  )
 }
 
 /**
  * 打包island组件
  */
+
 async function bundleIslands(
   root: string,
-  islandNameToPropsMap: Record<string, string>,
+  islandNameToPropsMap: RenderInServerRelsult['islandNameToPropsMap'],
 ) {
   // 根据 islandNameToPropsMap 拼接模块代码内容
-  const islandInjectCode = `${Object.entries(islandNameToPropsMap)
-    .map(
-      ([islandName, islandProp]) =>
-        `import { ${islandName} } from '${islandProp}'`,
-    )
-    .join('')}
-    window['ISLANDS_NAME_TO_PROPS_MAP'] = {${Object.keys(
-      islandNameToPropsMap,
-    ).join(',')}}
-    window['ISLAND_PROPS'] = JSON.parse(
-      document.getElementById('island-props').textContent
-    );
-    `
-
+  const islandInjectCode = `
+    ${Object.entries(islandNameToPropsMap)
+      .map(
+        ([islandName, islandProps]) =>
+          `import { ${islandName} } from '${islandProps}'`,
+      )
+      .join('')}
+window.ISLANDS_NAME_TO_PROPS_MAP = { ${Object.keys(islandNameToPropsMap).join(
+    ', ',
+  )} };
+window.ISLAND_PROPS = JSON.parse(
+  document.getElementById('island-props').textContent
+);
+  `
   // 加载我们拼接的 islands 注册模块的代码
   const INJECT_ID = 'virtual:inject'
-
-  const plugin: Plugin = {
-    name: 'hhxpress:inject',
-    enforce: 'post', // 在所有插件后调用 https://cn.vitejs.dev/guide/api-plugin.html#plugin-ordering
-    resolveId(id) {
-      // 处理island组件
-      if (id.includes(MASK_SPLITTER)) {
-        const [importPath, importer] = id.split(MASK_SPLITTER)
-
-        // 关于this.resolve https://rollupjs.org/plugin-development/#resolveid
-        // 忽略当前插件让其他插件进行解析
-        return this.resolve(importPath, importer, { skipSelf: true })
-      }
-
-      // 解析虚拟模块
-      if (id === INJECT_ID) {
-        return id
-      }
-    },
-    load(id) {
-      if (id === INJECT_ID) {
-        return islandInjectCode
-      }
-    },
-    generateBundle(_, bundle) {
-      // https://rollupjs.org/plugin-development/#generatebundle
-      Object.keys(bundle).forEach(
-        (key) => bundle[key].type === 'asset' && delete bundle[key],
-      )
-    },
-  }
-
-  // 静态资源拷贝到打包路径
-  const publicDir = path.join(root, 'public')
-  if (fse.pathExistsSync(publicDir)) {
-    await fse.copy(publicDir, path.join(root, CLIENT_OUTPUT_DIR))
-  }
+  const RESOLVED_INJECT_ID = '/0' + INJECT_ID
 
   return viteBuild({
     mode: 'production',
+    esbuild: {
+      jsx: 'automatic',
+    },
     build: {
       outDir: path.join(root, SERVER_OUTPUT_DIR),
       rollupOptions: {
-        input: INJECT_ID, // 导入虚拟模块用插件处理 https://rollupjs.org/configuration-options/#input
+        input: { virtual_inject: INJECT_ID }, // 导入虚拟模块用插件处理 https://rollupjs.org/configuration-options/#input
+        external: EXTERNALS,
       },
     },
-    plugins: [plugin],
+    plugins: [
+      {
+        name: 'hhxpress:inject',
+        enforce: 'post',
+        resolveId(id) {
+          if (id.includes(MASK_SPLITTER)) {
+            const [importPath, importer] = id.split(MASK_SPLITTER)
+
+            // 关于this.resolve https://rollupjs.org/plugin-development/#resolveid
+            // 忽略当前插件让其他插件进行解析
+            return this.resolve(importPath, importer, { skipSelf: true })
+          }
+
+          if (id === INJECT_ID) {
+            return RESOLVED_INJECT_ID
+          }
+        },
+        load(id) {
+          if (id === RESOLVED_INJECT_ID) {
+            return islandInjectCode
+          }
+        },
+        generateBundle(_, bundle) {
+          // https://rollupjs.org/plugin-development/#generatebundle
+
+          Object.keys(bundle).forEach(
+            (key) => bundle[key].type === 'asset' && delete bundle[key],
+          )
+        },
+      },
+    ],
   })
 }

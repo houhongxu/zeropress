@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsup --watch",
-    "build": "tsup",
+    "build": "tsup && pnpm build:pre",
+    "build:pre": "tsx scripts/prebundle.ts",
     "preview": "hhxpress build site && npx serve site/build"
   },
   "bin": {
@@ -26,9 +27,11 @@
     "@types/node": "^18.15.11",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
+    "@types/resolve": "^1.20.2",
     "@vitejs/plugin-react": "^4.0.0",
     "rollup": "^3.20.6",
     "tsup": "^6.7.0",
+    "tsx": "^3.12.7",
     "typescript": "^5.0.4"
   },
   "dependencies": {
@@ -42,6 +45,7 @@
     "acorn": "^8.8.2",
     "cac": "^6.7.14",
     "classnames": "^2.3.2",
+    "esbuild": "^0.17.19",
     "fast-glob": "^3.2.12",
     "fs-extra": "^11.1.1",
     "github-slugger": "^2.0.0",
@@ -56,6 +60,7 @@
     "remark-frontmatter": "^4.0.1",
     "remark-gfm": "^3.0.1",
     "remark-mdx-frontmatter": "^3.0.0",
+    "resolve": "^1.22.2",
     "shiki": "^0.14.2",
     "sirv": "^2.0.3",
     "unified": "^10.1.2",
