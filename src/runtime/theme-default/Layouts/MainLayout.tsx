@@ -7,9 +7,10 @@ import { Nav } from '../components/Nav'
 import { HomeLayout } from './HomeLayout'
 import { DocLayout } from './DocLayout'
 import { usePageData } from '../../usePageData'
+import { Helmet } from 'react-helmet-async'
 
 export function MainLayout() {
-  const { pageType } = usePageData()
+  const { pageType, title } = usePageData()
 
   const getContent = () => {
     if (pageType === 'home') {
@@ -23,6 +24,9 @@ export function MainLayout() {
 
   return (
     <div className="pt-nav">
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
       <Nav></Nav>
       {getContent()}
     </div>

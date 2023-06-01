@@ -5,6 +5,7 @@ import { App, initPageData } from './App'
 import { BrowserRouter } from 'react-router-dom'
 import { PageDataContext } from './usePageData'
 import { ComponentType } from 'react'
+import { HelmetProvider } from 'react-helmet-async'
 
 declare global {
   interface Window {
@@ -26,11 +27,13 @@ async function renderInBrower() {
     console.log('页面数据：', pageData)
 
     createRoot(rootDom).render(
-      <PageDataContext.Provider value={pageData}>
-        <BrowserRouter>
-          <App></App>
-        </BrowserRouter>
-      </PageDataContext.Provider>,
+      <HelmetProvider>
+        <PageDataContext.Provider value={pageData}>
+          <BrowserRouter>
+            <App></App>
+          </BrowserRouter>
+        </PageDataContext.Provider>
+      </HelmetProvider>,
     )
   } else {
     // 生产环境island架构同构

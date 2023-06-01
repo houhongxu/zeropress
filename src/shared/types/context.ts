@@ -9,12 +9,14 @@ export interface PageData {
   routes: Route[]
   frontmatter?: FrontMatter
   toc?: TocItem[]
+  title: string
 }
 
 export interface PageModule {
   default: ComponentType
   frontmatter?: FrontMatter
   toc?: TocItem[]
+  title?: string
   [key: string]: unknown
 }
 

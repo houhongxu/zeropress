@@ -17,7 +17,7 @@ import { resolveSiteConfig } from './config'
 import { RenderInServerRelsult, SiteConfig } from 'shared/types'
 import { createPlugins } from './plugin'
 import { Route } from './plugins/vitePluginRoutes'
-import { Plugin } from 'vite'
+import { HelmetData } from 'react-helmet-async'
 
 export async function build(root: string) {
   const siteConfig = await resolveSiteConfig(
@@ -107,7 +107,10 @@ export async function bundle(
 }
 
 export async function renderPageHtml(
-  renderInServer: (url: string) => Promise<RenderInServerRelsult>,
+  renderInServer: (
+    routePath: string,
+    helmetContext: object,
+  ) => Promise<RenderInServerRelsult>,
   routes: Route[],
   root: string,
   clientBundle: RollupOutput,
@@ -124,12 +127,18 @@ export async function renderPageHtml(
     routes.map(async (route) => {
       const routePath = route.path
 
+      // 标题栏上下文
+      const helmetContext = {} as HelmetData['context']
+
       // 获取包含react应用的构建时的模板html，island组件的数据
       const {
         appHtml,
         islandNameToPropsMap,
         islandProps = [],
-      } = await renderInServer(routePath)
+      } = await renderInServer(routePath, helmetContext)
+
+      // 获取标题
+      const { helmet } = helmetContext
 
       // 获取样式资源
       const styleAssets = clientBundle.output.filter(
@@ -150,7 +159,10 @@ export async function renderPageHtml(
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>title</title>
+    ${helmet?.title?.toString() || ''}
+    ${helmet?.meta?.toString() || ''}
+    ${helmet?.link?.toString() || ''}
+    ${helmet?.style?.toString() || ''}
     <meta name="description" content="xxx">
     ${styleAssets
       .map((item) => `<link rel="stylesheet" href="/${item.fileName}">`)

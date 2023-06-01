@@ -27,8 +27,12 @@ export async function initPageData(routePath: string): Promise<PageData> {
       routes,
       frontmatter: moduleInfo.frontmatter,
       toc: moduleInfo.toc,
+      title:
+        moduleInfo.frontmatter?.pageType === 'home'
+          ? userConfig.title || 'HOME'
+          : moduleInfo.frontmatter?.title || moduleInfo.title || 'HHXPRESS DOC',
     }
   }
 
-  return { pageType: '404', routePath, userConfig, routes }
+  return { pageType: '404', routePath, userConfig, routes, title: '404' }
 }

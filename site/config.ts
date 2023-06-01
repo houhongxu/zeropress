@@ -1,7 +1,7 @@
 import { defineConfig } from '../dist'
 
 export default defineConfig({
-  title: 'xxx',
+  title: '我的博客',
   themeConfig: {
     nav: [
       { text: '主页', link: '/' },
