@@ -44,11 +44,18 @@ export const remarkPluginMdxToc: Plugin<[], Root> = () => {
   return (tree) => {
     const toc: TocItem[] = []
 
+    let title = ''
+
     // https://github.com/syntax-tree/unist-util-visit#use
     // https://github.com/syntax-tree/mdast#heading
     visit(tree, 'heading', (node) => {
       if (!node.depth || !node.children) {
         return
+      }
+
+      // 配置网站标题为文档标题
+      if (node.depth === 1) {
+        title = (node.children[0] as ChildNode).value
       }
 
       if (node.depth > 1 && node.depth < 5) {
@@ -90,5 +97,20 @@ export const remarkPluginMdxToc: Plugin<[], Root> = () => {
         }) as unknown as Program,
       },
     })
+
+    if (title) {
+      const insertedTitle = `export const title='${title}'`
+
+      tree.children.push({
+        type: 'mdxjsEsm',
+        value: '',
+        data: {
+          estree: parse(insertedTitle, {
+            ecmaVersion: 'latest',
+            sourceType: 'module',
+          }) as unknown as Program,
+        },
+      })
+    }
   }
 }
