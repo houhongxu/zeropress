@@ -11,8 +11,7 @@ export function useSidebarData() {
 
   const { routes, sidebarTitles } = usePageData()
 
-  const titleIndexs = [] as number[]
-
+  const titleIndexs: number[] = []
   const paths = routes
     .map((route) => route.path)
     .filter((path, index) =>
@@ -39,7 +38,7 @@ function paths2tree(
   path2Title: (path: string) => string | undefined,
   nav: string,
 ): SidebarItem {
-  const tree = { text: nav, items: [] } as SidebarItem
+  const tree: SidebarItem = { text: nav, items: [] }
   const normalizeTitle = (path: string) => path?.replace(/^(\d+)/, '')
 
   const sortedPaths = [...paths]
