@@ -3,11 +3,13 @@
 // 顺序用文件系统
 // 标题默认是md#标题，没有则退到文件标准标题（去除开头数字），再没有则退到文件原标题
 
+import { useLocation } from 'react-router-dom'
 import { SidebarItem } from 'shared/types'
 import { usePageData } from '../../usePageData'
 
 export function useSidebarData() {
-  const nav = 'docs' // TODO 目前仅限一个目录docs
+  const { pathname } = useLocation()
+  const nav = pathname.split('/')[1]
 
   const { routes, sidebarTitles } = usePageData()
 
