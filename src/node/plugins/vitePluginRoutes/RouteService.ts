@@ -28,14 +28,14 @@ export class RouteService {
     const files = FastGlob.sync(['**/*.{js,jsx,ts,tsx,md,mdx}'], {
       cwd: this.#scanDir,
       absolute: true,
+      deep: 3, // 仅支持一层文件夹
       ignore: [
         '**/node_modules/**',
         '**/build/**',
         '**/.temp/**',
         ...SUPPORT_CONFIG_FILE,
       ],
-    }).sort()
-
+    })
     files.forEach((file) => {
       // 生成相对路径
       const relativePath = path.relative(this.#scanDir, file)

@@ -15,18 +15,18 @@ export function Sidebar({ sidebarData, pathname }: SidebarProps) {
     >
       <nav>
         {sidebarData?.map((sidebarGroupData) => (
-          <SidebarGroup
+          <SidebarDir
             key={sidebarGroupData.text}
             data={sidebarGroupData}
             pathname={pathname}
-          ></SidebarGroup>
+          ></SidebarDir>
         ))}
       </nav>
     </aside>
   )
 }
 
-function SidebarGroup({
+function SidebarDir({
   data,
   pathname,
 }: {
@@ -34,22 +34,41 @@ function SidebarGroup({
   pathname: string
 }) {
   const { text, link, items } = data
-  return (
-    <section className="divider-top mt-16px" un-first="border-0 mt-0">
-      <Link href={link}>
-        <h2 className="mt-12px mb-8px text-text-1 font-700">{text}</h2>
-      </Link>
+  const active = link === pathname
 
-      <div className="mb-4px">
-        {items?.map((item) => (
-          <SidebarItem
-            key={item.text}
-            data={item}
-            pathname={pathname}
-          ></SidebarItem>
-        ))}
-      </div>
-    </section>
+  return (
+    <>
+      {link ? (
+        <div className="mt-4px" un-first="mt-16px">
+          <div
+            className={classNames(
+              'p-4px text-14px font-500',
+              active ? 'text-brand-default' : 'text-text-2',
+            )}
+          >
+            <Link href={link} hover>
+              {text}
+            </Link>
+          </div>
+        </div>
+      ) : (
+        <section className="divider-top mt-16px" un-first="border-0 mt-0">
+          <h2 className="cursor-default mt-12px mb-8px text-text-1 font-700">
+            {text}
+          </h2>
+
+          <div className="mb-4px">
+            {items?.map((item) => (
+              <SidebarItem
+                key={item.text}
+                data={item}
+                pathname={pathname}
+              ></SidebarItem>
+            ))}
+          </div>
+        </section>
+      )}
+    </>
   )
 }
 
