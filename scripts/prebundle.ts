@@ -79,4 +79,8 @@ async function preBundle(dependencies: string[]) {
   })
 }
 
+console.log('pre bundling / 预打包中 ...')
+
 preBundle(['react', 'react-dom', 'react-dom/client', 'react/jsx-runtime'])
+
+console.log('pre bundle success / 预打包成功')

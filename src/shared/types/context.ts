@@ -9,7 +9,8 @@ export interface PageData {
   routes: Route[]
   frontmatter?: FrontMatter
   toc?: TocItem[]
-  title: string
+  siteTitle: string
+  sidebarTitles?: (string | undefined)[]
 }
 
 export interface PageModule {

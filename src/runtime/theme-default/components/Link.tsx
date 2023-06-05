@@ -8,10 +8,13 @@ interface LinkProps {
   hover?: boolean | string
 }
 
-// TODO 适配折叠侧边栏
-
-export function Link({ className, children, href, hover = false }: LinkProps) {
-  const isExternal = /^https?/.test(href ?? '')
+export function Link({
+  className,
+  children,
+  href = '/',
+  hover = false,
+}: LinkProps) {
+  const isExternal = /^https?/.test(href)
   const target = isExternal ? '_blank' : undefined
   const rel = isExternal ? 'nofollow noopener noreferrer' : undefined
   return (
@@ -19,11 +22,7 @@ export function Link({ className, children, href, hover = false }: LinkProps) {
       href={href}
       target={target}
       rel={rel}
-      className={classNames(
-        className,
-        'block text-14px font-500',
-        !href && 'cursor-default pointer-events:none',
-      )}
+      className={classNames(className, 'block text-14px font-500')}
       un-hover={
         hover
           ? classNames(

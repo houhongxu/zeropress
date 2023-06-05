@@ -1,103 +1,92 @@
+// 生成侧边栏数据
+// 目前仅限一层文件夹，空文件夹无视，文件夹不可点击跳转
+// 顺序用文件系统
+// 标题默认是md#标题，没有则退到文件标准标题（去除开头数字），再没有则退到文件原标题
+
 import { SidebarItem } from 'shared/types'
 import { usePageData } from '../../usePageData'
 
 export function useSidebarData() {
-  const { routes } = usePageData()
+  const nav = 'docs' // TODO 目前仅限一个目录docs
+
+  const { routes, sidebarTitles } = usePageData()
+
+  const titleIndexs = [] as number[]
 
   const paths = routes
     .map((route) => route.path)
-    .filter((path) => path.startsWith('/docs'))
+    .filter((path, index) =>
+      RegExp(`^(/${nav}/).+`).test(path)
+        ? titleIndexs.push(index) && true
+        : false,
+    )
 
-  const sidebarData = paths2tree(paths).items
+  const titles =
+    sidebarTitles?.filter((_, index) => titleIndexs.includes(index)) ?? []
 
-  // console.log(routes)
-  // console.log(sidebarData)
+  const path2Title = (path: string) =>
+    titles[paths.findIndex((item) => item === path)]
+
+  const sidebarData = paths2tree(paths, path2Title, nav).items
 
   return { data: sidebarData }
 }
 
 // ---
 
-function paths2tree(paths: string[]): SidebarItem {
-  // TODO
-  const root = {
-    text: 'docs',
-    link: '/docs/',
-    items: [
-      {
-        text: 'test',
-        items: [
-          {
-            text: 'md',
-            link: '/docs/test/md',
-          },
-          {
-            text: 'mdx',
-            link: '/docs/test/mdx',
-          },
-          {
-            text: 'tsx',
-            link: '/docs/test/tsx',
-          },
-        ],
-      },
-    ],
-  }
+function paths2tree(
+  paths: string[],
+  path2Title: (path: string) => string | undefined,
+  nav: string,
+): SidebarItem {
+  const tree = { text: nav, items: [] } as SidebarItem
+  const normalizeTitle = (path: string) => path?.replace(/^(\d+)/, '')
 
-  return root
+  const sortedPaths = [...paths]
+  const splitPath = (str: string) => str.split('/').filter((i) => !!i)
+
+  const splittedPaths = paths.map((path) => splitPath(path))
+
+  // 为保证同文件系统顺序，额外存文件夹节点处理文件夹
+  const dirNodes: any = []
+
+  splittedPaths.forEach((names, index) => {
+    const depth = names.length - 1
+
+    const title =
+      path2Title(sortedPaths[index]) ||
+      normalizeTitle(names[depth]) ||
+      names[depth]
+
+    if (depth === 1) {
+      // 肯定是根节点docs的子节点，肯定是文件节点，因为插件中空文件夹不生成路径
+      const isDir = false
+      if (!isDir) {
+        tree.items?.push({ text: title, link: sortedPaths[index] })
+      }
+    }
+
+    if (depth === 2) {
+      // 肯定是文件夹内的节点
+      const dirName = normalizeTitle(names[depth - 1]) || names[depth - 1]
+
+      // 判断是否有上级文件夹节点
+      // 通过dirnode判断
+      const hasItems = (arr?: SidebarItem[], text?: string) =>
+        !!arr?.some((item) => item.text === text)
+
+      if (!hasItems(dirNodes, dirName)) {
+        dirNodes.push({ text: dirName, items: [] })
+      }
+
+      const dir = dirNodes.at(-1)
+
+      dir?.items?.push({ text: title, link: sortedPaths[index] })
+    }
+  })
+
+  // 合并文件夹节点到树上
+  tree.items = [...dirNodes, ...(tree.items ?? [])]
+
+  return tree
 }
-
-// path: '/docs/depth/next/floor'
-// path: '/docs/depth/set'
-// path: '/docs/'
-// path: '/docs/intro'
-// path: '/docs/sec/'
-// path: '/docs/test/md'
-// path: '/docs/test/mdx'
-// path: '/docs/test/tsx'
-// path: '/'
-
-// const root = {
-//   text: 'docs',
-//   link: '/docs/',
-//   items: [
-//     {
-//       text: 'depth',
-//       items: [
-//         {
-//           text: 'next',
-//           items: [{ text: 'floor', link: '/docs/depth/next/floor' }],
-//         },
-//         {
-//           text: 'set',
-//           link: '/docs/depth/next/set',
-//         },
-//       ],
-//     },
-//     {
-//       text: 'intro',
-//       link: '/docs/intro',
-//     },
-//     {
-//       text: 'sec',
-//       link: '/docs/sec/',
-//     },
-//     {
-//       text: 'test',
-//       items: [
-//         {
-//           text: 'md',
-//           link: '/docs/test/md',
-//         },
-//         {
-//           text: 'mdx',
-//           link: '/docs/test/mdx',
-//         },
-//         {
-//           text: 'tsx',
-//           link: '/docs/test/tsx',
-//         },
-//       ],
-//     },
-//   ],
-// }
