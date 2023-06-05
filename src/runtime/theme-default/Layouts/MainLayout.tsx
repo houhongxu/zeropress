@@ -11,7 +11,7 @@ import { Helmet } from 'react-helmet-async'
 import { NotFoundLayout } from './NotFoundLayout'
 
 export function MainLayout() {
-  const { pageType, title } = usePageData()
+  const { pageType, siteTitle } = usePageData()
 
   const getContent = () => {
     if (pageType === 'home') {
@@ -26,7 +26,7 @@ export function MainLayout() {
   return (
     <div className="pt-nav">
       <Helmet>
-        <title>{title}</title>
+        <title>{siteTitle}</title>
       </Helmet>
       <Nav></Nav>
       {getContent()}

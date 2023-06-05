@@ -6,8 +6,6 @@ export function usePrevNextPage() {
   const { pathname } = useLocation()
   const { data } = useSidebarData()
 
-  console.log(data)
-
   const flattendTitles = data?.reduce(
     (pre, cur) => [...pre, ...(cur.items ? cur.items : [cur])],
     [] as SidebarItem[],
