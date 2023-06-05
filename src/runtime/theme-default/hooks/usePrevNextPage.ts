@@ -6,27 +6,22 @@ export function usePrevNextPage() {
   const { pathname } = useLocation()
   const { data } = useSidebarData()
 
-  // TODO data链接与标题平铺到一个数组里面
+  console.log(data)
 
-  const titles = [
-    { text: 'docs', link: '/docs/' },
-    {
-      text: 'md',
-      link: '/docs/test/md',
-    },
-    {
-      text: 'mdx',
-      link: '/docs/test/mdx',
-    },
-    {
-      text: 'tsx',
-      link: '/docs/test/tsx',
-    },
-  ]
-  const pageIndex = titles.findIndex((item) => item.link === pathname)
+  const flattendTitles = data?.reduce(
+    (pre, cur) => [...pre, ...(cur.items ? cur.items : [cur])],
+    [] as SidebarItem[],
+  )
 
-  const prevPage: SidebarItem | undefined = titles[pageIndex - 1]
-  const nextPage: SidebarItem | undefined = titles[pageIndex + 1]
+  const pageIndex =
+    flattendTitles?.findIndex((item) => item.link === pathname) ?? -1
+
+  const prevPage: SidebarItem | undefined = flattendTitles
+    ? flattendTitles[pageIndex - 1]
+    : undefined
+  const nextPage: SidebarItem | undefined = flattendTitles
+    ? flattendTitles[pageIndex + 1]
+    : undefined
 
   return { prevPage, nextPage }
 }
