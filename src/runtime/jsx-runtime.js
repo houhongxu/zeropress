@@ -1,6 +1,7 @@
-import * as jsxRuntime from 'react/jsx-runtime'
-
+// 拦截 react/jsx-runtime，拦截组件创建，通过props识别islands组件并记录
 // ! 组件避免 {... props} 语法，babel 在碰到 {... props} 的语法的时候，会将组件编译为 React.createElement的格式，不符合预期
+
+import * as jsxRuntime from 'react/jsx-runtime'
 
 // 对于一些静态节点，React 会使用 jsxs 来进行创建，优化渲染性能
 const originJsx = jsxRuntime.jsx
@@ -16,10 +17,9 @@ export const islandData = {
 const internalJsx = (originJsx, type, props, ...args) => {
   if (props && props.__island) {
     islandData.islandProps.push(props)
-
     const name = type.name
-    islandData['islandNameToPropsMap'][name] = props.__island
 
+    islandData['islandNameToPropsMap'][name] = props.__island
     delete props.__island
 
     // island组件添加div包裹

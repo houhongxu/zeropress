@@ -157,36 +157,37 @@ export async function renderPageHtml(
 
       // 解决react多实例问题，引入手动预打包的react相关代码 https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/script/type/importmap
       const html = `
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    ${helmet?.title?.toString() || ''}
-    ${helmet?.meta?.toString() || ''}
-    ${helmet?.link?.toString() || ''}
-    ${helmet?.style?.toString() || ''}
-    <meta name="description" content="xxx">
-    ${styleAssets
-      .map((item) => `<link rel="stylesheet" href="/${item.fileName}">`)
-      .join('\n')}
-    <script type="importmap">
-      {
-        "imports": {
-          ${EXTERNALS.map(
-            (name) => `"${name}": "/${normalizeVendorFilename(name) + '.js'}"`,
-          ).join(',')}
-        }
-      }
-    </script>
-  </head>
-  <body>
-    <div id="root">${appHtml}</div>
-    <script type="module">${islandsCode}</script>
-    <script type="module" src="/${clientEntryChunk?.fileName}"></script>
-    <script id="island-props">${JSON.stringify(islandProps)}</script>
-  </body>
-</html>`.trim()
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width,initial-scale=1">
+          ${helmet?.title?.toString() || ''}
+          ${helmet?.meta?.toString() || ''}
+          ${helmet?.link?.toString() || ''}
+          ${helmet?.style?.toString() || ''}
+          <meta name="description" content="xxx">
+          ${styleAssets
+            .map((item) => `<link rel="stylesheet" href="/${item.fileName}">`)
+            .join('\n')}
+          <script type="importmap">
+            {
+              "imports": {
+                ${EXTERNALS.map(
+                  (name) =>
+                    `"${name}": "/${normalizeVendorFilename(name) + '.js'}"`,
+                ).join(',')}
+              }
+            }
+          </script>
+        </head>
+        <body>
+          <div id="root">${appHtml}</div>
+          <script type="module">${islandsCode}</script>
+          <script type="module" src="/${clientEntryChunk?.fileName}"></script>
+          <script id="island-props">${JSON.stringify(islandProps)}</script>
+        </body>
+      </html>`.trim()
 
       const fileName = routePath.endsWith('/')
         ? `${routePath}index.html`
@@ -201,7 +202,7 @@ export async function renderPageHtml(
 /**
  * 打包island组件
  */
-
+let count = 0
 async function bundleIslands(
   root: string,
   islandNameToPropsMap: RenderInServerRelsult['islandNameToPropsMap'],
@@ -211,7 +212,7 @@ async function bundleIslands(
     ${Object.entries(islandNameToPropsMap)
       .map(
         ([islandName, islandProps]) =>
-          `import { ${islandName} } from '${islandProps}'`,
+          `import { ${islandName} } from '${islandProps}';`,
       )
       .join('')}
 window.ISLANDS_NAME_TO_PROPS_MAP = { ${Object.keys(islandNameToPropsMap).join(
@@ -221,6 +222,7 @@ window.ISLAND_PROPS = JSON.parse(
   document.getElementById('island-props').textContent
 );
   `
+
   // 加载我们拼接的 islands 注册模块的代码
   const INJECT_ID = 'virtual:inject'
   const RESOLVED_INJECT_ID = '/0' + INJECT_ID
@@ -233,9 +235,10 @@ window.ISLAND_PROPS = JSON.parse(
     build: {
       outDir: path.join(root, SERVER_OUTPUT_DIR),
       rollupOptions: {
-        input: { virtual_inject: INJECT_ID }, // 导入虚拟模块用插件处理 https://rollupjs.org/configuration-options/#input
+        input: { [`virtual_inject${count++}`]: INJECT_ID }, // 导入虚拟模块用插件处理 https://rollupjs.org/configuration-options/#input
         external: EXTERNALS,
       },
+      minify: false, // TODO 调试用
     },
     plugins: [
       {

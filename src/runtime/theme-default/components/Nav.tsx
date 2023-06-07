@@ -23,7 +23,7 @@ export function Nav() {
         </div>
 
         <div className="flex" un-before="menu-item-before">
-          <SwitchAppearance></SwitchAppearance>
+          <SwitchAppearance __island></SwitchAppearance>
         </div>
 
         <div
