@@ -2,9 +2,10 @@
 
 import classNames from 'classnames'
 import { ReactNode } from 'react'
+import { PropsWithIsland } from 'shared/types'
 import { useAppearance } from '../hooks/useAppearance'
 
-export function SwitchAppearance() {
+export function SwitchAppearance({}: PropsWithIsland) {
   const { toggle } = useAppearance()
   return (
     <Switch onClick={toggle}>

@@ -54,7 +54,7 @@ export default declare((api) => {
         const importPath = binding.path.parent.source
         // 组件的引入者
         const importer = state.filename || ''
-        // 修改__islan 属性为路径
+        // 修改__island 属性为路径
         const attributes = (path.container as JSXElement).openingElement
           .attributes
 
