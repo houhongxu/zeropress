@@ -18,6 +18,7 @@ import { RenderInServerRelsult, SiteConfig } from 'shared/types'
 import { createPlugins } from './plugin'
 import { Route } from './plugins/vitePluginRoutes'
 import { HelmetData } from 'react-helmet-async'
+import { createElement } from 'react'
 
 export async function build(root: string) {
   const siteConfig = await resolveSiteConfig(
@@ -41,7 +42,7 @@ export async function build(root: string) {
   const { renderInServer, routes } = await import(SERVER_BUNDLE_PATH)
 
   try {
-    await renderPageHtml(renderInServer, routes, root, clientBundle)
+    await renderPageHtmls(renderInServer, routes, root, clientBundle)
   } catch (e: any) {
     console.log('Render page error / 渲染页面失败')
     throw new Error(e)
@@ -106,7 +107,7 @@ export async function bundle(
   }
 }
 
-export async function renderPageHtml(
+export async function renderPageHtmls(
   renderInServer: (
     routePath: string,
     helmetContext: object,
@@ -122,81 +123,90 @@ export async function renderPageHtml(
     (chunk) => chunk.type === 'chunk' && chunk.isEntry,
   )
 
-  // 添加404页面的路由
-  const allRoutes = [...routes, { path: '/404' }]
-
-  // 写入每个路由的html的异步任务
-  return Promise.all(
-    allRoutes.map(async (route) => {
-      const routePath = route.path
-
-      // 标题栏上下文
-      const helmetContext = {} as HelmetData['context']
-
-      // 获取包含react应用的构建时的模板html，island组件的数据
-      const {
-        appHtml,
-        islandNameToPropsMap,
-        islandProps = [],
-      } = await renderInServer(routePath, helmetContext)
-
-      // 获取标题
-      const { helmet } = helmetContext
-
-      // 获取样式资源
-      const styleAssets = clientBundle.output.filter(
-        (chunk) => chunk.type === 'asset' && chunk.fileName.endsWith('.css'),
-      )
-
-      // 打包island组件，获取island打包代码
-      const islandBundle = await bundleIslands(root, islandNameToPropsMap)
-      const islandsCode = (islandBundle as RollupOutput).output[0].code
-
-      const normalizeVendorFilename = (fileName: string) =>
-        fileName.replace(/\//g, '_')
-
-      // 解决react多实例问题，引入手动预打包的react相关代码 https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/script/type/importmap
-      const html = `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width,initial-scale=1">
-          ${helmet?.title?.toString() || ''}
-          ${helmet?.meta?.toString() || ''}
-          ${helmet?.link?.toString() || ''}
-          ${helmet?.style?.toString() || ''}
-          <meta name="description" content="xxx">
-          ${styleAssets
-            .map((item) => `<link rel="stylesheet" href="/${item.fileName}">`)
-            .join('\n')}
-          <script type="importmap">
-            {
-              "imports": {
-                ${EXTERNALS.map(
-                  (name) =>
-                    `"${name}": "/${normalizeVendorFilename(name) + '.js'}"`,
-                ).join(',')}
-              }
-            }
-          </script>
-        </head>
-        <body>
-          <div id="root">${appHtml}</div>
-          <script type="module">${islandsCode}</script>
-          <script type="module" src="/${clientEntryChunk?.fileName}"></script>
-          <script id="island-props">${JSON.stringify(islandProps)}</script>
-        </body>
-      </html>`.trim()
-
-      const fileName = routePath.endsWith('/')
-        ? `${routePath}index.html`
-        : `${routePath}.html`
-
-      await fse.ensureDir(path.join(root, 'build', path.dirname(fileName)))
-      await fse.writeFile(path.join(root, 'build', fileName), html)
-    }),
+  // 获取样式资源
+  const styleAssets = clientBundle.output.filter(
+    (chunk) => chunk.type === 'asset' && chunk.fileName.endsWith('.css'),
   )
+
+  // 添加404页面的路由
+  const allRoutes = [
+    ...routes,
+    {
+      path: '/404',
+    } as Route, // TODO 规范类型
+  ]
+
+  const renderPageHtml = async (route: Route) => {
+    const routePath = route.path
+
+    // 标题栏上下文
+    const helmetContext = {} as HelmetData['context']
+
+    // 获取包含react应用的构建时的模板html，island组件的数据
+    const {
+      appHtml,
+      islandNameToPropsMap,
+      islandProps = [],
+    } = await renderInServer(routePath, helmetContext)
+
+    // 获取标题
+    const { helmet } = helmetContext
+
+    // 打包island组件，获取island打包代码
+    const hasIsland = Object.keys(islandNameToPropsMap).length > 0
+
+    let islandsCode = ''
+    if (hasIsland) {
+      const islandBundle = await bundleIslands(root, islandNameToPropsMap)
+      islandsCode = (islandBundle as RollupOutput).output[0].code
+    }
+
+    const normalizeVendorFilename = (fileName: string) =>
+      fileName.replace(/\//g, '_')
+
+    // 解决react多实例问题，引入手动预打包的react相关代码 https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/script/type/importmap
+    const html = `
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      ${helmet?.title?.toString() || ''}
+      ${helmet?.meta?.toString() || ''}
+      ${helmet?.link?.toString() || ''}
+      ${helmet?.style?.toString() || ''}
+      <meta name="description" content="xxx">
+      ${styleAssets
+        .map((item) => `<link rel="stylesheet" href="/${item.fileName}">`)
+        .join('\n')}
+      <script type="importmap">
+        {
+          "imports": {
+            ${EXTERNALS.map(
+              (name) =>
+                `"${name}": "/${normalizeVendorFilename(name) + '.js'}"`,
+            ).join(',')}
+          }
+        }
+      </script>
+    </head>
+    <body>
+      <div id="root">${appHtml}</div>
+      <script type="module">${islandsCode}</script>
+      <script type="module" src="/${clientEntryChunk?.fileName}"></script>
+      <script id="island-props">${JSON.stringify(islandProps)}</script>
+    </body>
+  </html>`.trim()
+
+    const fileName = routePath.endsWith('/')
+      ? `${routePath}index.html`
+      : `${routePath}.html`
+
+    await fse.ensureDir(path.join(root, 'build', path.dirname(fileName)))
+    await fse.writeFile(path.join(root, 'build', fileName), html)
+  }
+  // 写入每个路由的html的异步任务
+  return promiseMap(allRoutes, (route) => renderPageHtml(route), 1)
 }
 
 /**
@@ -259,6 +269,7 @@ window.ISLAND_PROPS = JSON.parse(
         },
         load(id) {
           if (id === RESOLVED_INJECT_ID) {
+            // 加载为虚拟模块
             return islandInjectCode
           }
         },
@@ -271,5 +282,42 @@ window.ISLAND_PROPS = JSON.parse(
         },
       },
     ],
+  })
+}
+
+async function promiseMap(
+  list: any[],
+  mapper: (item: any, index?: number) => any,
+  concurrency = 9,
+): Promise<any> {
+  // list 为 Iterator，先转化为 Array
+  list = Array.from(list)
+
+  return new Promise((resolve) => {
+    let currentIndex = 0
+    let resolveCount = 0
+    let length = list.length
+    const result: any[] = []
+
+    function next() {
+      const index = currentIndex
+      currentIndex++
+      Promise.resolve(list[index])
+        .then((item) => mapper(item, index))
+        .then((resp) => {
+          result[index] = resp
+          resolveCount++
+          if (resolveCount === length) {
+            resolve(result)
+          }
+          if (currentIndex < length) {
+            next()
+          }
+        })
+    }
+
+    for (let i = 0; i < concurrency && i < length; i++) {
+      next()
+    }
   })
 }
