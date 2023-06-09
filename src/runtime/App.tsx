@@ -31,6 +31,7 @@ export async function initPageData(routePath: string): Promise<PageData> {
       routes,
       frontmatter: moduleInfo.frontmatter,
       toc: moduleInfo.toc,
+      title: moduleInfo.title,
       // 首页为用户配置，文档页为frontmatter配置，没有则为文章标题
       siteTitle:
         moduleInfo.frontmatter?.pageType === 'home'

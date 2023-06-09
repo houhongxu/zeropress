@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { PropsWithIsland, TocItem } from 'shared/types'
-import { useTocHmr } from '../hooks/useTocHmr'
+import { useTocHMR } from '../hooks/useTocHMR'
 import { scrollToTarget, useTocScroll } from '../hooks/useTocScroll'
 import { isArrayEmpty } from '../utils'
 
@@ -9,7 +9,7 @@ interface TocProps extends PropsWithIsland {
 }
 
 export function DocToc({ toc: initialToc = [] }: TocProps) {
-  const toc = useTocHmr(initialToc)
+  const toc = useTocHMR(initialToc)
 
   const hasToc = !isArrayEmpty(toc)
 

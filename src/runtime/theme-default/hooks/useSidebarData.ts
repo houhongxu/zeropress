@@ -6,12 +6,13 @@
 import { useLocation } from 'react-router-dom'
 import { SidebarItem } from 'shared/types'
 import { usePageData } from '../../usePageData'
+import { useSidebarHMR } from './useSidebarHmr'
 
 export function useSidebarData() {
   const { pathname } = useLocation()
   const nav = pathname.split('/')[1]
 
-  const { routes, sidebarTitles } = usePageData()
+  const { routes, sidebarTitles, title } = usePageData()
 
   const titleIndexs: number[] = []
   const paths = routes
@@ -22,8 +23,10 @@ export function useSidebarData() {
         : false,
     )
 
-  const titles =
+  const initSidebarTitles =
     sidebarTitles?.filter((_, index) => titleIndexs.includes(index)) ?? []
+
+  const titles = useSidebarHMR(initSidebarTitles, title)
 
   const path2Title = (path: string) =>
     titles[paths.findIndex((item) => item === path)]

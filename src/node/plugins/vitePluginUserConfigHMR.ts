@@ -1,19 +1,21 @@
 // 读取 用户配置 给ui消费
-import { PACKAGE_ROOT_PATH } from 'node/constants'
+import { PACKAGE_ROOT_PATH, SUPPORT_CONFIG_FILE } from 'node/constants'
 import path from 'path'
 import { Plugin } from 'vite'
 import { SiteConfig } from 'shared/types'
 import fse from 'fs-extra'
 import sirv from 'sirv'
+import FastGlob from 'fast-glob'
 
 const CONFIG_ID = 'virtual:user-config'
 const RESOLVED_CONFIG_ID = '\0' + 'virtual:user-config' // vite继承的rollup生态的约定https://cn.vitejs.dev/guide/api-plugin.html#virtual-modules-convention
 
-export function vitePluginUserConfig(
+export function vitePluginUserConfigHMR(
   siteConfig: SiteConfig,
   restartServer?: () => Promise<void>,
 ): Plugin {
   const { root, userConfigPath, userConfig } = siteConfig
+  let lastFiles: string[] = []
   return {
     name: 'hhxpress:vite-plugin-user-config',
     resolveId(id) {
@@ -39,12 +41,35 @@ export function vitePluginUserConfig(
       }
     },
     async handleHotUpdate(ctx) {
+      const files = FastGlob.sync(['**/*.{js,jsx,ts,tsx,md,mdx}'], {
+        cwd: root,
+        absolute: true,
+        deep: 3, // 仅支持一层文件夹
+        ignore: [
+          '**/node_modules/**',
+          '**/build/**',
+          '**/.temp/**',
+          ...SUPPORT_CONFIG_FILE,
+        ],
+      })
+
+      lastFiles = files
+
+      const [home] = files.filter((file) =>
+        file.split('site/')[1].split('/')[0].includes('index'),
+      )
+
       // 是插件的热更新而不是react客户端的热更新，热更新触发是相对于命令行传入的根目录
-      const watchedFiles = [userConfigPath] // 监听配置文件
+      const watchedFiles = [userConfigPath, home] // 监听文件
+
       const include = (id: string) =>
         watchedFiles.some((path) => id.includes(path))
 
-      if (include(ctx.file)) {
+      const hasChange =
+        lastFiles.length !== files.length ||
+        lastFiles.some((lastFile, index) => lastFile !== files[index])
+
+      if (include(ctx.file) || hasChange) {
         if (!restartServer) return
 
         console.log(
