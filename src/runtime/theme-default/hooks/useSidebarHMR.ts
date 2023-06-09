@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
-import { TocItem } from 'shared/types'
 
-export function useTocHMR(initToc: TocItem[]) {
-  const [toc, setToc] = useState(initToc)
+export function useSidebarHMR(
+  initSidebarTitles: (string | undefined)[],
+  title?: string,
+) {
+  const [titles, setTitles] = useState(initSidebarTitles)
 
   useEffect(() => {
     if (import.meta.env.DEV) {
@@ -13,9 +15,11 @@ export function useTocHMR(initToc: TocItem[]) {
           // 客户端可以使用import()，添加参数是为了避免浏览器请求缓存
           import(/* @vite-ignore */ `${filePath}?import&t=${Date.now()}`).then(
             (module) => {
-              console.log('xxxxxxxxx')
-
-              setToc(module.toc)
+              setTitles(
+                initSidebarTitles.map((sidebarTitle) =>
+                  sidebarTitle === title ? module.title : sidebarTitle,
+                ),
+              )
             },
           )
         },
@@ -23,5 +27,5 @@ export function useTocHMR(initToc: TocItem[]) {
     }
   })
 
-  return toc
+  return titles
 }
