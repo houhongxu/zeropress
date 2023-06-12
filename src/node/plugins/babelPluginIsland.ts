@@ -17,7 +17,7 @@ export type Babel = typeof BabelCoreNamespace
 export type BabelTypes = typeof BabelTypesNamespace
 
 // https://babel.dev/docs/babel-helper-plugin-utils
-export default declare((api) => {
+export const babelPluginIsland = declare((api) => {
   api.assertVersion(7) // 确保babel版本
 
   // traverse 时调用的函数

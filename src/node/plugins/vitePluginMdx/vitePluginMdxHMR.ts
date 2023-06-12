@@ -1,11 +1,12 @@
 import assert from 'assert'
+import { MD_REGEX } from '../../constants'
 import { Plugin } from 'vite'
 
 // 参考 https://github.com/vitejs/vite-plugin-react/issues/38
 // TODO vite-plugin-react-swc 与 vite-plugin-react4 支持mdx 同时需要升级vite4 https://github.com/vitejs/vite-plugin-react/releases/tag/plugin-react%404.0.0
 export function vitePluginMdxHMR(): Plugin {
   let vitePluginReact: Plugin | undefined
-  const isMdx = (file: string) => /.mdx?$/.test(file)
+  const isMdx = (file: string) => MD_REGEX.test(file)
 
   return {
     name: 'hhxpress:vite-plugin-mdx-hmr',

@@ -8,7 +8,7 @@ import UnoCSS from 'unocss/vite'
 import { unoConfig } from './unocss.config'
 import path from 'path'
 import { PACKAGE_ROOT_PATH } from './constants'
-import babelPluginIsland from './plugins/babelPluginIsland'
+import { babelPluginIsland } from './plugins/babelPluginIsland'
 
 export function createPlugins(
   siteConfig: SiteConfig,

@@ -6,19 +6,11 @@ export const PACKAGE_ROOT_PATH = path.join(__dirname, '..')
 
 export const DEFAULT_HTML_PATH = path.join(PACKAGE_ROOT_PATH, 'template.html')
 
-export const CLIENT_ENTRY_PATH = path.join(
-  PACKAGE_ROOT_PATH,
-  'src',
-  'runtime',
-  'entry-client.tsx',
-)
+export const RUNTIME_PATH = path.join(PACKAGE_ROOT_PATH, 'src', 'runtime')
 
-export const SERVER_ENTRY_PATH = path.join(
-  PACKAGE_ROOT_PATH,
-  'src',
-  'runtime',
-  'entry-server.tsx',
-)
+export const CLIENT_ENTRY_PATH = path.join(RUNTIME_PATH, 'entry-client.tsx')
+
+export const SERVER_ENTRY_PATH = path.join(RUNTIME_PATH, 'entry-server.tsx')
 
 export const SUPPORT_CONFIG_FILE = ['config.ts', 'config.js']
 
@@ -34,3 +26,9 @@ export const EXTERNALS = [
   'react-dom/client',
   'react/jsx-runtime',
 ]
+
+export const ISLAND_JSX_RUNTIME_PATH = RUNTIME_PATH
+
+export const TS_REGEX = /(c|m)?tsx?$/
+
+export const MD_REGEX = /\.mdx?$/
