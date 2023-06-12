@@ -22,6 +22,7 @@
     "README.md",
     "CHANGELOG.md",
     "template.html",
+    "vendors",
     "src/runtime",
     "src/theme-default",
     "src/shared"
