@@ -20,6 +20,8 @@
     "dist",
     "bin",
     "README.md",
+    "CHANGELOG.md",
+    "template.html",
     "src/runtime",
     "src/theme-default",
     "src/shared"
