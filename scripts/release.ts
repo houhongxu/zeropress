@@ -83,7 +83,7 @@ async function main() {
   // 6. 生成 release commit
   step('Committing changes / 提交改动中 ...')
   await run('git', ['add', '-A'])
-  await run('git', ['commit', '-m', `'release: v${targetVersion}'`])
+  await run('git', ['commit', '-m', `release: v${targetVersion}`])
 
   // 7. 执行 npm publish
   step('Publishing packages / 发布包中 ...')
