@@ -2,7 +2,7 @@
 
 ## 功能
 
-- 支持 mdx2，docusaurus2 只支持 v1，vitepress1 不支持
+- 支持 mdx2，docusaurus2 只支持 mdx1，vitepress1 不支持
 - 减少 js 体积的孤岛架构
 - 约定式侧边栏
 
@@ -90,3 +90,14 @@
 - 侧边栏顺序按文件系统顺序，可以在文件名前使用 1234 排序
 - 仅支持一层侧边栏文件夹
 - 侧边栏名称按 文章标题 || 去开头数字的文件名 || 文件名 生成
+
+## 发版
+
+- 确定变动版本级别 patch | minor | major，遵循 semver 规范
+- TODO 执行测试命令
+- 自动修改 package.json 中的 version 字段
+- 执行 pnpm build
+- 生成 CHANGELOG.md
+- 生成 release 相关的 commit
+- 执行 npm publish
+- 执行 git push 并打 tag
