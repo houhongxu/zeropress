@@ -48,7 +48,6 @@
     "@types/react-dom": "^18.0.11",
     "@types/resolve": "^1.20.2",
     "@types/semver": "^7.5.0",
-    "@vitejs/plugin-react": "^4.0.0",
     "chalk": "^5.2.0",
     "conventional-changelog-cli": "^3.0.0",
     "enquirer": "^2.3.6",
