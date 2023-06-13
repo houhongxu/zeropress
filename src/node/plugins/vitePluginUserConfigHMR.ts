@@ -37,6 +37,19 @@ export function vitePluginUserConfigHMR(
       // 配置路径别名的解析
       return {
         root: PACKAGE_ROOT_PATH,
+        // 解决导入模块报错找不到包的default的问题
+        optimizeDeps: {
+          include: [
+            'react',
+            'react-dom',
+            'react-dom/client',
+            'react-router-dom',
+            'react/jsx-runtime',
+            'react-helmet-async',
+            'lodash-es',
+            'classnames',
+          ],
+        },
         server: {
           // 启用文件系统的路径
           fs: {
