@@ -11,7 +11,7 @@ export function vitePluginIslandTransform(isServer: boolean): Plugin {
     async transform(code, id, options) {
       if (options?.ssr && (TS_REGEX.test(id) || MD_REGEX.test(id))) {
         const strippedTypes = await transformWithEsbuild(code, id, {
-          jsx: 'preserve',
+          jsx: 'automatic',
           loader: 'tsx',
         })
 

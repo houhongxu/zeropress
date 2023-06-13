@@ -104,6 +104,5 @@
 
 ## 生产环境问题
 
-- [ ] 修复 plugin-react 无法编译 node_modules 下代码的问题
-- [ ] 修复 vite 静态资源服务的范围问题
+- [x] 修复 plugin-react 无法编译 node_modules 下代码的问题
 - [ ] config 热更新失效
