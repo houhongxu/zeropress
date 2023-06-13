@@ -1,6 +1,6 @@
 {
   "name": "hhxpress",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "hhxpress SSG framework based on islands arch",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
