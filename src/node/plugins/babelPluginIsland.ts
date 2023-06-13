@@ -11,7 +11,7 @@ import {
   JSXElement,
   stringLiteral,
 } from '@babel/types'
-import { MASK_SPLITTER } from 'node/constants'
+import { MASK_SPLITTER } from '../constants'
 
 export type Babel = typeof BabelCoreNamespace
 export type BabelTypes = typeof BabelTypesNamespace

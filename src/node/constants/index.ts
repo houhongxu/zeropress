@@ -32,3 +32,5 @@ export const ISLAND_JSX_RUNTIME_PATH = RUNTIME_PATH
 export const TS_REGEX = /(c|m)?tsx?$/
 
 export const MD_REGEX = /\.mdx?$/
+
+export const DEFAULT_THEME_PATH = path.join(RUNTIME_PATH, 'theme-default')

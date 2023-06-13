@@ -1,5 +1,5 @@
 import FastGlob from 'fast-glob'
-import { SUPPORT_CONFIG_FILE } from 'node/constants'
+import { SUPPORT_CONFIG_FILE } from '../../constants'
 import path from 'path'
 
 interface RouteItem {

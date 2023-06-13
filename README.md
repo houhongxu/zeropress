@@ -101,3 +101,8 @@
 - 生成 release 相关的 commit
 - 执行 npm publish
 - 执行 git push 并打 tag
+
+## 生产环境问题
+
+- [ ] 修复 plugin-react 无法编译 node_modules 下代码的问题
+- [ ] 修复 vite 静态资源服务的范围问题

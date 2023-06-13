@@ -1,5 +1,10 @@
 // 读取 用户配置 给ui消费
-import { PACKAGE_ROOT_PATH, SUPPORT_CONFIG_FILE } from 'node/constants'
+import {
+  DEFAULT_THEME_PATH,
+  PACKAGE_ROOT_PATH,
+  RUNTIME_PATH,
+  SUPPORT_CONFIG_FILE,
+} from '../constants'
 import path from 'path'
 import { Plugin } from 'vite'
 import { SiteConfig } from 'shared/types'
@@ -32,6 +37,12 @@ export function vitePluginUserConfigHMR(
       // 配置路径别名的解析
       return {
         root: PACKAGE_ROOT_PATH,
+        server: {
+          // 启用文件系统的路径
+          fs: {
+            allow: [RUNTIME_PATH, DEFAULT_THEME_PATH, process.cwd()],
+          },
+        },
         resolve: {
           alias: {
             runtime: path.join(PACKAGE_ROOT_PATH, 'src', 'runtime'),
