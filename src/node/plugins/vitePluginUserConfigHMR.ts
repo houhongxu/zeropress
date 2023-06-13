@@ -79,6 +79,7 @@ export function vitePluginUserConfigHMR(
 
       // 是插件的热更新而不是react客户端的热更新，热更新触发是相对于命令行传入的根目录
       const watchedFiles = [userConfigPath, home] // 监听文件
+      console.log(watchedFiles)
 
       const include = (id: string) =>
         watchedFiles.some((path) => id.includes(path))
