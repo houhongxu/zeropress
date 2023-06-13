@@ -19,7 +19,7 @@ export async function resolveSiteConfig(
   command: ConfigEnv['command'],
   mode: ConfigEnv['mode'],
 ) {
-  const [userConfigPath, userConfig] = await resolveUserConfig(
+  const [userConfigPath, userConfig, userConfigDeps] = await resolveUserConfig(
     root,
     command,
     mode,
@@ -28,6 +28,7 @@ export async function resolveSiteConfig(
   const siteConfig: SiteConfig = {
     root,
     userConfigPath,
+    userConfigDeps,
     userConfig: resolveDefaultConfig(userConfig),
   }
 
@@ -54,15 +55,15 @@ async function resolveUserConfig(
 
   if (result) {
     // vite源码中判断了result https://github.com/vitejs/vite/blob/main/packages/vite/src/node/config.ts#L411
-    const { config: rawConfig = {} as RawConfig } = result // 根据文档得知config有三种类型，https://cn.vitejs.dev/config/
+    const { config: rawConfig = {} as RawConfig, dependencies = [] } = result // 根据文档得知config有三种类型，https://cn.vitejs.dev/config/
 
     const userConfig = (await (typeof rawConfig === 'function'
       ? rawConfig()
       : rawConfig)) as UserConfig
 
-    return [userConfigPath, userConfig] as const
+    return [userConfigPath, userConfig, dependencies] as const
   } else {
-    return [userConfigPath, {} as UserConfig] as const
+    return [userConfigPath, {} as UserConfig, [] as string[]] as const
   }
 }
 

@@ -19,7 +19,7 @@ export function vitePluginUserConfigHMR(
   siteConfig: SiteConfig,
   restartServer?: () => Promise<void>,
 ): Plugin {
-  const { root, userConfigPath, userConfig } = siteConfig
+  const { root, userConfigPath, userConfig, userConfigDeps = [] } = siteConfig
   let lastFiles: string[] = []
   return {
     name: 'hhxpress:vite-plugin-user-config',
@@ -73,20 +73,17 @@ export function vitePluginUserConfigHMR(
 
       lastFiles = files
 
-      const [home] = files.filter((file) =>
-        file.split('site/')[1].split('/')[0].includes('index'),
-      )
-
-      // 是插件的热更新而不是react客户端的热更新，热更新触发是相对于命令行传入的根目录
-      const watchedFiles = [userConfigPath, home] // 监听文件
-      console.log(watchedFiles)
-
-      const include = (id: string) =>
-        watchedFiles.some((path) => id.includes(path))
-
       const hasChange =
         lastFiles.length !== files.length ||
         lastFiles.some((lastFile, index) => lastFile !== files[index])
+
+      // 是插件的热更新而不是react客户端的热更新，热更新触发是相对于命令行传入的根目录
+      const watchedFiles = [userConfigPath, ...userConfigDeps].filter(
+        Boolean,
+      ) as string[] // 监听文件
+
+      const include = (id: string) =>
+        watchedFiles.some((path) => id.includes(path))
 
       if (include(ctx.file) || hasChange) {
         if (!restartServer) return
