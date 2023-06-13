@@ -19,10 +19,6 @@ export async function createViteServer(
     root: PACKAGE_ROOT_PATH, // 避免vite静态资源服务与路由冲突，如服务路径为tsx返回文件内容，切换静态资源路径不在site可以避免， :5173/a 经过路由逻辑返回:5173/a.tsx，而静态资源会让:5173/a.tsx返回文件内容，切换静态资源路径不在site可以避免
     server: {
       host: true, // 开启局域网与公网ip,
-      fs: {
-        // 允许访问不在根目录下的文件夹
-        allow: [PACKAGE_ROOT_PATH],
-      },
     },
     plugins: createPlugins(siteConfig, restartServer),
   })

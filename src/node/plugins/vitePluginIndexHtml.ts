@@ -17,7 +17,7 @@ export function vitePluginIndexHtml(): Plugin {
             tag: 'script',
             attrs: {
               type: 'module',
-              src: `/@fs/${CLIENT_ENTRY_PATH}`, // 根路径以外的路径使用/@fs/+绝对路径的方式，是因为服务器安全问题
+              src: `/@fs${CLIENT_ENTRY_PATH}`, // 根路径以外的路径使用/@fs/+绝对路径的方式，是因为服务器安全问题
             },
             injectTo: 'body',
           },

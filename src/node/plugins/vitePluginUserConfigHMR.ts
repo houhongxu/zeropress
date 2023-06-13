@@ -50,12 +50,6 @@ export function vitePluginUserConfigHMR(
             'classnames',
           ],
         },
-        server: {
-          // 启用文件系统的路径
-          fs: {
-            allow: [RUNTIME_PATH, DEFAULT_THEME_PATH, process.cwd()],
-          },
-        },
         resolve: {
           alias: {
             runtime: path.join(PACKAGE_ROOT_PATH, 'src', 'runtime'),
