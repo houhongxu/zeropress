@@ -106,3 +106,4 @@
 
 - [x] 修复 plugin-react 无法编译 node_modules 下代码的问题
 - [ ] config 热更新失效
+- [ ] build 找不到 React 的问题

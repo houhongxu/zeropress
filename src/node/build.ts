@@ -18,7 +18,6 @@ import { RenderInServerRelsult, SiteConfig } from 'shared/types'
 import { createPlugins } from './plugin'
 import { Route } from './plugins/vitePluginRoutes'
 import { HelmetData } from 'react-helmet-async'
-import { createElement } from 'react'
 
 export async function build(root: string) {
   const siteConfig = await resolveSiteConfig(
@@ -63,6 +62,9 @@ export async function bundle(
     plugins: createPlugins(siteConfig, undefined, isServer),
     ssr: {
       noExternal: ['react-router-dom', 'lodash-es'], // 避免node-cjs环境执行esm包，https://cn.vitejs.dev/config/ssr-options.html#ssr-noexternal
+    },
+    esbuild: {
+      jsx: 'preserve', // 防止esbuild提前编译tsx
     },
     build: {
       minify: false, // TODO minify临时配置方便查看
