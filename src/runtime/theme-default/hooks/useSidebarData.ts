@@ -6,7 +6,7 @@
 import { useLocation } from 'react-router-dom'
 import { SidebarItem } from 'shared/types'
 import { usePageData } from '../../usePageData'
-import { useSidebarHMR } from './useSidebarHmr'
+import { useSidebarHMR } from './useSidebarHMR'
 
 export function useSidebarData() {
   const { pathname } = useLocation()
