@@ -1,10 +1,5 @@
 // 读取 用户配置 给ui消费
-import {
-  DEFAULT_THEME_PATH,
-  PACKAGE_ROOT_PATH,
-  RUNTIME_PATH,
-  SUPPORT_CONFIG_FILE,
-} from '../constants'
+import { PACKAGE_ROOT_PATH, SUPPORT_CONFIG_FILE } from '../constants'
 import path from 'path'
 import { Plugin } from 'vite'
 import { SiteConfig } from 'shared/types'

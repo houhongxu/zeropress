@@ -9,9 +9,11 @@ import { DocLayout } from './DocLayout'
 import { usePageData } from '../../usePageData'
 import { Helmet } from 'react-helmet-async'
 import { NotFoundLayout } from './NotFoundLayout'
+import { useLocation } from 'react-router-dom'
 
 export function MainLayout() {
   const { pageType, siteTitle } = usePageData()
+  const { pathname } = useLocation()
 
   const getContent = () => {
     if (pageType === 'home') {
@@ -28,7 +30,7 @@ export function MainLayout() {
       <Helmet>
         <title>{siteTitle}</title>
       </Helmet>
-      <Nav></Nav>
+      <Nav pathname={pathname}></Nav>
       {getContent()}
     </div>
   )

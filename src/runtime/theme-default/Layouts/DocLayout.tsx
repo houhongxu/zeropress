@@ -26,7 +26,6 @@ export function DocLayout() {
 
         <div className="sticky flex-shrink-0 top-88px h-100vh overflow-x-hidden overflow-y-auto">
           <DocToc toc={toc} __island></DocToc>
-          {/* // TODO 产物逻辑无效，多个孤岛组件报错 */}
         </div>
       </div>
     </div>

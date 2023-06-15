@@ -1,8 +1,9 @@
+import classNames from 'classnames'
 import { NavItem as NavItemType } from 'shared/types'
 import { usePageData } from '../../usePageData'
 import { SwitchAppearance } from './SwitchAppearance'
 
-export function Nav() {
+export function Nav({ pathname }: { pathname: string }) {
   const { userConfig } = usePageData()
   const nav = userConfig.themeConfig?.nav || []
   return (
@@ -18,7 +19,7 @@ export function Nav() {
 
         <div className="h-full flex">
           {nav.map((item) => (
-            <NavItem key={item.link} item={item}></NavItem>
+            <NavItem key={item.link} item={item} pathname={pathname}></NavItem>
           ))}
         </div>
 
@@ -40,13 +41,20 @@ export function Nav() {
   )
 }
 
-function NavItem({ item }: { item: NavItemType }) {
+function NavItem({ item, pathname }: { item: NavItemType; pathname: string }) {
   const { text, link } = item
+  const nav = link.split('/')[1]
+
+  const active = nav && pathname.includes(nav)
+
   return (
     <div className="h-full mx-12px">
       <a
         href={link}
-        className="block h-full before:contents flex items-center whitespace-nowrap text-14px font-500 transition-colors duration-250"
+        className={classNames(
+          'block h-full before:contents flex items-center whitespace-nowrap text-14px font-500 transition-colors duration-250',
+          active && 'text-brand-default',
+        )}
         un-hover="text-brand-default"
       >
         {text}
