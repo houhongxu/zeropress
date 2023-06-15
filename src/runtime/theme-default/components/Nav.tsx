@@ -5,7 +5,7 @@ import { SwitchAppearance } from './SwitchAppearance'
 
 export function Nav({ pathname }: { pathname: string }) {
   const { userConfig } = usePageData()
-  const nav = userConfig.themeConfig?.nav || []
+  const { title, items } = userConfig.themeConfig?.nav ?? {}
   return (
     <header className="w-full z-10 fixed top-0 left-0">
       <div className="flex items-center justify-between px-32px h-nav divider-bottom bg-bg-default">
@@ -14,11 +14,11 @@ export function Nav({ pathname }: { pathname: string }) {
           className="flex items-center w-full h-full font-600 transition-opacity duration-250"
           un-hover="opacity-60"
         >
-          HHXPRESS
+          {title || 'HHXPRESS'}
         </a>
 
         <div className="h-full flex">
-          {nav.map((item) => (
+          {items?.map((item) => (
             <NavItem key={item.link} item={item} pathname={pathname}></NavItem>
           ))}
         </div>

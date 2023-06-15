@@ -14,7 +14,7 @@ export interface UserConfig {
 }
 
 export interface ThemeConfig {
-  nav?: NavItem[]
+  nav?: { title: string; items: NavItem[] }
   footer?: Footer
 }
 
