@@ -35,7 +35,7 @@ export function createRollupPluginMdx(): Plugin {
         // https://rehype-pretty-code.netlify.app/
         rehypePrettyCode,
         {
-          theme: 'nord',
+          theme: 'github-dark',
           keepBackground: true,
         },
       ],

@@ -228,49 +228,6 @@
 }
 
 /**
- * Component: Custom Block
- * -------------------------------------------------------------------------- */
-
-:root {
-  --hp-custom-block-code-font-size: 13px;
-
-  --hp-custom-block-info-border: var(--hp-c-divider-light);
-  --hp-custom-block-info-text: var(--hp-c-text-2);
-  --hp-custom-block-info-bg: var(--hp-c-white-soft);
-  --hp-custom-block-info-code-bg: var(--hp-c-gray-light-4);
-
-  --hp-custom-block-tip-border: var(--hp-c-green-dimm-1);
-  --hp-custom-block-tip-text: var(--hp-c-green-darker);
-  --hp-custom-block-tip-bg: var(--hp-c-green-dimm-3);
-  --hp-custom-block-tip-code-bg: var(--hp-custom-block-tip-bg);
-
-  --hp-custom-block-warning-border: var(--hp-c-yellow-dimm-1);
-  --hp-custom-block-warning-text: var(--hp-c-yellow-darker);
-  --hp-custom-block-warning-bg: var(--hp-c-yellow-dimm-3);
-  --hp-custom-block-warning-code-bg: var(--hp-custom-block-warning-bg);
-
-  --hp-custom-block-danger-border: var(--hp-c-red-dimm-1);
-  --hp-custom-block-danger-text: var(--hp-c-red-darker);
-  --hp-custom-block-danger-bg: var(--hp-c-red-dimm-3);
-  --hp-custom-block-danger-code-bg: var(--hp-custom-block-danger-bg);
-}
-
-.dark {
-  --hp-custom-block-info-border: var(--hp-c-divider-light);
-  --hp-custom-block-info-bg: var(--hp-c-black-mute);
-  --hp-custom-block-info-code-bg: var(--hp-c-gray-dark-4);
-
-  --hp-custom-block-tip-border: var(--hp-c-green-dimm-2);
-  --hp-custom-block-tip-text: var(--hp-c-green-light);
-
-  --hp-custom-block-warning-border: var(--hp-c-yellow-dimm-2);
-  --hp-custom-block-warning-text: var(--hp-c-yellow-light);
-
-  --hp-custom-block-danger-border: var(--hp-c-red-dimm-2);
-  --hp-custom-block-danger-text: var(--hp-c-red-light);
-}
-
-/**
  * Component: Nav
  * -------------------------------------------------------------------------- */
 
