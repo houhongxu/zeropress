@@ -17,7 +17,11 @@ export function normalizeHref(url?: string) {
     return '/'
   }
 
-  if (isDevlopment() || url.startsWith('http')) {
+  if (isDevlopment()) {
+    return encodeURI(url)
+  }
+
+  if (url.startsWith('http')) {
     return url
   }
 

@@ -81,7 +81,7 @@ function SidebarItem({
   pathname: string
 }) {
   const { text, link } = data
-  const active = encodeURI(link ?? '') === pathname
+  const active = normalizeHref(link ?? '') === pathname
 
   return (
     <div className="ml-20px">
