@@ -17,13 +17,16 @@ export function normalizeHref(url?: string) {
     return '/'
   }
 
-  if (!isProduction() || url.startsWith('http')) {
+  let suffix = '.html'
+  if (url.endsWith('/')) {
+    suffix = 'index' + suffix
+  }
+  const prodUrl = addLeadingSlash(`${encodeURI(url)}${suffix}`)
+  console.log(url, prodUrl)
+
+  if (isDevlopment() || url.startsWith('http')) {
     return url
   }
-
-  let suffix = '.html'
-
-  const prodUrl = addLeadingSlash(`${encodeURI(url)}${suffix}`)
 
   return prodUrl
 }

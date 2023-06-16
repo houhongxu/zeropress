@@ -82,6 +82,7 @@ function SidebarItem({
 }) {
   const { text, link } = data
   const active = link === pathname
+
   return (
     <div className="ml-20px">
       <div
@@ -90,7 +91,7 @@ function SidebarItem({
           active ? 'text-brand-default' : 'text-text-2',
         )}
       >
-        <Link href={link} hover>
+        <Link href={normalizeHref(link)} hover>
           {text}
         </Link>
       </div>
