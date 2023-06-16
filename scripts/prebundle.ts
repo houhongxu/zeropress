@@ -35,15 +35,10 @@ async function preBundle(dependencies: string[]) {
 
         // TODO 解析路径，为什么用resolve库
         const isEntry = !args.importer
-        // const t = require.resolve(args.path, {
-        //   paths: [args.importer || process.cwd()],
-        // })
+
         const resolved = resolve.sync(args.path, {
           basedir: args.importer || process.cwd(),
         })
-
-        // console.log(count, '---node:', t)
-        // console.log(count++, '===resolved:', resolved)
 
         return isEntry
           ? { path: resolved, namespace: 'dependence' }
