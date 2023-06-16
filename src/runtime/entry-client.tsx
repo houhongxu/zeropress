@@ -20,12 +20,11 @@ async function renderInBrower() {
   if (!rootDom) {
     throw new Error('#root dom element not found / 未找到名为root的dom节点')
   }
+  const pageData = await initPageData(location.pathname)
+  console.log('页面数据：', pageData)
 
   if (import.meta.env.DEV) {
     // 开发环境
-    const pageData = await initPageData(location.pathname)
-    console.log('页面数据：', pageData)
-
     createRoot(rootDom).render(
       <HelmetProvider>
         <PageDataContext.Provider value={pageData}>
