@@ -66,7 +66,7 @@ function paths2tree(
       // 肯定是根节点docs的子节点，肯定是文件节点，因为插件中空文件夹不生成路径
       const isDir = false
       if (!isDir) {
-        tree.items?.push({ text: title, link: encodeURI(sortedPaths[index]) })
+        tree.items?.push({ text: title, link: sortedPaths[index] })
       }
     }
 
@@ -85,7 +85,7 @@ function paths2tree(
 
       const dir = dirNodes.at(-1)
 
-      dir?.items?.push({ text: title, link: encodeURI(sortedPaths[index]) })
+      dir?.items?.push({ text: title, link: sortedPaths[index] })
     }
   })
 
