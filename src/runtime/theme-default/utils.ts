@@ -27,7 +27,9 @@ export function normalizeHref(url?: string) {
     suffix = 'index' + suffix
   }
 
-  return addLeadingSlash(`${url}${suffix}`)
+  const normalUrl = addLeadingSlash(`${url}${suffix}`)
+
+  return isProduction() ? encodeURI(normalUrl) : normalUrl
 }
 
 export function addLeadingSlash(url: string) {
