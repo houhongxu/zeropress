@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { SidebarItem as SidebarItemType } from 'shared/types'
-import { normalizeHref } from '../utils'
+import { normalizeUrl } from '../utils'
 import { Link } from './Link'
 
 interface SidebarProps {
@@ -47,7 +47,7 @@ function SidebarDir({
               active ? 'text-brand-default' : 'text-text-2',
             )}
           >
-            <Link href={normalizeHref(link)} hover>
+            <Link href={normalizeUrl(link)} hover>
               {text}
             </Link>
           </div>
@@ -81,7 +81,8 @@ function SidebarItem({
   pathname: string
 }) {
   const { text, link } = data
-  const active = normalizeHref(link ?? '') === pathname
+  const active = normalizeUrl(link ?? '') === normalizeUrl(pathname)
+  console.log(normalizeUrl(link ?? ''), normalizeUrl(pathname))
 
   return (
     <div className="ml-20px">
@@ -91,7 +92,7 @@ function SidebarItem({
           active ? 'text-brand-default' : 'text-text-2',
         )}
       >
-        <Link href={normalizeHref(link)} hover>
+        <Link href={normalizeUrl(link)} hover>
           {text}
         </Link>
       </div>

@@ -12,13 +12,21 @@ export function isBrowser() {
   )
 }
 
-export function normalizeHref(url?: string) {
+export function hasChinese(str: string) {
+  return /.*[\u4e00-\u9fa5]+.*$/.test(str)
+}
+
+export function addLeadingSlash(url: string) {
+  return url.charAt(0) === '/' || url.startsWith('https') ? url : '/' + url
+}
+
+export function normalizeUrl(url?: string) {
   if (!url) {
     return '/'
   }
 
   if (isDevlopment()) {
-    return encodeURI(url)
+    return hasChinese(url) ? encodeURI(url) : url
   }
 
   if (url.startsWith('http')) {
@@ -32,8 +40,4 @@ export function normalizeHref(url?: string) {
   const prodUrl = addLeadingSlash(`${encodeURI(url)}${suffix}`)
 
   return prodUrl
-}
-
-export function addLeadingSlash(url: string) {
-  return url.charAt(0) === '/' || url.startsWith('https') ? url : '/' + url
 }

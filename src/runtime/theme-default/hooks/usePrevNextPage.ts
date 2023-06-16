@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom'
 import { SidebarItem } from 'shared/types'
-import { normalizeHref } from '../utils'
+import { normalizeUrl } from '../utils'
 import { useSidebarData } from './useSidebarData'
 
 export function usePrevNextPage() {
@@ -14,7 +14,7 @@ export function usePrevNextPage() {
 
   const pageIndex =
     flattendTitles?.findIndex(
-      (item) => normalizeHref(item.link ?? '') === pathname,
+      (item) => normalizeUrl(item.link ?? '') === normalizeUrl(pathname),
     ) ?? -1
 
   console.log(flattendTitles)

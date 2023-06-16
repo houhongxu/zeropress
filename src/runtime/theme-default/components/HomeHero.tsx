@@ -1,5 +1,5 @@
 import { Hero } from 'shared/types'
-import { normalizeHref } from '../utils'
+import { normalizeUrl } from '../utils'
 import { Button } from './Button'
 
 interface HeroProps {
@@ -23,7 +23,7 @@ export function HomeHero({ hero }: HeroProps) {
               <div key={link} className="p-4px">
                 <Button
                   text={text}
-                  href={normalizeHref(link)}
+                  href={normalizeUrl(link)}
                   theme={theme}
                 ></Button>
               </div>
