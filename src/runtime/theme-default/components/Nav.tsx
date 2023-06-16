@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import { NavItem as NavItemType } from 'shared/types'
 import { usePageData } from '../../usePageData'
+import { normalizeHref } from '../utils'
 import { SwitchAppearance } from './SwitchAppearance'
 
 export function Nav({ pathname }: { pathname: string }) {
@@ -50,7 +51,7 @@ function NavItem({ item, pathname }: { item: NavItemType; pathname: string }) {
   return (
     <div className="h-full mx-12px">
       <a
-        href={link}
+        href={normalizeHref(link)}
         className={classNames(
           'block h-full before:contents flex items-center whitespace-nowrap text-14px font-500 transition-colors duration-250',
           active && 'text-brand-default',

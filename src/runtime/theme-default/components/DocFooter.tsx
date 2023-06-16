@@ -1,4 +1,5 @@
 import { usePrevNextPage } from '../hooks/usePrevNextPage'
+import { normalizeHref } from '../utils'
 
 export function DocFooter() {
   const { prevPage, nextPage } = usePrevNextPage()
@@ -9,7 +10,7 @@ export function DocFooter() {
         <div className="w-[calc(50%-4px)]">
           {prevPage && (
             <a
-              href={prevPage.link}
+              href={normalizeHref(prevPage.link)}
               className="group block border-px border-divider-light rounded-8px py-8px px-16px w-full h-full transition-colors duration-250"
               un-hover="border-brand-default"
             >
@@ -28,7 +29,7 @@ export function DocFooter() {
         <div className="w-[calc(50%-4px)]">
           {nextPage && (
             <a
-              href={nextPage.link}
+              href={normalizeHref(nextPage.link)}
               className="group block border-px border-divider-light rounded-8px py-8px px-16px w-full h-full transition-colors duration-250"
               un-hover="border-brand-default"
             >

@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import { SidebarItem as SidebarItemType } from 'shared/types'
+import { normalizeHref } from '../utils'
 import { Link } from './Link'
 
 interface SidebarProps {
@@ -46,7 +47,7 @@ function SidebarDir({
               active ? 'text-brand-default' : 'text-text-2',
             )}
           >
-            <Link href={link} hover>
+            <Link href={normalizeHref(link)} hover>
               {text}
             </Link>
           </div>

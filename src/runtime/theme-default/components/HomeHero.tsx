@@ -1,4 +1,5 @@
 import { Hero } from 'shared/types'
+import { normalizeHref } from '../utils'
 import { Button } from './Button'
 
 interface HeroProps {
@@ -20,7 +21,11 @@ export function HomeHero({ hero }: HeroProps) {
           <div className="flex pt-32px -translate-x-4px">
             {hero?.actions.map(({ text, link, theme }) => (
               <div key={link} className="p-4px">
-                <Button text={text} href={link} theme={theme}></Button>
+                <Button
+                  text={text}
+                  href={normalizeHref(link)}
+                  theme={theme}
+                ></Button>
               </div>
             ))}
           </div>

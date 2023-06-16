@@ -5,6 +5,7 @@
 - 支持 mdx2，docusaurus2 只支持 mdx1，vitepress1 不支持
 - 减少 js 体积的孤岛架构
 - 约定式侧边栏
+- TODO 首页加载完后和侧边栏打开时预加载文件
 
 ## MVP 版本
 
@@ -107,3 +108,4 @@
 - [x] 修复 plugin-react 无法编译 node_modules 下代码的问题
 - [x] build 找不到 React 的问题
 - [ ] config 热更新失效
+- [ ] 包产物线上路由失效
