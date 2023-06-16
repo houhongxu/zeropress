@@ -21,15 +21,12 @@ export function normalizeHref(url?: string) {
     return url
   }
 
-  let suffix = ''
-  suffix += '.html'
-  if (url.endsWith('/')) {
-    suffix = 'index' + suffix
-  }
+  let suffix = '.html'
 
   const normalUrl = addLeadingSlash(`${url}${suffix}`)
+  console.log(normalUrl, encodeURI(normalUrl))
 
-  return isProduction() ? encodeURI(normalUrl) : normalUrl
+  return encodeURI(normalUrl)
 }
 
 export function addLeadingSlash(url: string) {
