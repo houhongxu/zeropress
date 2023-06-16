@@ -23,10 +23,9 @@ export function normalizeHref(url?: string) {
 
   let suffix = '.html'
 
-  const normalUrl = addLeadingSlash(`${url}${suffix}`)
-  console.log(normalUrl, encodeURI(normalUrl))
+  const prodUrl = addLeadingSlash(`${encodeURI(url)}${suffix}`)
 
-  return encodeURI(normalUrl)
+  return prodUrl
 }
 
 export function addLeadingSlash(url: string) {
