@@ -13,8 +13,6 @@ export function useTocHMR(initToc: TocItem[]) {
           // 客户端可以使用import()，添加参数是为了避免浏览器请求缓存
           import(/* @vite-ignore */ `${filePath}?import&t=${Date.now()}`).then(
             (module) => {
-              console.log('xxxxxxxxx')
-
               setToc(module.toc)
             },
           )

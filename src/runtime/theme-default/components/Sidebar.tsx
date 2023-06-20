@@ -82,7 +82,6 @@ function SidebarItem({
 }) {
   const { text, link } = data
   const active = normalizeUrl(link ?? '') === normalizeUrl(pathname)
-  console.log(normalizeUrl(link ?? ''), normalizeUrl(pathname))
 
   return (
     <div className="ml-20px">
