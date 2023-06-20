@@ -98,11 +98,15 @@ export function vitePluginUserConfigHMR(
       // https://cn.vitejs.dev/guide/api-plugin.html#configureserver
       // 兼容基于connect的中间件 https://cn.vitejs.dev/guide/ssr.html#setting-up-the-dev-server
       // 基于connect的静态资源服务中间件 https://github.com/lukeed/sirv
-      const publicDir = path.join(siteConfig.root, 'public')
+      const root = siteConfig.root
+
+      const publicDir = path.join(root, 'public')
 
       if (fse.pathExistsSync(publicDir)) {
         server.middlewares.use(sirv(publicDir))
       }
+
+      server.middlewares.use(sirv(root))
     },
   }
 }
