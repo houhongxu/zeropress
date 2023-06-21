@@ -19,7 +19,7 @@ export function HomeHero({ hero }: HeroProps) {
             {hero?.tagline}
           </div>
           <div className="flex pt-32px -translate-x-4px">
-            {hero?.actions.map(({ text, link, theme }) => (
+            {hero?.actions?.map(({ text, link, theme }) => (
               <div key={link} className="p-4px">
                 <Button
                   text={text}
