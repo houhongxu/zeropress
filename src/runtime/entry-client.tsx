@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { PageDataContext } from './usePageData'
 import { ComponentType } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
+import { setup } from './theme-default/hooks/useTocScroll'
 
 declare global {
   interface Window {
@@ -50,4 +51,9 @@ async function renderInBrower() {
   }
 }
 
-renderInBrower()
+renderInBrower().then(() => {
+  // Binding the event after the first render
+  setTimeout(() => {
+    setup()
+  })
+})

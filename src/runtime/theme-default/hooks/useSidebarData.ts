@@ -46,10 +46,12 @@ function paths2tree(
   const tree: SidebarItem = { text: nav, items: [] }
   const normalizeTitle = (path: string) => path?.replace(/^(\d+)/, '')
 
-  const sortedPaths = [...paths]
+  const getNumber = (str: string) => parseInt(str.replace(/[^\d]/g, ''))
+
+  const sortedPaths = [...paths].sort((a, b) => getNumber(a) - getNumber(b))
   const splitPath = (str: string) => str.split('/').filter((i) => !!i)
 
-  const splittedPaths = paths.map((path) => splitPath(path))
+  const splittedPaths = sortedPaths.map((path) => splitPath(path))
 
   // 为保证同文件系统顺序，额外存文件夹节点处理文件夹
   const dirNodes: any = []

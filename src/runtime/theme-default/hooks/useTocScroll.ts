@@ -1,5 +1,6 @@
 import { RefObject, useEffect } from 'react'
 import { throttle } from 'lodash-es'
+import { isBrowser } from '../utils'
 
 const NAV_HEIGHT = 56
 
@@ -160,4 +161,63 @@ export function scrollToTarget(target: HTMLElement, isSmooth: boolean = false) {
     top: targetTop,
     behavior: isSmooth ? 'smooth' : 'auto',
   })
+}
+
+// Control the scroll behavior of the browser when user clicks on a link
+function bindingWindowScroll() {
+  // Initial scroll position
+  function scrollTo(el: HTMLElement, hash: string, isSmooth = false) {
+    let target: HTMLElement | null = null
+    try {
+      target = el.classList.contains('autolink-header')
+        ? el
+        : document.getElementById(decodeURIComponent(hash.slice(1)))
+    } catch (e) {
+      console.warn(e)
+    }
+    if (target) {
+      scrollToTarget(target, isSmooth)
+    }
+  }
+
+  window.addEventListener(
+    'click',
+    (e) => {
+      // Only handle a tag click
+      const link = (e.target as Element).closest('a')
+      if (link) {
+        const { origin, hash, target, pathname, search } = link
+        const currentUrl = window.location
+        // only intercept inbound links
+        if (hash && target !== '_blank' && origin === currentUrl.origin) {
+          // scroll between hash anchors in the same page
+          if (
+            pathname === currentUrl.pathname &&
+            search === currentUrl.search &&
+            hash &&
+            hash !== currentUrl.hash &&
+            link.classList.contains('autolink-header')
+          ) {
+            e.preventDefault()
+            history.pushState(null, '', hash)
+            // use smooth scroll when clicking on header anchor links
+            scrollTo(link, hash, true)
+            // still emit the event so we can listen to it in themes
+            window.dispatchEvent(new Event('hashchange'))
+          }
+        }
+      }
+    },
+    { capture: true },
+  )
+  window.addEventListener('hashchange', (e) => {
+    e.preventDefault()
+  })
+}
+
+export function setup() {
+  if (!isBrowser()) {
+    return
+  }
+  bindingWindowScroll()
 }

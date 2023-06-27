@@ -57,16 +57,6 @@
 - [x] 正文
 - [x] TOC
 
-## TODO
-
-- [x] 配置 uno 变量
-- [x] 开启 ts 严格模式识别可选类型
-- [x] 避免 uno 使用 css 变量或者使用 text-$xxx 语法
-- [x] 取消 uno-attr 方式，适配很差，有些变量不生效需要加 un-，有些加了 un-失效
-- [x] 生成侧边栏数据的函数
-- [x] 文档多级菜单
-- [x] 侧边栏热更新
-
 ## unocss 痛点
 
 - uno-attr 方式，适配很差，有些变量不生效需要加 un-，有些加了 un-失效
@@ -76,6 +66,7 @@
 - spacing 配置 不能用在 height 与 width
 - breakpoints 配置 不支持 css 变量
 - zIndex 配置无效
+- overflow-ellipsis 无效
 
 ## 约定
 
@@ -107,9 +98,27 @@
 
 - [x] 修复 plugin-react 无法编译 node_modules 下代码的问题
 - [x] build 找不到 React 的问题
-- [ ] config 热更新失效
-- [ ] 包产物线上路由失效
+- [x] 包产物线上路由失效
+- [ ] 包 config 热更新失效
 
 ## TODO
 
+- [x] 配置 uno 变量
+- [x] 开启 ts 严格模式识别可选类型
+- [x] 避免 uno 使用 css 变量或者使用 text-$xxx 语法
+- [x] 取消 uno-attr 方式，适配很差，有些变量不生效需要加 un-，有些加了 un-失效
+- [x] 生成侧边栏数据的函数
+- [x] 文档多级菜单
+- [x] 侧边栏热更新
 - [ ] 支持当前文件夹下使用 img 文件夹引入图片
+- [ ] 支持侧边栏跳转页面
+
+## FIX
+
+- [x] 侧边栏顺序不对
+- [x] 侧边栏滚动条不应该被 header 遮挡
+- [x] 侧边栏部分高亮失效
+- [x] TOC 应该不能换行
+- [x] header anchor 应该精准定位
+- [ ] header anchor 定位有 bug，滚动后无法精准定位
+- [ ] 侧边栏点击后不应该跳转到头部->不应该跳转 html->使用 spa 模式->islandjs 也没解决

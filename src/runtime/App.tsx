@@ -36,7 +36,7 @@ export async function initPageData(routePath: string): Promise<PageData> {
       siteTitle:
         moduleInfo.frontmatter?.pageType === 'home'
           ? userConfig.title || 'HOME'
-          : moduleInfo.frontmatter?.title || moduleInfo.title || 'HHXPRESS DOC',
+          : moduleInfo.frontmatter?.title || moduleInfo.title || 'HHXPRESS',
       sidebarTitles: titles,
     }
   }

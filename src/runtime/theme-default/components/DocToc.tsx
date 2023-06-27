@@ -25,7 +25,7 @@ export function DocToc({ toc: initialToc = [] }: TocProps) {
           <div
             id="toc-container"
             ref={containerRef}
-            className="relative divider-left pl-16px text-13px font-500"
+            className="relative divider-left px-16px text-13px font-500"
           >
             <div
               id="toc-highlight"
@@ -58,9 +58,10 @@ function TocLi({ item }: { item: TocItem }) {
     <li>
       <a
         href={`#${item.id}`}
-        className="block text-text-2 leading-28px transition-colors duration-250"
+        className="block text-text-2 leading-28px transition-colors duration-250 overflow-hidden whitespace-nowrap"
         un-hover="text-text-1"
         style={{
+          textOverflow: 'ellipsis',
           paddingLeft: (item.depth - 2) * 12,
         }}
         onClick={(e) => {
