@@ -11,11 +11,21 @@ export interface UserConfig {
   description?: string
   themeConfig?: ThemeConfig
   vite?: ViteConfig
+  appearance?: boolean
 }
 
 export interface ThemeConfig {
   nav?: { title: string; items: NavItem[] }
   footer?: Footer
+  // 是否可折叠
+  collapsable?: boolean
+  // 是否默认折叠
+  collapsed?: boolean
+  lastUpdatedText?: string
+  socialLinks?: SocialLink[]
+  tocTitle?: string
+  prevPageText?: string
+  nextPageText?: string
 }
 
 // ---
@@ -31,3 +41,9 @@ export interface Footer {
   message?: string
   copyright?: string
 }
+
+export interface SocialLink {
+  icon: SocialLinkIcon
+  link: string
+}
+type SocialLinkIcon = 'github'

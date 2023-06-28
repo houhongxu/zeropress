@@ -6,6 +6,7 @@ import { SiteConfig } from 'shared/types'
 import fse from 'fs-extra'
 import sirv from 'sirv'
 import FastGlob from 'fast-glob'
+import { CLIENT_ENTRY_PATH, DEFAULT_THEME_PATH } from '../constants'
 
 const CONFIG_ID = 'virtual:user-config'
 const RESOLVED_CONFIG_ID = '\0' + 'virtual:user-config' // vite继承的rollup生态的约定https://cn.vitejs.dev/guide/api-plugin.html#virtual-modules-convention
@@ -44,6 +45,11 @@ export function vitePluginUserConfigHMR(
             'lodash-es',
             'classnames',
           ],
+        },
+        server: {
+          fs: {
+            allow: [CLIENT_ENTRY_PATH, DEFAULT_THEME_PATH, process.cwd()],
+          },
         },
         resolve: {
           alias: {

@@ -33,7 +33,7 @@ export function Nav({ pathname }: { pathname: string }) {
           un-before="menu-item-before"
           un-hover="text-text-1"
         >
-          <a href="/">
+          <a href="https://github.com/903040380/hhxpress">
             <div className="i-carbon-logo-github w-25px h-25px"></div>
           </a>
         </div>
