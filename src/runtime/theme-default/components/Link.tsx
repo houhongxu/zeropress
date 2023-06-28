@@ -28,7 +28,7 @@ export function Link({
           ? classNames(
               hover,
               typeof hover === 'boolean' &&
-                'text-brand-default transition-colors duration-250',
+                'text-brand-light transition-colors duration-250',
             )
           : undefined
       }

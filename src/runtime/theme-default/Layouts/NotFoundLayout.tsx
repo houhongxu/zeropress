@@ -10,7 +10,7 @@ export function NotFoundLayout() {
         <a
           href={'/'}
           className="inline-block border-px rounded-16px py-4px px-16px text-14px text-brand font-500  transition-colors duration-250"
-          un-hover="border-brand-default text-brand-default"
+          un-hover="border-brand-default text-brand-light"
         >
           返回主页
         </a>

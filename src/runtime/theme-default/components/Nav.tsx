@@ -54,9 +54,9 @@ function NavItem({ item, pathname }: { item: NavItemType; pathname: string }) {
         href={normalizeUrl(link)}
         className={classNames(
           'block h-full before:contents flex items-center whitespace-nowrap text-14px font-500 transition-colors duration-250',
-          active && 'text-brand-default',
+          active && 'text-brand-light',
         )}
-        un-hover="text-brand-default"
+        un-hover="text-brand-light"
       >
         {text}
       </a>

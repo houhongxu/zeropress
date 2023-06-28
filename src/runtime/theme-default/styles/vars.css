@@ -67,13 +67,13 @@
   --hp-c-green-dimm-2: rgba(66, 184, 131, 0.25);
   --hp-c-green-dimm-3: rgba(66, 184, 131, 0.05);
 
-  --hp-c-blue: #646cff;
-  --hp-c-blue-light: #747bff;
-  --hp-c-blue-lighter: #9499ff;
-  --hp-c-blue-lightest: #bcc0ff;
-  --hp-c-blue-dark: #535bf2;
-  --hp-c-blue-darker: #454ce1;
-  --hp-c-blue-dimm: rgba(100, 108, 255, 0.08);
+  --hp-c-blue: #002fa7;
+  --hp-c-blue-light: #306aff;
+  --hp-c-blue-lighter: #638fff;
+  --hp-c-blue-lightest: #96b4ff;
+  --hp-c-blue-dark: #002174;
+  --hp-c-blue-darker: #001752;
+  --hp-c-blue-dimm: #000e30;
 
   --hp-c-yellow: #ffc517;
   --hp-c-yellow-light: #fcd253;
@@ -112,11 +112,11 @@
   --hp-c-text-4: var(--hp-c-text-light-4);
   --hp-c-text-code: var(--hp-c-indigo-soft);
 
-  --hp-c-brand: var(--hp-c-green);
-  --hp-c-brand-light: var(--hp-c-green-light);
-  --hp-c-brand-lighter: var(--hp-c-green-lighter);
-  --hp-c-brand-dark: var(--hp-c-green-dark);
-  --hp-c-brand-darker: var(--hp-c-green-darker);
+  --hp-c-brand: var(--hp-c-blue);
+  --hp-c-brand-light: var(--hp-c-blue-light);
+  --hp-c-brand-lighter: var(--hp-c-blue-lighter);
+  --hp-c-brand-dark: var(--hp-c-blue-dark);
+  --hp-c-brand-darker: var(--hp-c-blue-darker);
 }
 
 .dark {
@@ -256,8 +256,8 @@
  * -------------------------------------------------------------------------- */
 
 :root {
-  --hp-home-hero-name-background-from: var(--hp-c-brand);
-  --hp-home-hero-name-background-to: #002fa7;
+  --hp-home-hero-name-background-from: var(--hp-c-brand-lighter);
+  --hp-home-hero-name-background-to: var(--hp-c-brand-darker);
 }
 
 /**

@@ -18,7 +18,7 @@ export function DocFooter() {
                 上一页
               </div>
               <div
-                className="leading-20px text-14px font-500 text-brand-default transition-colors duration-250"
+                className="leading-20px text-14px font-500 text-brand-light transition-colors duration-250"
                 un-group-hover="text-brand-dark"
               >
                 {prevPage.text}
@@ -37,7 +37,7 @@ export function DocFooter() {
                 下一页
               </div>
               <div
-                className="leading-20px text-14px font-500 text-brand-default transition-colors duration-250"
+                className="leading-20px text-14px font-500 text-brand-light transition-colors duration-250"
                 un-group-hover="text-brand-dark"
               >
                 {nextPage.text}

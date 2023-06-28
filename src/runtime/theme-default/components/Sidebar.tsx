@@ -45,7 +45,7 @@ function SidebarDir({
           <div
             className={classNames(
               'p-4px text-14px font-500',
-              active ? 'text-brand-default' : 'text-text-2',
+              active ? 'text-brand-light' : 'text-text-2',
             )}
           >
             <Link href={normalizeUrl(link)} hover>
@@ -89,7 +89,7 @@ function SidebarItem({
       <div
         className={classNames(
           'p-4px text-14px font-500',
-          active ? 'text-brand-default' : 'text-text-2',
+          active ? 'text-brand-light' : 'text-text-2',
         )}
       >
         <Link href={normalizeUrl(link)} hover>
