@@ -38,7 +38,6 @@ export function useSidebarData() {
     titles[paths.findIndex((item) => item === path)]
 
   const sidebarData = paths2tree(paths, path2Title, nav).items
-  console.log(paths)
 
   return { data: sidebarData }
 }
