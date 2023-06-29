@@ -34,10 +34,18 @@ export function normalizeUrl(url?: string) {
   }
 
   let suffix = '.html'
+
   if (url.endsWith('/')) {
     suffix = 'index' + suffix
   }
-  const prodUrl = addLeadingSlash(`${encodeURI(url)}${suffix}`)
+  let prodUrl = ''
+  // 兼容查询参数
+  if (url.includes('?')) {
+    const [pureUrl, search] = url.split('?')
+    prodUrl = addLeadingSlash(`${encodeURI(pureUrl)}${suffix}?${search}`)
+  } else {
+    prodUrl = addLeadingSlash(`${encodeURI(url)}${suffix}`)
+  }
 
   return prodUrl
 }
