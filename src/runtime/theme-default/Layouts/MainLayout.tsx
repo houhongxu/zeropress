@@ -12,8 +12,8 @@ import { NotFoundLayout } from './NotFoundLayout'
 import { useLocation } from 'react-router-dom'
 
 export function MainLayout() {
-  const { pageType, siteTitle } = usePageData()
-  const { pathname } = useLocation()
+  const { pageType, siteTitle, userConfig } = usePageData()
+  const location = useLocation()
 
   const getContent = () => {
     if (pageType === 'home') {
@@ -30,7 +30,9 @@ export function MainLayout() {
       <Helmet>
         <title>{siteTitle}</title>
       </Helmet>
-      <Nav pathname={pathname}></Nav>
+
+      <Nav nav={userConfig.themeConfig?.nav} location={location}></Nav>
+
       {getContent()}
     </div>
   )

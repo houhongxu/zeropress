@@ -7,13 +7,17 @@ import { usePageData } from '../../usePageData'
 import { useSidebarData } from '../hooks/useSidebarData'
 
 export function DocLayout() {
-  const { pathname } = useLocation()
+  const location = useLocation()
   const { data } = useSidebarData()
-  const { toc } = usePageData()
+  const { toc, userConfig } = usePageData()
 
   return (
     <div>
-      <Sidebar sidebarData={data} pathname={pathname}></Sidebar>
+      <Sidebar
+        nav={userConfig.themeConfig?.nav}
+        sidebarData={data}
+        location={location}
+      ></Sidebar>
 
       <div className="flex justify-between p-48px pr-0" un-md="ml-sidebar">
         <div className="w-full max-w-960px mx-auto pr-48px">

@@ -41,3 +41,5 @@ export function normalizeUrl(url?: string) {
 
   return prodUrl
 }
+
+export const normalizeTitle = (path: string) => path?.replace(/^(\d+)/, '')

@@ -1,26 +1,64 @@
 import classNames from 'classnames'
-import { useLocation } from 'react-router-dom'
-import { SidebarItem as SidebarItemType } from 'shared/types'
-import { normalizeUrl } from '../utils'
+import { Location, useLocation } from 'react-router-dom'
+import { SidebarItem as SidebarItemType, ThemeConfig } from 'shared/types'
+import { normalizeTitle, normalizeUrl } from '../utils'
 import { Link } from './Link'
 
 interface SidebarProps {
   sidebarData?: SidebarItemType[]
-  pathname: string
+  location: Location
+  nav: ThemeConfig['nav']
 }
 
-export function Sidebar({ sidebarData, pathname }: SidebarProps) {
+export function Sidebar({ nav, sidebarData, location }: SidebarProps) {
+  //  根据location 设计一个返回按钮返回跳转来的 /docs,并展示此处为docs->http，并未http添加图标
+  const isExtra = !!location.search
+
+  const { items } = nav ?? {}
+  const curDir = normalizeTitle(location.pathname.split('/')[1])
+  const curNav = location.search.slice(1)
+  const backLink = items?.find((item) => item.link.includes(curNav))?.link
+
   return (
     <aside
       className="fixed inset-y-0 left-0 opacity-0 -translate-x-full mt-nav w-sidebar px-32px pb-32px bg-bg-alt overflow-x-hidden overflow-y-auto transition-opacity transition-transform duration-500"
       un-md="opacity-100 translate-x-0"
     >
       <nav>
-        {sidebarData?.map((sidebarGroupData) => (
+        {isExtra && (
+          <Link
+            href={normalizeUrl(backLink)}
+            hover
+            className={classNames(
+              isExtra && 'flex justify-between items-center',
+            )}
+          >
+            {isExtra ? (
+              <h2 className="mt-12px font-700">{curDir}</h2>
+            ) : (
+              <p>{curDir}</p>
+            )}
+            {isExtra && (
+              <div className="i-carbon-down-to-bottom mt-12px w-16px h-16px rotate-180"></div>
+            )}
+          </Link>
+        )}
+        {(isExtra
+          ? sidebarData?.map((item) => ({
+              ...item,
+              link: item.link ? item.link + location.search : item.link,
+              items: item.items?.map((item) => ({
+                ...item,
+                link: item.link ? item.link + location.search : item.link,
+              })),
+            }))
+          : sidebarData
+        )?.map((sidebarGroupData) => (
           <SidebarDir
             key={sidebarGroupData.text}
             data={sidebarGroupData}
-            pathname={pathname}
+            location={location}
+            nav={nav}
           ></SidebarDir>
         ))}
       </nav>
@@ -30,14 +68,25 @@ export function Sidebar({ sidebarData, pathname }: SidebarProps) {
 
 function SidebarDir({
   data,
-  pathname,
+  location,
+  nav,
 }: {
   data: SidebarItemType
-  pathname: string
+  location: Location
+  nav: ThemeConfig['nav']
 }) {
   const { text, link, items } = data
-  const active = normalizeUrl(link ?? '') === normalizeUrl(decodeURI(pathname))
+  const active =
+    normalizeUrl(link ?? '') ===
+    normalizeUrl(decodeURI(location.pathname + location.search))
 
+  const { items: navItems } = nav ?? {}
+  const linkDir = normalizeTitle(link?.split('/')[1] ?? '')
+  const curDir = normalizeTitle(location.pathname.split('/')[1])
+  const isExtra =
+    curDir !== linkDir && !navItems?.some((item) => item.link.includes(linkDir))
+
+  // TODO siderbaritem 优化为选择样式
   return (
     <>
       {link ? (
@@ -45,11 +94,24 @@ function SidebarDir({
           <div
             className={classNames(
               'p-4px text-14px font-500',
-              active ? 'text-brand-light' : 'text-text-2',
+              active
+                ? 'text-brand-light'
+                : isExtra
+                ? 'text-text-1'
+                : 'text-text-2',
             )}
           >
-            <Link href={normalizeUrl(link)} hover>
-              {text}
+            <Link
+              href={normalizeUrl(link)}
+              hover
+              className={classNames(
+                isExtra && 'flex justify-between items-center',
+              )}
+            >
+              {isExtra ? <h2 className="font-700">{text}</h2> : <p>{text}</p>}
+              {isExtra && (
+                <div className="i-carbon-down-to-bottom w-16px h-16px rotate-270"></div>
+              )}
             </Link>
           </div>
         </div>
@@ -64,7 +126,7 @@ function SidebarDir({
               <SidebarItem
                 key={item.text}
                 data={item}
-                pathname={pathname}
+                location={location}
               ></SidebarItem>
             ))}
           </div>
@@ -76,13 +138,15 @@ function SidebarDir({
 
 function SidebarItem({
   data,
-  pathname,
+  location,
 }: {
   data: SidebarItemType
-  pathname: string
+  location: Location
 }) {
   const { text, link } = data
-  const active = normalizeUrl(link ?? '') === normalizeUrl(decodeURI(pathname))
+  const active =
+    normalizeUrl(link ?? '') ===
+    normalizeUrl(decodeURI(location.pathname + location.search))
 
   return (
     <div className="ml-20px">

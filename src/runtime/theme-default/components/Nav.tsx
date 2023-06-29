@@ -1,12 +1,18 @@
 import classNames from 'classnames'
-import { NavItem as NavItemType } from 'shared/types'
+import { Location } from 'react-router-dom'
+import { NavItem as NavItemType, ThemeConfig } from 'shared/types'
 import { usePageData } from '../../usePageData'
 import { normalizeUrl } from '../utils'
 import { SwitchAppearance } from './SwitchAppearance'
 
-export function Nav({ pathname }: { pathname: string }) {
-  const { userConfig } = usePageData()
-  const { title, items } = userConfig.themeConfig?.nav ?? {}
+export function Nav({
+  nav,
+  location,
+}: {
+  nav: ThemeConfig['nav']
+  location: Location
+}) {
+  const { title, items } = nav ?? {}
   return (
     <header className="w-full z-10 fixed top-0 left-0">
       <div className="flex items-center justify-between px-32px h-nav divider-bottom bg-bg-default">
@@ -20,7 +26,7 @@ export function Nav({ pathname }: { pathname: string }) {
 
         <div className="h-full flex">
           {items?.map((item) => (
-            <NavItem key={item.link} item={item} pathname={pathname}></NavItem>
+            <NavItem key={item.link} item={item} location={location}></NavItem>
           ))}
         </div>
 
@@ -42,11 +48,18 @@ export function Nav({ pathname }: { pathname: string }) {
   )
 }
 
-function NavItem({ item, pathname }: { item: NavItemType; pathname: string }) {
+function NavItem({
+  item,
+  location,
+}: {
+  item: NavItemType
+  location: Location
+}) {
   const { text, link } = item
   const nav = link.split('/')[1]
 
-  const active = nav && pathname.includes(nav)
+  const active =
+    nav && (location.pathname.includes(nav) || location.search.includes(nav))
 
   return (
     <div className="h-full mx-12px">

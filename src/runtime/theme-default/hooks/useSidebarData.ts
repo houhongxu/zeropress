@@ -6,6 +6,7 @@
 import { useLocation } from 'react-router-dom'
 import { SidebarItem } from 'shared/types'
 import { usePageData } from '../../usePageData'
+import { normalizeTitle } from '../utils'
 import { useSidebarHMR } from './useSidebarHMR'
 
 export function useSidebarData() {
@@ -17,6 +18,11 @@ export function useSidebarData() {
   const titleIndexs: number[] = []
   const paths = routes
     .map((route) => route.path)
+    .map((path, index) =>
+      path.endsWith('/')
+        ? path.slice(0, -1) + '>' + sidebarTitles?.[index]?.replace('/', '<')
+        : path,
+    ) // 标记跳转的文件夹
     .filter((path, index) =>
       RegExp(`^(/${nav}/).+`).test(path)
         ? titleIndexs.push(index) && true
@@ -32,6 +38,7 @@ export function useSidebarData() {
     titles[paths.findIndex((item) => item === path)]
 
   const sidebarData = paths2tree(paths, path2Title, nav).items
+  console.log(paths)
 
   return { data: sidebarData }
 }
@@ -44,7 +51,6 @@ function paths2tree(
   nav: string,
 ): SidebarItem {
   const tree: SidebarItem = { text: nav, items: [] }
-  const normalizeTitle = (path: string) => path?.replace(/^(\d+)/, '')
 
   const getNumber = (str: string) => parseInt(str.replace(/[^\d]/g, ''))
 
@@ -66,7 +72,18 @@ function paths2tree(
 
     if (depth === 1) {
       // 肯定是根节点docs的子节点，肯定是文件节点，因为插件中空文件夹不生成路径
-      const isDir = false
+
+      let isDir = false
+
+      if (names[depth].includes('>')) {
+        isDir = true
+
+        tree.items?.push({
+          text: normalizeTitle(names[depth].split('>')[0]),
+          link: `/${names[depth].replace('>', '/').replace('<', '/')}?${nav}`,
+        })
+      }
+
       if (!isDir) {
         tree.items?.push({ text: title, link: sortedPaths[index] })
       }
