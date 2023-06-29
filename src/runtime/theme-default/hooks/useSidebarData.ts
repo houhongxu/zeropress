@@ -51,7 +51,8 @@ function paths2tree(
 ): SidebarItem {
   const tree: SidebarItem = { text: nav, items: [] }
 
-  const getNumber = (str: string) => parseInt(str.replace(/[^\d]/g, ''))
+  const getNumber = (str: string) =>
+    parseInt(str.split(' ')[0].replace(/[^\d]/g, ''))
 
   const sortedPaths = [...paths].sort((a, b) => getNumber(a) - getNumber(b))
   const splitPath = (str: string) => str.split('/').filter((i) => !!i)
