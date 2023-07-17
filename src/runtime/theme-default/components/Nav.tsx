@@ -1,18 +1,27 @@
 import classNames from 'classnames'
-import { Location } from 'react-router-dom'
-import { NavItem as NavItemType, ThemeConfig } from 'shared/types'
-import { usePageData } from '../../usePageData'
-import { normalizeUrl } from '../utils'
+import { useEffect, useState } from 'react'
+import {
+  NavItem as NavItemType,
+  PropsWithIsland,
+  ThemeConfig,
+} from 'shared/types'
+import { isBrowser, normalizeUrl } from '../utils'
 import { SwitchAppearance } from './SwitchAppearance'
 
-export function Nav({
-  nav,
-  location,
-}: {
-  nav: ThemeConfig['nav']
-  location: Location
-}) {
+export function Nav({ nav }: { nav: ThemeConfig['nav'] } & PropsWithIsland) {
   const { title, items } = nav ?? {}
+
+  const [pathname, setPathname] = useState<string>()
+  const [search, setSearch] = useState<string>()
+
+  // 更新阅读文件夹链接内文章时的nav状态
+  useEffect(() => {
+    if (isBrowser() && typeof location !== 'undefined') {
+      setPathname(location.pathname)
+      setSearch(location.search)
+    }
+  }, [])
+
   return (
     <header className="w-full z-10 fixed top-0 left-0">
       <div className="flex items-center justify-between px-32px h-nav divider-bottom bg-bg-default">
@@ -26,7 +35,12 @@ export function Nav({
 
         <div className="h-full flex">
           {items?.map((item) => (
-            <NavItem key={item.link} item={item} location={location}></NavItem>
+            <NavItem
+              key={item.link}
+              item={item}
+              pathname={pathname}
+              search={search}
+            ></NavItem>
           ))}
         </div>
 
@@ -50,16 +64,16 @@ export function Nav({
 
 function NavItem({
   item,
-  location,
+  pathname,
+  search,
 }: {
   item: NavItemType
-  location: Location
+  pathname?: string
+  search?: string
 }) {
   const { text, link } = item
   const nav = link.split('/')[1]
-
-  const active =
-    nav && (location.pathname.includes(nav) || location.search.includes(nav))
+  const active = nav && (pathname?.includes(nav) || search?.includes(nav))
 
   return (
     <div className="h-full mx-12px">

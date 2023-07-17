@@ -7,16 +7,15 @@ import { usePageData } from '../../usePageData'
 import { useSidebarData } from '../hooks/useSidebarData'
 
 export function DocLayout() {
-  const location = useLocation()
   const { data } = useSidebarData()
   const { toc, userConfig } = usePageData()
 
   return (
     <div>
       <Sidebar
+        __island
         nav={userConfig.themeConfig?.nav}
         sidebarData={data}
-        location={location}
       ></Sidebar>
 
       <div className="flex justify-between p-48px pr-0" un-md="ml-sidebar">

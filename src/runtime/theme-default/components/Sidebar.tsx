@@ -1,23 +1,55 @@
 import classNames from 'classnames'
-import { Location, useLocation } from 'react-router-dom'
-import { SidebarItem as SidebarItemType, ThemeConfig } from 'shared/types'
-import { normalizeTitle, normalizeUrl } from '../utils'
+import { useEffect, useState } from 'react'
+import {
+  PropsWithIsland,
+  SidebarItem as SidebarItemType,
+  ThemeConfig,
+} from 'shared/types'
+import { isBrowser, normalizeTitle, normalizeUrl } from '../utils'
 import { Link } from './Link'
 
 interface SidebarProps {
   sidebarData?: SidebarItemType[]
-  location: Location
   nav: ThemeConfig['nav']
 }
 
-export function Sidebar({ nav, sidebarData, location }: SidebarProps) {
-  //  根据location 设计一个返回按钮返回跳转来的 /docs,并展示此处为docs->http，并未http添加图标
-  const isExtra = !!location.search
+export function Sidebar({ nav, sidebarData }: SidebarProps & PropsWithIsland) {
+  const [pathname, setPathname] = useState<string>()
+  const [search, setSearch] = useState<string>()
 
+  useEffect(() => {
+    if (isBrowser() && typeof location !== 'undefined') {
+      setPathname(location.pathname)
+      setSearch(location.search)
+    }
+  }, [])
+
+  // 获取配置导航栏
   const { items } = nav ?? {}
-  const curDir = normalizeTitle(location.pathname.split('/')[1])
-  const curNav = location.search.slice(1)
+  // 获取当前导航文件夹名
+  const curDir = pathname?.split('/')[1]
+
+  // 是否是配置的导航
+  const isNav = items?.some((item) => item.link.startsWith('/' + curDir))
+
+  // 是否是跳转文件夹侧边栏
+  const isDirLinkSidebar = !isNav
+
+  // 获取当前跳转文件夹属于的导航
+  const curNav = search?.slice(1) ?? ''
+
+  // 获取返回链接
   const backLink = items?.find((item) => item.link.includes(curNav))?.link
+
+  // 为sidebar的链接都添加nav标记
+  const dirLinkSidebarData = sidebarData?.map((item) => ({
+    ...item,
+    link: item.link ? item.link + search : item.link,
+    items: item.items?.map((item) => ({
+      ...item,
+      link: item.link ? item.link + search : item.link,
+    })),
+  }))
 
   return (
     <aside
@@ -25,42 +57,27 @@ export function Sidebar({ nav, sidebarData, location }: SidebarProps) {
       un-md="opacity-100 translate-x-0"
     >
       <nav>
-        {isExtra && (
+        {isDirLinkSidebar && (
           <Link
             href={normalizeUrl(backLink)}
             hover
-            className={classNames(
-              isExtra && 'flex justify-between items-center',
-            )}
+            className="flex justify-between items-center"
           >
-            {isExtra ? (
-              <h2 className="mt-12px font-700">{curDir}</h2>
-            ) : (
-              <p>{curDir}</p>
-            )}
-            {isExtra && (
-              <div className="i-carbon-down-to-bottom mt-12px w-16px h-16px rotate-180"></div>
-            )}
+            <h2 className="mt-12px font-700">{normalizeTitle(curDir ?? '')}</h2>
+            <div className="i-carbon-down-to-bottom mt-12px w-16px h-16px rotate-180"></div>
           </Link>
         )}
-        {(isExtra
-          ? sidebarData?.map((item) => ({
-              ...item,
-              link: item.link ? item.link + location.search : item.link,
-              items: item.items?.map((item) => ({
-                ...item,
-                link: item.link ? item.link + location.search : item.link,
-              })),
-            }))
-          : sidebarData
-        )?.map((sidebarGroupData) => (
-          <SidebarDir
-            key={sidebarGroupData.text}
-            data={sidebarGroupData}
-            location={location}
-            nav={nav}
-          ></SidebarDir>
-        ))}
+        {(isDirLinkSidebar ? dirLinkSidebarData : sidebarData)?.map(
+          (sidebarGroupData) => (
+            <SidebarDir
+              key={sidebarGroupData.text}
+              data={sidebarGroupData}
+              pathname={pathname}
+              search={search}
+              nav={nav}
+            ></SidebarDir>
+          ),
+        )}
       </nav>
     </aside>
   )
@@ -68,22 +85,24 @@ export function Sidebar({ nav, sidebarData, location }: SidebarProps) {
 
 function SidebarDir({
   data,
-  location,
+  pathname,
+  search,
   nav,
 }: {
   data: SidebarItemType
-  location: Location
+  pathname?: string
+  search?: string
+
   nav: ThemeConfig['nav']
 }) {
   const { text, link, items } = data
   const active =
-    normalizeUrl(link ?? '') ===
-    normalizeUrl(decodeURI(location.pathname + location.search))
+    normalizeUrl(link ?? '') === normalizeUrl(decodeURI(`${pathname}${search}`))
 
   const { items: navItems } = nav ?? {}
   const linkDir = normalizeTitle(link?.split('/')[1] ?? '')
-  const curDir = normalizeTitle(location.pathname.split('/')[1])
-  const isExtra =
+  const curDir = normalizeTitle(pathname?.split('/')[1] ?? '')
+  const isDirLinkSidebar =
     curDir !== linkDir && !navItems?.some((item) => item.link.includes(linkDir))
 
   // TODO siderbaritem 优化为选择样式
@@ -96,7 +115,7 @@ function SidebarDir({
               'p-4px text-14px font-500',
               active
                 ? 'text-brand-light'
-                : isExtra
+                : isDirLinkSidebar
                 ? 'text-text-1'
                 : 'text-text-2',
             )}
@@ -105,11 +124,15 @@ function SidebarDir({
               href={normalizeUrl(link)}
               hover
               className={classNames(
-                isExtra && 'flex justify-between items-center',
+                isDirLinkSidebar && 'flex justify-between items-center',
               )}
             >
-              {isExtra ? <h2 className="font-700">{text}</h2> : <p>{text}</p>}
-              {isExtra && (
+              {isDirLinkSidebar ? (
+                <h2 className="font-700">{text}</h2>
+              ) : (
+                <p>{text}</p>
+              )}
+              {isDirLinkSidebar && (
                 <div className="i-carbon-down-to-bottom w-16px h-16px rotate-270"></div>
               )}
             </Link>
@@ -126,7 +149,8 @@ function SidebarDir({
               <SidebarItem
                 key={item.text}
                 data={item}
-                location={location}
+                pathname={pathname}
+                search={search}
               ></SidebarItem>
             ))}
           </div>
@@ -138,15 +162,16 @@ function SidebarDir({
 
 function SidebarItem({
   data,
-  location,
+  pathname,
+  search,
 }: {
   data: SidebarItemType
-  location: Location
+  pathname?: string
+  search?: string
 }) {
   const { text, link } = data
   const active =
-    normalizeUrl(link ?? '') ===
-    normalizeUrl(decodeURI(location.pathname + location.search))
+    normalizeUrl(link ?? '') === normalizeUrl(decodeURI(`${pathname}${search}`))
 
   return (
     <div className="ml-20px">

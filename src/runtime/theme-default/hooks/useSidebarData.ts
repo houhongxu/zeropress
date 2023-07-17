@@ -11,33 +11,41 @@ import { useSidebarHMR } from './useSidebarHMR'
 
 export function useSidebarData() {
   const { pathname } = useLocation()
-  const nav = pathname.split('/')[1]
-
+  const curNav = pathname.split('/')[1]
   const { routes, sidebarTitles, title } = usePageData()
+  const curSidebarTitles = sidebarTitles?.slice(1)
 
   const titleIndexs: number[] = []
-  const paths = routes
-    .map((route) => route.path)
-    .map((path, index) =>
-      path.endsWith('/')
-        ? path.slice(0, -1) + '>' + sidebarTitles?.[index]?.replace('/', '<')
-        : path,
-    ) // 标记跳转的文件夹
-    .filter((path, index) =>
-      RegExp(`^(/${nav}/).+`).test(path)
-        ? titleIndexs.push(index) && true
-        : false,
-    )
 
+  const paths = routes.map((route) => route.path).filter((path) => path !== '/')
+
+  // 跳转文件夹的链接本身进行标记处理，并携带上链接
+  const dirLinkPaths = paths.map((path, index) =>
+    path.endsWith('/')
+      ? path.slice(0, -1) + '>' + curSidebarTitles?.[index]?.replace('/', '<')
+      : path,
+  )
+
+  // 筛选当前导航栏的路径，并收集标题索引
+  const curPaths = dirLinkPaths.filter((path, index) =>
+    RegExp(`^(/${curNav}/).+`).test(path)
+      ? titleIndexs.push(index) && true
+      : false,
+  )
+
+  // 根据收集的索引为当前路径获取初始标题
   const initSidebarTitles =
-    sidebarTitles?.filter((_, index) => titleIndexs.includes(index)) ?? []
+    curSidebarTitles?.filter((_, index) => titleIndexs.includes(index)) ?? []
 
+  // 根据初始标题获取支持hmr的标题
   const titles = useSidebarHMR(initSidebarTitles, title)
 
+  // 将路径转换为标题的工具函数
   const path2Title = (path: string) =>
-    titles[paths.findIndex((item) => item === path)]
+    titles[curPaths.findIndex((item) => item === path)]
 
-  const sidebarData = paths2tree(paths, path2Title, nav).items
+  // 将路径转换为可给侧边栏消费的树结构
+  const sidebarData = paths2tree(curPaths, path2Title, curNav).items ?? []
 
   return { data: sidebarData }
 }
@@ -47,9 +55,9 @@ export function useSidebarData() {
 function paths2tree(
   paths: string[],
   path2Title: (path: string) => string | undefined,
-  nav: string,
+  curNav: string,
 ): SidebarItem {
-  const tree: SidebarItem = { text: nav, items: [] }
+  const tree: SidebarItem = { text: curNav, items: [] }
 
   const getNumber = (str: string) =>
     parseInt(str.split(' ')[0].replace(/[^\d]/g, ''))
@@ -80,7 +88,9 @@ function paths2tree(
 
         tree.items?.push({
           text: normalizeTitle(names[depth].split('>')[0]),
-          link: `/${names[depth].replace('>', '/').replace('<', '/')}?${nav}`,
+          link: `/${names[depth]
+            .replace('>', '/')
+            .replace('<', '/')}?${curNav}`,
         })
       }
 

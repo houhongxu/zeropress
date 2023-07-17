@@ -6,7 +6,6 @@ export default defineConfig({
     nav: {
       title: 'xxx',
       items: [
-        { text: '主页', link: '/' },
         { text: '文档', link: '/docs/1test/1md' },
         { text: '博客', link: '/blog/2022' },
       ],

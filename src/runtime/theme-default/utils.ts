@@ -35,6 +35,10 @@ export function normalizeUrl(url?: string) {
 
   let suffix = '.html'
 
+  if (url.includes(suffix)) {
+    return encodeURI(url)
+  }
+
   if (url.endsWith('/')) {
     suffix = 'index' + suffix
   }
@@ -42,6 +46,7 @@ export function normalizeUrl(url?: string) {
   // 兼容查询参数
   if (url.includes('?')) {
     const [pureUrl, search] = url.split('?')
+
     prodUrl = addLeadingSlash(`${encodeURI(pureUrl)}${suffix}?${search}`)
   } else {
     prodUrl = addLeadingSlash(`${encodeURI(url)}${suffix}`)

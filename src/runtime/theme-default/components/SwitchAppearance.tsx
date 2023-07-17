@@ -7,6 +7,7 @@ import { useAppearance } from '../hooks/useAppearance'
 
 export function SwitchAppearance({}: PropsWithIsland) {
   const { toggle } = useAppearance()
+
   return (
     <Switch onClick={toggle}>
       <div className="i-carbon-sun"></div>
