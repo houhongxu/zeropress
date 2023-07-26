@@ -14,6 +14,7 @@ interface SidebarProps {
 }
 
 export function Sidebar({ nav, sidebarData }: SidebarProps & PropsWithIsland) {
+  // 文件夹链接需要根据pathname更新侧边栏高亮状态
   const [pathname, setPathname] = useState<string>()
   const [search, setSearch] = useState<string>()
 
@@ -26,8 +27,8 @@ export function Sidebar({ nav, sidebarData }: SidebarProps & PropsWithIsland) {
 
   // 获取配置导航栏
   const { items } = nav ?? {}
-  // 获取当前导航文件夹名
-  const curDir = pathname?.split('/')[1]
+  // 获取当前导航文件夹名，兼容汉字
+  const curDir = decodeURI(pathname?.split('/')[1] ?? '')
 
   // 是否是配置的导航
   const isNav = items?.some((item) => item.link.startsWith('/' + curDir))
@@ -63,7 +64,7 @@ export function Sidebar({ nav, sidebarData }: SidebarProps & PropsWithIsland) {
             hover
             className="flex justify-between items-center"
           >
-            <h2 className="mt-12px font-700">{normalizeTitle(curDir ?? '')}</h2>
+            <h2 className="mt-12px font-700">{normalizeTitle(curDir)}</h2>
             <div className="i-carbon-down-to-bottom mt-12px w-16px h-16px rotate-180"></div>
           </Link>
         )}

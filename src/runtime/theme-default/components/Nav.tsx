@@ -11,6 +11,7 @@ import { SwitchAppearance } from './SwitchAppearance'
 export function Nav({ nav }: { nav: ThemeConfig['nav'] } & PropsWithIsland) {
   const { title, items } = nav ?? {}
 
+  // 文件夹链接需要根据pathname更新nav高亮状态
   const [pathname, setPathname] = useState<string>()
   const [search, setSearch] = useState<string>()
 
