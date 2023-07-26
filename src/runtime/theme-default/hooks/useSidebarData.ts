@@ -96,21 +96,30 @@ function paths2tree(
   const splitPath = (str: string) => str.split('/').filter((i) => !!i)
 
   // 获取排序依据的数字的方法
-  const getSortNumber = (str: string) =>
-    parseInt(
-      splitPath(str).reduce((p, c) => {
-        const curNum = c.match(/\d+/)?.[0] || '0'
+  const getSortNumbers = (str: string) =>
+    splitPath(str).reduce((p, c) => {
+      const curNum = parseInt(c.match(/\d+/)?.[0] || '0')
 
-        return p + curNum
-      }, ''),
-    )
+      return [...p, curNum]
+    }, [] as number[])
 
   // 获取排序的路径
-  const sortedPaths = [...paths].sort(
-    (a, b) => getSortNumber(a) - getSortNumber(b),
-  )
+  const sortedPaths = [...paths].sort((a, b) => {
+    const aNums = getSortNumbers(a)
+    const bNums = getSortNumbers(b)
 
-  devLog('排序的路径：', sortedPaths, sortedPaths.map(getSortNumber))
+    for (let i = 0; i < aNums.length; ) {
+      if (aNums[i] !== bNums[i]) {
+        return aNums[i] - bNums[i]
+      } else {
+        i++
+      }
+    }
+
+    return 0
+  })
+
+  devLog('排序的路径：', sortedPaths, sortedPaths.map(getSortNumbers))
 
   // 获取分割的路径
   const splittedPaths = sortedPaths.map((path) => splitPath(path))
