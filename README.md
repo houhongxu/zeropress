@@ -119,8 +119,8 @@ TODO 可以通过传参自定义根文件夹
 - [ ] 支持侧边栏跳转文件夹链接 carbon:down-to-bottom
 - [ ] 更新 github 图标自定义链接
 - [ ] 上次更新时间
-- [ ] 侧边栏折叠 carbon:chevron-right
-      carbon:chevron-down
+- [ ] 侧边栏折叠
+- [ ] md 支持 tip 提示
 
 ## FIX
 
@@ -131,3 +131,4 @@ TODO 可以通过传参自定义根文件夹
 - [x] header anchor 应该精准定位
 - [ ] header anchor 定位有 bug，滚动后无法精准定位
 - [ ] 侧边栏点击后不应该跳转到头部->不应该跳转 html->使用 spa 模式->islandjs 也没解决
+- [ ] 文件夹链接内文件夹顺序不对

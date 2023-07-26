@@ -36,6 +36,9 @@ export class RouteService {
         ...SUPPORT_CONFIG_FILE,
       ],
     })
+
+    console.log('读取的文件：', files)
+
     files.forEach((file) => {
       // 生成相对路径
       const relativePath = path.relative(this.#scanDir, file)

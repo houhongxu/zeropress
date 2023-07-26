@@ -56,3 +56,9 @@ export function normalizeUrl(url?: string) {
 }
 
 export const normalizeTitle = (path: string) => path?.replace(/^(\d+)/, '')
+
+export function devLog(message?: any, ...optionalParams: any[]) {
+  if (isDevlopment()) {
+    console.log(message, ...optionalParams)
+  }
+}
