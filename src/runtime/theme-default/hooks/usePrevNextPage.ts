@@ -5,6 +5,7 @@ import { useSidebarData } from './useSidebarData'
 
 export function usePrevNextPage() {
   const { pathname } = useLocation()
+  const decodePathname = decodeURI(pathname)
   const { data } = useSidebarData()
 
   const flattendTitles: SidebarItem[] | undefined = data?.reduce(
@@ -14,8 +15,7 @@ export function usePrevNextPage() {
 
   const pageIndex =
     flattendTitles?.findIndex(
-      (item) =>
-        normalizeUrl(item.link ?? '') === normalizeUrl(decodeURI(pathname)),
+      (item) => normalizeUrl(item.link ?? '') === normalizeUrl(pathname),
     ) ?? -1
 
   const prevPage: SidebarItem | undefined = flattendTitles

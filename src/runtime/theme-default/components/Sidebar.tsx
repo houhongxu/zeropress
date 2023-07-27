@@ -28,8 +28,8 @@ export function Sidebar({ nav, sidebarData }: SidebarProps & PropsWithIsland) {
 
   // 获取配置导航栏
   const { items } = nav ?? {}
-  // 获取当前导航文件夹名，兼容汉字
-  const curDir = decodeURI(pathname?.split('/')[1] ?? '')
+  // 获取当前导航文件夹
+  const curDir = pathname?.split('/')[1] ?? ''
 
   // 是否是配置的导航
   const isNav = items?.some((item) => item.link.startsWith('/' + curDir))
@@ -99,7 +99,7 @@ function SidebarDir({
 }) {
   const { text, link, items } = data
   const active =
-    normalizeUrl(link ?? '') === normalizeUrl(decodeURI(`${pathname}${search}`))
+    normalizeUrl(link ?? '') === normalizeUrl(`${pathname}${search}`)
 
   const { items: navItems } = nav ?? {}
   const linkDir = normalizeTitle(link?.split('/')[1] ?? '')
@@ -173,7 +173,7 @@ function SidebarItem({
 }) {
   const { text, link } = data
   const active =
-    normalizeUrl(link ?? '') === normalizeUrl(decodeURI(`${pathname}${search}`))
+    normalizeUrl(link ?? '') === normalizeUrl(`${pathname}${search}`)
 
   return (
     <div className="ml-20px">

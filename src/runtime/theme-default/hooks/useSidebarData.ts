@@ -54,8 +54,7 @@ export function useSidebarData() {
 
   // 当前侧边栏链接
   const curPaths = dirLinkPaths.filter((path, index) =>
-    // 兼容汉字
-    RegExp(`^(/${decodeURI(curNav)}/).+`).test(path)
+    RegExp(`^(/${curNav}/).+`).test(path)
       ? titleIndexs.push(index) && true
       : false,
   )
