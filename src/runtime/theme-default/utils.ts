@@ -25,31 +25,35 @@ export function normalizeUrl(url?: string) {
     return '/'
   }
 
-  if (isDevlopment()) {
-    return hasChinese(url) ? encodeURI(url) : url
-  }
-
   if (url.startsWith('http')) {
     return url
   }
 
-  let suffix = '.html'
-
-  if (url.includes(suffix)) {
+  // 如果是开发环境，则主动编码
+  if (isDevlopment()) {
     return encodeURI(url)
   }
 
+  let suffix = '.html'
+
+  // 兼容文件夹下index
   if (url.endsWith('/')) {
     suffix = 'index' + suffix
   }
+
   let prodUrl = ''
+
+  const addSuffix = (url: string, suffix: string) =>
+    url.includes(suffix) ? url : url + suffix
+
   // 兼容查询参数
   if (url.includes('?')) {
     const [pureUrl, search] = url.split('?')
 
-    prodUrl = addLeadingSlash(`${encodeURI(pureUrl)}${suffix}?${search}`)
+    prodUrl =
+      addSuffix(addLeadingSlash(encodeURI(pureUrl)), suffix) + '?' + search
   } else {
-    prodUrl = addLeadingSlash(`${encodeURI(url)}${suffix}`)
+    prodUrl = addSuffix(addLeadingSlash(encodeURI(url)), suffix)
   }
 
   return prodUrl
