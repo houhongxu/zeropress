@@ -20,8 +20,9 @@ export function Sidebar({ nav, sidebarData }: SidebarProps & PropsWithIsland) {
 
   useEffect(() => {
     if (isBrowser() && typeof location !== 'undefined') {
-      setPathname(location.pathname)
-      setSearch(location.search)
+      // 支持中文
+      setPathname(decodeURI(location.pathname))
+      setSearch(decodeURI(location.search))
     }
   }, [])
 
