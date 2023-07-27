@@ -18,8 +18,9 @@ export function Nav({ nav }: { nav: ThemeConfig['nav'] } & PropsWithIsland) {
   // 更新阅读文件夹链接内文章时的nav状态
   useEffect(() => {
     if (isBrowser() && typeof location !== 'undefined') {
-      setPathname(location.pathname)
-      setSearch(location.search)
+      // 支持中文
+      setPathname(decodeURI(location.pathname))
+      setSearch(decodeURI(location.search))
     }
   }, [])
 
