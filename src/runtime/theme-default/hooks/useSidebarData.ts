@@ -30,7 +30,8 @@ export function isDirLink(name: string) {
  */
 export function useSidebarData() {
   const { pathname } = useLocation()
-  const curNav = pathname.split('/')[1]
+  const decodedPathname = decodeURI(pathname)
+  const curNav = decodedPathname.split('/')[1]
   const { routes, sidebarTitles, title } = usePageData()
 
   // 去除根路由的标题和路径
