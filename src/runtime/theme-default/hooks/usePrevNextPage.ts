@@ -15,7 +15,7 @@ export function usePrevNextPage() {
 
   const pageIndex =
     flattendTitles?.findIndex(
-      (item) => normalizeUrl(item.link ?? '') === normalizeUrl(pathname),
+      (item) => normalizeUrl(item.link ?? '') === normalizeUrl(decodePathname),
     ) ?? -1
 
   const prevPage: SidebarItem | undefined = flattendTitles
