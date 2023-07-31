@@ -2,6 +2,7 @@
   "name": "hhxpress",
   "version": "0.1.49",
   "description": "hhxpress SSG framework based on islands arch",
+  "homepage": "https://hhxpress-site.vercel.app/",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
