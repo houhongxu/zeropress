@@ -1,6 +1,6 @@
 {
   "name": "hhxpress",
-  "version": "0.1.50",
+  "version": "0.1.51",
   "description": "hhxpress SSG framework based on islands arch",
   "homepage": "https://hhxpress-docs.vercel.app",
   "main": "dist/index.js",
