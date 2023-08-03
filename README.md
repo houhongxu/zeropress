@@ -1,4 +1,4 @@
-# Hhxpress 静态页面生成框架
+# Hhxpress SSG 框架
 
 - 🚀 基于 Vite 构建，极速的服务，极速的热更新，极速的构建
 - 📝 基于 MDX2 生产内容，Javascritp & React & MD 的组合极其强大
