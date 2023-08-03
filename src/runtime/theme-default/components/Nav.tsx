@@ -28,7 +28,7 @@ export function Nav({ nav }: { nav: ThemeConfig['nav'] } & PropsWithIsland) {
     <header className="w-full z-10 fixed top-0 left-0">
       <div className="flex items-center justify-between px-32px h-nav divider-bottom bg-bg-default">
         <a
-          href="https://github.com/903040380/hhxpress"
+          href="/"
           className="flex items-center w-full h-full font-600 transition-opacity duration-250"
           un-hover="opacity-60"
         >
