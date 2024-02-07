@@ -1,0 +1,36 @@
+{
+  "name": "easypress",
+  "version": "0.0.1",
+  "description": "easier SSG framework",
+  "scripts": {
+    "build": "tsup ./src/node/cli.ts ./src/runtime/client/client-entry.tsx ./src/runtime/server/server-entry.tsx --format cjs --outDir=./lib",
+    "dev": "cross-env NODE_ENV=development pnpm build --watch",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "bin": "./bin/easypress.js",
+  "files": [
+    "./lib",
+    "./bin"
+  ],
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "commander": "^11.1.0",
+    "fs-extra": "^11.2.0",
+    "vite": "^5.0.8"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "cross-env": "^7.0.3",
+    "tsup": "^8.0.1"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0 <19.0.0",
+    "react-dom": ">=18.0.0 <19.0.0"
+  }
+}
