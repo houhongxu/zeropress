@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "easier SSG framework",
   "scripts": {
-    "build": "tsup ./src/node/cli.ts ./src/runtime/client/client-entry.tsx ./src/runtime/server/server-entry.tsx --format cjs --outDir=./lib",
+    "build:comment": "echo 多入口打包，tsup不打包node_modules，--shims兼容esm与cjs的全局变量如__dirname，--no-splitting兼容shims让shims不分割为chunk影响路径",
+    "build": "tsup ./src/node/cli.ts ./src/runtime/client/client-entry.tsx ./src/runtime/server/server-entry.tsx --shims --no-splitting --format cjs,esm  --outDir=./lib",
     "dev": "cross-env NODE_ENV=development pnpm build --watch",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
@@ -22,11 +23,11 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "cross-env": "^7.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "tsup": "^8.0.1"
   },
   "peerDependencies": {

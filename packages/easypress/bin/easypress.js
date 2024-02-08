@@ -1,3 +1,7 @@
 #!/usr/bin/env node
 
-require('../lib/node/cli.js')
+// esm
+import('../lib/node/cli.mjs')
+
+// cjs vite即将弃用该api
+// require('../lib/node/cli.js')

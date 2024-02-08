@@ -1,4 +1,3 @@
-// vite-plugin-html-template等库仅为vite的web应用设计，所以不能复用
 import fse from 'fs-extra'
 import { Plugin } from 'vite'
 
@@ -25,17 +24,17 @@ export function vitePluginServeHtml({
           }
 
           try {
-            const html = await fse.readFile(templatePath, 'utf-8')
+            const template = await fse.readFile(templatePath, 'utf-8')
 
             // 使用vite转换html来获取vite的支持
             const viteHtml = await server.transformIndexHtml?.(
               req.url,
-              html,
+              template,
               req.originalUrl,
             )
 
             // 添加客户端js入口
-            const finalHtml = viteHtml.replace(
+            const html = viteHtml.replace(
               '</body>',
               `
               <script type="module" src="${entry}"></script>
@@ -46,7 +45,7 @@ export function vitePluginServeHtml({
 
             res.statusCode = 200
             res.setHeader('Content-Type', 'text/html')
-            res.end(finalHtml)
+            res.end(html)
           } catch (e) {
             console.error(e)
 

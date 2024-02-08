@@ -50,7 +50,7 @@ var import_server = require("react-dom/server");
 var import_jsx_runtime3 = require("react/jsx-runtime");
 function render() {
   const html = (0, import_server.renderToString)(/* @__PURE__ */ (0, import_jsx_runtime3.jsx)(App, {}));
-  return { html };
+  return html;
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {

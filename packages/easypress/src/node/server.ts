@@ -1,9 +1,10 @@
-import { CLIENT_ENTRY_PATH, HTML_PATH } from './constants'
+import { CLIENT_ENTRY_PATH, HTML_PATH } from './consts'
 import { vitePluginServeHtml } from './plugins'
 import pluginReact from '@vitejs/plugin-react'
 
+// 因为是ssg所以dev使用传统的服务模式
 export async function createRuntimeDevServer({ root = process.cwd() }) {
-  // vite启用cjs api 所以使用await import导入esm api https://cn.vitejs.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated
+  // vite弃用cjs api 所以使用await import导入esm api，这样打包为esm和cjs都可以正常调用，为舍弃cjs只留esm做准备 https://cn.vitejs.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated
   const { createServer } = await import('vite')
 
   return createServer({

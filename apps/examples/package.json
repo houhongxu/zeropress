@@ -3,7 +3,8 @@
   "description": "",
   "scripts": {
     "dev": "easypress",
-    "build": "easypress build"
+    "build": "easypress build",
+    "serve": "npm run build && serve ./client"
   },
   "keywords": [],
   "author": "",
@@ -13,8 +14,9 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "easypress": "workspace:*",
     "@types/react": "^18.2.43",
-    "@types/react-dom": "^18.2.17"
+    "@types/react-dom": "^18.2.17",
+    "easypress": "workspace:*",
+    "serve": "^14.2.1"
   }
 }

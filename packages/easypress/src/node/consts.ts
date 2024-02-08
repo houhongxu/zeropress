@@ -16,6 +16,7 @@ export const CLIENT_ENTRY_PATH = path.join(
 
 export const SERVER_ENTRY_PATH = path.join(
   RUNTIME_PATH,
-  './client/server-entry.tsx',
+  './server/server-entry.tsx',
 )
+
 export const HTML_PATH = path.join(ROOT_PATH, './index.html')
