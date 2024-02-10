@@ -5,6 +5,7 @@ interface VitePluginServeHtmlOptions {
   templatePath: string
   entry: string
 }
+
 export function vitePluginServeHtml({
   templatePath,
   entry,

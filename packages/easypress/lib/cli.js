@@ -7,7 +7,7 @@ var __dirname = /* @__PURE__ */ getDirname();
 
 // src/node/consts.ts
 import path2 from "path";
-var ROOT_PATH = path2.join(__dirname, "..", "..");
+var ROOT_PATH = path2.join(__dirname, "..");
 var SRC_PATH = path2.join(ROOT_PATH, "./src");
 var RUNTIME_PATH = path2.join(SRC_PATH, "./runtime");
 var CLIENT_ENTRY_PATH = path2.join(
@@ -19,6 +19,7 @@ var SERVER_ENTRY_PATH = path2.join(
   "./server/server-entry.tsx"
 );
 var HTML_PATH = path2.join(ROOT_PATH, "./index.html");
+var CONFIG_OPTIONS = ["easypress.config.ts", "easypress.config.js"];
 
 // src/node/build.ts
 import fse from "fs-extra";
@@ -65,8 +66,58 @@ async function renderHtml({ root = process.cwd() }) {
   await fse.remove(path3.join(root, "server"));
 }
 
-// src/node/plugins/vitePluginServeHtml.ts
+// src/node/config.ts
 import fse2 from "fs-extra";
+import path4 from "path";
+import { loadConfigFromFile } from "vite";
+async function resolveSiteConfig({
+  root = process.cwd(),
+  command,
+  mode
+}) {
+  const { userConfigPath, userConfig } = await resolveUserConfig({
+    root,
+    mode,
+    command
+  });
+  const valuableUserConfig = {
+    title: userConfig?.title || "EASYPRESS",
+    description: userConfig?.description || "SSG Framework",
+    themeConfig: userConfig?.themeConfig ?? {},
+    vite: userConfig?.vite ?? {}
+  };
+  const siteConfig = {
+    root,
+    userConfigPath,
+    userConfig: valuableUserConfig
+  };
+  return siteConfig;
+}
+async function resolveUserConfig({
+  root = process.cwd(),
+  command,
+  mode
+}) {
+  const userConfigPath = getuserConfigPath({ root });
+  const loadResult = await loadConfigFromFile(
+    { command, mode },
+    userConfigPath,
+    root
+  );
+  return {
+    userConfigPath: loadResult?.path,
+    userConfig: loadResult?.config
+  };
+}
+function getuserConfigPath({ root = process.cwd() }) {
+  const userConfigPath = CONFIG_OPTIONS.map(
+    (option) => path4.join(root, option)
+  ).find((path6) => fse2.existsSync(path6));
+  return userConfigPath;
+}
+
+// src/node/plugins/vitePluginServeHtml.ts
+import fse3 from "fs-extra";
 function vitePluginServeHtml({
   templatePath,
   entry
@@ -81,7 +132,7 @@ function vitePluginServeHtml({
             return next();
           }
           try {
-            const template = await fse2.readFile(templatePath, "utf-8");
+            const template = await fse3.readFile(templatePath, "utf-8");
             const viteHtml = await server.transformIndexHtml?.(
               req.url,
               template,
@@ -109,10 +160,47 @@ function vitePluginServeHtml({
   };
 }
 
+// src/node/plugins/vitePluginVirtualConfig.ts
+function vitePluginVirtualConfig({
+  siteConfig,
+  restartRuntimeDevServer
+}) {
+  const virtualModuleId = "virtual:config";
+  const resolvedVirtualModuleId = "\0" + virtualModuleId;
+  return {
+    name: "vitePluginVirtualConfig",
+    resolveId(id) {
+      if (id === virtualModuleId) {
+        return resolvedVirtualModuleId;
+      }
+    },
+    load(id) {
+      if (id === resolvedVirtualModuleId) {
+        return `export default ${JSON.stringify(siteConfig.userConfig)}`;
+      }
+    },
+    async handleHotUpdate(ctx) {
+      const configPath = siteConfig.userConfigPath || "";
+      if (ctx.file.includes(configPath)) {
+        console.log("\u76D1\u542C\u5230\u914D\u7F6E\u6587\u4EF6\u66F4\u65B0\uFF0C\u91CD\u542F\u670D\u52A1\u4E2D...");
+        await restartRuntimeDevServer();
+      }
+    }
+  };
+}
+
 // src/node/server.ts
 import pluginReact from "@vitejs/plugin-react";
-async function createRuntimeDevServer({ root = process.cwd() }) {
-  const { createServer } = await import("vite");
+import { createServer } from "vite";
+async function createRuntimeDevServer({
+  root = process.cwd(),
+  restartRuntimeDevServer
+}) {
+  const siteConfig = await resolveSiteConfig({
+    root,
+    mode: "development",
+    command: "serve"
+  });
   return createServer({
     root,
     server: {
@@ -125,27 +213,37 @@ async function createRuntimeDevServer({ root = process.cwd() }) {
         templatePath: HTML_PATH,
         // /@fs/是针对root之外的，当作为npm包时在nodemodules中属于root内，不需要使用 https://cn.vitejs.dev/config/server-options.html#server-fs-allow
         entry: CLIENT_ENTRY_PATH
-      })
+      }),
+      vitePluginVirtualConfig({ siteConfig, restartRuntimeDevServer })
     ]
   });
 }
 
 // src/node/cli.ts
 import { program } from "commander";
-import fse3 from "fs-extra";
-import path4 from "path";
+import fse4 from "fs-extra";
+import path5 from "path";
 var cli = program;
-var { version } = fse3.readJSONSync(path4.join(ROOT_PATH, "./package.json"));
+var { version } = fse4.readJSONSync(path5.join(ROOT_PATH, "./package.json"));
 cli.name("easypress").version(version);
 cli.command("dev", { isDefault: true }).argument("[root]", "dev server root dir", process.cwd()).description("dev server").option("-p,--port <value>", "dev server port").action(async (root, { port }) => {
-  const absRoot = path4.resolve(root);
-  const server = await createRuntimeDevServer({ root: absRoot });
-  await server.listen(port);
-  server.printUrls();
+  const absRoot = path5.resolve(root);
+  const createServer2 = async () => {
+    const server = await createRuntimeDevServer({
+      root: absRoot,
+      restartRuntimeDevServer: async () => {
+        await server.close();
+        await createServer2();
+      }
+    });
+    await server.listen(port);
+    server.printUrls();
+  };
+  await createServer2();
 });
 cli.command("build").argument("[root]", "build root dir", process.cwd()).description("build").action(async (root) => {
   try {
-    const absRoot = path4.resolve(root);
+    const absRoot = path5.resolve(root);
     await buildRuntime({ root: absRoot });
   } catch (e) {
     console.log(e);

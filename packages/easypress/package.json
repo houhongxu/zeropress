@@ -3,13 +3,15 @@
   "version": "0.0.1",
   "description": "easier SSG framework",
   "scripts": {
-    "build:comment": "echo 多入口打包，tsup不打包node_modules，--shims兼容esm与cjs的全局变量如__dirname，--no-splitting兼容shims让shims不分割为chunk影响路径",
-    "build": "tsup ./src/node/cli.ts ./src/runtime/client/client-entry.tsx ./src/runtime/server/server-entry.tsx --shims --no-splitting --format cjs,esm  --outDir=./lib",
-    "dev": "cross-env NODE_ENV=development pnpm build --watch",
+    "build:comment": "echo 多入口打包，tsup不打包node_modules，--shims兼容esm与cjs的全局变量如__dirname，--no-splitting兼容shims，让shims不分割为chunk影响__dirname等路径，npm run build --watch无法接受watch参数，pnpm又固定了包管理器，所以复制build命令到dev",
+    "build": "tsup ./src/node/cli.ts ./src/node/index.ts --shims --no-splitting --format cjs,esm --dts  --outDir=./lib",
+    "dev": "cross-env NODE_ENV=development tsup ./src/node/cli.ts ./src/node/index.ts --shims --no-splitting --format cjs,esm --dts  --outDir=./lib --watch",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "type": "module",
+  "main": "./lib/index.cjs",
+  "module": "./lib/index.js",
+  "types": "./lib/index.d.cts",
   "bin": "./bin/easypress.js",
   "files": [
     "./lib",

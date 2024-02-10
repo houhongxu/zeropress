@@ -21,11 +21,22 @@ cli
   .action(async (root, { port }) => {
     const absRoot = path.resolve(root)
 
-    const server = await createRuntimeDevServer({ root: absRoot })
+    const createServer = async () => {
+      const server = await createRuntimeDevServer({
+        root: absRoot,
+        restartRuntimeDevServer: async () => {
+          await server.close()
 
-    await server.listen(port)
+          await createServer()
+        },
+      })
 
-    server.printUrls()
+      await server.listen(port)
+
+      server.printUrls()
+    }
+
+    await createServer()
   })
 
 cli
