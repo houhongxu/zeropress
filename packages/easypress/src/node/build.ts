@@ -1,12 +1,22 @@
+import { EasypressSiteConfig } from '../shared/types'
 import { CLIENT_ENTRY_PATH, HTML_PATH, SERVER_ENTRY_PATH } from './consts'
+import { createPlugins } from './createPlugins'
 import fse from 'fs-extra'
 import path from 'path'
 import { build } from 'vite'
 
-export async function buildRuntime({ root = process.cwd() }) {
+export async function buildRuntime({
+  root = process.cwd(),
+  siteConfig,
+}: {
+  root?: string
+  siteConfig: EasypressSiteConfig
+}) {
   // 分为运行时的client构建水合的js与server构建渲染html的js
-
-  await Promise.all([viteBuild({ root }), viteBuild({ root, isServer: true })])
+  await Promise.all([
+    viteBuild({ root, siteConfig }),
+    viteBuild({ root, siteConfig, isServer: true }),
+  ])
 
   // 渲染html
   await renderHtml({ root })
@@ -15,10 +25,19 @@ export async function buildRuntime({ root = process.cwd() }) {
 /**
  * vite构建
  */
-function viteBuild({ root = process.cwd(), isServer = false }) {
+function viteBuild({
+  root = process.cwd(),
+  isServer = false,
+  siteConfig,
+}: {
+  root?: string
+  isServer?: boolean
+  siteConfig: EasypressSiteConfig
+}) {
   return build({
     mode: 'production',
     root,
+    plugins: createPlugins({ siteConfig }),
     build: {
       ssr: isServer,
       outDir: isServer ? 'server' : 'client',
@@ -59,5 +78,4 @@ async function renderHtml({ root = process.cwd() }) {
 
   await fse.ensureDir(path.join(root, 'client'))
   await fse.writeFile(path.join(root, 'client/index.html'), html)
-  await fse.remove(path.join(root, 'server'))
 }

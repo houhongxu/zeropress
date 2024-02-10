@@ -3,7 +3,7 @@ import { Plugin } from 'vite'
 
 interface vitePluginVirtualConfigOptions {
   siteConfig: EasypressSiteConfig
-  restartRuntimeDevServer: () => Promise<void>
+  restartRuntimeDevServer?: () => Promise<void>
 }
 
 // 虚拟模块将node层数据传递给client层
@@ -30,9 +30,11 @@ export function vitePluginVirtualConfig({
     async handleHotUpdate(ctx) {
       const configPath = siteConfig.userConfigPath || ''
       if (ctx.file.includes(configPath)) {
-        console.log('监听到配置文件更新，重启服务中...')
+        if (restartRuntimeDevServer) {
+          console.log('监听到配置文件更新，重启服务中...')
 
-        await restartRuntimeDevServer()
+          await restartRuntimeDevServer()
+        }
       }
     },
   }

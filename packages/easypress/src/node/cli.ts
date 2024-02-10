@@ -1,4 +1,5 @@
 import { buildRuntime } from './build'
+import { resolveSiteConfig } from './config'
 import { ROOT_PATH } from './consts'
 import { createRuntimeDevServer } from './server'
 import { program } from 'commander'
@@ -22,8 +23,16 @@ cli
     const absRoot = path.resolve(root)
 
     const createServer = async () => {
+      // 每次开启服务都要先读取配置文件
+      const siteConfig = await resolveSiteConfig({
+        root,
+        mode: 'development',
+        command: 'serve',
+      })
+
       const server = await createRuntimeDevServer({
         root: absRoot,
+        siteConfig,
         restartRuntimeDevServer: async () => {
           await server.close()
 
@@ -47,7 +56,13 @@ cli
     try {
       const absRoot = path.resolve(root)
 
-      await buildRuntime({ root: absRoot })
+      const siteConfig = await resolveSiteConfig({
+        root,
+        mode: 'production',
+        command: 'build',
+      })
+
+      await buildRuntime({ root: absRoot, siteConfig })
     } catch (e) {
       console.log(e)
     }

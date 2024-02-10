@@ -50,103 +50,8 @@ var SERVER_ENTRY_PATH = import_path.default.join(
 var HTML_PATH = import_path.default.join(ROOT_PATH, "./index.html");
 var CONFIG_OPTIONS = ["easypress.config.ts", "easypress.config.js"];
 
-// src/node/build.ts
-var import_fs_extra = __toESM(require("fs-extra"), 1);
-var import_path2 = __toESM(require("path"), 1);
-var import_vite = require("vite");
-async function buildRuntime({ root = process.cwd() }) {
-  await Promise.all([viteBuild({ root }), viteBuild({ root, isServer: true })]);
-  await renderHtml({ root });
-}
-function viteBuild({ root = process.cwd(), isServer = false }) {
-  return (0, import_vite.build)({
-    mode: "production",
-    root,
-    build: {
-      ssr: isServer,
-      outDir: isServer ? "server" : "client",
-      rollupOptions: {
-        input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
-        output: {
-          entryFileNames: isServer ? "server-entry.js" : "client-entry.js",
-          format: isServer ? "cjs" : "es"
-        }
-      }
-    }
-  });
-}
-async function renderHtml({ root = process.cwd() }) {
-  const serverEntryPath = import_path2.default.join(root, "./server", "./server-entry.js");
-  const clientEntryPath = "./client-entry.js";
-  const { render } = await import(serverEntryPath);
-  const rendered = render();
-  const template = await import_fs_extra.default.readFile(HTML_PATH, "utf-8");
-  const html = template.replace("<!--app-html-->", rendered).replace(
-    "</body>",
-    `
-    <script type="module" src="${clientEntryPath}"></script>
-    
-
-    </body>
-    `
-  );
-  await import_fs_extra.default.ensureDir(import_path2.default.join(root, "client"));
-  await import_fs_extra.default.writeFile(import_path2.default.join(root, "client/index.html"), html);
-  await import_fs_extra.default.remove(import_path2.default.join(root, "server"));
-}
-
-// src/node/config.ts
-var import_fs_extra2 = __toESM(require("fs-extra"), 1);
-var import_path3 = __toESM(require("path"), 1);
-var import_vite2 = require("vite");
-async function resolveSiteConfig({
-  root = process.cwd(),
-  command,
-  mode
-}) {
-  const { userConfigPath, userConfig } = await resolveUserConfig({
-    root,
-    mode,
-    command
-  });
-  const valuableUserConfig = {
-    title: userConfig?.title || "EASYPRESS",
-    description: userConfig?.description || "SSG Framework",
-    themeConfig: userConfig?.themeConfig ?? {},
-    vite: userConfig?.vite ?? {}
-  };
-  const siteConfig = {
-    root,
-    userConfigPath,
-    userConfig: valuableUserConfig
-  };
-  return siteConfig;
-}
-async function resolveUserConfig({
-  root = process.cwd(),
-  command,
-  mode
-}) {
-  const userConfigPath = getuserConfigPath({ root });
-  const loadResult = await (0, import_vite2.loadConfigFromFile)(
-    { command, mode },
-    userConfigPath,
-    root
-  );
-  return {
-    userConfigPath: loadResult?.path,
-    userConfig: loadResult?.config
-  };
-}
-function getuserConfigPath({ root = process.cwd() }) {
-  const userConfigPath = CONFIG_OPTIONS.map(
-    (option) => import_path3.default.join(root, option)
-  ).find((path5) => import_fs_extra2.default.existsSync(path5));
-  return userConfigPath;
-}
-
 // src/node/plugins/vitePluginServeHtml.ts
-var import_fs_extra3 = __toESM(require("fs-extra"), 1);
+var import_fs_extra = __toESM(require("fs-extra"), 1);
 function vitePluginServeHtml({
   templatePath,
   entry
@@ -161,7 +66,7 @@ function vitePluginServeHtml({
             return next();
           }
           try {
-            const template = await import_fs_extra3.default.readFile(templatePath, "utf-8");
+            const template = await import_fs_extra.default.readFile(templatePath, "utf-8");
             const viteHtml = await server.transformIndexHtml?.(
               req.url,
               template,
@@ -211,40 +116,151 @@ function vitePluginVirtualConfig({
     async handleHotUpdate(ctx) {
       const configPath = siteConfig.userConfigPath || "";
       if (ctx.file.includes(configPath)) {
-        console.log("\u76D1\u542C\u5230\u914D\u7F6E\u6587\u4EF6\u66F4\u65B0\uFF0C\u91CD\u542F\u670D\u52A1\u4E2D...");
-        await restartRuntimeDevServer();
+        if (restartRuntimeDevServer) {
+          console.log("\u76D1\u542C\u5230\u914D\u7F6E\u6587\u4EF6\u66F4\u65B0\uFF0C\u91CD\u542F\u670D\u52A1\u4E2D...");
+          await restartRuntimeDevServer();
+        }
       }
     }
   };
 }
 
-// src/node/server.ts
+// src/node/createPlugins.ts
 var import_plugin_react = __toESM(require("@vitejs/plugin-react"), 1);
+function createPlugins({
+  siteConfig,
+  restartRuntimeDevServer
+}) {
+  return [
+    (0, import_plugin_react.default)(),
+    vitePluginServeHtml({
+      templatePath: HTML_PATH,
+      // /@fs/是针对root之外的，当作为npm包时在nodemodules中属于root内，不需要使用 https://cn.vitejs.dev/config/server-options.html#server-fs-allow
+      entry: CLIENT_ENTRY_PATH
+    }),
+    vitePluginVirtualConfig({ siteConfig, restartRuntimeDevServer })
+  ];
+}
+
+// src/node/build.ts
+var import_fs_extra2 = __toESM(require("fs-extra"), 1);
+var import_path2 = __toESM(require("path"), 1);
+var import_vite = require("vite");
+async function buildRuntime({
+  root = process.cwd(),
+  siteConfig
+}) {
+  await Promise.all([
+    viteBuild({ root, siteConfig }),
+    viteBuild({ root, siteConfig, isServer: true })
+  ]);
+  await renderHtml({ root });
+}
+function viteBuild({
+  root = process.cwd(),
+  isServer = false,
+  siteConfig
+}) {
+  return (0, import_vite.build)({
+    mode: "production",
+    root,
+    plugins: createPlugins({ siteConfig }),
+    build: {
+      ssr: isServer,
+      outDir: isServer ? "server" : "client",
+      rollupOptions: {
+        input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
+        output: {
+          entryFileNames: isServer ? "server-entry.js" : "client-entry.js",
+          format: isServer ? "cjs" : "es"
+        }
+      }
+    }
+  });
+}
+async function renderHtml({ root = process.cwd() }) {
+  const serverEntryPath = import_path2.default.join(root, "./server", "./server-entry.js");
+  const clientEntryPath = "./client-entry.js";
+  const { render } = await import(serverEntryPath);
+  const rendered = render();
+  const template = await import_fs_extra2.default.readFile(HTML_PATH, "utf-8");
+  const html = template.replace("<!--app-html-->", rendered).replace(
+    "</body>",
+    `
+    <script type="module" src="${clientEntryPath}"></script>
+    
+
+    </body>
+    `
+  );
+  await import_fs_extra2.default.ensureDir(import_path2.default.join(root, "client"));
+  await import_fs_extra2.default.writeFile(import_path2.default.join(root, "client/index.html"), html);
+}
+
+// src/node/config.ts
+var import_fs_extra3 = __toESM(require("fs-extra"), 1);
+var import_path3 = __toESM(require("path"), 1);
+var import_vite2 = require("vite");
+async function resolveSiteConfig({
+  root = process.cwd(),
+  command,
+  mode
+}) {
+  const { userConfigPath, userConfig } = await resolveUserConfig({
+    root,
+    mode,
+    command
+  });
+  const valuableUserConfig = {
+    title: userConfig?.title || "EASYPRESS",
+    description: userConfig?.description || "SSG Framework",
+    themeConfig: userConfig?.themeConfig ?? {},
+    vite: userConfig?.vite ?? {}
+  };
+  const siteConfig = {
+    root,
+    userConfigPath,
+    userConfig: valuableUserConfig
+  };
+  return siteConfig;
+}
+async function resolveUserConfig({
+  root = process.cwd(),
+  command,
+  mode
+}) {
+  const userConfigPath = getuserConfigPath({ root });
+  const loadResult = await (0, import_vite2.loadConfigFromFile)(
+    { command, mode },
+    userConfigPath,
+    root
+  );
+  return {
+    userConfigPath: loadResult?.path,
+    userConfig: loadResult?.config
+  };
+}
+function getuserConfigPath({ root = process.cwd() }) {
+  const userConfigPath = CONFIG_OPTIONS.map(
+    (option) => import_path3.default.join(root, option)
+  ).find((path5) => import_fs_extra3.default.existsSync(path5));
+  return userConfigPath;
+}
+
+// src/node/server.ts
 var import_vite3 = require("vite");
 async function createRuntimeDevServer({
   root = process.cwd(),
+  siteConfig,
   restartRuntimeDevServer
 }) {
-  const siteConfig = await resolveSiteConfig({
-    root,
-    mode: "development",
-    command: "serve"
-  });
   return (0, import_vite3.createServer)({
     root,
     server: {
       host: true
       // 开启局域网与公网ip,
     },
-    plugins: [
-      (0, import_plugin_react.default)(),
-      vitePluginServeHtml({
-        templatePath: HTML_PATH,
-        // /@fs/是针对root之外的，当作为npm包时在nodemodules中属于root内，不需要使用 https://cn.vitejs.dev/config/server-options.html#server-fs-allow
-        entry: CLIENT_ENTRY_PATH
-      }),
-      vitePluginVirtualConfig({ siteConfig, restartRuntimeDevServer })
-    ]
+    plugins: createPlugins({ restartRuntimeDevServer, siteConfig })
   });
 }
 
@@ -258,8 +274,14 @@ cli.name("easypress").version(version);
 cli.command("dev", { isDefault: true }).argument("[root]", "dev server root dir", process.cwd()).description("dev server").option("-p,--port <value>", "dev server port").action(async (root, { port }) => {
   const absRoot = import_path4.default.resolve(root);
   const createServer2 = async () => {
+    const siteConfig = await resolveSiteConfig({
+      root,
+      mode: "development",
+      command: "serve"
+    });
     const server = await createRuntimeDevServer({
       root: absRoot,
+      siteConfig,
       restartRuntimeDevServer: async () => {
         await server.close();
         await createServer2();
@@ -273,7 +295,12 @@ cli.command("dev", { isDefault: true }).argument("[root]", "dev server root dir"
 cli.command("build").argument("[root]", "build root dir", process.cwd()).description("build").action(async (root) => {
   try {
     const absRoot = import_path4.default.resolve(root);
-    await buildRuntime({ root: absRoot });
+    const siteConfig = await resolveSiteConfig({
+      root,
+      mode: "production",
+      command: "build"
+    });
+    await buildRuntime({ root: absRoot, siteConfig });
   } catch (e) {
     console.log(e);
   }
