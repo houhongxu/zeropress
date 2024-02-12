@@ -1,4 +1,5 @@
 import { EasypressSiteConfig } from '../shared/types'
+import { ROOT_PATH } from './consts'
 import { createPlugins } from './createPlugins'
 import { createServer } from 'vite'
 
@@ -13,10 +14,10 @@ export async function createRuntimeDevServer({
   restartRuntimeDevServer: () => Promise<void>
 }) {
   return createServer({
-    root,
+    root: ROOT_PATH, // 避免dev服务访问路由时直接访问静态tsx资源
     server: {
       host: true, // 开启局域网与公网ip,
     },
-    plugins: createPlugins({ restartRuntimeDevServer, siteConfig }),
+    plugins: createPlugins({ root, restartRuntimeDevServer, siteConfig }),
   })
 }

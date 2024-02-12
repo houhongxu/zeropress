@@ -19,7 +19,7 @@ export async function buildRuntime({
   ])
 
   // 渲染html
-  await renderHtml({ root })
+  await renderHtmls({ root })
 }
 
 /**
@@ -37,7 +37,7 @@ function viteBuild({
   return build({
     mode: 'production',
     root,
-    plugins: createPlugins({ siteConfig }),
+    plugins: createPlugins({ root, siteConfig }),
     build: {
       ssr: isServer,
       outDir: isServer ? 'server' : 'client',
@@ -53,15 +53,17 @@ function viteBuild({
 }
 
 /**
- * 渲染html并写入client文件夹
+ * 渲染多路由的html并写入client文件夹
  * @description 写入client文件夹就是ssg和ssr区别，ssr是渲染后将html在服务器接口中返回
  */
-async function renderHtml({ root = process.cwd() }) {
+async function renderHtmls({ root = process.cwd() }) {
   const serverEntryPath = path.join(root, './server', './server-entry.js')
   // 服务路径是client文件夹所以相对路径就可以了， vite build lib 打包产物是mjs
   const clientEntryPath = './client-entry.js'
 
-  const { render } = await import(serverEntryPath)
+  const { render } = (await import(serverEntryPath)) as {
+    render: () => string
+  }
 
   const rendered = render()
 

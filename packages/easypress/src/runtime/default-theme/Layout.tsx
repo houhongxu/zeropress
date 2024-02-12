@@ -1,4 +1,4 @@
-import { Content } from './Content'
+import { Content } from '../Content'
 
 /**
  * 主题入口

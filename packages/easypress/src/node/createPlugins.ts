@@ -1,12 +1,15 @@
 import { EasypressSiteConfig } from '../shared/types'
 import { CLIENT_ENTRY_PATH, HTML_PATH } from './consts'
 import { vitePluginServeHtml, vitePluginVirtualConfig } from './plugins'
+import { vitePluginVirtualRoutes } from './plugins/vitePluginVirtualRoutes'
 import pluginReact from '@vitejs/plugin-react'
 
 export function createPlugins({
+  root = process.cwd(),
   siteConfig,
   restartRuntimeDevServer,
 }: {
+  root?: string
   siteConfig: EasypressSiteConfig
   restartRuntimeDevServer?: () => Promise<void>
 }) {
@@ -18,5 +21,6 @@ export function createPlugins({
       entry: CLIENT_ENTRY_PATH,
     }),
     vitePluginVirtualConfig({ siteConfig, restartRuntimeDevServer }),
+    vitePluginVirtualRoutes({ root }),
   ]
 }

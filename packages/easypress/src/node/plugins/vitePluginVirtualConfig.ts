@@ -6,7 +6,7 @@ interface vitePluginVirtualConfigOptions {
   restartRuntimeDevServer?: () => Promise<void>
 }
 
-// 虚拟模块将node层数据传递给client层
+// 虚拟模块将node层读取的config数据传递给client层
 export function vitePluginVirtualConfig({
   siteConfig,
   restartRuntimeDevServer,

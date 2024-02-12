@@ -125,9 +125,50 @@ function vitePluginVirtualConfig({
   };
 }
 
+// src/node/plugins/vitePluginVirtualRoutes.ts
+var import_fast_glob = __toESM(require("fast-glob"), 1);
+var import_path2 = __toESM(require("path"), 1);
+function vitePluginVirtualRoutes({
+  root = process.cwd()
+}) {
+  const virtualModuleId = "virtual:routes";
+  const resolvedVirtualModuleId = "\0" + virtualModuleId;
+  return {
+    name: "vitePluginVirtualRoutes",
+    resolveId(id) {
+      if (id === virtualModuleId) {
+        return resolvedVirtualModuleId;
+      }
+    },
+    async load(id) {
+      if (id === resolvedVirtualModuleId) {
+        const files = await import_fast_glob.default.glob("**/*.{jsx,tsx}", {
+          ignore: ["node_modules/**", "client/**", "server/**"],
+          cwd: root,
+          deep: 2,
+          absolute: true
+        });
+        let importTemplate = 'import React from "react";\n';
+        const routes = files.map((file, index) => {
+          const fileBaseName = import_path2.default.basename(file, import_path2.default.extname(file));
+          importTemplate += `import Element${index + 1} from '${file}';
+`;
+          return `{ path: '/${fileBaseName.replace(/index$/, "")}', element: React.createElement(Element${index + 1}) },
+`;
+        });
+        return `
+        ${importTemplate}
+        export default [${routes.join("")}]
+        `;
+      }
+    }
+  };
+}
+
 // src/node/createPlugins.ts
 var import_plugin_react = __toESM(require("@vitejs/plugin-react"), 1);
 function createPlugins({
+  root = process.cwd(),
   siteConfig,
   restartRuntimeDevServer
 }) {
@@ -138,13 +179,14 @@ function createPlugins({
       // /@fs/是针对root之外的，当作为npm包时在nodemodules中属于root内，不需要使用 https://cn.vitejs.dev/config/server-options.html#server-fs-allow
       entry: CLIENT_ENTRY_PATH
     }),
-    vitePluginVirtualConfig({ siteConfig, restartRuntimeDevServer })
+    vitePluginVirtualConfig({ siteConfig, restartRuntimeDevServer }),
+    vitePluginVirtualRoutes({ root })
   ];
 }
 
 // src/node/build.ts
 var import_fs_extra2 = __toESM(require("fs-extra"), 1);
-var import_path2 = __toESM(require("path"), 1);
+var import_path3 = __toESM(require("path"), 1);
 var import_vite = require("vite");
 async function buildRuntime({
   root = process.cwd(),
@@ -154,7 +196,7 @@ async function buildRuntime({
     viteBuild({ root, siteConfig }),
     viteBuild({ root, siteConfig, isServer: true })
   ]);
-  await renderHtml({ root });
+  await renderHtmls({ root });
 }
 function viteBuild({
   root = process.cwd(),
@@ -164,7 +206,7 @@ function viteBuild({
   return (0, import_vite.build)({
     mode: "production",
     root,
-    plugins: createPlugins({ siteConfig }),
+    plugins: createPlugins({ root, siteConfig }),
     build: {
       ssr: isServer,
       outDir: isServer ? "server" : "client",
@@ -178,8 +220,8 @@ function viteBuild({
     }
   });
 }
-async function renderHtml({ root = process.cwd() }) {
-  const serverEntryPath = import_path2.default.join(root, "./server", "./server-entry.js");
+async function renderHtmls({ root = process.cwd() }) {
+  const serverEntryPath = import_path3.default.join(root, "./server", "./server-entry.js");
   const clientEntryPath = "./client-entry.js";
   const { render } = await import(serverEntryPath);
   const rendered = render();
@@ -193,13 +235,13 @@ async function renderHtml({ root = process.cwd() }) {
     </body>
     `
   );
-  await import_fs_extra2.default.ensureDir(import_path2.default.join(root, "client"));
-  await import_fs_extra2.default.writeFile(import_path2.default.join(root, "client/index.html"), html);
+  await import_fs_extra2.default.ensureDir(import_path3.default.join(root, "client"));
+  await import_fs_extra2.default.writeFile(import_path3.default.join(root, "client/index.html"), html);
 }
 
 // src/node/config.ts
 var import_fs_extra3 = __toESM(require("fs-extra"), 1);
-var import_path3 = __toESM(require("path"), 1);
+var import_path4 = __toESM(require("path"), 1);
 var import_vite2 = require("vite");
 async function resolveSiteConfig({
   root = process.cwd(),
@@ -242,8 +284,8 @@ async function resolveUserConfig({
 }
 function getuserConfigPath({ root = process.cwd() }) {
   const userConfigPath = CONFIG_OPTIONS.map(
-    (option) => import_path3.default.join(root, option)
-  ).find((path5) => import_fs_extra3.default.existsSync(path5));
+    (option) => import_path4.default.join(root, option)
+  ).find((path6) => import_fs_extra3.default.existsSync(path6));
   return userConfigPath;
 }
 
@@ -255,24 +297,25 @@ async function createRuntimeDevServer({
   restartRuntimeDevServer
 }) {
   return (0, import_vite3.createServer)({
-    root,
+    root: ROOT_PATH,
+    // 避免dev服务访问路由时直接访问静态tsx资源
     server: {
       host: true
       // 开启局域网与公网ip,
     },
-    plugins: createPlugins({ restartRuntimeDevServer, siteConfig })
+    plugins: createPlugins({ root, restartRuntimeDevServer, siteConfig })
   });
 }
 
 // src/node/cli.ts
 var import_commander = require("commander");
 var import_fs_extra4 = __toESM(require("fs-extra"), 1);
-var import_path4 = __toESM(require("path"), 1);
+var import_path5 = __toESM(require("path"), 1);
 var cli = import_commander.program;
-var { version } = import_fs_extra4.default.readJSONSync(import_path4.default.join(ROOT_PATH, "./package.json"));
+var { version } = import_fs_extra4.default.readJSONSync(import_path5.default.join(ROOT_PATH, "./package.json"));
 cli.name("easypress").version(version);
 cli.command("dev", { isDefault: true }).argument("[root]", "dev server root dir", process.cwd()).description("dev server").option("-p,--port <value>", "dev server port").action(async (root, { port }) => {
-  const absRoot = import_path4.default.resolve(root);
+  const absRoot = import_path5.default.resolve(root);
   const createServer2 = async () => {
     const siteConfig = await resolveSiteConfig({
       root,
@@ -294,7 +337,7 @@ cli.command("dev", { isDefault: true }).argument("[root]", "dev server root dir"
 });
 cli.command("build").argument("[root]", "build root dir", process.cwd()).description("build").action(async (root) => {
   try {
-    const absRoot = import_path4.default.resolve(root);
+    const absRoot = import_path5.default.resolve(root);
     const siteConfig = await resolveSiteConfig({
       root,
       mode: "production",
