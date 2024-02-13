@@ -223,20 +223,25 @@ function viteBuild({
 async function renderHtmls({ root = process.cwd() }) {
   const serverEntryPath = import_path3.default.join(root, "./server", "./server-entry.js");
   const clientEntryPath = "./client-entry.js";
-  const { render } = await import(serverEntryPath);
-  const rendered = render();
+  const { render, routes } = await import(serverEntryPath);
   const template = await import_fs_extra2.default.readFile(HTML_PATH, "utf-8");
-  const html = template.replace("<!--app-html-->", rendered).replace(
-    "</body>",
-    `
+  await Promise.all(
+    routes.map(async (route) => {
+      const location = route.path === "/" ? "/index" : route.path || "/index";
+      const rendered = render(location);
+      const html = template.replace("<!--app-html-->", rendered).replace(
+        "</body>",
+        `
     <script type="module" src="${clientEntryPath}"></script>
     
 
     </body>
     `
+      );
+      await import_fs_extra2.default.ensureDir(import_path3.default.join(root, "client"));
+      await import_fs_extra2.default.writeFile(import_path3.default.join(root, `client${location}.html`), html);
+    })
   );
-  await import_fs_extra2.default.ensureDir(import_path3.default.join(root, "client"));
-  await import_fs_extra2.default.writeFile(import_path3.default.join(root, "client/index.html"), html);
 }
 
 // src/node/config.ts

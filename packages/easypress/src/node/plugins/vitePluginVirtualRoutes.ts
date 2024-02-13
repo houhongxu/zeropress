@@ -6,7 +6,7 @@ interface vitePluginVirtualRoutesOptions {
   root?: string
 }
 
-// 虚拟模块将node端读取的routes数据传递给client端，不需要生成入口文件来处理client端路由了，仅用于client端的spa路由，server端使用mpa不采用spa路由
+// 虚拟模块将node端读取的routes数据传递给client端，不需要生成入口文件来处理client端路由了
 export function vitePluginVirtualRoutes({
   root = process.cwd(),
 }: vitePluginVirtualRoutesOptions): Plugin {

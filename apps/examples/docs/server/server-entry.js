@@ -810,7 +810,7 @@ function Element1() {
   return /* @__PURE__ */ jsxRuntime.jsx("div", { children: "count" });
 }
 function Element2() {
-  return /* @__PURE__ */ jsxRuntime.jsx("div", { children: "index" });
+  return /* @__PURE__ */ jsxRuntime.jsx("div", { onClick: () => alert("index"), children: "index" });
 }
 function Element3() {
   return /* @__PURE__ */ jsxRuntime.jsx("div", { children: "脚本" });
@@ -890,10 +890,11 @@ function encodeLocation(to) {
   };
 }
 const ABSOLUTE_URL_REGEX = /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i;
-function render() {
+function render(location) {
   const html = server.renderToString(
-    /* @__PURE__ */ jsxRuntime.jsx(StaticRouter, { location: "/", children: /* @__PURE__ */ jsxRuntime.jsx(Layout, {}) })
+    /* @__PURE__ */ jsxRuntime.jsx(StaticRouter, { location, children: /* @__PURE__ */ jsxRuntime.jsx(Layout, {}) })
   );
   return html;
 }
 exports.render = render;
+exports.routes = routes;

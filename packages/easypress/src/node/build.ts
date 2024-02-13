@@ -3,6 +3,7 @@ import { CLIENT_ENTRY_PATH, HTML_PATH, SERVER_ENTRY_PATH } from './consts'
 import { createPlugins } from './createPlugins'
 import fse from 'fs-extra'
 import path from 'path'
+import { RouteObject } from 'react-router-dom'
 import { build } from 'vite'
 
 export async function buildRuntime({
@@ -58,26 +59,34 @@ function viteBuild({
  */
 async function renderHtmls({ root = process.cwd() }) {
   const serverEntryPath = path.join(root, './server', './server-entry.js')
-  // 服务路径是client文件夹所以相对路径就可以了， vite build lib 打包产物是mjs
+  // 服务路径是client文件夹所以相对路径就可以了
   const clientEntryPath = './client-entry.js'
 
-  const { render } = (await import(serverEntryPath)) as {
-    render: () => string
+  const { render, routes } = (await import(serverEntryPath)) as {
+    render: (location: string) => string
+    routes: RouteObject[]
   }
-
-  const rendered = render()
 
   const template = await fse.readFile(HTML_PATH, 'utf-8')
 
-  const html = template.replace('<!--app-html-->', rendered).replace(
-    '</body>',
-    `
+  // mpa路由，每个路由都渲染为html
+  await Promise.all(
+    routes.map(async (route) => {
+      const location = route.path === '/' ? '/index' : route.path || '/index'
+
+      const rendered = render(location)
+
+      const html = template.replace('<!--app-html-->', rendered).replace(
+        '</body>',
+        `
     <script type="module" src="${clientEntryPath}"></script>
     \n
     </body>
     `,
-  )
+      )
 
-  await fse.ensureDir(path.join(root, 'client'))
-  await fse.writeFile(path.join(root, 'client/index.html'), html)
+      await fse.ensureDir(path.join(root, 'client'))
+      await fse.writeFile(path.join(root, `client${location}.html`), html)
+    }),
+  )
 }
