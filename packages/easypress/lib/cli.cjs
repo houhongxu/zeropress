@@ -50,6 +50,53 @@ var SERVER_ENTRY_PATH = import_path.default.join(
 var HTML_PATH = import_path.default.join(ROOT_PATH, "./index.html");
 var CONFIG_OPTIONS = ["easypress.config.ts", "easypress.config.js"];
 
+// src/node/plugins/createRollupPluginMdx.ts
+var import_rollup = __toESM(require("@mdx-js/rollup"), 1);
+var import_rehype_autolink_headings = __toESM(require("rehype-autolink-headings"), 1);
+var import_rehype_pretty_code = __toESM(require("rehype-pretty-code"), 1);
+var import_rehype_slug = __toESM(require("rehype-slug"), 1);
+var import_remark_frontmatter = __toESM(require("remark-frontmatter"), 1);
+var import_remark_gfm = __toESM(require("remark-gfm"), 1);
+var import_remark_mdx_frontmatter = __toESM(require("remark-mdx-frontmatter"), 1);
+function createRollupPluginMdx() {
+  return (0, import_rollup.default)({
+    remarkPlugins: [
+      import_remark_gfm.default,
+      // github的md语法
+      import_remark_frontmatter.default,
+      // md模块导出frontmatter变量
+      import_remark_mdx_frontmatter.default
+      // mdx模块导出frontmatter变量
+    ],
+    rehypePlugins: [
+      import_rehype_slug.default,
+      // 自动添加h1-h6的id
+      [
+        import_rehype_autolink_headings.default,
+        // 自动添加h1-h6的<a><a/>锚点，href是id
+        {
+          // 用hast定义锚点内容元素 https://github.com/syntax-tree/hast#nodes
+          content: {
+            type: "element",
+            tagName: "span",
+            children: [{ type: "text", value: "#" }],
+            properties: {
+              class: "autolink-headings",
+              style: "margin-right: 4px;"
+            }
+          }
+        }
+      ],
+      [
+        import_rehype_pretty_code.default,
+        {
+          theme: "github-light"
+        }
+      ]
+    ]
+  });
+}
+
 // src/node/plugins/vitePluginServeHtml.ts
 var import_fs_extra = __toESM(require("fs-extra"), 1);
 function vitePluginServeHtml({
@@ -142,7 +189,7 @@ function vitePluginVirtualRoutes({
     },
     async load(id) {
       if (id === resolvedVirtualModuleId) {
-        const files = await import_fast_glob.default.glob("**/*.{jsx,tsx}", {
+        const files = await import_fast_glob.default.glob("**/*.{jsx,tsx,md,mdx}", {
           ignore: ["node_modules/**", "client/**", "server/**"],
           cwd: root,
           deep: 2,
@@ -165,7 +212,7 @@ function vitePluginVirtualRoutes({
   };
 }
 
-// src/node/createPlugins.ts
+// src/node/plugins/createPlugins.ts
 var import_plugin_react = __toESM(require("@vitejs/plugin-react"), 1);
 function createPlugins({
   root = process.cwd(),
@@ -180,7 +227,8 @@ function createPlugins({
       entry: CLIENT_ENTRY_PATH
     }),
     vitePluginVirtualConfig({ siteConfig, restartRuntimeDevServer }),
-    vitePluginVirtualRoutes({ root })
+    vitePluginVirtualRoutes({ root }),
+    createRollupPluginMdx()
   ];
 }
 
@@ -192,11 +240,11 @@ async function buildRuntime({
   root = process.cwd(),
   siteConfig
 }) {
-  await Promise.all([
+  const [clientBundle, serverBundle] = await Promise.all([
     viteBuild({ root, siteConfig }),
     viteBuild({ root, siteConfig, isServer: true })
   ]);
-  await renderHtmls({ root });
+  await renderHtmls({ root, clientBundle, serverBundle });
 }
 function viteBuild({
   root = process.cwd(),
@@ -220,9 +268,29 @@ function viteBuild({
     }
   });
 }
-async function renderHtmls({ root = process.cwd() }) {
-  const serverEntryPath = import_path3.default.join(root, "./server", "./server-entry.js");
-  const clientEntryPath = "./client-entry.js";
+async function renderHtmls({
+  root = process.cwd(),
+  clientBundle,
+  serverBundle
+}) {
+  const clientEntryChunk = clientBundle.output.find(
+    (chunk) => chunk.type === "chunk" && chunk.isEntry
+  );
+  const serverEntryChunk = serverBundle.output.find(
+    (chunk) => chunk.type === "chunk" && chunk.isEntry
+  );
+  if (!clientEntryChunk || !serverEntryChunk) {
+    throw new Error("\u6784\u5EFA\u4EA7\u7269\u4E3A\u7A7A");
+  }
+  const styleAssets = clientBundle.output.filter(
+    (chunk) => chunk.type === "asset" && chunk.fileName.endsWith(".css")
+  );
+  const serverEntryPath = import_path3.default.join(
+    root,
+    "./server",
+    serverEntryChunk?.fileName
+  );
+  const clientEntryPath = `/${clientEntryChunk?.fileName}`;
   const { render, routes } = await import(serverEntryPath);
   const template = await import_fs_extra2.default.readFile(HTML_PATH, "utf-8");
   await Promise.all(
@@ -233,10 +301,11 @@ async function renderHtmls({ root = process.cwd() }) {
         "</body>",
         `
     <script type="module" src="${clientEntryPath}"></script>
-    
-
     </body>
     `
+      ).replace(
+        "</head>",
+        styleAssets.map((asset) => `<link rel="stylesheet" href="/${asset.fileName}">`).join("\n")
       );
       await import_fs_extra2.default.ensureDir(import_path3.default.join(root, "client"));
       await import_fs_extra2.default.writeFile(import_path3.default.join(root, `client${location}.html`), html);
@@ -276,18 +345,18 @@ async function resolveUserConfig({
   command,
   mode
 }) {
-  const userConfigPath = getuserConfigPath({ root });
+  const userConfigPath = getUserConfigPath({ root });
   const loadResult = await (0, import_vite2.loadConfigFromFile)(
     { command, mode },
     userConfigPath,
     root
   );
   return {
-    userConfigPath: loadResult?.path,
+    userConfigPath,
     userConfig: loadResult?.config
   };
 }
-function getuserConfigPath({ root = process.cwd() }) {
+function getUserConfigPath({ root = process.cwd() }) {
   const userConfigPath = CONFIG_OPTIONS.map(
     (option) => import_path4.default.join(root, option)
   ).find((path6) => import_fs_extra3.default.existsSync(path6));
@@ -303,10 +372,10 @@ async function createRuntimeDevServer({
 }) {
   return (0, import_vite3.createServer)({
     root: ROOT_PATH,
-    // 避免dev服务访问路由时直接访问静态tsx资源
+    // 避免dev服务访问路由时直接访问静态tsx资源，所以在/开启服务，路由一般在/docs内
     server: {
       host: true
-      // 开启局域网与公网ip,
+      // 开启局域网与公网ip
     },
     plugins: createPlugins({ root, restartRuntimeDevServer, siteConfig })
   });
@@ -323,7 +392,6 @@ cli.command("dev", { isDefault: true }).argument("[root]", "dev server root dir"
   const absRoot = import_path5.default.resolve(root);
   const createServer2 = async () => {
     const siteConfig = await resolveSiteConfig({
-      root,
       mode: "development",
       command: "serve"
     });
@@ -344,7 +412,6 @@ cli.command("build").argument("[root]", "build root dir", process.cwd()).descrip
   try {
     const absRoot = import_path5.default.resolve(root);
     const siteConfig = await resolveSiteConfig({
-      root,
       mode: "production",
       command: "build"
     });

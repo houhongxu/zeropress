@@ -25,7 +25,6 @@ cli
     const createServer = async () => {
       // 每次开启服务都要先读取配置文件
       const siteConfig = await resolveSiteConfig({
-        root,
         mode: 'development',
         command: 'serve',
       })
@@ -57,7 +56,6 @@ cli
       const absRoot = path.resolve(root)
 
       const siteConfig = await resolveSiteConfig({
-        root,
         mode: 'production',
         command: 'build',
       })

@@ -1,9 +1,10 @@
 import { EasypressSiteConfig } from '../shared/types'
 import { CLIENT_ENTRY_PATH, HTML_PATH, SERVER_ENTRY_PATH } from './consts'
-import { createPlugins } from './createPlugins'
+import { createPlugins } from './plugins'
 import fse from 'fs-extra'
 import path from 'path'
 import { RouteObject } from 'react-router-dom'
+import { RollupOutput } from 'rollup'
 import { build } from 'vite'
 
 export async function buildRuntime({
@@ -14,13 +15,13 @@ export async function buildRuntime({
   siteConfig: EasypressSiteConfig
 }) {
   // 分为运行时的client构建水合的js与server构建渲染html的js
-  await Promise.all([
+  const [clientBundle, serverBundle] = await Promise.all([
     viteBuild({ root, siteConfig }),
     viteBuild({ root, siteConfig, isServer: true }),
   ])
 
   // 渲染html
-  await renderHtmls({ root })
+  await renderHtmls({ root, clientBundle, serverBundle })
 }
 
 /**
@@ -50,17 +51,47 @@ function viteBuild({
         },
       },
     },
-  })
+  }) as Promise<RollupOutput>
 }
 
 /**
  * 渲染多路由的html并写入client文件夹
  * @description 写入client文件夹就是ssg和ssr区别，ssr是渲染后将html在服务器接口中返回
  */
-async function renderHtmls({ root = process.cwd() }) {
-  const serverEntryPath = path.join(root, './server', './server-entry.js')
+async function renderHtmls({
+  root = process.cwd(),
+  clientBundle,
+  serverBundle,
+}: {
+  root?: string
+  clientBundle: RollupOutput
+  serverBundle: RollupOutput
+}) {
+  // 获取客户端和服务端入口chunk
+  const clientEntryChunk = clientBundle.output.find(
+    (chunk) => chunk.type === 'chunk' && chunk.isEntry,
+  )
+  const serverEntryChunk = serverBundle.output.find(
+    (chunk) => chunk.type === 'chunk' && chunk.isEntry,
+  )
+
+  if (!clientEntryChunk || !serverEntryChunk) {
+    throw new Error('构建产物为空')
+  }
+
+  // 获取样式资源
+  const styleAssets = clientBundle.output.filter(
+    (chunk) => chunk.type === 'asset' && chunk.fileName.endsWith('.css'),
+  )
+
+  const serverEntryPath = path.join(
+    root,
+    './server',
+    serverEntryChunk?.fileName,
+  )
+
   // 服务路径是client文件夹所以相对路径就可以了
-  const clientEntryPath = './client-entry.js'
+  const clientEntryPath = `/${clientEntryChunk?.fileName}`
 
   const { render, routes } = (await import(serverEntryPath)) as {
     render: (location: string) => string
@@ -76,14 +107,21 @@ async function renderHtmls({ root = process.cwd() }) {
 
       const rendered = render(location)
 
-      const html = template.replace('<!--app-html-->', rendered).replace(
-        '</body>',
-        `
+      const html = template
+        .replace('<!--app-html-->', rendered)
+        .replace(
+          '</body>',
+          `
     <script type="module" src="${clientEntryPath}"></script>
-    \n
     </body>
     `,
-      )
+        )
+        .replace(
+          '</head>',
+          styleAssets
+            .map((asset) => `<link rel="stylesheet" href="/${asset.fileName}">`)
+            .join('\n'),
+        )
 
       await fse.ensureDir(path.join(root, 'client'))
       await fse.writeFile(path.join(root, `client${location}.html`), html)

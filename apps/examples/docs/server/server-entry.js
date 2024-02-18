@@ -812,13 +812,627 @@ function Element1() {
 function Element2() {
   return /* @__PURE__ */ jsxRuntime.jsx("div", { onClick: () => alert("index"), children: "index" });
 }
-function Element3() {
+function _createMdxContent$2(props) {
+  const _components = {
+    a: "a",
+    code: "code",
+    del: "del",
+    figure: "figure",
+    h1: "h1",
+    h2: "h2",
+    input: "input",
+    li: "li",
+    ol: "ol",
+    p: "p",
+    pre: "pre",
+    section: "section",
+    span: "span",
+    sup: "sup",
+    table: "table",
+    th: "th",
+    thead: "thead",
+    tr: "tr",
+    ul: "ul",
+    ...props.components
+  };
+  return jsxRuntime.jsxs(jsxRuntime.Fragment, {
+    children: [jsxRuntime.jsxs(_components.h1, {
+      id: "markx",
+      children: [jsxRuntime.jsx(_components.a, {
+        "aria-hidden": "true",
+        tabIndex: "-1",
+        href: "#markx",
+        children: jsxRuntime.jsx(_components.span, {
+          className: "autolink-headings",
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "markx"]
+    }), "\n", jsxRuntime.jsx("div", {
+      style: {
+        background: "red"
+      },
+      children: "我是jsx的div"
+    }), "\n", jsxRuntime.jsx(_components.figure, {
+      "data-rehype-pretty-code-figure": "",
+      children: jsxRuntime.jsx(_components.pre, {
+        style: {
+          backgroundColor: "#fff",
+          color: "#24292e"
+        },
+        tabIndex: "0",
+        "data-language": "ts",
+        "data-theme": "github-light",
+        children: jsxRuntime.jsxs(_components.code, {
+          "data-language": "ts",
+          "data-theme": "github-light",
+          style: {
+            display: "grid"
+          },
+          children: [jsxRuntime.jsxs(_components.span, {
+            "data-line": "",
+            children: [jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#D73A49"
+              },
+              children: "export"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#D73A49"
+              },
+              children: " async"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#D73A49"
+              },
+              children: " function"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#6F42C1"
+              },
+              children: " createRuntimeDevServer"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#24292E"
+              },
+              children: "({"
+            })]
+          }), "\n", jsxRuntime.jsxs(_components.span, {
+            "data-line": "",
+            children: [jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#E36209"
+              },
+              children: "  root"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#D73A49"
+              },
+              children: " ="
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#24292E"
+              },
+              children: " process."
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#6F42C1"
+              },
+              children: "cwd"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#24292E"
+              },
+              children: "(),"
+            })]
+          }), "\n", jsxRuntime.jsxs(_components.span, {
+            "data-line": "",
+            children: [jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#E36209"
+              },
+              children: "  siteConfig"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#24292E"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntime.jsxs(_components.span, {
+            "data-line": "",
+            children: [jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#E36209"
+              },
+              children: "  restartRuntimeDevServer"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#24292E"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntime.jsxs(_components.span, {
+            "data-line": "",
+            children: [jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#24292E"
+              },
+              children: "}"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#D73A49"
+              },
+              children: ":"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#24292E"
+              },
+              children: " {"
+            })]
+          }), "\n", jsxRuntime.jsxs(_components.span, {
+            "data-line": "",
+            children: [jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#E36209"
+              },
+              children: "  root"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#D73A49"
+              },
+              children: "?:"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#005CC5"
+              },
+              children: " string"
+            })]
+          }), "\n", jsxRuntime.jsxs(_components.span, {
+            "data-line": "",
+            children: [jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#E36209"
+              },
+              children: "  siteConfig"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#D73A49"
+              },
+              children: ":"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#6F42C1"
+              },
+              children: " EasypressSiteConfig"
+            })]
+          }), "\n", jsxRuntime.jsxs(_components.span, {
+            "data-line": "",
+            children: [jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#6F42C1"
+              },
+              children: "  restartRuntimeDevServer"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#D73A49"
+              },
+              children: ":"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#24292E"
+              },
+              children: " () "
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#D73A49"
+              },
+              children: "=>"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#6F42C1"
+              },
+              children: " Promise"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#24292E"
+              },
+              children: "<"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#005CC5"
+              },
+              children: "void"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#24292E"
+              },
+              children: ">"
+            })]
+          }), "\n", jsxRuntime.jsx(_components.span, {
+            "data-line": "",
+            children: jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#24292E"
+              },
+              children: "}) {"
+            })
+          }), "\n", jsxRuntime.jsxs(_components.span, {
+            "data-line": "",
+            children: [jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#D73A49"
+              },
+              children: "  return"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#6F42C1"
+              },
+              children: " createServer"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#24292E"
+              },
+              children: "({"
+            })]
+          }), "\n", jsxRuntime.jsxs(_components.span, {
+            "data-line": "",
+            children: [jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#24292E"
+              },
+              children: "    root: "
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#005CC5"
+              },
+              children: "ROOT_PATH"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#24292E"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntime.jsx(_components.span, {
+            "data-line": "",
+            children: jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#24292E"
+              },
+              children: "    server: {"
+            })
+          }), "\n", jsxRuntime.jsxs(_components.span, {
+            "data-line": "",
+            children: [jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#24292E"
+              },
+              children: "      host: "
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#005CC5"
+              },
+              children: "true"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#24292E"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntime.jsx(_components.span, {
+            "data-line": "",
+            children: jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#24292E"
+              },
+              children: "    },"
+            })
+          }), "\n", jsxRuntime.jsxs(_components.span, {
+            "data-line": "",
+            children: [jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#24292E"
+              },
+              children: "    plugins: "
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#6F42C1"
+              },
+              children: "createPlugins"
+            }), jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#24292E"
+              },
+              children: "({ root, restartRuntimeDevServer, siteConfig }),"
+            })]
+          }), "\n", jsxRuntime.jsx(_components.span, {
+            "data-line": "",
+            children: jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#24292E"
+              },
+              children: "  })"
+            })
+          }), "\n", jsxRuntime.jsx(_components.span, {
+            "data-line": "",
+            children: jsxRuntime.jsx(_components.span, {
+              style: {
+                color: "#24292E"
+              },
+              children: "}"
+            })
+          })]
+        })
+      })
+    }), "\n", jsxRuntime.jsxs(_components.h2, {
+      id: "gfm",
+      children: [jsxRuntime.jsx(_components.a, {
+        "aria-hidden": "true",
+        tabIndex: "-1",
+        href: "#gfm",
+        children: jsxRuntime.jsx(_components.span, {
+          className: "autolink-headings",
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "GFM"]
+    }), "\n", jsxRuntime.jsxs(_components.h2, {
+      id: "如果我是汉字-标题的id是什么呢-autolink-literals",
+      children: [jsxRuntime.jsx(_components.a, {
+        "aria-hidden": "true",
+        tabIndex: "-1",
+        href: "#如果我是汉字-标题的id是什么呢-autolink-literals",
+        children: jsxRuntime.jsx(_components.span, {
+          className: "autolink-headings",
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "如果我是汉字 标题的id是什么呢 Autolink literals"]
+    }), "\n", jsxRuntime.jsxs(_components.p, {
+      children: [jsxRuntime.jsx(_components.a, {
+        href: "http://www.example.com",
+        children: "www.example.com"
+      }), ", ", jsxRuntime.jsx(_components.a, {
+        href: "https://example.com",
+        children: "https://example.com"
+      }), ", and ", jsxRuntime.jsx(_components.a, {
+        href: "mailto:contact@example.com",
+        children: "contact@example.com"
+      }), "."]
+    }), "\n", jsxRuntime.jsxs(_components.h2, {
+      id: "footnote",
+      children: [jsxRuntime.jsx(_components.a, {
+        "aria-hidden": "true",
+        tabIndex: "-1",
+        href: "#footnote",
+        children: jsxRuntime.jsx(_components.span, {
+          className: "autolink-headings",
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "Footnote"]
+    }), "\n", jsxRuntime.jsxs(_components.p, {
+      children: ["A note", jsxRuntime.jsx(_components.sup, {
+        children: jsxRuntime.jsx(_components.a, {
+          href: "#user-content-fn-1",
+          id: "user-content-fnref-1",
+          "data-footnote-ref": true,
+          "aria-describedby": "footnote-label",
+          children: "1"
+        })
+      })]
+    }), "\n", jsxRuntime.jsxs(_components.h2, {
+      id: "strikethrough",
+      children: [jsxRuntime.jsx(_components.a, {
+        "aria-hidden": "true",
+        tabIndex: "-1",
+        href: "#strikethrough",
+        children: jsxRuntime.jsx(_components.span, {
+          className: "autolink-headings",
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "Strikethrough"]
+    }), "\n", jsxRuntime.jsxs(_components.p, {
+      children: [jsxRuntime.jsx(_components.del, {
+        children: "one"
+      }), " or ", jsxRuntime.jsx(_components.del, {
+        children: "two"
+      }), " tildes."]
+    }), "\n", jsxRuntime.jsxs(_components.h2, {
+      id: "table",
+      children: [jsxRuntime.jsx(_components.a, {
+        "aria-hidden": "true",
+        tabIndex: "-1",
+        href: "#table",
+        children: jsxRuntime.jsx(_components.span, {
+          className: "autolink-headings",
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "Table"]
+    }), "\n", jsxRuntime.jsx(_components.table, {
+      children: jsxRuntime.jsx(_components.thead, {
+        children: jsxRuntime.jsxs(_components.tr, {
+          children: [jsxRuntime.jsx(_components.th, {
+            children: "a"
+          }), jsxRuntime.jsx(_components.th, {
+            style: {
+              textAlign: "left"
+            },
+            children: "b"
+          }), jsxRuntime.jsx(_components.th, {
+            style: {
+              textAlign: "right"
+            },
+            children: "c"
+          }), jsxRuntime.jsx(_components.th, {
+            style: {
+              textAlign: "center"
+            },
+            children: "d"
+          })]
+        })
+      })
+    }), "\n", jsxRuntime.jsxs(_components.h2, {
+      id: "tasklist",
+      children: [jsxRuntime.jsx(_components.a, {
+        "aria-hidden": "true",
+        tabIndex: "-1",
+        href: "#tasklist",
+        children: jsxRuntime.jsx(_components.span, {
+          className: "autolink-headings",
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "Tasklist"]
+    }), "\n", jsxRuntime.jsxs(_components.ul, {
+      className: "contains-task-list",
+      children: ["\n", jsxRuntime.jsxs(_components.li, {
+        className: "task-list-item",
+        children: [jsxRuntime.jsx(_components.input, {
+          type: "checkbox",
+          disabled: true
+        }), " ", "to do"]
+      }), "\n", jsxRuntime.jsxs(_components.li, {
+        className: "task-list-item",
+        children: [jsxRuntime.jsx(_components.input, {
+          type: "checkbox",
+          checked: true,
+          disabled: true
+        }), " ", "done"]
+      }), "\n"]
+    }), "\n", jsxRuntime.jsxs(_components.section, {
+      "data-footnotes": true,
+      className: "footnotes",
+      children: [jsxRuntime.jsxs(_components.h2, {
+        className: "sr-only",
+        id: "footnote-label",
+        children: [jsxRuntime.jsx(_components.a, {
+          "aria-hidden": "true",
+          tabIndex: "-1",
+          href: "#footnote-label",
+          children: jsxRuntime.jsx(_components.span, {
+            className: "autolink-headings",
+            style: {
+              marginRight: "4px"
+            },
+            children: "#"
+          })
+        }), "Footnotes"]
+      }), "\n", jsxRuntime.jsxs(_components.ol, {
+        children: ["\n", jsxRuntime.jsxs(_components.li, {
+          id: "user-content-fn-1",
+          children: ["\n", jsxRuntime.jsxs(_components.p, {
+            children: ["Big note. ", jsxRuntime.jsx(_components.a, {
+              href: "#user-content-fnref-1",
+              "data-footnote-backref": "",
+              "aria-label": "Back to reference 1",
+              className: "data-footnote-backref",
+              children: "↩"
+            })]
+          }), "\n"]
+        }), "\n"]
+      }), "\n"]
+    })]
+  });
+}
+function MDXContent$2(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
+    ...props,
+    children: jsxRuntime.jsx(_createMdxContent$2, {
+      ...props
+    })
+  }) : _createMdxContent$2(props);
+}
+function _createMdxContent$1(props) {
+  const _components = {
+    a: "a",
+    h1: "h1",
+    span: "span",
+    ...props.components
+  };
+  return jsxRuntime.jsxs(_components.h1, {
+    id: "汉字",
+    children: [jsxRuntime.jsx(_components.a, {
+      "aria-hidden": "true",
+      tabIndex: "-1",
+      href: "#汉字",
+      children: jsxRuntime.jsx(_components.span, {
+        className: "autolink-headings",
+        style: {
+          marginRight: "4px"
+        },
+        children: "#"
+      })
+    }), "汉字"]
+  });
+}
+function MDXContent$1(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
+    ...props,
+    children: jsxRuntime.jsx(_createMdxContent$1, {
+      ...props
+    })
+  }) : _createMdxContent$1(props);
+}
+function Element5() {
   return /* @__PURE__ */ jsxRuntime.jsx("div", { children: "脚本" });
+}
+function _createMdxContent(props) {
+  const _components = {
+    a: "a",
+    h1: "h1",
+    span: "span",
+    ...props.components
+  };
+  return jsxRuntime.jsxs(_components.h1, {
+    id: "dir",
+    children: [jsxRuntime.jsx(_components.a, {
+      "aria-hidden": "true",
+      tabIndex: "-1",
+      href: "#dir",
+      children: jsxRuntime.jsx(_components.span, {
+        className: "autolink-headings",
+        style: {
+          marginRight: "4px"
+        },
+        children: "#"
+      })
+    }), "dir"]
+  });
+}
+function MDXContent(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
+    ...props,
+    children: jsxRuntime.jsx(_createMdxContent, {
+      ...props
+    })
+  }) : _createMdxContent(props);
 }
 const routes = [
   { path: "/count", element: React.createElement(Element1) },
   { path: "/", element: React.createElement(Element2) },
-  { path: "/脚本", element: React.createElement(Element3) }
+  { path: "/markx", element: React.createElement(MDXContent$2) },
+  { path: "/汉字", element: React.createElement(MDXContent$1) },
+  { path: "/脚本", element: React.createElement(Element5) },
+  { path: "/dir", element: React.createElement(MDXContent) }
 ];
 function Content() {
   const element = useRoutes(routes);
@@ -826,7 +1440,7 @@ function Content() {
   return element;
 }
 function Layout() {
-  return /* @__PURE__ */ jsxRuntime.jsx("div", { style: { background: "aliceblue", padding: "20px" }, children: /* @__PURE__ */ jsxRuntime.jsx(Content, {}) });
+  return /* @__PURE__ */ jsxRuntime.jsx("div", { style: { padding: "20px" }, children: /* @__PURE__ */ jsxRuntime.jsx(Content, {}) });
 }
 function StaticRouter({
   basename,

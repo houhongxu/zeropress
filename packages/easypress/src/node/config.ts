@@ -4,6 +4,10 @@ import fse from 'fs-extra'
 import path from 'path'
 import { loadConfigFromFile } from 'vite'
 
+/**
+ * 读取并处理配置文件
+ * @description root一般不填，默认为执行命令的根目录
+ */
 export async function resolveSiteConfig({
   root = process.cwd(),
   command,
@@ -44,7 +48,7 @@ export async function resolveUserConfig({
   command: 'build' | 'serve'
   mode: 'development' | 'production'
 }) {
-  const userConfigPath = getuserConfigPath({ root })
+  const userConfigPath = getUserConfigPath({ root })
 
   // command和mode和配置中一样 https://cn.vitejs.dev/guide/api-javascript.html#loadconfigfromfile
   const loadResult = await loadConfigFromFile(
@@ -54,12 +58,12 @@ export async function resolveUserConfig({
   )
 
   return {
-    userConfigPath: loadResult?.path,
+    userConfigPath,
     userConfig: loadResult?.config as EasypressUserConfig | undefined,
   }
 }
 
-function getuserConfigPath({ root = process.cwd() }) {
+function getUserConfigPath({ root = process.cwd() }) {
   const userConfigPath = CONFIG_OPTIONS.map((option) =>
     path.join(root, option),
   ).find((path) => fse.existsSync(path))

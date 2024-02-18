@@ -1,2 +1,1 @@
-export * from './vitePluginServeHtml'
-export * from './vitePluginVirtualConfig'
+export * from './createPlugins'

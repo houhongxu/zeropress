@@ -1,7 +1,9 @@
-import { EasypressSiteConfig } from '../shared/types'
-import { CLIENT_ENTRY_PATH, HTML_PATH } from './consts'
-import { vitePluginServeHtml, vitePluginVirtualConfig } from './plugins'
-import { vitePluginVirtualRoutes } from './plugins/vitePluginVirtualRoutes'
+import { EasypressSiteConfig } from '../../shared/types'
+import { CLIENT_ENTRY_PATH, HTML_PATH } from '../consts'
+import { createRollupPluginMdx } from './createRollupPluginMdx'
+import { vitePluginServeHtml } from './vitePluginServeHtml'
+import { vitePluginVirtualConfig } from './vitePluginVirtualConfig'
+import { vitePluginVirtualRoutes } from './vitePluginVirtualRoutes'
 import pluginReact from '@vitejs/plugin-react'
 
 export function createPlugins({
@@ -22,5 +24,6 @@ export function createPlugins({
     }),
     vitePluginVirtualConfig({ siteConfig, restartRuntimeDevServer }),
     vitePluginVirtualRoutes({ root }),
+    createRollupPluginMdx(),
   ]
 }

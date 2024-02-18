@@ -24,7 +24,7 @@ export function vitePluginVirtualRoutes({
     async load(id) {
       if (id === resolvedVirtualModuleId) {
         // glob文件
-        const files = await fg.glob('**/*.{jsx,tsx}', {
+        const files = await fg.glob('**/*.{jsx,tsx,md,mdx}', {
           ignore: ['node_modules/**', 'client/**', 'server/**'],
           cwd: root,
           deep: 2,

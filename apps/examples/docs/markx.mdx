@@ -1,1 +1,53 @@
+---
+hello: frontmatter
+---
+
 # markx
+
+<div style={{ background: 'red' }}>我是jsx的div</div>
+
+```ts
+export async function createRuntimeDevServer({
+  root = process.cwd(),
+  siteConfig,
+  restartRuntimeDevServer,
+}: {
+  root?: string
+  siteConfig: EasypressSiteConfig
+  restartRuntimeDevServer: () => Promise<void>
+}) {
+  return createServer({
+    root: ROOT_PATH,
+    server: {
+      host: true,
+    },
+    plugins: createPlugins({ root, restartRuntimeDevServer, siteConfig }),
+  })
+}
+```
+
+## GFM
+
+## 如果我是汉字 标题的id是什么呢 Autolink literals
+
+www.example.com, https://example.com, and contact@example.com.
+
+## Footnote
+
+A note[^1]
+
+[^1]: Big note.
+
+## Strikethrough
+
+~one~ or ~~two~~ tildes.
+
+## Table
+
+| a   | b   |   c |  d  |
+| --- | :-- | --: | :-: |
+
+## Tasklist
+
+- [ ] to do
+- [x] done

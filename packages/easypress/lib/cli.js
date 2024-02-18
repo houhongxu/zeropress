@@ -21,6 +21,53 @@ var SERVER_ENTRY_PATH = path2.join(
 var HTML_PATH = path2.join(ROOT_PATH, "./index.html");
 var CONFIG_OPTIONS = ["easypress.config.ts", "easypress.config.js"];
 
+// src/node/plugins/createRollupPluginMdx.ts
+import rollupPluginMdx from "@mdx-js/rollup";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypePrettyCode from "rehype-pretty-code";
+import rehypeSlug from "rehype-slug";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkGfm from "remark-gfm";
+import remarkMdxFrontmatter from "remark-mdx-frontmatter";
+function createRollupPluginMdx() {
+  return rollupPluginMdx({
+    remarkPlugins: [
+      remarkGfm,
+      // github的md语法
+      remarkFrontmatter,
+      // md模块导出frontmatter变量
+      remarkMdxFrontmatter
+      // mdx模块导出frontmatter变量
+    ],
+    rehypePlugins: [
+      rehypeSlug,
+      // 自动添加h1-h6的id
+      [
+        rehypeAutolinkHeadings,
+        // 自动添加h1-h6的<a><a/>锚点，href是id
+        {
+          // 用hast定义锚点内容元素 https://github.com/syntax-tree/hast#nodes
+          content: {
+            type: "element",
+            tagName: "span",
+            children: [{ type: "text", value: "#" }],
+            properties: {
+              class: "autolink-headings",
+              style: "margin-right: 4px;"
+            }
+          }
+        }
+      ],
+      [
+        rehypePrettyCode,
+        {
+          theme: "github-light"
+        }
+      ]
+    ]
+  });
+}
+
 // src/node/plugins/vitePluginServeHtml.ts
 import fse from "fs-extra";
 function vitePluginServeHtml({
@@ -113,7 +160,7 @@ function vitePluginVirtualRoutes({
     },
     async load(id) {
       if (id === resolvedVirtualModuleId) {
-        const files = await fg.glob("**/*.{jsx,tsx}", {
+        const files = await fg.glob("**/*.{jsx,tsx,md,mdx}", {
           ignore: ["node_modules/**", "client/**", "server/**"],
           cwd: root,
           deep: 2,
@@ -136,7 +183,7 @@ function vitePluginVirtualRoutes({
   };
 }
 
-// src/node/createPlugins.ts
+// src/node/plugins/createPlugins.ts
 import pluginReact from "@vitejs/plugin-react";
 function createPlugins({
   root = process.cwd(),
@@ -151,7 +198,8 @@ function createPlugins({
       entry: CLIENT_ENTRY_PATH
     }),
     vitePluginVirtualConfig({ siteConfig, restartRuntimeDevServer }),
-    vitePluginVirtualRoutes({ root })
+    vitePluginVirtualRoutes({ root }),
+    createRollupPluginMdx()
   ];
 }
 
@@ -163,11 +211,11 @@ async function buildRuntime({
   root = process.cwd(),
   siteConfig
 }) {
-  await Promise.all([
+  const [clientBundle, serverBundle] = await Promise.all([
     viteBuild({ root, siteConfig }),
     viteBuild({ root, siteConfig, isServer: true })
   ]);
-  await renderHtmls({ root });
+  await renderHtmls({ root, clientBundle, serverBundle });
 }
 function viteBuild({
   root = process.cwd(),
@@ -191,9 +239,29 @@ function viteBuild({
     }
   });
 }
-async function renderHtmls({ root = process.cwd() }) {
-  const serverEntryPath = path4.join(root, "./server", "./server-entry.js");
-  const clientEntryPath = "./client-entry.js";
+async function renderHtmls({
+  root = process.cwd(),
+  clientBundle,
+  serverBundle
+}) {
+  const clientEntryChunk = clientBundle.output.find(
+    (chunk) => chunk.type === "chunk" && chunk.isEntry
+  );
+  const serverEntryChunk = serverBundle.output.find(
+    (chunk) => chunk.type === "chunk" && chunk.isEntry
+  );
+  if (!clientEntryChunk || !serverEntryChunk) {
+    throw new Error("\u6784\u5EFA\u4EA7\u7269\u4E3A\u7A7A");
+  }
+  const styleAssets = clientBundle.output.filter(
+    (chunk) => chunk.type === "asset" && chunk.fileName.endsWith(".css")
+  );
+  const serverEntryPath = path4.join(
+    root,
+    "./server",
+    serverEntryChunk?.fileName
+  );
+  const clientEntryPath = `/${clientEntryChunk?.fileName}`;
   const { render, routes } = await import(serverEntryPath);
   const template = await fse2.readFile(HTML_PATH, "utf-8");
   await Promise.all(
@@ -204,10 +272,11 @@ async function renderHtmls({ root = process.cwd() }) {
         "</body>",
         `
     <script type="module" src="${clientEntryPath}"></script>
-    
-
     </body>
     `
+      ).replace(
+        "</head>",
+        styleAssets.map((asset) => `<link rel="stylesheet" href="/${asset.fileName}">`).join("\n")
       );
       await fse2.ensureDir(path4.join(root, "client"));
       await fse2.writeFile(path4.join(root, `client${location}.html`), html);
@@ -247,18 +316,18 @@ async function resolveUserConfig({
   command,
   mode
 }) {
-  const userConfigPath = getuserConfigPath({ root });
+  const userConfigPath = getUserConfigPath({ root });
   const loadResult = await loadConfigFromFile(
     { command, mode },
     userConfigPath,
     root
   );
   return {
-    userConfigPath: loadResult?.path,
+    userConfigPath,
     userConfig: loadResult?.config
   };
 }
-function getuserConfigPath({ root = process.cwd() }) {
+function getUserConfigPath({ root = process.cwd() }) {
   const userConfigPath = CONFIG_OPTIONS.map(
     (option) => path5.join(root, option)
   ).find((path7) => fse3.existsSync(path7));
@@ -274,10 +343,10 @@ async function createRuntimeDevServer({
 }) {
   return createServer({
     root: ROOT_PATH,
-    // 避免dev服务访问路由时直接访问静态tsx资源
+    // 避免dev服务访问路由时直接访问静态tsx资源，所以在/开启服务，路由一般在/docs内
     server: {
       host: true
-      // 开启局域网与公网ip,
+      // 开启局域网与公网ip
     },
     plugins: createPlugins({ root, restartRuntimeDevServer, siteConfig })
   });
@@ -294,7 +363,6 @@ cli.command("dev", { isDefault: true }).argument("[root]", "dev server root dir"
   const absRoot = path6.resolve(root);
   const createServer2 = async () => {
     const siteConfig = await resolveSiteConfig({
-      root,
       mode: "development",
       command: "serve"
     });
@@ -315,7 +383,6 @@ cli.command("build").argument("[root]", "build root dir", process.cwd()).descrip
   try {
     const absRoot = path6.resolve(root);
     const siteConfig = await resolveSiteConfig({
-      root,
       mode: "production",
       command: "build"
     });
