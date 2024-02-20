@@ -806,8 +806,12 @@ function Router(_ref5) {
 }
 new Promise(() => {
 });
-function Element1() {
-  return /* @__PURE__ */ jsxRuntime.jsx("div", { children: "count" });
+function Counter() {
+  const [count, setCount] = React.useState(0);
+  return /* @__PURE__ */ jsxRuntime.jsxs("div", { children: [
+    /* @__PURE__ */ jsxRuntime.jsx("p", { children: count }),
+    /* @__PURE__ */ jsxRuntime.jsx("button", { onClick: () => setCount((count2) => count2 + 1), children: "点击加1" })
+  ] });
 }
 function Element2() {
   return /* @__PURE__ */ jsxRuntime.jsx("div", { onClick: () => alert("index"), children: "index" });
@@ -850,7 +854,7 @@ function _createMdxContent$2(props) {
           children: "#"
         })
       }), "markx"]
-    }), "\n", jsxRuntime.jsx("div", {
+    }), "\n", "\n", jsxRuntime.jsx(Counter, {}), "\n", jsxRuntime.jsx("div", {
       style: {
         background: "red"
       },
@@ -1427,7 +1431,7 @@ function MDXContent(props = {}) {
   }) : _createMdxContent(props);
 }
 const routes = [
-  { path: "/count", element: React.createElement(Element1) },
+  { path: "/count", element: React.createElement(Counter) },
   { path: "/", element: React.createElement(Element2) },
   { path: "/markx", element: React.createElement(MDXContent$2) },
   { path: "/汉字", element: React.createElement(MDXContent$1) },

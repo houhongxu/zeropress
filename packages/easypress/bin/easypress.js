@@ -5,7 +5,7 @@
 // 本项目考虑兼容性尽量弃用api，为了避免使用vite的cjs api，比如配置类型使用EasypressUserConfig替换defineConfig
 
 // esm
-import('../lib/cli.js')
+import('../lib/node/cli.js')
 
 // cjs vite弃用cjs后项目也弃用cjs
-// import('../lib/cli.cjs')
+// import('../lib/node/cli.cjs')

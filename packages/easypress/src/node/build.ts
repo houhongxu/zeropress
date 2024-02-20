@@ -1,10 +1,10 @@
-import { EasypressSiteConfig } from '../shared/types'
 import { CLIENT_ENTRY_PATH, HTML_PATH, SERVER_ENTRY_PATH } from './consts'
 import { createPlugins } from './plugins'
 import fse from 'fs-extra'
 import path from 'path'
 import { RouteObject } from 'react-router-dom'
 import { RollupOutput } from 'rollup'
+import { EasypressSiteConfig } from 'shared/types'
 import { build } from 'vite'
 
 export async function buildRuntime({

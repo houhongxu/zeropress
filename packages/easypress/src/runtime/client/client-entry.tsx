@@ -5,8 +5,7 @@ import config from 'virtual:config'
 
 console.log('用户配置：', config)
 
-// build时是cjs，可以使用process
-if (typeof process !== 'undefined') {
+if (import.meta.env.PROD) {
   hydrateRoot(
     document.getElementById('root')!,
     <BrowserRouter>

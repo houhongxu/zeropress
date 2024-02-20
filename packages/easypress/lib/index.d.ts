@@ -41,4 +41,10 @@ interface EasypressSiteConfig {
     userConfig: EasypressUserConfig;
 }
 
-export type { EasypressSiteConfig, EasypressUserConfig, Footer, NavItemWithLink, Sidebar, SidebarGroup, SidebarItem, ThemeConfig };
+interface TocItem {
+    id: string;
+    text: string;
+    depth: number;
+}
+
+export type { EasypressSiteConfig, EasypressUserConfig, Footer, NavItemWithLink, Sidebar, SidebarGroup, SidebarItem, ThemeConfig, TocItem };

@@ -7,7 +7,7 @@ var __dirname = /* @__PURE__ */ getDirname();
 
 // src/node/consts.ts
 import path2 from "path";
-var ROOT_PATH = path2.join(__dirname, "..");
+var ROOT_PATH = path2.join(__dirname, "..", "..");
 var SRC_PATH = path2.join(ROOT_PATH, "./src");
 var RUNTIME_PATH = path2.join(SRC_PATH, "./runtime");
 var CLIENT_ENTRY_PATH = path2.join(
@@ -21,7 +21,51 @@ var SERVER_ENTRY_PATH = path2.join(
 var HTML_PATH = path2.join(ROOT_PATH, "./index.html");
 var CONFIG_OPTIONS = ["easypress.config.ts", "easypress.config.js"];
 
-// src/node/plugins/createRollupPluginMdx.ts
+// src/node/plugins/remarkMdxToc.ts
+import { parse } from "acorn";
+import Slugger from "github-slugger";
+import { visit } from "unist-util-visit";
+var remarkMdxToc = () => {
+  return function(tree) {
+    const toc = [];
+    visit(tree, "heading", (node) => {
+      if (node.depth > 1 && node.depth < 8) {
+        const children = node.children;
+        const headText = children.map((child) => {
+          var _a;
+          switch (child.type) {
+            case "link":
+              return ((_a = child.children) == null ? void 0 : _a.map((child2) => child2.value).join("")) || "";
+            default:
+              return child.value;
+          }
+        }).join("");
+        const slugger = new Slugger();
+        const id = slugger.slug(headText);
+        toc.push({
+          id,
+          text: headText,
+          depth: node.depth
+        });
+      }
+    });
+    const template = `export const toc = ${JSON.stringify(toc, null, 2)};`;
+    const estree = parse(template, {
+      ecmaVersion: "latest",
+      sourceType: "module"
+    });
+    const mdastNode = {
+      type: "mdxjsEsm",
+      value: "",
+      data: {
+        estree
+      }
+    };
+    tree.children.unshift(mdastNode);
+  };
+};
+
+// src/node/plugins/vitePluginMdx.ts
 import rollupPluginMdx from "@mdx-js/rollup";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
@@ -29,43 +73,57 @@ import rehypeSlug from "rehype-slug";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
-function createRollupPluginMdx() {
-  return rollupPluginMdx({
-    remarkPlugins: [
-      remarkGfm,
-      // github的md语法
-      remarkFrontmatter,
-      // md模块导出frontmatter变量
-      remarkMdxFrontmatter
-      // mdx模块导出frontmatter变量
-    ],
-    rehypePlugins: [
-      rehypeSlug,
-      // 自动添加h1-h6的id
-      [
-        rehypeAutolinkHeadings,
-        // 自动添加h1-h6的<a><a/>锚点，href是id
-        {
-          // 用hast定义锚点内容元素 https://github.com/syntax-tree/hast#nodes
-          content: {
-            type: "element",
-            tagName: "span",
-            children: [{ type: "text", value: "#" }],
-            properties: {
-              class: "autolink-headings",
-              style: "margin-right: 4px;"
+function vitePluginMdx() {
+  return {
+    enforce: "pre",
+    // 兼容rollupPluginMdx与vite-plugin-react https://github.com/vitejs/vite-plugin-react/issues/38
+    async handleHotUpdate(ctx) {
+      if (/\.mdx?/.test(ctx.file)) {
+        ctx.server.ws.send({
+          type: "custom",
+          event: "mdx-update",
+          data: { file: ctx.file }
+        });
+      }
+    },
+    ...rollupPluginMdx({
+      remarkPlugins: [
+        remarkGfm,
+        // github的md语法
+        remarkFrontmatter,
+        // md模块导出frontmatter变量
+        remarkMdxFrontmatter,
+        // mdx模块导出frontmatter变量
+        remarkMdxToc
+      ],
+      rehypePlugins: [
+        rehypeSlug,
+        // 自动添加h1-h6的id
+        [
+          rehypeAutolinkHeadings,
+          // 自动添加h1-h6的<a><a/>锚点，href是id
+          {
+            // 用hast定义锚点内容元素 https://github.com/syntax-tree/hast#nodes
+            content: {
+              type: "element",
+              tagName: "span",
+              children: [{ type: "text", value: "#" }],
+              properties: {
+                class: "autolink-headings",
+                style: "margin-right: 4px;"
+              }
             }
           }
-        }
-      ],
-      [
-        rehypePrettyCode,
-        {
-          theme: "github-light"
-        }
+        ],
+        [
+          rehypePrettyCode,
+          {
+            theme: "github-light"
+          }
+        ]
       ]
-    ]
-  });
+    })
+  };
 }
 
 // src/node/plugins/vitePluginServeHtml.ts
@@ -80,16 +138,18 @@ function vitePluginServeHtml({
     configureServer(server) {
       return () => {
         server.middlewares.use(async (req, res, next) => {
-          if (!req.url?.endsWith(".html") && req.url !== "/") {
+          var _a, _b;
+          if (!((_a = req.url) == null ? void 0 : _a.endsWith(".html")) && req.url !== "/") {
             return next();
           }
           try {
             const template = await fse.readFile(templatePath, "utf-8");
-            const viteHtml = await server.transformIndexHtml?.(
+            const viteHtml = await ((_b = server.transformIndexHtml) == null ? void 0 : _b.call(
+              server,
               req.url,
               template,
               req.originalUrl
-            );
+            ));
             const html = viteHtml.replace(
               "</body>",
               `
@@ -185,15 +245,15 @@ function vitePluginVirtualRoutes({
 
 // src/node/plugins/createPlugins.ts
 import pluginReact from "@vitejs/plugin-react";
+import tsconfigPaths from "vite-tsconfig-paths";
 function createPlugins({
   root = process.cwd(),
   siteConfig,
   restartRuntimeDevServer
 }) {
   return [
-    { enforce: "pre", ...createRollupPluginMdx() },
-    // 结合mdx与vite-plugin-react https://github.com/vitejs/vite-plugin-react/issues/38
-    pluginReact({ include: /\.(mdx|js|jsx|ts|tsx)$/ }),
+    vitePluginMdx(),
+    pluginReact({ include: /\.(md|mdx|js|jsx|ts|tsx)$/ }),
     // 根据热更新规则，仅导出组件时才能保证热更新正确，因为组件副作用是确定的，所以mdx导出frontmatter等对象会提示但是仍然尝试生效，这规则是react refresh特性，所以webpack热更新插件也是这样 https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#consistent-components-exports https://github.com/pmmmwh/react-refresh-webpack-plugin/issues/249#issuecomment-729277683
     vitePluginServeHtml({
       templatePath: HTML_PATH,
@@ -201,7 +261,9 @@ function createPlugins({
       // /@fs/是针对root之外的，当作为npm包时在nodemodules中属于root内，不需要使用 https://cn.vitejs.dev/config/server-options.html#server-fs-allow
     }),
     vitePluginVirtualConfig({ siteConfig, restartRuntimeDevServer }),
-    vitePluginVirtualRoutes({ root })
+    vitePluginVirtualRoutes({ root }),
+    tsconfigPaths()
+    // vite-env.d.ts中declare虚拟模块引入的类型需要绝对路径，所以使用路径别名插件解析tsconfig的baseurl
   ];
 }
 
@@ -261,9 +323,9 @@ async function renderHtmls({
   const serverEntryPath = path4.join(
     root,
     "./server",
-    serverEntryChunk?.fileName
+    serverEntryChunk == null ? void 0 : serverEntryChunk.fileName
   );
-  const clientEntryPath = `/${clientEntryChunk?.fileName}`;
+  const clientEntryPath = `/${clientEntryChunk == null ? void 0 : clientEntryChunk.fileName}`;
   const { render, routes } = await import(serverEntryPath);
   const template = await fse2.readFile(HTML_PATH, "utf-8");
   await Promise.all(
@@ -301,10 +363,10 @@ async function resolveSiteConfig({
     command
   });
   const valuableUserConfig = {
-    title: userConfig?.title || "EASYPRESS",
-    description: userConfig?.description || "SSG Framework",
-    themeConfig: userConfig?.themeConfig ?? {},
-    vite: userConfig?.vite ?? {}
+    title: (userConfig == null ? void 0 : userConfig.title) || "EASYPRESS",
+    description: (userConfig == null ? void 0 : userConfig.description) || "SSG Framework",
+    themeConfig: (userConfig == null ? void 0 : userConfig.themeConfig) ?? {},
+    vite: (userConfig == null ? void 0 : userConfig.vite) ?? {}
   };
   const siteConfig = {
     root,
@@ -326,7 +388,7 @@ async function resolveUserConfig({
   );
   return {
     userConfigPath,
-    userConfig: loadResult?.config
+    userConfig: loadResult == null ? void 0 : loadResult.config
   };
 }
 function getUserConfigPath({ root = process.cwd() }) {

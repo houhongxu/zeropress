@@ -1,10 +1,12 @@
 {
   "compilerOptions": {
-    "skipLibCheck": true,
-    "target": "ESNext",
-    "module": "CommonJS",
     "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "jsx": "react-jsx",
+    "baseUrl": "./src",
   },
 }

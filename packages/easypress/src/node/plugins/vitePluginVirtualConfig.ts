@@ -1,4 +1,4 @@
-import { EasypressSiteConfig } from '../../shared/types'
+import { EasypressSiteConfig } from 'shared/types'
 import { Plugin } from 'vite'
 
 interface vitePluginVirtualConfigOptions {

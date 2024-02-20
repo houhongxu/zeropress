@@ -3,7 +3,7 @@ import path from 'path'
 /**
  * 以产物lib文件夹内入口cli.js为基准
  */
-export const ROOT_PATH = path.join(__dirname, '..')
+export const ROOT_PATH = path.join(__dirname, '..', '..')
 
 export const SRC_PATH = path.join(ROOT_PATH, './src')
 

@@ -1,7 +1,7 @@
-import { EasypressUserConfig, EasypressSiteConfig } from '../shared/types'
 import { CONFIG_OPTIONS } from './consts'
 import fse from 'fs-extra'
 import path from 'path'
+import { EasypressUserConfig, EasypressSiteConfig } from 'shared/types'
 import { loadConfigFromFile } from 'vite'
 
 /**

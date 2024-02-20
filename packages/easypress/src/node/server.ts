@@ -1,6 +1,6 @@
-import { EasypressSiteConfig } from '../shared/types'
 import { ROOT_PATH } from './consts'
 import { createPlugins } from './plugins'
+import { EasypressSiteConfig } from 'shared/types'
 import { createServer } from 'vite'
 
 // 因为是ssg所以dev使用传统的服务模式，如果是ssr dev也需要服务端返回html

@@ -13,6 +13,6 @@ var __copyProps = (to, from, except, desc) => {
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// src/node/index.ts
-var node_exports = {};
-module.exports = __toCommonJS(node_exports);
+// src/index.ts
+var src_exports = {};
+module.exports = __toCommonJS(src_exports);
