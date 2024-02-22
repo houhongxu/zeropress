@@ -9,8 +9,8 @@ declare module 'virtual:config' {
 }
 
 declare module 'virtual:routes' {
-  import { RouteObject } from 'react-router-dom'
+  import { Route } from 'shared/types'
 
-  const routes: RouteObject[]
+  const routes: Route[]
   export default routes
 }

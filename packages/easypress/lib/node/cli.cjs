@@ -108,10 +108,10 @@ function vitePluginMdx() {
     // 兼容rollupPluginMdx与vite-plugin-react https://github.com/vitejs/vite-plugin-react/issues/38
     async handleHotUpdate(ctx) {
       if (/\.mdx?/.test(ctx.file)) {
+        console.log(ctx.file);
         ctx.server.ws.send({
           type: "custom",
-          event: "mdx-update",
-          data: { file: ctx.file }
+          event: "mdx?-update"
         });
       }
     },
@@ -260,7 +260,7 @@ function vitePluginVirtualRoutes({
           const fileBaseName = import_path2.default.basename(file, import_path2.default.extname(file));
           importTemplate += `import Element${index + 1} from '${file}';
 `;
-          return `{ path: '/${fileBaseName.replace(/index$/, "")}', element: React.createElement(Element${index + 1}) },
+          return `{ path: '/${fileBaseName.replace(/index$/, "")}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },
 `;
         });
         return `

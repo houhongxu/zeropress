@@ -1,4 +1,5 @@
 import { UserConfig } from 'vite';
+import { ReactElement } from 'react';
 
 interface EasypressUserConfig {
     title?: string;
@@ -41,10 +42,35 @@ interface EasypressSiteConfig {
     userConfig: EasypressUserConfig;
 }
 
+type PageType = 'home' | 'doc' | 'custom' | '404';
+interface PageData {
+    userConfig: EasypressUserConfig;
+    pagePath: string;
+    pageType: PageType;
+    toc: TocItem[];
+    frontmatter?: FrontMatter;
+}
+interface PageModule {
+    default: ReactElement;
+    frontmatter?: FrontMatter;
+    toc: TocItem[];
+    [key: string]: unknown;
+}
 interface TocItem {
     id: string;
     text: string;
     depth: number;
 }
+interface FrontMatter {
+    title?: string;
+    description?: string;
+    pageType?: PageType;
+}
 
-export type { EasypressSiteConfig, EasypressUserConfig, Footer, NavItemWithLink, Sidebar, SidebarGroup, SidebarItem, ThemeConfig, TocItem };
+interface Route {
+    path: string;
+    element: React.ReactElement;
+    preload: () => Promise<PageModule>;
+}
+
+export type { EasypressSiteConfig, EasypressUserConfig, Footer, FrontMatter, NavItemWithLink, PageData, PageModule, PageType, Route, Sidebar, SidebarGroup, SidebarItem, ThemeConfig, TocItem };

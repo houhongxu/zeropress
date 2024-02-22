@@ -1,7 +1,6 @@
 import { remarkMdxToc } from './remarkMdxToc'
 import rollupPluginMdx from '@mdx-js/rollup'
 import { ElementContent } from 'hast'
-import { ROOT_PATH } from 'node/consts'
 import rehypeAutolinkHeadings, {
   Options as RehypeAutolinkHeadingsOptions,
 } from 'rehype-autolink-headings'
@@ -24,10 +23,11 @@ export function vitePluginMdx(): Plugin {
     async handleHotUpdate(ctx) {
       // https://cn.vitejs.dev/guide/api-plugin.html#handlehotupdate
       if (/\.mdx?/.test(ctx.file)) {
+        console.log(ctx.file)
+
         ctx.server.ws.send({
           type: 'custom',
-          event: 'mdx-update',
-          data: { file: ctx.file },
+          event: 'mdx?-update',
         })
       }
     },
