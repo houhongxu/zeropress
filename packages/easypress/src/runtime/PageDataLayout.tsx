@@ -12,9 +12,9 @@ export function PageDataLayout({ children }: PropsWithChildren) {
   useEffect(() => {
     // mdx更新后重新获取pageData
     if (import.meta.env.DEV && import.meta.hot) {
-      import.meta.hot.on('mdx?-update', async () => {
-        getPageData(location.pathname).then(setPageData)
-      })
+      import.meta.hot.on('mdx?-update', () =>
+        getPageData(location.pathname).then(setPageData),
+      )
     }
   })
 

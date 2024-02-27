@@ -1,7 +1,7 @@
-import { EasypressUserConfig } from './user-config'
+import { UserConfig } from './user-config'
 
-export interface EasypressSiteConfig {
+export interface SiteConfig {
   root: string
   userConfigPath?: string
-  userConfig: EasypressUserConfig
+  userConfig: UserConfig
 }

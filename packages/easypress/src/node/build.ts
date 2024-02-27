@@ -1,10 +1,17 @@
-import { CLIENT_ENTRY_PATH, HTML_PATH, SERVER_ENTRY_PATH } from './consts'
+import {
+  CLIENT_ENTRY_PATH,
+  CLIENT_OUT_PATH,
+  HTML_PATH,
+  ROOT_PATH,
+  SERVER_ENTRY_PATH,
+  SERVER_OUT_PATH,
+} from './consts'
 import { createPlugins } from './plugins'
 import fse from 'fs-extra'
 import path from 'path'
 import { RouteObject } from 'react-router-dom'
 import { RollupOutput } from 'rollup'
-import { EasypressSiteConfig } from 'shared/types'
+import { SiteConfig } from 'shared/types'
 import { build } from 'vite'
 
 export async function buildRuntime({
@@ -12,7 +19,7 @@ export async function buildRuntime({
   siteConfig,
 }: {
   root?: string
-  siteConfig: EasypressSiteConfig
+  siteConfig: SiteConfig
 }) {
   // 分为运行时的client构建水合的js与server构建渲染html的js
   const [clientBundle, serverBundle] = await Promise.all([
@@ -34,20 +41,22 @@ function viteBuild({
 }: {
   root?: string
   isServer?: boolean
-  siteConfig: EasypressSiteConfig
+  siteConfig: SiteConfig
 }) {
   return build({
     mode: 'production',
-    root,
+    root: ROOT_PATH, // 获取postcss等配置文件
     plugins: createPlugins({ root, siteConfig }),
     build: {
       ssr: isServer,
-      outDir: isServer ? 'server' : 'client',
+      outDir: isServer
+        ? path.join(ROOT_PATH, SERVER_OUT_PATH)
+        : path.join(root, CLIENT_OUT_PATH),
       rollupOptions: {
         input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
         output: {
           entryFileNames: isServer ? 'server-entry.js' : 'client-entry.js',
-          format: isServer ? 'cjs' : 'es',
+          format: 'es',
         },
       },
     },
@@ -85,12 +94,12 @@ async function renderHtmls({
   )
 
   const serverEntryPath = path.join(
-    root,
-    './server',
+    ROOT_PATH,
+    SERVER_OUT_PATH,
     serverEntryChunk?.fileName,
   )
 
-  // 服务路径是client文件夹所以相对路径就可以了
+  // 部署后服务路径是CLIENT_OUT_PATH文件夹所以相对路径就可以了
   const clientEntryPath = `/${clientEntryChunk?.fileName}`
 
   const { render, routes } = (await import(serverEntryPath)) as {
@@ -123,8 +132,11 @@ async function renderHtmls({
             .join('\n'),
         )
 
-      await fse.ensureDir(path.join(root, 'client'))
-      await fse.writeFile(path.join(root, `client${location}.html`), html)
+      await fse.ensureDir(path.join(root, CLIENT_OUT_PATH))
+      await fse.writeFile(
+        path.join(root, `${CLIENT_OUT_PATH}${location}.html`),
+        html,
+      )
     }),
   )
 }

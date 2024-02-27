@@ -8,7 +8,10 @@ import routes from 'virtual:routes'
 export function Content() {
   const element = useRoutes(routes)
 
-  console.log('文件路由', routes)
+  console.log(
+    '文件路由',
+    routes.map((i) => i.path),
+  )
 
   return element
 }

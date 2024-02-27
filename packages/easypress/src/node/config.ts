@@ -1,7 +1,7 @@
 import { CONFIG_OPTIONS } from './consts'
 import fse from 'fs-extra'
 import path from 'path'
-import { EasypressUserConfig, EasypressSiteConfig } from 'shared/types'
+import { UserConfig, SiteConfig } from 'shared/types'
 import { loadConfigFromFile } from 'vite'
 
 /**
@@ -30,7 +30,7 @@ export async function resolveSiteConfig({
     vite: userConfig?.vite ?? {},
   }
 
-  const siteConfig: EasypressSiteConfig = {
+  const siteConfig: SiteConfig = {
     root,
     userConfigPath,
     userConfig: valuableUserConfig,
@@ -59,7 +59,7 @@ export async function resolveUserConfig({
 
   return {
     userConfigPath,
-    userConfig: loadResult?.config as EasypressUserConfig | undefined,
+    userConfig: loadResult?.config as UserConfig | undefined,
   }
 }
 

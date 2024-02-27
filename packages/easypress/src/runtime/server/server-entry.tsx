@@ -1,6 +1,7 @@
 import { Layout } from '../default-theme/Layout'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom/server'
+import { PageDataLayout } from 'runtime/PageDataLayout'
 import routes from 'virtual:routes'
 
 /**
@@ -10,9 +11,11 @@ import routes from 'virtual:routes'
 export function render(location: string) {
   // https://reactrouter.com/en/main/guides/ssr#without-a-data-router
   const html = renderToString(
-    <StaticRouter location={location}>
-      <Layout></Layout>
-    </StaticRouter>,
+    <PageDataLayout>
+      <StaticRouter location={location}>
+        <Layout></Layout>
+      </StaticRouter>
+    </PageDataLayout>,
   )
 
   return html

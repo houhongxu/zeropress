@@ -2,9 +2,9 @@
   "name": "examples",
   "description": "",
   "scripts": {
-    "dev": "easypress docs",
-    "build": "easypress build docs",
-    "serve": "npm run build docs && serve ./docs/client"
+    "dev": "easypress",
+    "build": "easypress build",
+    "serve": "npm run build && serve ./dist"
   },
   "keywords": [],
   "author": "",

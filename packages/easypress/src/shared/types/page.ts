@@ -1,10 +1,10 @@
-import { EasypressUserConfig } from './user-config'
+import { UserConfig } from './user-config'
 import { ReactElement } from 'react'
 
 export type PageType = 'home' | 'doc' | 'custom' | '404'
 
 export interface PageData {
-  userConfig: EasypressUserConfig
+  userConfig: UserConfig
   pagePath: string
   pageType: PageType
   toc: TocItem[]

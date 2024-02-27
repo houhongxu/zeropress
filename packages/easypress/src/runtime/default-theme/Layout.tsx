@@ -3,6 +3,7 @@ import { Doc } from './components/Doc'
 import { Hello } from './components/Hello'
 import { NotFount } from './components/NotFount'
 import './styles/base.css'
+import { Link } from 'react-router-dom'
 import { usePageData } from 'runtime/usePageData'
 
 /**
@@ -10,7 +11,7 @@ import { usePageData } from 'runtime/usePageData'
  */
 export function Layout() {
   const { pageData } = usePageData()
-  console.log(pageData)
+  console.log('页面数据：', pageData)
 
   const getPage = () => {
     const pageType = pageData?.pageType
@@ -25,9 +26,9 @@ export function Layout() {
   }
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div className="p-[40px]">
       {getPage()}
-
+      <Link to={'/markx'}>go to markx</Link>
       <Content></Content>
     </div>
   )

@@ -8,7 +8,7 @@ import Counter from './count.tsx'
 
 <Counter />
 
-<div style={{ background: 'red' }}>我是jsx的div</div>
+<div style={{ background: 'red', margin: 10 }}>我是jsx的div</div>
 
 ```ts
 export async function createRuntimeDevServer({
@@ -17,7 +17,7 @@ export async function createRuntimeDevServer({
   restartRuntimeDevServer,
 }: {
   root?: string
-  siteConfig: EasypressSiteConfig
+  siteConfig: SiteConfig
   restartRuntimeDevServer: () => Promise<void>
 }) {
   return createServer({

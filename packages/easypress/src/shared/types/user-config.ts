@@ -1,10 +1,10 @@
-import { UserConfig } from 'vite'
+import { UserConfig as ViteUserConfig } from 'vite'
 
-export interface EasypressUserConfig {
+export interface UserConfig {
   title?: string
   description?: string
   themeConfig?: ThemeConfig
-  vite?: UserConfig
+  vite?: ViteUserConfig
 }
 
 export interface ThemeConfig {

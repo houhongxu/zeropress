@@ -1,11 +1,13 @@
-import { UserConfig } from 'vite';
+import { UserConfig as UserConfig$1 } from 'vite';
+import * as react from 'react';
 import { ReactElement } from 'react';
+import * as zustand from 'zustand';
 
-interface EasypressUserConfig {
+interface UserConfig {
     title?: string;
     description?: string;
     themeConfig?: ThemeConfig;
-    vite?: UserConfig;
+    vite?: UserConfig$1;
 }
 interface ThemeConfig {
     nav?: NavItemWithLink[];
@@ -36,15 +38,15 @@ interface Footer {
     copyright?: string;
 }
 
-interface EasypressSiteConfig {
+interface SiteConfig {
     root: string;
     userConfigPath?: string;
-    userConfig: EasypressUserConfig;
+    userConfig: UserConfig;
 }
 
 type PageType = 'home' | 'doc' | 'custom' | '404';
 interface PageData {
-    userConfig: EasypressUserConfig;
+    userConfig: UserConfig;
     pagePath: string;
     pageType: PageType;
     toc: TocItem[];
@@ -73,4 +75,16 @@ interface Route {
     preload: () => Promise<PageModule>;
 }
 
-export type { EasypressSiteConfig, EasypressUserConfig, Footer, FrontMatter, NavItemWithLink, PageData, PageModule, PageType, Route, Sidebar, SidebarGroup, SidebarItem, ThemeConfig, TocItem };
+/**
+ * 路由内容
+ * @description 通过虚拟模块提供spa路由内容
+ */
+declare function Content(): react.ReactElement<any, string | react.JSXElementConstructor<any>> | null;
+
+declare function getPageData(pathname: string): Promise<PageData>;
+declare const usePageData: zustand.UseBoundStore<zustand.StoreApi<{
+    pageData?: PageData | undefined;
+    setPageData: (pageData?: PageData) => void;
+}>>;
+
+export { Content, type Footer, type FrontMatter, type NavItemWithLink, type PageData, type PageModule, type PageType, type Route, type Sidebar, type SidebarGroup, type SidebarItem, type SiteConfig, type ThemeConfig, type TocItem, type UserConfig, getPageData, usePageData };

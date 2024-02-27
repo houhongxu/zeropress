@@ -4,8 +4,8 @@
   "description": "easier SSG framework",
   "scripts": {
     "build:comment": "echo 多入口打包，tsup不打包node_modules，--shims兼容esm与cjs的全局变量如__dirname，--no-splitting兼容shims，让shims不分割为chunk影响__dirname等路径，npm run build --watch无法接受watch参数，pnpm又固定了包管理器，所以复制build命令到dev",
-    "build": "tsup ./src/node/cli.ts ./src/index.ts --shims --no-splitting --format cjs,esm --dts  --outDir=./lib",
-    "dev": "cross-env NODE_ENV=development tsup ./src/node/cli.ts ./src/index.ts --shims --no-splitting --format cjs,esm --dts  --outDir=./lib --watch",
+    "build": "tsup ./src/node/cli.ts ./src/index.ts --shims --no-splitting --format cjs,esm --dts --external virtual:routes --external virtual:config --outDir=./lib",
+    "dev": "cross-env NODE_ENV=development tsup ./src/node/cli.ts ./src/index.ts --shims --no-splitting --format cjs,esm --dts --external virtual:routes --external virtual:config  --outDir=./lib --watch",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "type": "module",
@@ -18,13 +18,16 @@
     "./bin"
   ],
   "dependencies": {
+    "@iconify/tailwind": "^0.1.4",
     "@mdx-js/rollup": "^3.0.1",
     "@vitejs/plugin-react": "^4.2.1",
     "acorn": "^8.11.3",
+    "autoprefixer": "^10.4.17",
     "commander": "^11.1.0",
     "fast-glob": "^3.3.2",
     "fs-extra": "^11.2.0",
     "github-slugger": "^2.0.0",
+    "postcss": "^8.4.35",
     "react-router-dom": "^6.22.0",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-pretty-code": "^0.13.0",
@@ -33,6 +36,7 @@
     "remark-gfm": "^4.0.0",
     "remark-mdx-frontmatter": "^4.0.0",
     "shiki": "^1.1.2",
+    "tailwindcss": "^3.4.1",
     "unist-util-visit": "^5.0.0",
     "vite": "^5.0.8",
     "vite-tsconfig-paths": "^4.3.1",

@@ -4,7 +4,7 @@ import { vitePluginServeHtml } from './vitePluginServeHtml'
 import { vitePluginVirtualConfig } from './vitePluginVirtualConfig'
 import { vitePluginVirtualRoutes } from './vitePluginVirtualRoutes'
 import pluginReact from '@vitejs/plugin-react'
-import { EasypressSiteConfig } from 'shared/types'
+import { SiteConfig } from 'shared/types'
 import { PluginOption } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
@@ -14,7 +14,7 @@ export function createPlugins({
   restartRuntimeDevServer,
 }: {
   root?: string
-  siteConfig: EasypressSiteConfig
+  siteConfig: SiteConfig
   restartRuntimeDevServer?: () => Promise<void>
 }): PluginOption[] {
   return [

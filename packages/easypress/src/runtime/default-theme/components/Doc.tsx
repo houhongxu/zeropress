@@ -1,3 +1,3 @@
 export function Doc() {
-  return <div>Doc</div>
+  return <div className="bg-red">Doc</div>
 }

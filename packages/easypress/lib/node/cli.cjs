@@ -47,6 +47,8 @@ var SERVER_ENTRY_PATH = import_path.default.join(
   RUNTIME_PATH,
   "./server/server-entry.tsx"
 );
+var SERVER_OUT_PATH = "./.easypress";
+var CLIENT_OUT_PATH = "./dist";
 var HTML_PATH = import_path.default.join(ROOT_PATH, "./index.html");
 var CONFIG_OPTIONS = ["easypress.config.ts", "easypress.config.js"];
 
@@ -317,16 +319,17 @@ function viteBuild({
 }) {
   return (0, import_vite.build)({
     mode: "production",
-    root,
+    root: ROOT_PATH,
+    // 获取postcss等配置文件
     plugins: createPlugins({ root, siteConfig }),
     build: {
       ssr: isServer,
-      outDir: isServer ? "server" : "client",
+      outDir: isServer ? import_path3.default.join(ROOT_PATH, SERVER_OUT_PATH) : import_path3.default.join(root, CLIENT_OUT_PATH),
       rollupOptions: {
         input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
         output: {
           entryFileNames: isServer ? "server-entry.js" : "client-entry.js",
-          format: isServer ? "cjs" : "es"
+          format: "es"
         }
       }
     }
@@ -350,8 +353,8 @@ async function renderHtmls({
     (chunk) => chunk.type === "asset" && chunk.fileName.endsWith(".css")
   );
   const serverEntryPath = import_path3.default.join(
-    root,
-    "./server",
+    ROOT_PATH,
+    SERVER_OUT_PATH,
     serverEntryChunk == null ? void 0 : serverEntryChunk.fileName
   );
   const clientEntryPath = `/${clientEntryChunk == null ? void 0 : clientEntryChunk.fileName}`;
@@ -371,8 +374,11 @@ async function renderHtmls({
         "</head>",
         styleAssets.map((asset) => `<link rel="stylesheet" href="/${asset.fileName}">`).join("\n")
       );
-      await import_fs_extra2.default.ensureDir(import_path3.default.join(root, "client"));
-      await import_fs_extra2.default.writeFile(import_path3.default.join(root, `client${location}.html`), html);
+      await import_fs_extra2.default.ensureDir(import_path3.default.join(root, CLIENT_OUT_PATH));
+      await import_fs_extra2.default.writeFile(
+        import_path3.default.join(root, `${CLIENT_OUT_PATH}${location}.html`),
+        html
+      );
     })
   );
 }
@@ -423,11 +429,49 @@ async function resolveUserConfig({
 function getUserConfigPath({ root = process.cwd() }) {
   const userConfigPath = CONFIG_OPTIONS.map(
     (option) => import_path4.default.join(root, option)
-  ).find((path6) => import_fs_extra3.default.existsSync(path6));
+  ).find((path7) => import_fs_extra3.default.existsSync(path7));
   return userConfigPath;
 }
 
+// src/node/tailwindcss.ts
+var import_tailwind = require("@iconify/tailwind");
+var import_path5 = __toESM(require("path"), 1);
+var tailwindcssConfig = {
+  content: [import_path5.default.join(ROOT_PATH, "./src/runtime/**/*.{tsx,ts,jsx,js}")],
+  theme: {
+    extend: {
+      colors: {
+        divider: {
+          light: "rgba(60, 60, 60, 0.29)",
+          dark: "rgba(84, 84, 84, 0.48)"
+        },
+        bg: {
+          soft: { light: "#f9f9f9", dark: "#242424" }
+        },
+        text: {
+          light: {
+            1: "#213547",
+            2: "rgba(60, 60, 60, 0.7)",
+            3: "rgba(60, 60, 60, 0.33)",
+            4: "rgba(60, 60, 60, 0.18)"
+          },
+          dark: {
+            1: "rgba(255, 255, 255, 0.87)",
+            2: "rgba(235, 235, 235, 0.6)",
+            3: "rgba(235, 235, 235, 0.38)",
+            4: "rgba(235, 235, 235, 0.18)"
+          }
+        }
+      },
+      spacing: { nav: "56px", sidebar: "272px", toc: "252px" }
+    }
+  },
+  plugins: [(0, import_tailwind.addDynamicIconSelectors)()]
+};
+
 // src/node/server.ts
+var import_autoprefixer = __toESM(require("autoprefixer"), 1);
+var import_tailwindcss2 = __toESM(require("tailwindcss"), 1);
 var import_vite3 = require("vite");
 async function createRuntimeDevServer({
   root = process.cwd(),
@@ -435,11 +479,14 @@ async function createRuntimeDevServer({
   restartRuntimeDevServer
 }) {
   return (0, import_vite3.createServer)({
-    root: ROOT_PATH,
+    root: siteConfig.root,
     // 避免dev服务访问路由时直接访问静态tsx资源，所以在/开启服务，路由一般在/docs内
     server: {
       host: true
       // 开启局域网与公网ip
+    },
+    css: {
+      postcss: { plugins: [(0, import_tailwindcss2.default)(tailwindcssConfig), (0, import_autoprefixer.default)({})] }
     },
     plugins: createPlugins({ root, restartRuntimeDevServer, siteConfig })
   });
@@ -448,12 +495,12 @@ async function createRuntimeDevServer({
 // src/node/cli.ts
 var import_commander = require("commander");
 var import_fs_extra4 = __toESM(require("fs-extra"), 1);
-var import_path5 = __toESM(require("path"), 1);
+var import_path6 = __toESM(require("path"), 1);
 var cli = import_commander.program;
-var { version } = import_fs_extra4.default.readJSONSync(import_path5.default.join(ROOT_PATH, "./package.json"));
+var { version } = import_fs_extra4.default.readJSONSync(import_path6.default.join(ROOT_PATH, "./package.json"));
 cli.name("easypress").version(version);
 cli.command("dev", { isDefault: true }).argument("[root]", "dev server root dir", process.cwd()).description("dev server").option("-p,--port <value>", "dev server port").action(async (root, { port }) => {
-  const absRoot = import_path5.default.resolve(root);
+  const absRoot = import_path6.default.resolve(root);
   const createServer2 = async () => {
     const siteConfig = await resolveSiteConfig({
       mode: "development",
@@ -474,7 +521,7 @@ cli.command("dev", { isDefault: true }).argument("[root]", "dev server root dir"
 });
 cli.command("build").argument("[root]", "build root dir", process.cwd()).description("build").action(async (root) => {
   try {
-    const absRoot = import_path5.default.resolve(root);
+    const absRoot = import_path6.default.resolve(root);
     const siteConfig = await resolveSiteConfig({
       mode: "production",
       command: "build"

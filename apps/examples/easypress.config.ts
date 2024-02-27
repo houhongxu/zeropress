@@ -1,6 +1,6 @@
-import { EasypressUserConfig } from 'easypress'
+import { UserConfig } from 'easypress'
 
-const config: EasypressUserConfig = {
+const config: UserConfig = {
   title: 'EASYPRESS',
   description: 'u know me',
 }
