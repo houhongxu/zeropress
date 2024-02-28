@@ -1,9 +1,8 @@
-import { Content } from '../Content'
-import { Doc } from './components/Doc'
-import { Hello } from './components/Hello'
-import { NotFount } from './components/NotFount'
+import { Doc } from './components/Doc/Doc'
+import { Home } from './components/Home'
+import { Nav } from './components/Nav'
+import { NotFound } from './components/NotFound'
 import './styles/base.css'
-import { Link } from 'react-router-dom'
 import { usePageData } from 'runtime/usePageData'
 
 /**
@@ -17,19 +16,19 @@ export function Layout() {
     const pageType = pageData?.pageType
 
     if (pageType === 'home') {
-      return <Hello></Hello>
+      return <Home></Home>
     } else if (pageType === 'doc') {
       return <Doc></Doc>
     } else {
-      return <NotFount></NotFount>
+      return <NotFound></NotFound>
     }
   }
 
   return (
-    <div className="p-[40px]">
+    <>
+      <Nav nav={pageData?.userConfig.themeConfig?.nav}></Nav>
+
       {getPage()}
-      <Link to={'/markx'}>go to markx</Link>
-      <Content></Content>
-    </div>
+    </>
   )
 }

@@ -1,18 +1,15 @@
-import { ROOT_PATH } from './consts'
+import { baseConfig } from './config'
 import { createPlugins } from './plugins'
-import { tailwindcssConfig } from './tailwindcss'
-import autoprefixer from 'autoprefixer'
 import { SiteConfig } from 'shared/types'
-import tailwindcss from 'tailwindcss'
 import { createServer } from 'vite'
 
 // 因为是ssg所以dev使用传统的服务模式，如果是ssr dev也需要服务端返回html
 export async function createRuntimeDevServer({
-  root = process.cwd(),
   siteConfig,
   restartRuntimeDevServer,
+  docs,
 }: {
-  root?: string
+  docs: string
   siteConfig: SiteConfig
   restartRuntimeDevServer: () => Promise<void>
 }) {
@@ -21,9 +18,11 @@ export async function createRuntimeDevServer({
     server: {
       host: true, // 开启局域网与公网ip
     },
-    css: {
-      postcss: { plugins: [tailwindcss(tailwindcssConfig), autoprefixer({})] },
-    },
-    plugins: createPlugins({ root, restartRuntimeDevServer, siteConfig }),
+    plugins: createPlugins({
+      restartRuntimeDevServer,
+      siteConfig,
+      docs,
+    }),
+    ...baseConfig,
   })
 }

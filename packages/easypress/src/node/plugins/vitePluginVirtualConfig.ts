@@ -29,6 +29,7 @@ export function vitePluginVirtualConfig({
     },
     async handleHotUpdate(ctx) {
       const configPath = siteConfig.userConfigPath || ''
+      console.log(ctx.file)
 
       if (ctx.file.includes(configPath)) {
         if (restartRuntimeDevServer) {

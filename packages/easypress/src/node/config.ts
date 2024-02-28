@@ -1,8 +1,19 @@
+import tailwindcssConfig from '../../tailwind.config'
 import { CONFIG_OPTIONS } from './consts'
+import autoprefixer from 'autoprefixer'
 import fse from 'fs-extra'
 import path from 'path'
 import { UserConfig, SiteConfig } from 'shared/types'
+import tailwindcss from 'tailwindcss'
 import { loadConfigFromFile } from 'vite'
+import { UserConfig as ViteUserConfig } from 'vite'
+
+export const baseConfig: Pick<ViteUserConfig, 'css'> = {
+  // 配置tailwindcss
+  css: {
+    postcss: { plugins: [tailwindcss(tailwindcssConfig), autoprefixer({})] },
+  },
+}
 
 /**
  * 读取并处理配置文件
@@ -17,23 +28,16 @@ export async function resolveSiteConfig({
   command: 'build' | 'serve'
   mode: 'development' | 'production'
 }) {
-  const { userConfigPath, userConfig } = await resolveUserConfig({
+  const { userConfigPath, userConfig = {} } = await resolveUserConfig({
     root,
     mode,
     command,
   })
 
-  const valuableUserConfig = {
-    title: userConfig?.title || 'EASYPRESS',
-    description: userConfig?.description || 'SSG Framework',
-    themeConfig: userConfig?.themeConfig ?? {},
-    vite: userConfig?.vite ?? {},
-  }
-
   const siteConfig: SiteConfig = {
     root,
     userConfigPath,
-    userConfig: valuableUserConfig,
+    userConfig,
   }
 
   return siteConfig

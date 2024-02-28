@@ -5,23 +5,118 @@ var getFilename = () => fileURLToPath(import.meta.url);
 var getDirname = () => path.dirname(getFilename());
 var __dirname = /* @__PURE__ */ getDirname();
 
-// src/node/consts.ts
+// tailwind.config.ts
+import { addDynamicIconSelectors } from "@iconify/tailwind";
 import path2 from "path";
-var ROOT_PATH = path2.join(__dirname, "..", "..");
-var SRC_PATH = path2.join(ROOT_PATH, "./src");
-var RUNTIME_PATH = path2.join(SRC_PATH, "./runtime");
-var CLIENT_ENTRY_PATH = path2.join(
+var tailwindcssConfig = {
+  content: [
+    path2.join(__dirname, "..", "..", "./src/runtime/**/*.{tsx,ts,jsx,js}")
+    // 相对于lib的路径，tailwind引入是在node/config,打包后是lib/node/cli
+  ],
+  darkMode: "selector",
+  theme: {
+    extend: {
+      /** 声明时dark在下面所以默认显示dark主题颜色 */
+      colors: {
+        divider: "var(--ep-color-divider)",
+        bg: {
+          soft: "var(--ep-color-bg-soft)",
+          mute: "var(--ep-color-bg-mute)",
+          inverse: "var(--ep-color-bg-inverse)"
+        },
+        text: {
+          1: "var(--ep-color-text-1)",
+          2: "var(--ep-color-text-2)",
+          3: "var(--ep-color-text-3)",
+          4: "var(--ep-color-text-4)"
+        },
+        gray: {
+          1: "var(--ep-color-gray-1)"
+        }
+      },
+      boxShadow: {
+        1: "0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06)",
+        2: "0 3px 12px rgba(0, 0, 0, 0.07), 0 1px 4px rgba(0, 0, 0, 0.07)",
+        3: "0 12px 32px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08)",
+        4: "0 14px 44px rgba(0, 0, 0, 0.12), 0 3px 9px rgba(0, 0, 0, 0.12)",
+        5: "0 18px 56px rgba(0, 0, 0, 0.16), 0 4px 12px rgba(0, 0, 0, 0.16)"
+      },
+      spacing: { nav: "56px", sidebar: "272px", toc: "252px" }
+    }
+  },
+  plugins: [addDynamicIconSelectors()]
+};
+var tailwind_config_default = tailwindcssConfig;
+
+// src/node/consts.ts
+import path3 from "path";
+var ROOT_PATH = path3.join(__dirname, "..", "..");
+var SRC_PATH = path3.join(ROOT_PATH, "./src");
+var RUNTIME_PATH = path3.join(SRC_PATH, "./runtime");
+var CLIENT_ENTRY_PATH = path3.join(
   RUNTIME_PATH,
   "./client/client-entry.tsx"
 );
-var SERVER_ENTRY_PATH = path2.join(
+var SERVER_ENTRY_PATH = path3.join(
   RUNTIME_PATH,
   "./server/server-entry.tsx"
 );
 var SERVER_OUT_PATH = "./.easypress";
 var CLIENT_OUT_PATH = "./dist";
-var HTML_PATH = path2.join(ROOT_PATH, "./index.html");
+var HTML_PATH = path3.join(ROOT_PATH, "./index.html");
 var CONFIG_OPTIONS = ["easypress.config.ts", "easypress.config.js"];
+
+// src/node/config.ts
+import autoprefixer from "autoprefixer";
+import fse from "fs-extra";
+import path4 from "path";
+import tailwindcss from "tailwindcss";
+import { loadConfigFromFile } from "vite";
+var baseConfig = {
+  // 配置tailwindcss
+  css: {
+    postcss: { plugins: [tailwindcss(tailwind_config_default), autoprefixer({})] }
+  }
+};
+async function resolveSiteConfig({
+  root = process.cwd(),
+  command,
+  mode
+}) {
+  const { userConfigPath, userConfig = {} } = await resolveUserConfig({
+    root,
+    mode,
+    command
+  });
+  const siteConfig = {
+    root,
+    userConfigPath,
+    userConfig
+  };
+  return siteConfig;
+}
+async function resolveUserConfig({
+  root = process.cwd(),
+  command,
+  mode
+}) {
+  const userConfigPath = getUserConfigPath({ root });
+  const loadResult = await loadConfigFromFile(
+    { command, mode },
+    userConfigPath,
+    root
+  );
+  return {
+    userConfigPath,
+    userConfig: loadResult == null ? void 0 : loadResult.config
+  };
+}
+function getUserConfigPath({ root = process.cwd() }) {
+  const userConfigPath = CONFIG_OPTIONS.map(
+    (option) => path4.join(root, option)
+  ).find((path8) => fse.existsSync(path8));
+  return userConfigPath;
+}
 
 // src/node/plugins/remarkMdxToc.ts
 import { parse } from "acorn";
@@ -129,7 +224,7 @@ function vitePluginMdx() {
 }
 
 // src/node/plugins/vitePluginServeHtml.ts
-import fse from "fs-extra";
+import fse2 from "fs-extra";
 function vitePluginServeHtml({
   templatePath,
   entry
@@ -145,7 +240,7 @@ function vitePluginServeHtml({
             return next();
           }
           try {
-            const template = await fse.readFile(templatePath, "utf-8");
+            const template = await fse2.readFile(templatePath, "utf-8");
             const viteHtml = await ((_b = server.transformIndexHtml) == null ? void 0 : _b.call(
               server,
               req.url,
@@ -195,6 +290,7 @@ function vitePluginVirtualConfig({
     },
     async handleHotUpdate(ctx) {
       const configPath = siteConfig.userConfigPath || "";
+      console.log(ctx.file);
       if (ctx.file.includes(configPath)) {
         if (restartRuntimeDevServer) {
           console.log("\u76D1\u542C\u5230\u914D\u7F6E\u6587\u4EF6\u66F4\u65B0\uFF0C\u91CD\u542F\u670D\u52A1\u4E2D...");
@@ -207,9 +303,9 @@ function vitePluginVirtualConfig({
 
 // src/node/plugins/vitePluginVirtualRoutes.ts
 import fg from "fast-glob";
-import path3 from "path";
+import path5 from "path";
 function vitePluginVirtualRoutes({
-  root = process.cwd()
+  docs
 }) {
   const virtualModuleId = "virtual:routes";
   const resolvedVirtualModuleId = "\0" + virtualModuleId;
@@ -224,13 +320,13 @@ function vitePluginVirtualRoutes({
       if (id === resolvedVirtualModuleId) {
         const files = await fg.glob("**/*.{jsx,tsx,md,mdx}", {
           ignore: ["node_modules/**", "client/**", "server/**"],
-          cwd: root,
+          cwd: docs,
           deep: 2,
           absolute: true
         });
         let importTemplate = 'import React from "react";\n';
         const routes = files.map((file, index) => {
-          const fileBaseName = path3.basename(file, path3.extname(file));
+          const fileBaseName = path5.basename(file, path5.extname(file));
           importTemplate += `import Element${index + 1} from '${file}';
 `;
           return `{ path: '/${fileBaseName.replace(/index$/, "")}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },
@@ -249,7 +345,7 @@ function vitePluginVirtualRoutes({
 import pluginReact from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
 function createPlugins({
-  root = process.cwd(),
+  docs,
   siteConfig,
   restartRuntimeDevServer
 }) {
@@ -263,53 +359,54 @@ function createPlugins({
       // /@fs/是针对root之外的，当作为npm包时在nodemodules中属于root内，不需要使用 https://cn.vitejs.dev/config/server-options.html#server-fs-allow
     }),
     vitePluginVirtualConfig({ siteConfig, restartRuntimeDevServer }),
-    vitePluginVirtualRoutes({ root }),
+    vitePluginVirtualRoutes({ docs }),
     tsconfigPaths()
     // vite-env.d.ts中declare虚拟模块引入的类型需要绝对路径，所以使用路径别名插件解析tsconfig的baseurl
   ];
 }
 
 // src/node/build.ts
-import fse2 from "fs-extra";
-import path4 from "path";
+import fse3 from "fs-extra";
+import path6 from "path";
 import { build } from "vite";
 async function buildRuntime({
-  root = process.cwd(),
-  siteConfig
+  siteConfig,
+  docs
 }) {
   const [clientBundle, serverBundle] = await Promise.all([
-    viteBuild({ root, siteConfig }),
-    viteBuild({ root, siteConfig, isServer: true })
+    viteBuild({ siteConfig, docs }),
+    viteBuild({ siteConfig, isServer: true, docs })
   ]);
-  await renderHtmls({ root, clientBundle, serverBundle });
+  await renderHtmls({ siteConfig, clientBundle, serverBundle });
 }
 function viteBuild({
-  root = process.cwd(),
   isServer = false,
+  docs,
   siteConfig
 }) {
   return build({
     mode: "production",
     root: ROOT_PATH,
     // 获取postcss等配置文件
-    plugins: createPlugins({ root, siteConfig }),
+    plugins: createPlugins({ siteConfig, docs }),
     build: {
       ssr: isServer,
-      outDir: isServer ? path4.join(ROOT_PATH, SERVER_OUT_PATH) : path4.join(root, CLIENT_OUT_PATH),
+      outDir: isServer ? path6.join(ROOT_PATH, SERVER_OUT_PATH) : path6.join(siteConfig.root, CLIENT_OUT_PATH),
       rollupOptions: {
         input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
         output: {
           entryFileNames: isServer ? "server-entry.js" : "client-entry.js",
           format: "es"
         }
-      }
+      },
+      ...baseConfig
     }
   });
 }
 async function renderHtmls({
-  root = process.cwd(),
   clientBundle,
-  serverBundle
+  serverBundle,
+  siteConfig
 }) {
   const clientEntryChunk = clientBundle.output.find(
     (chunk) => chunk.type === "chunk" && chunk.isEntry
@@ -323,14 +420,14 @@ async function renderHtmls({
   const styleAssets = clientBundle.output.filter(
     (chunk) => chunk.type === "asset" && chunk.fileName.endsWith(".css")
   );
-  const serverEntryPath = path4.join(
+  const serverEntryPath = path6.join(
     ROOT_PATH,
     SERVER_OUT_PATH,
     serverEntryChunk == null ? void 0 : serverEntryChunk.fileName
   );
   const clientEntryPath = `/${clientEntryChunk == null ? void 0 : clientEntryChunk.fileName}`;
   const { render, routes } = await import(serverEntryPath);
-  const template = await fse2.readFile(HTML_PATH, "utf-8");
+  const template = await fse3.readFile(HTML_PATH, "utf-8");
   await Promise.all(
     routes.map(async (route) => {
       const location = route.path === "/" ? "/index" : route.path || "/index";
@@ -345,109 +442,21 @@ async function renderHtmls({
         "</head>",
         styleAssets.map((asset) => `<link rel="stylesheet" href="/${asset.fileName}">`).join("\n")
       );
-      await fse2.ensureDir(path4.join(root, CLIENT_OUT_PATH));
-      await fse2.writeFile(
-        path4.join(root, `${CLIENT_OUT_PATH}${location}.html`),
+      await fse3.ensureDir(path6.join(siteConfig.root, CLIENT_OUT_PATH));
+      await fse3.writeFile(
+        path6.join(siteConfig.root, `${CLIENT_OUT_PATH}${location}.html`),
         html
       );
     })
   );
 }
 
-// src/node/config.ts
-import fse3 from "fs-extra";
-import path5 from "path";
-import { loadConfigFromFile } from "vite";
-async function resolveSiteConfig({
-  root = process.cwd(),
-  command,
-  mode
-}) {
-  const { userConfigPath, userConfig } = await resolveUserConfig({
-    root,
-    mode,
-    command
-  });
-  const valuableUserConfig = {
-    title: (userConfig == null ? void 0 : userConfig.title) || "EASYPRESS",
-    description: (userConfig == null ? void 0 : userConfig.description) || "SSG Framework",
-    themeConfig: (userConfig == null ? void 0 : userConfig.themeConfig) ?? {},
-    vite: (userConfig == null ? void 0 : userConfig.vite) ?? {}
-  };
-  const siteConfig = {
-    root,
-    userConfigPath,
-    userConfig: valuableUserConfig
-  };
-  return siteConfig;
-}
-async function resolveUserConfig({
-  root = process.cwd(),
-  command,
-  mode
-}) {
-  const userConfigPath = getUserConfigPath({ root });
-  const loadResult = await loadConfigFromFile(
-    { command, mode },
-    userConfigPath,
-    root
-  );
-  return {
-    userConfigPath,
-    userConfig: loadResult == null ? void 0 : loadResult.config
-  };
-}
-function getUserConfigPath({ root = process.cwd() }) {
-  const userConfigPath = CONFIG_OPTIONS.map(
-    (option) => path5.join(root, option)
-  ).find((path8) => fse3.existsSync(path8));
-  return userConfigPath;
-}
-
-// src/node/tailwindcss.ts
-import { addDynamicIconSelectors } from "@iconify/tailwind";
-import path6 from "path";
-var tailwindcssConfig = {
-  content: [path6.join(ROOT_PATH, "./src/runtime/**/*.{tsx,ts,jsx,js}")],
-  theme: {
-    extend: {
-      colors: {
-        divider: {
-          light: "rgba(60, 60, 60, 0.29)",
-          dark: "rgba(84, 84, 84, 0.48)"
-        },
-        bg: {
-          soft: { light: "#f9f9f9", dark: "#242424" }
-        },
-        text: {
-          light: {
-            1: "#213547",
-            2: "rgba(60, 60, 60, 0.7)",
-            3: "rgba(60, 60, 60, 0.33)",
-            4: "rgba(60, 60, 60, 0.18)"
-          },
-          dark: {
-            1: "rgba(255, 255, 255, 0.87)",
-            2: "rgba(235, 235, 235, 0.6)",
-            3: "rgba(235, 235, 235, 0.38)",
-            4: "rgba(235, 235, 235, 0.18)"
-          }
-        }
-      },
-      spacing: { nav: "56px", sidebar: "272px", toc: "252px" }
-    }
-  },
-  plugins: [addDynamicIconSelectors()]
-};
-
 // src/node/server.ts
-import autoprefixer from "autoprefixer";
-import tailwindcss from "tailwindcss";
 import { createServer } from "vite";
 async function createRuntimeDevServer({
-  root = process.cwd(),
   siteConfig,
-  restartRuntimeDevServer
+  restartRuntimeDevServer,
+  docs
 }) {
   return createServer({
     root: siteConfig.root,
@@ -456,10 +465,12 @@ async function createRuntimeDevServer({
       host: true
       // 开启局域网与公网ip
     },
-    css: {
-      postcss: { plugins: [tailwindcss(tailwindcssConfig), autoprefixer({})] }
-    },
-    plugins: createPlugins({ root, restartRuntimeDevServer, siteConfig })
+    plugins: createPlugins({
+      restartRuntimeDevServer,
+      siteConfig,
+      docs
+    }),
+    ...baseConfig
   });
 }
 
@@ -470,15 +481,15 @@ import path7 from "path";
 var cli = program;
 var { version } = fse4.readJSONSync(path7.join(ROOT_PATH, "./package.json"));
 cli.name("easypress").version(version);
-cli.command("dev", { isDefault: true }).argument("[root]", "dev server root dir", process.cwd()).description("dev server").option("-p,--port <value>", "dev server port").action(async (root, { port }) => {
-  const absRoot = path7.resolve(root);
+cli.command("dev", { isDefault: true }).description("dev server").option("-p,--port <value>", "dev server port").option("-d,--docs <value>", "docs dir", "docs").action(async ({ port, docs }) => {
   const createServer2 = async () => {
     const siteConfig = await resolveSiteConfig({
       mode: "development",
       command: "serve"
     });
+    const absDocs = path7.resolve(siteConfig.userConfig.docs || docs);
     const server = await createRuntimeDevServer({
-      root: absRoot,
+      docs: absDocs,
       siteConfig,
       restartRuntimeDevServer: async () => {
         await server.close();
@@ -490,14 +501,14 @@ cli.command("dev", { isDefault: true }).argument("[root]", "dev server root dir"
   };
   await createServer2();
 });
-cli.command("build").argument("[root]", "build root dir", process.cwd()).description("build").action(async (root) => {
+cli.command("build").description("build").option("-d,--docs <value>", "docs dir", "docs").action(async ({ docs }) => {
   try {
-    const absRoot = path7.resolve(root);
+    const absDocs = path7.resolve(docs);
     const siteConfig = await resolveSiteConfig({
       mode: "production",
       command: "build"
     });
-    await buildRuntime({ root: absRoot, siteConfig });
+    await buildRuntime({ siteConfig, docs: absDocs });
   } catch (e) {
     console.log(e);
   }

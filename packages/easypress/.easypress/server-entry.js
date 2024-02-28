@@ -1,6 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { useRoutes, matchRoutes, Link } from "react-router-dom";
+import { useRoutes, matchRoutes } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import classNames from "classnames";
 import { create } from "zustand";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server.mjs";
@@ -17,14 +18,29 @@ const count = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePropert
   a,
   default: Counter
 }, Symbol.toStringTag, { value: "Module" }));
-function Element2() {
-  return /* @__PURE__ */ jsx("div", { onClick: () => alert("index"), children: "index" });
+const toc$3 = [];
+const frontmatter$3 = {
+  "pageType": "home"
+};
+function _createMdxContent$3(props) {
+  return jsx(Fragment, {});
+}
+function MDXContent$3(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$3, {
+      ...props
+    })
+  }) : _createMdxContent$3();
 }
 const index = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: Element2
+  default: MDXContent$3,
+  frontmatter: frontmatter$3,
+  toc: toc$3
 }, Symbol.toStringTag, { value: "Module" }));
-const toc$1 = [{
+const toc$2 = [{
   "id": "gfm",
   "text": "GFM",
   "depth": 2
@@ -49,10 +65,10 @@ const toc$1 = [{
   "text": "Tasklist",
   "depth": 2
 }];
-const frontmatter$1 = {
+const frontmatter$2 = {
   "hello": "frontmatter"
 };
-function _createMdxContent$1(props) {
+function _createMdxContent$2(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -591,24 +607,24 @@ function _createMdxContent$1(props) {
     })]
   });
 }
-function MDXContent$1(props = {}) {
+function MDXContent$2(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$1, {
+    children: jsx(_createMdxContent$2, {
       ...props
     })
-  }) : _createMdxContent$1(props);
+  }) : _createMdxContent$2(props);
 }
 const markx = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: MDXContent$1,
-  frontmatter: frontmatter$1,
-  toc: toc$1
+  default: MDXContent$2,
+  frontmatter: frontmatter$2,
+  toc: toc$2
 }, Symbol.toStringTag, { value: "Module" }));
-const toc = [];
-const frontmatter = void 0;
-function _createMdxContent(props) {
+const toc$1 = [];
+const frontmatter$1 = void 0;
+function _createMdxContent$1(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -631,6 +647,53 @@ function _createMdxContent(props) {
     }), "汉字"]
   });
 }
+function MDXContent$1(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$1, {
+      ...props
+    })
+  }) : _createMdxContent$1(props);
+}
+const __$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: MDXContent$1,
+  frontmatter: frontmatter$1,
+  toc: toc$1
+}, Symbol.toStringTag, { value: "Module" }));
+function Element5() {
+  return /* @__PURE__ */ jsx("div", { children: "脚本" });
+}
+const __ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: Element5
+}, Symbol.toStringTag, { value: "Module" }));
+const toc = [];
+const frontmatter = void 0;
+function _createMdxContent(props) {
+  const _components = {
+    a: "a",
+    h1: "h1",
+    span: "span",
+    ...props.components
+  };
+  return jsxs(_components.h1, {
+    id: "dir",
+    children: [jsx(_components.a, {
+      "aria-hidden": "true",
+      tabIndex: "-1",
+      href: "#dir",
+      children: jsx(_components.span, {
+        className: "autolink-headings",
+        style: {
+          marginRight: "4px"
+        },
+        children: "#"
+      })
+    }), "dir"]
+  });
+}
 function MDXContent(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
@@ -640,25 +703,19 @@ function MDXContent(props = {}) {
     })
   }) : _createMdxContent(props);
 }
-const __$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const dir = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: MDXContent,
   frontmatter,
   toc
 }, Symbol.toStringTag, { value: "Module" }));
-function Element5() {
-  return /* @__PURE__ */ jsx("div", { children: "脚本" });
-}
-const __ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  default: Element5
-}, Symbol.toStringTag, { value: "Module" }));
 const routes = [
   { path: "/count", element: React.createElement(Counter), preload: () => Promise.resolve().then(() => count) },
-  { path: "/", element: React.createElement(Element2), preload: () => Promise.resolve().then(() => index) },
-  { path: "/markx", element: React.createElement(MDXContent$1), preload: () => Promise.resolve().then(() => markx) },
-  { path: "/汉字", element: React.createElement(MDXContent), preload: () => Promise.resolve().then(() => __$1) },
-  { path: "/脚本", element: React.createElement(Element5), preload: () => Promise.resolve().then(() => __) }
+  { path: "/", element: React.createElement(MDXContent$3), preload: () => Promise.resolve().then(() => index) },
+  { path: "/markx", element: React.createElement(MDXContent$2), preload: () => Promise.resolve().then(() => markx) },
+  { path: "/汉字", element: React.createElement(MDXContent$1), preload: () => Promise.resolve().then(() => __$1) },
+  { path: "/脚本", element: React.createElement(Element5), preload: () => Promise.resolve().then(() => __) },
+  { path: "/dir", element: React.createElement(MDXContent), preload: () => Promise.resolve().then(() => dir) }
 ];
 function Content() {
   const element = useRoutes(routes);
@@ -669,15 +726,69 @@ function Content() {
   return element;
 }
 function Doc() {
-  return /* @__PURE__ */ jsx("div", { className: "bg-red", children: "Doc" });
+  return /* @__PURE__ */ jsxs("div", { className: "bg-red", children: [
+    "Doc",
+    /* @__PURE__ */ jsx(Content, {})
+  ] });
 }
 function Hello() {
-  return /* @__PURE__ */ jsx("div", { children: "Hello" });
+  return /* @__PURE__ */ jsx("div", { className: "pt-nav h-screen bg-blue-100 flex justify-center items-center text-[10vw]", children: "EASYPRESS" });
+}
+function Nav({ nav }) {
+  return /* @__PURE__ */ jsx("header", { className: "w-full z-10 fixed top-0 left-0", children: /* @__PURE__ */ jsx(
+    "div",
+    {
+      className: classNames(
+        "flex items-center justify-between px-[32px] h-nav bg-transparent"
+      ),
+      children: /* @__PURE__ */ jsx("div", { className: "h-full flex", children: nav == null ? void 0 : nav.map((item) => {
+        if (item.text) {
+          return /* @__PURE__ */ jsx(TextItem, { item }, item.link + item.text);
+        } else if (item.logo) {
+          return /* @__PURE__ */ jsx(LogoItem, { item }, item.link + item.logo);
+        } else if (item.img) {
+          return /* @__PURE__ */ jsx(ImgItem, { item }, item.link + item.img);
+        } else {
+          return /* @__PURE__ */ jsx(Fragment, {});
+        }
+      }) })
+    }
+  ) });
+}
+function TextItem({ item }) {
+  const { text, link } = item;
+  if (!text) {
+    return /* @__PURE__ */ jsx(Fragment, {});
+  }
+  return /* @__PURE__ */ jsx("nav", { className: "h-full mx-[12px]", children: /* @__PURE__ */ jsx("a", { href: link, className: "h-full flex items-center", children: /* @__PURE__ */ jsx("span", { className: "whitespace-nowrap text-[14px] font-500 text-hover", children: text }) }) });
+}
+function LogoItem({ item }) {
+  const { logo, link } = item;
+  if (!logo) {
+    return /* @__PURE__ */ jsx(Fragment, {});
+  }
+  const logoMap = {
+    github: "icon-[carbon--logo-github]",
+    twitter: "icon-[carbon--logo-twitter]"
+  };
+  return /* @__PURE__ */ jsx("nav", { className: "h-full mx-[12px]", children: /* @__PURE__ */ jsx("a", { href: link, className: "h-full flex items-center", children: /* @__PURE__ */ jsx(
+    "span",
+    {
+      className: classNames(logoMap[logo], "w-[24px] h-[24px] text-hover")
+    }
+  ) }) });
+}
+function ImgItem({ item }) {
+  const { img, link } = item;
+  if (!img) {
+    return /* @__PURE__ */ jsx(Fragment, {});
+  }
+  return /* @__PURE__ */ jsx("nav", { className: "h-full mx-[12px]", children: /* @__PURE__ */ jsx("a", { href: link, className: "h-full flex items-center", children: /* @__PURE__ */ jsx("img", { src: img, className: "w-[24px] h-[24px]" }) }) });
 }
 function NotFount() {
   return /* @__PURE__ */ jsx("div", { children: "NotFount" });
 }
-const config = { "title": "EASYPRESS", "description": "u know me", "themeConfig": {}, "vite": {} };
+const config = { "title": "EASYPRESS", "description": "u know me", "themeConfig": { "nav": [{ "text": "主页", "link": "/" }, { "text": "指南", "link": "/guide/" }, { "logo": "github", "link": "https://github.com/903040380" }, { "img": "/favicon.jpg", "link": "/" }] } };
 async function getPageData(pathname) {
   var _a;
   const matched = matchRoutes(routes, pathname);
@@ -698,6 +809,7 @@ const usePageData = create((set) => ({
   setPageData: (pageData) => set({ pageData })
 }));
 function Layout() {
+  var _a;
   const { pageData } = usePageData();
   console.log("页面数据：", pageData);
   const getPage = () => {
@@ -710,10 +822,9 @@ function Layout() {
       return /* @__PURE__ */ jsx(NotFount, {});
     }
   };
-  return /* @__PURE__ */ jsxs("div", { className: "p-[40px]", children: [
-    getPage(),
-    /* @__PURE__ */ jsx(Link, { to: "/markx", children: "go to markx" }),
-    /* @__PURE__ */ jsx(Content, {})
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsx(Nav, { nav: (_a = pageData == null ? void 0 : pageData.userConfig.themeConfig) == null ? void 0 : _a.nav }),
+    getPage()
   ] });
 }
 function PageDataLayout({ children }) {

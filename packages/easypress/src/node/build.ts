@@ -1,3 +1,4 @@
+import { baseConfig } from './config'
 import {
   CLIENT_ENTRY_PATH,
   CLIENT_OUT_PATH,
@@ -15,43 +16,43 @@ import { SiteConfig } from 'shared/types'
 import { build } from 'vite'
 
 export async function buildRuntime({
-  root = process.cwd(),
   siteConfig,
+  docs,
 }: {
-  root?: string
+  docs: string
   siteConfig: SiteConfig
 }) {
   // 分为运行时的client构建水合的js与server构建渲染html的js
   const [clientBundle, serverBundle] = await Promise.all([
-    viteBuild({ root, siteConfig }),
-    viteBuild({ root, siteConfig, isServer: true }),
+    viteBuild({ siteConfig, docs }),
+    viteBuild({ siteConfig, isServer: true, docs }),
   ])
 
   // 渲染html
-  await renderHtmls({ root, clientBundle, serverBundle })
+  await renderHtmls({ siteConfig, clientBundle, serverBundle })
 }
 
 /**
  * vite构建
  */
 function viteBuild({
-  root = process.cwd(),
   isServer = false,
+  docs,
   siteConfig,
 }: {
-  root?: string
   isServer?: boolean
+  docs: string
   siteConfig: SiteConfig
 }) {
   return build({
     mode: 'production',
     root: ROOT_PATH, // 获取postcss等配置文件
-    plugins: createPlugins({ root, siteConfig }),
+    plugins: createPlugins({ siteConfig, docs }),
     build: {
       ssr: isServer,
       outDir: isServer
         ? path.join(ROOT_PATH, SERVER_OUT_PATH)
-        : path.join(root, CLIENT_OUT_PATH),
+        : path.join(siteConfig.root, CLIENT_OUT_PATH),
       rollupOptions: {
         input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
         output: {
@@ -59,6 +60,7 @@ function viteBuild({
           format: 'es',
         },
       },
+      ...baseConfig,
     },
   }) as Promise<RollupOutput>
 }
@@ -68,13 +70,13 @@ function viteBuild({
  * @description 写入client文件夹就是ssg和ssr区别，ssr是渲染后将html在服务器接口中返回
  */
 async function renderHtmls({
-  root = process.cwd(),
   clientBundle,
   serverBundle,
+  siteConfig,
 }: {
-  root?: string
   clientBundle: RollupOutput
   serverBundle: RollupOutput
+  siteConfig: SiteConfig
 }) {
   // 获取客户端和服务端入口chunk
   const clientEntryChunk = clientBundle.output.find(
@@ -132,9 +134,9 @@ async function renderHtmls({
             .join('\n'),
         )
 
-      await fse.ensureDir(path.join(root, CLIENT_OUT_PATH))
+      await fse.ensureDir(path.join(siteConfig.root, CLIENT_OUT_PATH))
       await fse.writeFile(
-        path.join(root, `${CLIENT_OUT_PATH}${location}.html`),
+        path.join(siteConfig.root, `${CLIENT_OUT_PATH}${location}.html`),
         html,
       )
     }),

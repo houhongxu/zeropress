@@ -1,4 +1,4 @@
-import { UserConfig } from './user-config'
+import { UserConfig } from './userConfig'
 
 export interface SiteConfig {
   root: string

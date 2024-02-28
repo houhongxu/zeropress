@@ -1,4 +1,4 @@
-export * from './user-config'
-export * from './site-config'
+export * from './userConfig'
+export * from './siteConfig'
 export * from './page'
 export * from './route'

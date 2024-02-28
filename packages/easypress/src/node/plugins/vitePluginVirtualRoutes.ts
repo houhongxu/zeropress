@@ -3,12 +3,12 @@ import path from 'path'
 import { Plugin } from 'vite'
 
 interface vitePluginVirtualRoutesOptions {
-  root?: string
+  docs: string
 }
 
 // 虚拟模块将node端读取的routes数据传递给client端，不需要生成入口文件来处理client端路由了
 export function vitePluginVirtualRoutes({
-  root = process.cwd(),
+  docs,
 }: vitePluginVirtualRoutesOptions): Plugin {
   const virtualModuleId = 'virtual:routes'
   const resolvedVirtualModuleId = '\0' + virtualModuleId
@@ -26,7 +26,7 @@ export function vitePluginVirtualRoutes({
         // glob文件
         const files = await fg.glob('**/*.{jsx,tsx,md,mdx}', {
           ignore: ['node_modules/**', 'client/**', 'server/**'],
-          cwd: root,
+          cwd: docs,
           deep: 2,
           absolute: true,
         })

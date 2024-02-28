@@ -16,12 +16,10 @@ cli.name('easypress').version(version)
 
 cli
   .command('dev', { isDefault: true })
-  .argument('[root]', 'dev server root dir', process.cwd())
   .description('dev server') // 单独使用description才使命令参数生效
   .option('-p,--port <value>', 'dev server port')
-  .action(async (root, { port }) => {
-    const absRoot = path.resolve(root)
-
+  .option('-d,--docs <value>', 'docs dir', 'docs')
+  .action(async ({ port, docs }) => {
     const createServer = async () => {
       // 每次开启服务都要先读取配置文件
       const siteConfig = await resolveSiteConfig({
@@ -29,8 +27,10 @@ cli
         command: 'serve',
       })
 
+      const absDocs = path.resolve(siteConfig.userConfig.docs || docs)
+
       const server = await createRuntimeDevServer({
-        root: absRoot,
+        docs: absDocs,
         siteConfig,
         restartRuntimeDevServer: async () => {
           await server.close()
@@ -49,18 +49,18 @@ cli
 
 cli
   .command('build')
-  .argument('[root]', 'build root dir', process.cwd())
   .description('build')
-  .action(async (root) => {
+  .option('-d,--docs <value>', 'docs dir', 'docs')
+  .action(async ({ docs }) => {
     try {
-      const absRoot = path.resolve(root)
+      const absDocs = path.resolve(docs)
 
       const siteConfig = await resolveSiteConfig({
         mode: 'production',
         command: 'build',
       })
 
-      await buildRuntime({ root: absRoot, siteConfig })
+      await buildRuntime({ siteConfig, docs: absDocs })
     } catch (e) {
       console.log(e)
     }

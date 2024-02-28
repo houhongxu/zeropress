@@ -4,5 +4,8 @@ module.exports = {
   tabWidth: 2,
   semi: false,
   singleQuote: true,
-  plugins: ['@trivago/prettier-plugin-sort-imports'],
+  plugins: [
+    '@trivago/prettier-plugin-sort-imports',
+    'prettier-plugin-tailwindcss',
+  ],
 }

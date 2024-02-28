@@ -4,20 +4,46 @@ import { ReactElement } from 'react';
 import * as zustand from 'zustand';
 
 interface UserConfig {
+    /**
+     * md/mdx文档目录
+     * @default docs
+     */
+    docs?: string;
     title?: string;
     description?: string;
+    autoSidebar?: boolean;
+    /**
+     * 自动头部导航栏，仅支持文字，固定在右边配置项的左边增加
+     */
+    autoNav?: boolean;
     themeConfig?: ThemeConfig;
     vite?: UserConfig$1;
 }
 interface ThemeConfig {
-    nav?: NavItemWithLink[];
+    /**
+     * 头部导航栏，支持 图片、链接、文字，支持固定logo如github等，支持调整左右
+     */
+    nav?: NavItem[];
     sidebar?: Sidebar;
     footer?: Footer;
 }
-type NavItemWithLink = {
-    text: string;
-    link: string;
+type NavItem = {
+    text?: string;
+    logo?: NavLogo;
+    img?: string;
+    /**
+     * 深色切换按钮
+     */
+    dark?: boolean;
+    link?: string;
+    /**
+     * 导航项目的位置
+     * @default right
+     */
+    position?: NavDirection;
 };
+type NavDirection = 'left' | 'right';
+type NavLogo = 'github' | 'twitter';
 interface Sidebar {
     [path: string]: SidebarGroup[];
 }
@@ -87,4 +113,4 @@ declare const usePageData: zustand.UseBoundStore<zustand.StoreApi<{
     setPageData: (pageData?: PageData) => void;
 }>>;
 
-export { Content, type Footer, type FrontMatter, type NavItemWithLink, type PageData, type PageModule, type PageType, type Route, type Sidebar, type SidebarGroup, type SidebarItem, type SiteConfig, type ThemeConfig, type TocItem, type UserConfig, getPageData, usePageData };
+export { Content, type Footer, type FrontMatter, type NavDirection, type NavItem, type NavLogo, type PageData, type PageModule, type PageType, type Route, type Sidebar, type SidebarGroup, type SidebarItem, type SiteConfig, type ThemeConfig, type TocItem, type UserConfig, getPageData, usePageData };

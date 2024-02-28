@@ -26,3 +26,11 @@ export const CLIENT_OUT_PATH = './dist'
 export const HTML_PATH = path.join(ROOT_PATH, './index.html')
 
 export const CONFIG_OPTIONS = ['easypress.config.ts', 'easypress.config.js']
+
+export const DEFAULT_USER_CONFIG = {
+  docs: 'docs',
+  title: 'EASYPRESS',
+  description: 'SSG Framework',
+  themeConfig: {},
+  vite: {},
+}
