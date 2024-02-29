@@ -9,14 +9,21 @@ const tailwindcssConfig: Config = {
   darkMode: 'selector',
   theme: {
     extend: {
+      screens: {
+        pc: '960px',
+      },
+
       /** 声明时dark在下面所以默认显示dark主题颜色 */
       colors: {
         divider: 'var(--ep-color-divider)',
 
+        brand: 'var(--ep-color-brand)',
+
         bg: {
-          soft: 'var(--ep-color-bg-soft)',
-          mute: 'var(--ep-color-bg-mute)',
+          default: 'var(--ep-color-bg-default)',
+          switch: 'var(--ep-color-bg-switch)',
           inverse: 'var(--ep-color-bg-inverse)',
+          sidebar: 'var(--ep-color-bg-sidebar)',
         },
 
         text: {
@@ -37,7 +44,7 @@ const tailwindcssConfig: Config = {
         4: '0 14px 44px rgba(0, 0, 0, 0.12), 0 3px 9px rgba(0, 0, 0, 0.12)',
         5: '0 18px 56px rgba(0, 0, 0, 0.16), 0 4px 12px rgba(0, 0, 0, 0.16)',
       },
-      spacing: { nav: '56px', sidebar: '272px', toc: '252px' },
+      spacing: { nav: '56px', sidebar: '270px', toc: '250px' },
     },
   },
   plugins: [addDynamicIconSelectors()],

@@ -1,8 +1,8 @@
+import '../styles/base.css'
 import { Doc } from './components/Doc/Doc'
 import { Home } from './components/Home'
 import { Nav } from './components/Nav'
 import { NotFound } from './components/NotFound'
-import './styles/base.css'
 import { usePageData } from 'runtime/usePageData'
 
 /**
@@ -26,8 +26,7 @@ export function Layout() {
 
   return (
     <>
-      <Nav nav={pageData?.userConfig.themeConfig?.nav}></Nav>
-
+      <Nav></Nav>
       {getPage()}
     </>
   )

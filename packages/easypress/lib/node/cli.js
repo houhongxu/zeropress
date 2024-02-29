@@ -16,13 +16,18 @@ var tailwindcssConfig = {
   darkMode: "selector",
   theme: {
     extend: {
+      screens: {
+        pc: "960px"
+      },
       /** 声明时dark在下面所以默认显示dark主题颜色 */
       colors: {
         divider: "var(--ep-color-divider)",
+        brand: "var(--ep-color-brand)",
         bg: {
-          soft: "var(--ep-color-bg-soft)",
-          mute: "var(--ep-color-bg-mute)",
-          inverse: "var(--ep-color-bg-inverse)"
+          default: "var(--ep-color-bg-default)",
+          switch: "var(--ep-color-bg-switch)",
+          inverse: "var(--ep-color-bg-inverse)",
+          sidebar: "var(--ep-color-bg-sidebar)"
         },
         text: {
           1: "var(--ep-color-text-1)",
@@ -41,7 +46,7 @@ var tailwindcssConfig = {
         4: "0 14px 44px rgba(0, 0, 0, 0.12), 0 3px 9px rgba(0, 0, 0, 0.12)",
         5: "0 18px 56px rgba(0, 0, 0, 0.16), 0 4px 12px rgba(0, 0, 0, 0.16)"
       },
-      spacing: { nav: "56px", sidebar: "272px", toc: "252px" }
+      spacing: { nav: "56px", sidebar: "270px", toc: "250px" }
     }
   },
   plugins: [addDynamicIconSelectors()]
@@ -65,6 +70,13 @@ var SERVER_OUT_PATH = "./.easypress";
 var CLIENT_OUT_PATH = "./dist";
 var HTML_PATH = path3.join(ROOT_PATH, "./index.html");
 var CONFIG_OPTIONS = ["easypress.config.ts", "easypress.config.js"];
+var DEFAULT_USER_CONFIG = {
+  docs: "docs",
+  title: "EASYPRESS",
+  description: "SSG Framework",
+  themeConfig: {},
+  vite: {}
+};
 
 // src/node/config.ts
 import autoprefixer from "autoprefixer";
@@ -88,10 +100,17 @@ async function resolveSiteConfig({
     mode,
     command
   });
+  const requiredUserConfig = {
+    docs: userConfig.docs || DEFAULT_USER_CONFIG.docs,
+    title: userConfig.title || DEFAULT_USER_CONFIG.title,
+    description: userConfig.description || DEFAULT_USER_CONFIG.description,
+    themeConfig: userConfig.themeConfig || DEFAULT_USER_CONFIG.themeConfig,
+    vite: userConfig.vite || DEFAULT_USER_CONFIG.vite
+  };
   const siteConfig = {
     root,
     userConfigPath,
-    userConfig
+    userConfig: requiredUserConfig
   };
   return siteConfig;
 }
@@ -326,10 +345,11 @@ function vitePluginVirtualRoutes({
         });
         let importTemplate = 'import React from "react";\n';
         const routes = files.map((file, index) => {
-          const fileBaseName = path5.basename(file, path5.extname(file));
+          const relativePath = path5.relative(docs, file);
+          const pathname = relativePath.replace(path5.extname(file), "").replace(/index$/, "");
           importTemplate += `import Element${index + 1} from '${file}';
 `;
-          return `{ path: '/${fileBaseName.replace(/index$/, "")}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },
+          return `{ path: '/${pathname}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },
 `;
         });
         return `
@@ -359,7 +379,7 @@ function createPlugins({
       // /@fs/是针对root之外的，当作为npm包时在nodemodules中属于root内，不需要使用 https://cn.vitejs.dev/config/server-options.html#server-fs-allow
     }),
     vitePluginVirtualConfig({ siteConfig, restartRuntimeDevServer }),
-    vitePluginVirtualRoutes({ docs }),
+    vitePluginVirtualRoutes({ siteConfig, docs }),
     tsconfigPaths()
     // vite-env.d.ts中declare虚拟模块引入的类型需要绝对路径，所以使用路径别名插件解析tsconfig的baseurl
   ];
@@ -481,13 +501,13 @@ import path7 from "path";
 var cli = program;
 var { version } = fse4.readJSONSync(path7.join(ROOT_PATH, "./package.json"));
 cli.name("easypress").version(version);
-cli.command("dev", { isDefault: true }).description("dev server").option("-p,--port <value>", "dev server port").option("-d,--docs <value>", "docs dir", "docs").action(async ({ port, docs }) => {
+cli.command("dev", { isDefault: true }).description("dev server").option("-p,--port <value>", "dev server port").action(async ({ port }) => {
   const createServer2 = async () => {
     const siteConfig = await resolveSiteConfig({
       mode: "development",
       command: "serve"
     });
-    const absDocs = path7.resolve(siteConfig.userConfig.docs || docs);
+    const absDocs = path7.resolve(siteConfig.userConfig.docs);
     const server = await createRuntimeDevServer({
       docs: absDocs,
       siteConfig,
@@ -501,13 +521,13 @@ cli.command("dev", { isDefault: true }).description("dev server").option("-p,--p
   };
   await createServer2();
 });
-cli.command("build").description("build").option("-d,--docs <value>", "docs dir", "docs").action(async ({ docs }) => {
+cli.command("build").description("build").action(async () => {
   try {
-    const absDocs = path7.resolve(docs);
     const siteConfig = await resolveSiteConfig({
       mode: "production",
       command: "build"
     });
+    const absDocs = path7.resolve(siteConfig.userConfig.docs);
     await buildRuntime({ siteConfig, docs: absDocs });
   } catch (e) {
     console.log(e);

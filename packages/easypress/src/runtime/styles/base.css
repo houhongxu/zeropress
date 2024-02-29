@@ -12,12 +12,12 @@
 #root pre {
   overflow-x: auto;
   padding: 1rem;
-  background-color: #f8f8f8 !important;
+  background-color: #eeeeee !important;
 }
 
 @layer components {
   .text-hover {
-    @apply hover:text-text-1 transition-colors duration-300;
+    @apply hover:text-brand transition-colors duration-300;
   }
 }
 
@@ -30,20 +30,22 @@
 
   /* 基础样式 */
   body {
-    background-color: var(--ep-color-bg-soft);
+    background-color: var(--ep-color-bg-default);
   }
 
   /* 基础颜色 */
   :root {
-    --ep-color-divider-light: rgba(60, 60, 60, 0.29);
+    --ep-color-divider-light: rgba(60, 60, 60, 0.19);
     --ep-color-divider-dark: rgba(84, 84, 84, 0.48);
 
-    --ep-color-bg-soft-light: #f9f9f9;
-    --ep-color-bg-soft-dark: #242424;
-    --ep-color-bg-mute-light: #f1f1f1;
-    --ep-color-bg-mute-dark: #2f2f2f;
+    --ep-color-bg-default-light: #f9f9f9;
+    --ep-color-bg-default-dark: #242424;
+    --ep-color-bg-switch-light: #f1f1f1;
+    --ep-color-bg-switch-dark: #2f2f2f;
     --ep-color-bg-inverse-light: #ffffff;
     --ep-color-bg-inverse-dark: #000000;
+    --ep-color-bg-sidebar-light: #f9f9f9;
+    --ep-color-bg-sidebar-dark: #1a1a1a;
 
     --ep-color-text-light-1: #213547;
     --ep-color-text-light-2: rgba(60, 60, 60, 0.7);
@@ -55,33 +57,42 @@
     --ep-color-text-dark-4: rgba(235, 235, 235, 0.18);
 
     --ep-color-gray-1: #8e8e8e;
+
+    --ep-color-brand-light: #213547;
+    --ep-color-brand-dark: rgba(255, 255, 255, 0.87);
   }
 
   /* 白天主题 */
   :root {
     --ep-color-divider: var(--ep-color-divider-light);
 
-    --ep-color-bg-soft: var(--ep-color-bg-soft-light);
-    --ep-color-bg-mute: var(--ep-color-bg-mute-light);
+    --ep-color-bg-default: var(--ep-color-bg-default-light);
+    --ep-color-bg-switch: var(--ep-color-bg-switch-light);
     --ep-color-bg-inverse: var(--ep-color-bg-inverse-light);
+    --ep-color-bg-sidebar: var(--ep-color-bg-sidebar-light);
 
     --ep-color-text-1: var(--ep-color-text-light-1);
     --ep-color-text-2: var(--ep-color-text-light-2);
     --ep-color-text-3: var(--ep-color-text-light-3);
     --ep-color-text-4: var(--ep-color-text-light-4);
+
+    --ep-color-brand: var(--ep-color-brand-light);
   }
 
   /* 深夜主题 */
   .dark {
     --ep-color-divider: var(--ep-color-divider-dark);
 
-    --ep-color-bg-soft: var(--ep-color-bg-soft-dark);
-    --ep-color-bg-mute: var(--ep-color-bg-mute-dark);
+    --ep-color-bg-default: var(--ep-color-bg-default-dark);
+    --ep-color-bg-switch: var(--ep-color-bg-switch-dark);
     --ep-color-bg-inverse: var(--ep-color-bg-inverse-dark);
+    --ep-color-bg-sidebar: var(--ep-color-bg-sidebar-dark);
 
     --ep-color-text-1: var(--ep-color-text-dark-1);
     --ep-color-text-2: var(--ep-color-text-dark-2);
     --ep-color-text-3: var(--ep-color-text-dark-3);
     --ep-color-text-4: var(--ep-color-text-dark-4);
+
+    --ep-color-brand: var(--ep-color-brand-dark);
   }
 }

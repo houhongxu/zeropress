@@ -1,5 +1,5 @@
 import tailwindcssConfig from '../../tailwind.config'
-import { CONFIG_OPTIONS } from './consts'
+import { CONFIG_OPTIONS, DEFAULT_USER_CONFIG } from './consts'
 import autoprefixer from 'autoprefixer'
 import fse from 'fs-extra'
 import path from 'path'
@@ -34,10 +34,18 @@ export async function resolveSiteConfig({
     command,
   })
 
+  const requiredUserConfig: Required<UserConfig> = {
+    docs: userConfig.docs || DEFAULT_USER_CONFIG.docs,
+    title: userConfig.title || DEFAULT_USER_CONFIG.title,
+    description: userConfig.description || DEFAULT_USER_CONFIG.description,
+    themeConfig: userConfig.themeConfig || DEFAULT_USER_CONFIG.themeConfig,
+    vite: userConfig.vite || DEFAULT_USER_CONFIG.vite,
+  }
+
   const siteConfig: SiteConfig = {
     root,
     userConfigPath,
-    userConfig,
+    userConfig: requiredUserConfig,
   }
 
   return siteConfig

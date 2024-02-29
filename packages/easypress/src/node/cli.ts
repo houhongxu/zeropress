@@ -18,8 +18,7 @@ cli
   .command('dev', { isDefault: true })
   .description('dev server') // 单独使用description才使命令参数生效
   .option('-p,--port <value>', 'dev server port')
-  .option('-d,--docs <value>', 'docs dir', 'docs')
-  .action(async ({ port, docs }) => {
+  .action(async ({ port }) => {
     const createServer = async () => {
       // 每次开启服务都要先读取配置文件
       const siteConfig = await resolveSiteConfig({
@@ -27,7 +26,7 @@ cli
         command: 'serve',
       })
 
-      const absDocs = path.resolve(siteConfig.userConfig.docs || docs)
+      const absDocs = path.resolve(siteConfig.userConfig.docs)
 
       const server = await createRuntimeDevServer({
         docs: absDocs,
@@ -50,15 +49,14 @@ cli
 cli
   .command('build')
   .description('build')
-  .option('-d,--docs <value>', 'docs dir', 'docs')
-  .action(async ({ docs }) => {
+  .action(async () => {
     try {
-      const absDocs = path.resolve(docs)
-
       const siteConfig = await resolveSiteConfig({
         mode: 'production',
         command: 'build',
       })
+
+      const absDocs = path.resolve(siteConfig.userConfig.docs)
 
       await buildRuntime({ siteConfig, docs: absDocs })
     } catch (e) {

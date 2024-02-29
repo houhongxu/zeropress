@@ -1,4 +1,5 @@
 import path from 'path'
+import { UserConfig } from 'shared/types'
 
 /**
  * 以产物lib文件夹内入口cli.js为基准
@@ -27,7 +28,7 @@ export const HTML_PATH = path.join(ROOT_PATH, './index.html')
 
 export const CONFIG_OPTIONS = ['easypress.config.ts', 'easypress.config.js']
 
-export const DEFAULT_USER_CONFIG = {
+export const DEFAULT_USER_CONFIG: Required<UserConfig> = {
   docs: 'docs',
   title: 'EASYPRESS',
   description: 'SSG Framework',

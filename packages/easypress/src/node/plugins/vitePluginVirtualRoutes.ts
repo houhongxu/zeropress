@@ -1,9 +1,11 @@
 import fg from 'fast-glob'
 import path from 'path'
+import { SiteConfig } from 'shared/types'
 import { Plugin } from 'vite'
 
 interface vitePluginVirtualRoutesOptions {
   docs: string
+  siteConfig: SiteConfig
 }
 
 // 虚拟模块将node端读取的routes数据传递给client端，不需要生成入口文件来处理client端路由了
@@ -35,11 +37,14 @@ export function vitePluginVirtualRoutes({
 
         // 根据文件获取路由
         const routes = files.map((file, index) => {
-          const fileBaseName = path.basename(file, path.extname(file))
+          const relativePath = path.relative(docs, file)
+          const pathname = relativePath
+            .replace(path.extname(file), '')
+            .replace(/index$/, '')
 
           importTemplate += `import Element${index + 1} from '${file}';\n`
 
-          return `{ path: '/${fileBaseName.replace(/index$/, '')}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },\n`
+          return `{ path: '/${pathname}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },\n`
         })
 
         return `

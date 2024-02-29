@@ -3,5 +3,5 @@ import { UserConfig } from './userConfig'
 export interface SiteConfig {
   root: string
   userConfigPath?: string
-  userConfig: UserConfig
+  userConfig: Required<UserConfig>
 }

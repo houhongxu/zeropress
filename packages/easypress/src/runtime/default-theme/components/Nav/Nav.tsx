@@ -1,13 +1,17 @@
 import { Switch } from './Switch'
 import { LOGO_MAP } from './consts'
 import classNames from 'classnames'
-import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useDark, useWindowScroll } from 'runtime/default-theme/hooks'
-import { NavItem, ThemeConfig } from 'shared/types'
+import { usePageData } from 'runtime/usePageData'
+import { NavItem } from 'shared/types'
 
-export function Nav({ nav }: { nav: ThemeConfig['nav'] }) {
+export function Nav() {
   const { y: isScrolled } = useWindowScroll()
-  const [pathname, setPathname] = useState<string>()
+  const { pageData } = usePageData()
+  const { pathname } = useLocation()
+  const nav = pageData?.userConfig.themeConfig?.nav
+  const isNotHome = pathname !== '/'
 
   const left = nav?.filter((item) => item.position === 'left')
 
@@ -31,17 +35,16 @@ export function Nav({ nav }: { nav: ThemeConfig['nav'] }) {
     }
   }
 
-  // 获取pathname
-  useEffect(() => {
-    setPathname(location.pathname)
-  }, [])
+  if (!nav || nav.length < 1) {
+    return <></>
+  }
 
   return (
     <header className="fixed left-0 top-0 z-10 w-full">
       <div
         className={classNames(
-          isScrolled
-            ? 'border-divider bg-bg-soft'
+          isScrolled || isNotHome
+            ? 'border-divider bg-bg-default'
             : 'border-transparent bg-transparent',
           'h-nav border-b px-[12px] pt-px transition-colors duration-300',
         )}
@@ -66,7 +69,7 @@ export function Nav({ nav }: { nav: ThemeConfig['nav'] }) {
 
 function TextItem({ item, pathname }: { item: NavItem; pathname?: string }) {
   const { text, link } = item
-  const active = link && pathname?.includes(link)
+  const active = pathname === link
 
   if (!text) {
     return <></>
@@ -77,8 +80,8 @@ function TextItem({ item, pathname }: { item: NavItem; pathname?: string }) {
       <a href={link} className="flex h-full items-center">
         <span
           className={classNames(
-            active ? 'text-text-1' : 'text-text-2',
-            'font-500 text-hover whitespace-nowrap text-[14px]',
+            active ? 'text-brand' : 'text-text-2',
+            'text-hover whitespace-nowrap text-[14px] font-[500]',
           )}
         >
           {text}

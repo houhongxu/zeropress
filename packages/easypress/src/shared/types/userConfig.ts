@@ -6,23 +6,44 @@ export interface UserConfig {
    * @default docs
    */
   docs?: string
-  title?: string
-  description?: string
-  autoSidebar?: boolean
   /**
-   * 自动头部导航栏，仅支持文字，固定在右边配置项的左边增加
+   * 标题，首页以及文档使用
    */
-  autoNav?: boolean
+  title?: string
+  /**
+   * 描述，首页使用
+   */
+  description?: string
+  /**
+   * 主题设置
+   */
   themeConfig?: ThemeConfig
+  /**
+   * vite设置
+   */
   vite?: ViteUserConfig
 }
 
 export interface ThemeConfig {
   /**
+   * 自动文档侧边栏
+   */
+  autoSidebar?: boolean
+  /**
+   * 自动头部导航栏，仅支持文字，固定在右边配置项的左边增加
+   */
+  autoNav?: boolean
+  /**
    * 头部导航栏，支持 图片、链接、文字，支持固定logo如github等，支持调整左右
    */
   nav?: NavItem[]
+  /**
+   * 侧边栏
+   */
   sidebar?: Sidebar
+  /**
+   * 底部
+   */
   footer?: Footer
 }
 
@@ -47,12 +68,12 @@ export type NavDirection = 'left' | 'right'
 export type NavLogo = 'github' | 'twitter'
 
 export interface Sidebar {
-  [path: string]: SidebarGroup[]
+  [path: string]: SidebarDir[]
 }
 
-export interface SidebarGroup {
+export interface SidebarDir {
   text?: string
-  items: SidebarItem[]
+  items?: SidebarItem[]
 }
 
 export type SidebarItem =

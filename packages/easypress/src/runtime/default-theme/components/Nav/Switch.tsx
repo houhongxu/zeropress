@@ -13,7 +13,7 @@ export function Switch({
       onClick={onClick}
       className={classNames(
         className,
-        'bg-bg-mute border-divider hover:border-gray-1 relative h-[22px] w-[40px] rounded-[11px] border transition-colors duration-300',
+        'bg-bg-switch border-divider hover:border-gray-1 relative h-[22px] w-[40px] rounded-[11px] border transition-colors duration-300',
       )}
     >
       <div className="bg-bg-inverse shadow-1 absolute left-px top-px h-[18px] w-[18px] overflow-hidden rounded-[50%] transition-all duration-300 dark:translate-x-[18px]">
