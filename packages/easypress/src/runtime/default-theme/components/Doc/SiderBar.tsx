@@ -1,25 +1,18 @@
 import classNames from 'classnames'
 import { useLocation } from 'react-router-dom'
-import { usePageData } from 'runtime/usePageData'
+import { useSidebar } from 'runtime/default-theme/hooks'
 import { SidebarDir, SidebarItem } from 'shared/types'
 
 export function Siderbar() {
-  const { pageData } = usePageData()
-  const sidebar = pageData?.userConfig.themeConfig?.sidebar
-  const { pathname } = useLocation()
+  const { sidebar } = useSidebar()
 
   if (!sidebar || Object.keys(sidebar).length < 1) {
     return <></>
   }
 
-  const sidebarEntry = Object.entries(sidebar).find(([key]) =>
-    pathname.startsWith(key),
-  )
-  const sidebarDir = sidebarEntry?.[1]
-
   return (
     <aside className="mt-nav w-sidebar border-divider bg-bg-sidebar pc:-translate-x-0 fixed inset-y-0 left-0 -translate-x-full overflow-y-auto border-r px-[28px] py-[16px] transition-transform duration-300">
-      {sidebarDir?.map((dir) => {
+      {sidebar?.map((dir) => {
         return <SiderbarDir key={dir.text} dir={dir}></SiderbarDir>
       })}
     </aside>

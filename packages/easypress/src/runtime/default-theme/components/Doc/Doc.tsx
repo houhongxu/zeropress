@@ -1,3 +1,4 @@
+import { Footer } from './Footer'
 import { Siderbar } from './SiderBar'
 import { Content } from 'runtime/Content'
 
@@ -8,6 +9,8 @@ export function Doc() {
 
       <div className="pc:ml-sidebar max-w-960px ml-0 p-[48px] transition-[margin] duration-300">
         <Content></Content>
+
+        <Footer></Footer>
       </div>
     </div>
   )
