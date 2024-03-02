@@ -27,9 +27,9 @@ function SiderbarDir({ dir }: { dir: SidebarDir }) {
       </h2>
 
       <div className="mb-[12px] flex flex-col pl-[1rem]">
-        {dir.items?.map((item) => {
-          return <SiderbarItem key={item.link} item={item}></SiderbarItem>
-        })}
+        {dir.items?.map((item) => (
+          <SiderbarItem key={item.link} item={item}></SiderbarItem>
+        ))}
       </div>
     </div>
   )

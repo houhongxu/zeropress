@@ -10,7 +10,8 @@ const tailwindcssConfig: Config = {
   theme: {
     extend: {
       screens: {
-        pc: '960px',
+        pc: '768px',
+        full: '1060px',
       },
 
       /** 声明时dark在下面所以默认显示dark主题颜色 */
@@ -44,7 +45,7 @@ const tailwindcssConfig: Config = {
         4: '0 14px 44px rgba(0, 0, 0, 0.12), 0 3px 9px rgba(0, 0, 0, 0.12)',
         5: '0 18px 56px rgba(0, 0, 0, 0.16), 0 4px 12px rgba(0, 0, 0, 0.16)',
       },
-      spacing: { nav: '56px', sidebar: '270px', toc: '250px' },
+      spacing: { nav: '56px', sidebar: '250px', toc: '200px' },
     },
   },
   plugins: [addDynamicIconSelectors()],

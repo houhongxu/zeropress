@@ -51,15 +51,15 @@ export function Nav() {
       >
         <div className="flex h-full items-center justify-between">
           <div className="flex justify-start">
-            {left?.map((item, index) => {
-              return <div key={`${item.link}${index}`}>{getItem(item)}</div>
-            })}
+            {left?.map((item, index) => (
+              <div key={`${item.link}${index}`}>{getItem(item)}</div>
+            ))}
           </div>
 
           <div className="flex justify-end">
-            {right?.map((item, index) => {
-              return <div key={`${item.link}${index}`}>{getItem(item)}</div>
-            })}
+            {right?.map((item, index) => (
+              <div key={`${item.link}${index}`}>{getItem(item)}</div>
+            ))}
           </div>
         </div>
       </div>

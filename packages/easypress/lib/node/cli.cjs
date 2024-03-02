@@ -46,7 +46,8 @@ var tailwindcssConfig = {
   theme: {
     extend: {
       screens: {
-        pc: "960px"
+        pc: "768px",
+        full: "1060px"
       },
       /** 声明时dark在下面所以默认显示dark主题颜色 */
       colors: {
@@ -75,7 +76,7 @@ var tailwindcssConfig = {
         4: "0 14px 44px rgba(0, 0, 0, 0.12), 0 3px 9px rgba(0, 0, 0, 0.12)",
         5: "0 18px 56px rgba(0, 0, 0, 0.16), 0 4px 12px rgba(0, 0, 0, 0.16)"
       },
-      spacing: { nav: "56px", sidebar: "270px", toc: "250px" }
+      spacing: { nav: "56px", sidebar: "250px", toc: "200px" }
     }
   },
   plugins: [(0, import_tailwind.addDynamicIconSelectors)()]
@@ -249,14 +250,16 @@ function vitePluginMdx() {
           // 自动添加h1-h6的<a><a/>锚点，href是id
           {
             // 用hast定义锚点内容元素 https://github.com/syntax-tree/hast#nodes
+            properties: {
+              class: "autolink-headings"
+            },
             content: {
               type: "element",
               tagName: "span",
-              children: [{ type: "text", value: "#" }],
               properties: {
-                class: "autolink-headings",
                 style: "margin-right: 4px;"
-              }
+              },
+              children: [{ type: "text", value: "#" }]
             }
           }
         ],

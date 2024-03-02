@@ -44,14 +44,16 @@ export function vitePluginMdx(): Plugin {
           rehypeAutolinkHeadings, // 自动添加h1-h6的<a><a/>锚点，href是id
           {
             // 用hast定义锚点内容元素 https://github.com/syntax-tree/hast#nodes
+            properties: {
+              class: 'autolink-headings',
+            },
             content: {
               type: 'element',
               tagName: 'span',
-              children: [{ type: 'text', value: '#' }],
               properties: {
-                class: 'autolink-headings',
                 style: 'margin-right: 4px;',
               },
+              children: [{ type: 'text', value: '#' }],
             } as ElementContent,
           } as RehypeAutolinkHeadingsOptions,
         ],

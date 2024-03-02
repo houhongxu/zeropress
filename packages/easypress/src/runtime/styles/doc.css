@@ -1,0 +1,197 @@
+/* 参考vitepress https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/components/vp-doc.css */
+
+/* 正文的各种样式，通过css给子标签提供 */
+
+/**
+ * Code
+ * -------------------------------------------------------------------------- */
+
+.doc figure {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.doc pre {
+  overflow-x: auto;
+  padding: 1rem;
+  background-color: #eeeeee !important;
+}
+
+/**
+ * Headings
+ * -------------------------------------------------------------------------- */
+
+.doc h1,
+.doc h2,
+.doc h3,
+.doc h4,
+.doc h5,
+.doc h6 {
+  position: relative;
+  font-weight: 600;
+  outline: none;
+}
+
+.doc h1 {
+  letter-spacing: -0.02em;
+  line-height: 40px;
+  font-size: 28px;
+  margin-bottom: 40px;
+}
+
+.doc h2 {
+  margin: 48px 0 16px;
+  /* padding-top: 24px; */
+  letter-spacing: -0.02em;
+  line-height: 32px;
+  font-size: 24px;
+}
+
+.doc h3 {
+  margin: 32px 0 0;
+  letter-spacing: -0.01em;
+  line-height: 28px;
+  font-size: 20px;
+}
+
+.doc .autolink-header {
+  float: left;
+  margin-left: -0.87em;
+  padding-right: 0.23em;
+  font-weight: 500;
+  opacity: 0;
+  transition:
+    color 0.25s,
+    opacity 0.25s;
+}
+
+.doc h1:hover .autolink-header,
+.doc h1 .autolink-header:focus,
+.doc h2:hover .autolink-header,
+.doc h2 .autolink-header:focus,
+.doc h3:hover .autolink-header,
+.doc h3 .autolink-header:focus,
+.doc h4:hover .autolink-header,
+.doc h4 .autolink-header:focus,
+.doc h5:hover .autolink-header,
+.doc h5 .autolink-header:focus,
+.doc h6:hover .autolink-header,
+.doc h6 .autolink-header:focus {
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .doc h1 {
+    letter-spacing: -0.02em;
+    line-height: 40px;
+    font-size: 32px;
+  }
+}
+
+/**
+   * Paragraph and inline elements
+   * -------------------------------------------------------------------------- */
+
+.doc p,
+.doc summary {
+  margin: 16px 0;
+}
+
+.doc p {
+  z-index: 2;
+  line-height: 28px;
+}
+
+.doc blockquote {
+  margin: 16px 0;
+  border-left: 2px solid var(--hp-c-divider);
+  padding-left: 16px;
+  transition: border-color 0.5s;
+}
+
+.doc blockquote > p {
+  margin: 0;
+  font-size: 16px;
+  color: var(--hp-c-text-2);
+  transition: color 0.5s;
+}
+
+.doc a {
+  font-weight: 500;
+  color: var(--hp-c-brand);
+  text-decoration-style: dotted;
+  transition: color 0.25s;
+}
+
+.doc a:hover {
+  color: var(--hp-c-brand-dark);
+}
+
+.doc strong {
+  font-weight: 600;
+}
+
+/**
+   * Lists
+   * -------------------------------------------------------------------------- */
+
+.doc ul,
+.doc ol {
+  padding-left: 1.25rem;
+  margin: 16px 0;
+}
+
+.doc ul {
+  list-style: disc;
+}
+
+.doc ol {
+  list-style: decimal;
+}
+
+.doc li + li {
+  margin-top: 8px;
+}
+
+.doc li > ol,
+.doc li > ul {
+  margin: 8px 0 0;
+}
+
+/**
+   * Table
+   * -------------------------------------------------------------------------- */
+
+.doc table {
+  display: block;
+  border-collapse: collapse;
+  margin: 20px 0;
+  overflow-x: auto;
+}
+
+.doc tr {
+  border-top: 1px solid var(--hp-c-divider);
+  transition: background-color 0.5s;
+}
+
+.doc tr:nth-child(2n) {
+  background-color: var(--hp-c-bg-soft);
+}
+
+.doc th,
+.doc td {
+  border: 1px solid var(--hp-c-divider);
+  padding: 12px 16px;
+}
+
+.doc th {
+  font-size: 16px;
+  font-weight: 600;
+  background-color: var(--hp-c-white-soft);
+}
+
+.dark .doc th {
+  background-color: var(--hp-c-black);
+}

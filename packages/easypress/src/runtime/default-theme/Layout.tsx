@@ -1,4 +1,5 @@
 import '../styles/base.css'
+import '../styles/doc.css'
 import { Doc } from './components/Doc/Doc'
 import { Home } from './components/Home'
 import { Nav } from './components/Nav'

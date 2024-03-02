@@ -2,19 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-#root figure {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  border-radius: 0.5rem;
-}
-
-#root pre {
-  overflow-x: auto;
-  padding: 1rem;
-  background-color: #eeeeee !important;
-}
-
 @layer components {
   .text-hover {
     @apply hover:text-brand transition-colors duration-300;
@@ -31,6 +18,10 @@
   /* 基础样式 */
   body {
     background-color: var(--ep-color-bg-default);
+    transition-property: color, background-color, border-color,
+      text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
   }
 
   /* 基础颜色 */

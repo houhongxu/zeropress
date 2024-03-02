@@ -5,7 +5,6 @@ import { SidebarItem } from 'shared/types'
 export function usePrevNextPage() {
   const { sidebar } = useSidebar()
   const { pathname } = useLocation()
-  console.log(sidebar)
 
   const flatted = sidebar?.map((dir) => dir.items ?? []).flat() ?? []
 
