@@ -1,12 +1,9 @@
 import classNames from 'classnames'
-import { NAV_HEIGHT } from 'runtime/default-theme/consts'
-import { useTocScroll } from 'runtime/default-theme/hooks'
-import { usePageData } from 'runtime/usePageData'
+import { NAV_HEIGHT } from 'default-theme/consts'
+import { useTocScroll } from 'default-theme/hooks'
 import { TocItem as TocItemType } from 'shared/types'
 
-export function Toc() {
-  const { pageData } = usePageData()
-  const toc = pageData?.toc
+export function Toc({ toc }: { toc?: TocItemType[] }) {
   const [index] = useTocScroll()
 
   if (!toc || toc.length < 1) {

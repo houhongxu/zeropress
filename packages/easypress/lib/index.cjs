@@ -58,6 +58,7 @@ async function getPageData(pathname) {
   const matched = (0, import_react_router_dom2.matchRoutes)(import_virtual_routes2.default, pathname);
   if (matched) {
     const module2 = await matched[0].route.preload();
+    console.log(matched[0].route.preload, module2);
     return {
       pageType: ((_a = module2.frontmatter) == null ? void 0 : _a.pageType) || "doc",
       pagePath: pathname,
@@ -70,7 +71,9 @@ async function getPageData(pathname) {
 }
 var usePageData = (0, import_zustand.create)((set) => ({
   pageData: void 0,
-  setPageData: (pageData) => set({ pageData })
+  setPageData: (pageData) => set({ pageData }),
+  toc: void 0,
+  setToc: (toc) => set({ toc })
 }));
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {

@@ -1,6 +1,6 @@
 import classNames from 'classnames'
+import { useSidebar } from 'default-theme/hooks'
 import { useLocation } from 'react-router-dom'
-import { useSidebar } from 'runtime/default-theme/hooks'
 import { SidebarDir, SidebarItem } from 'shared/types'
 
 export function Siderbar() {

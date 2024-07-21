@@ -4,7 +4,12 @@ import { Config } from 'tailwindcss'
 
 const tailwindcssConfig: Config = {
   content: [
-    path.join(__dirname, '..', '..', './src/runtime/**/*.{tsx,ts,jsx,js}'), // 相对于lib的路径，tailwind引入是在node/config,打包后是lib/node/cli
+    path.join(
+      __dirname,
+      '..',
+      '..',
+      './src/default-theme/**/*.{tsx,ts,jsx,js}',
+    ), // 相对于lib的路径，tailwind引入是在node/config,打包后是lib/node/cli
   ],
   darkMode: 'selector',
   theme: {

@@ -132,6 +132,8 @@ declare function getPageData(pathname: string): Promise<PageData>;
 declare const usePageData: zustand.UseBoundStore<zustand.StoreApi<{
     pageData?: PageData | undefined;
     setPageData: (pageData?: PageData) => void;
+    toc?: TocItem[] | undefined;
+    setToc: (toc?: PageData['toc']) => void;
 }>>;
 
 export { Content, type Footer, type FrontMatter, type NavDirection, type NavItem, type NavLogo, type PageData, type PageModule, type PageType, type Route, type Sidebar, type SidebarDir, type SidebarItem, type SiteConfig, type ThemeConfig, type TocItem, type UserConfig, getPageData, usePageData };

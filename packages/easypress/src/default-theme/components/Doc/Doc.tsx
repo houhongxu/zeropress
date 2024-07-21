@@ -1,10 +1,11 @@
 import { Footer } from './Footer'
 import { Siderbar } from './SiderBar'
 import { Toc } from './Toc'
-import { Content } from 'runtime/Content'
-import { useHeaderScroll } from 'runtime/default-theme/hooks/useHeaderScroll'
+import { useHeaderScroll } from 'default-theme/hooks/useHeaderScroll'
+import { ReactNode } from 'react'
+import { TocItem } from 'shared/types'
 
-export function Doc() {
+export function Doc({ content, toc }: { content: ReactNode; toc?: TocItem[] }) {
   useHeaderScroll()
 
   return (
@@ -13,12 +14,12 @@ export function Doc() {
 
       <div className="pc:ml-sidebar ml-0 flex justify-between">
         <div className="doc mx-auto w-full max-w-[768px] p-[48px] transition-[margin] duration-300">
-          <Content></Content>
+          {content}
 
           <Footer></Footer>
         </div>
 
-        <Toc></Toc>
+        <Toc toc={toc}></Toc>
       </div>
     </div>
   )

@@ -23,7 +23,7 @@ export function vitePluginMdx(): Plugin {
     async handleHotUpdate(ctx) {
       // https://cn.vitejs.dev/guide/api-plugin.html#handlehotupdate
       if (/\.mdx?/.test(ctx.file)) {
-        console.log(ctx.file)
+        console.log('自定义hmr:', ctx.file)
 
         ctx.server.ws.send({
           type: 'custom',

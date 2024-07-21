@@ -1,10 +1,10 @@
-import { usePageData } from 'runtime/usePageData'
-
-export function Home() {
-  const { pageData } = usePageData()
-  const title = pageData?.userConfig.title
-  const description = pageData?.userConfig.description
-
+export function Home({
+  title,
+  description,
+}: {
+  title?: string
+  description?: string
+}) {
   return (
     <>
       <div className="pt-nav flex h-screen flex-col items-center justify-center">

@@ -9,6 +9,7 @@ export async function getPageData(pathname: string): Promise<PageData> {
 
   if (matched) {
     const module = await matched[0].route.preload()
+    console.log(matched[0].route.preload, module)
 
     return {
       pageType: module.frontmatter?.pageType || 'doc',
@@ -25,7 +26,11 @@ export async function getPageData(pathname: string): Promise<PageData> {
 export const usePageData = create<{
   pageData?: PageData
   setPageData: (pageData?: PageData) => void
+  toc?: PageData['toc']
+  setToc: (toc?: PageData['toc']) => void
 }>((set) => ({
   pageData: undefined,
   setPageData: (pageData?: PageData) => set({ pageData }),
+  toc: undefined,
+  setToc: (toc?: PageData['toc']) => set({ toc }),
 }))

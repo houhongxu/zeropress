@@ -1,8 +1,8 @@
 import { Switch } from './Switch'
 import { LOGO_MAP } from './consts'
 import classNames from 'classnames'
+import { useDark, useWindowScroll } from 'default-theme/hooks'
 import { useLocation } from 'react-router-dom'
-import { useDark, useWindowScroll } from 'runtime/default-theme/hooks'
 import { usePageData } from 'runtime/usePageData'
 import { NavItem } from 'shared/types'
 

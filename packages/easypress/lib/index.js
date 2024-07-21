@@ -20,6 +20,7 @@ async function getPageData(pathname) {
   const matched = matchRoutes(routes2, pathname);
   if (matched) {
     const module = await matched[0].route.preload();
+    console.log(matched[0].route.preload, module);
     return {
       pageType: ((_a = module.frontmatter) == null ? void 0 : _a.pageType) || "doc",
       pagePath: pathname,
@@ -32,7 +33,9 @@ async function getPageData(pathname) {
 }
 var usePageData = create((set) => ({
   pageData: void 0,
-  setPageData: (pageData) => set({ pageData })
+  setPageData: (pageData) => set({ pageData }),
+  toc: void 0,
+  setToc: (toc) => set({ toc })
 }));
 export {
   Content,

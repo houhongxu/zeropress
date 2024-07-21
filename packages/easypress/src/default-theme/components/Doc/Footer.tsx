@@ -1,5 +1,5 @@
+import { usePrevNextPage } from 'default-theme/hooks'
 import { PropsWithChildren } from 'react'
-import { usePrevNextPage } from 'runtime/default-theme/hooks'
 
 export function Footer() {
   const { prevPage, nextPage } = usePrevNextPage()

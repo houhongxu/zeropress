@@ -10,7 +10,12 @@ import { addDynamicIconSelectors } from "@iconify/tailwind";
 import path2 from "path";
 var tailwindcssConfig = {
   content: [
-    path2.join(__dirname, "..", "..", "./src/runtime/**/*.{tsx,ts,jsx,js}")
+    path2.join(
+      __dirname,
+      "..",
+      "..",
+      "./src/default-theme/**/*.{tsx,ts,jsx,js}"
+    )
     // 相对于lib的路径，tailwind引入是在node/config,打包后是lib/node/cli
   ],
   darkMode: "selector",
@@ -196,7 +201,7 @@ function vitePluginMdx() {
     // 兼容rollupPluginMdx与vite-plugin-react https://github.com/vitejs/vite-plugin-react/issues/38
     async handleHotUpdate(ctx) {
       if (/\.mdx?/.test(ctx.file)) {
-        console.log(ctx.file);
+        console.log("\u81EA\u5B9A\u4E49hmr:", ctx.file);
         ctx.server.ws.send({
           type: "custom",
           event: "mdx?-update"
