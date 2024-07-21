@@ -19,7 +19,9 @@ export function createPlugins({
 }): PluginOption[] {
   return [
     vitePluginMdx(),
-    pluginReact({ include: /\.(md|mdx|js|jsx|ts|tsx)$/ }), // 根据热更新规则，仅导出组件时才能保证热更新正确，因为组件副作用是确定的，所以mdx导出frontmatter等对象会提示但是仍然尝试生效，这规则是react refresh特性，所以webpack热更新插件也是这样 https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#consistent-components-exports https://github.com/pmmmwh/react-refresh-webpack-plugin/issues/249#issuecomment-729277683
+    pluginReact({ include: /\.(md|mdx|js|jsx|ts|tsx)$/ }), // mdx接入hmr与react-refresh，hmr生效，但是react-refresh失效
+    // vite https://github.com/vitejs/@vitejs/plugin-react/tree/main/packages/plugin-react#consistent-components-exports 中提到的，“为了更轻松地将简单常量与组件一起导出，模块仅在其值发生变化时才会失效”，所以mdx导出的复杂变量toc或者frontmatter会导致react-refresh失效，具体原因是react-refresh避免复杂变量的副作用
+    // webpack也提到了 https://github.com/pmmmwh/react-refresh-webpack-plugin/issues/249#issuecomment-729277683
     vitePluginServeHtml({
       templatePath: HTML_PATH,
       entry: CLIENT_ENTRY_PATH, // /@fs/是针对root之外的，当作为npm包时在nodemodules中属于root内，不需要使用 https://cn.vitejs.dev/config/server-options.html#server-fs-allow

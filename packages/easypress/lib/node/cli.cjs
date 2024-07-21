@@ -227,10 +227,12 @@ var import_remark_mdx_frontmatter = __toESM(require("remark-mdx-frontmatter"), 1
 function vitePluginMdx() {
   return {
     enforce: "pre",
-    // 兼容rollupPluginMdx与vite-plugin-react https://github.com/vitejs/vite-plugin-react/issues/38
+    //兼容@mdx-js/rollup与@vitejs/plugin-react https://github.com/vitejs/@vitejs/plugin-react/issues/38，需要在@vitejs/plugin-react前，将mdx编译为js后接入@vitejs/plugin-react的react-refresh
+    apply: "serve",
+    // 提供hmr自定义事件给client
     async handleHotUpdate(ctx) {
       if (/\.mdx?/.test(ctx.file)) {
-        console.log("\u81EA\u5B9A\u4E49hmr:", ctx.file);
+        console.log("\u81EA\u5B9A\u4E49hmr\u4E8B\u4EF6:", ctx.file);
         ctx.server.ws.send({
           type: "custom",
           event: "mdx?-update"
@@ -346,10 +348,9 @@ function vitePluginVirtualConfig({
     },
     async handleHotUpdate(ctx) {
       const configPath = siteConfig.userConfigPath || "";
-      console.log(ctx.file);
       if (ctx.file.includes(configPath)) {
         if (restartRuntimeDevServer) {
-          console.log("\u76D1\u542C\u5230\u914D\u7F6E\u6587\u4EF6\u66F4\u65B0\uFF0C\u91CD\u542F\u670D\u52A1\u4E2D...");
+          console.log("\u76D1\u542C\u5230\u914D\u7F6E\u6587\u4EF6\u66F4\u65B0\uFF0C\u91CD\u542F\u670D\u52A1\u4E2D:", ctx.file);
           await restartRuntimeDevServer();
         }
       }
@@ -409,7 +410,9 @@ function createPlugins({
   return [
     vitePluginMdx(),
     (0, import_plugin_react.default)({ include: /\.(md|mdx|js|jsx|ts|tsx)$/ }),
-    // 根据热更新规则，仅导出组件时才能保证热更新正确，因为组件副作用是确定的，所以mdx导出frontmatter等对象会提示但是仍然尝试生效，这规则是react refresh特性，所以webpack热更新插件也是这样 https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#consistent-components-exports https://github.com/pmmmwh/react-refresh-webpack-plugin/issues/249#issuecomment-729277683
+    // mdx接入hmr与react-refresh，hmr生效，但是react-refresh失效
+    // vite https://github.com/vitejs/@vitejs/plugin-react/tree/main/packages/plugin-react#consistent-components-exports 中提到的，“为了更轻松地将简单常量与组件一起导出，模块仅在其值发生变化时才会失效”，所以mdx导出的复杂变量toc或者frontmatter会导致react-refresh失效，具体原因是react-refresh避免复杂变量的副作用
+    // webpack也提到了 https://github.com/pmmmwh/react-refresh-webpack-plugin/issues/249#issuecomment-729277683
     vitePluginServeHtml({
       templatePath: HTML_PATH,
       entry: CLIENT_ENTRY_PATH

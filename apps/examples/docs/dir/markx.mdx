@@ -10,27 +10,7 @@ import Counter from './count.tsx'
 
 <div style={{ background: 'red', margin: 10 }}>我是jsx的div</div>
 
-```ts
-export async function createRuntimeDevServer({
-  root = process.cwd(),
-  siteConfig,
-  restartRuntimeDevServer,
-}: {
-  root?: string
-  siteConfig: SiteConfig
-  restartRuntimeDevServer: () => Promise<void>
-}) {
-  return createServer({
-    root: ROOT_PATH,
-    server: {
-      host: true,
-    },
-    plugins: createPlugins({ root, restartRuntimeDevServer, siteConfig }),
-  })
-}
-```
-
-## GFM1
+## GFM
 
 执行上下文就是 JavaScript 执行一段代码时的运行环境
 
@@ -216,3 +196,23 @@ memo 通过浅比较 props 的每个值 来判断是否需要重新渲染子组�
 例如：但是可以直接复制链接打开https://i0.hdslb.com/bfs/banner/728f45f115c9b99752bb162664600a183b23c8da.png
 
 因为直接访问没有 Referer 请求头
+
+```ts
+export async function createRuntimeDevServer({
+  root = process.cwd(),
+  siteConfig,
+  restartRuntimeDevServer,
+}: {
+  root?: string
+  siteConfig: SiteConfig
+  restartRuntimeDevServer: () => Promise<void>
+}) {
+  return createServer({
+    root: ROOT_PATH,
+    server: {
+      host: true,
+    },
+    plugins: createPlugins({ root, restartRuntimeDevServer, siteConfig }),
+  })
+}
+```

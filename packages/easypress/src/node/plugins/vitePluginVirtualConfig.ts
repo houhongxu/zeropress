@@ -29,11 +29,10 @@ export function vitePluginVirtualConfig({
     },
     async handleHotUpdate(ctx) {
       const configPath = siteConfig.userConfigPath || ''
-      console.log(ctx.file)
 
       if (ctx.file.includes(configPath)) {
         if (restartRuntimeDevServer) {
-          console.log('监听到配置文件更新，重启服务中...')
+          console.log('监听到配置文件更新，重启服务中:', ctx.file)
 
           await restartRuntimeDevServer()
         }
