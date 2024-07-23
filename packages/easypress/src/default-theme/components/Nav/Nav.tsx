@@ -7,10 +7,13 @@ import { usePageData } from 'runtime/usePageData'
 import { NavItem } from 'shared/types'
 
 export function Nav() {
-  const { y: isScrolled } = useWindowScroll()
+  const { y } = useWindowScroll()
   const { pageData } = usePageData()
   const { pathname } = useLocation()
+
   const nav = pageData?.userConfig.themeConfig?.nav
+
+  const isScrolled = Boolean(y)
   const isNotHome = pathname !== '/'
 
   const left = nav?.filter((item) => item.position === 'left')
@@ -50,15 +53,19 @@ export function Nav() {
         )}
       >
         <div className="flex h-full items-center justify-between">
-          <div className="flex justify-start">
+          <div className="flex h-full justify-start">
             {left?.map((item, index) => (
-              <div key={`${item.link}${index}`}>{getItem(item)}</div>
+              <div className="h-full" key={`${item.link}${index}`}>
+                {getItem(item)}
+              </div>
             ))}
           </div>
 
-          <div className="flex justify-end">
+          <div className="flex h-full justify-end">
             {right?.map((item, index) => (
-              <div key={`${item.link}${index}`}>{getItem(item)}</div>
+              <div className="h-full" key={`${item.link}${index}`}>
+                {getItem(item)}
+              </div>
             ))}
           </div>
         </div>
@@ -77,15 +84,14 @@ function TextItem({ item, pathname }: { item: NavItem; pathname?: string }) {
 
   return (
     <nav className="mx-[12px] h-full justify-end">
-      <a href={link} className="flex h-full items-center">
-        <span
-          className={classNames(
-            active ? 'text-brand' : 'text-text-2',
-            'text-hover whitespace-nowrap text-[14px] font-[500]',
-          )}
-        >
-          {text}
-        </span>
+      <a
+        href={link}
+        className={classNames(
+          active ? 'text-brand' : 'text-text-2',
+          'text-hover flex h-full items-center whitespace-nowrap text-[14px] font-[500]',
+        )}
+      >
+        {text}
       </a>
     </nav>
   )
@@ -100,12 +106,12 @@ function LogoItem({ item }: { item: NavItem }) {
 
   return (
     <nav className="mx-[12px] h-full">
-      <a href={link} className="flex h-full items-center">
+      <a
+        href={link}
+        className="text-text-2 text-hover flex  h-full items-center"
+      >
         <span
-          className={classNames(
-            LOGO_MAP[logo],
-            'text-text-2 text-hover h-[24px] w-[24px]',
-          )}
+          className={classNames(LOGO_MAP[logo], 'h-[24px] w-[24px]')}
         ></span>
       </a>
     </nav>
@@ -120,8 +126,8 @@ function ImgItem({ item }: { item: NavItem }) {
   }
 
   return (
-    <nav className="mx-[12px] h-full">
-      <a href={link} className="flex h-full items-center">
+    <nav className="mx-[12px] flex h-full items-center">
+      <a href={link}>
         <img src={img} className="h-[24px] w-[24px]"></img>
       </a>
     </nav>
