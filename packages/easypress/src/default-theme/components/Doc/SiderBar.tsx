@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import { useSidebar } from 'default-theme/hooks'
+import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { SidebarDir, SidebarItem } from 'shared/types'
 
@@ -20,13 +21,33 @@ export function Siderbar() {
 }
 
 function SiderbarDir({ dir }: { dir: SidebarDir }) {
+  const [isExpand, setIsExpand] = useState(!dir.collapsed)
+
+  // ! TODO 添加配置项
   return (
     <div className="border-divider mt-[4px] border-t first:mt-0 first:border-t-0">
-      <h2 className="text-text-1 mb-[6px] mt-[12px] cursor-default font-[700]">
-        {dir.text}
+      <h2
+        onClick={() => setIsExpand((pre) => !pre)}
+        className="text-text-1 mb-[6px] mt-[12px] flex cursor-pointer items-center justify-between font-[700]"
+      >
+        <span>{dir.text}</span>
+        <span
+          className={classNames(
+            isExpand ? 'rotate-90' : 'rotate-0',
+            'icon-[carbon--chevron-right]',
+            'transition-transform duration-300',
+          )}
+        ></span>
       </h2>
 
-      <div className="mb-[12px] flex flex-col pl-[1rem]">
+      <div
+        style={{
+          height: isExpand ? `${(dir.items?.length ?? 0) * 25}px` : '0',
+        }}
+        className={classNames(
+          'mb-[12px] flex flex-col overflow-hidden pl-[1rem] transition-[height] duration-300',
+        )}
+      >
         {dir.items?.map((item) => (
           <SiderbarItem key={item.link} item={item}></SiderbarItem>
         ))}
@@ -41,15 +62,14 @@ function SiderbarItem({ item }: { item: SidebarItem }) {
   const active = pathname === link
 
   return (
-    <a href={link} className="p-[2px]">
-      <span
-        className={classNames(
-          active ? 'text-brand' : 'text-text-2',
-          'text-hover text-[14px]',
-        )}
-      >
-        {text}
-      </span>
+    <a
+      href={link}
+      className={classNames(
+        active ? 'text-brand' : 'text-text-2',
+        'text-hover p-[2px] text-[14px]',
+      )}
+    >
+      {text}
     </a>
   )
 }

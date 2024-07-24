@@ -5,8 +5,7 @@ import fse from 'fs-extra'
 import path from 'path'
 import { UserConfig, SiteConfig } from 'shared/types'
 import tailwindcss from 'tailwindcss'
-import { loadConfigFromFile } from 'vite'
-import { UserConfig as ViteUserConfig } from 'vite'
+import { loadConfigFromFile, UserConfig as ViteUserConfig } from 'vite'
 
 export const baseConfig: Pick<ViteUserConfig, 'css'> = {
   // 配置tailwindcss
@@ -38,8 +37,8 @@ export async function resolveSiteConfig({
     docs: userConfig.docs || DEFAULT_USER_CONFIG.docs,
     title: userConfig.title || DEFAULT_USER_CONFIG.title,
     description: userConfig.description || DEFAULT_USER_CONFIG.description,
-    themeConfig: userConfig.themeConfig || DEFAULT_USER_CONFIG.themeConfig,
-    vite: userConfig.vite || DEFAULT_USER_CONFIG.vite,
+    themeConfig: userConfig.themeConfig ?? DEFAULT_USER_CONFIG.themeConfig,
+    vite: userConfig.vite ?? DEFAULT_USER_CONFIG.vite,
   }
 
   const siteConfig: SiteConfig = {

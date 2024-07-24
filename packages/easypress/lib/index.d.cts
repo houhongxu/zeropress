@@ -71,6 +71,7 @@ interface Sidebar {
 interface SidebarDir {
     text?: string;
     items?: SidebarItem[];
+    collapsed?: boolean;
 }
 type SidebarItem = {
     text: string;
