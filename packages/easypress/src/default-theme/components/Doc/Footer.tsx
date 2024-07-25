@@ -1,5 +1,6 @@
 import { usePrevNextPage } from 'default-theme/hooks'
 import { PropsWithChildren } from 'react'
+import { Link } from 'runtime/Link'
 
 export function Footer() {
   const { prevPage, nextPage } = usePrevNextPage()
@@ -36,7 +37,7 @@ function Button({
   link?: string
 }>) {
   return (
-    <a
+    <Link
       href={link}
       className="border-divider hover:border-brand group block h-full w-full rounded-[8px] border px-[16px] py-[8px] transition-colors duration-300"
     >
@@ -47,6 +48,6 @@ function Button({
       <div className="text-text-2 group-hover:text-brand text-[14px] font-[500] leading-[20px] transition-colors duration-300">
         {text}
       </div>
-    </a>
+    </Link>
   )
 }

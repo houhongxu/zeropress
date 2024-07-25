@@ -1,0 +1,218 @@
+---
+hello: frontmatter
+---
+
+# markx
+
+import Counter from './count.tsx'
+
+<Counter />
+
+<div style={{ background: 'red', margin: 10 }}>我是jsx的div</div>
+
+## GFM
+
+执行上下文就是 JavaScript 执行一段代码时的运行环境
+
+执行上下文种类分为：
+
+全局执行上下文
+函数执行上下文
+块级执行上下文 （es6 后出现）
+eval 执行上下文 (暂不考虑)
+注意，全局执行上下文是在编译阶段就生成并存储在执行上下文栈中的
+
+每一次执行到**(函数/代码块)时，就会创建(函数/块级)执行上下文，然后放入执行上下文栈**中，执行完后弹出
+
+所以全局执行上下文直到程序终止前都会存在 当递归调用函数时，没有终止条件就一直入栈，会产生著名的栈溢出(Stack Overflow)
+
+执行上下文创建时，会：
+
+为了新增块级作用域并兼容变量提升等旧特性，出现了新的定义比如词法环境和变量环境，本质并没有太大变化，但是尽量以 es3 为基础理解，以 es2018 为基础应用
+
+es3:
+
+创建变量对象 VO(作用域)：存储变量声明+函数声明+函数参数名(全局创建全局对象 GO，函数创建活动对象 AO 并初始化 arguments)
+创建作用域链 Scope：有序链表，包括自身变量对象+父级作用域[[scope]]
+确定 this 的指向
+es6:
+
+创建词法环境：环境记录（变量对象）+ 外部环境引用 outer(作用域链) (存储变量 let/const 的内容)
+创建变量环境：与词法环境类似 (存储变量提升的内容)
+确定 this 的指向
+es2018:
+
+创建词法环境：环境记录（变量对象）+ 外部环境引用 outer(作用域链) + this (存储变量 let/const 的内容)
+创建变量环境：与词法环境类似 (存储变量提升的内容)
+很多其他环境暂时不关注
+执行上下文栈是按执行顺序压入的，但是代码作用域往往不同于调用的顺序，所以作用域是通过作用域链来控制代码可以访问的变量等内容
+
+## 22222如果我是汉字 标题的id是什么呢 Autolink literals
+
+作用域和作用域链
+作用域是 es3 的知识了，我们拓展到 2018 进行理解
+
+JavaScript 采用词法(静态)作用域，就是指作用域是由代码中函数(代码块)声明的位置来决定的
+
+作用域种类分为：
+
+全局作用域（es3 全局对象 GO）(es2018 (词法/变量)环境的一部分)
+函数作用域（es3 活动对象 AO）(es2018 (词法/变量)环境的一部分)
+块级作用域 (es2018 词法环境的一部分)
+es3 执行阶段先看自身作用域再看父级作用域[[scope]]，注意[[scope]]是我们无法看到的
+
+es2018 执行阶段先查找词法环境再查找变量环境再查找 outer，即先看块级作用域再看函数作用域再看父级作用域，通过这种方式解决了新增 let/const 的块级作用域的问题
+
+作用域和作用域链
+作用域是 es3 的知识了，我们拓展到 2018 进行理解
+
+JavaScript 采用词法(静态)作用域，就是指作用域是由代码中函数(代码块)声明的位置来决定的
+
+作用域种类分为：
+
+全局作用域（es3 全局对象 GO）(es2018 (词法/变量)环境的一部分)
+函数作用域（es3 活动对象 AO）(es2018 (词法/变量)环境的一部分)
+块级作用域 (es2018 词法环境的一部分)
+es3 执行阶段先看自身作用域再看父级作用域[[scope]]，注意[[scope]]是我们无法看到的
+
+es2018 执行阶段先查找词法环境再查找变量环境再查找 outer，即先看块级作用域再看函数作用域再看父级作用域，通过这种方式解决了新增 let/const 的块级作用域的问题
+
+www.example.com, https://example.com, and contact@example.com.
+
+## Footnote3333
+
+闭包是一个包含环境的函数
+
+环境指的是内部函数引用外部函数的变量的集合
+
+根据词法作用域的规则，内部函数总是可以访问它们的外部函数中的变量
+
+当外部函数执行完时，内部函数引用的外包函数的变量依然保存在内存中
+
+也有人称保存的这些变量的集合叫闭包
+
+在 chrome 控制台就可以看到闭包的特性
+
+chorme 控制台的[[Scopes]]
+[[Scopes]] 不是内部 JavaScript 属性，它是 Chromium 调试器创建的功能
+
+见 stackoverflow
+
+[[Scopes]]在 chrome 版本 114.0.5735.198（正式版本） (arm64) 浏览器内可以观察闭包
+
+在控制台可以通过console.dir看到属性[[Scopes]]
+
+[[Scopes]]是一个类数组的栈结构，[Closure,Script,Global]
+
+Closure：闭包作用域
+Script：Script 标签的作用域（控制台没有标签则没有变量内容)
+Global：全局作用域
+
+#### four
+
+所以就有了 this 机制，
+
+上面创建执行上下文的时候也创建了 this，所以 this 也是分为：
+
+全局执行上下文 this
+函数执行上下文 this
+eval 执行上下文 this (暂不考虑)
+而他们都是一种指向：
+
+直接调用：在浏览器中，指向 window，严格模式指向 undefined。node 中则指向 global，严格模式指向 undefined
+也有方法使 this 指向不同值：
+
+对象方法调用：this 指向调用它的对象
+
+##### five
+
+memo 通过浅比较 props 的每个值 来判断是否需要重新渲染子组件，而且可以指定具体渲染条件
+
+这个浅比较很关键，当属性是基本类型变量时，比较是是其本身的值，当属性是函数等引用类型变量时，比较的是引用的地址
+
+属性在父组件是否是状态也很关键，如果是状态，就算是引用类型变量比如对象，那地址也是不随父组件每次渲染而刷新的
+
+所以，需要严格关注引用类型变量在父组件的情况
+
+比如 这里子组件属性是 right，那么当 right 值不变时，子组件就不随父组件渲染
+
+如果这里子组件属性是 handleClick，因为 handleClick 在父组件不是状态，所以父组件每次渲染都刷新其地址，所以 memo 也没有效果，需要配合 useCallback
+
+所以 memo 在属性不仅仅是基本类型变量时，需要配合一些 hook 使用
+
+如果子组件渲染性能消耗不是很多的话就没必要使用 memo，因为缓存本身就消耗性能， useCallback 或 useMemo 同理
+
+当 props 在父组件都是状态时
+无需额外考虑
+
+###### six
+
+请求页面的来源地址
+
+服务器通过 referer 记录的来源来判断是否是内部域名
+
+例如：但是可以直接复制链接打开https://i0.hdslb.com/bfs/banner/728f45f115c9b99752bb162664600a183b23c8da.png
+
+因为直接访问没有 Referer 请求头
+请求页面的来源地址
+
+服务器通过 referer 记录的来源来判断是否是内部域名
+
+例如：但是可以直接复制链接打开https://i0.hdslb.com/bfs/banner/728f45f115c9b99752bb162664600a183b23c8da.png
+
+因为直接访问没有 Referer 请求头
+请求页面的来源地址
+
+服务器通过 referer 记录的来源来判断是否是内部域名
+
+例如：但是可以直接复制链接打开https://i0.hdslb.com/bfs/banner/728f45f115c9b99752bb162664600a183b23c8da.png
+
+因为直接访问没有 Referer 请求头
+请求页面的来源地址
+
+服务器通过 referer 记录的来源来判断是否是内部域名
+
+例如：但是可以直接复制链接打开https://i0.hdslb.com/bfs/banner/728f45f115c9b99752bb162664600a183b23c8da.png
+
+因为直接访问没有 Referer 请求头
+请求页面的来源地址
+
+服务器通过 referer 记录的来源来判断是否是内部域名
+
+例如：但是可以直接复制链接打开https://i0.hdslb.com/bfs/banner/728f45f115c9b99752bb162664600a183b23c8da.png
+
+因为直接访问没有 Referer 请求头
+请求页面的来源地址
+
+服务器通过 referer 记录的来源来判断是否是内部域名
+
+例如：但是可以直接复制链接打开https://i0.hdslb.com/bfs/banner/728f45f115c9b99752bb162664600a183b23c8da.png
+
+因为直接访问没有 Referer 请求头
+请求页面的来源地址
+
+服务器通过 referer 记录的来源来判断是否是内部域名
+
+例如：但是可以直接复制链接打开https://i0.hdslb.com/bfs/banner/728f45f115c9b99752bb162664600a183b23c8da.png
+
+因为直接访问没有 Referer 请求头
+
+```ts
+export async function createRuntimeDevServer({
+  root = process.cwd(),
+  siteConfig,
+  restartRuntimeDevServer,
+}: {
+  root?: string
+  siteConfig: SiteConfig
+  restartRuntimeDevServer: () => Promise<void>
+}) {
+  return createServer({
+    root: ROOT_PATH,
+    server: {
+      host: true,
+    },
+    plugins: createPlugins({ root, restartRuntimeDevServer, siteConfig }),
+  })
+}
+```

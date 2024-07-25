@@ -1,7 +1,9 @@
 import classNames from 'classnames'
 import { useSidebar } from 'default-theme/hooks'
+import { nomoralizeUrl } from 'default-theme/utils'
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import { Link } from 'runtime/Link'
 import { SidebarDir, SidebarItem } from 'shared/types'
 
 export function Siderbar() {
@@ -23,7 +25,6 @@ export function Siderbar() {
 function SiderbarDir({ dir }: { dir: SidebarDir }) {
   const [isExpand, setIsExpand] = useState(!dir.collapsed)
 
-  // ! TODO 添加配置项
   return (
     <div className="border-divider mt-[4px] border-t first:mt-0 first:border-t-0">
       <h2
@@ -59,10 +60,10 @@ function SiderbarDir({ dir }: { dir: SidebarDir }) {
 function SiderbarItem({ item }: { item: SidebarItem }) {
   const { text, link } = item
   const { pathname } = useLocation()
-  const active = pathname === link
+  const active = nomoralizeUrl(pathname) === nomoralizeUrl(link)
 
   return (
-    <a
+    <Link
       href={link}
       className={classNames(
         active ? 'text-brand' : 'text-text-2',
@@ -70,6 +71,6 @@ function SiderbarItem({ item }: { item: SidebarItem }) {
       )}
     >
       {text}
-    </a>
+    </Link>
   )
 }

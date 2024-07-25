@@ -131,6 +131,7 @@ declare function Content(): react.ReactElement<any, string | react.JSXElementCon
 declare function getPageData(pathname: string): Promise<PageData>;
 interface Props {
     pageData?: PageData;
+    setPageData?: React.Dispatch<React.SetStateAction<PageData | undefined>>;
 }
 declare const PageDataContext: react.Context<Props>;
 declare const usePageData: () => Props;

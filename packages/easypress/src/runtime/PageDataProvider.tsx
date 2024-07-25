@@ -17,7 +17,7 @@ export function PageDataProvider({
   })
 
   return (
-    <PageDataContext.Provider value={{ pageData }}>
+    <PageDataContext.Provider value={{ pageData, setPageData }}>
       {children}
     </PageDataContext.Provider>
   )

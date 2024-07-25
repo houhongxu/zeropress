@@ -2,7 +2,9 @@ import { Switch } from './Switch'
 import { LOGO_MAP } from './consts'
 import classNames from 'classnames'
 import { useDark, useWindowScroll } from 'default-theme/hooks'
+import { nomoralizeUrl } from 'default-theme/utils'
 import { useLocation } from 'react-router-dom'
+import { Link } from 'runtime/Link'
 import { usePageData } from 'runtime/usePageData'
 import { NavItem } from 'shared/types'
 
@@ -76,7 +78,9 @@ export function Nav() {
 
 function TextItem({ item, pathname }: { item: NavItem; pathname?: string }) {
   const { text, link } = item
-  const active = pathname === link
+  const getDirname = (url = '/') => url.split('/').at(-2)
+  const active =
+    getDirname(nomoralizeUrl(pathname)) === getDirname(nomoralizeUrl(link))
 
   if (!text) {
     return <></>
@@ -84,7 +88,7 @@ function TextItem({ item, pathname }: { item: NavItem; pathname?: string }) {
 
   return (
     <nav className="mx-[12px] h-full justify-end">
-      <a
+      <Link
         href={link}
         className={classNames(
           active ? 'text-brand' : 'text-text-2',
@@ -92,7 +96,7 @@ function TextItem({ item, pathname }: { item: NavItem; pathname?: string }) {
         )}
       >
         {text}
-      </a>
+      </Link>
     </nav>
   )
 }
@@ -106,14 +110,14 @@ function LogoItem({ item }: { item: NavItem }) {
 
   return (
     <nav className="mx-[12px] h-full">
-      <a
+      <Link
         href={link}
         className="text-text-2 text-hover flex  h-full items-center"
       >
         <span
           className={classNames(LOGO_MAP[logo], 'h-[24px] w-[24px]')}
         ></span>
-      </a>
+      </Link>
     </nav>
   )
 }
@@ -127,9 +131,9 @@ function ImgItem({ item }: { item: NavItem }) {
 
   return (
     <nav className="mx-[12px] flex h-full items-center">
-      <a href={link}>
+      <Link href={link}>
         <img src={img} className="h-[24px] w-[24px]"></img>
-      </a>
+      </Link>
     </nav>
   )
 }

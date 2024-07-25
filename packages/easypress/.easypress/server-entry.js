@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import React, { useState, useEffect, createContext, useContext } from "react";
-import { matchRoutes, useLocation, useRoutes } from "react-router-dom";
+import { matchRoutes, useLocation, useNavigate, useRoutes } from "react-router-dom";
 import classNames from "classnames";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server.mjs";
@@ -940,10 +940,12 @@ function SiderbarItem({ item }) {
   const { text, link } = item;
   const { pathname } = useLocation();
   const active = pathname === link;
+  const navigate = useNavigate();
   return /* @__PURE__ */ jsx(
     "a",
     {
       href: link,
+      onClick: () => navigate(link || "/"),
       className: classNames(
         active ? "text-brand" : "text-text-2",
         "text-hover p-[2px] text-[14px]"

@@ -24,6 +24,7 @@ export async function getPageData(pathname: string): Promise<PageData> {
 
 interface Props {
   pageData?: PageData
+  setPageData?: React.Dispatch<React.SetStateAction<PageData | undefined>>
 }
 
 export const PageDataContext = createContext<Props>({})

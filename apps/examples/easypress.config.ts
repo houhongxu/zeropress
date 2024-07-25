@@ -10,6 +10,7 @@ const config: UserConfig = {
       },
       { text: '主页', link: '/' },
       { text: '指南', link: '/dir/markx' },
+      { text: '引导', link: '/nodir/markx' },
       {
         dark: true,
       },
@@ -31,81 +32,8 @@ const config: UserConfig = {
               text: '计数器',
               link: '/dir/count',
             },
-            {
-              text: '计数器1',
-              link: '/dir/count1',
-            },
-            {
-              text: '计数器2',
-              link: '/dir/count2',
-            },
-            {
-              text: '计数器3',
-              link: '/dir/count3',
-            },
-            {
-              text: '计数器4',
-              link: '/dir/count4',
-            },
-            {
-              text: '计数器5',
-              link: '/dir/count5',
-            },
           ],
         },
-
-        {
-          text: '测试mdx2',
-          items: [
-            {
-              text: '计数器1',
-              link: '/dir/count1',
-            },
-            {
-              text: '计数器2',
-              link: '/dir/count2',
-            },
-            {
-              text: '计数器3',
-              link: '/dir/count3',
-            },
-            {
-              text: '计数器4',
-              link: '/dir/count4',
-            },
-            {
-              text: '计数器5',
-              link: '/dir/count5',
-            },
-          ],
-        },
-
-        {
-          text: '测试mdx3',
-          items: [
-            {
-              text: '计数器1',
-              link: '/dir/count1',
-            },
-            {
-              text: '计数器2',
-              link: '/dir/count2',
-            },
-            {
-              text: '计数器3',
-              link: '/dir/count3',
-            },
-            {
-              text: '计数器4',
-              link: '/dir/count4',
-            },
-            {
-              text: '计数器5',
-              link: '/dir/count5',
-            },
-          ],
-        },
-
         {
           text: '测试mdx4',
           items: [
@@ -113,47 +41,29 @@ const config: UserConfig = {
               text: '汉字',
               link: '/dir/汉字',
             },
+          ],
+        },
+      ],
+      '/nodir': [
+        {
+          text: '测试mdx',
+          items: [
             {
-              text: '计数器2',
-              link: '/dir/count2',
+              text: 'mdx',
+              link: '/nodir/markx',
             },
             {
-              text: '计数器3',
-              link: '/dir/count3',
-            },
-            {
-              text: '计数器4',
-              link: '/dir/count4',
-            },
-            {
-              text: '计数器5',
-              link: '/dir/count5',
+              text: '计数器',
+              link: '/nodir/count',
             },
           ],
         },
-
         {
-          text: '测试mdx5',
+          text: '测试mdx4',
           items: [
             {
-              text: '计数器1',
-              link: '/dir/count1',
-            },
-            {
-              text: '计数器2',
-              link: '/dir/count2',
-            },
-            {
-              text: '计数器3',
-              link: '/dir/count3',
-            },
-            {
-              text: '计数器4',
-              link: '/dir/count4',
-            },
-            {
-              text: '计数器5',
-              link: '/dir/count5',
+              text: 'no',
+              link: '/nodir/no',
             },
           ],
         },
