@@ -55,15 +55,15 @@ var import_react_router_dom2 = require("react-router-dom");
 var import_virtual_config = __toESM(require("virtual:config"), 1);
 var import_virtual_routes2 = __toESM(require("virtual:routes"), 1);
 async function getPageData(pathname) {
-  var _a;
+  var _a, _b, _c, _d;
   const matched = (0, import_react_router_dom2.matchRoutes)(import_virtual_routes2.default, pathname);
   if (matched) {
     const module2 = await matched[0].route.preload();
     return {
-      pageType: ((_a = module2.frontmatter) == null ? void 0 : _a.pageType) || "doc",
+      pageType: ((_b = (_a = module2 == null ? void 0 : module2.GetFrontMatter) == null ? void 0 : _a.call(module2)) == null ? void 0 : _b.pageType) || "doc",
       pagePath: pathname,
-      frontmatter: module2.frontmatter,
-      toc: module2.toc,
+      frontmatter: ((_c = module2.GetFrontMatter) == null ? void 0 : _c.call(module2)) ?? {},
+      toc: ((_d = module2.GetToc) == null ? void 0 : _d.call(module2)) ?? [],
       userConfig: import_virtual_config.default
     };
   }

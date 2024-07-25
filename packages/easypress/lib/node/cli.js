@@ -171,7 +171,7 @@ var remarkMdxToc = () => {
         });
       }
     });
-    const template = `export const toc = ${JSON.stringify(toc, null, 2)};`;
+    const template = `export const GetToc = () => ${JSON.stringify(toc, null, 2)};`;
     const estree = parse(template, {
       ecmaVersion: "latest",
       sourceType: "module"
@@ -196,12 +196,12 @@ import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 function vitePluginMdx() {
+  const isMdx = (file) => /\.mdx?/.test(file);
   return {
     enforce: "pre",
-    //兼容@mdx-js/rollup与@vitejs/plugin-react https://github.com/vitejs/@vitejs/plugin-react/issues/38，需要在@vitejs/plugin-react前，将mdx编译为js后接入@vitejs/plugin-react的react-refresh
-    // 提供hmr自定义事件给client
+    // 将热更新边界拓展到接受该事件并处理的组件，提供hmr自定义事件给client
     async handleHotUpdate(ctx) {
-      if (/\.mdx?/.test(ctx.file)) {
+      if (isMdx(ctx.file)) {
         console.log("\u81EA\u5B9A\u4E49hmr\u4E8B\u4EF6:", ctx.file);
         ctx.server.ws.send({
           type: "custom",
@@ -297,6 +297,23 @@ function vitePluginServeHtml({
   };
 }
 
+// src/node/plugins/vitePluginTransformFrontmatter.ts
+function vitePluginTransformFrontmatter() {
+  const isMdx = (file) => /\.mdx?/.test(file);
+  return {
+    name: "vitePluginTransformFrontmatter",
+    enforce: "post",
+    transform(code, id) {
+      if (isMdx(id)) {
+        code = code.replace("export const frontmatter", "const frontmatter");
+        code += `
+ export const GetFrontMatter = () => frontmatter`;
+        return { code };
+      }
+    }
+  };
+}
+
 // src/node/plugins/vitePluginVirtualConfig.ts
 function vitePluginVirtualConfig({
   siteConfig,
@@ -379,11 +396,11 @@ function createPlugins({
 }) {
   return [
     vitePluginMdx(),
+    // vite 中提到的，“为了更轻松地将简单常量与组件一起导出，模块仅在其值发生变化时才会失效”，所以mdx导出的复杂变量toc或者frontmatter会导致react-refresh失效，具体原因是react-refresh避免复杂变量的副作用 https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#consistent-components-exports
+    // webpack 也提到了 https://github.com/pmmmwh/react-refresh-webpack-plugin/issues/249#issuecomment-729277683
+    // react-refresh issue中可得知 生效需要首字母大写+函数变量 dan的指南https://github.com/facebook/react/issues/16604
     pluginReact({ include: /\.(md|mdx|js|jsx|ts|tsx)$/ }),
-    // mdx接入hmr与react-refresh，hmr生效，但是react-refresh失效
-    // vite https://github.com/vitejs/@vitejs/plugin-react/tree/main/packages/plugin-react#consistent-components-exports 中提到的，“为了更轻松地将简单常量与组件一起导出，模块仅在其值发生变化时才会失效”，所以mdx导出的复杂变量toc或者frontmatter会导致react-refresh失效，具体原因是react-refresh避免复杂变量的副作用
-    // webpack也提到了 https://github.com/pmmmwh/react-refresh-webpack-plugin/issues/249#issuecomment-729277683
-    // react-refresh生效需要首字母大写+函数变量 dan的指南https://github.com/facebook/react/issues/16604
+    // mdx接入@vitejs/plugin-react https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#includeexclude
     vitePluginServeHtml({
       templatePath: HTML_PATH,
       entry: CLIENT_ENTRY_PATH
@@ -391,8 +408,9 @@ function createPlugins({
     }),
     vitePluginVirtualConfig({ siteConfig, restartRuntimeDevServer }),
     vitePluginVirtualRoutes({ siteConfig, docs }),
-    tsconfigPaths()
+    tsconfigPaths(),
     // vite-env.d.ts中declare虚拟模块引入的类型需要绝对路径，所以使用路径别名插件解析tsconfig的baseurl
+    vitePluginTransformFrontmatter()
   ];
 }
 

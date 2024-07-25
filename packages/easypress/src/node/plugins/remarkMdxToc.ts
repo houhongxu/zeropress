@@ -72,7 +72,8 @@ export const remarkMdxToc: Plugin<[], Root> = () => {
       }
     })
 
-    const template = `export const toc = ${JSON.stringify(toc, null, 2)};`
+    // GetToc为了符合react-refresh规则
+    const template = `export const GetToc = () => ${JSON.stringify(toc, null, 2)};`
 
     // acorn解析template为esast节点，acorn类型不准确，所以需要用estree官方类型 https://github.com/acornjs/acorn/tree/master/acorn/#interface
     const estree = parse(template, {

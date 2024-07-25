@@ -11,10 +11,10 @@ export async function getPageData(pathname: string): Promise<PageData> {
     const module = await matched[0].route.preload()
 
     return {
-      pageType: module.frontmatter?.pageType || 'doc',
+      pageType: module?.GetFrontMatter?.()?.pageType || 'doc',
       pagePath: pathname,
-      frontmatter: module.frontmatter,
-      toc: module.toc,
+      frontmatter: module.GetFrontMatter?.() ?? {},
+      toc: module.GetToc?.() ?? [],
       userConfig: config,
     }
   }

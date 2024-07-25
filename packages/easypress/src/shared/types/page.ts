@@ -13,8 +13,8 @@ export interface PageData {
 
 export interface PageModule {
   default: ReactElement
-  frontmatter?: FrontMatter
-  toc: TocItem[]
+  GetFrontMatter?: () => FrontMatter
+  GetToc?: () => TocItem[]
   [key: string]: unknown
 }
 

@@ -16,15 +16,15 @@ import { matchRoutes } from "react-router-dom";
 import config from "virtual:config";
 import routes2 from "virtual:routes";
 async function getPageData(pathname) {
-  var _a;
+  var _a, _b, _c, _d;
   const matched = matchRoutes(routes2, pathname);
   if (matched) {
     const module = await matched[0].route.preload();
     return {
-      pageType: ((_a = module.frontmatter) == null ? void 0 : _a.pageType) || "doc",
+      pageType: ((_b = (_a = module == null ? void 0 : module.GetFrontMatter) == null ? void 0 : _a.call(module)) == null ? void 0 : _b.pageType) || "doc",
       pagePath: pathname,
-      frontmatter: module.frontmatter,
-      toc: module.toc,
+      frontmatter: ((_c = module.GetFrontMatter) == null ? void 0 : _c.call(module)) ?? {},
+      toc: ((_d = module.GetToc) == null ? void 0 : _d.call(module)) ?? [],
       userConfig: config
     };
   }

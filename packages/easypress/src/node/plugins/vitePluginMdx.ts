@@ -14,15 +14,18 @@ import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
 import { Plugin } from 'vite'
 
 /**
- * 支持mdx的热更新与Gfm、Frontmatter、Toc等功能
+ * 支持mdx的Gfm、Frontmatter、Toc等功能
  */
 export function vitePluginMdx(): Plugin {
+  const isMdx = (file: string) => /\.mdx?/.test(file)
+
   return {
-    enforce: 'pre', //兼容@mdx-js/rollup与@vitejs/plugin-react https://github.com/vitejs/@vitejs/plugin-react/issues/38，需要在@vitejs/plugin-react前，将mdx编译为js后接入@vitejs/plugin-react的react-refresh
-    // 提供hmr自定义事件给client
+    enforce: 'pre',
+
+    // 将热更新边界拓展到接受该事件并处理的组件，提供hmr自定义事件给client
     async handleHotUpdate(ctx) {
       // https://cn.vitejs.dev/guide/api-plugin.html#handlehotupdate
-      if (/\.mdx?/.test(ctx.file)) {
+      if (isMdx(ctx.file)) {
         console.log('自定义hmr事件:', ctx.file)
 
         ctx.server.ws.send({
