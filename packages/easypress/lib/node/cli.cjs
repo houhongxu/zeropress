@@ -51,8 +51,8 @@ var tailwindcssConfig = {
   theme: {
     extend: {
       screens: {
-        pc: "768px",
-        full: "1060px"
+        pc: "68px",
+        full: "160px"
       },
       /** 声明时dark在下面所以默认显示dark主题颜色 */
       colors: {
@@ -228,7 +228,6 @@ function vitePluginMdx() {
   return {
     enforce: "pre",
     //兼容@mdx-js/rollup与@vitejs/plugin-react https://github.com/vitejs/@vitejs/plugin-react/issues/38，需要在@vitejs/plugin-react前，将mdx编译为js后接入@vitejs/plugin-react的react-refresh
-    apply: "serve",
     // 提供hmr自定义事件给client
     async handleHotUpdate(ctx) {
       if (/\.mdx?/.test(ctx.file)) {
@@ -244,7 +243,7 @@ function vitePluginMdx() {
         import_remark_gfm.default,
         // github的md语法
         import_remark_frontmatter.default,
-        // md模块导出frontmatter变量
+        // md模块导出frontmatter变量，改变name配置需要提供type和marker配置https://github.com/remarkjs/remark-frontmatter?tab=readme-ov-file#example-different-markers-and-fences
         import_remark_mdx_frontmatter.default,
         // mdx模块导出frontmatter变量
         remarkMdxToc
@@ -413,6 +412,7 @@ function createPlugins({
     // mdx接入hmr与react-refresh，hmr生效，但是react-refresh失效
     // vite https://github.com/vitejs/@vitejs/plugin-react/tree/main/packages/plugin-react#consistent-components-exports 中提到的，“为了更轻松地将简单常量与组件一起导出，模块仅在其值发生变化时才会失效”，所以mdx导出的复杂变量toc或者frontmatter会导致react-refresh失效，具体原因是react-refresh避免复杂变量的副作用
     // webpack也提到了 https://github.com/pmmmwh/react-refresh-webpack-plugin/issues/249#issuecomment-729277683
+    // react-refresh生效需要首字母大写+函数变量 dan的指南https://github.com/facebook/react/issues/16604
     vitePluginServeHtml({
       templatePath: HTML_PATH,
       entry: CLIENT_ENTRY_PATH
@@ -433,10 +433,15 @@ async function buildRuntime({
   siteConfig,
   docs
 }) {
+  console.log("\u5220\u9664\u65E7\u4EA7\u7269\uFF1A", SERVER_OUT_PATH, CLIENT_OUT_PATH);
+  await (0, import_fs_extra3.remove)(SERVER_OUT_PATH);
+  await (0, import_fs_extra3.remove)(CLIENT_OUT_PATH);
+  console.log("\u6784\u5EFAjs\u6587\u4EF6...");
   const [clientBundle, serverBundle] = await Promise.all([
     viteBuild({ siteConfig, docs }),
     viteBuild({ siteConfig, isServer: true, docs })
   ]);
+  console.log("\u6784\u5EFAhtml\u6587\u4EF6...");
   await renderHtmls({ siteConfig, clientBundle, serverBundle });
 }
 function viteBuild({

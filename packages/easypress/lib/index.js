@@ -11,10 +11,10 @@ function Content() {
 }
 
 // src/runtime/usePageData.ts
+import { createContext, useContext } from "react";
 import { matchRoutes } from "react-router-dom";
 import config from "virtual:config";
 import routes2 from "virtual:routes";
-import { create } from "zustand";
 async function getPageData(pathname) {
   var _a;
   const matched = matchRoutes(routes2, pathname);
@@ -30,14 +30,13 @@ async function getPageData(pathname) {
   }
   return { pageType: "404", pagePath: pathname, toc: [], userConfig: config };
 }
-var usePageData = create((set) => ({
-  pageData: void 0,
-  setPageData: (pageData) => set({ pageData }),
-  toc: void 0,
-  setToc: (toc) => set({ toc })
-}));
+var PageDataContext = createContext({});
+var usePageData = () => {
+  return useContext(PageDataContext);
+};
 export {
   Content,
+  PageDataContext,
   getPageData,
   usePageData
 };

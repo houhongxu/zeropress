@@ -19,7 +19,6 @@ import { Plugin } from 'vite'
 export function vitePluginMdx(): Plugin {
   return {
     enforce: 'pre', //兼容@mdx-js/rollup与@vitejs/plugin-react https://github.com/vitejs/@vitejs/plugin-react/issues/38，需要在@vitejs/plugin-react前，将mdx编译为js后接入@vitejs/plugin-react的react-refresh
-    apply: 'serve',
     // 提供hmr自定义事件给client
     async handleHotUpdate(ctx) {
       // https://cn.vitejs.dev/guide/api-plugin.html#handlehotupdate
@@ -35,7 +34,7 @@ export function vitePluginMdx(): Plugin {
     ...rollupPluginMdx({
       remarkPlugins: [
         remarkGfm, // github的md语法
-        remarkFrontmatter, // md模块导出frontmatter变量
+        remarkFrontmatter, // md模块导出frontmatter变量，改变name配置需要提供type和marker配置https://github.com/remarkjs/remark-frontmatter?tab=readme-ov-file#example-different-markers-and-fences
         remarkMdxFrontmatter, // mdx模块导出frontmatter变量
         remarkMdxToc,
       ],

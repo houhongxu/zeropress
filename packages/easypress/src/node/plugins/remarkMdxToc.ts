@@ -3,7 +3,7 @@ import { Program } from 'estree'
 import Slugger from 'github-slugger'
 import { Root } from 'mdast'
 import { MdxjsEsm } from 'mdast-util-mdxjs-esm'
-import { TocItem } from 'shared/types'
+import { PageData } from 'shared/types'
 import { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 
@@ -39,7 +39,7 @@ interface ChildNode {
 // 导出mdx toc 对象，并使用slug id对应rehypeSlug
 export const remarkMdxToc: Plugin<[], Root> = () => {
   return function (tree) {
-    const toc: TocItem[] = []
+    const toc: PageData['toc'] = []
 
     // 遍历mdast tree的heading节点
     visit(tree, 'heading', (node) => {

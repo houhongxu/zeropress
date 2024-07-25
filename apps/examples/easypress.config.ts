@@ -110,8 +110,8 @@ const config: UserConfig = {
           text: '测试mdx4',
           items: [
             {
-              text: '计数器1',
-              link: '/dir/count1',
+              text: '汉字',
+              link: '/dir/汉字',
             },
             {
               text: '计数器2',

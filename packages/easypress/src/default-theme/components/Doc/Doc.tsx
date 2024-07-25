@@ -3,9 +3,15 @@ import { Siderbar } from './SiderBar'
 import { Toc } from './Toc'
 import { useHeaderScroll } from 'default-theme/hooks/useHeaderScroll'
 import { ReactNode } from 'react'
-import { TocItem } from 'shared/types'
+import { PageData } from 'shared/types'
 
-export function Doc({ content, toc }: { content: ReactNode; toc?: TocItem[] }) {
+export function Doc({
+  content,
+  toc,
+}: {
+  content: ReactNode
+  toc?: PageData['toc']
+}) {
   useHeaderScroll()
 
   return (

@@ -8,7 +8,7 @@ import {
   SERVER_OUT_PATH,
 } from './consts'
 import { createPlugins } from './plugins'
-import fse from 'fs-extra'
+import fse, { remove } from 'fs-extra'
 import path from 'path'
 import { RouteObject } from 'react-router-dom'
 import { RollupOutput } from 'rollup'
@@ -22,13 +22,20 @@ export async function buildRuntime({
   docs: string
   siteConfig: SiteConfig
 }) {
+  // 删除旧产物
+  console.log('删除旧产物：', SERVER_OUT_PATH, CLIENT_OUT_PATH)
+  await remove(SERVER_OUT_PATH)
+  await remove(CLIENT_OUT_PATH)
+
   // 分为运行时的client构建水合的js与server构建渲染html的js
+  console.log('构建js文件...')
   const [clientBundle, serverBundle] = await Promise.all([
     viteBuild({ siteConfig, docs }),
     viteBuild({ siteConfig, isServer: true, docs }),
   ])
 
   // 渲染html
+  console.log('构建html文件...')
   await renderHtmls({ siteConfig, clientBundle, serverBundle })
 }
 

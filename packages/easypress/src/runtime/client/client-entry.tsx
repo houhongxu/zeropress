@@ -1,25 +1,28 @@
 import { Layout } from 'default-theme/Layout'
 import { createRoot, hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
-import { PageDataLayout } from 'runtime/PageDataLayout'
+import { PageDataProvider } from 'runtime/PageDataProvider'
+import { getPageData } from 'runtime/usePageData'
 
 async function render() {
+  const pageData = await getPageData(location.pathname)
+
   if (import.meta.env.PROD) {
     hydrateRoot(
       document.getElementById('root')!,
-      <PageDataLayout>
+      <PageDataProvider value={{ pageData, toc: pageData.toc }}>
         <BrowserRouter>
           <Layout></Layout>
         </BrowserRouter>
-      </PageDataLayout>,
+      </PageDataProvider>,
     )
   } else {
     createRoot(document.getElementById('root')!).render(
-      <PageDataLayout>
+      <PageDataProvider value={{ pageData, toc: pageData.toc }}>
         <BrowserRouter>
           <Layout></Layout>
         </BrowserRouter>
-      </PageDataLayout>,
+      </PageDataProvider>,
     )
   }
 }

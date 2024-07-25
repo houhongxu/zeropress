@@ -31,6 +31,7 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 var src_exports = {};
 __export(src_exports, {
   Content: () => Content,
+  PageDataContext: () => PageDataContext,
   getPageData: () => getPageData,
   usePageData: () => usePageData
 });
@@ -49,10 +50,10 @@ function Content() {
 }
 
 // src/runtime/usePageData.ts
+var import_react = require("react");
 var import_react_router_dom2 = require("react-router-dom");
 var import_virtual_config = __toESM(require("virtual:config"), 1);
 var import_virtual_routes2 = __toESM(require("virtual:routes"), 1);
-var import_zustand = require("zustand");
 async function getPageData(pathname) {
   var _a;
   const matched = (0, import_react_router_dom2.matchRoutes)(import_virtual_routes2.default, pathname);
@@ -68,15 +69,14 @@ async function getPageData(pathname) {
   }
   return { pageType: "404", pagePath: pathname, toc: [], userConfig: import_virtual_config.default };
 }
-var usePageData = (0, import_zustand.create)((set) => ({
-  pageData: void 0,
-  setPageData: (pageData) => set({ pageData }),
-  toc: void 0,
-  setToc: (toc) => set({ toc })
-}));
+var PageDataContext = (0, import_react.createContext)({});
+var usePageData = () => {
+  return (0, import_react.useContext)(PageDataContext);
+};
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   Content,
+  PageDataContext,
   getPageData,
   usePageData
 });

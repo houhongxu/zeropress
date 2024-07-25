@@ -1,7 +1,6 @@
 import { UserConfig as UserConfig$1 } from 'vite';
 import * as react from 'react';
 import { ReactElement } from 'react';
-import * as zustand from 'zustand';
 
 interface UserConfig {
     /**
@@ -130,11 +129,11 @@ interface Route {
 declare function Content(): react.ReactElement<any, string | react.JSXElementConstructor<any>> | null;
 
 declare function getPageData(pathname: string): Promise<PageData>;
-declare const usePageData: zustand.UseBoundStore<zustand.StoreApi<{
-    pageData?: PageData | undefined;
-    setPageData: (pageData?: PageData) => void;
-    toc?: TocItem[] | undefined;
-    setToc: (toc?: PageData['toc']) => void;
-}>>;
+interface Props {
+    pageData?: PageData;
+    toc?: PageData['toc'];
+}
+declare const PageDataContext: react.Context<Props>;
+declare const usePageData: () => Props;
 
-export { Content, type Footer, type FrontMatter, type NavDirection, type NavItem, type NavLogo, type PageData, type PageModule, type PageType, type Route, type Sidebar, type SidebarDir, type SidebarItem, type SiteConfig, type ThemeConfig, type TocItem, type UserConfig, getPageData, usePageData };
+export { Content, type Footer, type FrontMatter, type NavDirection, type NavItem, type NavLogo, type PageData, PageDataContext, type PageModule, type PageType, type Route, type Sidebar, type SidebarDir, type SidebarItem, type SiteConfig, type ThemeConfig, type TocItem, type UserConfig, getPageData, usePageData };
