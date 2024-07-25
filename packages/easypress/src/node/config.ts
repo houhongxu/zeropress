@@ -1,5 +1,5 @@
-import tailwindcssConfig from '../../tailwind.config'
 import { CONFIG_OPTIONS, DEFAULT_USER_CONFIG } from './consts'
+import { tailwindcssConfig } from './tailwind'
 import autoprefixer from 'autoprefixer'
 import fse from 'fs-extra'
 import path from 'path'

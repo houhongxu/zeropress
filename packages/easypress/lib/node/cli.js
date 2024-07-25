@@ -5,12 +5,38 @@ var getFilename = () => fileURLToPath(import.meta.url);
 var getDirname = () => path.dirname(getFilename());
 var __dirname = /* @__PURE__ */ getDirname();
 
-// tailwind.config.ts
-import { addDynamicIconSelectors } from "@iconify/tailwind";
+// src/node/consts.ts
 import path2 from "path";
+var ROOT_PATH = path2.join(__dirname, "..", "..");
+var SRC_PATH = path2.join(ROOT_PATH, "./src");
+var RUNTIME_PATH = path2.join(SRC_PATH, "./runtime");
+var CLIENT_ENTRY_PATH = path2.join(
+  RUNTIME_PATH,
+  "./client/client-entry.tsx"
+);
+var SERVER_ENTRY_PATH = path2.join(
+  RUNTIME_PATH,
+  "./server/server-entry.tsx"
+);
+var SERVER_OUT_PATH = "./.easypress";
+var CLIENT_OUT_PATH = "./dist";
+var PUBLIC_PATH = "./public";
+var HTML_PATH = path2.join(ROOT_PATH, "./index.html");
+var CONFIG_OPTIONS = ["easypress.config.ts", "easypress.config.js"];
+var DEFAULT_USER_CONFIG = {
+  docs: "docs",
+  title: "EASYPRESS",
+  description: "SSG Framework",
+  themeConfig: {},
+  vite: {}
+};
+
+// src/node/tailwind.ts
+import { addDynamicIconSelectors } from "@iconify/tailwind";
+import path3 from "path";
 var tailwindcssConfig = {
   content: [
-    path2.join(
+    path3.join(
       __dirname,
       "..",
       "..",
@@ -22,8 +48,8 @@ var tailwindcssConfig = {
   theme: {
     extend: {
       screens: {
-        pc: "68px",
-        full: "160px"
+        pc: "768px",
+        full: "1060px"
       },
       /** 声明时dark在下面所以默认显示dark主题颜色 */
       colors: {
@@ -57,32 +83,6 @@ var tailwindcssConfig = {
   },
   plugins: [addDynamicIconSelectors()]
 };
-var tailwind_config_default = tailwindcssConfig;
-
-// src/node/consts.ts
-import path3 from "path";
-var ROOT_PATH = path3.join(__dirname, "..", "..");
-var SRC_PATH = path3.join(ROOT_PATH, "./src");
-var RUNTIME_PATH = path3.join(SRC_PATH, "./runtime");
-var CLIENT_ENTRY_PATH = path3.join(
-  RUNTIME_PATH,
-  "./client/client-entry.tsx"
-);
-var SERVER_ENTRY_PATH = path3.join(
-  RUNTIME_PATH,
-  "./server/server-entry.tsx"
-);
-var SERVER_OUT_PATH = "./.easypress";
-var CLIENT_OUT_PATH = "./dist";
-var HTML_PATH = path3.join(ROOT_PATH, "./index.html");
-var CONFIG_OPTIONS = ["easypress.config.ts", "easypress.config.js"];
-var DEFAULT_USER_CONFIG = {
-  docs: "docs",
-  title: "EASYPRESS",
-  description: "SSG Framework",
-  themeConfig: {},
-  vite: {}
-};
 
 // src/node/config.ts
 import autoprefixer from "autoprefixer";
@@ -93,7 +93,7 @@ import { loadConfigFromFile } from "vite";
 var baseConfig = {
   // 配置tailwindcss
   css: {
-    postcss: { plugins: [tailwindcss(tailwind_config_default), autoprefixer({})] }
+    postcss: { plugins: [tailwindcss(tailwindcssConfig), autoprefixer({})] }
   }
 };
 async function resolveSiteConfig({
@@ -422,8 +422,7 @@ async function buildRuntime({
   siteConfig,
   docs
 }) {
-  console.log("\u5220\u9664\u65E7\u4EA7\u7269\uFF1A", SERVER_OUT_PATH, CLIENT_OUT_PATH);
-  await remove(SERVER_OUT_PATH);
+  console.log("\u5220\u9664\u65E7\u4EA7\u7269\uFF1A", CLIENT_OUT_PATH);
   await remove(CLIENT_OUT_PATH);
   console.log("\u6784\u5EFAjs\u6587\u4EF6...");
   const [clientBundle, serverBundle] = await Promise.all([
@@ -441,7 +440,7 @@ function viteBuild({
   return build({
     mode: "production",
     root: ROOT_PATH,
-    // 获取postcss等配置文件
+    // 获取tsconfig.json等配置文件
     plugins: createPlugins({ siteConfig, docs }),
     build: {
       ssr: isServer,
@@ -452,9 +451,9 @@ function viteBuild({
           entryFileNames: isServer ? "server-entry.js" : "client-entry.js",
           format: "es"
         }
-      },
-      ...baseConfig
-    }
+      }
+    },
+    ...baseConfig
   });
 }
 async function renderHtmls({
@@ -474,6 +473,9 @@ async function renderHtmls({
   const styleAssets = clientBundle.output.filter(
     (chunk) => chunk.type === "asset" && chunk.fileName.endsWith(".css")
   );
+  if (await fse3.exists(PUBLIC_PATH)) {
+    await fse3.copy(PUBLIC_PATH, path6.join(CLIENT_OUT_PATH));
+  }
   const serverEntryPath = path6.join(
     ROOT_PATH,
     SERVER_OUT_PATH,
@@ -485,7 +487,8 @@ async function renderHtmls({
   await Promise.all(
     routes.map(async (route) => {
       const location = route.path === "/" ? "/index" : route.path || "/index";
-      const rendered = render(location);
+      const relativeFilePath = `${CLIENT_OUT_PATH}${location}.html`;
+      const rendered = await render(location);
       const html = template.replace("<!--app-html-->", rendered).replace(
         "</body>",
         `
@@ -496,11 +499,9 @@ async function renderHtmls({
         "</head>",
         styleAssets.map((asset) => `<link rel="stylesheet" href="/${asset.fileName}">`).join("\n")
       );
-      await fse3.ensureDir(path6.join(siteConfig.root, CLIENT_OUT_PATH));
-      await fse3.writeFile(
-        path6.join(siteConfig.root, `${CLIENT_OUT_PATH}${location}.html`),
-        html
-      );
+      fse3.ensureDir(path6.join(siteConfig.root, path6.dirname(relativeFilePath))).catch((e) => console.log("client\u6587\u4EF6\u5939\u4E0D\u5B58\u5728\uFF1A", e)).then(
+        () => fse3.writeFile(path6.join(siteConfig.root, relativeFilePath), html)
+      ).catch((e) => console.log("html\u5199\u5165\u5931\u8D25", e));
     })
   );
 }
@@ -563,6 +564,7 @@ cli.command("build").description("build").action(async () => {
     });
     const absDocs = path7.resolve(siteConfig.userConfig.docs);
     await buildRuntime({ siteConfig, docs: absDocs });
+    console.log("\u6784\u5EFA\u6210\u529F");
   } catch (e) {
     console.log(e);
   }

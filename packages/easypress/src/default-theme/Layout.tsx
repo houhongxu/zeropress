@@ -10,7 +10,7 @@ import { Content, usePageData } from 'runtime'
  * 主题入口
  */
 export function Layout() {
-  const { pageData, toc } = usePageData()
+  const { pageData } = usePageData()
   console.log('页面数据：', pageData)
 
   const getPage = () => {
@@ -24,7 +24,7 @@ export function Layout() {
         ></Home>
       )
     } else if (pageType === 'doc') {
-      return <Doc content={<Content></Content>} toc={toc}></Doc>
+      return <Doc content={<Content></Content>} toc={pageData?.toc}></Doc>
     } else if (pageType === '404') {
       return <NotFound></NotFound>
     } else {

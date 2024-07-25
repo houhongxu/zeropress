@@ -59,6 +59,8 @@ cli
       const absDocs = path.resolve(siteConfig.userConfig.docs)
 
       await buildRuntime({ siteConfig, docs: absDocs })
+
+      console.log('构建成功')
     } catch (e) {
       console.log(e)
     }

@@ -1,7 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
 import { matchRoutes, useLocation, useRoutes } from "react-router-dom";
-import { create } from "zustand";
 import classNames from "classnames";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server.mjs";
@@ -61,7 +60,7 @@ function useWindowScroll() {
   return { x, y };
 }
 const config = { "docs": "docs", "title": "EASYPRESS", "description": "SSG Framework", "themeConfig": { "nav": [{ "img": "/favicon.jpg", "link": "/", "position": "left" }, { "text": "主页", "link": "/" }, { "text": "指南", "link": "/dir/markx" }, { "dark": true }, { "logo": "github", "link": "https://github.com/houhongxu/hhxpress" }], "sidebar": { "/dir": [{ "text": "测试mdx", "items": [{ "text": "mdx", "link": "/dir/markx" }, { "text": "计数器", "link": "/dir/count" }, { "text": "计数器1", "link": "/dir/count1" }, { "text": "计数器2", "link": "/dir/count2" }, { "text": "计数器3", "link": "/dir/count3" }, { "text": "计数器4", "link": "/dir/count4" }, { "text": "计数器5", "link": "/dir/count5" }] }, { "text": "测试mdx2", "items": [{ "text": "计数器1", "link": "/dir/count1" }, { "text": "计数器2", "link": "/dir/count2" }, { "text": "计数器3", "link": "/dir/count3" }, { "text": "计数器4", "link": "/dir/count4" }, { "text": "计数器5", "link": "/dir/count5" }] }, { "text": "测试mdx3", "items": [{ "text": "计数器1", "link": "/dir/count1" }, { "text": "计数器2", "link": "/dir/count2" }, { "text": "计数器3", "link": "/dir/count3" }, { "text": "计数器4", "link": "/dir/count4" }, { "text": "计数器5", "link": "/dir/count5" }] }, { "text": "测试mdx4", "items": [{ "text": "汉字", "link": "/dir/汉字" }, { "text": "计数器2", "link": "/dir/count2" }, { "text": "计数器3", "link": "/dir/count3" }, { "text": "计数器4", "link": "/dir/count4" }, { "text": "计数器5", "link": "/dir/count5" }] }, { "text": "测试mdx5", "items": [{ "text": "计数器1", "link": "/dir/count1" }, { "text": "计数器2", "link": "/dir/count2" }, { "text": "计数器3", "link": "/dir/count3" }, { "text": "计数器4", "link": "/dir/count4" }, { "text": "计数器5", "link": "/dir/count5" }] }] } }, "vite": {} };
-const toc$2 = [];
+const GetToc$2 = () => [];
 const frontmatter$2 = {
   "pageType": "home"
 };
@@ -77,11 +76,12 @@ function MDXContent$2(props = {}) {
     })
   }) : _createMdxContent$2();
 }
+const GetFrontMatter$2 = () => frontmatter$2;
 const index = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: MDXContent$2,
-  frontmatter: frontmatter$2,
-  toc: toc$2
+  GetFrontMatter: GetFrontMatter$2,
+  GetToc: GetToc$2,
+  default: MDXContent$2
 }, Symbol.toStringTag, { value: "Module" }));
 const a = { a: 2 };
 function Counter() {
@@ -96,7 +96,7 @@ const count = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePropert
   a,
   default: Counter
 }, Symbol.toStringTag, { value: "Module" }));
-const toc$1 = [{
+const GetToc$1 = () => [{
   "id": "gfm",
   "text": "GFM",
   "depth": 2
@@ -722,14 +722,17 @@ function MDXContent$1(props = {}) {
     })
   }) : _createMdxContent$1(props);
 }
+const GetFrontMatter$1 = () => frontmatter$1;
 const markx = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: MDXContent$1,
-  frontmatter: frontmatter$1,
-  toc: toc$1
+  GetFrontMatter: GetFrontMatter$1,
+  GetToc: GetToc$1,
+  default: MDXContent$1
 }, Symbol.toStringTag, { value: "Module" }));
-const toc = [];
-const frontmatter = void 0;
+const GetToc = () => [];
+const frontmatter = {
+  "hello": "frontmatter"
+};
 function _createMdxContent(props) {
   const _components = {
     a: "a",
@@ -765,11 +768,12 @@ function MDXContent(props = {}) {
     })
   }) : _createMdxContent(props);
 }
+const GetFrontMatter = () => frontmatter;
 const __ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: MDXContent,
-  frontmatter,
-  toc
+  GetFrontMatter,
+  GetToc,
+  default: MDXContent
 }, Symbol.toStringTag, { value: "Module" }));
 const routes = [
   { path: "/", element: React.createElement(MDXContent$2), preload: () => Promise.resolve().then(() => index) },
@@ -778,26 +782,24 @@ const routes = [
   { path: "/dir/汉字", element: React.createElement(MDXContent), preload: () => Promise.resolve().then(() => __) }
 ];
 async function getPageData(pathname) {
-  var _a;
+  var _a, _b, _c, _d;
   const matched = matchRoutes(routes, pathname);
   if (matched) {
     const module = await matched[0].route.preload();
     return {
-      pageType: ((_a = module.frontmatter) == null ? void 0 : _a.pageType) || "doc",
+      pageType: ((_b = (_a = module == null ? void 0 : module.GetFrontMatter) == null ? void 0 : _a.call(module)) == null ? void 0 : _b.pageType) || "doc",
       pagePath: pathname,
-      frontmatter: module.frontmatter,
-      toc: module.toc,
+      frontmatter: ((_c = module.GetFrontMatter) == null ? void 0 : _c.call(module)) ?? {},
+      toc: ((_d = module.GetToc) == null ? void 0 : _d.call(module)) ?? [],
       userConfig: config
     };
   }
   return { pageType: "404", pagePath: pathname, toc: [], userConfig: config };
 }
-const usePageData = create((set) => ({
-  pageData: void 0,
-  setPageData: (pageData) => set({ pageData }),
-  toc: void 0,
-  setToc: (toc2) => set({ toc: toc2 })
-}));
+const PageDataContext = createContext({});
+const usePageData = () => {
+  return useContext(PageDataContext);
+};
 function useSidebar() {
   var _a;
   const { pageData } = usePageData();
@@ -950,9 +952,9 @@ function SiderbarItem({ item }) {
     }
   );
 }
-function Toc({ toc: toc2 }) {
+function Toc({ toc }) {
   const [index2] = useTocScroll();
-  if (!toc2 || toc2.length < 1) {
+  if (!toc || toc.length < 1) {
     return /* @__PURE__ */ jsx(Fragment, {});
   }
   return /* @__PURE__ */ jsx("aside", { className: "w-toc full:flex sticky top-[calc(theme(spacing.nav)+48px)] hidden h-full flex-col", children: /* @__PURE__ */ jsxs("div", { className: "border-divider border-l px-[16px] font-[500]", children: [
@@ -964,7 +966,7 @@ function Toc({ toc: toc2 }) {
       }
     ),
     /* @__PURE__ */ jsx("div", { className: "text-[14px] font-[600] leading-[28px]", children: "本页目录" }),
-    /* @__PURE__ */ jsx("div", { children: toc2.map((item, i) => /* @__PURE__ */ jsx(TocItem, { active: index2 === i, item }, item.id)) })
+    /* @__PURE__ */ jsx("div", { children: toc.map((item, i) => /* @__PURE__ */ jsx(TocItem, { active: index2 === i, item }, item.id)) })
   ] }) });
 }
 function TocItem({
@@ -1008,7 +1010,10 @@ function useHeaderScroll() {
     });
   }, []);
 }
-function Doc({ content, toc: toc2 }) {
+function Doc({
+  content,
+  toc
+}) {
   useHeaderScroll();
   return /* @__PURE__ */ jsxs("div", { className: "pt-nav", children: [
     /* @__PURE__ */ jsx(Siderbar, {}),
@@ -1017,7 +1022,7 @@ function Doc({ content, toc: toc2 }) {
         content,
         /* @__PURE__ */ jsx(Footer, {})
       ] }),
-      /* @__PURE__ */ jsx(Toc, { toc: toc2 })
+      /* @__PURE__ */ jsx(Toc, { toc })
     ] })
   ] });
 }
@@ -1179,7 +1184,7 @@ function Content() {
   return element;
 }
 function Layout() {
-  const { pageData, toc: toc2 } = usePageData();
+  const { pageData } = usePageData();
   console.log("页面数据：", pageData);
   const getPage = () => {
     const pageType = pageData == null ? void 0 : pageData.pageType;
@@ -1192,7 +1197,7 @@ function Layout() {
         }
       );
     } else if (pageType === "doc") {
-      return /* @__PURE__ */ jsx(Doc, { content: /* @__PURE__ */ jsx(Content, {}), toc: toc2 });
+      return /* @__PURE__ */ jsx(Doc, { content: /* @__PURE__ */ jsx(Content, {}), toc: pageData == null ? void 0 : pageData.toc });
     } else if (pageType === "404") {
       return /* @__PURE__ */ jsx(NotFound, {});
     } else {
@@ -1204,21 +1209,19 @@ function Layout() {
     getPage()
   ] });
 }
-function PageDataLayout({ children }) {
-  const { setPageData, setToc } = usePageData();
-  useEffect(() => {
-    getPageData(location.pathname).then((pageData) => {
-      setPageData(pageData);
-      setToc(pageData.toc);
-    });
-  }, []);
+function PageDataProvider({
+  children,
+  value
+}) {
+  const [pageData, setPageData] = useState(value.pageData);
   useEffect(() => {
   });
-  return /* @__PURE__ */ jsx(Fragment, { children });
+  return /* @__PURE__ */ jsx(PageDataContext.Provider, { value: { pageData }, children });
 }
-function render(location2) {
+async function render(location) {
+  const pageData = await getPageData(location);
   const html = renderToString(
-    /* @__PURE__ */ jsx(PageDataLayout, { children: /* @__PURE__ */ jsx(StaticRouter, { location: location2, children: /* @__PURE__ */ jsx(Layout, {}) }) })
+    /* @__PURE__ */ jsx(PageDataProvider, { value: { pageData }, children: /* @__PURE__ */ jsx(StaticRouter, { location, children: /* @__PURE__ */ jsx(Layout, {}) }) })
   );
   return html;
 }

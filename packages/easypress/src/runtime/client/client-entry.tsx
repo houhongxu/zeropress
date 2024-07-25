@@ -10,7 +10,7 @@ async function render() {
   if (import.meta.env.PROD) {
     hydrateRoot(
       document.getElementById('root')!,
-      <PageDataProvider value={{ pageData, toc: pageData.toc }}>
+      <PageDataProvider value={{ pageData }}>
         <BrowserRouter>
           <Layout></Layout>
         </BrowserRouter>
@@ -18,7 +18,7 @@ async function render() {
     )
   } else {
     createRoot(document.getElementById('root')!).render(
-      <PageDataProvider value={{ pageData, toc: pageData.toc }}>
+      <PageDataProvider value={{ pageData }}>
         <BrowserRouter>
           <Layout></Layout>
         </BrowserRouter>

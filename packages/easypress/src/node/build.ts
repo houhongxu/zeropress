@@ -3,6 +3,7 @@ import {
   CLIENT_ENTRY_PATH,
   CLIENT_OUT_PATH,
   HTML_PATH,
+  PUBLIC_PATH,
   ROOT_PATH,
   SERVER_ENTRY_PATH,
   SERVER_OUT_PATH,
@@ -23,8 +24,7 @@ export async function buildRuntime({
   siteConfig: SiteConfig
 }) {
   // 删除旧产物
-  console.log('删除旧产物：', SERVER_OUT_PATH, CLIENT_OUT_PATH)
-  await remove(SERVER_OUT_PATH)
+  console.log('删除旧产物：', CLIENT_OUT_PATH)
   await remove(CLIENT_OUT_PATH)
 
   // 分为运行时的client构建水合的js与server构建渲染html的js
@@ -53,7 +53,7 @@ function viteBuild({
 }) {
   return build({
     mode: 'production',
-    root: ROOT_PATH, // 获取postcss等配置文件
+    root: ROOT_PATH, // 获取tsconfig.json等配置文件
     plugins: createPlugins({ siteConfig, docs }),
     build: {
       ssr: isServer,
@@ -67,8 +67,8 @@ function viteBuild({
           format: 'es',
         },
       },
-      ...baseConfig,
     },
+    ...baseConfig,
   }) as Promise<RollupOutput>
 }
 
@@ -102,6 +102,11 @@ async function renderHtmls({
     (chunk) => chunk.type === 'asset' && chunk.fileName.endsWith('.css'),
   )
 
+  // 静态资源拷贝到打包路径
+  if (await fse.exists(PUBLIC_PATH)) {
+    await fse.copy(PUBLIC_PATH, path.join(CLIENT_OUT_PATH))
+  }
+
   const serverEntryPath = path.join(
     ROOT_PATH,
     SERVER_OUT_PATH,
@@ -112,7 +117,7 @@ async function renderHtmls({
   const clientEntryPath = `/${clientEntryChunk?.fileName}`
 
   const { render, routes } = (await import(serverEntryPath)) as {
-    render: (location: string) => string
+    render: (location: string) => Promise<string>
     routes: RouteObject[]
   }
 
@@ -123,7 +128,9 @@ async function renderHtmls({
     routes.map(async (route) => {
       const location = route.path === '/' ? '/index' : route.path || '/index'
 
-      const rendered = render(location)
+      const relativeFilePath = `${CLIENT_OUT_PATH}${location}.html`
+
+      const rendered = await render(location)
 
       const html = template
         .replace('<!--app-html-->', rendered)
@@ -141,11 +148,13 @@ async function renderHtmls({
             .join('\n'),
         )
 
-      await fse.ensureDir(path.join(siteConfig.root, CLIENT_OUT_PATH))
-      await fse.writeFile(
-        path.join(siteConfig.root, `${CLIENT_OUT_PATH}${location}.html`),
-        html,
-      )
+      fse
+        .ensureDir(path.join(siteConfig.root, path.dirname(relativeFilePath)))
+        .catch((e) => console.log('client文件夹不存在：', e))
+        .then(() =>
+          fse.writeFile(path.join(siteConfig.root, relativeFilePath), html),
+        )
+        .catch((e) => console.log('html写入失败', e))
     }),
   )
 }

@@ -131,7 +131,6 @@ declare function Content(): react.ReactElement<any, string | react.JSXElementCon
 declare function getPageData(pathname: string): Promise<PageData>;
 interface Props {
     pageData?: PageData;
-    toc?: PageData['toc'];
 }
 declare const PageDataContext: react.Context<Props>;
 declare const usePageData: () => Props;

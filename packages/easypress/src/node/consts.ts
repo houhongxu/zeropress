@@ -24,6 +24,8 @@ export const SERVER_OUT_PATH = './.easypress'
 
 export const CLIENT_OUT_PATH = './dist'
 
+export const PUBLIC_PATH = './public'
+
 export const HTML_PATH = path.join(ROOT_PATH, './index.html')
 
 export const CONFIG_OPTIONS = ['easypress.config.ts', 'easypress.config.js']

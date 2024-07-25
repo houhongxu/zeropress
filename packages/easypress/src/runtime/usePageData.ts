@@ -24,7 +24,6 @@ export async function getPageData(pathname: string): Promise<PageData> {
 
 interface Props {
   pageData?: PageData
-  toc?: PageData['toc']
 }
 
 export const PageDataContext = createContext<Props>({})

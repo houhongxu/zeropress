@@ -2,7 +2,7 @@ import { addDynamicIconSelectors } from '@iconify/tailwind'
 import path from 'path'
 import { Config } from 'tailwindcss'
 
-const tailwindcssConfig: Config = {
+export const tailwindcssConfig: Config = {
   content: [
     path.join(
       __dirname,
@@ -15,8 +15,8 @@ const tailwindcssConfig: Config = {
   theme: {
     extend: {
       screens: {
-        pc: '68px',
-        full: '160px',
+        pc: '768px',
+        full: '1060px',
       },
 
       /** 声明时dark在下面所以默认显示dark主题颜色 */
@@ -55,5 +55,3 @@ const tailwindcssConfig: Config = {
   },
   plugins: [addDynamicIconSelectors()],
 }
-
-export default tailwindcssConfig

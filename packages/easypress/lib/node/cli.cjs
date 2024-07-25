@@ -34,12 +34,38 @@ __export(cli_exports, {
 });
 module.exports = __toCommonJS(cli_exports);
 
-// tailwind.config.ts
-var import_tailwind = require("@iconify/tailwind");
+// src/node/consts.ts
 var import_path = __toESM(require("path"), 1);
+var ROOT_PATH = import_path.default.join(__dirname, "..", "..");
+var SRC_PATH = import_path.default.join(ROOT_PATH, "./src");
+var RUNTIME_PATH = import_path.default.join(SRC_PATH, "./runtime");
+var CLIENT_ENTRY_PATH = import_path.default.join(
+  RUNTIME_PATH,
+  "./client/client-entry.tsx"
+);
+var SERVER_ENTRY_PATH = import_path.default.join(
+  RUNTIME_PATH,
+  "./server/server-entry.tsx"
+);
+var SERVER_OUT_PATH = "./.easypress";
+var CLIENT_OUT_PATH = "./dist";
+var PUBLIC_PATH = "./public";
+var HTML_PATH = import_path.default.join(ROOT_PATH, "./index.html");
+var CONFIG_OPTIONS = ["easypress.config.ts", "easypress.config.js"];
+var DEFAULT_USER_CONFIG = {
+  docs: "docs",
+  title: "EASYPRESS",
+  description: "SSG Framework",
+  themeConfig: {},
+  vite: {}
+};
+
+// src/node/tailwind.ts
+var import_tailwind = require("@iconify/tailwind");
+var import_path2 = __toESM(require("path"), 1);
 var tailwindcssConfig = {
   content: [
-    import_path.default.join(
+    import_path2.default.join(
       __dirname,
       "..",
       "..",
@@ -51,8 +77,8 @@ var tailwindcssConfig = {
   theme: {
     extend: {
       screens: {
-        pc: "68px",
-        full: "160px"
+        pc: "768px",
+        full: "1060px"
       },
       /** 声明时dark在下面所以默认显示dark主题颜色 */
       colors: {
@@ -86,32 +112,6 @@ var tailwindcssConfig = {
   },
   plugins: [(0, import_tailwind.addDynamicIconSelectors)()]
 };
-var tailwind_config_default = tailwindcssConfig;
-
-// src/node/consts.ts
-var import_path2 = __toESM(require("path"), 1);
-var ROOT_PATH = import_path2.default.join(__dirname, "..", "..");
-var SRC_PATH = import_path2.default.join(ROOT_PATH, "./src");
-var RUNTIME_PATH = import_path2.default.join(SRC_PATH, "./runtime");
-var CLIENT_ENTRY_PATH = import_path2.default.join(
-  RUNTIME_PATH,
-  "./client/client-entry.tsx"
-);
-var SERVER_ENTRY_PATH = import_path2.default.join(
-  RUNTIME_PATH,
-  "./server/server-entry.tsx"
-);
-var SERVER_OUT_PATH = "./.easypress";
-var CLIENT_OUT_PATH = "./dist";
-var HTML_PATH = import_path2.default.join(ROOT_PATH, "./index.html");
-var CONFIG_OPTIONS = ["easypress.config.ts", "easypress.config.js"];
-var DEFAULT_USER_CONFIG = {
-  docs: "docs",
-  title: "EASYPRESS",
-  description: "SSG Framework",
-  themeConfig: {},
-  vite: {}
-};
 
 // src/node/config.ts
 var import_autoprefixer = __toESM(require("autoprefixer"), 1);
@@ -122,7 +122,7 @@ var import_vite = require("vite");
 var baseConfig = {
   // 配置tailwindcss
   css: {
-    postcss: { plugins: [(0, import_tailwindcss.default)(tailwind_config_default), (0, import_autoprefixer.default)({})] }
+    postcss: { plugins: [(0, import_tailwindcss.default)(tailwindcssConfig), (0, import_autoprefixer.default)({})] }
   }
 };
 async function resolveSiteConfig({
@@ -451,8 +451,7 @@ async function buildRuntime({
   siteConfig,
   docs
 }) {
-  console.log("\u5220\u9664\u65E7\u4EA7\u7269\uFF1A", SERVER_OUT_PATH, CLIENT_OUT_PATH);
-  await (0, import_fs_extra3.remove)(SERVER_OUT_PATH);
+  console.log("\u5220\u9664\u65E7\u4EA7\u7269\uFF1A", CLIENT_OUT_PATH);
   await (0, import_fs_extra3.remove)(CLIENT_OUT_PATH);
   console.log("\u6784\u5EFAjs\u6587\u4EF6...");
   const [clientBundle, serverBundle] = await Promise.all([
@@ -470,7 +469,7 @@ function viteBuild({
   return (0, import_vite2.build)({
     mode: "production",
     root: ROOT_PATH,
-    // 获取postcss等配置文件
+    // 获取tsconfig.json等配置文件
     plugins: createPlugins({ siteConfig, docs }),
     build: {
       ssr: isServer,
@@ -481,9 +480,9 @@ function viteBuild({
           entryFileNames: isServer ? "server-entry.js" : "client-entry.js",
           format: "es"
         }
-      },
-      ...baseConfig
-    }
+      }
+    },
+    ...baseConfig
   });
 }
 async function renderHtmls({
@@ -503,6 +502,9 @@ async function renderHtmls({
   const styleAssets = clientBundle.output.filter(
     (chunk) => chunk.type === "asset" && chunk.fileName.endsWith(".css")
   );
+  if (await import_fs_extra3.default.exists(PUBLIC_PATH)) {
+    await import_fs_extra3.default.copy(PUBLIC_PATH, import_path5.default.join(CLIENT_OUT_PATH));
+  }
   const serverEntryPath = import_path5.default.join(
     ROOT_PATH,
     SERVER_OUT_PATH,
@@ -514,7 +516,8 @@ async function renderHtmls({
   await Promise.all(
     routes.map(async (route) => {
       const location = route.path === "/" ? "/index" : route.path || "/index";
-      const rendered = render(location);
+      const relativeFilePath = `${CLIENT_OUT_PATH}${location}.html`;
+      const rendered = await render(location);
       const html = template.replace("<!--app-html-->", rendered).replace(
         "</body>",
         `
@@ -525,11 +528,9 @@ async function renderHtmls({
         "</head>",
         styleAssets.map((asset) => `<link rel="stylesheet" href="/${asset.fileName}">`).join("\n")
       );
-      await import_fs_extra3.default.ensureDir(import_path5.default.join(siteConfig.root, CLIENT_OUT_PATH));
-      await import_fs_extra3.default.writeFile(
-        import_path5.default.join(siteConfig.root, `${CLIENT_OUT_PATH}${location}.html`),
-        html
-      );
+      import_fs_extra3.default.ensureDir(import_path5.default.join(siteConfig.root, import_path5.default.dirname(relativeFilePath))).catch((e) => console.log("client\u6587\u4EF6\u5939\u4E0D\u5B58\u5728\uFF1A", e)).then(
+        () => import_fs_extra3.default.writeFile(import_path5.default.join(siteConfig.root, relativeFilePath), html)
+      ).catch((e) => console.log("html\u5199\u5165\u5931\u8D25", e));
     })
   );
 }
@@ -592,6 +593,7 @@ cli.command("build").description("build").action(async () => {
     });
     const absDocs = import_path6.default.resolve(siteConfig.userConfig.docs);
     await buildRuntime({ siteConfig, docs: absDocs });
+    console.log("\u6784\u5EFA\u6210\u529F");
   } catch (e) {
     console.log(e);
   }

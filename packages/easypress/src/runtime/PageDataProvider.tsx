@@ -5,19 +5,19 @@ export function PageDataProvider({
   children,
   value,
 }: PropsWithChildren<ComponentProps<typeof PageDataContext.Provider>>) {
-  const [toc, setToc] = useState(value.toc)
+  const [pageData, setPageData] = useState(value.pageData)
 
   useEffect(() => {
     // mdx更新后重新获取pageData
     if (import.meta.hot) {
       import.meta.hot.on('mdx?-update', () =>
-        getPageData(location.pathname).then(({ toc }) => setToc(toc)),
+        getPageData(location.pathname).then(setPageData),
       )
     }
   })
 
   return (
-    <PageDataContext.Provider value={{ ...value, toc }}>
+    <PageDataContext.Provider value={{ pageData }}>
       {children}
     </PageDataContext.Provider>
   )

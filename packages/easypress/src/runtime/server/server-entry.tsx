@@ -1,21 +1,24 @@
 import { Layout } from 'default-theme/Layout'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom/server'
-import { PageDataLayout } from 'runtime/PageDataLayout'
+import { PageDataProvider } from 'runtime/PageDataProvider'
+import { getPageData } from 'runtime/usePageData'
 import routes from 'virtual:routes'
 
 /**
  * 渲染无请求的html
  * @description 不同的location拿到不同路由的的html，多html实现mpa路由
  */
-export function render(location: string) {
+export async function render(location: string) {
+  const pageData = await getPageData(location)
+
   // https://reactrouter.com/en/main/guides/ssr#without-a-data-router
   const html = renderToString(
-    <PageDataLayout>
+    <PageDataProvider value={{ pageData }}>
       <StaticRouter location={location}>
         <Layout></Layout>
       </StaticRouter>
-    </PageDataLayout>,
+    </PageDataProvider>,
   )
 
   return html
