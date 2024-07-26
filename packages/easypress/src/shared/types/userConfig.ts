@@ -49,14 +49,16 @@ export interface ThemeConfig {
 
 export type NavItem = {
   text?: string
+  link?: string
+
   logo?: NavLogo
   img?: string
+
   /**
    * 深色切换按钮
    */
   dark?: boolean
 
-  link?: string
   /**
    * 导航项目的位置
    * @default right

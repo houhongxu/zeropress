@@ -3,7 +3,8 @@ import { tailwindcssConfig } from './tailwind'
 import autoprefixer from 'autoprefixer'
 import fse from 'fs-extra'
 import path from 'path'
-import { UserConfig, SiteConfig } from 'shared/types'
+import { UserConfig, SiteConfig, Sidebar } from 'shared/types'
+import { normalizeUrl } from 'shared/utils'
 import tailwindcss from 'tailwindcss'
 import { loadConfigFromFile, UserConfig as ViteUserConfig } from 'vite'
 
@@ -33,11 +34,32 @@ export async function resolveSiteConfig({
     command,
   })
 
+  const normalizedNav = userConfig.themeConfig?.nav?.map((item) => ({
+    ...item,
+    link: normalizeUrl(item.link),
+  }))
+
+  const normalizedSidebar = Object.entries(
+    userConfig.themeConfig?.sidebar ?? {},
+  ).reduce<Sidebar>((pre, [key, value]) => {
+    pre[normalizeUrl(key)] = value.map((item) => ({
+      ...item,
+      items: item.items?.map((i) => ({ ...i, link: normalizeUrl(i.link) })),
+    }))
+
+    return pre
+  }, {})
+
   const requiredUserConfig: Required<UserConfig> = {
     docs: userConfig.docs || DEFAULT_USER_CONFIG.docs,
     title: userConfig.title || DEFAULT_USER_CONFIG.title,
     description: userConfig.description || DEFAULT_USER_CONFIG.description,
-    themeConfig: userConfig.themeConfig ?? DEFAULT_USER_CONFIG.themeConfig,
+    themeConfig:
+      {
+        ...userConfig.themeConfig,
+        nav: normalizedNav,
+        sidebar: normalizedSidebar,
+      } ?? DEFAULT_USER_CONFIG.themeConfig,
     vite: userConfig.vite ?? DEFAULT_USER_CONFIG.vite,
   }
 

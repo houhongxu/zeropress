@@ -5,3 +5,7 @@ export function isBrowser() {
     !!window.document.createElement
   )
 }
+
+export function normalizeUrl(url = '/') {
+  return encodeURI(url)
+}

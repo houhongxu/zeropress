@@ -39,9 +39,17 @@ module.exports = __toCommonJS(src_exports);
 
 // src/runtime/Content.tsx
 var import_react_router_dom = require("react-router-dom");
+
+// src/shared/utils.ts
+function normalizeUrl(url = "/") {
+  return encodeURI(url);
+}
+
+// src/runtime/Content.tsx
 var import_virtual_routes = __toESM(require("virtual:routes"), 1);
+console.log(import_virtual_routes.default);
 function Content() {
-  const element = (0, import_react_router_dom.useRoutes)(import_virtual_routes.default);
+  const element = (0, import_react_router_dom.useRoutes)(import_virtual_routes.default, normalizeUrl(location.pathname));
   console.log(
     "\u6587\u4EF6\u8DEF\u7531",
     import_virtual_routes.default.map((i) => i.path)
@@ -51,14 +59,13 @@ function Content() {
 
 // src/runtime/usePageData.ts
 var import_react = require("react");
-var import_react_router_dom2 = require("react-router-dom");
 var import_virtual_config = __toESM(require("virtual:config"), 1);
 var import_virtual_routes2 = __toESM(require("virtual:routes"), 1);
 async function getPageData(pathname) {
   var _a, _b, _c, _d;
-  const matched = (0, import_react_router_dom2.matchRoutes)(import_virtual_routes2.default, pathname);
+  const matched = import_virtual_routes2.default.find((route) => route.path === pathname);
   if (matched) {
-    const module2 = await matched[0].route.preload();
+    const module2 = await matched.preload();
     return {
       pageType: ((_b = (_a = module2 == null ? void 0 : module2.GetFrontMatter) == null ? void 0 : _a.call(module2)) == null ? void 0 : _b.pageType) || "doc",
       pagePath: pathname,

@@ -9,7 +9,7 @@ const config: UserConfig = {
         position: 'left',
       },
       { text: '主页', link: '/' },
-      { text: '指南', link: '/dir/markx' },
+      { text: '指南', link: '/指南/markx' },
       { text: '引导', link: '/nodir/markx' },
       {
         dark: true,
@@ -20,17 +20,17 @@ const config: UserConfig = {
       },
     ],
     sidebar: {
-      '/dir': [
+      '/指南': [
         {
           text: '测试mdx',
           items: [
             {
               text: 'mdx',
-              link: '/dir/markx',
+              link: '/指南/markx',
             },
             {
               text: '计数器',
-              link: '/dir/count',
+              link: '/指南/count',
             },
           ],
         },
@@ -39,7 +39,7 @@ const config: UserConfig = {
           items: [
             {
               text: '汉字',
-              link: '/dir/汉字',
+              link: '/指南/汉字',
             },
           ],
         },

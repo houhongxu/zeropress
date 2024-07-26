@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import { useSidebar } from 'default-theme/hooks'
-import { nomoralizeUrl } from 'default-theme/utils'
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Link } from 'runtime/Link'
@@ -60,7 +59,7 @@ function SiderbarDir({ dir }: { dir: SidebarDir }) {
 function SiderbarItem({ item }: { item: SidebarItem }) {
   const { text, link } = item
   const { pathname } = useLocation()
-  const active = nomoralizeUrl(pathname) === nomoralizeUrl(link)
+  const active = pathname === link
 
   return (
     <Link

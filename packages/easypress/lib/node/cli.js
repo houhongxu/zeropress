@@ -88,6 +88,13 @@ var tailwindcssConfig = {
 import autoprefixer from "autoprefixer";
 import fse from "fs-extra";
 import path4 from "path";
+
+// src/shared/utils.ts
+function normalizeUrl(url = "/") {
+  return encodeURI(url);
+}
+
+// src/node/config.ts
 import tailwindcss from "tailwindcss";
 import { loadConfigFromFile } from "vite";
 var baseConfig = {
@@ -101,16 +108,37 @@ async function resolveSiteConfig({
   command,
   mode
 }) {
+  var _a, _b, _c;
   const { userConfigPath, userConfig = {} } = await resolveUserConfig({
     root,
     mode,
     command
   });
+  const normalizedNav = (_b = (_a = userConfig.themeConfig) == null ? void 0 : _a.nav) == null ? void 0 : _b.map((item) => ({
+    ...item,
+    link: normalizeUrl(item.link)
+  }));
+  const normalizedSidebar = Object.entries(
+    ((_c = userConfig.themeConfig) == null ? void 0 : _c.sidebar) ?? {}
+  ).reduce((pre, [key, value]) => {
+    pre[normalizeUrl(key)] = value.map((item) => {
+      var _a2;
+      return {
+        ...item,
+        items: (_a2 = item.items) == null ? void 0 : _a2.map((i) => ({ ...i, link: normalizeUrl(i.link) }))
+      };
+    });
+    return pre;
+  }, {});
   const requiredUserConfig = {
     docs: userConfig.docs || DEFAULT_USER_CONFIG.docs,
     title: userConfig.title || DEFAULT_USER_CONFIG.title,
     description: userConfig.description || DEFAULT_USER_CONFIG.description,
-    themeConfig: userConfig.themeConfig ?? DEFAULT_USER_CONFIG.themeConfig,
+    themeConfig: {
+      ...userConfig.themeConfig,
+      nav: normalizedNav,
+      sidebar: normalizedSidebar
+    },
     vite: userConfig.vite ?? DEFAULT_USER_CONFIG.vite
   };
   const siteConfig = {
@@ -374,7 +402,7 @@ function vitePluginVirtualRoutes({
           const pathname = relativePath.replace(path5.extname(file), "").replace(/index$/, "");
           importTemplate += `import Element${index + 1} from '${file}';
 `;
-          return `{ path: '/${pathname}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },
+          return `{ path: '/${normalizeUrl(pathname)}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },
 `;
         });
         return `

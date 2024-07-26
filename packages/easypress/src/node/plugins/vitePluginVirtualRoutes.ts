@@ -1,6 +1,7 @@
 import fg from 'fast-glob'
 import path from 'path'
 import { SiteConfig } from 'shared/types'
+import { normalizeUrl } from 'shared/utils'
 import { Plugin } from 'vite'
 
 interface vitePluginVirtualRoutesOptions {
@@ -44,7 +45,7 @@ export function vitePluginVirtualRoutes({
 
           importTemplate += `import Element${index + 1} from '${file}';\n`
 
-          return `{ path: '/${pathname}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },\n`
+          return `{ path: '/${normalizeUrl(pathname)}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },\n`
         })
 
         return `

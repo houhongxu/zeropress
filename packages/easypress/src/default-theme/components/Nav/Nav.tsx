@@ -2,7 +2,6 @@ import { Switch } from './Switch'
 import { LOGO_MAP } from './consts'
 import classNames from 'classnames'
 import { useDark, useWindowScroll } from 'default-theme/hooks'
-import { nomoralizeUrl } from 'default-theme/utils'
 import { useLocation } from 'react-router-dom'
 import { Link } from 'runtime/Link'
 import { usePageData } from 'runtime/usePageData'
@@ -79,8 +78,7 @@ export function Nav() {
 function TextItem({ item, pathname }: { item: NavItem; pathname?: string }) {
   const { text, link } = item
   const getDirname = (url = '/') => url.split('/').at(-2)
-  const active =
-    getDirname(nomoralizeUrl(pathname)) === getDirname(nomoralizeUrl(link))
+  const active = getDirname(pathname) === getDirname(link)
 
   if (!text) {
     return <></>

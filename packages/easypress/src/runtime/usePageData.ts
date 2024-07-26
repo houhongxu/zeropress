@@ -1,14 +1,13 @@
 import { createContext, useContext } from 'react'
-import { matchRoutes } from 'react-router-dom'
 import { PageData } from 'shared/types'
 import config from 'virtual:config'
 import routes from 'virtual:routes'
 
 export async function getPageData(pathname: string): Promise<PageData> {
-  const matched = matchRoutes(routes, pathname)
+  const matched = routes.find((route) => route.path === pathname)
 
   if (matched) {
-    const module = await matched[0].route.preload()
+    const module = await matched.preload()
 
     return {
       pageType: module?.GetFrontMatter?.()?.pageType || 'doc',
