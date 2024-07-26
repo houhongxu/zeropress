@@ -5,16 +5,16 @@ import { normalizeUrl } from 'shared/utils'
 import { Plugin } from 'vite'
 
 interface vitePluginVirtualRoutesOptions {
-  docs: string
   siteConfig: SiteConfig
 }
 
 // 虚拟模块将node端读取的routes数据传递给client端，不需要生成入口文件来处理client端路由了
 export function vitePluginVirtualRoutes({
-  docs,
+  siteConfig,
 }: vitePluginVirtualRoutesOptions): Plugin {
   const virtualModuleId = 'virtual:routes'
   const resolvedVirtualModuleId = '\0' + virtualModuleId
+  const docs = siteConfig.userConfig.docs
 
   return {
     name: 'vitePluginVirtualRoutes',
@@ -30,7 +30,7 @@ export function vitePluginVirtualRoutes({
         const files = await fg.glob('**/*.{jsx,tsx,md,mdx}', {
           ignore: ['node_modules/**', 'client/**', 'server/**'],
           cwd: docs,
-          deep: 2,
+          deep: 3,
           absolute: true,
         })
 

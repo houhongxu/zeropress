@@ -26,10 +26,7 @@ cli
         command: 'serve',
       })
 
-      const absDocs = path.resolve(siteConfig.userConfig.docs)
-
       const server = await createRuntimeDevServer({
-        docs: absDocs,
         siteConfig,
         restartRuntimeDevServer: async () => {
           await server.close()
@@ -56,9 +53,7 @@ cli
         command: 'build',
       })
 
-      const absDocs = path.resolve(siteConfig.userConfig.docs)
-
-      await buildRuntime({ siteConfig, docs: absDocs })
+      await buildRuntime({ siteConfig })
 
       console.log('构建成功')
     } catch (e) {

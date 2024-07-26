@@ -10,11 +10,9 @@ import { PluginOption } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
 export function createPlugins({
-  docs,
   siteConfig,
   restartRuntimeDevServer,
 }: {
-  docs: string
   siteConfig: SiteConfig
   restartRuntimeDevServer?: () => Promise<void>
 }): PluginOption[] {
@@ -29,7 +27,7 @@ export function createPlugins({
       entry: CLIENT_ENTRY_PATH, // /@fs/是针对root之外的，当作为npm包时在nodemodules中属于root内，不需要使用 https://cn.vitejs.dev/config/server-options.html#server-fs-allow
     }),
     vitePluginVirtualConfig({ siteConfig, restartRuntimeDevServer }),
-    vitePluginVirtualRoutes({ siteConfig, docs }),
+    vitePluginVirtualRoutes({ siteConfig }),
     tsconfigPaths(), // vite-env.d.ts中declare虚拟模块引入的类型需要绝对路径，所以使用路径别名插件解析tsconfig的baseurl
     vitePluginTransformFrontmatter(),
   ]

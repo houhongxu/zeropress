@@ -9,8 +9,8 @@ const config: UserConfig = {
         position: 'left',
       },
       { text: '主页', link: '/' },
-      { text: '指南', link: '/指南/markx' },
-      { text: '引导', link: '/nodir/markx' },
+      { text: '指南', link: '/指南/测试mdx/markx' },
+      { text: '引导', link: '/1. nodir/2. text/markx' },
       {
         dark: true,
       },
@@ -26,11 +26,11 @@ const config: UserConfig = {
           items: [
             {
               text: 'mdx',
-              link: '/指南/markx',
+              link: '/指南/测试mdx/markx',
             },
             {
               text: '计数器',
-              link: '/指南/count',
+              link: '/指南/测试mdx/count',
             },
           ],
         },
@@ -39,22 +39,22 @@ const config: UserConfig = {
           items: [
             {
               text: '汉字',
-              link: '/指南/汉字',
+              link: '/指南/测试mdx/汉字',
             },
           ],
         },
       ],
-      '/nodir': [
+      '/1. nodir': [
         {
           text: '测试mdx',
           items: [
             {
               text: 'mdx',
-              link: '/nodir/markx',
+              link: '/1. nodir/2. text/markx',
             },
             {
               text: '计数器',
-              link: '/nodir/count',
+              link: '/1. nodir/2. text/count',
             },
           ],
         },
@@ -63,7 +63,7 @@ const config: UserConfig = {
           items: [
             {
               text: 'no',
-              link: '/nodir/no',
+              link: '/1. nodir/2. text/1. no',
             },
           ],
         },

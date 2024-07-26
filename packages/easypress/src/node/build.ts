@@ -16,13 +16,7 @@ import { RollupOutput } from 'rollup'
 import { SiteConfig } from 'shared/types'
 import { build } from 'vite'
 
-export async function buildRuntime({
-  siteConfig,
-  docs,
-}: {
-  docs: string
-  siteConfig: SiteConfig
-}) {
+export async function buildRuntime({ siteConfig }: { siteConfig: SiteConfig }) {
   // 删除旧产物
   console.log('删除旧产物：', CLIENT_OUT_PATH)
   await remove(CLIENT_OUT_PATH)
@@ -30,8 +24,8 @@ export async function buildRuntime({
   // 分为运行时的client构建水合的js与server构建渲染html的js
   console.log('构建js文件...')
   const [clientBundle, serverBundle] = await Promise.all([
-    viteBuild({ siteConfig, docs }),
-    viteBuild({ siteConfig, isServer: true, docs }),
+    viteBuild({ siteConfig }),
+    viteBuild({ siteConfig, isServer: true }),
   ])
 
   // 渲染html
@@ -44,17 +38,15 @@ export async function buildRuntime({
  */
 function viteBuild({
   isServer = false,
-  docs,
   siteConfig,
 }: {
   isServer?: boolean
-  docs: string
   siteConfig: SiteConfig
 }) {
   return build({
     mode: 'production',
     root: ROOT_PATH, // 获取tsconfig.json等配置文件
-    plugins: createPlugins({ siteConfig, docs }),
+    plugins: createPlugins({ siteConfig }),
     build: {
       ssr: isServer,
       outDir: isServer

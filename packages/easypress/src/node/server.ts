@@ -7,9 +7,7 @@ import { createServer } from 'vite'
 export async function createRuntimeDevServer({
   siteConfig,
   restartRuntimeDevServer,
-  docs,
 }: {
-  docs: string
   siteConfig: SiteConfig
   restartRuntimeDevServer: () => Promise<void>
 }) {
@@ -21,7 +19,6 @@ export async function createRuntimeDevServer({
     plugins: createPlugins({
       restartRuntimeDevServer,
       siteConfig,
-      docs,
     }),
     ...baseConfig,
   })

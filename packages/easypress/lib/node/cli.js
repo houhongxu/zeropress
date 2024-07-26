@@ -114,6 +114,7 @@ async function resolveSiteConfig({
     mode,
     command
   });
+  const docs = userConfig.docs || DEFAULT_USER_CONFIG.docs;
   const normalizedNav = (_b = (_a = userConfig.themeConfig) == null ? void 0 : _a.nav) == null ? void 0 : _b.map((item) => ({
     ...item,
     link: normalizeUrl(item.link)
@@ -131,7 +132,7 @@ async function resolveSiteConfig({
     return pre;
   }, {});
   const requiredUserConfig = {
-    docs: userConfig.docs || DEFAULT_USER_CONFIG.docs,
+    docs,
     title: userConfig.title || DEFAULT_USER_CONFIG.title,
     description: userConfig.description || DEFAULT_USER_CONFIG.description,
     themeConfig: {
@@ -377,10 +378,11 @@ function vitePluginVirtualConfig({
 import fg from "fast-glob";
 import path5 from "path";
 function vitePluginVirtualRoutes({
-  docs
+  siteConfig
 }) {
   const virtualModuleId = "virtual:routes";
   const resolvedVirtualModuleId = "\0" + virtualModuleId;
+  const docs = siteConfig.userConfig.docs;
   return {
     name: "vitePluginVirtualRoutes",
     resolveId(id) {
@@ -393,7 +395,7 @@ function vitePluginVirtualRoutes({
         const files = await fg.glob("**/*.{jsx,tsx,md,mdx}", {
           ignore: ["node_modules/**", "client/**", "server/**"],
           cwd: docs,
-          deep: 2,
+          deep: 3,
           absolute: true
         });
         let importTemplate = 'import React from "react";\n';
@@ -418,7 +420,6 @@ function vitePluginVirtualRoutes({
 import pluginReact from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
 function createPlugins({
-  docs,
   siteConfig,
   restartRuntimeDevServer
 }) {
@@ -435,7 +436,7 @@ function createPlugins({
       // /@fs/是针对root之外的，当作为npm包时在nodemodules中属于root内，不需要使用 https://cn.vitejs.dev/config/server-options.html#server-fs-allow
     }),
     vitePluginVirtualConfig({ siteConfig, restartRuntimeDevServer }),
-    vitePluginVirtualRoutes({ siteConfig, docs }),
+    vitePluginVirtualRoutes({ siteConfig }),
     tsconfigPaths(),
     // vite-env.d.ts中declare虚拟模块引入的类型需要绝对路径，所以使用路径别名插件解析tsconfig的baseurl
     vitePluginTransformFrontmatter()
@@ -446,30 +447,26 @@ function createPlugins({
 import fse3, { remove } from "fs-extra";
 import path6 from "path";
 import { build } from "vite";
-async function buildRuntime({
-  siteConfig,
-  docs
-}) {
+async function buildRuntime({ siteConfig }) {
   console.log("\u5220\u9664\u65E7\u4EA7\u7269\uFF1A", CLIENT_OUT_PATH);
   await remove(CLIENT_OUT_PATH);
   console.log("\u6784\u5EFAjs\u6587\u4EF6...");
   const [clientBundle, serverBundle] = await Promise.all([
-    viteBuild({ siteConfig, docs }),
-    viteBuild({ siteConfig, isServer: true, docs })
+    viteBuild({ siteConfig }),
+    viteBuild({ siteConfig, isServer: true })
   ]);
   console.log("\u6784\u5EFAhtml\u6587\u4EF6...");
   await renderHtmls({ siteConfig, clientBundle, serverBundle });
 }
 function viteBuild({
   isServer = false,
-  docs,
   siteConfig
 }) {
   return build({
     mode: "production",
     root: ROOT_PATH,
     // 获取tsconfig.json等配置文件
-    plugins: createPlugins({ siteConfig, docs }),
+    plugins: createPlugins({ siteConfig }),
     build: {
       ssr: isServer,
       outDir: isServer ? path6.join(ROOT_PATH, SERVER_OUT_PATH) : path6.join(siteConfig.root, CLIENT_OUT_PATH),
@@ -538,8 +535,7 @@ async function renderHtmls({
 import { createServer } from "vite";
 async function createRuntimeDevServer({
   siteConfig,
-  restartRuntimeDevServer,
-  docs
+  restartRuntimeDevServer
 }) {
   return createServer({
     root: siteConfig.root,
@@ -550,8 +546,7 @@ async function createRuntimeDevServer({
     },
     plugins: createPlugins({
       restartRuntimeDevServer,
-      siteConfig,
-      docs
+      siteConfig
     }),
     ...baseConfig
   });
@@ -570,9 +565,7 @@ cli.command("dev", { isDefault: true }).description("dev server").option("-p,--p
       mode: "development",
       command: "serve"
     });
-    const absDocs = path7.resolve(siteConfig.userConfig.docs);
     const server = await createRuntimeDevServer({
-      docs: absDocs,
       siteConfig,
       restartRuntimeDevServer: async () => {
         await server.close();
@@ -590,8 +583,7 @@ cli.command("build").description("build").action(async () => {
       mode: "production",
       command: "build"
     });
-    const absDocs = path7.resolve(siteConfig.userConfig.docs);
-    await buildRuntime({ siteConfig, docs: absDocs });
+    await buildRuntime({ siteConfig });
     console.log("\u6784\u5EFA\u6210\u529F");
   } catch (e) {
     console.log(e);

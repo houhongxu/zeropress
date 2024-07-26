@@ -1,9 +1,10 @@
 import { CONFIG_OPTIONS, DEFAULT_USER_CONFIG } from './consts'
 import { tailwindcssConfig } from './tailwind'
 import autoprefixer from 'autoprefixer'
+import fg from 'fast-glob'
 import fse from 'fs-extra'
 import path from 'path'
-import { UserConfig, SiteConfig, Sidebar } from 'shared/types'
+import { UserConfig, SiteConfig, Sidebar, SidebarItem } from 'shared/types'
 import { normalizeUrl } from 'shared/utils'
 import tailwindcss from 'tailwindcss'
 import { loadConfigFromFile, UserConfig as ViteUserConfig } from 'vite'
@@ -34,6 +35,8 @@ export async function resolveSiteConfig({
     command,
   })
 
+  const docs = userConfig.docs || DEFAULT_USER_CONFIG.docs
+
   const normalizedNav = userConfig.themeConfig?.nav?.map((item) => ({
     ...item,
     link: normalizeUrl(item.link),
@@ -51,7 +54,7 @@ export async function resolveSiteConfig({
   }, {})
 
   const requiredUserConfig: Required<UserConfig> = {
-    docs: userConfig.docs || DEFAULT_USER_CONFIG.docs,
+    docs,
     title: userConfig.title || DEFAULT_USER_CONFIG.title,
     description: userConfig.description || DEFAULT_USER_CONFIG.description,
     themeConfig:
@@ -72,7 +75,7 @@ export async function resolveSiteConfig({
   return siteConfig
 }
 
-export async function resolveUserConfig({
+async function resolveUserConfig({
   root = process.cwd(),
   command,
   mode,
