@@ -6,6 +6,3 @@
 
 // esm
 import('../lib/node/cli.js')
-
-// cjs vite弃用cjs后项目也弃用cjs
-// import('../lib/node/cli.cjs')

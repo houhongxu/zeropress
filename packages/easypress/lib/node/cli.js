@@ -18,16 +18,17 @@ var SERVER_ENTRY_PATH = path2.join(
   RUNTIME_PATH,
   "./server/server-entry.tsx"
 );
-var SERVER_OUT_PATH = "./.easypress";
+var SERVER_OUT_PATH = "./.easysite";
 var CLIENT_OUT_PATH = "./dist";
 var PUBLIC_PATH = "./public";
 var HTML_PATH = path2.join(ROOT_PATH, "./index.html");
-var CONFIG_OPTIONS = ["easypress.config.ts", "easypress.config.js"];
+var CONFIG_OPTIONS = ["easysite.config.ts", "easysite.config.js"];
 var DEFAULT_USER_CONFIG = {
   docs: "docs",
-  title: "EASYPRESS",
+  title: "EASYSITE",
   description: "SSG Framework",
   themeConfig: {
+    nav: [{ text: "EASYSITE", link: "/", position: "left" }],
     autoNav: true,
     autoSidebar: true
   },
@@ -173,7 +174,13 @@ async function resolveSiteConfig({
       sidebar: normalizedSidebar,
       autoNav: true,
       autoSidebar: true
-    } : DEFAULT_USER_CONFIG.themeConfig,
+    } : {
+      ...DEFAULT_USER_CONFIG.themeConfig,
+      nav: normalizedNav,
+      sidebar: normalizedSidebar,
+      autoNav: true,
+      autoSidebar: true
+    },
     vite: userConfig.vite ?? DEFAULT_USER_CONFIG.vite
   };
   const siteConfig = {
@@ -664,7 +671,7 @@ import fse4 from "fs-extra";
 import path7 from "path";
 var cli = program;
 var { version } = fse4.readJSONSync(path7.join(ROOT_PATH, "./package.json"));
-cli.name("easypress").version(version);
+cli.name("easysite").version(version);
 cli.command("dev", { isDefault: true }).description("dev server").option("-p,--port <value>", "dev server port").action(async ({ port }) => {
   const createServer2 = async () => {
     const siteConfig = await resolveSiteConfig({

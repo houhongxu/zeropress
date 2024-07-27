@@ -94,7 +94,13 @@ export async function resolveSiteConfig({
           autoNav: true,
           autoSidebar: true,
         }
-      : DEFAULT_USER_CONFIG.themeConfig,
+      : {
+          ...DEFAULT_USER_CONFIG.themeConfig,
+          nav: normalizedNav,
+          sidebar: normalizedSidebar,
+          autoNav: true,
+          autoSidebar: true,
+        },
     vite: userConfig.vite ?? DEFAULT_USER_CONFIG.vite,
   }
 

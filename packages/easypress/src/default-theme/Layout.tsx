@@ -34,7 +34,7 @@ export function Layout() {
 
   return (
     <>
-      <Nav></Nav>
+      <Nav nav={pageData?.userConfig.themeConfig?.nav}></Nav>
       {getPage()}
     </>
   )

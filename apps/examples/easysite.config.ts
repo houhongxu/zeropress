@@ -1,4 +1,4 @@
-import { UserConfig } from 'easypress'
+import { UserConfig } from 'easysite'
 
 const config: UserConfig = {
   themeConfig: {

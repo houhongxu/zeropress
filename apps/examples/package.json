@@ -2,8 +2,8 @@
   "name": "examples",
   "description": "",
   "scripts": {
-    "dev": "easypress",
-    "build": "easypress build",
+    "dev": "easysite",
+    "build": "easysite build",
     "serve": "npm run build && serve ./dist"
   },
   "keywords": [],
@@ -16,7 +16,7 @@
   "devDependencies": {
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
-    "easypress": "workspace:*",
+    "easysite": "workspace:*",
     "serve": "^14.2.1"
   }
 }

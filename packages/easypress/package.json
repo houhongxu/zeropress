@@ -1,5 +1,5 @@
 {
-  "name": "easypress",
+  "name": "easysite",
   "version": "0.0.1",
   "description": "easier SSG framework",
   "scripts": {
@@ -12,7 +12,7 @@
   "main": "./lib/index.cjs",
   "module": "./lib/index.js",
   "types": "./lib/index.d.cts",
-  "bin": "./bin/easypress.js",
+  "bin": "./bin/easysite.js",
   "files": [
     "./lib",
     "./bin"

@@ -20,7 +20,7 @@ export const SERVER_ENTRY_PATH = path.join(
   './server/server-entry.tsx',
 )
 
-export const SERVER_OUT_PATH = './.easypress'
+export const SERVER_OUT_PATH = './.easysite'
 
 export const CLIENT_OUT_PATH = './dist'
 
@@ -28,13 +28,14 @@ export const PUBLIC_PATH = './public'
 
 export const HTML_PATH = path.join(ROOT_PATH, './index.html')
 
-export const CONFIG_OPTIONS = ['easypress.config.ts', 'easypress.config.js']
+export const CONFIG_OPTIONS = ['easysite.config.ts', 'easysite.config.js']
 
 export const DEFAULT_USER_CONFIG: Required<UserConfig> = {
   docs: 'docs',
-  title: 'EASYPRESS',
+  title: 'EASYSITE',
   description: 'SSG Framework',
   themeConfig: {
+    nav: [{ text: 'EASYSITE', link: '/', position: 'left' }],
     autoNav: true,
     autoSidebar: true,
   },

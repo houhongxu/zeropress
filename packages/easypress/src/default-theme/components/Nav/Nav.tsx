@@ -4,15 +4,11 @@ import classNames from 'classnames'
 import { useDark, useWindowScroll } from 'default-theme/hooks'
 import { useLocation } from 'react-router-dom'
 import { Link } from 'runtime'
-import { usePageData } from 'runtime'
 import { NavItem } from 'shared/types'
 
-export function Nav() {
+export function Nav({ nav }: { nav?: NavItem[] }) {
   const { y } = useWindowScroll()
-  const { pageData } = usePageData()
   const { pathname } = useLocation()
-
-  const nav = pageData?.userConfig.themeConfig?.nav
 
   const isScrolled = Boolean(y)
   const isNotHome = pathname !== '/'
