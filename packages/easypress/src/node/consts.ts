@@ -34,6 +34,9 @@ export const DEFAULT_USER_CONFIG: Required<UserConfig> = {
   docs: 'docs',
   title: 'EASYPRESS',
   description: 'SSG Framework',
-  themeConfig: {},
+  themeConfig: {
+    autoNav: true,
+    autoSidebar: true,
+  },
   vite: {},
 }

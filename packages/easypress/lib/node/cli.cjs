@@ -56,7 +56,10 @@ var DEFAULT_USER_CONFIG = {
   docs: "docs",
   title: "EASYPRESS",
   description: "SSG Framework",
-  themeConfig: {},
+  themeConfig: {
+    autoNav: true,
+    autoSidebar: true
+  },
   vite: {}
 };
 
@@ -115,12 +118,30 @@ var tailwindcssConfig = {
 
 // src/node/config.ts
 var import_autoprefixer = __toESM(require("autoprefixer"), 1);
+var import_fast_glob = __toESM(require("fast-glob"), 1);
 var import_fs_extra = __toESM(require("fs-extra"), 1);
 var import_path3 = __toESM(require("path"), 1);
 
 // src/shared/utils.ts
 function normalizeUrl(url = "/") {
   return encodeURI(url);
+}
+function groupBy(arr, key) {
+  return arr.reduce((pre, cur) => {
+    const valueAsKey = cur[key];
+    if (!pre[valueAsKey]) {
+      pre[valueAsKey] = [];
+    }
+    pre[valueAsKey].push(cur);
+    return pre;
+  }, {});
+}
+function keyBy(arr, key) {
+  return arr.reduce((pre, cur) => {
+    const valueAsKey = cur[key];
+    pre[valueAsKey] = cur;
+    return pre;
+  }, {});
 }
 
 // src/node/config.ts
@@ -137,38 +158,51 @@ async function resolveSiteConfig({
   command,
   mode
 }) {
-  var _a, _b, _c;
+  var _a, _b, _c, _d, _e;
   const { userConfigPath, userConfig = {} } = await resolveUserConfig({
     root,
     mode,
     command
   });
   const docs = userConfig.docs || DEFAULT_USER_CONFIG.docs;
-  const normalizedNav = (_b = (_a = userConfig.themeConfig) == null ? void 0 : _a.nav) == null ? void 0 : _b.map((item) => ({
+  const auto = await autoSidebarAndNav({ docs });
+  const navLeftIndex = ((_b = (_a = userConfig.themeConfig) == null ? void 0 : _a.nav) == null ? void 0 : _b.findIndex(
+    (item) => item.position === "left"
+  )) ?? 0;
+  const nav = ((_c = userConfig.themeConfig) == null ? void 0 : _c.autoNav) === false ? userConfig.themeConfig.nav ?? [] : (((_d = userConfig.themeConfig) == null ? void 0 : _d.nav) ?? []).toSpliced(
+    navLeftIndex === -1 ? 0 : navLeftIndex,
+    0,
+    ...auto.nav
+  );
+  const sidebar = ((_e = userConfig.themeConfig) == null ? void 0 : _e.autoSidebar) === false ? userConfig.themeConfig.sidebar ?? {} : auto.sidebar;
+  const normalizedNav = nav.map((item) => ({
     ...item,
     link: normalizeUrl(item.link)
   }));
-  const normalizedSidebar = Object.entries(
-    ((_c = userConfig.themeConfig) == null ? void 0 : _c.sidebar) ?? {}
-  ).reduce((pre, [key, value]) => {
-    pre[normalizeUrl(key)] = value.map((item) => {
-      var _a2;
-      return {
-        ...item,
-        items: (_a2 = item.items) == null ? void 0 : _a2.map((i) => ({ ...i, link: normalizeUrl(i.link) }))
-      };
-    });
-    return pre;
-  }, {});
+  const normalizedSidebar = Object.entries(sidebar).reduce(
+    (pre, [key, value]) => {
+      pre[normalizeUrl(key)] = value.map((item) => {
+        var _a2;
+        return {
+          ...item,
+          items: (_a2 = item.items) == null ? void 0 : _a2.map((i) => ({ ...i, link: normalizeUrl(i.link) }))
+        };
+      });
+      return pre;
+    },
+    {}
+  );
   const requiredUserConfig = {
     docs,
     title: userConfig.title || DEFAULT_USER_CONFIG.title,
     description: userConfig.description || DEFAULT_USER_CONFIG.description,
-    themeConfig: {
+    themeConfig: userConfig.themeConfig ? {
       ...userConfig.themeConfig,
       nav: normalizedNav,
-      sidebar: normalizedSidebar
-    },
+      sidebar: normalizedSidebar,
+      autoNav: true,
+      autoSidebar: true
+    } : DEFAULT_USER_CONFIG.themeConfig,
     vite: userConfig.vite ?? DEFAULT_USER_CONFIG.vite
   };
   const siteConfig = {
@@ -177,6 +211,79 @@ async function resolveSiteConfig({
     userConfig: requiredUserConfig
   };
   return siteConfig;
+}
+async function autoSidebarAndNav({ docs }) {
+  const files = (await import_fast_glob.default.glob("**/*.{jsx,tsx,md,mdx}", {
+    ignore: ["node_modules/**", "client/**", "server/**"],
+    cwd: docs,
+    deep: 3
+  })).filter((item) => !item.endsWith("index.md"));
+  const data = files.map((item) => {
+    const nav2 = item.split("/")[0];
+    const dir = item.split("/")[1];
+    const file = item.split("/")[2];
+    const splitedNav = splitIndex(nav2);
+    const splitedDir = splitIndex(dir);
+    const splitedFile = splitIndex(file);
+    return {
+      path: `/${item.replace(import_path3.default.extname(item), "")}`,
+      nav: nav2,
+      dir,
+      file,
+      navIndex: splitedNav.index,
+      navText: splitedNav.text,
+      navPath: `/${nav2}`,
+      siderbarDirIndex: splitedDir.index,
+      siderbarDirText: splitedDir.text,
+      fileIndex: splitedFile.index,
+      fileText: splitedFile.text.replace(import_path3.default.extname(splitedFile.text), "")
+    };
+  });
+  console.log(data);
+  const nav = Object.entries(groupBy(data, "navText")).map(
+    ([navText, value]) => ({
+      text: navText,
+      link: value.toSorted((a, b) => a.navIndex - b.navIndex)[0].path
+    })
+  );
+  const sidebar = Object.entries(groupBy(data, "navPath")).reduce((pre, [navPath, value]) => {
+    const sidebarItemsMap = Object.entries(
+      groupBy(value, "siderbarDirText")
+    ).reduce((pre2, [siderbarDirText, value2]) => {
+      pre2[siderbarDirText] = value2.map((item) => ({
+        text: item.fileText,
+        link: item.path
+      }));
+      return pre2;
+    }, {});
+    pre[navPath] = Object.values(
+      // keyBy可以根据text字段去重，因为text相同的items也是相同的，所以不会丢失值
+      keyBy(
+        value.map((item) => ({
+          text: item.siderbarDirText,
+          items: sidebarItemsMap[item.siderbarDirText]
+        })),
+        "text"
+      )
+    );
+    return pre;
+  }, {});
+  return { nav, sidebar };
+}
+function splitIndex(text) {
+  const matched = text.match(/^(\d+)(\.?\s*)(.*)$/);
+  const index = matched == null ? void 0 : matched[1];
+  if (index) {
+    return {
+      index: parseInt(index),
+      text: (matched == null ? void 0 : matched[3]) ?? ""
+    };
+  } else {
+    return {
+      index: 0,
+      text
+    };
+  }
 }
 async function resolveUserConfig({
   root = process.cwd(),
@@ -404,7 +511,7 @@ function vitePluginVirtualConfig({
 }
 
 // src/node/plugins/vitePluginVirtualRoutes.ts
-var import_fast_glob = __toESM(require("fast-glob"), 1);
+var import_fast_glob2 = __toESM(require("fast-glob"), 1);
 var import_path4 = __toESM(require("path"), 1);
 function vitePluginVirtualRoutes({
   siteConfig
@@ -421,7 +528,7 @@ function vitePluginVirtualRoutes({
     },
     async load(id) {
       if (id === resolvedVirtualModuleId) {
-        const files = await import_fast_glob.default.glob("**/*.{jsx,tsx,md,mdx}", {
+        const files = await import_fast_glob2.default.glob("**/*.{jsx,tsx,md,mdx}", {
           ignore: ["node_modules/**", "client/**", "server/**"],
           cwd: docs,
           deep: 3,

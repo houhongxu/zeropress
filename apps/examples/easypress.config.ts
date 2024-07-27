@@ -8,9 +8,6 @@ const config: UserConfig = {
         link: '/',
         position: 'left',
       },
-      { text: '主页', link: '/' },
-      { text: '指南', link: '/指南/测试mdx/markx' },
-      { text: '引导', link: '/1. nodir/2. text/markx' },
       {
         dark: true,
       },

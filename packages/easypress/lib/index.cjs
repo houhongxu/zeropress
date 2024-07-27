@@ -47,7 +47,6 @@ function normalizeUrl(url = "/") {
 
 // src/runtime/Content.tsx
 var import_virtual_routes = __toESM(require("virtual:routes"), 1);
-console.log(import_virtual_routes.default);
 function Content() {
   const element = (0, import_react_router_dom.useRoutes)(import_virtual_routes.default, normalizeUrl(location.pathname));
   console.log(

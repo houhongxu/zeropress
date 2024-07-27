@@ -8,7 +8,6 @@ function normalizeUrl(url = "/") {
 
 // src/runtime/Content.tsx
 import routes from "virtual:routes";
-console.log(routes);
 function Content() {
   const element = useRoutes(routes, normalizeUrl(location.pathname));
   console.log(
