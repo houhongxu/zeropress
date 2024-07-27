@@ -47,17 +47,17 @@ var SERVER_ENTRY_PATH = import_path.default.join(
   RUNTIME_PATH,
   "./server/server-entry.tsx"
 );
-var SERVER_OUT_PATH = "./.easysite";
+var SERVER_OUT_PATH = "./.zeropress";
 var CLIENT_OUT_PATH = "./dist";
 var PUBLIC_PATH = "./public";
 var HTML_PATH = import_path.default.join(ROOT_PATH, "./index.html");
-var CONFIG_OPTIONS = ["easysite.config.ts", "easysite.config.js"];
+var CONFIG_OPTIONS = ["zeropress.config.ts", "zeropress.config.js"];
 var DEFAULT_USER_CONFIG = {
   docs: "docs",
-  title: "EASYSITE",
+  title: "ZEROPRESS",
   description: "SSG Framework",
   themeConfig: {
-    nav: [{ text: "EASYSITE", link: "/", position: "left" }],
+    nav: [{ text: "ZEROPRESS", link: "/", position: "left" }],
     autoNav: true,
     autoSidebar: true
   },
@@ -700,7 +700,7 @@ var import_fs_extra4 = __toESM(require("fs-extra"), 1);
 var import_path6 = __toESM(require("path"), 1);
 var cli = import_commander.program;
 var { version } = import_fs_extra4.default.readJSONSync(import_path6.default.join(ROOT_PATH, "./package.json"));
-cli.name("easysite").version(version);
+cli.name("zeropress").version(version);
 cli.command("dev", { isDefault: true }).description("dev server").option("-p,--port <value>", "dev server port").action(async ({ port }) => {
   const createServer2 = async () => {
     const siteConfig = await resolveSiteConfig({

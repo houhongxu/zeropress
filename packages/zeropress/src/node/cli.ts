@@ -12,7 +12,7 @@ export const cli = program
 
 const { version } = fse.readJSONSync(path.join(ROOT_PATH, './package.json'))
 
-cli.name('easysite').version(version)
+cli.name('zeropress').version(version)
 
 cli
   .command('dev', { isDefault: true })
