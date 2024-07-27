@@ -1,0 +1,58 @@
+# useAnimationFrame 和计时器
+
+因为 setTimeout/setInterval 会因为任务阻塞延迟严重
+
+requestAnimationFrame 可以实现更精准的计时器
+
+requestAnimationFrame 是自动匹配帧率调用的 api，60 帧执行 60 次，120 帧执行 120 次
+
+api 设计目的就是使动画更丝滑
+
+所以 requestAnimationFrame 需要与浏览器的重绘同步，具有调用优先级，不会因为任务阻塞
+
+## useAnimationFrame
+
+```ts
+function useAnimationFrame(callback: (durationTime: number) => void) {
+  const requestRef = useRef<number | undefined>()
+  const startTimeRef = useRef<number | undefined>()
+
+  const animate = (time: DOMHighResTimeStamp) => {
+    if (startTimeRef.current !== undefined) {
+      const durationTime = time - startTimeRef.current
+      callback(durationTime)
+    }
+
+    startTimeRef.current = time
+
+    requestRef.current = requestAnimationFrame(animate)
+  }
+
+  useEffect(() => {
+    requestRef.current = requestAnimationFrame(animate)
+    return () => {
+      if (requestRef.current) {
+        cancelAnimationFrame(requestRef.current)
+      }
+    }
+  }, [])
+}
+```
+
+## 计时器
+
+```tsx
+const IndexPage = () => {
+  const [count, setCount] = useState(0)
+
+  useAnimationFrame((durationTime: number) => {
+    setCount((prevCount) => prevCount + durationTime / 1000)
+  })
+
+  return <div>{Math.round(count)}</div>
+}
+
+export default IndexPage
+```
+
+<p align="right">23.12.01</p>

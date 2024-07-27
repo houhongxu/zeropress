@@ -111,7 +111,9 @@ function TocItem({
 
           const target = document.getElementById(item.id)
 
-          scrollTo({ top: (target?.offsetTop ?? NAV_HEIGHT) - NAV_HEIGHT })
+          const top = (target?.offsetTop ?? NAV_HEIGHT) - NAV_HEIGHT
+
+          scrollTo({ top })
         }}
         style={{
           paddingLeft: `${item.depth - 2}rem`,

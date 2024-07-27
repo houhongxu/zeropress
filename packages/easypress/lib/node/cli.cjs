@@ -270,7 +270,7 @@ async function autoSidebarAndNav({ docs }) {
   return { nav, sidebar };
 }
 function splitIndex(text) {
-  const matched = text.match(/^(\d+)(\.?\s*)(.*)$/);
+  const matched = text == null ? void 0 : text.match(/^(\d+)(\.?\s*)(.*)$/);
   const index = matched == null ? void 0 : matched[1];
   if (index) {
     return {
@@ -280,7 +280,7 @@ function splitIndex(text) {
   } else {
     return {
       index: 0,
-      text
+      text: text ?? ""
     };
   }
 }

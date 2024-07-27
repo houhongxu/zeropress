@@ -44,7 +44,7 @@ export function Nav() {
   }
 
   return (
-    <header className="fixed left-0 top-0 z-50 w-full">
+    <header className="pc:fixed absolute left-0 top-0 z-50 w-full">
       <div
         className={classNames(
           isScrolled || isNotHome

@@ -34,10 +34,15 @@ export function MobileSiderbar({
           'w-sidebar border-divider bg-bg-sidebar fixed inset-y-0 left-0 z-40 overflow-y-auto border-r px-[28px] py-[16px] transition-transform duration-300',
           visible ? '-translate-x-0' : '-translate-x-full',
         )}
-        onClick={onClick}
       >
         {sidebar.map((dir) => {
-          return <SiderbarDir key={dir.text} dir={dir}></SiderbarDir>
+          return (
+            <SiderbarDir
+              onClick={onClick}
+              key={dir.text}
+              dir={dir}
+            ></SiderbarDir>
+          )
         })}
       </aside>
     </>
@@ -70,10 +75,7 @@ function SiderbarDir({
   const [isExpand, setIsExpand] = useState(!dir.collapsed)
 
   return (
-    <div
-      onClick={onClick}
-      className="border-divider mt-[4px] border-t first:mt-0 first:border-t-0"
-    >
+    <div className="border-divider mt-[4px] border-t first:mt-0 first:border-t-0">
       <h2
         onClick={() => setIsExpand((pre) => !pre)}
         className="text-text-1 mb-[6px] mt-[12px] flex cursor-pointer items-center justify-between font-[700]"
@@ -90,14 +92,18 @@ function SiderbarDir({
 
       <div
         style={{
-          height: isExpand ? `${(dir.items?.length ?? 0) * 25}px` : '0',
+          height: isExpand ? `${(dir.items?.length ?? 0) * 27}px` : '0',
         }}
         className={classNames(
           'mb-[12px] flex flex-col overflow-hidden pl-[1rem] transition-[height] duration-300',
         )}
       >
         {dir.items?.map((item) => (
-          <SiderbarItem key={item.link} item={item}></SiderbarItem>
+          <SiderbarItem
+            onClick={onClick}
+            key={item.link}
+            item={item}
+          ></SiderbarItem>
         ))}
       </div>
     </div>
@@ -121,7 +127,7 @@ function SiderbarItem({
       onClick={onClick}
       className={classNames(
         active ? 'text-brand' : 'text-text-2',
-        'text-hover p-[2px] text-[14px]',
+        'text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]',
       )}
     >
       {text}

@@ -45,7 +45,7 @@ function Button({
         {children}
       </div>
 
-      <div className="text-text-2 group-hover:text-brand text-[14px] font-[500] leading-[20px] transition-colors duration-300">
+      <div className=" text-text-2 group-hover:text-brand overflow-hidden text-ellipsis whitespace-nowrap text-[14px] font-[500] leading-[20px] transition-colors duration-300">
         {text}
       </div>
     </Link>

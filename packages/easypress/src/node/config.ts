@@ -183,8 +183,8 @@ async function autoSidebarAndNav({ docs }: { docs?: string }) {
   return { nav, sidebar }
 }
 
-function splitIndex(text: string) {
-  const matched = text.match(/^(\d+)(\.?\s*)(.*)$/)
+function splitIndex(text?: string) {
+  const matched = text?.match(/^(\d+)(\.?\s*)(.*)$/)
   const index = matched?.[1]
 
   if (index) {
@@ -195,7 +195,7 @@ function splitIndex(text: string) {
   } else {
     return {
       index: 0,
-      text,
+      text: text ?? '',
     }
   }
 }
