@@ -1,4 +1,5 @@
 import { Footer } from './Footer'
+import { MobileBar } from './MobileBar'
 import { Siderbar } from './SiderBar'
 import { Toc } from './Toc'
 import { useHeaderScroll } from 'default-theme/hooks/useHeaderScroll'
@@ -19,10 +20,14 @@ export function Doc({
       <Siderbar></Siderbar>
 
       <div className="pc:ml-sidebar ml-0 flex justify-between">
-        <div className="doc mx-auto w-full max-w-[768px] p-[48px] transition-[margin] duration-300">
-          {content}
+        <div className="mx-auto w-full max-w-[768px] transition-[margin] duration-300">
+          <MobileBar toc={toc}></MobileBar>
 
-          <Footer></Footer>
+          <div className="doc p-[48px]">
+            {content}
+
+            <Footer></Footer>
+          </div>
         </div>
 
         <Toc toc={toc}></Toc>

@@ -3,8 +3,8 @@ import { LOGO_MAP } from './consts'
 import classNames from 'classnames'
 import { useDark, useWindowScroll } from 'default-theme/hooks'
 import { useLocation } from 'react-router-dom'
-import { Link } from 'runtime/Link'
-import { usePageData } from 'runtime/usePageData'
+import { Link } from 'runtime'
+import { usePageData } from 'runtime'
 import { NavItem } from 'shared/types'
 
 export function Nav() {
@@ -44,7 +44,7 @@ export function Nav() {
   }
 
   return (
-    <header className="fixed left-0 top-0 z-10 w-full">
+    <header className="fixed left-0 top-0 z-50 w-full">
       <div
         className={classNames(
           isScrolled || isNotHome

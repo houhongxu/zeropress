@@ -1,4 +1,4 @@
-// src/runtime/Content.tsx
+// src/runtime/client/Content.tsx
 import { useRoutes } from "react-router-dom";
 
 // src/shared/utils.ts
@@ -6,7 +6,7 @@ function normalizeUrl(url = "/") {
   return encodeURI(url);
 }
 
-// src/runtime/Content.tsx
+// src/runtime/client/Content.tsx
 import routes from "virtual:routes";
 function Content() {
   const element = useRoutes(routes, normalizeUrl(location.pathname));
@@ -40,8 +40,39 @@ var PageDataContext = createContext({});
 var usePageData = () => {
   return useContext(PageDataContext);
 };
+
+// src/runtime/client/Link.tsx
+import classNames from "classnames";
+import { useNavigate } from "react-router-dom";
+import { jsx } from "react/jsx-runtime";
+function Link({
+  href = "/",
+  className,
+  children,
+  onClick
+}) {
+  const navigate = useNavigate();
+  const { setPageData } = usePageData();
+  const isSpa = true;
+  const isCsg = isSpa && !(href == null ? void 0 : href.startsWith("http"));
+  const handleCsgNavigate = async () => {
+    const newPageData = await getPageData(href);
+    setPageData == null ? void 0 : setPageData(newPageData);
+    onClick == null ? void 0 : onClick();
+    navigate(href);
+  };
+  return /* @__PURE__ */ jsx(
+    "a",
+    {
+      ...isCsg ? { onClick: handleCsgNavigate } : { href, onClick },
+      className: classNames("cursor-pointer", className),
+      children
+    }
+  );
+}
 export {
   Content,
+  Link,
   PageDataContext,
   getPageData,
   usePageData

@@ -1,8 +1,8 @@
 import { Layout } from 'default-theme/Layout'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom/server'
+import { getPageData } from 'runtime'
 import { PageDataProvider } from 'runtime/PageDataProvider'
-import { getPageData } from 'runtime/usePageData'
 import routes from 'virtual:routes'
 
 /**

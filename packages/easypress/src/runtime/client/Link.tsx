@@ -1,4 +1,4 @@
-import { getPageData, usePageData } from './usePageData'
+import { getPageData, usePageData } from '../usePageData'
 import classNames from 'classnames'
 import { PropsWithChildren } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -7,9 +7,11 @@ export function Link({
   href = '/',
   className,
   children,
+  onClick,
 }: PropsWithChildren<{
   href?: string
   className?: string
+  onClick?: () => void
 }>) {
   const navigate = useNavigate()
   const { setPageData } = usePageData()
@@ -25,12 +27,14 @@ export function Link({
 
     setPageData?.(newPageData)
 
+    onClick?.()
+
     navigate(href)
   }
 
   return (
     <a
-      {...(isCsg ? { onClick: handleCsgNavigate } : { href })}
+      {...(isCsg ? { onClick: handleCsgNavigate } : { href, onClick })}
       className={classNames('cursor-pointer', className)}
     >
       {children}

@@ -1,8 +1,8 @@
 import { Layout } from 'default-theme/Layout'
 import { createRoot, hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
+import { getPageData } from 'runtime'
 import { PageDataProvider } from 'runtime/PageDataProvider'
-import { getPageData } from 'runtime/usePageData'
 
 async function render() {
   const pageData = await getPageData(location.pathname)

@@ -1,3 +1,3 @@
-export * from './Content'
+export * from './client/Content'
 export * from './usePageData'
-export * from './Link'
+export * from './client/Link'

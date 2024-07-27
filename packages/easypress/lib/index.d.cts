@@ -1,6 +1,7 @@
 import { UserConfig as UserConfig$1 } from 'vite';
 import * as react from 'react';
-import { ReactElement } from 'react';
+import { ReactElement, PropsWithChildren } from 'react';
+import * as react_jsx_runtime from 'react/jsx-runtime';
 
 interface UserConfig {
     /**
@@ -136,4 +137,10 @@ interface Props {
 declare const PageDataContext: react.Context<Props>;
 declare const usePageData: () => Props;
 
-export { Content, type Footer, type FrontMatter, type NavDirection, type NavItem, type NavLogo, type PageData, PageDataContext, type PageModule, type PageType, type Route, type Sidebar, type SidebarDir, type SidebarItem, type SiteConfig, type ThemeConfig, type TocItem, type UserConfig, getPageData, usePageData };
+declare function Link({ href, className, children, onClick, }: PropsWithChildren<{
+    href?: string;
+    className?: string;
+    onClick?: () => void;
+}>): react_jsx_runtime.JSX.Element;
+
+export { Content, type Footer, type FrontMatter, Link, type NavDirection, type NavItem, type NavLogo, type PageData, PageDataContext, type PageModule, type PageType, type Route, type Sidebar, type SidebarDir, type SidebarItem, type SiteConfig, type ThemeConfig, type TocItem, type UserConfig, getPageData, usePageData };
