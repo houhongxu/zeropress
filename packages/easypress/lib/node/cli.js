@@ -210,7 +210,6 @@ async function autoSidebarAndNav({ docs }) {
       fileText: splitedFile.text.replace(path4.extname(splitedFile.text), "")
     };
   });
-  console.log(data);
   const nav = Object.entries(groupBy(data, "navText")).map(
     ([navText, value]) => ({
       text: navText,
@@ -221,7 +220,7 @@ async function autoSidebarAndNav({ docs }) {
     const sidebarItemsMap = Object.entries(
       groupBy(value, "siderbarDirText")
     ).reduce((pre2, [siderbarDirText, value2]) => {
-      pre2[siderbarDirText] = value2.map((item) => ({
+      pre2[siderbarDirText] = value2.toSorted((a, b) => a.fileIndex - b.fileIndex).map((item) => ({
         text: item.fileText,
         link: item.path
       }));
@@ -230,7 +229,7 @@ async function autoSidebarAndNav({ docs }) {
     pre[navPath] = Object.values(
       // keyBy可以根据text字段去重，因为text相同的items也是相同的，所以不会丢失值
       keyBy(
-        value.map((item) => ({
+        value.toSorted((a, b) => a.siderbarDirIndex - b.siderbarDirIndex).map((item) => ({
           text: item.siderbarDirText,
           items: sidebarItemsMap[item.siderbarDirText]
         })),

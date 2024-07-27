@@ -140,7 +140,6 @@ async function autoSidebarAndNav({ docs }: { docs?: string }) {
       fileText: splitedFile.text.replace(path.extname(splitedFile.text), ''),
     }
   })
-  console.log(data)
 
   const nav = Object.entries(groupBy(data, 'navText')).map<NavItem>(
     ([navText, value]) => ({
@@ -155,10 +154,12 @@ async function autoSidebarAndNav({ docs }: { docs?: string }) {
     const sidebarItemsMap = Object.entries(
       groupBy(value, 'siderbarDirText'),
     ).reduce<Record<string, SidebarItem[]>>((pre, [siderbarDirText, value]) => {
-      pre[siderbarDirText] = value.map((item) => ({
-        text: item.fileText,
-        link: item.path,
-      }))
+      pre[siderbarDirText] = value
+        .toSorted((a, b) => a.fileIndex - b.fileIndex)
+        .map((item) => ({
+          text: item.fileText,
+          link: item.path,
+        }))
 
       return pre
     }, {})
@@ -166,10 +167,12 @@ async function autoSidebarAndNav({ docs }: { docs?: string }) {
     pre[navPath] = Object.values(
       // keyBy可以根据text字段去重，因为text相同的items也是相同的，所以不会丢失值
       keyBy(
-        value.map((item) => ({
-          text: item.siderbarDirText,
-          items: sidebarItemsMap[item.siderbarDirText],
-        })),
+        value
+          .toSorted((a, b) => a.siderbarDirIndex - b.siderbarDirIndex)
+          .map((item) => ({
+            text: item.siderbarDirText,
+            items: sidebarItemsMap[item.siderbarDirText],
+          })),
         'text',
       ),
     )
