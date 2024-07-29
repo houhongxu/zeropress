@@ -34,15 +34,8 @@ __export(cli_exports, {
 });
 module.exports = __toCommonJS(cli_exports);
 
-// ../../node_modules/.pnpm/tsup@8.0.1_postcss@8.4.35_typescript@5.3.3/node_modules/tsup/assets/cjs_shims.js
-var getImportMetaUrl = () => typeof document === "undefined" ? new URL("file:" + __filename).href : document.currentScript && document.currentScript.src || new URL("main.js", document.baseURI).href;
-var importMetaUrl = /* @__PURE__ */ getImportMetaUrl();
-
 // src/node/consts.ts
 var import_path = __toESM(require("path"), 1);
-var import_url = require("url");
-var __filename2 = (0, import_url.fileURLToPath)(importMetaUrl);
-var __dirname = import_path.default.dirname(__filename2);
 var ROOT_PATH = import_path.default.join(__dirname, "..", "..");
 var SRC_PATH = import_path.default.join(ROOT_PATH, "./src");
 var RUNTIME_PATH = import_path.default.join(SRC_PATH, "./runtime");
@@ -70,255 +63,6 @@ var DEFAULT_USER_CONFIG = {
   },
   vite: {}
 };
-
-// src/node/tailwind.ts
-var import_tailwind = require("@iconify/tailwind");
-var import_path2 = __toESM(require("path"), 1);
-var import_url2 = require("url");
-var __filename3 = (0, import_url2.fileURLToPath)(importMetaUrl);
-var __dirname2 = import_path2.default.dirname(__filename3);
-var tailwindcssConfig = {
-  content: [
-    import_path2.default.join(
-      __dirname2,
-      "..",
-      "..",
-      "./src/default-theme/**/*.{tsx,ts,jsx,js}"
-    )
-    // 相对于lib的路径，tailwind引入是在node/config,打包后是lib/node/cli
-  ],
-  darkMode: "selector",
-  theme: {
-    extend: {
-      screens: {
-        pc: "768px",
-        full: "1060px"
-      },
-      /** 声明时dark在下面所以默认显示dark主题颜色 */
-      colors: {
-        divider: "var(--ep-color-divider)",
-        brand: "var(--ep-color-brand)",
-        bg: {
-          default: "var(--ep-color-bg-default)",
-          switch: "var(--ep-color-bg-switch)",
-          inverse: "var(--ep-color-bg-inverse)",
-          sidebar: "var(--ep-color-bg-sidebar)"
-        },
-        text: {
-          1: "var(--ep-color-text-1)",
-          2: "var(--ep-color-text-2)",
-          3: "var(--ep-color-text-3)",
-          4: "var(--ep-color-text-4)"
-        },
-        gray: {
-          1: "var(--ep-color-gray-1)"
-        }
-      },
-      boxShadow: {
-        1: "0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06)",
-        2: "0 3px 12px rgba(0, 0, 0, 0.07), 0 1px 4px rgba(0, 0, 0, 0.07)",
-        3: "0 12px 32px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08)",
-        4: "0 14px 44px rgba(0, 0, 0, 0.12), 0 3px 9px rgba(0, 0, 0, 0.12)",
-        5: "0 18px 56px rgba(0, 0, 0, 0.16), 0 4px 12px rgba(0, 0, 0, 0.16)"
-      },
-      spacing: { nav: "56px", sidebar: "250px", toc: "200px" }
-    }
-  },
-  plugins: [(0, import_tailwind.addDynamicIconSelectors)()]
-};
-
-// src/node/config.ts
-var import_autoprefixer = __toESM(require("autoprefixer"), 1);
-var import_fast_glob = __toESM(require("fast-glob"), 1);
-var import_fs_extra = __toESM(require("fs-extra"), 1);
-var import_path3 = __toESM(require("path"), 1);
-
-// src/shared/utils.ts
-function normalizeUrl(url = "/") {
-  return encodeURI(url);
-}
-function groupBy(arr, key) {
-  return arr.reduce((pre, cur) => {
-    const valueAsKey = cur[key];
-    if (!pre[valueAsKey]) {
-      pre[valueAsKey] = [];
-    }
-    pre[valueAsKey].push(cur);
-    return pre;
-  }, {});
-}
-function keyBy(arr, key) {
-  return arr.reduce((pre, cur) => {
-    const valueAsKey = cur[key];
-    pre[valueAsKey] = cur;
-    return pre;
-  }, {});
-}
-
-// src/node/config.ts
-var import_tailwindcss = __toESM(require("tailwindcss"), 1);
-var import_vite = require("vite");
-var baseConfig = {
-  // 配置tailwindcss
-  css: {
-    postcss: { plugins: [(0, import_tailwindcss.default)(tailwindcssConfig), (0, import_autoprefixer.default)({})] }
-  }
-};
-async function resolveSiteConfig({
-  root = process.cwd(),
-  command,
-  mode
-}) {
-  const { userConfigPath, userConfig = {} } = await resolveUserConfig({
-    root,
-    mode,
-    command
-  });
-  const docs = userConfig.docs || DEFAULT_USER_CONFIG.docs;
-  const auto = await autoSidebarAndNav({ docs });
-  const navLeftIndex = userConfig.themeConfig?.nav?.findIndex(
-    (item) => item.position === "left"
-  ) ?? 0;
-  const nav = userConfig.themeConfig?.autoNav === false ? userConfig.themeConfig.nav ?? [] : (userConfig.themeConfig?.nav ?? []).toSpliced(
-    navLeftIndex === -1 ? 0 : navLeftIndex,
-    0,
-    ...auto.nav
-  );
-  const sidebar = userConfig.themeConfig?.autoSidebar === false ? userConfig.themeConfig.sidebar ?? {} : auto.sidebar;
-  const normalizedNav = nav.map((item) => ({
-    ...item,
-    link: normalizeUrl(item.link)
-  }));
-  const normalizedSidebar = Object.entries(sidebar).reduce(
-    (pre, [key, value]) => {
-      pre[normalizeUrl(key)] = value.map((item) => ({
-        ...item,
-        items: item.items?.map((i) => ({ ...i, link: normalizeUrl(i.link) }))
-      }));
-      return pre;
-    },
-    {}
-  );
-  const requiredUserConfig = {
-    docs,
-    title: userConfig.title || DEFAULT_USER_CONFIG.title,
-    description: userConfig.description || DEFAULT_USER_CONFIG.description,
-    themeConfig: userConfig.themeConfig ? {
-      ...userConfig.themeConfig,
-      nav: normalizedNav,
-      sidebar: normalizedSidebar,
-      autoNav: true,
-      autoSidebar: true
-    } : {
-      ...DEFAULT_USER_CONFIG.themeConfig,
-      nav: normalizedNav,
-      sidebar: normalizedSidebar,
-      autoNav: true,
-      autoSidebar: true
-    },
-    vite: userConfig.vite ?? DEFAULT_USER_CONFIG.vite
-  };
-  const siteConfig = {
-    root,
-    userConfigPath,
-    userConfig: requiredUserConfig
-  };
-  return siteConfig;
-}
-async function autoSidebarAndNav({ docs }) {
-  const files = (await import_fast_glob.default.glob("**/*.{jsx,tsx,md,mdx}", {
-    ignore: ["node_modules/**", "client/**", "server/**"],
-    cwd: docs,
-    deep: 3
-  })).filter((item) => !item.endsWith("index.md"));
-  const data = files.map((item) => {
-    const nav2 = item.split("/")[0];
-    const dir = item.split("/")[1];
-    const file = item.split("/")[2];
-    const splitedNav = splitIndex(nav2);
-    const splitedDir = splitIndex(dir);
-    const splitedFile = splitIndex(file);
-    return {
-      path: `/${item.replace(import_path3.default.extname(item), "")}`,
-      nav: nav2,
-      dir,
-      file,
-      navIndex: splitedNav.index,
-      navText: splitedNav.text,
-      navPath: `/${nav2}`,
-      siderbarDirIndex: splitedDir.index,
-      siderbarDirText: splitedDir.text,
-      fileIndex: splitedFile.index,
-      fileText: splitedFile.text.replace(import_path3.default.extname(splitedFile.text), "")
-    };
-  });
-  const nav = Object.entries(groupBy(data, "navText")).map(
-    ([navText, value]) => ({
-      text: navText,
-      link: value.toSorted((a, b) => a.navIndex - b.navIndex)[0].path
-    })
-  );
-  const sidebar = Object.entries(groupBy(data, "navPath")).reduce((pre, [navPath, value]) => {
-    const sidebarItemsMap = Object.entries(
-      groupBy(value, "siderbarDirText")
-    ).reduce((pre2, [siderbarDirText, value2]) => {
-      pre2[siderbarDirText] = value2.toSorted((a, b) => a.fileIndex - b.fileIndex).map((item) => ({
-        text: item.fileText,
-        link: item.path
-      }));
-      return pre2;
-    }, {});
-    pre[navPath] = Object.values(
-      // keyBy可以根据text字段去重，因为text相同的items也是相同的，所以不会丢失值
-      keyBy(
-        value.toSorted((a, b) => a.siderbarDirIndex - b.siderbarDirIndex).map((item) => ({
-          text: item.siderbarDirText,
-          items: sidebarItemsMap[item.siderbarDirText]
-        })),
-        "text"
-      )
-    );
-    return pre;
-  }, {});
-  return { nav, sidebar };
-}
-function splitIndex(text) {
-  const matched = text?.match(/^(\d+)(\.?\s*)(.*)$/);
-  const index = matched?.[1];
-  if (index) {
-    return {
-      index: parseInt(index),
-      text: matched?.[3] ?? ""
-    };
-  } else {
-    return {
-      index: 0,
-      text: text ?? ""
-    };
-  }
-}
-async function resolveUserConfig({
-  root = process.cwd(),
-  command,
-  mode
-}) {
-  const userConfigPath = getUserConfigPath({ root });
-  const loadResult = await (0, import_vite.loadConfigFromFile)(
-    { command, mode },
-    userConfigPath,
-    root
-  );
-  return {
-    userConfigPath,
-    userConfig: loadResult?.config
-  };
-}
-function getUserConfigPath({ root = process.cwd() }) {
-  const userConfigPath = CONFIG_OPTIONS.map(
-    (option) => import_path3.default.join(root, option)
-  ).find((path7) => import_fs_extra.default.existsSync(path7));
-  return userConfigPath;
-}
 
 // src/node/plugins/remarkMdxToc.ts
 var import_acorn = require("acorn");
@@ -428,7 +172,7 @@ function vitePluginMdx() {
 }
 
 // src/node/plugins/vitePluginServeHtml.ts
-var import_fs_extra2 = __toESM(require("fs-extra"), 1);
+var import_fs_extra = __toESM(require("fs-extra"), 1);
 function vitePluginServeHtml({
   templatePath,
   entry
@@ -443,7 +187,7 @@ function vitePluginServeHtml({
             return next();
           }
           try {
-            const template = await import_fs_extra2.default.readFile(templatePath, "utf-8");
+            const template = await import_fs_extra.default.readFile(templatePath, "utf-8");
             const viteHtml = await server.transformIndexHtml?.(
               req.url,
               template,
@@ -519,9 +263,31 @@ function vitePluginVirtualConfig({
   };
 }
 
+// src/shared/utils.ts
+function normalizeUrl(url = "/") {
+  return encodeURI(url);
+}
+function groupBy(arr, key) {
+  return arr.reduce((pre, cur) => {
+    const valueAsKey = cur[key];
+    if (!pre[valueAsKey]) {
+      pre[valueAsKey] = [];
+    }
+    pre[valueAsKey].push(cur);
+    return pre;
+  }, {});
+}
+function keyBy(arr, key) {
+  return arr.reduce((pre, cur) => {
+    const valueAsKey = cur[key];
+    pre[valueAsKey] = cur;
+    return pre;
+  }, {});
+}
+
 // src/node/plugins/vitePluginVirtualRoutes.ts
-var import_fast_glob2 = __toESM(require("fast-glob"), 1);
-var import_path4 = __toESM(require("path"), 1);
+var import_fast_glob = __toESM(require("fast-glob"), 1);
+var import_path2 = __toESM(require("path"), 1);
 function vitePluginVirtualRoutes({
   siteConfig
 }) {
@@ -537,7 +303,7 @@ function vitePluginVirtualRoutes({
     },
     async load(id) {
       if (id === resolvedVirtualModuleId) {
-        const files = await import_fast_glob2.default.glob("**/*.{jsx,tsx,md,mdx}", {
+        const files = await import_fast_glob.default.glob("**/*.{jsx,tsx,md,mdx}", {
           ignore: ["node_modules/**", "client/**", "server/**"],
           cwd: docs,
           deep: 3,
@@ -545,8 +311,8 @@ function vitePluginVirtualRoutes({
         });
         let importTemplate = 'import React from "react";\n';
         const routes = files.map((file, index) => {
-          const relativePath = import_path4.default.relative(docs, file);
-          const pathname = relativePath.replace(import_path4.default.extname(file), "").replace(/index$/, "");
+          const relativePath = import_path2.default.relative(docs, file);
+          const pathname = relativePath.replace(import_path2.default.extname(file), "").replace(/index$/, "");
           importTemplate += `import Element${index + 1} from '${file}';
 `;
           return `{ path: '/${normalizeUrl(pathname)}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },
@@ -588,13 +354,68 @@ function createPlugins({
   ];
 }
 
+// src/node/tailwind.ts
+var import_tailwind = require("@iconify/tailwind");
+var import_path3 = __toESM(require("path"), 1);
+var tailwindcssConfig = {
+  content: [
+    import_path3.default.join(
+      __dirname,
+      "..",
+      "..",
+      "./src/default-theme/**/*.{tsx,ts,jsx,js}"
+    )
+    // 相对于lib的路径，tailwind引入是在node/config,打包后是lib/node/cli
+  ],
+  darkMode: "selector",
+  theme: {
+    extend: {
+      screens: {
+        pc: "768px",
+        full: "1060px"
+      },
+      /** 声明时dark在下面所以默认显示dark主题颜色 */
+      colors: {
+        divider: "var(--ep-color-divider)",
+        brand: "var(--ep-color-brand)",
+        bg: {
+          default: "var(--ep-color-bg-default)",
+          switch: "var(--ep-color-bg-switch)",
+          inverse: "var(--ep-color-bg-inverse)",
+          sidebar: "var(--ep-color-bg-sidebar)"
+        },
+        text: {
+          1: "var(--ep-color-text-1)",
+          2: "var(--ep-color-text-2)",
+          3: "var(--ep-color-text-3)",
+          4: "var(--ep-color-text-4)"
+        },
+        gray: {
+          1: "var(--ep-color-gray-1)"
+        }
+      },
+      boxShadow: {
+        1: "0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06)",
+        2: "0 3px 12px rgba(0, 0, 0, 0.07), 0 1px 4px rgba(0, 0, 0, 0.07)",
+        3: "0 12px 32px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08)",
+        4: "0 14px 44px rgba(0, 0, 0, 0.12), 0 3px 9px rgba(0, 0, 0, 0.12)",
+        5: "0 18px 56px rgba(0, 0, 0, 0.16), 0 4px 12px rgba(0, 0, 0, 0.16)"
+      },
+      spacing: { nav: "56px", sidebar: "250px", toc: "200px" }
+    }
+  },
+  plugins: [(0, import_tailwind.addDynamicIconSelectors)()]
+};
+
 // src/node/build.ts
-var import_fs_extra3 = __toESM(require("fs-extra"), 1);
-var import_path5 = __toESM(require("path"), 1);
-var import_vite2 = require("vite");
+var import_autoprefixer = __toESM(require("autoprefixer"), 1);
+var import_fs_extra2 = __toESM(require("fs-extra"), 1);
+var import_path4 = __toESM(require("path"), 1);
+var import_tailwindcss = __toESM(require("tailwindcss"), 1);
+var import_vite = require("vite");
 async function buildRuntime({ siteConfig }) {
   console.log("\u5220\u9664\u65E7\u4EA7\u7269\uFF1A", CLIENT_OUT_PATH);
-  await (0, import_fs_extra3.remove)(CLIENT_OUT_PATH);
+  await import_fs_extra2.default.remove(CLIENT_OUT_PATH);
   console.log("\u6784\u5EFAjs\u6587\u4EF6...");
   const [clientBundle, serverBundle] = await Promise.all([
     viteBuild({ siteConfig }),
@@ -607,14 +428,14 @@ function viteBuild({
   isServer = false,
   siteConfig
 }) {
-  return (0, import_vite2.build)({
+  return (0, import_vite.build)({
     mode: "production",
     root: ROOT_PATH,
     // 获取tsconfig.json等配置文件
     plugins: createPlugins({ siteConfig }),
     build: {
       ssr: isServer,
-      outDir: isServer ? import_path5.default.join(ROOT_PATH, SERVER_OUT_PATH) : import_path5.default.join(siteConfig.root, CLIENT_OUT_PATH),
+      outDir: isServer ? import_path4.default.join(ROOT_PATH, SERVER_OUT_PATH) : import_path4.default.join(siteConfig.root, CLIENT_OUT_PATH),
       rollupOptions: {
         input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
         output: {
@@ -623,7 +444,10 @@ function viteBuild({
         }
       }
     },
-    ...baseConfig
+    // 配置tailwindcss
+    css: {
+      postcss: { plugins: [(0, import_tailwindcss.default)(tailwindcssConfig), (0, import_autoprefixer.default)({})] }
+    }
   });
 }
 async function renderHtmls({
@@ -643,17 +467,17 @@ async function renderHtmls({
   const styleAssets = clientBundle.output.filter(
     (chunk) => chunk.type === "asset" && chunk.fileName.endsWith(".css")
   );
-  if (await import_fs_extra3.default.exists(PUBLIC_PATH)) {
-    await import_fs_extra3.default.copy(PUBLIC_PATH, import_path5.default.join(CLIENT_OUT_PATH));
+  if (await import_fs_extra2.default.exists(PUBLIC_PATH)) {
+    await import_fs_extra2.default.copy(PUBLIC_PATH, import_path4.default.join(CLIENT_OUT_PATH));
   }
-  const serverEntryPath = import_path5.default.join(
+  const serverEntryPath = import_path4.default.join(
     ROOT_PATH,
     SERVER_OUT_PATH,
     serverEntryChunk?.fileName
   );
   const clientEntryPath = `/${clientEntryChunk?.fileName}`;
   const { render, routes } = await import(serverEntryPath);
-  const template = await import_fs_extra3.default.readFile(HTML_PATH, "utf-8");
+  const template = await import_fs_extra2.default.readFile(HTML_PATH, "utf-8");
   await Promise.all(
     routes.map(async (route) => {
       const location = (route.path === "/" ? "/index" : route.path) || "/index";
@@ -669,14 +493,177 @@ async function renderHtmls({
         "</head>",
         styleAssets.map((asset) => `<link rel="stylesheet" href="/${asset.fileName}">`).join("\n")
       );
-      import_fs_extra3.default.ensureDir(import_path5.default.join(siteConfig.root, import_path5.default.dirname(relativeFilePath))).catch((e) => console.log("client\u6587\u4EF6\u5939\u4E0D\u5B58\u5728\uFF1A", e)).then(
-        () => import_fs_extra3.default.writeFile(import_path5.default.join(siteConfig.root, relativeFilePath), html)
+      import_fs_extra2.default.ensureDir(import_path4.default.join(siteConfig.root, import_path4.default.dirname(relativeFilePath))).catch((e) => console.log("client\u6587\u4EF6\u5939\u4E0D\u5B58\u5728\uFF1A", e)).then(
+        () => import_fs_extra2.default.writeFile(import_path4.default.join(siteConfig.root, relativeFilePath), html)
       ).catch((e) => console.log("html\u5199\u5165\u5931\u8D25", e));
     })
   );
 }
 
+// src/node/config.ts
+var import_fast_glob2 = __toESM(require("fast-glob"), 1);
+var import_fs_extra3 = __toESM(require("fs-extra"), 1);
+var import_path5 = __toESM(require("path"), 1);
+var import_vite2 = require("vite");
+async function resolveSiteConfig({
+  root = process.cwd(),
+  command,
+  mode
+}) {
+  const { userConfigPath, userConfig = {} } = await resolveUserConfig({
+    root,
+    mode,
+    command
+  });
+  const docs = userConfig.docs || DEFAULT_USER_CONFIG.docs;
+  const auto = await autoSidebarAndNav({ docs });
+  const navLeftIndex = userConfig.themeConfig?.nav?.findIndex(
+    (item) => item.position === "left"
+  ) ?? 0;
+  const nav = userConfig.themeConfig?.autoNav === false ? userConfig.themeConfig.nav ?? [] : (userConfig.themeConfig?.nav ?? []).toSpliced(
+    navLeftIndex === -1 ? 0 : navLeftIndex,
+    0,
+    ...auto.nav
+  );
+  const sidebar = userConfig.themeConfig?.autoSidebar === false ? userConfig.themeConfig.sidebar ?? {} : auto.sidebar;
+  const normalizedNav = nav.map((item) => ({
+    ...item,
+    link: normalizeUrl(item.link)
+  }));
+  const normalizedSidebar = Object.entries(sidebar).reduce(
+    (pre, [key, value]) => {
+      pre[normalizeUrl(key)] = value.map((item) => ({
+        ...item,
+        items: item.items?.map((i) => ({ ...i, link: normalizeUrl(i.link) }))
+      }));
+      return pre;
+    },
+    {}
+  );
+  const requiredUserConfig = {
+    docs,
+    title: userConfig.title || DEFAULT_USER_CONFIG.title,
+    description: userConfig.description || DEFAULT_USER_CONFIG.description,
+    themeConfig: userConfig.themeConfig ? {
+      ...userConfig.themeConfig,
+      nav: normalizedNav,
+      sidebar: normalizedSidebar,
+      autoNav: true,
+      autoSidebar: true
+    } : {
+      ...DEFAULT_USER_CONFIG.themeConfig,
+      nav: normalizedNav,
+      sidebar: normalizedSidebar,
+      autoNav: true,
+      autoSidebar: true
+    },
+    vite: userConfig.vite ?? DEFAULT_USER_CONFIG.vite
+  };
+  const siteConfig = {
+    root,
+    userConfigPath,
+    userConfig: requiredUserConfig
+  };
+  return siteConfig;
+}
+async function autoSidebarAndNav({ docs }) {
+  const files = (await import_fast_glob2.default.glob("**/*.{jsx,tsx,md,mdx}", {
+    ignore: ["node_modules/**", "client/**", "server/**"],
+    cwd: docs,
+    deep: 3
+  })).filter((item) => !item.endsWith("index.md"));
+  const data = files.map((item) => {
+    const nav2 = item.split("/")[0];
+    const dir = item.split("/")[1];
+    const file = item.split("/")[2];
+    const splitedNav = splitIndex(nav2);
+    const splitedDir = splitIndex(dir);
+    const splitedFile = splitIndex(file);
+    return {
+      path: `/${item.replace(import_path5.default.extname(item), "")}`,
+      nav: nav2,
+      dir,
+      file,
+      navIndex: splitedNav.index,
+      navText: splitedNav.text,
+      navPath: `/${nav2}`,
+      siderbarDirIndex: splitedDir.index,
+      siderbarDirText: splitedDir.text,
+      fileIndex: splitedFile.index,
+      fileText: splitedFile.text.replace(import_path5.default.extname(splitedFile.text), "")
+    };
+  });
+  const nav = Object.entries(groupBy(data, "navText")).map(
+    ([navText, value]) => ({
+      text: navText,
+      link: value.toSorted((a, b) => a.navIndex - b.navIndex)[0].path
+    })
+  );
+  const sidebar = Object.entries(groupBy(data, "navPath")).reduce((pre, [navPath, value]) => {
+    const sidebarItemsMap = Object.entries(
+      groupBy(value, "siderbarDirText")
+    ).reduce((pre2, [siderbarDirText, value2]) => {
+      pre2[siderbarDirText] = value2.toSorted((a, b) => a.fileIndex - b.fileIndex).map((item) => ({
+        text: item.fileText,
+        link: item.path
+      }));
+      return pre2;
+    }, {});
+    pre[navPath] = Object.values(
+      // keyBy可以根据text字段去重，因为text相同的items也是相同的，所以不会丢失值
+      keyBy(
+        value.toSorted((a, b) => a.siderbarDirIndex - b.siderbarDirIndex).map((item) => ({
+          text: item.siderbarDirText,
+          items: sidebarItemsMap[item.siderbarDirText]
+        })),
+        "text"
+      )
+    );
+    return pre;
+  }, {});
+  return { nav, sidebar };
+}
+function splitIndex(text) {
+  const matched = text?.match(/^(\d+)(\.?\s*)(.*)$/);
+  const index = matched?.[1];
+  if (index) {
+    return {
+      index: parseInt(index),
+      text: matched?.[3] ?? ""
+    };
+  } else {
+    return {
+      index: 0,
+      text: text ?? ""
+    };
+  }
+}
+async function resolveUserConfig({
+  root = process.cwd(),
+  command,
+  mode
+}) {
+  const userConfigPath = getUserConfigPath({ root });
+  const loadResult = await (0, import_vite2.loadConfigFromFile)(
+    { command, mode },
+    userConfigPath,
+    root
+  );
+  return {
+    userConfigPath,
+    userConfig: loadResult?.config
+  };
+}
+function getUserConfigPath({ root = process.cwd() }) {
+  const userConfigPath = CONFIG_OPTIONS.map(
+    (option) => import_path5.default.join(root, option)
+  ).find((path7) => import_fs_extra3.default.existsSync(path7));
+  return userConfigPath;
+}
+
 // src/node/server.ts
+var import_autoprefixer2 = __toESM(require("autoprefixer"), 1);
+var import_tailwindcss2 = __toESM(require("tailwindcss"), 1);
 var import_vite3 = require("vite");
 async function createRuntimeDevServer({
   siteConfig,
@@ -693,7 +680,15 @@ async function createRuntimeDevServer({
       restartRuntimeDevServer,
       siteConfig
     }),
-    ...baseConfig
+    // 配置tailwindcss
+    css: {
+      postcss: { plugins: [(0, import_tailwindcss2.default)(tailwindcssConfig), (0, import_autoprefixer2.default)({})] }
+    },
+    resolve: {
+      alias: {
+        "@": SRC_PATH
+      }
+    }
   });
 }
 

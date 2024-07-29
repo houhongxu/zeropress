@@ -1,4 +1,4 @@
-import { SiteConfig } from 'shared/types'
+import { SiteConfig } from '@/shared/types'
 import { Plugin } from 'vite'
 
 interface vitePluginVirtualConfigOptions {

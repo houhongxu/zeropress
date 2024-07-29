@@ -1,5 +1,5 @@
+import { PageData } from '@/shared/types'
 import { createContext, useContext } from 'react'
-import { PageData } from 'shared/types'
 import config from 'virtual:config'
 import routes from 'virtual:routes'
 

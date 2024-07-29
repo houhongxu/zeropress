@@ -1,9 +1,9 @@
+import { useSidebar } from '@/default-theme/hooks'
+import { Link } from '@/runtime'
+import { SidebarDir, SidebarItem } from '@/shared/types'
 import classNames from 'classnames'
-import { useSidebar } from 'default-theme/hooks'
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { Link } from 'runtime'
-import { SidebarDir, SidebarItem } from 'shared/types'
 
 export function MobileSiderbar({
   visible,

@@ -1,9 +1,4 @@
 import { CONFIG_OPTIONS, DEFAULT_USER_CONFIG } from './consts'
-import { tailwindcssConfig } from './tailwind'
-import autoprefixer from 'autoprefixer'
-import fg from 'fast-glob'
-import fse from 'fs-extra'
-import path from 'path'
 import {
   UserConfig,
   SiteConfig,
@@ -11,17 +6,12 @@ import {
   NavItem,
   SidebarDir,
   SidebarItem,
-} from 'shared/types'
-import { groupBy, keyBy, normalizeUrl } from 'shared/utils'
-import tailwindcss from 'tailwindcss'
-import { loadConfigFromFile, UserConfig as ViteUserConfig } from 'vite'
-
-export const baseConfig: Pick<ViteUserConfig, 'css'> = {
-  // 配置tailwindcss
-  css: {
-    postcss: { plugins: [tailwindcss(tailwindcssConfig), autoprefixer({})] },
-  },
-}
+} from '@/shared/types'
+import { groupBy, keyBy, normalizeUrl } from '@/shared/utils'
+import fg from 'fast-glob'
+import fse from 'fs-extra'
+import path from 'path'
+import { loadConfigFromFile } from 'vite'
 
 /**
  * 读取并处理配置文件

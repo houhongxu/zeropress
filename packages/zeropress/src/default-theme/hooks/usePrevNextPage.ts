@@ -1,6 +1,6 @@
 import { useSidebar } from './useSidebar'
+import { SidebarItem } from '@/shared/types'
 import { useLocation } from 'react-router-dom'
-import { SidebarItem } from 'shared/types'
 
 export function usePrevNextPage() {
   const { sidebar } = useSidebar()

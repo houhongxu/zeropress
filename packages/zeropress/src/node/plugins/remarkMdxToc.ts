@@ -1,9 +1,9 @@
+import { PageData } from '@/shared/types'
 import { parse } from 'acorn'
 import { Program } from 'estree'
 import Slugger from 'github-slugger'
 import { Root } from 'mdast'
 import { MdxjsEsm } from 'mdast-util-mdxjs-esm'
-import { PageData } from 'shared/types'
 import { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 

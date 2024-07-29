@@ -1,5 +1,5 @@
+import { usePageData } from '@/runtime'
 import { useLocation } from 'react-router-dom'
-import { usePageData } from 'runtime'
 
 export function useSidebar() {
   const { pageData } = usePageData()

@@ -1,6 +1,9 @@
-import { baseConfig } from './config'
+import { SRC_PATH } from './consts'
 import { createPlugins } from './plugins'
-import { SiteConfig } from 'shared/types'
+import { tailwindcssConfig } from './tailwind'
+import { SiteConfig } from '@/shared/types'
+import autoprefixer from 'autoprefixer'
+import tailwindcss from 'tailwindcss'
 import { createServer } from 'vite'
 
 // 因为是ssg所以dev使用传统的服务模式，如果是ssr dev也需要服务端返回html
@@ -20,6 +23,14 @@ export async function createRuntimeDevServer({
       restartRuntimeDevServer,
       siteConfig,
     }),
-    ...baseConfig,
+    // 配置tailwindcss
+    css: {
+      postcss: { plugins: [tailwindcss(tailwindcssConfig), autoprefixer({})] },
+    },
+    resolve: {
+      alias: {
+        '@': SRC_PATH,
+      },
+    },
   })
 }

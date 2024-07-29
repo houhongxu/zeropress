@@ -1,7 +1,7 @@
 import { MobileSiderbar } from './SiderBar'
 import { MobileToc } from './Toc'
+import { PageData } from '@/shared/types'
 import { useState } from 'react'
-import { PageData } from 'shared/types'
 
 export function MobileBar({ toc }: { toc?: PageData['toc'] }) {
   const [state, setState] = useState({

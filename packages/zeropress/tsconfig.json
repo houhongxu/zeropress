@@ -10,6 +10,9 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "jsx": "react-jsx",
-    "baseUrl": "./src",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+    },
   },
 }

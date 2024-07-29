@@ -1,4 +1,4 @@
-import { NavLogo } from 'shared/types'
+import { NavLogo } from '@/shared/types'
 
 export const LOGO_MAP: Record<NavLogo, string> = {
   github: 'icon-[carbon--logo-github]',

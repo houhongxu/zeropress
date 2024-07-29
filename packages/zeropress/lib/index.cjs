@@ -38,15 +38,13 @@ __export(src_exports, {
 });
 module.exports = __toCommonJS(src_exports);
 
-// src/runtime/client/Content.tsx
-var import_react_router_dom = require("react-router-dom");
-
 // src/shared/utils.ts
 function normalizeUrl(url = "/") {
   return encodeURI(url);
 }
 
 // src/runtime/client/Content.tsx
+var import_react_router_dom = require("react-router-dom");
 var import_virtual_routes = __toESM(require("virtual:routes"), 1);
 function Content({ location = "/" }) {
   const element = (0, import_react_router_dom.useRoutes)(import_virtual_routes.default, normalizeUrl(location));

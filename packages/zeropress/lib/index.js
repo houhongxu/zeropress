@@ -1,12 +1,10 @@
-// src/runtime/client/Content.tsx
-import { useRoutes } from "react-router-dom";
-
 // src/shared/utils.ts
 function normalizeUrl(url = "/") {
   return encodeURI(url);
 }
 
 // src/runtime/client/Content.tsx
+import { useRoutes } from "react-router-dom";
 import routes from "virtual:routes";
 function Content({ location = "/" }) {
   const element = useRoutes(routes, normalizeUrl(location));

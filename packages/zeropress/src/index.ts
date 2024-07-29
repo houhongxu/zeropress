@@ -1,2 +1,2 @@
-export * from 'shared/types'
-export * from 'runtime'
+export * from '@/shared/types'
+export * from '@/runtime'

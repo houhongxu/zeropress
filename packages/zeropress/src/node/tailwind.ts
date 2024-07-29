@@ -1,10 +1,6 @@
 import { addDynamicIconSelectors } from '@iconify/tailwind'
 import path from 'path'
 import { Config } from 'tailwindcss'
-import { fileURLToPath } from 'url'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
 
 export const tailwindcssConfig: Config = {
   content: [

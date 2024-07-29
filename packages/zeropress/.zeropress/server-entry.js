@@ -1,67 +1,10 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
-import React, { useState, useEffect, createContext, useContext } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import { useRoutes, useNavigate, useLocation } from "react-router-dom";
 import classNames from "classnames";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server.mjs";
-const NAV_HEIGHT = 56;
-const DARK_KEY = "ZEROPRESS_DARK";
-function isBrowser() {
-  return typeof window !== "undefined" && !!window.document && !!window.document.createElement;
-}
-function normalizeUrl(url = "/") {
-  return encodeURI(url);
-}
-function useDark() {
-  return {
-    toggle
-  };
-}
-if (isBrowser()) {
-  initDark();
-}
-function initDark() {
-  const init = () => {
-    if (localStorage.getItem(DARK_KEY) === "true") {
-      const classList = document.documentElement.classList;
-      classList.add("dark");
-    }
-  };
-  window.addEventListener("storage", init);
-}
-function addDark() {
-  const classList = document.documentElement.classList;
-  classList.add("dark");
-  localStorage.setItem(DARK_KEY, "true");
-}
-function removeDark() {
-  const classList = document.documentElement.classList;
-  classList.remove("dark");
-  localStorage.setItem(DARK_KEY, "false");
-}
-function toggle() {
-  const classList = document.documentElement.classList;
-  if (classList.contains("dark")) {
-    removeDark();
-  } else {
-    addDark();
-  }
-}
-function useWindowScroll() {
-  const [x, setX] = useState();
-  const [y, setY] = useState();
-  useEffect(() => {
-    const handleScroll = () => {
-      setX(window.scrollX);
-      setY(window.scrollY);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-  return { x, y };
-}
+const config = { "docs": "docs", "title": "ZEROPRESS", "description": "SSG Framework", "themeConfig": { "nav": [{ "text": "笔记", "link": "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro" }, { "img": "/favicon.jpg", "link": "/", "position": "left" }, { "dark": true, "link": "/" }, { "logo": "github", "link": "https://github.com/houhongxu/hhxpress" }], "sidebar": { "/%E7%AC%94%E8%AE%B0": [{ "text": "介绍", "items": [{ "text": "intro", "link": "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro" }] }, { "text": "git", "items": [{ "text": "常用命令", "link": "/%E7%AC%94%E8%AE%B0/1git/0%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4" }, { "text": "版本控制系统VCS", "link": "/%E7%AC%94%E8%AE%B0/1git/1%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FVCS" }, { "text": "分布式版本控制系统DVCS", "link": "/%E7%AC%94%E8%AE%B0/1git/2%E5%88%86%E5%B8%83%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FDVCS" }, { "text": "HEAD与master与branch", "link": "/%E7%AC%94%E8%AE%B0/1git/3HEAD%E4%B8%8Emaster%E4%B8%8Ebranch" }, { "text": "push", "link": "/%E7%AC%94%E8%AE%B0/1git/4push" }, { "text": "merge", "link": "/%E7%AC%94%E8%AE%B0/1git/5merge" }, { "text": "feature branch", "link": "/%E7%AC%94%E8%AE%B0/1git/6feature%20branch" }, { "text": "rebase", "link": "/%E7%AC%94%E8%AE%B0/1git/7rebase" }, { "text": "revert", "link": "/%E7%AC%94%E8%AE%B0/1git/8revert" }, { "text": "reset", "link": "/%E7%AC%94%E8%AE%B0/1git/9reset" }, { "text": "checkout", "link": "/%E7%AC%94%E8%AE%B0/1git/10checkout" }, { "text": "stash", "link": "/%E7%AC%94%E8%AE%B0/1git/11stash" }, { "text": "log与reflog", "link": "/%E7%AC%94%E8%AE%B0/1git/12log%E4%B8%8Ereflog" }, { "text": "cherry-pick", "link": "/%E7%AC%94%E8%AE%B0/1git/13cherry-pick" }, { "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/1git/99readme" }] }, { "text": "浏览器", "items": [{ "text": "浏览器进程", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/1%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9B%E7%A8%8B" }, { "text": "TCP协议", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/2TCP%E5%8D%8F%E8%AE%AE" }, { "text": "HTTP协议", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/3HTTP%E5%8D%8F%E8%AE%AE" }, { "text": "浏览器缓存", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/4%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98" }, { "text": "导航流程", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/5%E5%AF%BC%E8%88%AA%E6%B5%81%E7%A8%8B" }, { "text": "渲染流程", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/6%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B" }, { "text": "内存", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/13%E5%86%85%E5%AD%98" }, { "text": "消息队列和事件循环", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/16%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF" }, { "text": "浏览器的dns缓存", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/98%20%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84dns%E7%BC%93%E5%AD%98" }, { "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/99readme" }] }, { "text": "http", "items": [{ "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/3http/99readme" }] }, { "text": "javascript", "items": [{ "text": "引用", "link": "/%E7%AC%94%E8%AE%B0/4javascript/1%E5%BC%95%E7%94%A8" }, { "text": "运算符", "link": "/%E7%AC%94%E8%AE%B0/4javascript/2%E8%BF%90%E7%AE%97%E7%AC%A6" }, { "text": "lodash手写", "link": "/%E7%AC%94%E8%AE%B0/4javascript/3lodash%E6%89%8B%E5%86%99" }] }, { "text": "webpack", "items": [{ "text": "使用 node api 学习 webpack", "link": "/%E7%AC%94%E8%AE%B0/5webpack/1%E4%BD%BF%E7%94%A8%20node%20api%20%E5%AD%A6%E4%B9%A0%20webpack" }, { "text": "cjs运行时分析", "link": "/%E7%AC%94%E8%AE%B0/5webpack/2cjs%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90" }, { "text": "cjs模块收集与ast", "link": "/%E7%AC%94%E8%AE%B0/5webpack/3cjs%E6%A8%A1%E5%9D%97%E6%94%B6%E9%9B%86%E4%B8%8East" }, { "text": "文件名中的hash", "link": "/%E7%AC%94%E8%AE%B0/5webpack/4%E6%96%87%E4%BB%B6%E5%90%8D%E4%B8%AD%E7%9A%84hash" }, { "text": "cjs与esm", "link": "/%E7%AC%94%E8%AE%B0/5webpack/5cjs%E4%B8%8Eesm" }, { "text": "esm to cjs", "link": "/%E7%AC%94%E8%AE%B0/5webpack/6esm%20to%20cjs" }, { "text": "code spliting运行时分析", "link": "/%E7%AC%94%E8%AE%B0/5webpack/7code%20spliting%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90" }, { "text": "magic comment", "link": "/%E7%AC%94%E8%AE%B0/5webpack/8magic%20comment" }, { "text": "hash 的增强", "link": "/%E7%AC%94%E8%AE%B0/5webpack/9hash%20%E7%9A%84%E5%A2%9E%E5%BC%BA" }, { "text": "module与chunk与asset", "link": "/%E7%AC%94%E8%AE%B0/5webpack/10module%E4%B8%8Echunk%E4%B8%8Easset" }, { "text": "bundle spliting", "link": "/%E7%AC%94%E8%AE%B0/5webpack/11bundle%20spliting" }, { "text": "高效分包", "link": "/%E7%AC%94%E8%AE%B0/5webpack/12%E9%AB%98%E6%95%88%E5%88%86%E5%8C%85" }, { "text": "loader初识", "link": "/%E7%AC%94%E8%AE%B0/5webpack/13loader%E5%88%9D%E8%AF%86" }, { "text": "json处理", "link": "/%E7%AC%94%E8%AE%B0/5webpack/14json%E5%A4%84%E7%90%86" }, { "text": "import assertions", "link": "/%E7%AC%94%E8%AE%B0/5webpack/15import%20assertions" }, { "text": "html处理", "link": "/%E7%AC%94%E8%AE%B0/5webpack/16html%E5%A4%84%E7%90%86" }, { "text": "图片处理", "link": "/%E7%AC%94%E8%AE%B0/5webpack/17%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86" }, { "text": "小图片处理", "link": "/%E7%AC%94%E8%AE%B0/5webpack/18%E5%B0%8F%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86" }, { "text": "svg图片处理", "link": "/%E7%AC%94%E8%AE%B0/5webpack/19svg%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86" }, { "text": "简单样式处理", "link": "/%E7%AC%94%E8%AE%B0/5webpack/20%E7%AE%80%E5%8D%95%E6%A0%B7%E5%BC%8F%E5%A4%84%E7%90%86" }, { "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/5webpack/99readme" }] }, { "text": "ahooks", "items": [{ "text": "useLocalStorageState与useSessionStorageState", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/1useLocalStorageState%E4%B8%8EuseSessionStorageState" }, { "text": "useUpdateEffect 与 useUpdateLayoutEffectt", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/2useUpdateEffect%20%E4%B8%8E%20useUpdateLayoutEffectt" }, { "text": "useLatest与useMemoizedFn", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/3useLatest%E4%B8%8EuseMemoizedFn" }, { "text": "use(Raf)Timeout与use(Raf)Interval与useCountDown", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/4use(Raf)Timeout%E4%B8%8Euse(Raf)Interval%E4%B8%8EuseCountDown" }, { "text": "useRequest", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/5useRequest" }, { "text": "useMount与useUnMount与useMountedRefx.md", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/6useMount%E4%B8%8EuseUnMount%E4%B8%8EuseMountedRefx.md" }, { "text": "useUpdate", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/7useUpdate" }, { "text": "useCreation", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/8useCreation" }, { "text": "useDeepCompareEffect", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/9useDeepCompareEffect" }, { "text": "useAnimationFrame和计时器", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/97useAnimationFrame%E5%92%8C%E8%AE%A1%E6%97%B6%E5%99%A8" }, { "text": "工具函数", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/98.%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0" }] }] }, "autoNav": true, "autoSidebar": true }, "vite": {} };
 const GetToc$_ = () => [];
 const frontmatter$_ = {
   "pageType": "home"
@@ -22074,15 +22017,6 @@ const routes = [
   { path: "/%E7%AC%94%E8%AE%B0/6ahooks/98.%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0", element: React.createElement(MDXContent$1), preload: () => Promise.resolve().then(() => _98_____) },
   { path: "/%E7%AC%94%E8%AE%B0/6ahooks/9useDeepCompareEffect", element: React.createElement(MDXContent), preload: () => Promise.resolve().then(() => _9useDeepCompareEffect) }
 ];
-function Content({ location = "/" }) {
-  const element = useRoutes(routes, normalizeUrl(location));
-  console.log(
-    "文件路由",
-    routes.map((i) => i.path)
-  );
-  return element;
-}
-const config = { "docs": "docs", "title": "ZEROPRESS", "description": "SSG Framework", "themeConfig": { "nav": [{ "text": "笔记", "link": "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro" }, { "img": "/favicon.jpg", "link": "/", "position": "left" }, { "dark": true, "link": "/" }, { "logo": "github", "link": "https://github.com/houhongxu/hhxpress" }], "sidebar": { "/%E7%AC%94%E8%AE%B0": [{ "text": "介绍", "items": [{ "text": "intro", "link": "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro" }] }, { "text": "git", "items": [{ "text": "常用命令", "link": "/%E7%AC%94%E8%AE%B0/1git/0%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4" }, { "text": "版本控制系统VCS", "link": "/%E7%AC%94%E8%AE%B0/1git/1%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FVCS" }, { "text": "分布式版本控制系统DVCS", "link": "/%E7%AC%94%E8%AE%B0/1git/2%E5%88%86%E5%B8%83%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FDVCS" }, { "text": "HEAD与master与branch", "link": "/%E7%AC%94%E8%AE%B0/1git/3HEAD%E4%B8%8Emaster%E4%B8%8Ebranch" }, { "text": "push", "link": "/%E7%AC%94%E8%AE%B0/1git/4push" }, { "text": "merge", "link": "/%E7%AC%94%E8%AE%B0/1git/5merge" }, { "text": "feature branch", "link": "/%E7%AC%94%E8%AE%B0/1git/6feature%20branch" }, { "text": "rebase", "link": "/%E7%AC%94%E8%AE%B0/1git/7rebase" }, { "text": "revert", "link": "/%E7%AC%94%E8%AE%B0/1git/8revert" }, { "text": "reset", "link": "/%E7%AC%94%E8%AE%B0/1git/9reset" }, { "text": "checkout", "link": "/%E7%AC%94%E8%AE%B0/1git/10checkout" }, { "text": "stash", "link": "/%E7%AC%94%E8%AE%B0/1git/11stash" }, { "text": "log与reflog", "link": "/%E7%AC%94%E8%AE%B0/1git/12log%E4%B8%8Ereflog" }, { "text": "cherry-pick", "link": "/%E7%AC%94%E8%AE%B0/1git/13cherry-pick" }, { "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/1git/99readme" }] }, { "text": "浏览器", "items": [{ "text": "浏览器进程", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/1%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9B%E7%A8%8B" }, { "text": "TCP协议", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/2TCP%E5%8D%8F%E8%AE%AE" }, { "text": "HTTP协议", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/3HTTP%E5%8D%8F%E8%AE%AE" }, { "text": "浏览器缓存", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/4%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98" }, { "text": "导航流程", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/5%E5%AF%BC%E8%88%AA%E6%B5%81%E7%A8%8B" }, { "text": "渲染流程", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/6%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B" }, { "text": "内存", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/13%E5%86%85%E5%AD%98" }, { "text": "消息队列和事件循环", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/16%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF" }, { "text": "浏览器的dns缓存", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/98%20%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84dns%E7%BC%93%E5%AD%98" }, { "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/99readme" }] }, { "text": "http", "items": [{ "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/3http/99readme" }] }, { "text": "javascript", "items": [{ "text": "引用", "link": "/%E7%AC%94%E8%AE%B0/4javascript/1%E5%BC%95%E7%94%A8" }, { "text": "运算符", "link": "/%E7%AC%94%E8%AE%B0/4javascript/2%E8%BF%90%E7%AE%97%E7%AC%A6" }, { "text": "lodash手写", "link": "/%E7%AC%94%E8%AE%B0/4javascript/3lodash%E6%89%8B%E5%86%99" }] }, { "text": "webpack", "items": [{ "text": "使用 node api 学习 webpack", "link": "/%E7%AC%94%E8%AE%B0/5webpack/1%E4%BD%BF%E7%94%A8%20node%20api%20%E5%AD%A6%E4%B9%A0%20webpack" }, { "text": "cjs运行时分析", "link": "/%E7%AC%94%E8%AE%B0/5webpack/2cjs%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90" }, { "text": "cjs模块收集与ast", "link": "/%E7%AC%94%E8%AE%B0/5webpack/3cjs%E6%A8%A1%E5%9D%97%E6%94%B6%E9%9B%86%E4%B8%8East" }, { "text": "文件名中的hash", "link": "/%E7%AC%94%E8%AE%B0/5webpack/4%E6%96%87%E4%BB%B6%E5%90%8D%E4%B8%AD%E7%9A%84hash" }, { "text": "cjs与esm", "link": "/%E7%AC%94%E8%AE%B0/5webpack/5cjs%E4%B8%8Eesm" }, { "text": "esm to cjs", "link": "/%E7%AC%94%E8%AE%B0/5webpack/6esm%20to%20cjs" }, { "text": "code spliting运行时分析", "link": "/%E7%AC%94%E8%AE%B0/5webpack/7code%20spliting%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90" }, { "text": "magic comment", "link": "/%E7%AC%94%E8%AE%B0/5webpack/8magic%20comment" }, { "text": "hash 的增强", "link": "/%E7%AC%94%E8%AE%B0/5webpack/9hash%20%E7%9A%84%E5%A2%9E%E5%BC%BA" }, { "text": "module与chunk与asset", "link": "/%E7%AC%94%E8%AE%B0/5webpack/10module%E4%B8%8Echunk%E4%B8%8Easset" }, { "text": "bundle spliting", "link": "/%E7%AC%94%E8%AE%B0/5webpack/11bundle%20spliting" }, { "text": "高效分包", "link": "/%E7%AC%94%E8%AE%B0/5webpack/12%E9%AB%98%E6%95%88%E5%88%86%E5%8C%85" }, { "text": "loader初识", "link": "/%E7%AC%94%E8%AE%B0/5webpack/13loader%E5%88%9D%E8%AF%86" }, { "text": "json处理", "link": "/%E7%AC%94%E8%AE%B0/5webpack/14json%E5%A4%84%E7%90%86" }, { "text": "import assertions", "link": "/%E7%AC%94%E8%AE%B0/5webpack/15import%20assertions" }, { "text": "html处理", "link": "/%E7%AC%94%E8%AE%B0/5webpack/16html%E5%A4%84%E7%90%86" }, { "text": "图片处理", "link": "/%E7%AC%94%E8%AE%B0/5webpack/17%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86" }, { "text": "小图片处理", "link": "/%E7%AC%94%E8%AE%B0/5webpack/18%E5%B0%8F%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86" }, { "text": "svg图片处理", "link": "/%E7%AC%94%E8%AE%B0/5webpack/19svg%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86" }, { "text": "简单样式处理", "link": "/%E7%AC%94%E8%AE%B0/5webpack/20%E7%AE%80%E5%8D%95%E6%A0%B7%E5%BC%8F%E5%A4%84%E7%90%86" }, { "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/5webpack/99readme" }] }, { "text": "ahooks", "items": [{ "text": "useLocalStorageState与useSessionStorageState", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/1useLocalStorageState%E4%B8%8EuseSessionStorageState" }, { "text": "useUpdateEffect 与 useUpdateLayoutEffectt", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/2useUpdateEffect%20%E4%B8%8E%20useUpdateLayoutEffectt" }, { "text": "useLatest与useMemoizedFn", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/3useLatest%E4%B8%8EuseMemoizedFn" }, { "text": "use(Raf)Timeout与use(Raf)Interval与useCountDown", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/4use(Raf)Timeout%E4%B8%8Euse(Raf)Interval%E4%B8%8EuseCountDown" }, { "text": "useRequest", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/5useRequest" }, { "text": "useMount与useUnMount与useMountedRefx.md", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/6useMount%E4%B8%8EuseUnMount%E4%B8%8EuseMountedRefx.md" }, { "text": "useUpdate", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/7useUpdate" }, { "text": "useCreation", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/8useCreation" }, { "text": "useDeepCompareEffect", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/9useDeepCompareEffect" }, { "text": "useAnimationFrame和计时器", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/97useAnimationFrame%E5%92%8C%E8%AE%A1%E6%97%B6%E5%99%A8" }, { "text": "工具函数", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/98.%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0" }] }] }, "autoNav": true, "autoSidebar": true }, "vite": {} };
 async function getPageData(pathname) {
   var _a, _b, _c, _d;
   const matched = routes.find((route) => route.path === pathname);
@@ -22102,6 +22036,81 @@ const PageDataContext = createContext({});
 const usePageData = () => {
   return useContext(PageDataContext);
 };
+function PageDataProvider({
+  children,
+  value
+}) {
+  const [pageData, setPageData] = useState(value.pageData);
+  useEffect(() => {
+  });
+  return /* @__PURE__ */ jsx(PageDataContext.Provider, { value: { pageData, setPageData }, children });
+}
+const NAV_HEIGHT = 56;
+const DARK_KEY = "ZEROPRESS_DARK";
+function isBrowser() {
+  return typeof window !== "undefined" && !!window.document && !!window.document.createElement;
+}
+function normalizeUrl(url = "/") {
+  return encodeURI(url);
+}
+function useDark() {
+  return {
+    toggle
+  };
+}
+if (isBrowser()) {
+  initDark();
+}
+function initDark() {
+  const init = () => {
+    if (localStorage.getItem(DARK_KEY) === "true") {
+      const classList = document.documentElement.classList;
+      classList.add("dark");
+    }
+  };
+  window.addEventListener("storage", init);
+}
+function addDark() {
+  const classList = document.documentElement.classList;
+  classList.add("dark");
+  localStorage.setItem(DARK_KEY, "true");
+}
+function removeDark() {
+  const classList = document.documentElement.classList;
+  classList.remove("dark");
+  localStorage.setItem(DARK_KEY, "false");
+}
+function toggle() {
+  const classList = document.documentElement.classList;
+  if (classList.contains("dark")) {
+    removeDark();
+  } else {
+    addDark();
+  }
+}
+function useWindowScroll() {
+  const [x, setX] = useState();
+  const [y, setY] = useState();
+  useEffect(() => {
+    const handleScroll = () => {
+      setX(window.scrollX);
+      setY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  return { x, y };
+}
+function Content({ location = "/" }) {
+  const element = useRoutes(routes, normalizeUrl(location));
+  console.log(
+    "文件路由",
+    routes.map((i) => i.path)
+  );
+  return element;
+}
 function Link({
   href = "/",
   className,
@@ -22680,15 +22689,6 @@ function Layout({ location = window.location.pathname }) {
     /* @__PURE__ */ jsx(Nav, { nav: (_a = pageData == null ? void 0 : pageData.userConfig.themeConfig) == null ? void 0 : _a.nav }),
     getPage()
   ] });
-}
-function PageDataProvider({
-  children,
-  value
-}) {
-  const [pageData, setPageData] = useState(value.pageData);
-  useEffect(() => {
-  });
-  return /* @__PURE__ */ jsx(PageDataContext.Provider, { value: { pageData, setPageData }, children });
 }
 async function render(location) {
   const pageData = await getPageData(location);

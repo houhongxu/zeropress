@@ -1,5 +1,5 @@
 import { DARK_KEY } from '../consts'
-import { isBrowser } from 'shared/utils'
+import { isBrowser } from '@/shared/utils'
 
 export function useDark() {
   return {

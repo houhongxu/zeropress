@@ -40,7 +40,7 @@ const step = (msg: string) => console.log(chalk.cyan('\n' + msg))
 
 async function updateVersion(version: string) {
   await fse.writeFile(
-    path.resolve(__dirname, '../package.json'),
+    path.join(__dirname, '../package.json'),
     JSON.stringify({ ...pkg, version }, null, 2),
   )
 }

@@ -1,7 +1,7 @@
+import { SiteConfig } from '@/shared/types'
+import { normalizeUrl } from '@/shared/utils'
 import fg from 'fast-glob'
 import path from 'path'
-import { SiteConfig } from 'shared/types'
-import { normalizeUrl } from 'shared/utils'
 import { Plugin } from 'vite'
 
 interface vitePluginVirtualRoutesOptions {

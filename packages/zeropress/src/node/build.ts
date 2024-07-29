@@ -1,4 +1,3 @@
-import { baseConfig } from './config'
 import {
   CLIENT_ENTRY_PATH,
   CLIENT_OUT_PATH,
@@ -9,17 +8,20 @@ import {
   SERVER_OUT_PATH,
 } from './consts'
 import { createPlugins } from './plugins'
-import fse, { remove } from 'fs-extra'
+import { tailwindcssConfig } from './tailwind'
+import { SiteConfig } from '@/shared/types'
+import autoprefixer from 'autoprefixer'
+import fse from 'fs-extra'
 import path from 'path'
 import { RouteObject } from 'react-router-dom'
 import { RollupOutput } from 'rollup'
-import { SiteConfig } from 'shared/types'
+import tailwindcss from 'tailwindcss'
 import { build } from 'vite'
 
 export async function buildRuntime({ siteConfig }: { siteConfig: SiteConfig }) {
   // 删除旧产物
   console.log('删除旧产物：', CLIENT_OUT_PATH)
-  await remove(CLIENT_OUT_PATH)
+  await fse.remove(CLIENT_OUT_PATH)
 
   // 分为运行时的client构建水合的js与server构建渲染html的js
   console.log('构建js文件...')
@@ -60,7 +62,10 @@ function viteBuild({
         },
       },
     },
-    ...baseConfig,
+    // 配置tailwindcss
+    css: {
+      postcss: { plugins: [tailwindcss(tailwindcssConfig), autoprefixer({})] },
+    },
   }) as Promise<RollupOutput>
 }
 

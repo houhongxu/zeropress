@@ -1,7 +1,7 @@
+import { NAV_HEIGHT } from '@/default-theme/consts'
+import { useTocScroll } from '@/default-theme/hooks'
+import { PageData, TocItem as TocItemType } from '@/shared/types'
 import classNames from 'classnames'
-import { NAV_HEIGHT } from 'default-theme/consts'
-import { useTocScroll } from 'default-theme/hooks'
-import { PageData, TocItem as TocItemType } from 'shared/types'
 
 export function MobileToc({
   visible,

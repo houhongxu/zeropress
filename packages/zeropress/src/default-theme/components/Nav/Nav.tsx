@@ -1,10 +1,10 @@
 import { Switch } from './Switch'
 import { LOGO_MAP } from './consts'
+import { useDark, useWindowScroll } from '@/default-theme/hooks'
+import { Link } from '@/runtime'
+import { NavItem } from '@/shared/types'
 import classNames from 'classnames'
-import { useDark, useWindowScroll } from 'default-theme/hooks'
 import { useLocation } from 'react-router-dom'
-import { Link } from 'runtime'
-import { NavItem } from 'shared/types'
 
 export function Nav({ nav }: { nav?: NavItem[] }) {
   const { y } = useWindowScroll()

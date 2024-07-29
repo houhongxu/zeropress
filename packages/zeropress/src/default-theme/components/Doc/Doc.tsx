@@ -2,9 +2,9 @@ import { Footer } from './Footer'
 import { MobileBar } from './MobileBar'
 import { Siderbar } from './SiderBar'
 import { Toc } from './Toc'
-import { useHeaderScroll } from 'default-theme/hooks/useHeaderScroll'
+import { useHeaderScroll } from '@/default-theme/hooks/useHeaderScroll'
+import { PageData } from '@/shared/types'
 import { ReactNode } from 'react'
-import { PageData } from 'shared/types'
 
 export function Doc({
   content,
