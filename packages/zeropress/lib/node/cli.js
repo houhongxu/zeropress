@@ -300,7 +300,7 @@ function vitePluginVirtualRoutes({
 
 // src/node/plugins/createPlugins.ts
 import pluginReact from "@vitejs/plugin-react";
-import tsconfigPaths from "vite-tsconfig-paths";
+import viteTsconfigPaths from "vite-tsconfig-paths";
 function createPlugins({
   siteConfig,
   restartRuntimeDevServer
@@ -319,7 +319,7 @@ function createPlugins({
     }),
     vitePluginVirtualConfig({ siteConfig, restartRuntimeDevServer }),
     vitePluginVirtualRoutes({ siteConfig }),
-    tsconfigPaths(),
+    viteTsconfigPaths(),
     // 路径别名插件解析tsconfig的baseurl和paths
     vitePluginTransformFrontmatter()
   ];
