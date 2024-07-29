@@ -64,6 +64,7 @@ export async function resolveSiteConfig({
     (pre, [key, value]) => {
       pre[normalizeUrl(key)] = value.map((item) => ({
         ...item,
+        link: normalizeUrl(item.link),
         items: item.items?.map((i) => ({ ...i, link: normalizeUrl(i.link) })),
       }))
 
@@ -111,12 +112,12 @@ async function autoSidebarAndNav({ docs }: { docs?: string }) {
       cwd: docs,
       deep: 3,
     })
-  ).filter((item) => !item.endsWith('index.md'))
+  ).filter((item) => !item.includes('index.md'))
 
   const data = files.map((item) => {
     const nav = item.split('/')[0]
     const dir = item.split('/')[1]
-    const file = item.split('/')[2]
+    const file: string | undefined = item.split('/')[2]
 
     const splitedNav = splitIndex(nav)
     const splitedDir = splitIndex(dir)
@@ -131,7 +132,10 @@ async function autoSidebarAndNav({ docs }: { docs?: string }) {
       navText: splitedNav.text,
       navPath: `/${nav}`,
       siderbarDirIndex: splitedDir.index,
-      siderbarDirText: splitedDir.text,
+      siderbarDirText: splitedDir.text.replace(
+        path.extname(splitedDir.text),
+        '',
+      ),
       fileIndex: splitedFile.index,
       fileText: splitedFile.text.replace(path.extname(splitedFile.text), ''),
     }
@@ -156,6 +160,7 @@ async function autoSidebarAndNav({ docs }: { docs?: string }) {
           text: item.fileText,
           link: item.path,
         }))
+        .filter((item) => item.text) // file可能不存在
 
       return pre
     }, {})
@@ -168,6 +173,7 @@ async function autoSidebarAndNav({ docs }: { docs?: string }) {
           .map((item) => ({
             text: item.siderbarDirText,
             items: sidebarItemsMap[item.siderbarDirText],
+            link: item.path,
           })),
         'text',
       ),

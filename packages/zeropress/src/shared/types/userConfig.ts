@@ -76,6 +76,7 @@ export interface Sidebar {
 export interface SidebarDir {
   text?: string
   items?: SidebarItem[]
+  link?: string
   collapsed?: boolean
 }
 

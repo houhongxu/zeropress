@@ -505,6 +505,7 @@ async function resolveSiteConfig({
     (pre, [key, value]) => {
       pre[normalizeUrl(key)] = value.map((item) => ({
         ...item,
+        link: normalizeUrl(item.link),
         items: item.items?.map((i) => ({ ...i, link: normalizeUrl(i.link) }))
       }));
       return pre;
@@ -542,7 +543,7 @@ async function autoSidebarAndNav({ docs }) {
     ignore: ["node_modules/**", "client/**", "server/**"],
     cwd: docs,
     deep: 3
-  })).filter((item) => !item.endsWith("index.md"));
+  })).filter((item) => !item.includes("index.md"));
   const data = files.map((item) => {
     const nav2 = item.split("/")[0];
     const dir = item.split("/")[1];
@@ -559,7 +560,10 @@ async function autoSidebarAndNav({ docs }) {
       navText: splitedNav.text,
       navPath: `/${nav2}`,
       siderbarDirIndex: splitedDir.index,
-      siderbarDirText: splitedDir.text,
+      siderbarDirText: splitedDir.text.replace(
+        path6.extname(splitedDir.text),
+        ""
+      ),
       fileIndex: splitedFile.index,
       fileText: splitedFile.text.replace(path6.extname(splitedFile.text), "")
     };
@@ -577,7 +581,7 @@ async function autoSidebarAndNav({ docs }) {
       pre2[siderbarDirText] = value2.toSorted((a, b) => a.fileIndex - b.fileIndex).map((item) => ({
         text: item.fileText,
         link: item.path
-      }));
+      })).filter((item) => item.text);
       return pre2;
     }, {});
     pre[navPath] = Object.values(
@@ -585,7 +589,8 @@ async function autoSidebarAndNav({ docs }) {
       keyBy(
         value.toSorted((a, b) => a.siderbarDirIndex - b.siderbarDirIndex).map((item) => ({
           text: item.siderbarDirText,
-          items: sidebarItemsMap[item.siderbarDirText]
+          items: sidebarItemsMap[item.siderbarDirText],
+          link: item.path
         })),
         "text"
       )

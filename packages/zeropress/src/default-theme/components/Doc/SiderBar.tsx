@@ -74,6 +74,18 @@ function SiderbarDir({
 }) {
   const [isExpand, setIsExpand] = useState(!dir.collapsed)
 
+  if (!Array.isArray(dir.items) || dir.items.length < 1) {
+    return (
+      <div className="border-divider mt-[4px] border-t first:mt-0 first:border-t-0">
+        <h2 className="text-text-1 mb-[6px] mt-[12px] flex cursor-pointer items-center justify-between font-[700]">
+          <Link href={dir.link} onClick={onClick}>
+            {dir.text}
+          </Link>
+        </h2>
+      </div>
+    )
+  }
+
   return (
     <div className="border-divider mt-[4px] border-t first:mt-0 first:border-t-0">
       <h2
@@ -89,7 +101,6 @@ function SiderbarDir({
           )}
         ></span>
       </h2>
-
       <div
         style={{
           height: isExpand ? `${(dir.items?.length ?? 0) * 27}px` : '0',
