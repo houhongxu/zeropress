@@ -694,6 +694,9 @@ async function createRuntimeDevServer({
       alias: {
         "@": SRC_PATH
       }
+    },
+    optimizeDeps: {
+      exclude: ["virtual:config", "virtual:routes"]
     }
   });
 }
