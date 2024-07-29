@@ -1,6 +1,6 @@
 {
   "name": "zeropress",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "zero config SSG framework",
   "scripts": {
     "build:comment": "echo 多入口打包，tsup不打包node_modules，--shims兼容esm与cjs的全局变量如__dirname，--no-splitting兼容shims，让shims不分割为chunk影响__dirname等路径，npm run build --watch无法接受watch参数，pnpm又固定了包管理器，所以复制build命令到dev",
