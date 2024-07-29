@@ -597,12 +597,13 @@ async function autoSidebarAndNav({ docs }) {
       fileText: splitedFile.text.replace(import_path5.default.extname(splitedFile.text), "")
     };
   });
-  const nav = Object.entries(groupBy(data, "navText")).map(
-    ([navText, value]) => ({
-      text: navText,
-      link: value.toSorted((a, b) => a.navIndex - b.navIndex)[0].path
-    })
-  );
+  const nav = Object.entries(groupBy(data, "navText")).map(([navText, value]) => ({
+    text: navText,
+    index: keyBy(value, "navText")[navText].navIndex,
+    link: value.toSorted(
+      (a, b) => a.siderbarDirIndex - b.siderbarDirIndex + a.fileIndex - b.fileIndex
+    )[0].path
+  })).toSorted((a, b) => a.index - b.index);
   const sidebar = Object.entries(groupBy(data, "navPath")).reduce((pre, [navPath, value]) => {
     const sidebarItemsMap = Object.entries(
       groupBy(value, "siderbarDirText")

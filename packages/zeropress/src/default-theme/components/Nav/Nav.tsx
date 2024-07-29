@@ -73,7 +73,7 @@ export function Nav({ nav }: { nav?: NavItem[] }) {
 
 function TextItem({ item, pathname }: { item: NavItem; pathname?: string }) {
   const { text, link } = item
-  const getDirname = (url = '/') => url.split('/').at(-2)
+  const getDirname = (url = '/') => url.split('/')[1]
   const active = getDirname(pathname) === getDirname(link)
 
   if (!text) {

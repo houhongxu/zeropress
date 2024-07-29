@@ -4,7 +4,7 @@ const config: UserConfig = {
   themeConfig: {
     nav: [
       {
-        img: '/favicon.jpg',
+        img: '/logo.jpg',
         link: '/',
         position: 'left',
       },

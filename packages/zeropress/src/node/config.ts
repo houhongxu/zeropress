@@ -141,12 +141,16 @@ async function autoSidebarAndNav({ docs }: { docs?: string }) {
     }
   })
 
-  const nav = Object.entries(groupBy(data, 'navText')).map<NavItem>(
-    ([navText, value]) => ({
+  const nav = Object.entries(groupBy(data, 'navText'))
+    .map<NavItem & { index: number }>(([navText, value]) => ({
       text: navText,
-      link: value.toSorted((a, b) => a.navIndex - b.navIndex)[0].path,
-    }),
-  )
+      index: keyBy(value, 'navText')[navText].navIndex,
+      link: value.toSorted(
+        (a, b) =>
+          a.siderbarDirIndex - b.siderbarDirIndex + a.fileIndex - b.fileIndex,
+      )[0].path,
+    }))
+    .toSorted((a, b) => a.index - b.index)
 
   const sidebar = Object.entries(groupBy(data, 'navPath')).reduce<
     Record<string, SidebarDir[]>
