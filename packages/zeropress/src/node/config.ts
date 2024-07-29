@@ -1,4 +1,5 @@
 import { CONFIG_OPTIONS, DEFAULT_USER_CONFIG } from './consts'
+import { getDocs } from './utils'
 import {
   UserConfig,
   SiteConfig,
@@ -8,7 +9,6 @@ import {
   SidebarItem,
 } from '@/shared/types'
 import { groupBy, keyBy, normalizeUrl } from '@/shared/utils'
-import fg from 'fast-glob'
 import fse from 'fs-extra'
 import path from 'path'
 import { loadConfigFromFile } from 'vite'
@@ -106,13 +106,9 @@ export async function resolveSiteConfig({
 
 async function autoSidebarAndNav({ docs }: { docs?: string }) {
   // glob文件
-  const files = (
-    await fg.glob('**/*.{jsx,tsx,md,mdx}', {
-      ignore: ['node_modules/**', 'client/**', 'server/**'],
-      cwd: docs,
-      deep: 3,
-    })
-  ).filter((item) => !item.includes('index.md'))
+  const files = (await getDocs(docs)).filter(
+    (item) => !item.includes('index.md'),
+  )
 
   const data = files.map((item) => {
     const nav = item.split('/')[0]

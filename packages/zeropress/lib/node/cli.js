@@ -35,6 +35,41 @@ var DEFAULT_USER_CONFIG = {
   vite: {}
 };
 
+// src/node/utils.ts
+import fg from "fast-glob";
+async function getDocs(docs = DEFAULT_USER_CONFIG.docs, options) {
+  return await fg.glob("**/*.{jsx,tsx,md,mdx}", {
+    ignore: ["node_modules/**", "client/**", "server/**"],
+    cwd: docs,
+    deep: 3,
+    ...options
+  });
+}
+
+// src/node/plugins/vitePluginFileChange.ts
+function vitePluginFileChange({
+  siteConfig,
+  restartRuntimeDevServer
+}) {
+  let preFiles;
+  return {
+    name: "vitePluginFileChange",
+    async configResolved() {
+      preFiles = await getDocs(siteConfig.userConfig.docs);
+    },
+    async handleHotUpdate(ctx) {
+      const curFiles = await getDocs(siteConfig.userConfig.docs);
+      if (preFiles.length !== curFiles.length) {
+        if (restartRuntimeDevServer) {
+          console.log("\u76D1\u542C\u5230markdown\u6587\u4EF6\u589E\u5220\uFF0C\u91CD\u542F\u670D\u52A1\u4E2D:", ctx.file);
+          await restartRuntimeDevServer();
+        }
+      }
+      preFiles = curFiles;
+    }
+  };
+}
+
 // src/node/plugins/remarkMdxToc.ts
 import { parse } from "acorn";
 import Slugger from "github-slugger";
@@ -257,7 +292,6 @@ function keyBy(arr, key) {
 }
 
 // src/node/plugins/vitePluginVirtualRoutes.ts
-import fg from "fast-glob";
 import path3 from "path";
 function vitePluginVirtualRoutes({
   siteConfig
@@ -274,12 +308,7 @@ function vitePluginVirtualRoutes({
     },
     async load(id) {
       if (id === resolvedVirtualModuleId) {
-        const files = await fg.glob("**/*.{jsx,tsx,md,mdx}", {
-          ignore: ["node_modules/**", "client/**", "server/**"],
-          cwd: docs,
-          deep: 3,
-          absolute: true
-        });
+        const files = await getDocs(docs, { absolute: true });
         let importTemplate = 'import React from "react";\n';
         const routes = files.map((file, index) => {
           const relativePath = path3.relative(docs, file);
@@ -319,6 +348,7 @@ function createPlugins({
     }),
     vitePluginVirtualConfig({ siteConfig, restartRuntimeDevServer }),
     vitePluginVirtualRoutes({ siteConfig }),
+    vitePluginFileChange({ siteConfig, restartRuntimeDevServer }),
     viteTsconfigPaths(),
     // 路径别名插件解析tsconfig的baseurl和paths
     vitePluginTransformFrontmatter()
@@ -472,7 +502,6 @@ async function renderHtmls({
 }
 
 // src/node/config.ts
-import fg2 from "fast-glob";
 import fse3 from "fs-extra";
 import path6 from "path";
 import { loadConfigFromFile } from "vite";
@@ -539,11 +568,9 @@ async function resolveSiteConfig({
   return siteConfig;
 }
 async function autoSidebarAndNav({ docs }) {
-  const files = (await fg2.glob("**/*.{jsx,tsx,md,mdx}", {
-    ignore: ["node_modules/**", "client/**", "server/**"],
-    cwd: docs,
-    deep: 3
-  })).filter((item) => !item.includes("index.md"));
+  const files = (await getDocs(docs)).filter(
+    (item) => !item.includes("index.md")
+  );
   const data = files.map((item) => {
     const nav2 = item.split("/")[0];
     const dir = item.split("/")[1];

@@ -1,6 +1,6 @@
+import { getDocs } from '../utils'
 import { SiteConfig } from '@/shared/types'
 import { normalizeUrl } from '@/shared/utils'
-import fg from 'fast-glob'
 import path from 'path'
 import { Plugin } from 'vite'
 
@@ -27,12 +27,7 @@ export function vitePluginVirtualRoutes({
     async load(id) {
       if (id === resolvedVirtualModuleId) {
         // glob文件
-        const files = await fg.glob('**/*.{jsx,tsx,md,mdx}', {
-          ignore: ['node_modules/**', 'client/**', 'server/**'],
-          cwd: docs,
-          deep: 3,
-          absolute: true,
-        })
+        const files = await getDocs(docs, { absolute: true })
 
         let importTemplate = 'import React from "react";\n'
 
