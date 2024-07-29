@@ -1,0 +1,338 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZEROPRESS</title>
+  <link rel="stylesheet" href="/assets/client-entry-UI1mcJZ-.css">
+  <body>
+    <div id="root"><header class="pc:fixed absolute left-0 top-0 z-50 w-full"><div class="border-divider bg-bg-default h-nav border-b px-[12px] pt-px transition-colors duration-300"><div class="flex h-full items-center justify-between"><div class="flex h-full justify-start"><div class="h-full"><nav class="mx-[12px] flex h-full items-center"><a class="cursor-pointer"><img src="/logo.jpg" class="h-[24px] w-[24px]"/></a></nav></div></div><div class="flex h-full justify-end"><div class="h-full"><nav class="mx-[12px] h-full justify-end"><a class="cursor-pointer text-text-2 text-hover flex h-full items-center whitespace-nowrap text-[14px] font-[500]">笔记</a></nav></div><div class="h-full"><nav class="mx-[12px] h-full justify-end"><a class="cursor-pointer text-text-2 text-hover flex h-full items-center whitespace-nowrap text-[14px] font-[500]">测试</a></nav></div><div class="h-full"><nav class="mx-[12px] h-full justify-end"><a class="cursor-pointer text-brand text-hover flex h-full items-center whitespace-nowrap text-[14px] font-[500]">离谱</a></nav></div><div class="h-full"><nav class="mx-[4px] flex h-full items-center"><button class="bg-bg-switch border-divider hover:border-gray-1 relative h-[22px] w-[40px] rounded-[11px] border transition-colors duration-300"><div class="bg-bg-inverse shadow-1 absolute left-px top-px h-[18px] w-[18px] overflow-hidden rounded-[50%] transition-all duration-300 dark:translate-x-[18px]"><span class="*:text-text-2 *:absolute *:left-[3px] *:top-[3px] *:h-[12px] *:w-[12px] *:transition-opacity *:duration-300"><div class="icon-[carbon--sun] opacity-100 dark:opacity-0"></div><div class="icon-[carbon--moon] opacity-0 dark:opacity-100"></div></span></div></button></nav></div><div class="h-full"><nav class="mx-[12px] h-full"><a href="https://github.com/houhongxu/hhxpress" class="cursor-pointer text-text-2 text-hover flex  h-full items-center"><span class="icon-[carbon--logo-github] h-[24px] w-[24px]"></span></a></nav></div></div></div></div></header><div class="pt-nav"><aside class="mt-nav w-sidebar border-divider bg-bg-sidebar pc:-translate-x-0 fixed inset-y-0 left-0 z-40 -translate-x-full overflow-y-auto border-r px-[28px] py-[16px] transition-transform duration-300"><div class="border-divider mt-[4px] border-t first:mt-0 first:border-t-0"><h2 class="text-text-1 mb-[6px] mt-[12px] flex cursor-pointer items-center justify-between font-[700]"><span>ahooks</span><span class="rotate-90 icon-[carbon--chevron-right] transition-transform duration-300"></span></h2><div style="height:270px" class="mb-[12px] flex flex-col overflow-hidden pl-[1rem] transition-[height] duration-300"><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">useLocalStorageState与useSessionStorageState</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">useUpdateEffect 与 useUpdateLayoutEffectt</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">useLatest与useMemoizedFn</a><a class="cursor-pointer text-brand text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">use(Raf)Timeout与use(Raf)Interval与useCountDown</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">useRequest</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">useMount与useUnMount与useMountedRefx.md</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">useUpdate</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">useCreation</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">useDeepCompareEffect</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">useAnimationFrame和计时器</a></div></div></aside><div class="pc:ml-sidebar ml-0 flex justify-between"><div class="mx-auto w-full max-w-[768px] transition-[margin] duration-300"><div class="h-nav pc:hidden bg-bg-default sticky top-0 z-50 w-full border-b"><div class="flex h-full items-center justify-between px-[24px]"><a class="icon-[carbon--list] h-[24px] w-[24px] cursor-pointer"></a><a class="icon-[carbon--border-top] h-[24px] w-[24px] cursor-pointer"></a></div><div class="fixed inset-0 bg-[#00000060] transition-all duration-300 opacity-0 invisible"></div><aside class="w-sidebar border-divider bg-bg-sidebar fixed inset-y-0 left-0 z-40 overflow-y-auto border-r px-[28px] py-[16px] transition-transform duration-300 -translate-x-full"><div class="border-divider mt-[4px] border-t first:mt-0 first:border-t-0"><h2 class="text-text-1 mb-[6px] mt-[12px] flex cursor-pointer items-center justify-between font-[700]"><span>ahooks</span><span class="rotate-90 icon-[carbon--chevron-right] transition-transform duration-300"></span></h2><div style="height:270px" class="mb-[12px] flex flex-col overflow-hidden pl-[1rem] transition-[height] duration-300"><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">useLocalStorageState与useSessionStorageState</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">useUpdateEffect 与 useUpdateLayoutEffectt</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">useLatest与useMemoizedFn</a><a class="cursor-pointer text-brand text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">use(Raf)Timeout与use(Raf)Interval与useCountDown</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">useRequest</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">useMount与useUnMount与useMountedRefx.md</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">useUpdate</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">useCreation</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">useDeepCompareEffect</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">useAnimationFrame和计时器</a></div></div></aside><div class="fixed inset-0  bg-[#00000060] transition-all duration-300 opacity-0 invisible"></div><aside class="w-toc border-divider bg-bg-sidebar fixed inset-y-0 right-0 z-40  h-full border-l px-[28px] py-[16px] transition-transform duration-300 translate-x-full"><div class="border-divider pc:border-l px-[16px] font-[500]"><div class="pc:block bg-brand absolute left-0 hidden h-[18px] w-px transition-[opacity,top] duration-300" style="top:33px;opacity:0"></div><div class="text-[14px] font-[600] leading-[28px]">本页目录</div><div><div><a href="#usetimeout" class="text-text-2 text-hover block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] leading-[28px]" style="padding-left:0rem">useTimeout</a></div><div><a href="#useraftimeout" class="text-text-2 text-hover block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] leading-[28px]" style="padding-left:0rem">useRafTimeout</a></div><div><a href="#useinterval" class="text-text-2 text-hover block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] leading-[28px]" style="padding-left:0rem">useInterval</a></div><div><a href="#userafinterval" class="text-text-2 text-hover block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] leading-[28px]" style="padding-left:0rem">useRafInterval</a></div><div><a href="#usecountdown" class="text-text-2 text-hover block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] leading-[28px]" style="padding-left:0rem">useCountDown</a></div></div></div></aside></div><div class="p-[48px]"><div class="doc"><h1 id="useraftimeout-与-userafinterval-与-usecountdown"><a class="autolink-headings" href="#useraftimeout-与-userafinterval-与-usecountdown"><span style="margin-right:4px">#</span></a>use(Raf)Timeout 与 use(Raf)Interval 与 useCountDown</h1>
+<h2 id="usetimeout"><a class="autolink-headings" href="#usetimeout"><span style="margin-right:4px">#</span></a>useTimeout</h2>
+<p>setTimeout 的 hook，返回 clear 函数来清除定时器</p>
+<figure data-rehype-pretty-code-figure=""><pre style="background-color:#fff;color:#24292e" tabindex="0" data-language="ts" data-theme="github-light"><code data-language="ts" data-theme="github-light" style="display:grid"><span data-line=""><span style="color:#D73A49">const</span><span style="color:#6F42C1"> useTimeout</span><span style="color:#D73A49"> =</span><span style="color:#24292E"> (</span><span style="color:#6F42C1">fn</span><span style="color:#D73A49">:</span><span style="color:#24292E"> () </span><span style="color:#D73A49">=&gt;</span><span style="color:#005CC5"> void</span><span style="color:#24292E">, </span><span style="color:#E36209">delay</span><span style="color:#D73A49">?:</span><span style="color:#005CC5"> number</span><span style="color:#24292E">) </span><span style="color:#D73A49">=&gt;</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#6A737D">  // 使fn函数对象地址不变，哪怕fn内含有状态也不变</span></span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#005CC5"> timerCallback</span><span style="color:#D73A49"> =</span><span style="color:#6F42C1"> useMemoizedFn</span><span style="color:#24292E">(fn)</span></span>
+<span data-line=""><span style="color:#6A737D">  // 使setInterval的timer不变</span></span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#005CC5"> timerRef</span><span style="color:#D73A49"> =</span><span style="color:#6F42C1"> useRef</span><span style="color:#24292E">&lt;</span><span style="color:#6F42C1">NodeJS</span><span style="color:#24292E">.</span><span style="color:#6F42C1">Timer</span><span style="color:#D73A49"> |</span><span style="color:#005CC5"> null</span><span style="color:#24292E">&gt;(</span><span style="color:#005CC5">null</span><span style="color:#24292E">)</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">  // 使clear函数对象地址不变</span></span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#005CC5"> clear</span><span style="color:#D73A49"> =</span><span style="color:#6F42C1"> useCallback</span><span style="color:#24292E">(() </span><span style="color:#D73A49">=&gt;</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#D73A49">    if</span><span style="color:#24292E"> (timerRef.current) {</span></span>
+<span data-line=""><span style="color:#6F42C1">      clearTimeout</span><span style="color:#24292E">(timerRef.current)</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""><span style="color:#24292E">  }, [])</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6F42C1">  useEffect</span><span style="color:#24292E">(() </span><span style="color:#D73A49">=&gt;</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#6A737D">    // 校验delay</span></span>
+<span data-line=""><span style="color:#D73A49">    if</span><span style="color:#24292E"> (</span><span style="color:#D73A49">!</span><span style="color:#6F42C1">isNumber</span><span style="color:#24292E">(delay) </span><span style="color:#D73A49">||</span><span style="color:#24292E"> delay </span><span style="color:#D73A49">&lt;</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#D73A49">      return</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">    // 保存最新定时器timer</span></span>
+<span data-line=""><span style="color:#24292E">    timerRef.current </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> setTimeout</span><span style="color:#24292E">(timerCallback, delay)</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">    return</span><span style="color:#24292E"> clear</span></span>
+<span data-line=""><span style="color:#24292E">  }, [delay])</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">  return</span><span style="color:#24292E"> clear</span></span>
+<span data-line=""><span style="color:#24292E">}</span></span></code></pre></figure>
+<h2 id="useraftimeout"><a class="autolink-headings" href="#useraftimeout"><span style="margin-right:4px">#</span></a>useRafTimeout</h2>
+<p>用 requestAnimationFrame 模拟实现的 useTimeout，更精准，页面不渲染的时候不触发函数执行，比如页面隐藏或最小化等</p>
+<figure data-rehype-pretty-code-figure=""><pre style="background-color:#fff;color:#24292e" tabindex="0" data-language="ts" data-theme="github-light"><code data-language="ts" data-theme="github-light" style="display:grid"><span data-line=""><span style="color:#D73A49">interface</span><span style="color:#6F42C1"> Handle</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#E36209">  id</span><span style="color:#D73A49">:</span><span style="color:#005CC5"> number</span><span style="color:#D73A49"> |</span><span style="color:#6F42C1"> NodeJS</span><span style="color:#24292E">.</span><span style="color:#6F42C1">Timeout</span></span>
+<span data-line=""><span style="color:#24292E">}</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">// 先实现setRafTimeout</span></span>
+<span data-line=""><span style="color:#D73A49">const</span><span style="color:#6F42C1"> setRafTimeout</span><span style="color:#D73A49"> =</span><span style="color:#D73A49"> function</span><span style="color:#24292E"> (</span></span>
+<span data-line=""><span style="color:#6F42C1">  callback</span><span style="color:#D73A49">:</span><span style="color:#24292E"> () </span><span style="color:#D73A49">=&gt;</span><span style="color:#005CC5"> void</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#E36209">  delay</span><span style="color:#D73A49">:</span><span style="color:#005CC5"> number</span><span style="color:#D73A49"> =</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#24292E">)</span><span style="color:#D73A49">:</span><span style="color:#6F42C1"> Handle</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#6A737D">  // 如果是node等环境没有requestAnimationFrame，直接使用setTimeout调用后的定时器id</span></span>
+<span data-line=""><span style="color:#D73A49">  if</span><span style="color:#24292E"> (</span><span style="color:#D73A49">typeof</span><span style="color:#24292E"> requestAnimationFrame </span><span style="color:#D73A49">===</span><span style="color:#D73A49"> typeof</span><span style="color:#005CC5"> undefined</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#D73A49">    return</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#24292E">      id: </span><span style="color:#6F42C1">setTimeout</span><span style="color:#24292E">(callback, delay),</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""><span style="color:#24292E">  }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">  // 记录定时器id</span></span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#005CC5"> handle</span><span style="color:#D73A49">:</span><span style="color:#6F42C1"> Handle</span><span style="color:#D73A49"> =</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#24292E">    id: </span><span style="color:#005CC5">0</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#24292E">  }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">  // 记录开始时间</span></span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#005CC5"> startTime</span><span style="color:#D73A49"> =</span><span style="color:#D73A49"> new</span><span style="color:#6F42C1"> Date</span><span style="color:#24292E">().</span><span style="color:#6F42C1">getTime</span><span style="color:#24292E">()</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">  // 递归调用requestAnimationFrame，这是requestAnimationFrame的使用方式</span></span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#6F42C1"> loop</span><span style="color:#D73A49"> =</span><span style="color:#24292E"> () </span><span style="color:#D73A49">=&gt;</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#6A737D">    // 记录当前时间，话说这里也能用参数获取requestAnimationFrame调用的时间</span></span>
+<span data-line=""><span style="color:#D73A49">    const</span><span style="color:#005CC5"> current</span><span style="color:#D73A49"> =</span><span style="color:#D73A49"> new</span><span style="color:#6F42C1"> Date</span><span style="color:#24292E">().</span><span style="color:#6F42C1">getTime</span><span style="color:#24292E">()</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">    // 如果delay的时间到了，执行callback</span></span>
+<span data-line=""><span style="color:#D73A49">    if</span><span style="color:#24292E"> (current </span><span style="color:#D73A49">-</span><span style="color:#24292E"> startTime </span><span style="color:#D73A49">&gt;=</span><span style="color:#24292E"> delay) {</span></span>
+<span data-line=""><span style="color:#6F42C1">      callback</span><span style="color:#24292E">()</span></span>
+<span data-line=""><span style="color:#24292E">    } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#6A737D">      // 否则继续递归</span></span>
+<span data-line=""><span style="color:#24292E">      handle.id </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> requestAnimationFrame</span><span style="color:#24292E">(loop)</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""><span style="color:#24292E">  }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">  // 记录定时器id</span></span>
+<span data-line=""><span style="color:#24292E">  handle.id </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> requestAnimationFrame</span><span style="color:#24292E">(loop)</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">  return</span><span style="color:#24292E"> handle</span></span>
+<span data-line=""><span style="color:#24292E">}</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">// 判断是否有cancelAnimationFrame</span></span>
+<span data-line=""><span style="color:#D73A49">function</span><span style="color:#6F42C1"> cancelAnimationFrameIsNotDefined</span><span style="color:#24292E">(</span><span style="color:#E36209">t</span><span style="color:#D73A49">:</span><span style="color:#005CC5"> any</span><span style="color:#24292E">)</span><span style="color:#D73A49">:</span><span style="color:#E36209"> t</span><span style="color:#D73A49"> is</span><span style="color:#6F42C1"> NodeJS</span><span style="color:#24292E">.</span><span style="color:#6F42C1">Timer</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#D73A49">  return</span><span style="color:#D73A49"> typeof</span><span style="color:#24292E"> cancelAnimationFrame </span><span style="color:#D73A49">===</span><span style="color:#D73A49"> typeof</span><span style="color:#005CC5"> undefined</span></span>
+<span data-line=""><span style="color:#24292E">}</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">// 清除setRafTimeout定时器</span></span>
+<span data-line=""><span style="color:#D73A49">const</span><span style="color:#6F42C1"> clearRafTimeout</span><span style="color:#D73A49"> =</span><span style="color:#D73A49"> function</span><span style="color:#24292E"> (</span><span style="color:#E36209">handle</span><span style="color:#D73A49">:</span><span style="color:#6F42C1"> Handle</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#6A737D">  // 如果是node等环境没有cancelAnimationFrame使用clearTimeout</span></span>
+<span data-line=""><span style="color:#D73A49">  if</span><span style="color:#24292E"> (</span><span style="color:#6F42C1">cancelAnimationFrameIsNotDefined</span><span style="color:#24292E">(handle.id)) {</span></span>
+<span data-line=""><span style="color:#D73A49">    return</span><span style="color:#6F42C1"> clearTimeout</span><span style="color:#24292E">(handle.id)</span></span>
+<span data-line=""><span style="color:#24292E">  }</span></span>
+<span data-line=""><span style="color:#6F42C1">  cancelAnimationFrame</span><span style="color:#24292E">(handle.id)</span></span>
+<span data-line=""><span style="color:#24292E">}</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">// 和useTimeout逻辑类似</span></span>
+<span data-line=""><span style="color:#D73A49">function</span><span style="color:#6F42C1"> useRafTimeout</span><span style="color:#24292E">(</span><span style="color:#6F42C1">fn</span><span style="color:#D73A49">:</span><span style="color:#24292E"> () </span><span style="color:#D73A49">=&gt;</span><span style="color:#005CC5"> void</span><span style="color:#24292E">, </span><span style="color:#E36209">delay</span><span style="color:#D73A49">:</span><span style="color:#005CC5"> number</span><span style="color:#D73A49"> |</span><span style="color:#005CC5"> undefined</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#005CC5"> fnRef</span><span style="color:#D73A49"> =</span><span style="color:#6F42C1"> useLatest</span><span style="color:#24292E">(fn)</span></span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#005CC5"> timerRef</span><span style="color:#D73A49"> =</span><span style="color:#6F42C1"> useRef</span><span style="color:#24292E">&lt;</span><span style="color:#6F42C1">Handle</span><span style="color:#24292E">&gt;()</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6F42C1">  useEffect</span><span style="color:#24292E">(() </span><span style="color:#D73A49">=&gt;</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#D73A49">    if</span><span style="color:#24292E"> (</span><span style="color:#D73A49">!</span><span style="color:#6F42C1">isNumber</span><span style="color:#24292E">(delay) </span><span style="color:#D73A49">||</span><span style="color:#24292E"> delay </span><span style="color:#D73A49">&lt;</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">) </span><span style="color:#D73A49">return</span></span>
+<span data-line=""><span style="color:#24292E">    timerRef.current </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> setRafTimeout</span><span style="color:#24292E">(() </span><span style="color:#D73A49">=&gt;</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#24292E">      fnRef.</span><span style="color:#6F42C1">current</span><span style="color:#24292E">()</span></span>
+<span data-line=""><span style="color:#24292E">    }, delay)</span></span>
+<span data-line=""><span style="color:#D73A49">    return</span><span style="color:#24292E"> () </span><span style="color:#D73A49">=&gt;</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#D73A49">      if</span><span style="color:#24292E"> (timerRef.current) {</span></span>
+<span data-line=""><span style="color:#6F42C1">        clearRafTimeout</span><span style="color:#24292E">(timerRef.current)</span></span>
+<span data-line=""><span style="color:#24292E">      }</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""><span style="color:#24292E">  }, [delay])</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#005CC5"> clear</span><span style="color:#D73A49"> =</span><span style="color:#6F42C1"> useCallback</span><span style="color:#24292E">(() </span><span style="color:#D73A49">=&gt;</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#D73A49">    if</span><span style="color:#24292E"> (timerRef.current) {</span></span>
+<span data-line=""><span style="color:#6F42C1">      clearRafTimeout</span><span style="color:#24292E">(timerRef.current)</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""><span style="color:#24292E">  }, [])</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">  return</span><span style="color:#24292E"> clear</span></span>
+<span data-line=""><span style="color:#24292E">}</span></span></code></pre></figure>
+<h2 id="useinterval"><a class="autolink-headings" href="#useinterval"><span style="margin-right:4px">#</span></a>useInterval</h2>
+<p>setInterval 的 hook，返回 clear 函数来清除定时器</p>
+<figure data-rehype-pretty-code-figure=""><pre style="background-color:#fff;color:#24292e" tabindex="0" data-language="ts" data-theme="github-light"><code data-language="ts" data-theme="github-light" style="display:grid"><span data-line=""><span style="color:#D73A49">const</span><span style="color:#6F42C1"> useInterval</span><span style="color:#D73A49"> =</span><span style="color:#24292E"> (</span></span>
+<span data-line=""><span style="color:#6F42C1">  fn</span><span style="color:#D73A49">:</span><span style="color:#24292E"> () </span><span style="color:#D73A49">=&gt;</span><span style="color:#005CC5"> void</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#E36209">  delay</span><span style="color:#D73A49">?:</span><span style="color:#005CC5"> number</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#E36209">  options</span><span style="color:#D73A49">:</span><span style="color:#24292E"> { </span><span style="color:#E36209">immediate</span><span style="color:#D73A49">?:</span><span style="color:#005CC5"> boolean</span><span style="color:#24292E"> } </span><span style="color:#D73A49">=</span><span style="color:#24292E"> {},</span></span>
+<span data-line=""><span style="color:#24292E">) </span><span style="color:#D73A49">=&gt;</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#6A737D">  // 使fn函数对象地址不变，哪怕fn内含有状态也不变</span></span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#005CC5"> timerCallback</span><span style="color:#D73A49"> =</span><span style="color:#6F42C1"> useMemoizedFn</span><span style="color:#24292E">(fn)</span></span>
+<span data-line=""><span style="color:#6A737D">  // 使setInterval的timer不变</span></span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#005CC5"> timerRef</span><span style="color:#D73A49"> =</span><span style="color:#6F42C1"> useRef</span><span style="color:#24292E">&lt;</span><span style="color:#6F42C1">NodeJS</span><span style="color:#24292E">.</span><span style="color:#6F42C1">Timer</span><span style="color:#D73A49"> |</span><span style="color:#005CC5"> null</span><span style="color:#24292E">&gt;(</span><span style="color:#005CC5">null</span><span style="color:#24292E">)</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">  // 使clear函数对象地址不变</span></span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#005CC5"> clear</span><span style="color:#D73A49"> =</span><span style="color:#6F42C1"> useCallback</span><span style="color:#24292E">(() </span><span style="color:#D73A49">=&gt;</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#D73A49">    if</span><span style="color:#24292E"> (timerRef.current) {</span></span>
+<span data-line=""><span style="color:#6F42C1">      clearInterval</span><span style="color:#24292E">(timerRef.current)</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""><span style="color:#24292E">  }, [])</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6F42C1">  useEffect</span><span style="color:#24292E">(() </span><span style="color:#D73A49">=&gt;</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#6A737D">    // 校验delay</span></span>
+<span data-line=""><span style="color:#D73A49">    if</span><span style="color:#24292E"> (</span><span style="color:#D73A49">!</span><span style="color:#6F42C1">isNumber</span><span style="color:#24292E">(delay) </span><span style="color:#D73A49">||</span><span style="color:#24292E"> delay </span><span style="color:#D73A49">&lt;</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#D73A49">      return</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">    // 如果配置immediate则第一次渲染也执行fn</span></span>
+<span data-line=""><span style="color:#D73A49">    if</span><span style="color:#24292E"> (options.immediate) {</span></span>
+<span data-line=""><span style="color:#6F42C1">      timerCallback</span><span style="color:#24292E">()</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">    // 保存最新定时器timer</span></span>
+<span data-line=""><span style="color:#24292E">    timerRef.current </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> setInterval</span><span style="color:#24292E">(timerCallback, delay)</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">    return</span><span style="color:#24292E"> clear</span></span>
+<span data-line=""><span style="color:#24292E">  }, [delay, options.immediate])</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">  return</span><span style="color:#24292E"> clear</span></span>
+<span data-line=""><span style="color:#24292E">}</span></span></code></pre></figure>
+<h2 id="userafinterval"><a class="autolink-headings" href="#userafinterval"><span style="margin-right:4px">#</span></a>useRafInterval</h2>
+<p>用 requestAnimationFrame 模拟实现的 useInterval，更精准，页面不渲染的时候不触发函数执行，比如页面隐藏或最小化等</p>
+<figure data-rehype-pretty-code-figure=""><pre style="background-color:#fff;color:#24292e" tabindex="0" data-language="ts" data-theme="github-light"><code data-language="ts" data-theme="github-light" style="display:grid"><span data-line=""><span style="color:#D73A49">interface</span><span style="color:#6F42C1"> Handle</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#E36209">  id</span><span style="color:#D73A49">:</span><span style="color:#005CC5"> number</span><span style="color:#D73A49"> |</span><span style="color:#6F42C1"> NodeJS</span><span style="color:#24292E">.</span><span style="color:#6F42C1">Timer</span></span>
+<span data-line=""><span style="color:#24292E">}</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">// 和useRafTimeout中类似</span></span>
+<span data-line=""><span style="color:#D73A49">const</span><span style="color:#6F42C1"> setRafInterval</span><span style="color:#D73A49"> =</span><span style="color:#D73A49"> function</span><span style="color:#24292E"> (</span></span>
+<span data-line=""><span style="color:#6F42C1">  callback</span><span style="color:#D73A49">:</span><span style="color:#24292E"> () </span><span style="color:#D73A49">=&gt;</span><span style="color:#005CC5"> void</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#E36209">  delay</span><span style="color:#D73A49">:</span><span style="color:#005CC5"> number</span><span style="color:#D73A49"> =</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#24292E">)</span><span style="color:#D73A49">:</span><span style="color:#6F42C1"> Handle</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#D73A49">  if</span><span style="color:#24292E"> (</span><span style="color:#D73A49">typeof</span><span style="color:#24292E"> requestAnimationFrame </span><span style="color:#D73A49">===</span><span style="color:#D73A49"> typeof</span><span style="color:#005CC5"> undefined</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#D73A49">    return</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#24292E">      id: </span><span style="color:#6F42C1">setInterval</span><span style="color:#24292E">(callback, delay),</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""><span style="color:#24292E">  }</span></span>
+<span data-line=""><span style="color:#D73A49">  let</span><span style="color:#24292E"> start </span><span style="color:#D73A49">=</span><span style="color:#D73A49"> new</span><span style="color:#6F42C1"> Date</span><span style="color:#24292E">().</span><span style="color:#6F42C1">getTime</span><span style="color:#24292E">()</span></span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#005CC5"> handle</span><span style="color:#D73A49">:</span><span style="color:#6F42C1"> Handle</span><span style="color:#D73A49"> =</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#24292E">    id: </span><span style="color:#005CC5">0</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#24292E">  }</span></span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#6F42C1"> loop</span><span style="color:#D73A49"> =</span><span style="color:#24292E"> () </span><span style="color:#D73A49">=&gt;</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#D73A49">    const</span><span style="color:#005CC5"> current</span><span style="color:#D73A49"> =</span><span style="color:#D73A49"> new</span><span style="color:#6F42C1"> Date</span><span style="color:#24292E">().</span><span style="color:#6F42C1">getTime</span><span style="color:#24292E">()</span></span>
+<span data-line=""><span style="color:#D73A49">    if</span><span style="color:#24292E"> (current </span><span style="color:#D73A49">-</span><span style="color:#24292E"> start </span><span style="color:#D73A49">&gt;=</span><span style="color:#24292E"> delay) {</span></span>
+<span data-line=""><span style="color:#6F42C1">      callback</span><span style="color:#24292E">()</span></span>
+<span data-line=""><span style="color:#24292E">      start </span><span style="color:#D73A49">=</span><span style="color:#D73A49"> new</span><span style="color:#6F42C1"> Date</span><span style="color:#24292E">().</span><span style="color:#6F42C1">getTime</span><span style="color:#24292E">()</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""><span style="color:#24292E">    handle.id </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> requestAnimationFrame</span><span style="color:#24292E">(loop)</span></span>
+<span data-line=""><span style="color:#24292E">  }</span></span>
+<span data-line=""><span style="color:#24292E">  handle.id </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> requestAnimationFrame</span><span style="color:#24292E">(loop)</span></span>
+<span data-line=""><span style="color:#D73A49">  return</span><span style="color:#24292E"> handle</span></span>
+<span data-line=""><span style="color:#24292E">}</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">function</span><span style="color:#6F42C1"> cancelAnimationFrameIsNotDefined</span><span style="color:#24292E">(</span><span style="color:#E36209">t</span><span style="color:#D73A49">:</span><span style="color:#005CC5"> any</span><span style="color:#24292E">)</span><span style="color:#D73A49">:</span><span style="color:#E36209"> t</span><span style="color:#D73A49"> is</span><span style="color:#6F42C1"> NodeJS</span><span style="color:#24292E">.</span><span style="color:#6F42C1">Timer</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#D73A49">  return</span><span style="color:#D73A49"> typeof</span><span style="color:#24292E"> cancelAnimationFrame </span><span style="color:#D73A49">===</span><span style="color:#D73A49"> typeof</span><span style="color:#005CC5"> undefined</span></span>
+<span data-line=""><span style="color:#24292E">}</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">const</span><span style="color:#6F42C1"> clearRafInterval</span><span style="color:#D73A49"> =</span><span style="color:#D73A49"> function</span><span style="color:#24292E"> (</span><span style="color:#E36209">handle</span><span style="color:#D73A49">:</span><span style="color:#6F42C1"> Handle</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#D73A49">  if</span><span style="color:#24292E"> (</span><span style="color:#6F42C1">cancelAnimationFrameIsNotDefined</span><span style="color:#24292E">(handle.id)) {</span></span>
+<span data-line=""><span style="color:#D73A49">    return</span><span style="color:#6F42C1"> clearInterval</span><span style="color:#24292E">(handle.id)</span></span>
+<span data-line=""><span style="color:#24292E">  }</span></span>
+<span data-line=""><span style="color:#6F42C1">  cancelAnimationFrame</span><span style="color:#24292E">(handle.id)</span></span>
+<span data-line=""><span style="color:#24292E">}</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">// 和useInterval中类似</span></span>
+<span data-line=""><span style="color:#D73A49">function</span><span style="color:#6F42C1"> useRafInterval</span><span style="color:#24292E">(</span></span>
+<span data-line=""><span style="color:#6F42C1">  fn</span><span style="color:#D73A49">:</span><span style="color:#24292E"> () </span><span style="color:#D73A49">=&gt;</span><span style="color:#005CC5"> void</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#E36209">  delay</span><span style="color:#D73A49">:</span><span style="color:#005CC5"> number</span><span style="color:#D73A49"> |</span><span style="color:#005CC5"> undefined</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#E36209">  options</span><span style="color:#D73A49">?:</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#E36209">    immediate</span><span style="color:#D73A49">?:</span><span style="color:#005CC5"> boolean</span></span>
+<span data-line=""><span style="color:#24292E">  },</span></span>
+<span data-line=""><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#005CC5"> immediate</span><span style="color:#D73A49"> =</span><span style="color:#24292E"> options?.immediate</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#005CC5"> fnRef</span><span style="color:#D73A49"> =</span><span style="color:#6F42C1"> useLatest</span><span style="color:#24292E">(fn)</span></span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#005CC5"> timerRef</span><span style="color:#D73A49"> =</span><span style="color:#6F42C1"> useRef</span><span style="color:#24292E">&lt;</span><span style="color:#6F42C1">Handle</span><span style="color:#24292E">&gt;()</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6F42C1">  useEffect</span><span style="color:#24292E">(() </span><span style="color:#D73A49">=&gt;</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#D73A49">    if</span><span style="color:#24292E"> (</span><span style="color:#D73A49">!</span><span style="color:#6F42C1">isNumber</span><span style="color:#24292E">(delay) </span><span style="color:#D73A49">||</span><span style="color:#24292E"> delay </span><span style="color:#D73A49">&lt;</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">) </span><span style="color:#D73A49">return</span></span>
+<span data-line=""><span style="color:#D73A49">    if</span><span style="color:#24292E"> (immediate) {</span></span>
+<span data-line=""><span style="color:#24292E">      fnRef.</span><span style="color:#6F42C1">current</span><span style="color:#24292E">()</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""><span style="color:#24292E">    timerRef.current </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> setRafInterval</span><span style="color:#24292E">(() </span><span style="color:#D73A49">=&gt;</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#24292E">      fnRef.</span><span style="color:#6F42C1">current</span><span style="color:#24292E">()</span></span>
+<span data-line=""><span style="color:#24292E">    }, delay)</span></span>
+<span data-line=""><span style="color:#D73A49">    return</span><span style="color:#24292E"> () </span><span style="color:#D73A49">=&gt;</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#D73A49">      if</span><span style="color:#24292E"> (timerRef.current) {</span></span>
+<span data-line=""><span style="color:#6F42C1">        clearRafInterval</span><span style="color:#24292E">(timerRef.current)</span></span>
+<span data-line=""><span style="color:#24292E">      }</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""><span style="color:#24292E">  }, [delay])</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#005CC5"> clear</span><span style="color:#D73A49"> =</span><span style="color:#6F42C1"> useCallback</span><span style="color:#24292E">(() </span><span style="color:#D73A49">=&gt;</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#D73A49">    if</span><span style="color:#24292E"> (timerRef.current) {</span></span>
+<span data-line=""><span style="color:#6F42C1">      clearRafInterval</span><span style="color:#24292E">(timerRef.current)</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""><span style="color:#24292E">  }, [])</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">  return</span><span style="color:#24292E"> clear</span></span>
+<span data-line=""><span style="color:#24292E">}</span></span></code></pre></figure>
+<h2 id="usecountdown"><a class="autolink-headings" href="#usecountdown"><span style="margin-right:4px">#</span></a>useCountDown</h2>
+<p>倒计时 Hook</p>
+<figure data-rehype-pretty-code-figure=""><pre style="background-color:#fff;color:#24292e" tabindex="0" data-language="ts" data-theme="github-light"><code data-language="ts" data-theme="github-light" style="display:grid"><span data-line=""><span style="color:#D73A49">export</span><span style="color:#D73A49"> type</span><span style="color:#6F42C1"> TDate</span><span style="color:#D73A49"> =</span><span style="color:#6F42C1"> dayjs</span><span style="color:#24292E">.</span><span style="color:#6F42C1">ConfigType</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">export</span><span style="color:#D73A49"> interface</span><span style="color:#6F42C1"> Options</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#E36209">  leftTime</span><span style="color:#D73A49">?:</span><span style="color:#005CC5"> number</span></span>
+<span data-line=""><span style="color:#E36209">  targetDate</span><span style="color:#D73A49">?:</span><span style="color:#6F42C1"> TDate</span></span>
+<span data-line=""><span style="color:#E36209">  interval</span><span style="color:#D73A49">?:</span><span style="color:#005CC5"> number</span></span>
+<span data-line=""><span style="color:#6F42C1">  onEnd</span><span style="color:#D73A49">?:</span><span style="color:#24292E"> () </span><span style="color:#D73A49">=&gt;</span><span style="color:#005CC5"> void</span></span>
+<span data-line=""><span style="color:#24292E">}</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">export</span><span style="color:#D73A49"> interface</span><span style="color:#6F42C1"> FormattedRes</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#E36209">  days</span><span style="color:#D73A49">:</span><span style="color:#005CC5"> number</span></span>
+<span data-line=""><span style="color:#E36209">  hours</span><span style="color:#D73A49">:</span><span style="color:#005CC5"> number</span></span>
+<span data-line=""><span style="color:#E36209">  minutes</span><span style="color:#D73A49">:</span><span style="color:#005CC5"> number</span></span>
+<span data-line=""><span style="color:#E36209">  seconds</span><span style="color:#D73A49">:</span><span style="color:#005CC5"> number</span></span>
+<span data-line=""><span style="color:#E36209">  milliseconds</span><span style="color:#D73A49">:</span><span style="color:#005CC5"> number</span></span>
+<span data-line=""><span style="color:#24292E">}</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">// 计算剩余时间</span></span>
+<span data-line=""><span style="color:#D73A49">const</span><span style="color:#6F42C1"> calcLeft</span><span style="color:#D73A49"> =</span><span style="color:#24292E"> (</span><span style="color:#E36209">target</span><span style="color:#D73A49">?:</span><span style="color:#6F42C1"> TDate</span><span style="color:#24292E">) </span><span style="color:#D73A49">=&gt;</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#D73A49">  if</span><span style="color:#24292E"> (</span><span style="color:#D73A49">!</span><span style="color:#24292E">target) {</span></span>
+<span data-line=""><span style="color:#D73A49">    return</span><span style="color:#005CC5"> 0</span></span>
+<span data-line=""><span style="color:#24292E">  }</span></span>
+<span data-line=""><span style="color:#6A737D">  // https://stackoverflow.com/questions/4310953/invalid-date-in-safari</span></span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#005CC5"> left</span><span style="color:#D73A49"> =</span><span style="color:#6F42C1"> dayjs</span><span style="color:#24292E">(target).</span><span style="color:#6F42C1">valueOf</span><span style="color:#24292E">() </span><span style="color:#D73A49">-</span><span style="color:#24292E"> Date.</span><span style="color:#6F42C1">now</span><span style="color:#24292E">()</span></span>
+<span data-line=""><span style="color:#D73A49">  return</span><span style="color:#24292E"> left </span><span style="color:#D73A49">&lt;</span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> ?</span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> :</span><span style="color:#24292E"> left</span></span>
+<span data-line=""><span style="color:#24292E">}</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">// 格式化毫秒为日期</span></span>
+<span data-line=""><span style="color:#D73A49">const</span><span style="color:#6F42C1"> parseMs</span><span style="color:#D73A49"> =</span><span style="color:#24292E"> (</span><span style="color:#E36209">milliseconds</span><span style="color:#D73A49">:</span><span style="color:#005CC5"> number</span><span style="color:#24292E">)</span><span style="color:#D73A49">:</span><span style="color:#6F42C1"> FormattedRes</span><span style="color:#D73A49"> =&gt;</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#D73A49">  return</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#24292E">    days: Math.</span><span style="color:#6F42C1">floor</span><span style="color:#24292E">(milliseconds </span><span style="color:#D73A49">/</span><span style="color:#005CC5"> 86400000</span><span style="color:#24292E">),</span></span>
+<span data-line=""><span style="color:#24292E">    hours: Math.</span><span style="color:#6F42C1">floor</span><span style="color:#24292E">(milliseconds </span><span style="color:#D73A49">/</span><span style="color:#005CC5"> 3600000</span><span style="color:#24292E">) </span><span style="color:#D73A49">%</span><span style="color:#005CC5"> 24</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#24292E">    minutes: Math.</span><span style="color:#6F42C1">floor</span><span style="color:#24292E">(milliseconds </span><span style="color:#D73A49">/</span><span style="color:#005CC5"> 60000</span><span style="color:#24292E">) </span><span style="color:#D73A49">%</span><span style="color:#005CC5"> 60</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#24292E">    seconds: Math.</span><span style="color:#6F42C1">floor</span><span style="color:#24292E">(milliseconds </span><span style="color:#D73A49">/</span><span style="color:#005CC5"> 1000</span><span style="color:#24292E">) </span><span style="color:#D73A49">%</span><span style="color:#005CC5"> 60</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#24292E">    milliseconds: Math.</span><span style="color:#6F42C1">floor</span><span style="color:#24292E">(milliseconds) </span><span style="color:#D73A49">%</span><span style="color:#005CC5"> 1000</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#24292E">  }</span></span>
+<span data-line=""><span style="color:#24292E">}</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">const</span><span style="color:#6F42C1"> useCountdown</span><span style="color:#D73A49"> =</span><span style="color:#24292E"> (</span><span style="color:#E36209">options</span><span style="color:#D73A49">:</span><span style="color:#6F42C1"> Options</span><span style="color:#D73A49"> =</span><span style="color:#24292E"> {}) </span><span style="color:#D73A49">=&gt;</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#24292E"> { </span><span style="color:#005CC5">leftTime</span><span style="color:#24292E">, </span><span style="color:#005CC5">targetDate</span><span style="color:#24292E">, </span><span style="color:#005CC5">interval</span><span style="color:#D73A49"> =</span><span style="color:#005CC5"> 1000</span><span style="color:#24292E">, </span><span style="color:#005CC5">onEnd</span><span style="color:#24292E"> } </span><span style="color:#D73A49">=</span><span style="color:#24292E"> options </span><span style="color:#D73A49">||</span><span style="color:#24292E"> {}</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">  // 计算目标时间</span></span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#005CC5"> target</span><span style="color:#D73A49"> =</span><span style="color:#6F42C1"> useMemo</span><span style="color:#24292E">&lt;</span><span style="color:#6F42C1">TDate</span><span style="color:#24292E">&gt;(() </span><span style="color:#D73A49">=&gt;</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#6A737D">    // 如果leftTime传入了值，注意undefined也算</span></span>
+<span data-line=""><span style="color:#D73A49">    if</span><span style="color:#24292E"> (</span><span style="color:#032F62">&#x27;leftTime&#x27;</span><span style="color:#D73A49"> in</span><span style="color:#24292E"> options) {</span></span>
+<span data-line=""><span style="color:#6A737D">      // 如果leftTime是&gt;0的数字</span></span>
+<span data-line=""><span style="color:#D73A49">      return</span><span style="color:#6F42C1"> isNumber</span><span style="color:#24292E">(leftTime) </span><span style="color:#D73A49">&amp;&amp;</span><span style="color:#24292E"> leftTime </span><span style="color:#D73A49">&gt;</span><span style="color:#005CC5"> 0</span></span>
+<span data-line=""><span style="color:#D73A49">        ?</span><span style="color:#24292E"> Date.</span><span style="color:#6F42C1">now</span><span style="color:#24292E">() </span><span style="color:#D73A49">+</span><span style="color:#24292E"> leftTime</span></span>
+<span data-line=""><span style="color:#D73A49">        :</span><span style="color:#005CC5"> undefined</span></span>
+<span data-line=""><span style="color:#24292E">    } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#D73A49">      return</span><span style="color:#24292E"> targetDate</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""><span style="color:#24292E">  }, [leftTime, targetDate])</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">  // 倒计时状态，就是countdown</span></span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#24292E"> [</span><span style="color:#005CC5">timeLeft</span><span style="color:#24292E">, </span><span style="color:#005CC5">setTimeLeft</span><span style="color:#24292E">] </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> useState</span><span style="color:#24292E">(() </span><span style="color:#D73A49">=&gt;</span><span style="color:#6F42C1"> calcLeft</span><span style="color:#24292E">(target))</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">  // 保存onEnd钩子</span></span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#005CC5"> onEndRef</span><span style="color:#D73A49"> =</span><span style="color:#6F42C1"> useLatest</span><span style="color:#24292E">(onEnd)</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6F42C1">  useEffect</span><span style="color:#24292E">(() </span><span style="color:#D73A49">=&gt;</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#6A737D">    // 没有目标时间则停止，并归零倒计时</span></span>
+<span data-line=""><span style="color:#D73A49">    if</span><span style="color:#24292E"> (</span><span style="color:#D73A49">!</span><span style="color:#24292E">target) {</span></span>
+<span data-line=""><span style="color:#6A737D">      // for stop</span></span>
+<span data-line=""><span style="color:#6F42C1">      setTimeLeft</span><span style="color:#24292E">(</span><span style="color:#005CC5">0</span><span style="color:#24292E">)</span></span>
+<span data-line=""><span style="color:#D73A49">      return</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">    // 立即计算并保存一次</span></span>
+<span data-line=""><span style="color:#6F42C1">    setTimeLeft</span><span style="color:#24292E">(</span><span style="color:#6F42C1">calcLeft</span><span style="color:#24292E">(target))</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">    const</span><span style="color:#005CC5"> timer</span><span style="color:#D73A49"> =</span><span style="color:#6F42C1"> setInterval</span><span style="color:#24292E">(() </span><span style="color:#D73A49">=&gt;</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#6A737D">      // 每隔interval计算并保存倒计时</span></span>
+<span data-line=""><span style="color:#D73A49">      const</span><span style="color:#005CC5"> targetLeft</span><span style="color:#D73A49"> =</span><span style="color:#6F42C1"> calcLeft</span><span style="color:#24292E">(target)</span></span>
+<span data-line=""><span style="color:#6F42C1">      setTimeLeft</span><span style="color:#24292E">(targetLeft)</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">      // 倒计时结束时清除计时器并执行onEnd钩子</span></span>
+<span data-line=""><span style="color:#D73A49">      if</span><span style="color:#24292E"> (targetLeft </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#6F42C1">        clearInterval</span><span style="color:#24292E">(timer)</span></span>
+<span data-line=""><span style="color:#24292E">        onEndRef.</span><span style="color:#6F42C1">current</span><span style="color:#24292E">?.()</span></span>
+<span data-line=""><span style="color:#24292E">      }</span></span>
+<span data-line=""><span style="color:#24292E">    }, interval)</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">    return</span><span style="color:#24292E"> () </span><span style="color:#D73A49">=&gt;</span><span style="color:#6F42C1"> clearInterval</span><span style="color:#24292E">(timer)</span></span>
+<span data-line=""><span style="color:#24292E">  }, [target, interval])</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">  // 将倒计时格式化为日期</span></span>
+<span data-line=""><span style="color:#D73A49">  const</span><span style="color:#005CC5"> formattedRes</span><span style="color:#D73A49"> =</span><span style="color:#6F42C1"> useMemo</span><span style="color:#24292E">(() </span><span style="color:#D73A49">=&gt;</span><span style="color:#6F42C1"> parseMs</span><span style="color:#24292E">(timeLeft), [timeLeft])</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">  return</span><span style="color:#24292E"> [timeLeft, formattedRes] </span><span style="color:#D73A49">as</span><span style="color:#D73A49"> const</span></span>
+<span data-line=""><span style="color:#24292E">}</span></span></code></pre></figure></div><footer class="mt-[32px]"><div class="border-divider flex justify-between border-t pt-[24px]"><div class="w-[calc(50%-4px)]"><a class="cursor-pointer border-divider hover:border-brand group block h-full w-full rounded-[8px] border px-[16px] py-[8px] transition-colors duration-300"><div class="text-text-2 text-[12px] font-[500] leading-[20px]">上一页</div><div class=" text-text-2 group-hover:text-brand overflow-hidden text-ellipsis whitespace-nowrap text-[14px] font-[500] leading-[20px] transition-colors duration-300">useLatest与useMemoizedFn</div></a></div><div class="w-[calc(50%-4px)]"><a class="cursor-pointer border-divider hover:border-brand group block h-full w-full rounded-[8px] border px-[16px] py-[8px] transition-colors duration-300"><div class="text-text-2 text-[12px] font-[500] leading-[20px]">下一页</div><div class=" text-text-2 group-hover:text-brand overflow-hidden text-ellipsis whitespace-nowrap text-[14px] font-[500] leading-[20px] transition-colors duration-300">useRequest</div></a></div></div></footer></div></div><aside class="w-toc full:flex sticky top-[calc(theme(spacing.nav)+48px)] hidden h-full flex-col"><div class="border-divider pc:border-l px-[16px] font-[500]"><div class="pc:block bg-brand absolute left-0 hidden h-[18px] w-px transition-[opacity,top] duration-300" style="top:33px;opacity:0"></div><div class="text-[14px] font-[600] leading-[28px]">本页目录</div><div><div><a href="#usetimeout" class="text-text-2 text-hover block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] leading-[28px]" style="padding-left:0rem">useTimeout</a></div><div><a href="#useraftimeout" class="text-text-2 text-hover block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] leading-[28px]" style="padding-left:0rem">useRafTimeout</a></div><div><a href="#useinterval" class="text-text-2 text-hover block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] leading-[28px]" style="padding-left:0rem">useInterval</a></div><div><a href="#userafinterval" class="text-text-2 text-hover block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] leading-[28px]" style="padding-left:0rem">useRafInterval</a></div><div><a href="#usecountdown" class="text-text-2 text-hover block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] leading-[28px]" style="padding-left:0rem">useCountDown</a></div></div></div></aside></div></div></div>
+  
+    <script type="module" src="/client-entry.js"></script>
+    </body>
+    
+</html>
