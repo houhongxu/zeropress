@@ -1,27 +1,23 @@
-// ../../node_modules/.pnpm/tsup@8.0.1_postcss@8.4.35_typescript@5.3.3/node_modules/tsup/assets/esm_shims.js
-import { fileURLToPath } from "url";
-import path from "path";
-var getFilename = () => fileURLToPath(import.meta.url);
-var getDirname = () => path.dirname(getFilename());
-var __dirname = /* @__PURE__ */ getDirname();
-
 // src/node/consts.ts
-import path2 from "path";
-var ROOT_PATH = path2.join(__dirname, "..", "..");
-var SRC_PATH = path2.join(ROOT_PATH, "./src");
-var RUNTIME_PATH = path2.join(SRC_PATH, "./runtime");
-var CLIENT_ENTRY_PATH = path2.join(
+import path from "path";
+import { fileURLToPath } from "url";
+var __filename = fileURLToPath(import.meta.url);
+var __dirname = path.dirname(__filename);
+var ROOT_PATH = path.join(__dirname, "..", "..");
+var SRC_PATH = path.join(ROOT_PATH, "./src");
+var RUNTIME_PATH = path.join(SRC_PATH, "./runtime");
+var CLIENT_ENTRY_PATH = path.join(
   RUNTIME_PATH,
   "./client/client-entry.tsx"
 );
-var SERVER_ENTRY_PATH = path2.join(
+var SERVER_ENTRY_PATH = path.join(
   RUNTIME_PATH,
   "./server/server-entry.tsx"
 );
 var SERVER_OUT_PATH = "./.zeropress";
 var CLIENT_OUT_PATH = "./dist";
 var PUBLIC_PATH = "./public";
-var HTML_PATH = path2.join(ROOT_PATH, "./index.html");
+var HTML_PATH = path.join(ROOT_PATH, "./index.html");
 var CONFIG_OPTIONS = ["zeropress.config.ts", "zeropress.config.js"];
 var DEFAULT_USER_CONFIG = {
   docs: "docs",
@@ -37,11 +33,14 @@ var DEFAULT_USER_CONFIG = {
 
 // src/node/tailwind.ts
 import { addDynamicIconSelectors } from "@iconify/tailwind";
-import path3 from "path";
+import path2 from "path";
+import { fileURLToPath as fileURLToPath2 } from "url";
+var __filename2 = fileURLToPath2(import.meta.url);
+var __dirname2 = path2.dirname(__filename2);
 var tailwindcssConfig = {
   content: [
-    path3.join(
-      __dirname,
+    path2.join(
+      __dirname2,
       "..",
       "..",
       "./src/default-theme/**/*.{tsx,ts,jsx,js}"
@@ -92,7 +91,7 @@ var tailwindcssConfig = {
 import autoprefixer from "autoprefixer";
 import fg from "fast-glob";
 import fse from "fs-extra";
-import path4 from "path";
+import path3 from "path";
 
 // src/shared/utils.ts
 function normalizeUrl(url = "/") {
@@ -130,7 +129,6 @@ async function resolveSiteConfig({
   command,
   mode
 }) {
-  var _a, _b, _c, _d, _e;
   const { userConfigPath, userConfig = {} } = await resolveUserConfig({
     root,
     mode,
@@ -138,28 +136,25 @@ async function resolveSiteConfig({
   });
   const docs = userConfig.docs || DEFAULT_USER_CONFIG.docs;
   const auto = await autoSidebarAndNav({ docs });
-  const navLeftIndex = ((_b = (_a = userConfig.themeConfig) == null ? void 0 : _a.nav) == null ? void 0 : _b.findIndex(
+  const navLeftIndex = userConfig.themeConfig?.nav?.findIndex(
     (item) => item.position === "left"
-  )) ?? 0;
-  const nav = ((_c = userConfig.themeConfig) == null ? void 0 : _c.autoNav) === false ? userConfig.themeConfig.nav ?? [] : (((_d = userConfig.themeConfig) == null ? void 0 : _d.nav) ?? []).toSpliced(
+  ) ?? 0;
+  const nav = userConfig.themeConfig?.autoNav === false ? userConfig.themeConfig.nav ?? [] : (userConfig.themeConfig?.nav ?? []).toSpliced(
     navLeftIndex === -1 ? 0 : navLeftIndex,
     0,
     ...auto.nav
   );
-  const sidebar = ((_e = userConfig.themeConfig) == null ? void 0 : _e.autoSidebar) === false ? userConfig.themeConfig.sidebar ?? {} : auto.sidebar;
+  const sidebar = userConfig.themeConfig?.autoSidebar === false ? userConfig.themeConfig.sidebar ?? {} : auto.sidebar;
   const normalizedNav = nav.map((item) => ({
     ...item,
     link: normalizeUrl(item.link)
   }));
   const normalizedSidebar = Object.entries(sidebar).reduce(
     (pre, [key, value]) => {
-      pre[normalizeUrl(key)] = value.map((item) => {
-        var _a2;
-        return {
-          ...item,
-          items: (_a2 = item.items) == null ? void 0 : _a2.map((i) => ({ ...i, link: normalizeUrl(i.link) }))
-        };
-      });
+      pre[normalizeUrl(key)] = value.map((item) => ({
+        ...item,
+        items: item.items?.map((i) => ({ ...i, link: normalizeUrl(i.link) }))
+      }));
       return pre;
     },
     {}
@@ -204,7 +199,7 @@ async function autoSidebarAndNav({ docs }) {
     const splitedDir = splitIndex(dir);
     const splitedFile = splitIndex(file);
     return {
-      path: `/${item.replace(path4.extname(item), "")}`,
+      path: `/${item.replace(path3.extname(item), "")}`,
       nav: nav2,
       dir,
       file,
@@ -214,7 +209,7 @@ async function autoSidebarAndNav({ docs }) {
       siderbarDirIndex: splitedDir.index,
       siderbarDirText: splitedDir.text,
       fileIndex: splitedFile.index,
-      fileText: splitedFile.text.replace(path4.extname(splitedFile.text), "")
+      fileText: splitedFile.text.replace(path3.extname(splitedFile.text), "")
     };
   });
   const nav = Object.entries(groupBy(data, "navText")).map(
@@ -248,12 +243,12 @@ async function autoSidebarAndNav({ docs }) {
   return { nav, sidebar };
 }
 function splitIndex(text) {
-  const matched = text == null ? void 0 : text.match(/^(\d+)(\.?\s*)(.*)$/);
-  const index = matched == null ? void 0 : matched[1];
+  const matched = text?.match(/^(\d+)(\.?\s*)(.*)$/);
+  const index = matched?.[1];
   if (index) {
     return {
       index: parseInt(index),
-      text: (matched == null ? void 0 : matched[3]) ?? ""
+      text: matched?.[3] ?? ""
     };
   } else {
     return {
@@ -275,13 +270,13 @@ async function resolveUserConfig({
   );
   return {
     userConfigPath,
-    userConfig: loadResult == null ? void 0 : loadResult.config
+    userConfig: loadResult?.config
   };
 }
 function getUserConfigPath({ root = process.cwd() }) {
   const userConfigPath = CONFIG_OPTIONS.map(
-    (option) => path4.join(root, option)
-  ).find((path8) => fse.existsSync(path8));
+    (option) => path3.join(root, option)
+  ).find((path7) => fse.existsSync(path7));
   return userConfigPath;
 }
 
@@ -296,10 +291,9 @@ var remarkMdxToc = () => {
       if (node.depth > 1 && node.depth < 8) {
         const children = node.children;
         const headText = children.map((child) => {
-          var _a;
           switch (child.type) {
             case "link":
-              return ((_a = child.children) == null ? void 0 : _a.map((child2) => child2.value).join("")) || "";
+              return child.children?.map((child2) => child2.value).join("") || "";
             default:
               return child.value;
           }
@@ -405,18 +399,16 @@ function vitePluginServeHtml({
     configureServer(server) {
       return () => {
         server.middlewares.use(async (req, res, next) => {
-          var _a, _b;
-          if (!((_a = req.url) == null ? void 0 : _a.endsWith(".html")) && req.url !== "/") {
+          if (!req.url?.endsWith(".html") && req.url !== "/") {
             return next();
           }
           try {
             const template = await fse2.readFile(templatePath, "utf-8");
-            const viteHtml = await ((_b = server.transformIndexHtml) == null ? void 0 : _b.call(
-              server,
+            const viteHtml = await server.transformIndexHtml?.(
               req.url,
               template,
               req.originalUrl
-            ));
+            );
             const html = viteHtml.replace(
               "</body>",
               `
@@ -489,7 +481,7 @@ function vitePluginVirtualConfig({
 
 // src/node/plugins/vitePluginVirtualRoutes.ts
 import fg2 from "fast-glob";
-import path5 from "path";
+import path4 from "path";
 function vitePluginVirtualRoutes({
   siteConfig
 }) {
@@ -513,8 +505,8 @@ function vitePluginVirtualRoutes({
         });
         let importTemplate = 'import React from "react";\n';
         const routes = files.map((file, index) => {
-          const relativePath = path5.relative(docs, file);
-          const pathname = relativePath.replace(path5.extname(file), "").replace(/index$/, "");
+          const relativePath = path4.relative(docs, file);
+          const pathname = relativePath.replace(path4.extname(file), "").replace(/index$/, "");
           importTemplate += `import Element${index + 1} from '${file}';
 `;
           return `{ path: '/${normalizeUrl(pathname)}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },
@@ -558,7 +550,7 @@ function createPlugins({
 
 // src/node/build.ts
 import fse3, { remove } from "fs-extra";
-import path6 from "path";
+import path5 from "path";
 import { build } from "vite";
 async function buildRuntime({ siteConfig }) {
   console.log("\u5220\u9664\u65E7\u4EA7\u7269\uFF1A", CLIENT_OUT_PATH);
@@ -582,7 +574,7 @@ function viteBuild({
     plugins: createPlugins({ siteConfig }),
     build: {
       ssr: isServer,
-      outDir: isServer ? path6.join(ROOT_PATH, SERVER_OUT_PATH) : path6.join(siteConfig.root, CLIENT_OUT_PATH),
+      outDir: isServer ? path5.join(ROOT_PATH, SERVER_OUT_PATH) : path5.join(siteConfig.root, CLIENT_OUT_PATH),
       rollupOptions: {
         input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
         output: {
@@ -612,19 +604,19 @@ async function renderHtmls({
     (chunk) => chunk.type === "asset" && chunk.fileName.endsWith(".css")
   );
   if (await fse3.exists(PUBLIC_PATH)) {
-    await fse3.copy(PUBLIC_PATH, path6.join(CLIENT_OUT_PATH));
+    await fse3.copy(PUBLIC_PATH, path5.join(CLIENT_OUT_PATH));
   }
-  const serverEntryPath = path6.join(
+  const serverEntryPath = path5.join(
     ROOT_PATH,
     SERVER_OUT_PATH,
-    serverEntryChunk == null ? void 0 : serverEntryChunk.fileName
+    serverEntryChunk?.fileName
   );
-  const clientEntryPath = `/${clientEntryChunk == null ? void 0 : clientEntryChunk.fileName}`;
+  const clientEntryPath = `/${clientEntryChunk?.fileName}`;
   const { render, routes } = await import(serverEntryPath);
   const template = await fse3.readFile(HTML_PATH, "utf-8");
   await Promise.all(
     routes.map(async (route) => {
-      const location = route.path === "/" ? "/index" : route.path || "/index";
+      const location = (route.path === "/" ? "/index" : route.path) || "/index";
       const relativeFilePath = `${CLIENT_OUT_PATH}${location}.html`;
       const rendered = await render(location);
       const html = template.replace("<!--app-html-->", rendered).replace(
@@ -637,8 +629,8 @@ async function renderHtmls({
         "</head>",
         styleAssets.map((asset) => `<link rel="stylesheet" href="/${asset.fileName}">`).join("\n")
       );
-      fse3.ensureDir(path6.join(siteConfig.root, path6.dirname(relativeFilePath))).catch((e) => console.log("client\u6587\u4EF6\u5939\u4E0D\u5B58\u5728\uFF1A", e)).then(
-        () => fse3.writeFile(path6.join(siteConfig.root, relativeFilePath), html)
+      fse3.ensureDir(path5.join(siteConfig.root, path5.dirname(relativeFilePath))).catch((e) => console.log("client\u6587\u4EF6\u5939\u4E0D\u5B58\u5728\uFF1A", e)).then(
+        () => fse3.writeFile(path5.join(siteConfig.root, relativeFilePath), html)
       ).catch((e) => console.log("html\u5199\u5165\u5931\u8D25", e));
     })
   );
@@ -668,9 +660,9 @@ async function createRuntimeDevServer({
 // src/node/cli.ts
 import { program } from "commander";
 import fse4 from "fs-extra";
-import path7 from "path";
+import path6 from "path";
 var cli = program;
-var { version } = fse4.readJSONSync(path7.join(ROOT_PATH, "./package.json"));
+var { version } = fse4.readJSONSync(path6.join(ROOT_PATH, "./package.json"));
 cli.name("zeropress").version(version);
 cli.command("dev", { isDefault: true }).description("dev server").option("-p,--port <value>", "dev server port").action(async ({ port }) => {
   const createServer2 = async () => {

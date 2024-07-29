@@ -9,9 +9,9 @@ import { Content, usePageData } from 'runtime'
 /**
  * 主题入口
  */
-export function Layout() {
+export function Layout({ location = window.location.pathname }) {
   const { pageData } = usePageData()
-  console.log('页面数据：', pageData)
+  // console.log('页面数据：', pageData)
 
   const getPage = () => {
     const pageType = pageData?.pageType
@@ -24,7 +24,12 @@ export function Layout() {
         ></Home>
       )
     } else if (pageType === 'doc') {
-      return <Doc content={<Content></Content>} toc={pageData?.toc}></Doc>
+      return (
+        <Doc
+          content={<Content location={location}></Content>}
+          toc={pageData?.toc}
+        ></Doc>
+      )
     } else if (pageType === '404') {
       return <NotFound></NotFound>
     } else {

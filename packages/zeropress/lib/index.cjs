@@ -48,8 +48,8 @@ function normalizeUrl(url = "/") {
 
 // src/runtime/client/Content.tsx
 var import_virtual_routes = __toESM(require("virtual:routes"), 1);
-function Content() {
-  const element = (0, import_react_router_dom.useRoutes)(import_virtual_routes.default, normalizeUrl(location.pathname));
+function Content({ location = "/" }) {
+  const element = (0, import_react_router_dom.useRoutes)(import_virtual_routes.default, normalizeUrl(location));
   console.log(
     "\u6587\u4EF6\u8DEF\u7531",
     import_virtual_routes.default.map((i) => i.path)
@@ -62,15 +62,14 @@ var import_react = require("react");
 var import_virtual_config = __toESM(require("virtual:config"), 1);
 var import_virtual_routes2 = __toESM(require("virtual:routes"), 1);
 async function getPageData(pathname) {
-  var _a, _b, _c, _d;
   const matched = import_virtual_routes2.default.find((route) => route.path === pathname);
   if (matched) {
     const module2 = await matched.preload();
     return {
-      pageType: ((_b = (_a = module2 == null ? void 0 : module2.GetFrontMatter) == null ? void 0 : _a.call(module2)) == null ? void 0 : _b.pageType) || "doc",
+      pageType: module2?.GetFrontMatter?.()?.pageType || "doc",
       pagePath: pathname,
-      frontmatter: ((_c = module2.GetFrontMatter) == null ? void 0 : _c.call(module2)) ?? {},
-      toc: ((_d = module2.GetToc) == null ? void 0 : _d.call(module2)) ?? [],
+      frontmatter: module2.GetFrontMatter?.() ?? {},
+      toc: module2.GetToc?.() ?? [],
       userConfig: import_virtual_config.default
     };
   }
@@ -94,11 +93,11 @@ function Link({
   const navigate = (0, import_react_router_dom2.useNavigate)();
   const { setPageData } = usePageData();
   const isSpa = true;
-  const isCsg = isSpa && !(href == null ? void 0 : href.startsWith("http"));
+  const isCsg = isSpa && !href?.startsWith("http");
   const handleCsgNavigate = async () => {
     const newPageData = await getPageData(href);
-    setPageData == null ? void 0 : setPageData(newPageData);
-    onClick == null ? void 0 : onClick();
+    setPageData?.(newPageData);
+    onClick?.();
     navigate(href);
   };
   return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(

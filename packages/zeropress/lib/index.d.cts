@@ -127,7 +127,9 @@ interface Route {
  * 路由内容
  * @description 通过虚拟模块提供spa路由内容
  */
-declare function Content(): react.ReactElement<any, string | react.JSXElementConstructor<any>> | null;
+declare function Content({ location }: {
+    location?: string | undefined;
+}): react.ReactElement<any, string | react.JSXElementConstructor<any>> | null;
 
 declare function getPageData(pathname: string): Promise<PageData>;
 interface Props {

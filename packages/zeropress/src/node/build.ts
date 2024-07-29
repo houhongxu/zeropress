@@ -118,7 +118,7 @@ async function renderHtmls({
   // mpa路由，每个路由都渲染为html
   await Promise.all(
     routes.map(async (route) => {
-      const location = route.path === '/' ? '/index' : route.path || '/index'
+      const location = (route.path === '/' ? '/index' : route.path) || '/index'
 
       const relativeFilePath = `${CLIENT_OUT_PATH}${location}.html`
 

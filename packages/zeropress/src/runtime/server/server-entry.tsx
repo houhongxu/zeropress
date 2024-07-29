@@ -11,12 +11,13 @@ import routes from 'virtual:routes'
  */
 export async function render(location: string) {
   const pageData = await getPageData(location)
+  console.log(location, 3123123213)
 
   // https://reactrouter.com/en/main/guides/ssr#without-a-data-router
   const html = renderToString(
     <PageDataProvider value={{ pageData }}>
       <StaticRouter location={location}>
-        <Layout></Layout>
+        <Layout location={location}></Layout>
       </StaticRouter>
     </PageDataProvider>,
   )

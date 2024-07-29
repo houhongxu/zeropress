@@ -8,8 +8,8 @@ function normalizeUrl(url = "/") {
 
 // src/runtime/client/Content.tsx
 import routes from "virtual:routes";
-function Content() {
-  const element = useRoutes(routes, normalizeUrl(location.pathname));
+function Content({ location = "/" }) {
+  const element = useRoutes(routes, normalizeUrl(location));
   console.log(
     "\u6587\u4EF6\u8DEF\u7531",
     routes.map((i) => i.path)
@@ -22,15 +22,14 @@ import { createContext, useContext } from "react";
 import config from "virtual:config";
 import routes2 from "virtual:routes";
 async function getPageData(pathname) {
-  var _a, _b, _c, _d;
   const matched = routes2.find((route) => route.path === pathname);
   if (matched) {
     const module = await matched.preload();
     return {
-      pageType: ((_b = (_a = module == null ? void 0 : module.GetFrontMatter) == null ? void 0 : _a.call(module)) == null ? void 0 : _b.pageType) || "doc",
+      pageType: module?.GetFrontMatter?.()?.pageType || "doc",
       pagePath: pathname,
-      frontmatter: ((_c = module.GetFrontMatter) == null ? void 0 : _c.call(module)) ?? {},
-      toc: ((_d = module.GetToc) == null ? void 0 : _d.call(module)) ?? [],
+      frontmatter: module.GetFrontMatter?.() ?? {},
+      toc: module.GetToc?.() ?? [],
       userConfig: config
     };
   }
@@ -54,11 +53,11 @@ function Link({
   const navigate = useNavigate();
   const { setPageData } = usePageData();
   const isSpa = true;
-  const isCsg = isSpa && !(href == null ? void 0 : href.startsWith("http"));
+  const isCsg = isSpa && !href?.startsWith("http");
   const handleCsgNavigate = async () => {
     const newPageData = await getPageData(href);
-    setPageData == null ? void 0 : setPageData(newPageData);
-    onClick == null ? void 0 : onClick();
+    setPageData?.(newPageData);
+    onClick?.();
     navigate(href);
   };
   return /* @__PURE__ */ jsx(

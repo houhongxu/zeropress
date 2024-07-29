@@ -1,12 +1,14 @@
 {
   "name": "zeropress",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "zero config SSG framework",
   "scripts": {
     "build:comment": "echo 多入口打包，tsup不打包node_modules，--shims兼容esm与cjs的全局变量如__dirname，--no-splitting兼容shims，让shims不分割为chunk影响__dirname等路径，npm run build --watch无法接受watch参数，pnpm又固定了包管理器，所以复制build命令到dev",
     "build": "tsup ./src/node/cli.ts ./src/index.ts --shims --no-splitting --format cjs,esm --dts --external virtual:routes --external virtual:config --outDir=./lib",
     "dev": "cross-env NODE_ENV=development tsup ./src/node/cli.ts ./src/index.ts --shims --no-splitting --format cjs,esm --dts --external virtual:routes --external virtual:config  --outDir=./lib --watch",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "release": "tsx scripts/release.ts",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "type": "module",
   "main": "./lib/index.cjs",
@@ -15,12 +17,18 @@
   "bin": "./bin/zeropress.js",
   "files": [
     "./lib",
-    "./bin"
+    "./bin",
+    "index.html",
+    "src/runtime",
+    "src/shared",
+    "src/default-theme"
   ],
   "dependencies": {
     "@iconify-json/carbon": "^1.1.30",
     "@iconify/tailwind": "^0.1.4",
     "@mdx-js/rollup": "^3.0.1",
+    "@types/minimist": "^1.2.5",
+    "@types/semver": "^7.5.8",
     "@vitejs/plugin-react": "^4.2.1",
     "acorn": "^8.11.3",
     "autoprefixer": "^10.4.17",
@@ -52,12 +60,19 @@
     "@types/mdast": "^4.0.3",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
+    "chalk": "^5.3.0",
     "cross-env": "^7.0.3",
+    "enquirer": "^2.4.1",
+    "execa": "^9.3.0",
     "mdast-util-mdxjs-esm": "^2.0.1",
+    "minimist": "^1.2.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rollup": "^4.12.0",
-    "tsup": "^8.0.1"
+    "semver": "^7.6.3",
+    "serve": "^14.2.1",
+    "tsup": "^8.0.1",
+    "tsx": "^4.16.2"
   },
   "peerDependencies": {
     "react": ">=18.0.0 <19.0.0",

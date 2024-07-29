@@ -34,8 +34,15 @@ __export(cli_exports, {
 });
 module.exports = __toCommonJS(cli_exports);
 
+// ../../node_modules/.pnpm/tsup@8.0.1_postcss@8.4.35_typescript@5.3.3/node_modules/tsup/assets/cjs_shims.js
+var getImportMetaUrl = () => typeof document === "undefined" ? new URL("file:" + __filename).href : document.currentScript && document.currentScript.src || new URL("main.js", document.baseURI).href;
+var importMetaUrl = /* @__PURE__ */ getImportMetaUrl();
+
 // src/node/consts.ts
 var import_path = __toESM(require("path"), 1);
+var import_url = require("url");
+var __filename2 = (0, import_url.fileURLToPath)(importMetaUrl);
+var __dirname = import_path.default.dirname(__filename2);
 var ROOT_PATH = import_path.default.join(__dirname, "..", "..");
 var SRC_PATH = import_path.default.join(ROOT_PATH, "./src");
 var RUNTIME_PATH = import_path.default.join(SRC_PATH, "./runtime");
@@ -67,10 +74,13 @@ var DEFAULT_USER_CONFIG = {
 // src/node/tailwind.ts
 var import_tailwind = require("@iconify/tailwind");
 var import_path2 = __toESM(require("path"), 1);
+var import_url2 = require("url");
+var __filename3 = (0, import_url2.fileURLToPath)(importMetaUrl);
+var __dirname2 = import_path2.default.dirname(__filename3);
 var tailwindcssConfig = {
   content: [
     import_path2.default.join(
-      __dirname,
+      __dirname2,
       "..",
       "..",
       "./src/default-theme/**/*.{tsx,ts,jsx,js}"
@@ -159,7 +169,6 @@ async function resolveSiteConfig({
   command,
   mode
 }) {
-  var _a, _b, _c, _d, _e;
   const { userConfigPath, userConfig = {} } = await resolveUserConfig({
     root,
     mode,
@@ -167,28 +176,25 @@ async function resolveSiteConfig({
   });
   const docs = userConfig.docs || DEFAULT_USER_CONFIG.docs;
   const auto = await autoSidebarAndNav({ docs });
-  const navLeftIndex = ((_b = (_a = userConfig.themeConfig) == null ? void 0 : _a.nav) == null ? void 0 : _b.findIndex(
+  const navLeftIndex = userConfig.themeConfig?.nav?.findIndex(
     (item) => item.position === "left"
-  )) ?? 0;
-  const nav = ((_c = userConfig.themeConfig) == null ? void 0 : _c.autoNav) === false ? userConfig.themeConfig.nav ?? [] : (((_d = userConfig.themeConfig) == null ? void 0 : _d.nav) ?? []).toSpliced(
+  ) ?? 0;
+  const nav = userConfig.themeConfig?.autoNav === false ? userConfig.themeConfig.nav ?? [] : (userConfig.themeConfig?.nav ?? []).toSpliced(
     navLeftIndex === -1 ? 0 : navLeftIndex,
     0,
     ...auto.nav
   );
-  const sidebar = ((_e = userConfig.themeConfig) == null ? void 0 : _e.autoSidebar) === false ? userConfig.themeConfig.sidebar ?? {} : auto.sidebar;
+  const sidebar = userConfig.themeConfig?.autoSidebar === false ? userConfig.themeConfig.sidebar ?? {} : auto.sidebar;
   const normalizedNav = nav.map((item) => ({
     ...item,
     link: normalizeUrl(item.link)
   }));
   const normalizedSidebar = Object.entries(sidebar).reduce(
     (pre, [key, value]) => {
-      pre[normalizeUrl(key)] = value.map((item) => {
-        var _a2;
-        return {
-          ...item,
-          items: (_a2 = item.items) == null ? void 0 : _a2.map((i) => ({ ...i, link: normalizeUrl(i.link) }))
-        };
-      });
+      pre[normalizeUrl(key)] = value.map((item) => ({
+        ...item,
+        items: item.items?.map((i) => ({ ...i, link: normalizeUrl(i.link) }))
+      }));
       return pre;
     },
     {}
@@ -277,12 +283,12 @@ async function autoSidebarAndNav({ docs }) {
   return { nav, sidebar };
 }
 function splitIndex(text) {
-  const matched = text == null ? void 0 : text.match(/^(\d+)(\.?\s*)(.*)$/);
-  const index = matched == null ? void 0 : matched[1];
+  const matched = text?.match(/^(\d+)(\.?\s*)(.*)$/);
+  const index = matched?.[1];
   if (index) {
     return {
       index: parseInt(index),
-      text: (matched == null ? void 0 : matched[3]) ?? ""
+      text: matched?.[3] ?? ""
     };
   } else {
     return {
@@ -304,7 +310,7 @@ async function resolveUserConfig({
   );
   return {
     userConfigPath,
-    userConfig: loadResult == null ? void 0 : loadResult.config
+    userConfig: loadResult?.config
   };
 }
 function getUserConfigPath({ root = process.cwd() }) {
@@ -325,10 +331,9 @@ var remarkMdxToc = () => {
       if (node.depth > 1 && node.depth < 8) {
         const children = node.children;
         const headText = children.map((child) => {
-          var _a;
           switch (child.type) {
             case "link":
-              return ((_a = child.children) == null ? void 0 : _a.map((child2) => child2.value).join("")) || "";
+              return child.children?.map((child2) => child2.value).join("") || "";
             default:
               return child.value;
           }
@@ -434,18 +439,16 @@ function vitePluginServeHtml({
     configureServer(server) {
       return () => {
         server.middlewares.use(async (req, res, next) => {
-          var _a, _b;
-          if (!((_a = req.url) == null ? void 0 : _a.endsWith(".html")) && req.url !== "/") {
+          if (!req.url?.endsWith(".html") && req.url !== "/") {
             return next();
           }
           try {
             const template = await import_fs_extra2.default.readFile(templatePath, "utf-8");
-            const viteHtml = await ((_b = server.transformIndexHtml) == null ? void 0 : _b.call(
-              server,
+            const viteHtml = await server.transformIndexHtml?.(
               req.url,
               template,
               req.originalUrl
-            ));
+            );
             const html = viteHtml.replace(
               "</body>",
               `
@@ -646,14 +649,14 @@ async function renderHtmls({
   const serverEntryPath = import_path5.default.join(
     ROOT_PATH,
     SERVER_OUT_PATH,
-    serverEntryChunk == null ? void 0 : serverEntryChunk.fileName
+    serverEntryChunk?.fileName
   );
-  const clientEntryPath = `/${clientEntryChunk == null ? void 0 : clientEntryChunk.fileName}`;
+  const clientEntryPath = `/${clientEntryChunk?.fileName}`;
   const { render, routes } = await import(serverEntryPath);
   const template = await import_fs_extra3.default.readFile(HTML_PATH, "utf-8");
   await Promise.all(
     routes.map(async (route) => {
-      const location = route.path === "/" ? "/index" : route.path || "/index";
+      const location = (route.path === "/" ? "/index" : route.path) || "/index";
       const relativeFilePath = `${CLIENT_OUT_PATH}${location}.html`;
       const rendered = await render(location);
       const html = template.replace("<!--app-html-->", rendered).replace(
