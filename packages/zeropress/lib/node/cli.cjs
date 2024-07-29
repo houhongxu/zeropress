@@ -430,6 +430,8 @@ function viteBuild({
 }) {
   return (0, import_vite.build)({
     mode: "production",
+    root: ROOT_PATH,
+    // 获取tsconfig.json等配置文件
     plugins: createPlugins({ siteConfig }),
     build: {
       ssr: isServer,
