@@ -50,7 +50,7 @@ export function Nav({ nav }: { nav?: NavItem[] }) {
         )}
       >
         <div className="flex h-full items-center justify-between">
-          <div className="flex h-full justify-start">
+          <div className="flex h-full shrink-0 justify-start">
             {left?.map((item, index) => (
               <div className="h-full" key={`${item.link}${index}`}>
                 {getItem(item)}
@@ -58,7 +58,7 @@ export function Nav({ nav }: { nav?: NavItem[] }) {
             ))}
           </div>
 
-          <div className="flex h-full justify-end">
+          <div className="flex h-full w-full justify-end overflow-x-scroll">
             {right?.map((item, index) => (
               <div className="h-full" key={`${item.link}${index}`}>
                 {getItem(item)}

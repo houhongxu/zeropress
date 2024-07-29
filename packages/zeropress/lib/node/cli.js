@@ -54,6 +54,7 @@ function vitePluginFileChange({
   let preFiles;
   return {
     name: "vitePluginFileChange",
+    apply: "serve",
     async configResolved() {
       preFiles = await getDocs(siteConfig.userConfig.docs);
     },
@@ -185,6 +186,7 @@ function vitePluginServeHtml({
 }) {
   return {
     name: "vitePluginServeHtml",
+    apply: "serve",
     // https://cn.vitejs.dev/guide/api-plugin.html#configureserver
     configureServer(server) {
       return () => {
@@ -692,9 +694,6 @@ async function createRuntimeDevServer({
       alias: {
         "@": SRC_PATH
       }
-    },
-    optimizeDeps: {
-      exclude: ["virtual:config", "virtual:routes"]
     }
   });
 }

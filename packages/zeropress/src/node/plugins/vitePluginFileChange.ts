@@ -16,7 +16,7 @@ export function vitePluginFileChange({
 
   return {
     name: 'vitePluginFileChange',
-
+    apply: 'serve',
     async configResolved() {
       preFiles = await getDocs(siteConfig.userConfig.docs)
     },

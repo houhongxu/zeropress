@@ -32,8 +32,5 @@ export async function createRuntimeDevServer({
         '@': SRC_PATH,
       },
     },
-    optimizeDeps: {
-      exclude: ['virtual:config', 'virtual:routes'],
-    },
   })
 }

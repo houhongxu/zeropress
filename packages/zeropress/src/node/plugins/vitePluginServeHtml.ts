@@ -12,7 +12,7 @@ export function vitePluginServeHtml({
 }: VitePluginServeHtmlOptions): Plugin {
   return {
     name: 'vitePluginServeHtml',
-
+    apply: 'serve',
     // https://cn.vitejs.dev/guide/api-plugin.html#configureserver
     configureServer(server) {
       return () => {
