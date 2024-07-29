@@ -4,6 +4,7 @@ import { execa } from 'execa'
 import fse from 'fs-extra'
 import minimist from 'minimist'
 import path from 'path'
+import { exit } from 'process'
 import semver from 'semver'
 import { fileURLToPath } from 'url'
 
@@ -73,9 +74,16 @@ async function main() {
 
   // 3. 自动修改包版本
   if (!isDry) {
-    step('Updating version / 更新版本中 ...')
-    await updateVersion(targetVersion)
+    try {
+      step('Updating version / 更新版本中 ...')
+      await updateVersion(targetVersion)
+    } catch (err) {
+      console.log(err)
+      await updateVersion(currentVersion)
+      exit(1)
+    }
   }
+
   // 4. 执行 pnpm build
   step('Building package / 构建产物中 ...')
   await run('pnpm', ['build'])
@@ -85,17 +93,33 @@ async function main() {
   await run('pnpm', ['changelog'])
 
   // 6. 生成 release commit
-  step('Committing changes / 提交改动中 ...')
-  await run('git', ['add', '-A'])
-  await run('git', ['commit', '-m', `release: v${targetVersion}`])
+  try {
+    step('Committing changes / 提交改动中 ...')
+    await run('git', ['add', '-A'])
+    await run('git', ['commit', '-m', `release: v${targetVersion}`])
+  } catch (err) {
+    console.log(err)
+    await updateVersion(currentVersion)
+    await run('git', ['reset', '--soft', 'HEAD~1'])
+    exit(1)
+  }
 
   // 7. git push 并打 tag
-  step('\nPushing to GitHub...')
   const tagName = `${currentName}-v${targetVersion}`
-  await run('git', ['tag', tagName])
-  // 将本地仓库中的 vxxx 标签推送到名为 origin 的远程仓库，不推送代码
-  await run('git', ['push', 'origin', tagName])
-  await run('git', ['push'])
+
+  try {
+    step('\nPushing to GitHub...')
+    await run('git', ['tag', tagName])
+    // 将本地仓库中的 vxxx 标签推送到名为 origin 的远程仓库，不推送代码
+    await run('git', ['push', 'origin', tagName])
+  } catch (err) {
+    console.log(err)
+    await updateVersion(currentVersion)
+    await run('git', ['reset', '--soft', 'HEAD~1'])
+    await run('git', ['tag', '-d', tagName])
+    await run('git', ['push', 'origin', '--delete', 'tag', tagName])
+    exit(1)
+  }
 
   // 8. 执行 npm publish
   step('Publishing packages / 发布包中 ...')
@@ -103,8 +127,5 @@ async function main() {
 }
 
 main().catch(async (err) => {
-  // 错误兜底处理，回退版本
   console.log(err)
-  await run('git', ['reset', '--soft', 'HEAD~1'])
-  await updateVersion(currentVersion)
 })
