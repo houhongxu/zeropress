@@ -1,10 +1,10 @@
 {
   "name": "zeropress",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "zero config SSG framework",
   "scripts": {
     "build:comment": "echo 多入口打包，tsup不打包node_modules，--shims兼容esm与cjs的全局变量如__dirname，--no-splitting兼容shims，让shims不分割为chunk影响__dirname等路径",
-    "build": "tsup ./src/node/cli.ts ./src/index.ts --shims --no-splitting --format cjs,esm --dts --outDir=./lib",
+    "build": "tsup ./src/node/cli.ts ./src/index.ts --shims --no-splitting --format cjs,esm --dts --external virtual:routes --external virtual:config --outDir=./lib",
     "dev": "cross-env NODE_ENV=development tsup ./src/node/cli.ts ./src/index.ts --shims --no-splitting --format cjs,esm --dts --outDir=./lib --watch",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "release": "tsx scripts/release.ts",
