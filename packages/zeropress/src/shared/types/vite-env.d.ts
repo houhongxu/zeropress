@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
 declare module 'virtual:config' {
-  import { UserConfig } from '@/shared/types'
+  import { UserConfig } from './userConfig'
 
   const config: UserConfig
 
@@ -9,7 +9,7 @@ declare module 'virtual:config' {
 }
 
 declare module 'virtual:routes' {
-  import { Route } from '@/shared/types'
+  import { Route } from './route'
 
   const routes: Route[]
   export default routes

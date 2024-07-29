@@ -1,9 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
-import React, { createContext, useContext, useState, useEffect } from "react";
-import { useRoutes, useNavigate, useLocation } from "react-router-dom";
-import classNames from "classnames";
+import * as React from "react";
+import React__default, { createContext, useContext, useState, useEffect } from "react";
 import { renderToString } from "react-dom/server";
-import { StaticRouter } from "react-router-dom/server.mjs";
 const config = { "docs": "docs", "title": "ZEROPRESS", "description": "SSG Framework", "themeConfig": { "nav": [{ "text": "笔记", "link": "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro" }, { "img": "/favicon.jpg", "link": "/", "position": "left" }, { "dark": true, "link": "/" }, { "logo": "github", "link": "https://github.com/houhongxu/hhxpress" }], "sidebar": { "/%E7%AC%94%E8%AE%B0": [{ "text": "介绍", "items": [{ "text": "intro", "link": "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro" }] }, { "text": "git", "items": [{ "text": "常用命令", "link": "/%E7%AC%94%E8%AE%B0/1git/0%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4" }, { "text": "版本控制系统VCS", "link": "/%E7%AC%94%E8%AE%B0/1git/1%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FVCS" }, { "text": "分布式版本控制系统DVCS", "link": "/%E7%AC%94%E8%AE%B0/1git/2%E5%88%86%E5%B8%83%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FDVCS" }, { "text": "HEAD与master与branch", "link": "/%E7%AC%94%E8%AE%B0/1git/3HEAD%E4%B8%8Emaster%E4%B8%8Ebranch" }, { "text": "push", "link": "/%E7%AC%94%E8%AE%B0/1git/4push" }, { "text": "merge", "link": "/%E7%AC%94%E8%AE%B0/1git/5merge" }, { "text": "feature branch", "link": "/%E7%AC%94%E8%AE%B0/1git/6feature%20branch" }, { "text": "rebase", "link": "/%E7%AC%94%E8%AE%B0/1git/7rebase" }, { "text": "revert", "link": "/%E7%AC%94%E8%AE%B0/1git/8revert" }, { "text": "reset", "link": "/%E7%AC%94%E8%AE%B0/1git/9reset" }, { "text": "checkout", "link": "/%E7%AC%94%E8%AE%B0/1git/10checkout" }, { "text": "stash", "link": "/%E7%AC%94%E8%AE%B0/1git/11stash" }, { "text": "log与reflog", "link": "/%E7%AC%94%E8%AE%B0/1git/12log%E4%B8%8Ereflog" }, { "text": "cherry-pick", "link": "/%E7%AC%94%E8%AE%B0/1git/13cherry-pick" }, { "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/1git/99readme" }] }, { "text": "浏览器", "items": [{ "text": "浏览器进程", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/1%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9B%E7%A8%8B" }, { "text": "TCP协议", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/2TCP%E5%8D%8F%E8%AE%AE" }, { "text": "HTTP协议", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/3HTTP%E5%8D%8F%E8%AE%AE" }, { "text": "浏览器缓存", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/4%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98" }, { "text": "导航流程", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/5%E5%AF%BC%E8%88%AA%E6%B5%81%E7%A8%8B" }, { "text": "渲染流程", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/6%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B" }, { "text": "内存", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/13%E5%86%85%E5%AD%98" }, { "text": "消息队列和事件循环", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/16%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF" }, { "text": "浏览器的dns缓存", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/98%20%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84dns%E7%BC%93%E5%AD%98" }, { "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/99readme" }] }, { "text": "http", "items": [{ "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/3http/99readme" }] }, { "text": "javascript", "items": [{ "text": "引用", "link": "/%E7%AC%94%E8%AE%B0/4javascript/1%E5%BC%95%E7%94%A8" }, { "text": "运算符", "link": "/%E7%AC%94%E8%AE%B0/4javascript/2%E8%BF%90%E7%AE%97%E7%AC%A6" }, { "text": "lodash手写", "link": "/%E7%AC%94%E8%AE%B0/4javascript/3lodash%E6%89%8B%E5%86%99" }] }, { "text": "webpack", "items": [{ "text": "使用 node api 学习 webpack", "link": "/%E7%AC%94%E8%AE%B0/5webpack/1%E4%BD%BF%E7%94%A8%20node%20api%20%E5%AD%A6%E4%B9%A0%20webpack" }, { "text": "cjs运行时分析", "link": "/%E7%AC%94%E8%AE%B0/5webpack/2cjs%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90" }, { "text": "cjs模块收集与ast", "link": "/%E7%AC%94%E8%AE%B0/5webpack/3cjs%E6%A8%A1%E5%9D%97%E6%94%B6%E9%9B%86%E4%B8%8East" }, { "text": "文件名中的hash", "link": "/%E7%AC%94%E8%AE%B0/5webpack/4%E6%96%87%E4%BB%B6%E5%90%8D%E4%B8%AD%E7%9A%84hash" }, { "text": "cjs与esm", "link": "/%E7%AC%94%E8%AE%B0/5webpack/5cjs%E4%B8%8Eesm" }, { "text": "esm to cjs", "link": "/%E7%AC%94%E8%AE%B0/5webpack/6esm%20to%20cjs" }, { "text": "code spliting运行时分析", "link": "/%E7%AC%94%E8%AE%B0/5webpack/7code%20spliting%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90" }, { "text": "magic comment", "link": "/%E7%AC%94%E8%AE%B0/5webpack/8magic%20comment" }, { "text": "hash 的增强", "link": "/%E7%AC%94%E8%AE%B0/5webpack/9hash%20%E7%9A%84%E5%A2%9E%E5%BC%BA" }, { "text": "module与chunk与asset", "link": "/%E7%AC%94%E8%AE%B0/5webpack/10module%E4%B8%8Echunk%E4%B8%8Easset" }, { "text": "bundle spliting", "link": "/%E7%AC%94%E8%AE%B0/5webpack/11bundle%20spliting" }, { "text": "高效分包", "link": "/%E7%AC%94%E8%AE%B0/5webpack/12%E9%AB%98%E6%95%88%E5%88%86%E5%8C%85" }, { "text": "loader初识", "link": "/%E7%AC%94%E8%AE%B0/5webpack/13loader%E5%88%9D%E8%AF%86" }, { "text": "json处理", "link": "/%E7%AC%94%E8%AE%B0/5webpack/14json%E5%A4%84%E7%90%86" }, { "text": "import assertions", "link": "/%E7%AC%94%E8%AE%B0/5webpack/15import%20assertions" }, { "text": "html处理", "link": "/%E7%AC%94%E8%AE%B0/5webpack/16html%E5%A4%84%E7%90%86" }, { "text": "图片处理", "link": "/%E7%AC%94%E8%AE%B0/5webpack/17%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86" }, { "text": "小图片处理", "link": "/%E7%AC%94%E8%AE%B0/5webpack/18%E5%B0%8F%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86" }, { "text": "svg图片处理", "link": "/%E7%AC%94%E8%AE%B0/5webpack/19svg%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86" }, { "text": "简单样式处理", "link": "/%E7%AC%94%E8%AE%B0/5webpack/20%E7%AE%80%E5%8D%95%E6%A0%B7%E5%BC%8F%E5%A4%84%E7%90%86" }, { "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/5webpack/99readme" }] }, { "text": "ahooks", "items": [{ "text": "useLocalStorageState与useSessionStorageState", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/1useLocalStorageState%E4%B8%8EuseSessionStorageState" }, { "text": "useUpdateEffect 与 useUpdateLayoutEffectt", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/2useUpdateEffect%20%E4%B8%8E%20useUpdateLayoutEffectt" }, { "text": "useLatest与useMemoizedFn", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/3useLatest%E4%B8%8EuseMemoizedFn" }, { "text": "use(Raf)Timeout与use(Raf)Interval与useCountDown", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/4use(Raf)Timeout%E4%B8%8Euse(Raf)Interval%E4%B8%8EuseCountDown" }, { "text": "useRequest", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/5useRequest" }, { "text": "useMount与useUnMount与useMountedRefx.md", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/6useMount%E4%B8%8EuseUnMount%E4%B8%8EuseMountedRefx.md" }, { "text": "useUpdate", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/7useUpdate" }, { "text": "useCreation", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/8useCreation" }, { "text": "useDeepCompareEffect", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/9useDeepCompareEffect" }, { "text": "useAnimationFrame和计时器", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/97useAnimationFrame%E5%92%8C%E8%AE%A1%E6%97%B6%E5%99%A8" }, { "text": "工具函数", "link": "/%E7%AC%94%E8%AE%B0/6ahooks/98.%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0" }] }] }, "autoNav": true, "autoSidebar": true }, "vite": {} };
 const GetToc$_ = () => [];
 const frontmatter$_ = {
@@ -3112,1419 +3110,12 @@ const _3lodash__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePr
   default: MDXContent$w
 }, Symbol.toStringTag, { value: "Module" }));
 const GetToc$v = () => [{
-  "id": "moduletype",
-  "text": "moduleType",
-  "depth": 2
-}, {
-  "id": "chunk",
-  "text": "chunk",
-  "depth": 2
-}];
-const frontmatter$v = void 0;
-function _createMdxContent$v(props) {
-  const _components = {
-    a: "a",
-    h1: "h1",
-    h2: "h2",
-    li: "li",
-    ol: "ol",
-    p: "p",
-    span: "span",
-    ul: "ul",
-    ...props.components
-  };
-  return jsxs(Fragment, {
-    children: [jsxs(_components.h1, {
-      id: "modulechunkasset",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#modulechunkasset",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "module/chunk/asset"]
-    }), "\n", jsxs(_components.h2, {
-      id: "moduletype",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#moduletype",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "moduleType"]
-    }), "\n", jsxs(_components.ul, {
-      children: ["\n", jsx(_components.li, {
-        children: "javascript/auto：我们在项目内引入的 ESM/CommonJS 的模块 (ESM 模块要看 loader 是如何处理的，也有可能是 javascript/esm 类型，不必深究)"
-      }), "\n", jsx(_components.li, {
-        children: "javascript/esm：我们在项目内引入的 ESM Package，比如 html-to-image，在其 package.json 中含有 module 字段"
-      }), "\n", jsx(_components.li, {
-        children: "javascript/dynamic：require('./src' + xxx)，动态加载"
-      }), "\n", jsx(_components.li, {
-        children: "asset：图片等资源"
-      }), "\n", jsx(_components.li, {
-        children: "asset/resource：图片等资源"
-      }), "\n", jsx(_components.li, {
-        children: "runtime：webpack_require 下挂载的诸多方法"
-      }), "\n"]
-    }), "\n", jsxs(_components.h2, {
-      id: "chunk",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#chunk",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "chunk"]
-    }), "\n", jsx(_components.p, {
-      children: "一个 chunk 包含以下属性"
-    }), "\n", jsxs(_components.ul, {
-      children: ["\n", jsx(_components.li, {
-        children: "initial：是否是 initial chunk，即首次 HTML 必须加载的模块"
-      }), "\n", jsx(_components.li, {
-        children: "entry：是否是 entry chunk"
-      }), "\n", jsx(_components.li, {
-        children: "hash：chunkhash"
-      }), "\n"]
-    }), "\n", jsxs(_components.ol, {
-      children: ["\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "分析你们项目中打包后 stats 对象的 module/chunk/asset"
-        }), "\n", jsx(_components.p, {
-          children: "分析"
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "contenthash 与 chunkhash 有何区别"
-        }), "\n", jsxs(_components.ul, {
-          children: ["\n", jsx(_components.li, {
-            children: "chunkhash：对应 chunk 的 hash"
-          }), "\n", jsx(_components.li, {
-            children: "contenthash：对应 chunk 中每个 content 的 hash，比如一个 chunk 中既包含 js，又包含 css 时"
-          }), "\n"]
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "什么是 Concatenated Module"
-        }), "\n", jsx(_components.p, {
-          children: "将多个模块打包为 webpack 的一个模块"
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "什么是 initial chunk"
-        }), "\n", jsx(_components.p, {
-          children: "首次 HTML 必须加载的模块"
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "output.filename 与 output.chunkFilename 的区别是什么"
-        }), "\n", jsxs(_components.ul, {
-          children: ["\n", jsx(_components.li, {
-            children: "filename：initial chunk 的文件名"
-          }), "\n", jsx(_components.li, {
-            children: "chunkFilename：非 initial chunk 的文件名"
-          }), "\n"]
-        }), "\n"]
-      }), "\n"]
-    })]
-  });
-}
-function MDXContent$v(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$v, {
-      ...props
-    })
-  }) : _createMdxContent$v(props);
-}
-const GetFrontMatter$v = () => frontmatter$v;
-const _10module_chunk_asset = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$v,
-  GetToc: GetToc$v,
-  default: MDXContent$v
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$u = () => [];
-const frontmatter$u = void 0;
-function _createMdxContent$u(props) {
-  const _components = {
-    a: "a",
-    h1: "h1",
-    li: "li",
-    ol: "ol",
-    span: "span",
-    ...props.components
-  };
-  return jsxs(Fragment, {
-    children: [jsxs(_components.h1, {
-      id: "bundle-spliting",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#bundle-spliting",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "bundle spliting"]
-    }), "\n", jsxs(_components.ol, {
-      children: ["\n", jsx(_components.li, {
-        children: "将示例一中的 common.js 抽出来进行单独打包"
-      }), "\n", jsx(_components.li, {
-        children: "optimization.splitChunks 中 chunks、minChunks、minSize 各参数代表什么"
-      }), "\n", jsx(_components.li, {
-        children: "如果将示例一中的 common.js 在 index.js 中引用，即被 initial chunk 引用，打包会发生什么"
-      }), "\n", jsx(_components.li, {
-        children: "如果将示例二中的 lodash.js 在 index.js 中引用，即被 initial chunk 引用，打包会发生什么"
-      }), "\n"]
-    })]
-  });
-}
-function MDXContent$u(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$u, {
-      ...props
-    })
-  }) : _createMdxContent$u(props);
-}
-const GetFrontMatter$u = () => frontmatter$u;
-const _11bundle_spliting = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$u,
-  GetToc: GetToc$u,
-  default: MDXContent$u
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$t = () => [];
-const frontmatter$t = void 0;
-function _createMdxContent$t(props) {
-  const _components = {
-    a: "a",
-    h1: "h1",
-    span: "span",
-    ...props.components
-  };
-  return jsxs(_components.h1, {
-    id: "高效分包",
-    children: [jsx(_components.a, {
-      className: "autolink-headings",
-      href: "#高效分包",
-      children: jsx(_components.span, {
-        style: {
-          marginRight: "4px"
-        },
-        children: "#"
-      })
-    }), "高效分包"]
-  });
-}
-function MDXContent$t(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$t, {
-      ...props
-    })
-  }) : _createMdxContent$t(props);
-}
-const GetFrontMatter$t = () => frontmatter$t;
-const _12____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$t,
-  GetToc: GetToc$t,
-  default: MDXContent$t
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$s = () => [];
-const frontmatter$s = void 0;
-function _createMdxContent$s(props) {
-  return jsx(Fragment, {});
-}
-function MDXContent$s(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$s, {
-      ...props
-    })
-  }) : _createMdxContent$s();
-}
-const GetFrontMatter$s = () => frontmatter$s;
-const _13loader__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$s,
-  GetToc: GetToc$s,
-  default: MDXContent$s
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$r = () => [];
-const frontmatter$r = void 0;
-function _createMdxContent$r(props) {
-  return jsx(Fragment, {});
-}
-function MDXContent$r(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$r, {
-      ...props
-    })
-  }) : _createMdxContent$r();
-}
-const GetFrontMatter$r = () => frontmatter$r;
-const _14json__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$r,
-  GetToc: GetToc$r,
-  default: MDXContent$r
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$q = () => [];
-const frontmatter$q = void 0;
-function _createMdxContent$q(props) {
-  return jsx(Fragment, {});
-}
-function MDXContent$q(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$q, {
-      ...props
-    })
-  }) : _createMdxContent$q();
-}
-const GetFrontMatter$q = () => frontmatter$q;
-const _15import_assertions = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$q,
-  GetToc: GetToc$q,
-  default: MDXContent$q
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$p = () => [];
-const frontmatter$p = void 0;
-function _createMdxContent$p(props) {
-  return jsx(Fragment, {});
-}
-function MDXContent$p(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$p, {
-      ...props
-    })
-  }) : _createMdxContent$p();
-}
-const GetFrontMatter$p = () => frontmatter$p;
-const _16html__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$p,
-  GetToc: GetToc$p,
-  default: MDXContent$p
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$o = () => [];
-const frontmatter$o = void 0;
-function _createMdxContent$o(props) {
-  return jsx(Fragment, {});
-}
-function MDXContent$o(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$o, {
-      ...props
-    })
-  }) : _createMdxContent$o();
-}
-const GetFrontMatter$o = () => frontmatter$o;
-const _17____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$o,
-  GetToc: GetToc$o,
-  default: MDXContent$o
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$n = () => [];
-const frontmatter$n = void 0;
-function _createMdxContent$n(props) {
-  return jsx(Fragment, {});
-}
-function MDXContent$n(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$n, {
-      ...props
-    })
-  }) : _createMdxContent$n();
-}
-const GetFrontMatter$n = () => frontmatter$n;
-const _18_____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$n,
-  GetToc: GetToc$n,
-  default: MDXContent$n
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$m = () => [];
-const frontmatter$m = void 0;
-function _createMdxContent$m(props) {
-  return jsx(Fragment, {});
-}
-function MDXContent$m(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$m, {
-      ...props
-    })
-  }) : _createMdxContent$m();
-}
-const GetFrontMatter$m = () => frontmatter$m;
-const _19svg____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$m,
-  GetToc: GetToc$m,
-  default: MDXContent$m
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$l = () => [];
-const frontmatter$l = void 0;
-function _createMdxContent$l(props) {
-  const _components = {
-    a: "a",
-    h1: "h1",
-    img: "img",
-    li: "li",
-    ol: "ol",
-    p: "p",
-    span: "span",
-    ...props.components
-  };
-  return jsxs(Fragment, {
-    children: [jsxs(_components.h1, {
-      id: "使用-node-api-学习-webpack",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#使用-node-api-学习-webpack",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "使用 node api 学习 webpack​"]
-    }), "\n", jsxs(_components.ol, {
-      children: ["\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "使用 webpack api 打包一个最简的 js 资源"
-        }), "\n", jsx(_components.p, {
-          children: jsx(_components.img, {
-            src: "/img/note/5/z-1-1.jpg",
-            alt: "z-1-1"
-          })
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "你所使用含有 webpack 的项目中，webpack 是通过 webpack-cli 打包的吗？"
-        }), "\n", jsx(_components.p, {
-          children: "是，nextjs 和 umijs 2.直播后明白并不是，nextjs 和 umijsj 将 webpack 包直接放入 compiled 文件夹 ，防止依赖更新带来的问题，所以是 api 打包的"
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "如何计算每次 webpack 构建时间"
-        }), "\n", jsx(_components.p, {
-          children: "stat.toJson().time\nstat.endTime - stat.statTime"
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "断点调试 webpack 源码，了解其编译时间（startTime/endTime）是如何计算的"
-        }), "\n", jsxs(_components.p, {
-          children: ["首先进入 run 函数\n", jsx(_components.img, {
-            src: "/img/note/5/z-1-2.jpg",
-            alt: "z-1-2"
-          }), "\n可以看到直接定义了 startTime\n下面是要找 endTime\n先看最后的调用逻辑\n", jsx(_components.img, {
-            src: "/img/note/5/z-1-3.jpg",
-            alt: "z-1-3"
-          })]
-        }), "\n", jsxs(_components.p, {
-          children: ["如果是判断是否闲置，两种情况都执行内部的 run 函数\n", jsx(_components.img, {
-            src: "/img/note/5/z-1-4.jpg",
-            alt: "z-1-4"
-          })]
-        }), "\n", jsxs(_components.p, {
-          children: ["再看 run 函数，如果错误执行的 finalCallback 把 err 传给用户，没有错误则执行 onCompiled 函数\n", jsx(_components.img, {
-            src: "/img/note/5/z-1-5.jpg",
-            alt: "z-1-5"
-          })]
-        }), "\n", jsxs(_components.p, {
-          children: ["这里便赋值了 startTime 和 endTime，compilation 对象是在调用 onCompiled 时由 webpack 实例的 compile 编译函数传过来的参数\n然后 new Stats 生成 stats 实例，实例根据 Stats 里定义的\n", jsx(_components.img, {
-            src: "/img/note/5/z-1-6.jpg",
-            alt: "z-1-6"
-          })]
-        }), "\n", jsx(_components.p, {
-          children: "get 函数即可访问 startTime 和 endTime"
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "断点调试执行 webpack 命令时的流程，体验它是如何在 webpack/webpack-cli 间相互调用的"
-        }), "\n", jsxs(_components.p, {
-          children: ["首先执行 webpack/bin/webpack.js\n", jsx(_components.img, {
-            src: "/img/note/5/z-1-7.jpg",
-            alt: "z-1-7"
-          })]
-        }), "\n", jsx(_components.p, {
-          children: "其中 runCli 函数根据传入的 cli 对象拼接路径，加载 webpack-cli/bin/cli.js\npkg.bin[cli.binName]即 pkg.bin['webpack-cli']\nwebpack-cli 的 package.json 里配置了 bin\n![z-1-8]/img/note/5/z-1-8.jpg)"
-        }), "\n", jsxs(_components.p, {
-          children: ["调用逻辑是判断是否安装 webpack，未安装时引导安装，已安装则直接调用 webpack-cli\n", jsx(_components.img, {
-            src: "/img/note/5/z-1-9.jpg",
-            alt: "z-1-9"
-          })]
-        }), "\n"]
-      }), "\n"]
-    })]
-  });
-}
-function MDXContent$l(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$l, {
-      ...props
-    })
-  }) : _createMdxContent$l(props);
-}
-const GetFrontMatter$l = () => frontmatter$l;
-const _1___node_api____webpack = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$l,
-  GetToc: GetToc$l,
-  default: MDXContent$l
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$k = () => [];
-const frontmatter$k = void 0;
-function _createMdxContent$k(props) {
-  return jsx(Fragment, {});
-}
-function MDXContent$k(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$k, {
-      ...props
-    })
-  }) : _createMdxContent$k();
-}
-const GetFrontMatter$k = () => frontmatter$k;
-const _20______ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$k,
-  GetToc: GetToc$k,
-  default: MDXContent$k
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$j = () => [{
-  "id": "作业",
-  "text": "作业",
-  "depth": 2
-}];
-const frontmatter$j = void 0;
-function _createMdxContent$j(props) {
-  const _components = {
-    a: "a",
-    code: "code",
-    h1: "h1",
-    h2: "h2",
-    img: "img",
-    li: "li",
-    ol: "ol",
-    p: "p",
-    span: "span",
-    ...props.components
-  };
-  return jsxs(Fragment, {
-    children: [jsxs(_components.h1, {
-      id: "cjs-运行时分析",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#cjs-运行时分析",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "cjs 运行时分析"]
-    }), "\n", jsxs(_components.h2, {
-      id: "作业",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#作业",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "作业"]
-    }), "\n", jsxs(_components.ol, {
-      children: ["\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "webpack 运行时代码进行调试三遍并理解"
-        }), "\n", jsx(_components.p, {
-          children: "调试略"
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "webpack 的模块加载器是如何实现的"
-        }), "\n", jsxs(_components.p, {
-          children: [jsx(_components.img, {
-            src: "/img/note/5/z-2-1.jpg",
-            alt: "z-2-1"
-          }), "\n首先定义全局缓存对象", jsx(_components.code, {
-            children: "__webpack_module_cache__"
-          }), "\n然后定义打包器函数", jsx(_components.code, {
-            children: "__webpack_require__(moduleId){}"
-          }), "\n函数中：\n首先根据 moduleId 读取全局缓存对象\n如果存在缓存，则直接返回缓存模块的 exports 对象\n如果不存在缓存，创建新的模块对象，首先根据 moduleId 放入缓存，然后赋值给局部模块对象，此时局部模块对象仅有 exports 属性\n然后根据 moduleId 读取全局模块数组，执行该模块函数并传入函数里的局部模块对象，拿到指定模块的 exports 值\n最后导出该模块的 exports 值"]
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "webpack 的运行时代码做了那些事情"
-        }), "\n", jsxs(_components.p, {
-          children: ["首先定义全局模块数组，将模块用带参数的函数包裹并根据 moduleId 放入数组的第一个位置后，第一个位置为入口模块 ", jsx(_components.code, {
-            children: "__webpack_modules__"
-          }), "\n然后定义模块加载器，可以根据 moduleId 执行模块，并返回模块的 exports 值 ", jsx(_components.code, {
-            children: "__webpack_require__"
-          }), "(moduleId){}\n最后执行模块加载器加载入口模块", jsx(_components.code, {
-            children: "__webpack_require__(0)"
-          })]
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsxs(_components.p, {
-          children: ["CommonJS 中，如果不对 module 进行缓存有什么问题，即不实现以上的 ", jsx(_components.code, {
-            children: "__webpack_module_cache__"
-          }), " 数据结构"]
-        }), "\n", jsxs(_components.ol, {
-          children: ["\n", jsx(_components.li, {
-            children: "避免模块反复生成"
-          }), "\n", jsx(_components.li, {
-            children: "单例模式，每个模块只在第一次被引用时产出模块对象，之后的引用都是同一个对象。"
-          }), "\n"]
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsxs(_components.p, {
-          children: ["阅读 webpack 模块加载器代码，我们在 CommonJS 中使用 ", jsx(_components.code, {
-            children: "module.exports"
-          }), " 与 ", jsx(_components.code, {
-            children: "exports"
-          }), " 有何区别"]
-        }), "\n", jsxs(_components.p, {
-          children: ["module.exports 是访问 module 的 exports 属性的值，exports 是该值的引用，即类似于", jsx(_components.code, {
-            children: "const exports=module.exports"
-          })]
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsxs(_components.p, {
-          children: ["如何理解 webpack 运行时代码最后是 ", jsx(_components.code, {
-            children: "__webpack_require__(0)"
-          })]
-        }), "\n", jsxs(_components.p, {
-          children: [jsx(_components.img, {
-            src: "/img/note/5/z-2-2.jpg",
-            alt: "z-2-2"
-          }), "\n", jsx(_components.img, {
-            src: "/img/note/5/z-2-3.jpg",
-            alt: "z-2-3"
-          }), "\n执行打包后的 js 然后打印", jsx(_components.code, {
-            children: "__webpack_modules__"
-          }), "发现 0 的位置是空的\n所以其实 0 只是一个预留位置\n解释成是储存入口模块可能更容易理解\n且因为", jsx(_components.code, {
-            children: "__webpack_modules__"
-          }), "是根据文件的依赖关系进行深度优先遍历得来的数组，所以根节点即入口文件即 0 位置的模块"]
-        }), "\n"]
-      }), "\n"]
-    })]
-  });
-}
-function MDXContent$j(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$j, {
-      ...props
-    })
-  }) : _createMdxContent$j(props);
-}
-const GetFrontMatter$j = () => frontmatter$j;
-const _2cjs_____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$j,
-  GetToc: GetToc$j,
-  default: MDXContent$j
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$i = () => [];
-const frontmatter$i = void 0;
-function _createMdxContent$i(props) {
-  const _components = {
-    a: "a",
-    h1: "h1",
-    img: "img",
-    li: "li",
-    ol: "ol",
-    p: "p",
-    span: "span",
-    strong: "strong",
-    ...props.components
-  };
-  return jsxs(Fragment, {
-    children: [jsxs(_components.h1, {
-      id: "cjs-模块收集与-ast",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#cjs-模块收集与-ast",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "cjs 模块收集与 ast"]
-    }), "\n", jsxs(_components.ol, {
-      children: ["\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "了解 AST 概念"
-        }), "\n", jsxs(_components.ol, {
-          children: ["\n", jsx(_components.li, {
-            children: "通过解析 parser 生成 AST"
-          }), "\n", jsx(_components.li, {
-            children: "code(词法分析)=>Token(语法分析)=>AST"
-          }), "\n", jsx(_components.li, {
-            children: "Token 可以进行代码检查，语法高亮等"
-          }), "\n"]
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "在 AST Explore 尝试 Javascript/CSS 解析，并观察其语法树"
-        }), "\n", jsxs(_components.p, {
-          children: [jsx(_components.img, {
-            src: "/img/note/5/z-3-1.jpg",
-            alt: "z-3-1"
-          }), "\n如图是 require 的语法树，4.会用到"]
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "如何根据入口文件搜索出所有需要打包的模块"
-        }), "\n", jsxs(_components.p, {
-          children: ["code 解析成 AST 后，以入口文件作为根节点开始深度优先遍历，通过 AST 找到具有 require 函数的节点,构建", jsx(_components.strong, {
-            children: "webpack_modules"
-          }), " 数组"]
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "如何模拟实现运行时代码的生成，实现 mini-webpack"
-        }), "\n", jsx(_components.p, {
-          children: jsx(_components.a, {
-            href: "https://github.com/903040380/poor-webpack",
-            children: "示例仓库"
-          })
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "如何去除代码中的所有 console.log"
-        }), "\n", jsxs(_components.p, {
-          children: ["见", jsx(_components.a, {
-            href: "https://github.com/903040380/poor-webpack",
-            children: "示例仓库"
-          })]
-        }), "\n"]
-      }), "\n"]
-    })]
-  });
-}
-function MDXContent$i(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$i, {
-      ...props
-    })
-  }) : _createMdxContent$i(props);
-}
-const GetFrontMatter$i = () => frontmatter$i;
-const _3cjs_____ast = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$i,
-  GetToc: GetToc$i,
-  default: MDXContent$i
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$h = () => [];
-const frontmatter$h = void 0;
-function _createMdxContent$h(props) {
-  const _components = {
-    a: "a",
-    h1: "h1",
-    li: "li",
-    ol: "ol",
-    p: "p",
-    span: "span",
-    ...props.components
-  };
-  return jsxs(Fragment, {
-    children: [jsxs(_components.h1, {
-      id: "文件名中的-hash",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#文件名中的-hash",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "文件名中的 hash"]
-    }), "\n", jsxs(_components.ol, {
-      children: ["\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "什么是 Long Term Cache，有何作用"
-        }), "\n", jsx(_components.p, {
-          children: "在服务器对响应头设置 cache-control 的值来达到最大化缓存时间，一般指一年时间或者两年时间"
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "为什么配置 output.filename 时不建议注入版本号"
-        }), "\n", jsx(_components.p, {
-          children: "因为会导致更新版本时所有文件名变化，当文件名变更时会重新进行缓存，那么更新版本会导致所有缓存失效，但是更新版本一般并不会更新所有文件"
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "为什么可以配置 Long Term Cache"
-        }), "\n", jsx(_components.p, {
-          children: "因为 webpack 打包时可以配置 contenthash,只改变改变内容的文件的 hash 值，新的文件会重新进行缓存，不会导致版本问题"
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "如何提升 webpack 编译时期计算 hash 的速度"
-        }), "\n", jsxs(_components.p, {
-          children: ["通过 output.hashFunction 属性,webpack5 已经支持直接配置’xxhash64‘\n", jsx(_components.a, {
-            href: "https://github.com/umijs/umi/pull/9168#event-7302069734",
-            children: "根据此方法对 umi 进行了优化"
-          })]
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "在 Node.js 中如何进行 hash 计算"
-        }), "\n", jsx(_components.p, {
-          children: "参考大佬的回答，是用 crypto 库"
-        }), "\n"]
-      }), "\n"]
-    })]
-  });
-}
-function MDXContent$h(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$h, {
-      ...props
-    })
-  }) : _createMdxContent$h(props);
-}
-const GetFrontMatter$h = () => frontmatter$h;
-const _4_____hash = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$h,
-  GetToc: GetToc$h,
-  default: MDXContent$h
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$g = () => [];
-const frontmatter$g = void 0;
-function _createMdxContent$g(props) {
-  const _components = {
-    a: "a",
-    h1: "h1",
-    li: "li",
-    ol: "ol",
-    p: "p",
-    span: "span",
-    ul: "ul",
-    ...props.components
-  };
-  return jsxs(Fragment, {
-    children: [jsxs(_components.h1, {
-      id: "cjs-与-esm",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#cjs-与-esm",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "cjs 与 esm"]
-    }), "\n", jsxs(_components.ol, {
-      children: ["\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "什么是 esm/commonjs"
-        }), "\n", jsx(_components.p, {
-          children: "esm:"
-        }), "\n", jsxs(_components.ul, {
-          children: ["\n", jsxs(_components.li, {
-            children: ["\n", jsx(_components.p, {
-              children: "是 ES 的模块规范，浏览器 node 都可运行"
-            }), "\n"]
-          }), "\n", jsxs(_components.li, {
-            children: ["\n", jsx(_components.p, {
-              children: "静态导入，所以可以 tree shaking，减少 js 体积，编译阶段就进行导入和导出"
-            }), "\n"]
-          }), "\n", jsxs(_components.li, {
-            children: ["\n", jsx(_components.p, {
-              children: "支持动态导入，执行到该行代码时才开始导入，异步加载（Promise）"
-            }), "\n"]
-          }), "\n", jsxs(_components.li, {
-            children: ["\n", jsx(_components.p, {
-              children: "导出的值是引用"
-            }), "\n"]
-          }), "\n"]
-        }), "\n", jsx(_components.p, {
-          children: "cjs: -是 node 的模块规范，webpack 和 node 都可运行，单纯浏览器环境不可以"
-        }), "\n", jsxs(_components.ul, {
-          children: ["\n", jsxs(_components.li, {
-            children: ["\n", jsx(_components.p, {
-              children: "动态导入，执行到该行代码时才开始导入，同步加载，加载完模块才会继续执行"
-            }), "\n"]
-          }), "\n", jsxs(_components.li, {
-            children: ["\n", jsx(_components.p, {
-              children: "具有缓存，可以通过 require.cache 查看，加载过的模块会通过缓存加载"
-            }), "\n"]
-          }), "\n", jsxs(_components.li, {
-            children: ["\n", jsx(_components.p, {
-              children: "导出的值是复制的值，类似 exports.a=a"
-            }), "\n"]
-          }), "\n"]
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "什么是 import(module)"
-        }), "\n", jsx(_components.p, {
-          children: "类似于 require 的动态导入，但是是异步加载（Promise）"
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "了解 skypack 和 jsdeliver 两个 npm 的 cdn 网站"
-        }), "\n", jsxs(_components.ul, {
-          children: ["\n", jsxs(_components.li, {
-            children: ["\n", jsx(_components.p, {
-              children: jsx(_components.a, {
-                href: "https://www.skypack.dev/",
-                children: "skypack"
-              })
-            }), "\n"]
-          }), "\n", jsxs(_components.li, {
-            children: ["\n", jsx(_components.p, {
-              children: jsx(_components.a, {
-                href: "https://www.jsdelivr.com/",
-                children: "jsdeliver"
-              })
-            }), "\n"]
-          }), "\n"]
-        }), "\n"]
-      }), "\n"]
-    })]
-  });
-}
-function MDXContent$g(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$g, {
-      ...props
-    })
-  }) : _createMdxContent$g(props);
-}
-const GetFrontMatter$g = () => frontmatter$g;
-const _5cjs_esm = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$g,
-  GetToc: GetToc$g,
-  default: MDXContent$g
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$f = () => [];
-const frontmatter$f = void 0;
-function _createMdxContent$f(props) {
-  const _components = {
-    a: "a",
-    code: "code",
-    h1: "h1",
-    img: "img",
-    li: "li",
-    ol: "ol",
-    p: "p",
-    span: "span",
-    ul: "ul",
-    ...props.components
-  };
-  return jsxs(Fragment, {
-    children: [jsxs(_components.h1, {
-      id: "esm-to-cjs",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#esm-to-cjs",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "esm to cjs"]
-    }), "\n", jsxs(_components.ol, {
-      children: ["\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "对含 ESM 模块的 webpack 运行时代码进行调试与理解"
-        }), "\n", jsx(_components.p, {
-          children: "ok"
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "webpack 含 ESM 的运行时代码做了那些事情"
-        }), "\n", jsxs(_components.p, {
-          children: ["首先根据 ast 生成的", jsx(_components.code, {
-            children: "__webpack_module__"
-          }), "的中用", jsx(_components.code, {
-            children: "__webpack_require__"
-          }), "的属性方法，r 给 ", jsx(_components.code, {
-            children: "__webpack_exports__"
-          }), "添加鉴别是 esm 模块的属性，d 将导出的属性用 getter(setter)定义，\n属性在下方声明是因为访问时已经赋值\n", jsx(_components.img, {
-            src: "/img/note/5/z-6-1.jpg",
-            alt: "z-6-1"
-          })]
-        }), "\n", jsxs(_components.p, {
-          children: ["缓存和", jsx(_components.code, {
-            children: "__webpack_require__"
-          }), "同 cjsm 模块\n", jsx(_components.img, {
-            src: "/img/note/5/z-6-2.jpg",
-            alt: "z-6-2"
-          })]
-        }), "\n", jsxs(_components.p, {
-          children: ["定义", jsx(_components.code, {
-            children: "__webpack_require__"
-          }), "的属性方法，r,d,o\n", jsx(_components.img, {
-            src: "/img/note/5/z-6-3.jpg",
-            alt: "z-6-3"
-          })]
-        }), "\n", jsxs(_components.p, {
-          children: ["先和", jsx(_components.code, {
-            children: "__webpack_module__"
-          }), "中模块一样执行 r,给入口模块添加 esm 标签，然后调用", jsx(_components.code, {
-            children: "__webpack_require__"
-          }), "返回 sum 模块的导出"]
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsxs(_components.p, {
-          children: [jsx(_components.code, {
-            children: "__webpack_require__"
-          }), " 中的 d/r/o 各个变量指什么意思"]
-        }), "\n", jsxs(_components.ul, {
-          children: ["\n", jsx(_components.li, {
-            children: "d:将 esm 导出的变量变成 exports 的 getter/setter 属性"
-          }), "\n", jsx(_components.li, {
-            children: "r:给 exports 添加一个属性标志这是 esm 模块"
-          }), "\n", jsx(_components.li, {
-            children: "o:相当于 Object 的 hasOwnProperty 方法"
-          }), "\n"]
-        }), "\n"]
-      }), "\n"]
-    })]
-  });
-}
-function MDXContent$f(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$f, {
-      ...props
-    })
-  }) : _createMdxContent$f(props);
-}
-const GetFrontMatter$f = () => frontmatter$f;
-const _6esm_to_cjs = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$f,
-  GetToc: GetToc$f,
-  default: MDXContent$f
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$e = () => [];
-const frontmatter$e = void 0;
-function _createMdxContent$e(props) {
-  const _components = {
-    a: "a",
-    code: "code",
-    h1: "h1",
-    img: "img",
-    li: "li",
-    ol: "ol",
-    p: "p",
-    span: "span",
-    ...props.components
-  };
-  return jsxs(Fragment, {
-    children: [jsxs(_components.h1, {
-      id: "code-spliting-运行时分析",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#code-spliting-运行时分析",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "code spliting 运行时分析"]
-    }), "\n", jsxs(_components.ol, {
-      children: ["\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "对 code spliting 后的代码进行调试与理解"
-        }), "\n", jsxs(_components.p, {
-          children: ["见", jsx(_components.a, {
-            href: "https://github.com/903040380/Xwebpack/tree/master/code-spliting/example/jsonp",
-            children: "代码中的注释"
-          })]
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsxs(_components.p, {
-          children: ["将自己项目取消代码压缩进行打包，观察其打包后的代码骨架\n", jsx(_components.img, {
-            src: "/img/note/5/z-7-1.jpg",
-            alt: "z-7-1"
-          })]
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "在 webpack 中如何实现 code spliting"
-        }), "\n", jsx(_components.p, {
-          children: "import() 动态导入"
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "在 webpack 中，加载 chunk 脚本的 JSONP Callback 如何实现"
-        }), "\n", jsx(_components.p, {
-          children: jsx(_components.img, {
-            src: "/img/note/5/z-7-2.jpg",
-            alt: "z-7-2"
-          })
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "当 output.chunkLoading 配置为 import 时，分析其源码"
-        }), "\n", jsx(_components.p, {
-          children: jsx(_components.img, {
-            src: "/img/note/5/z-7-3.jpg",
-            alt: "z-7-3"
-          })
-        }), "\n", jsxs(_components.p, {
-          children: [jsx(_components.code, {
-            children: "__webpack_require__.f.j"
-          }), "不同\n", jsx(_components.code, {
-            children: "__webpack_require__.l"
-          }), "不需要了"]
-        }), "\n", jsx(_components.p, {
-          children: jsx(_components.img, {
-            src: "/img/note/5/z-7-4.jpg",
-            alt: "z-7-4"
-          })
-        }), "\n", jsx(_components.p, {
-          children: "jsonp 不需要了，用 installChunck 替代"
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsxs(_components.p, {
-          children: ["当代码分割时，async chunk 所对应的源代码发生变更时，该 async chunk 路径将会发生变化，而 entry chunk 中的", jsx(_components.code, {
-            children: "__webpack_require__.u"
-          }), " 内容也将发生变化，导致 entry chunk 的内容发生变更，随之路径发生变更，这将导致不必要的缓存失效，如何处理该问题。"]
-        }), "\n", jsx(_components.p, {
-          children: "runtimeChunk 设置为 true 可以单独把 webpack 的运行时给独立出来，这样每次只重新请求 runtime 文件，nextjs 就是这样做的,见 hash 的增强章节"
-        }), "\n"]
-      }), "\n"]
-    })]
-  });
-}
-function MDXContent$e(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$e, {
-      ...props
-    })
-  }) : _createMdxContent$e(props);
-}
-const GetFrontMatter$e = () => frontmatter$e;
-const _7code_spliting_____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$e,
-  GetToc: GetToc$e,
-  default: MDXContent$e
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$d = () => [];
-const frontmatter$d = void 0;
-function _createMdxContent$d(props) {
-  const _components = {
-    a: "a",
-    code: "code",
-    h1: "h1",
-    li: "li",
-    ol: "ol",
-    p: "p",
-    span: "span",
-    strong: "strong",
-    ul: "ul",
-    ...props.components
-  };
-  return jsxs(Fragment, {
-    children: [jsxs(_components.h1, {
-      id: "magic-comment",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#magic-comment",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "magic comment"]
-    }), "\n", jsxs(_components.ol, {
-      children: ["\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "在 webpack 中有哪些魔法注释"
-        }), "\n", jsxs(_components.ul, {
-          children: ["\n", jsxs(_components.li, {
-            children: ["\n", jsx(_components.p, {
-              children: "webpackIgnore：设置为 true 时，禁用动态导入解析。"
-            }), "\n"]
-          }), "\n", jsxs(_components.li, {
-            children: ["\n", jsx(_components.p, {
-              children: "webpackChunkName: 新 chunk 的名称。"
-            }), "\n"]
-          }), "\n", jsxs(_components.li, {
-            children: ["\n", jsx(_components.p, {
-              children: "webpackMode：可以指定以不同的模式解析动态导入。"
-            }), "\n"]
-          }), "\n", jsxs(_components.li, {
-            children: ["\n", jsx(_components.p, {
-              children: "webpackPrefetch：告诉浏览器将来可能需要该资源来进行某些导航跳转。"
-            }), "\n"]
-          }), "\n", jsxs(_components.li, {
-            children: ["\n", jsx(_components.p, {
-              children: "webpackPreload：告诉浏览器在当前导航期间可能需要该资源。"
-            }), "\n"]
-          }), "\n", jsxs(_components.li, {
-            children: ["\n", jsx(_components.p, {
-              children: "webpackInclude：在导入解析（import resolution）过程中，用于匹配的正则表达式。只有匹配到的模块才会被打包。"
-            }), "\n"]
-          }), "\n", jsxs(_components.li, {
-            children: ["\n", jsx(_components.p, {
-              children: "webpackExclude：在导入解析（import resolution）过程中，用于匹配的正则表达式。所有匹配到的模块都不会被打包。"
-            }), "\n"]
-          }), "\n", jsxs(_components.li, {
-            children: ["\n", jsx(_components.p, {
-              children: "webpackExports: 告知 webpack 只构建指定出口的动态 import() 模块。"
-            }), "\n"]
-          }), "\n"]
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "在 webpack 中如何实现 prefetch 的"
-        }), "\n", jsxs(_components.p, {
-          children: ["配置", jsx(_components.code, {
-            children: "/* webpackPrefetch: true */"
-          }), "后，webpack 运行时，会生成", jsx(_components.code, {
-            children: "<link ref='prefetch'>"
-          }), "标签并放入 dom 中，浏览器会开始预加载资源"]
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "阅读 prefetch 后的运行时代码进行理解"
-        }), "\n", jsxs(_components.p, {
-          children: ["见", jsx(_components.a, {
-            href: "https://github.com/903040380/Xwebpack/tree/master/code-spliting/example/prefetch",
-            children: "代码中的注释"
-          })]
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "补充关于 preload 的问题"
-        }), "\n", jsxs(_components.p, {
-          children: ["preload chunk 会在父 chunk 加载时，以并行方式开始加载。\nprefetch chunk 会在父 chunk 加载结束后开始加载。\n所以，需要在 sumjs 里再次 preload 导入 add 才产生 preload，即", jsx(_components.strong, {
-            children: "只能加载 chunk 的 chunk"
-          })]
-        }), "\n"]
-      }), "\n"]
-    })]
-  });
-}
-function MDXContent$d(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$d, {
-      ...props
-    })
-  }) : _createMdxContent$d(props);
-}
-const GetFrontMatter$d = () => frontmatter$d;
-const _8magic_comment = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$d,
-  GetToc: GetToc$d,
-  default: MDXContent$d
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$c = () => [];
-const frontmatter$c = void 0;
-function _createMdxContent$c(props) {
-  const _components = {
-    a: "a",
-    h1: "h1",
-    li: "li",
-    p: "p",
-    span: "span",
-    ul: "ul",
-    ...props.components
-  };
-  return jsxs(Fragment, {
-    children: [jsxs(_components.h1, {
-      id: "参考",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#参考",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "参考"]
-    }), "\n", jsxs(_components.ul, {
-      children: ["\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: jsx(_components.a, {
-            href: "https://q.shanyue.tech/",
-            children: "山月"
-          })
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: jsx(_components.a, {
-            href: "https://github.com/903040380/webpack-demo",
-            children: "示例仓库"
-          })
-        }), "\n"]
-      }), "\n"]
-    })]
-  });
-}
-function MDXContent$c(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$c, {
-      ...props
-    })
-  }) : _createMdxContent$c(props);
-}
-const GetFrontMatter$c = () => frontmatter$c;
-const _99readme = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$c,
-  GetToc: GetToc$c,
-  default: MDXContent$c
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$b = () => [];
-const frontmatter$b = void 0;
-function _createMdxContent$b(props) {
-  const _components = {
-    a: "a",
-    code: "code",
-    h1: "h1",
-    img: "img",
-    li: "li",
-    ol: "ol",
-    p: "p",
-    span: "span",
-    ...props.components
-  };
-  return jsxs(Fragment, {
-    children: [jsxs(_components.h1, {
-      id: "hash-的增强",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#hash-的增强",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "hash 的增强"]
-    }), "\n", jsxs(_components.ol, {
-      children: ["\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "理解 deterministic chunkIds/moduleIds，以及什么情况下 id 会发生变更"
-        }), "\n", jsxs(_components.p, {
-          children: ["当模块加载顺序发生改变，模块顺序会发生改变，moduleIds 随之改变，而同时", jsx(_components.code, {
-            children: "__webpack_require__.u"
-          }), "读取到的 chunkId 随 moduleIds 改变，即 chunkIds 改变"]
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "如有余力，阅读源码查看 deterministic 在 webpack 的内部实现"
-        }), "\n", jsx(_components.p, {
-          children: "根据大佬回答，只要模块的路径和文件名不做更改，那么 deterministic 后的 hash 值就是稳定的"
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "理解 runtimeChunk 选项，阅读其源码，理解它是如何运行代码的"
-        }), "\n", jsx(_components.p, {
-          children: jsx(_components.img, {
-            src: "/img/note/5/z-9-1.jpg",
-            alt: "z-9-1"
-          })
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "阅读常见的社区以及自己公司的脚手架代码，观察是否配置了以上优化选项，如果没有，考虑是否可贡献代码"
-        }), "\n", jsx(_components.p, {
-          children: jsx(_components.a, {
-            href: "https://github.com/umijs/umi/pull/9541",
-            children: "umi 已提交 pr，正在修改中"
-          })
-        }), "\n"]
-      }), "\n"]
-    })]
-  });
-}
-function MDXContent$b(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$b, {
-      ...props
-    })
-  }) : _createMdxContent$b(props);
-}
-const GetFrontMatter$b = () => frontmatter$b;
-const _9hash____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$b,
-  GetToc: GetToc$b,
-  default: MDXContent$b
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$a = () => [{
   "id": "createusestoragestate",
   "text": "createUseStorageState",
   "depth": 2
 }];
-const frontmatter$a = void 0;
-function _createMdxContent$a(props) {
+const frontmatter$v = void 0;
+function _createMdxContent$v(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -6206,29 +4797,29 @@ function _createMdxContent$a(props) {
     })]
   });
 }
-function MDXContent$a(props = {}) {
+function MDXContent$v(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$a, {
+    children: jsx(_createMdxContent$v, {
       ...props
     })
-  }) : _createMdxContent$a(props);
+  }) : _createMdxContent$v(props);
 }
-const GetFrontMatter$a = () => frontmatter$a;
+const GetFrontMatter$v = () => frontmatter$v;
 const _1useLocalStorageState_useSessionStorageState = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$a,
-  GetToc: GetToc$a,
-  default: MDXContent$a
+  GetFrontMatter: GetFrontMatter$v,
+  GetToc: GetToc$v,
+  default: MDXContent$v
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$9 = () => [{
+const GetToc$u = () => [{
   "id": "useupdateeffect-与-useupdatelayouteffect",
   "text": "useUpdateEffect 与 useUpdateLayoutEffect",
   "depth": 2
 }];
-const frontmatter$9 = void 0;
-function _createMdxContent$9(props) {
+const frontmatter$u = void 0;
+function _createMdxContent$u(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -6768,23 +5359,23 @@ function _createMdxContent$9(props) {
     })]
   });
 }
-function MDXContent$9(props = {}) {
+function MDXContent$u(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$9, {
+    children: jsx(_createMdxContent$u, {
       ...props
     })
-  }) : _createMdxContent$9(props);
+  }) : _createMdxContent$u(props);
 }
-const GetFrontMatter$9 = () => frontmatter$9;
+const GetFrontMatter$u = () => frontmatter$u;
 const _2useUpdateEffect___useUpdateLayoutEffectt = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$9,
-  GetToc: GetToc$9,
-  default: MDXContent$9
+  GetFrontMatter: GetFrontMatter$u,
+  GetToc: GetToc$u,
+  default: MDXContent$u
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$8 = () => [{
+const GetToc$t = () => [{
   "id": "uselatest",
   "text": "useLatest",
   "depth": 2
@@ -6793,8 +5384,8 @@ const GetToc$8 = () => [{
   "text": "useMemoizedFn",
   "depth": 2
 }];
-const frontmatter$8 = void 0;
-function _createMdxContent$8(props) {
+const frontmatter$t = void 0;
+function _createMdxContent$t(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -7840,23 +6431,23 @@ function _createMdxContent$8(props) {
     })]
   });
 }
-function MDXContent$8(props = {}) {
+function MDXContent$t(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$8, {
+    children: jsx(_createMdxContent$t, {
       ...props
     })
-  }) : _createMdxContent$8(props);
+  }) : _createMdxContent$t(props);
 }
-const GetFrontMatter$8 = () => frontmatter$8;
+const GetFrontMatter$t = () => frontmatter$t;
 const _3useLatest_useMemoizedFn = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$8,
-  GetToc: GetToc$8,
-  default: MDXContent$8
+  GetFrontMatter: GetFrontMatter$t,
+  GetToc: GetToc$t,
+  default: MDXContent$t
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$7 = () => [{
+const GetToc$s = () => [{
   "id": "usetimeout",
   "text": "useTimeout",
   "depth": 2
@@ -7877,8 +6468,8 @@ const GetToc$7 = () => [{
   "text": "useCountDown",
   "depth": 2
 }];
-const frontmatter$7 = void 0;
-function _createMdxContent$7(props) {
+const frontmatter$s = void 0;
+function _createMdxContent$s(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -13763,23 +12354,23 @@ function _createMdxContent$7(props) {
     })]
   });
 }
-function MDXContent$7(props = {}) {
+function MDXContent$s(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$7, {
+    children: jsx(_createMdxContent$s, {
       ...props
     })
-  }) : _createMdxContent$7(props);
+  }) : _createMdxContent$s(props);
 }
-const GetFrontMatter$7 = () => frontmatter$7;
+const GetFrontMatter$s = () => frontmatter$s;
 const _4use_Raf_Timeout_use_Raf_Interval_useCountDown = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$7,
-  GetToc: GetToc$7,
-  default: MDXContent$7
+  GetFrontMatter: GetFrontMatter$s,
+  GetToc: GetToc$s,
+  default: MDXContent$s
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$6 = () => [{
+const GetToc$r = () => [{
   "id": "userequestimplement",
   "text": "useRequestImplement",
   "depth": 2
@@ -13788,8 +12379,8 @@ const GetToc$6 = () => [{
   "text": "Fetch",
   "depth": 2
 }];
-const frontmatter$6 = void 0;
-function _createMdxContent$6(props) {
+const frontmatter$r = void 0;
+function _createMdxContent$r(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -19103,46 +17694,46 @@ function _createMdxContent$6(props) {
     })]
   });
 }
-function MDXContent$6(props = {}) {
+function MDXContent$r(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$6, {
+    children: jsx(_createMdxContent$r, {
       ...props
     })
-  }) : _createMdxContent$6(props);
+  }) : _createMdxContent$r(props);
 }
-const GetFrontMatter$6 = () => frontmatter$6;
+const GetFrontMatter$r = () => frontmatter$r;
 const _5useRequest = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$6,
-  GetToc: GetToc$6,
-  default: MDXContent$6
+  GetFrontMatter: GetFrontMatter$r,
+  GetToc: GetToc$r,
+  default: MDXContent$r
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$5 = () => [];
-const frontmatter$5 = void 0;
-function _createMdxContent$5(props) {
+const GetToc$q = () => [];
+const frontmatter$q = void 0;
+function _createMdxContent$q(props) {
   return jsx(Fragment, {});
 }
-function MDXContent$5(props = {}) {
+function MDXContent$q(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$5, {
+    children: jsx(_createMdxContent$q, {
       ...props
     })
-  }) : _createMdxContent$5();
+  }) : _createMdxContent$q();
 }
-const GetFrontMatter$5 = () => frontmatter$5;
+const GetFrontMatter$q = () => frontmatter$q;
 const _6useMount_useUnMount_useMountedRef_mdx = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$5,
-  GetToc: GetToc$5,
-  default: MDXContent$5
+  GetFrontMatter: GetFrontMatter$q,
+  GetToc: GetToc$q,
+  default: MDXContent$q
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$4 = () => [];
-const frontmatter$4 = void 0;
-function _createMdxContent$4(props) {
+const GetToc$p = () => [];
+const frontmatter$p = void 0;
+function _createMdxContent$p(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -19321,25 +17912,25 @@ function _createMdxContent$4(props) {
     })]
   });
 }
-function MDXContent$4(props = {}) {
+function MDXContent$p(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$4, {
+    children: jsx(_createMdxContent$p, {
       ...props
     })
-  }) : _createMdxContent$4(props);
+  }) : _createMdxContent$p(props);
 }
-const GetFrontMatter$4 = () => frontmatter$4;
+const GetFrontMatter$p = () => frontmatter$p;
 const _7useUpdate = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$4,
-  GetToc: GetToc$4,
-  default: MDXContent$4
+  GetFrontMatter: GetFrontMatter$p,
+  GetToc: GetToc$p,
+  default: MDXContent$p
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$3 = () => [];
-const frontmatter$3 = void 0;
-function _createMdxContent$3(props) {
+const GetToc$o = () => [];
+const frontmatter$o = void 0;
+function _createMdxContent$o(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -19752,23 +18343,23 @@ function _createMdxContent$3(props) {
     })]
   });
 }
-function MDXContent$3(props = {}) {
+function MDXContent$o(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$3, {
+    children: jsx(_createMdxContent$o, {
       ...props
     })
-  }) : _createMdxContent$3(props);
+  }) : _createMdxContent$o(props);
 }
-const GetFrontMatter$3 = () => frontmatter$3;
+const GetFrontMatter$o = () => frontmatter$o;
 const _8useCreation = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$3,
-  GetToc: GetToc$3,
-  default: MDXContent$3
+  GetFrontMatter: GetFrontMatter$o,
+  GetToc: GetToc$o,
+  default: MDXContent$o
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$2 = () => [{
+const GetToc$n = () => [{
   "id": "useanimationframe",
   "text": "useAnimationFrame",
   "depth": 2
@@ -19777,8 +18368,8 @@ const GetToc$2 = () => [{
   "text": "计时器",
   "depth": 2
 }];
-const frontmatter$2 = void 0;
-function _createMdxContent$2(props) {
+const frontmatter$n = void 0;
+function _createMdxContent$n(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -20646,25 +19237,25 @@ function _createMdxContent$2(props) {
     })]
   });
 }
-function MDXContent$2(props = {}) {
+function MDXContent$n(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$2, {
+    children: jsx(_createMdxContent$n, {
       ...props
     })
-  }) : _createMdxContent$2(props);
+  }) : _createMdxContent$n(props);
 }
-const GetFrontMatter$2 = () => frontmatter$2;
+const GetFrontMatter$n = () => frontmatter$n;
 const _97useAnimationFrame____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$2,
-  GetToc: GetToc$2,
-  default: MDXContent$2
+  GetFrontMatter: GetFrontMatter$n,
+  GetToc: GetToc$n,
+  default: MDXContent$n
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$1 = () => [];
-const frontmatter$1 = void 0;
-function _createMdxContent$1(props) {
+const GetToc$m = () => [];
+const frontmatter$m = void 0;
+function _createMdxContent$m(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -21528,29 +20119,29 @@ function _createMdxContent$1(props) {
     })]
   });
 }
-function MDXContent$1(props = {}) {
+function MDXContent$m(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$1, {
+    children: jsx(_createMdxContent$m, {
       ...props
     })
-  }) : _createMdxContent$1(props);
+  }) : _createMdxContent$m(props);
 }
-const GetFrontMatter$1 = () => frontmatter$1;
+const GetFrontMatter$m = () => frontmatter$m;
 const _98_____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$1,
-  GetToc: GetToc$1,
-  default: MDXContent$1
+  GetFrontMatter: GetFrontMatter$m,
+  GetToc: GetToc$m,
+  default: MDXContent$m
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc = () => [{
+const GetToc$l = () => [{
   "id": "usedeepeffect",
   "text": "useDeepEffect",
   "depth": 2
 }];
-const frontmatter = void 0;
-function _createMdxContent(props) {
+const frontmatter$l = void 0;
+function _createMdxContent$l(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -21936,6 +20527,1413 @@ function _createMdxContent(props) {
     })]
   });
 }
+function MDXContent$l(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$l, {
+      ...props
+    })
+  }) : _createMdxContent$l(props);
+}
+const GetFrontMatter$l = () => frontmatter$l;
+const _9useDeepCompareEffect = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$l,
+  GetToc: GetToc$l,
+  default: MDXContent$l
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$k = () => [{
+  "id": "moduletype",
+  "text": "moduleType",
+  "depth": 2
+}, {
+  "id": "chunk",
+  "text": "chunk",
+  "depth": 2
+}];
+const frontmatter$k = void 0;
+function _createMdxContent$k(props) {
+  const _components = {
+    a: "a",
+    h1: "h1",
+    h2: "h2",
+    li: "li",
+    ol: "ol",
+    p: "p",
+    span: "span",
+    ul: "ul",
+    ...props.components
+  };
+  return jsxs(Fragment, {
+    children: [jsxs(_components.h1, {
+      id: "modulechunkasset",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#modulechunkasset",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "module/chunk/asset"]
+    }), "\n", jsxs(_components.h2, {
+      id: "moduletype",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#moduletype",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "moduleType"]
+    }), "\n", jsxs(_components.ul, {
+      children: ["\n", jsx(_components.li, {
+        children: "javascript/auto：我们在项目内引入的 ESM/CommonJS 的模块 (ESM 模块要看 loader 是如何处理的，也有可能是 javascript/esm 类型，不必深究)"
+      }), "\n", jsx(_components.li, {
+        children: "javascript/esm：我们在项目内引入的 ESM Package，比如 html-to-image，在其 package.json 中含有 module 字段"
+      }), "\n", jsx(_components.li, {
+        children: "javascript/dynamic：require('./src' + xxx)，动态加载"
+      }), "\n", jsx(_components.li, {
+        children: "asset：图片等资源"
+      }), "\n", jsx(_components.li, {
+        children: "asset/resource：图片等资源"
+      }), "\n", jsx(_components.li, {
+        children: "runtime：webpack_require 下挂载的诸多方法"
+      }), "\n"]
+    }), "\n", jsxs(_components.h2, {
+      id: "chunk",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#chunk",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "chunk"]
+    }), "\n", jsx(_components.p, {
+      children: "一个 chunk 包含以下属性"
+    }), "\n", jsxs(_components.ul, {
+      children: ["\n", jsx(_components.li, {
+        children: "initial：是否是 initial chunk，即首次 HTML 必须加载的模块"
+      }), "\n", jsx(_components.li, {
+        children: "entry：是否是 entry chunk"
+      }), "\n", jsx(_components.li, {
+        children: "hash：chunkhash"
+      }), "\n"]
+    }), "\n", jsxs(_components.ol, {
+      children: ["\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "分析你们项目中打包后 stats 对象的 module/chunk/asset"
+        }), "\n", jsx(_components.p, {
+          children: "分析"
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "contenthash 与 chunkhash 有何区别"
+        }), "\n", jsxs(_components.ul, {
+          children: ["\n", jsx(_components.li, {
+            children: "chunkhash：对应 chunk 的 hash"
+          }), "\n", jsx(_components.li, {
+            children: "contenthash：对应 chunk 中每个 content 的 hash，比如一个 chunk 中既包含 js，又包含 css 时"
+          }), "\n"]
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "什么是 Concatenated Module"
+        }), "\n", jsx(_components.p, {
+          children: "将多个模块打包为 webpack 的一个模块"
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "什么是 initial chunk"
+        }), "\n", jsx(_components.p, {
+          children: "首次 HTML 必须加载的模块"
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "output.filename 与 output.chunkFilename 的区别是什么"
+        }), "\n", jsxs(_components.ul, {
+          children: ["\n", jsx(_components.li, {
+            children: "filename：initial chunk 的文件名"
+          }), "\n", jsx(_components.li, {
+            children: "chunkFilename：非 initial chunk 的文件名"
+          }), "\n"]
+        }), "\n"]
+      }), "\n"]
+    })]
+  });
+}
+function MDXContent$k(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$k, {
+      ...props
+    })
+  }) : _createMdxContent$k(props);
+}
+const GetFrontMatter$k = () => frontmatter$k;
+const _10module_chunk_asset = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$k,
+  GetToc: GetToc$k,
+  default: MDXContent$k
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$j = () => [];
+const frontmatter$j = void 0;
+function _createMdxContent$j(props) {
+  const _components = {
+    a: "a",
+    h1: "h1",
+    li: "li",
+    ol: "ol",
+    span: "span",
+    ...props.components
+  };
+  return jsxs(Fragment, {
+    children: [jsxs(_components.h1, {
+      id: "bundle-spliting",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#bundle-spliting",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "bundle spliting"]
+    }), "\n", jsxs(_components.ol, {
+      children: ["\n", jsx(_components.li, {
+        children: "将示例一中的 common.js 抽出来进行单独打包"
+      }), "\n", jsx(_components.li, {
+        children: "optimization.splitChunks 中 chunks、minChunks、minSize 各参数代表什么"
+      }), "\n", jsx(_components.li, {
+        children: "如果将示例一中的 common.js 在 index.js 中引用，即被 initial chunk 引用，打包会发生什么"
+      }), "\n", jsx(_components.li, {
+        children: "如果将示例二中的 lodash.js 在 index.js 中引用，即被 initial chunk 引用，打包会发生什么"
+      }), "\n"]
+    })]
+  });
+}
+function MDXContent$j(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$j, {
+      ...props
+    })
+  }) : _createMdxContent$j(props);
+}
+const GetFrontMatter$j = () => frontmatter$j;
+const _11bundle_spliting = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$j,
+  GetToc: GetToc$j,
+  default: MDXContent$j
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$i = () => [];
+const frontmatter$i = void 0;
+function _createMdxContent$i(props) {
+  const _components = {
+    a: "a",
+    h1: "h1",
+    span: "span",
+    ...props.components
+  };
+  return jsxs(_components.h1, {
+    id: "高效分包",
+    children: [jsx(_components.a, {
+      className: "autolink-headings",
+      href: "#高效分包",
+      children: jsx(_components.span, {
+        style: {
+          marginRight: "4px"
+        },
+        children: "#"
+      })
+    }), "高效分包"]
+  });
+}
+function MDXContent$i(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$i, {
+      ...props
+    })
+  }) : _createMdxContent$i(props);
+}
+const GetFrontMatter$i = () => frontmatter$i;
+const _12____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$i,
+  GetToc: GetToc$i,
+  default: MDXContent$i
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$h = () => [];
+const frontmatter$h = void 0;
+function _createMdxContent$h(props) {
+  return jsx(Fragment, {});
+}
+function MDXContent$h(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$h, {
+      ...props
+    })
+  }) : _createMdxContent$h();
+}
+const GetFrontMatter$h = () => frontmatter$h;
+const _13loader__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$h,
+  GetToc: GetToc$h,
+  default: MDXContent$h
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$g = () => [];
+const frontmatter$g = void 0;
+function _createMdxContent$g(props) {
+  return jsx(Fragment, {});
+}
+function MDXContent$g(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$g, {
+      ...props
+    })
+  }) : _createMdxContent$g();
+}
+const GetFrontMatter$g = () => frontmatter$g;
+const _14json__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$g,
+  GetToc: GetToc$g,
+  default: MDXContent$g
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$f = () => [];
+const frontmatter$f = void 0;
+function _createMdxContent$f(props) {
+  return jsx(Fragment, {});
+}
+function MDXContent$f(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$f, {
+      ...props
+    })
+  }) : _createMdxContent$f();
+}
+const GetFrontMatter$f = () => frontmatter$f;
+const _15import_assertions = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$f,
+  GetToc: GetToc$f,
+  default: MDXContent$f
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$e = () => [];
+const frontmatter$e = void 0;
+function _createMdxContent$e(props) {
+  return jsx(Fragment, {});
+}
+function MDXContent$e(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$e, {
+      ...props
+    })
+  }) : _createMdxContent$e();
+}
+const GetFrontMatter$e = () => frontmatter$e;
+const _16html__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$e,
+  GetToc: GetToc$e,
+  default: MDXContent$e
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$d = () => [];
+const frontmatter$d = void 0;
+function _createMdxContent$d(props) {
+  return jsx(Fragment, {});
+}
+function MDXContent$d(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$d, {
+      ...props
+    })
+  }) : _createMdxContent$d();
+}
+const GetFrontMatter$d = () => frontmatter$d;
+const _17____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$d,
+  GetToc: GetToc$d,
+  default: MDXContent$d
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$c = () => [];
+const frontmatter$c = void 0;
+function _createMdxContent$c(props) {
+  return jsx(Fragment, {});
+}
+function MDXContent$c(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$c, {
+      ...props
+    })
+  }) : _createMdxContent$c();
+}
+const GetFrontMatter$c = () => frontmatter$c;
+const _18_____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$c,
+  GetToc: GetToc$c,
+  default: MDXContent$c
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$b = () => [];
+const frontmatter$b = void 0;
+function _createMdxContent$b(props) {
+  return jsx(Fragment, {});
+}
+function MDXContent$b(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$b, {
+      ...props
+    })
+  }) : _createMdxContent$b();
+}
+const GetFrontMatter$b = () => frontmatter$b;
+const _19svg____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$b,
+  GetToc: GetToc$b,
+  default: MDXContent$b
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$a = () => [];
+const frontmatter$a = void 0;
+function _createMdxContent$a(props) {
+  const _components = {
+    a: "a",
+    h1: "h1",
+    img: "img",
+    li: "li",
+    ol: "ol",
+    p: "p",
+    span: "span",
+    ...props.components
+  };
+  return jsxs(Fragment, {
+    children: [jsxs(_components.h1, {
+      id: "使用-node-api-学习-webpack",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#使用-node-api-学习-webpack",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "使用 node api 学习 webpack​"]
+    }), "\n", jsxs(_components.ol, {
+      children: ["\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "使用 webpack api 打包一个最简的 js 资源"
+        }), "\n", jsx(_components.p, {
+          children: jsx(_components.img, {
+            src: "/img/note/5/z-1-1.jpg",
+            alt: "z-1-1"
+          })
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "你所使用含有 webpack 的项目中，webpack 是通过 webpack-cli 打包的吗？"
+        }), "\n", jsx(_components.p, {
+          children: "是，nextjs 和 umijs 2.直播后明白并不是，nextjs 和 umijsj 将 webpack 包直接放入 compiled 文件夹 ，防止依赖更新带来的问题，所以是 api 打包的"
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "如何计算每次 webpack 构建时间"
+        }), "\n", jsx(_components.p, {
+          children: "stat.toJson().time\nstat.endTime - stat.statTime"
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "断点调试 webpack 源码，了解其编译时间（startTime/endTime）是如何计算的"
+        }), "\n", jsxs(_components.p, {
+          children: ["首先进入 run 函数\n", jsx(_components.img, {
+            src: "/img/note/5/z-1-2.jpg",
+            alt: "z-1-2"
+          }), "\n可以看到直接定义了 startTime\n下面是要找 endTime\n先看最后的调用逻辑\n", jsx(_components.img, {
+            src: "/img/note/5/z-1-3.jpg",
+            alt: "z-1-3"
+          })]
+        }), "\n", jsxs(_components.p, {
+          children: ["如果是判断是否闲置，两种情况都执行内部的 run 函数\n", jsx(_components.img, {
+            src: "/img/note/5/z-1-4.jpg",
+            alt: "z-1-4"
+          })]
+        }), "\n", jsxs(_components.p, {
+          children: ["再看 run 函数，如果错误执行的 finalCallback 把 err 传给用户，没有错误则执行 onCompiled 函数\n", jsx(_components.img, {
+            src: "/img/note/5/z-1-5.jpg",
+            alt: "z-1-5"
+          })]
+        }), "\n", jsxs(_components.p, {
+          children: ["这里便赋值了 startTime 和 endTime，compilation 对象是在调用 onCompiled 时由 webpack 实例的 compile 编译函数传过来的参数\n然后 new Stats 生成 stats 实例，实例根据 Stats 里定义的\n", jsx(_components.img, {
+            src: "/img/note/5/z-1-6.jpg",
+            alt: "z-1-6"
+          })]
+        }), "\n", jsx(_components.p, {
+          children: "get 函数即可访问 startTime 和 endTime"
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "断点调试执行 webpack 命令时的流程，体验它是如何在 webpack/webpack-cli 间相互调用的"
+        }), "\n", jsxs(_components.p, {
+          children: ["首先执行 webpack/bin/webpack.js\n", jsx(_components.img, {
+            src: "/img/note/5/z-1-7.jpg",
+            alt: "z-1-7"
+          })]
+        }), "\n", jsx(_components.p, {
+          children: "其中 runCli 函数根据传入的 cli 对象拼接路径，加载 webpack-cli/bin/cli.js\npkg.bin[cli.binName]即 pkg.bin['webpack-cli']\nwebpack-cli 的 package.json 里配置了 bin\n![z-1-8]/img/note/5/z-1-8.jpg)"
+        }), "\n", jsxs(_components.p, {
+          children: ["调用逻辑是判断是否安装 webpack，未安装时引导安装，已安装则直接调用 webpack-cli\n", jsx(_components.img, {
+            src: "/img/note/5/z-1-9.jpg",
+            alt: "z-1-9"
+          })]
+        }), "\n"]
+      }), "\n"]
+    })]
+  });
+}
+function MDXContent$a(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$a, {
+      ...props
+    })
+  }) : _createMdxContent$a(props);
+}
+const GetFrontMatter$a = () => frontmatter$a;
+const _1___node_api____webpack = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$a,
+  GetToc: GetToc$a,
+  default: MDXContent$a
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$9 = () => [];
+const frontmatter$9 = void 0;
+function _createMdxContent$9(props) {
+  return jsx(Fragment, {});
+}
+function MDXContent$9(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$9, {
+      ...props
+    })
+  }) : _createMdxContent$9();
+}
+const GetFrontMatter$9 = () => frontmatter$9;
+const _20______ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$9,
+  GetToc: GetToc$9,
+  default: MDXContent$9
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$8 = () => [{
+  "id": "作业",
+  "text": "作业",
+  "depth": 2
+}];
+const frontmatter$8 = void 0;
+function _createMdxContent$8(props) {
+  const _components = {
+    a: "a",
+    code: "code",
+    h1: "h1",
+    h2: "h2",
+    img: "img",
+    li: "li",
+    ol: "ol",
+    p: "p",
+    span: "span",
+    ...props.components
+  };
+  return jsxs(Fragment, {
+    children: [jsxs(_components.h1, {
+      id: "cjs-运行时分析",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#cjs-运行时分析",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "cjs 运行时分析"]
+    }), "\n", jsxs(_components.h2, {
+      id: "作业",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#作业",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "作业"]
+    }), "\n", jsxs(_components.ol, {
+      children: ["\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "webpack 运行时代码进行调试三遍并理解"
+        }), "\n", jsx(_components.p, {
+          children: "调试略"
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "webpack 的模块加载器是如何实现的"
+        }), "\n", jsxs(_components.p, {
+          children: [jsx(_components.img, {
+            src: "/img/note/5/z-2-1.jpg",
+            alt: "z-2-1"
+          }), "\n首先定义全局缓存对象", jsx(_components.code, {
+            children: "__webpack_module_cache__"
+          }), "\n然后定义打包器函数", jsx(_components.code, {
+            children: "__webpack_require__(moduleId){}"
+          }), "\n函数中：\n首先根据 moduleId 读取全局缓存对象\n如果存在缓存，则直接返回缓存模块的 exports 对象\n如果不存在缓存，创建新的模块对象，首先根据 moduleId 放入缓存，然后赋值给局部模块对象，此时局部模块对象仅有 exports 属性\n然后根据 moduleId 读取全局模块数组，执行该模块函数并传入函数里的局部模块对象，拿到指定模块的 exports 值\n最后导出该模块的 exports 值"]
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "webpack 的运行时代码做了那些事情"
+        }), "\n", jsxs(_components.p, {
+          children: ["首先定义全局模块数组，将模块用带参数的函数包裹并根据 moduleId 放入数组的第一个位置后，第一个位置为入口模块 ", jsx(_components.code, {
+            children: "__webpack_modules__"
+          }), "\n然后定义模块加载器，可以根据 moduleId 执行模块，并返回模块的 exports 值 ", jsx(_components.code, {
+            children: "__webpack_require__"
+          }), "(moduleId){}\n最后执行模块加载器加载入口模块", jsx(_components.code, {
+            children: "__webpack_require__(0)"
+          })]
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsxs(_components.p, {
+          children: ["CommonJS 中，如果不对 module 进行缓存有什么问题，即不实现以上的 ", jsx(_components.code, {
+            children: "__webpack_module_cache__"
+          }), " 数据结构"]
+        }), "\n", jsxs(_components.ol, {
+          children: ["\n", jsx(_components.li, {
+            children: "避免模块反复生成"
+          }), "\n", jsx(_components.li, {
+            children: "单例模式，每个模块只在第一次被引用时产出模块对象，之后的引用都是同一个对象。"
+          }), "\n"]
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsxs(_components.p, {
+          children: ["阅读 webpack 模块加载器代码，我们在 CommonJS 中使用 ", jsx(_components.code, {
+            children: "module.exports"
+          }), " 与 ", jsx(_components.code, {
+            children: "exports"
+          }), " 有何区别"]
+        }), "\n", jsxs(_components.p, {
+          children: ["module.exports 是访问 module 的 exports 属性的值，exports 是该值的引用，即类似于", jsx(_components.code, {
+            children: "const exports=module.exports"
+          })]
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsxs(_components.p, {
+          children: ["如何理解 webpack 运行时代码最后是 ", jsx(_components.code, {
+            children: "__webpack_require__(0)"
+          })]
+        }), "\n", jsxs(_components.p, {
+          children: [jsx(_components.img, {
+            src: "/img/note/5/z-2-2.jpg",
+            alt: "z-2-2"
+          }), "\n", jsx(_components.img, {
+            src: "/img/note/5/z-2-3.jpg",
+            alt: "z-2-3"
+          }), "\n执行打包后的 js 然后打印", jsx(_components.code, {
+            children: "__webpack_modules__"
+          }), "发现 0 的位置是空的\n所以其实 0 只是一个预留位置\n解释成是储存入口模块可能更容易理解\n且因为", jsx(_components.code, {
+            children: "__webpack_modules__"
+          }), "是根据文件的依赖关系进行深度优先遍历得来的数组，所以根节点即入口文件即 0 位置的模块"]
+        }), "\n"]
+      }), "\n"]
+    })]
+  });
+}
+function MDXContent$8(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$8, {
+      ...props
+    })
+  }) : _createMdxContent$8(props);
+}
+const GetFrontMatter$8 = () => frontmatter$8;
+const _2cjs_____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$8,
+  GetToc: GetToc$8,
+  default: MDXContent$8
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$7 = () => [];
+const frontmatter$7 = void 0;
+function _createMdxContent$7(props) {
+  const _components = {
+    a: "a",
+    h1: "h1",
+    img: "img",
+    li: "li",
+    ol: "ol",
+    p: "p",
+    span: "span",
+    strong: "strong",
+    ...props.components
+  };
+  return jsxs(Fragment, {
+    children: [jsxs(_components.h1, {
+      id: "cjs-模块收集与-ast",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#cjs-模块收集与-ast",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "cjs 模块收集与 ast"]
+    }), "\n", jsxs(_components.ol, {
+      children: ["\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "了解 AST 概念"
+        }), "\n", jsxs(_components.ol, {
+          children: ["\n", jsx(_components.li, {
+            children: "通过解析 parser 生成 AST"
+          }), "\n", jsx(_components.li, {
+            children: "code(词法分析)=>Token(语法分析)=>AST"
+          }), "\n", jsx(_components.li, {
+            children: "Token 可以进行代码检查，语法高亮等"
+          }), "\n"]
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "在 AST Explore 尝试 Javascript/CSS 解析，并观察其语法树"
+        }), "\n", jsxs(_components.p, {
+          children: [jsx(_components.img, {
+            src: "/img/note/5/z-3-1.jpg",
+            alt: "z-3-1"
+          }), "\n如图是 require 的语法树，4.会用到"]
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "如何根据入口文件搜索出所有需要打包的模块"
+        }), "\n", jsxs(_components.p, {
+          children: ["code 解析成 AST 后，以入口文件作为根节点开始深度优先遍历，通过 AST 找到具有 require 函数的节点,构建", jsx(_components.strong, {
+            children: "webpack_modules"
+          }), " 数组"]
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "如何模拟实现运行时代码的生成，实现 mini-webpack"
+        }), "\n", jsx(_components.p, {
+          children: jsx(_components.a, {
+            href: "https://github.com/903040380/poor-webpack",
+            children: "示例仓库"
+          })
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "如何去除代码中的所有 console.log"
+        }), "\n", jsxs(_components.p, {
+          children: ["见", jsx(_components.a, {
+            href: "https://github.com/903040380/poor-webpack",
+            children: "示例仓库"
+          })]
+        }), "\n"]
+      }), "\n"]
+    })]
+  });
+}
+function MDXContent$7(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$7, {
+      ...props
+    })
+  }) : _createMdxContent$7(props);
+}
+const GetFrontMatter$7 = () => frontmatter$7;
+const _3cjs_____ast = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$7,
+  GetToc: GetToc$7,
+  default: MDXContent$7
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$6 = () => [];
+const frontmatter$6 = void 0;
+function _createMdxContent$6(props) {
+  const _components = {
+    a: "a",
+    h1: "h1",
+    li: "li",
+    ol: "ol",
+    p: "p",
+    span: "span",
+    ...props.components
+  };
+  return jsxs(Fragment, {
+    children: [jsxs(_components.h1, {
+      id: "文件名中的-hash",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#文件名中的-hash",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "文件名中的 hash"]
+    }), "\n", jsxs(_components.ol, {
+      children: ["\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "什么是 Long Term Cache，有何作用"
+        }), "\n", jsx(_components.p, {
+          children: "在服务器对响应头设置 cache-control 的值来达到最大化缓存时间，一般指一年时间或者两年时间"
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "为什么配置 output.filename 时不建议注入版本号"
+        }), "\n", jsx(_components.p, {
+          children: "因为会导致更新版本时所有文件名变化，当文件名变更时会重新进行缓存，那么更新版本会导致所有缓存失效，但是更新版本一般并不会更新所有文件"
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "为什么可以配置 Long Term Cache"
+        }), "\n", jsx(_components.p, {
+          children: "因为 webpack 打包时可以配置 contenthash,只改变改变内容的文件的 hash 值，新的文件会重新进行缓存，不会导致版本问题"
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "如何提升 webpack 编译时期计算 hash 的速度"
+        }), "\n", jsxs(_components.p, {
+          children: ["通过 output.hashFunction 属性,webpack5 已经支持直接配置’xxhash64‘\n", jsx(_components.a, {
+            href: "https://github.com/umijs/umi/pull/9168#event-7302069734",
+            children: "根据此方法对 umi 进行了优化"
+          })]
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "在 Node.js 中如何进行 hash 计算"
+        }), "\n", jsx(_components.p, {
+          children: "参考大佬的回答，是用 crypto 库"
+        }), "\n"]
+      }), "\n"]
+    })]
+  });
+}
+function MDXContent$6(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$6, {
+      ...props
+    })
+  }) : _createMdxContent$6(props);
+}
+const GetFrontMatter$6 = () => frontmatter$6;
+const _4_____hash = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$6,
+  GetToc: GetToc$6,
+  default: MDXContent$6
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$5 = () => [];
+const frontmatter$5 = void 0;
+function _createMdxContent$5(props) {
+  const _components = {
+    a: "a",
+    h1: "h1",
+    li: "li",
+    ol: "ol",
+    p: "p",
+    span: "span",
+    ul: "ul",
+    ...props.components
+  };
+  return jsxs(Fragment, {
+    children: [jsxs(_components.h1, {
+      id: "cjs-与-esm",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#cjs-与-esm",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "cjs 与 esm"]
+    }), "\n", jsxs(_components.ol, {
+      children: ["\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "什么是 esm/commonjs"
+        }), "\n", jsx(_components.p, {
+          children: "esm:"
+        }), "\n", jsxs(_components.ul, {
+          children: ["\n", jsxs(_components.li, {
+            children: ["\n", jsx(_components.p, {
+              children: "是 ES 的模块规范，浏览器 node 都可运行"
+            }), "\n"]
+          }), "\n", jsxs(_components.li, {
+            children: ["\n", jsx(_components.p, {
+              children: "静态导入，所以可以 tree shaking，减少 js 体积，编译阶段就进行导入和导出"
+            }), "\n"]
+          }), "\n", jsxs(_components.li, {
+            children: ["\n", jsx(_components.p, {
+              children: "支持动态导入，执行到该行代码时才开始导入，异步加载（Promise）"
+            }), "\n"]
+          }), "\n", jsxs(_components.li, {
+            children: ["\n", jsx(_components.p, {
+              children: "导出的值是引用"
+            }), "\n"]
+          }), "\n"]
+        }), "\n", jsx(_components.p, {
+          children: "cjs: -是 node 的模块规范，webpack 和 node 都可运行，单纯浏览器环境不可以"
+        }), "\n", jsxs(_components.ul, {
+          children: ["\n", jsxs(_components.li, {
+            children: ["\n", jsx(_components.p, {
+              children: "动态导入，执行到该行代码时才开始导入，同步加载，加载完模块才会继续执行"
+            }), "\n"]
+          }), "\n", jsxs(_components.li, {
+            children: ["\n", jsx(_components.p, {
+              children: "具有缓存，可以通过 require.cache 查看，加载过的模块会通过缓存加载"
+            }), "\n"]
+          }), "\n", jsxs(_components.li, {
+            children: ["\n", jsx(_components.p, {
+              children: "导出的值是复制的值，类似 exports.a=a"
+            }), "\n"]
+          }), "\n"]
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "什么是 import(module)"
+        }), "\n", jsx(_components.p, {
+          children: "类似于 require 的动态导入，但是是异步加载（Promise）"
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "了解 skypack 和 jsdeliver 两个 npm 的 cdn 网站"
+        }), "\n", jsxs(_components.ul, {
+          children: ["\n", jsxs(_components.li, {
+            children: ["\n", jsx(_components.p, {
+              children: jsx(_components.a, {
+                href: "https://www.skypack.dev/",
+                children: "skypack"
+              })
+            }), "\n"]
+          }), "\n", jsxs(_components.li, {
+            children: ["\n", jsx(_components.p, {
+              children: jsx(_components.a, {
+                href: "https://www.jsdelivr.com/",
+                children: "jsdeliver"
+              })
+            }), "\n"]
+          }), "\n"]
+        }), "\n"]
+      }), "\n"]
+    })]
+  });
+}
+function MDXContent$5(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$5, {
+      ...props
+    })
+  }) : _createMdxContent$5(props);
+}
+const GetFrontMatter$5 = () => frontmatter$5;
+const _5cjs_esm = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$5,
+  GetToc: GetToc$5,
+  default: MDXContent$5
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$4 = () => [];
+const frontmatter$4 = void 0;
+function _createMdxContent$4(props) {
+  const _components = {
+    a: "a",
+    code: "code",
+    h1: "h1",
+    img: "img",
+    li: "li",
+    ol: "ol",
+    p: "p",
+    span: "span",
+    ul: "ul",
+    ...props.components
+  };
+  return jsxs(Fragment, {
+    children: [jsxs(_components.h1, {
+      id: "esm-to-cjs",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#esm-to-cjs",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "esm to cjs"]
+    }), "\n", jsxs(_components.ol, {
+      children: ["\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "对含 ESM 模块的 webpack 运行时代码进行调试与理解"
+        }), "\n", jsx(_components.p, {
+          children: "ok"
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "webpack 含 ESM 的运行时代码做了那些事情"
+        }), "\n", jsxs(_components.p, {
+          children: ["首先根据 ast 生成的", jsx(_components.code, {
+            children: "__webpack_module__"
+          }), "的中用", jsx(_components.code, {
+            children: "__webpack_require__"
+          }), "的属性方法，r 给 ", jsx(_components.code, {
+            children: "__webpack_exports__"
+          }), "添加鉴别是 esm 模块的属性，d 将导出的属性用 getter(setter)定义，\n属性在下方声明是因为访问时已经赋值\n", jsx(_components.img, {
+            src: "/img/note/5/z-6-1.jpg",
+            alt: "z-6-1"
+          })]
+        }), "\n", jsxs(_components.p, {
+          children: ["缓存和", jsx(_components.code, {
+            children: "__webpack_require__"
+          }), "同 cjsm 模块\n", jsx(_components.img, {
+            src: "/img/note/5/z-6-2.jpg",
+            alt: "z-6-2"
+          })]
+        }), "\n", jsxs(_components.p, {
+          children: ["定义", jsx(_components.code, {
+            children: "__webpack_require__"
+          }), "的属性方法，r,d,o\n", jsx(_components.img, {
+            src: "/img/note/5/z-6-3.jpg",
+            alt: "z-6-3"
+          })]
+        }), "\n", jsxs(_components.p, {
+          children: ["先和", jsx(_components.code, {
+            children: "__webpack_module__"
+          }), "中模块一样执行 r,给入口模块添加 esm 标签，然后调用", jsx(_components.code, {
+            children: "__webpack_require__"
+          }), "返回 sum 模块的导出"]
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsxs(_components.p, {
+          children: [jsx(_components.code, {
+            children: "__webpack_require__"
+          }), " 中的 d/r/o 各个变量指什么意思"]
+        }), "\n", jsxs(_components.ul, {
+          children: ["\n", jsx(_components.li, {
+            children: "d:将 esm 导出的变量变成 exports 的 getter/setter 属性"
+          }), "\n", jsx(_components.li, {
+            children: "r:给 exports 添加一个属性标志这是 esm 模块"
+          }), "\n", jsx(_components.li, {
+            children: "o:相当于 Object 的 hasOwnProperty 方法"
+          }), "\n"]
+        }), "\n"]
+      }), "\n"]
+    })]
+  });
+}
+function MDXContent$4(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$4, {
+      ...props
+    })
+  }) : _createMdxContent$4(props);
+}
+const GetFrontMatter$4 = () => frontmatter$4;
+const _6esm_to_cjs = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$4,
+  GetToc: GetToc$4,
+  default: MDXContent$4
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$3 = () => [];
+const frontmatter$3 = void 0;
+function _createMdxContent$3(props) {
+  const _components = {
+    a: "a",
+    code: "code",
+    h1: "h1",
+    img: "img",
+    li: "li",
+    ol: "ol",
+    p: "p",
+    span: "span",
+    ...props.components
+  };
+  return jsxs(Fragment, {
+    children: [jsxs(_components.h1, {
+      id: "code-spliting-运行时分析",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#code-spliting-运行时分析",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "code spliting 运行时分析"]
+    }), "\n", jsxs(_components.ol, {
+      children: ["\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "对 code spliting 后的代码进行调试与理解"
+        }), "\n", jsxs(_components.p, {
+          children: ["见", jsx(_components.a, {
+            href: "https://github.com/903040380/Xwebpack/tree/master/code-spliting/example/jsonp",
+            children: "代码中的注释"
+          })]
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsxs(_components.p, {
+          children: ["将自己项目取消代码压缩进行打包，观察其打包后的代码骨架\n", jsx(_components.img, {
+            src: "/img/note/5/z-7-1.jpg",
+            alt: "z-7-1"
+          })]
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "在 webpack 中如何实现 code spliting"
+        }), "\n", jsx(_components.p, {
+          children: "import() 动态导入"
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "在 webpack 中，加载 chunk 脚本的 JSONP Callback 如何实现"
+        }), "\n", jsx(_components.p, {
+          children: jsx(_components.img, {
+            src: "/img/note/5/z-7-2.jpg",
+            alt: "z-7-2"
+          })
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "当 output.chunkLoading 配置为 import 时，分析其源码"
+        }), "\n", jsx(_components.p, {
+          children: jsx(_components.img, {
+            src: "/img/note/5/z-7-3.jpg",
+            alt: "z-7-3"
+          })
+        }), "\n", jsxs(_components.p, {
+          children: [jsx(_components.code, {
+            children: "__webpack_require__.f.j"
+          }), "不同\n", jsx(_components.code, {
+            children: "__webpack_require__.l"
+          }), "不需要了"]
+        }), "\n", jsx(_components.p, {
+          children: jsx(_components.img, {
+            src: "/img/note/5/z-7-4.jpg",
+            alt: "z-7-4"
+          })
+        }), "\n", jsx(_components.p, {
+          children: "jsonp 不需要了，用 installChunck 替代"
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsxs(_components.p, {
+          children: ["当代码分割时，async chunk 所对应的源代码发生变更时，该 async chunk 路径将会发生变化，而 entry chunk 中的", jsx(_components.code, {
+            children: "__webpack_require__.u"
+          }), " 内容也将发生变化，导致 entry chunk 的内容发生变更，随之路径发生变更，这将导致不必要的缓存失效，如何处理该问题。"]
+        }), "\n", jsx(_components.p, {
+          children: "runtimeChunk 设置为 true 可以单独把 webpack 的运行时给独立出来，这样每次只重新请求 runtime 文件，nextjs 就是这样做的,见 hash 的增强章节"
+        }), "\n"]
+      }), "\n"]
+    })]
+  });
+}
+function MDXContent$3(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$3, {
+      ...props
+    })
+  }) : _createMdxContent$3(props);
+}
+const GetFrontMatter$3 = () => frontmatter$3;
+const _7code_spliting_____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$3,
+  GetToc: GetToc$3,
+  default: MDXContent$3
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$2 = () => [];
+const frontmatter$2 = void 0;
+function _createMdxContent$2(props) {
+  const _components = {
+    a: "a",
+    code: "code",
+    h1: "h1",
+    li: "li",
+    ol: "ol",
+    p: "p",
+    span: "span",
+    strong: "strong",
+    ul: "ul",
+    ...props.components
+  };
+  return jsxs(Fragment, {
+    children: [jsxs(_components.h1, {
+      id: "magic-comment",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#magic-comment",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "magic comment"]
+    }), "\n", jsxs(_components.ol, {
+      children: ["\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "在 webpack 中有哪些魔法注释"
+        }), "\n", jsxs(_components.ul, {
+          children: ["\n", jsxs(_components.li, {
+            children: ["\n", jsx(_components.p, {
+              children: "webpackIgnore：设置为 true 时，禁用动态导入解析。"
+            }), "\n"]
+          }), "\n", jsxs(_components.li, {
+            children: ["\n", jsx(_components.p, {
+              children: "webpackChunkName: 新 chunk 的名称。"
+            }), "\n"]
+          }), "\n", jsxs(_components.li, {
+            children: ["\n", jsx(_components.p, {
+              children: "webpackMode：可以指定以不同的模式解析动态导入。"
+            }), "\n"]
+          }), "\n", jsxs(_components.li, {
+            children: ["\n", jsx(_components.p, {
+              children: "webpackPrefetch：告诉浏览器将来可能需要该资源来进行某些导航跳转。"
+            }), "\n"]
+          }), "\n", jsxs(_components.li, {
+            children: ["\n", jsx(_components.p, {
+              children: "webpackPreload：告诉浏览器在当前导航期间可能需要该资源。"
+            }), "\n"]
+          }), "\n", jsxs(_components.li, {
+            children: ["\n", jsx(_components.p, {
+              children: "webpackInclude：在导入解析（import resolution）过程中，用于匹配的正则表达式。只有匹配到的模块才会被打包。"
+            }), "\n"]
+          }), "\n", jsxs(_components.li, {
+            children: ["\n", jsx(_components.p, {
+              children: "webpackExclude：在导入解析（import resolution）过程中，用于匹配的正则表达式。所有匹配到的模块都不会被打包。"
+            }), "\n"]
+          }), "\n", jsxs(_components.li, {
+            children: ["\n", jsx(_components.p, {
+              children: "webpackExports: 告知 webpack 只构建指定出口的动态 import() 模块。"
+            }), "\n"]
+          }), "\n"]
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "在 webpack 中如何实现 prefetch 的"
+        }), "\n", jsxs(_components.p, {
+          children: ["配置", jsx(_components.code, {
+            children: "/* webpackPrefetch: true */"
+          }), "后，webpack 运行时，会生成", jsx(_components.code, {
+            children: "<link ref='prefetch'>"
+          }), "标签并放入 dom 中，浏览器会开始预加载资源"]
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "阅读 prefetch 后的运行时代码进行理解"
+        }), "\n", jsxs(_components.p, {
+          children: ["见", jsx(_components.a, {
+            href: "https://github.com/903040380/Xwebpack/tree/master/code-spliting/example/prefetch",
+            children: "代码中的注释"
+          })]
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "补充关于 preload 的问题"
+        }), "\n", jsxs(_components.p, {
+          children: ["preload chunk 会在父 chunk 加载时，以并行方式开始加载。\nprefetch chunk 会在父 chunk 加载结束后开始加载。\n所以，需要在 sumjs 里再次 preload 导入 add 才产生 preload，即", jsx(_components.strong, {
+            children: "只能加载 chunk 的 chunk"
+          })]
+        }), "\n"]
+      }), "\n"]
+    })]
+  });
+}
+function MDXContent$2(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$2, {
+      ...props
+    })
+  }) : _createMdxContent$2(props);
+}
+const GetFrontMatter$2 = () => frontmatter$2;
+const _8magic_comment = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$2,
+  GetToc: GetToc$2,
+  default: MDXContent$2
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$1 = () => [];
+const frontmatter$1 = void 0;
+function _createMdxContent$1(props) {
+  const _components = {
+    a: "a",
+    h1: "h1",
+    li: "li",
+    p: "p",
+    span: "span",
+    ul: "ul",
+    ...props.components
+  };
+  return jsxs(Fragment, {
+    children: [jsxs(_components.h1, {
+      id: "参考",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#参考",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "参考"]
+    }), "\n", jsxs(_components.ul, {
+      children: ["\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: jsx(_components.a, {
+            href: "https://q.shanyue.tech/",
+            children: "山月"
+          })
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: jsx(_components.a, {
+            href: "https://github.com/903040380/webpack-demo",
+            children: "示例仓库"
+          })
+        }), "\n"]
+      }), "\n"]
+    })]
+  });
+}
+function MDXContent$1(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$1, {
+      ...props
+    })
+  }) : _createMdxContent$1(props);
+}
+const GetFrontMatter$1 = () => frontmatter$1;
+const _99readme = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$1,
+  GetToc: GetToc$1,
+  default: MDXContent$1
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc = () => [];
+const frontmatter = void 0;
+function _createMdxContent(props) {
+  const _components = {
+    a: "a",
+    code: "code",
+    h1: "h1",
+    img: "img",
+    li: "li",
+    ol: "ol",
+    p: "p",
+    span: "span",
+    ...props.components
+  };
+  return jsxs(Fragment, {
+    children: [jsxs(_components.h1, {
+      id: "hash-的增强",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#hash-的增强",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "hash 的增强"]
+    }), "\n", jsxs(_components.ol, {
+      children: ["\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "理解 deterministic chunkIds/moduleIds，以及什么情况下 id 会发生变更"
+        }), "\n", jsxs(_components.p, {
+          children: ["当模块加载顺序发生改变，模块顺序会发生改变，moduleIds 随之改变，而同时", jsx(_components.code, {
+            children: "__webpack_require__.u"
+          }), "读取到的 chunkId 随 moduleIds 改变，即 chunkIds 改变"]
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "如有余力，阅读源码查看 deterministic 在 webpack 的内部实现"
+        }), "\n", jsx(_components.p, {
+          children: "根据大佬回答，只要模块的路径和文件名不做更改，那么 deterministic 后的 hash 值就是稳定的"
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "理解 runtimeChunk 选项，阅读其源码，理解它是如何运行代码的"
+        }), "\n", jsx(_components.p, {
+          children: jsx(_components.img, {
+            src: "/img/note/5/z-9-1.jpg",
+            alt: "z-9-1"
+          })
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "阅读常见的社区以及自己公司的脚手架代码，观察是否配置了以上优化选项，如果没有，考虑是否可贡献代码"
+        }), "\n", jsx(_components.p, {
+          children: jsx(_components.a, {
+            href: "https://github.com/umijs/umi/pull/9541",
+            children: "umi 已提交 pr，正在修改中"
+          })
+        }), "\n"]
+      }), "\n"]
+    })]
+  });
+}
 function MDXContent(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
@@ -21946,76 +21944,76 @@ function MDXContent(props = {}) {
   }) : _createMdxContent(props);
 }
 const GetFrontMatter = () => frontmatter;
-const _9useDeepCompareEffect = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const _9hash____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   GetFrontMatter,
   GetToc,
   default: MDXContent
 }, Symbol.toStringTag, { value: "Module" }));
 const routes = [
-  { path: "/", element: React.createElement(MDXContent$_), preload: () => Promise.resolve().then(() => index) },
-  { path: "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro", element: React.createElement(MDXContent$Z), preload: () => Promise.resolve().then(() => intro) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/0%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4", element: React.createElement(MDXContent$Y), preload: () => Promise.resolve().then(() => _0____) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/10checkout", element: React.createElement(MDXContent$X), preload: () => Promise.resolve().then(() => _10checkout) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/11stash", element: React.createElement(MDXContent$W), preload: () => Promise.resolve().then(() => _11stash) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/12log%E4%B8%8Ereflog", element: React.createElement(MDXContent$V), preload: () => Promise.resolve().then(() => _12log_reflog) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/13cherry-pick", element: React.createElement(MDXContent$U), preload: () => Promise.resolve().then(() => _13cherryPick) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/1%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FVCS", element: React.createElement(MDXContent$T), preload: () => Promise.resolve().then(() => _1______VCS) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/2%E5%88%86%E5%B8%83%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FDVCS", element: React.createElement(MDXContent$S), preload: () => Promise.resolve().then(() => _2_________DVCS) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/3HEAD%E4%B8%8Emaster%E4%B8%8Ebranch", element: React.createElement(MDXContent$R), preload: () => Promise.resolve().then(() => _3HEAD_master_branch) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/4push", element: React.createElement(MDXContent$Q), preload: () => Promise.resolve().then(() => _4push) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/5merge", element: React.createElement(MDXContent$P), preload: () => Promise.resolve().then(() => _5merge) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/6feature%20branch", element: React.createElement(MDXContent$O), preload: () => Promise.resolve().then(() => _6feature_branch) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/7rebase", element: React.createElement(MDXContent$N), preload: () => Promise.resolve().then(() => _7rebase) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/8revert", element: React.createElement(MDXContent$M), preload: () => Promise.resolve().then(() => _8revert) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/99readme", element: React.createElement(MDXContent$L), preload: () => Promise.resolve().then(() => _99readme$3) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/9reset", element: React.createElement(MDXContent$K), preload: () => Promise.resolve().then(() => _9reset) },
-  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/13%E5%86%85%E5%AD%98", element: React.createElement(MDXContent$J), preload: () => Promise.resolve().then(() => _13__) },
-  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/16%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF", element: React.createElement(MDXContent$I), preload: () => Promise.resolve().then(() => _16_________) },
-  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/1%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9B%E7%A8%8B", element: React.createElement(MDXContent$H), preload: () => Promise.resolve().then(() => _1_____) },
-  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/2TCP%E5%8D%8F%E8%AE%AE", element: React.createElement(MDXContent$G), preload: () => Promise.resolve().then(() => _2TCP__) },
-  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/3HTTP%E5%8D%8F%E8%AE%AE", element: React.createElement(MDXContent$F), preload: () => Promise.resolve().then(() => _3HTTP__) },
-  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/4%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98", element: React.createElement(MDXContent$E), preload: () => Promise.resolve().then(() => _4_____) },
-  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/5%E5%AF%BC%E8%88%AA%E6%B5%81%E7%A8%8B", element: React.createElement(MDXContent$D), preload: () => Promise.resolve().then(() => _5____) },
-  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/6%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B", element: React.createElement(MDXContent$C), preload: () => Promise.resolve().then(() => _6____) },
-  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/98%20%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84dns%E7%BC%93%E5%AD%98", element: React.createElement(MDXContent$B), preload: () => Promise.resolve().then(() => _98_____dns__) },
-  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/99readme", element: React.createElement(MDXContent$A), preload: () => Promise.resolve().then(() => _99readme$2) },
-  { path: "/%E7%AC%94%E8%AE%B0/3http/99readme", element: React.createElement(MDXContent$z), preload: () => Promise.resolve().then(() => _99readme$1) },
-  { path: "/%E7%AC%94%E8%AE%B0/4javascript/1%E5%BC%95%E7%94%A8", element: React.createElement(MDXContent$y), preload: () => Promise.resolve().then(() => _1__) },
-  { path: "/%E7%AC%94%E8%AE%B0/4javascript/2%E8%BF%90%E7%AE%97%E7%AC%A6", element: React.createElement(MDXContent$x), preload: () => Promise.resolve().then(() => _2___) },
-  { path: "/%E7%AC%94%E8%AE%B0/4javascript/3lodash%E6%89%8B%E5%86%99", element: React.createElement(MDXContent$w), preload: () => Promise.resolve().then(() => _3lodash__) },
-  { path: "/%E7%AC%94%E8%AE%B0/5webpack/10module%E4%B8%8Echunk%E4%B8%8Easset", element: React.createElement(MDXContent$v), preload: () => Promise.resolve().then(() => _10module_chunk_asset) },
-  { path: "/%E7%AC%94%E8%AE%B0/5webpack/11bundle%20spliting", element: React.createElement(MDXContent$u), preload: () => Promise.resolve().then(() => _11bundle_spliting) },
-  { path: "/%E7%AC%94%E8%AE%B0/5webpack/12%E9%AB%98%E6%95%88%E5%88%86%E5%8C%85", element: React.createElement(MDXContent$t), preload: () => Promise.resolve().then(() => _12____) },
-  { path: "/%E7%AC%94%E8%AE%B0/5webpack/13loader%E5%88%9D%E8%AF%86", element: React.createElement(MDXContent$s), preload: () => Promise.resolve().then(() => _13loader__) },
-  { path: "/%E7%AC%94%E8%AE%B0/5webpack/14json%E5%A4%84%E7%90%86", element: React.createElement(MDXContent$r), preload: () => Promise.resolve().then(() => _14json__) },
-  { path: "/%E7%AC%94%E8%AE%B0/5webpack/15import%20assertions", element: React.createElement(MDXContent$q), preload: () => Promise.resolve().then(() => _15import_assertions) },
-  { path: "/%E7%AC%94%E8%AE%B0/5webpack/16html%E5%A4%84%E7%90%86", element: React.createElement(MDXContent$p), preload: () => Promise.resolve().then(() => _16html__) },
-  { path: "/%E7%AC%94%E8%AE%B0/5webpack/17%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86", element: React.createElement(MDXContent$o), preload: () => Promise.resolve().then(() => _17____) },
-  { path: "/%E7%AC%94%E8%AE%B0/5webpack/18%E5%B0%8F%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86", element: React.createElement(MDXContent$n), preload: () => Promise.resolve().then(() => _18_____) },
-  { path: "/%E7%AC%94%E8%AE%B0/5webpack/19svg%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86", element: React.createElement(MDXContent$m), preload: () => Promise.resolve().then(() => _19svg____) },
-  { path: "/%E7%AC%94%E8%AE%B0/5webpack/1%E4%BD%BF%E7%94%A8%20node%20api%20%E5%AD%A6%E4%B9%A0%20webpack", element: React.createElement(MDXContent$l), preload: () => Promise.resolve().then(() => _1___node_api____webpack) },
-  { path: "/%E7%AC%94%E8%AE%B0/5webpack/20%E7%AE%80%E5%8D%95%E6%A0%B7%E5%BC%8F%E5%A4%84%E7%90%86", element: React.createElement(MDXContent$k), preload: () => Promise.resolve().then(() => _20______) },
-  { path: "/%E7%AC%94%E8%AE%B0/5webpack/2cjs%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90", element: React.createElement(MDXContent$j), preload: () => Promise.resolve().then(() => _2cjs_____) },
-  { path: "/%E7%AC%94%E8%AE%B0/5webpack/3cjs%E6%A8%A1%E5%9D%97%E6%94%B6%E9%9B%86%E4%B8%8East", element: React.createElement(MDXContent$i), preload: () => Promise.resolve().then(() => _3cjs_____ast) },
-  { path: "/%E7%AC%94%E8%AE%B0/5webpack/4%E6%96%87%E4%BB%B6%E5%90%8D%E4%B8%AD%E7%9A%84hash", element: React.createElement(MDXContent$h), preload: () => Promise.resolve().then(() => _4_____hash) },
-  { path: "/%E7%AC%94%E8%AE%B0/5webpack/5cjs%E4%B8%8Eesm", element: React.createElement(MDXContent$g), preload: () => Promise.resolve().then(() => _5cjs_esm) },
-  { path: "/%E7%AC%94%E8%AE%B0/5webpack/6esm%20to%20cjs", element: React.createElement(MDXContent$f), preload: () => Promise.resolve().then(() => _6esm_to_cjs) },
-  { path: "/%E7%AC%94%E8%AE%B0/5webpack/7code%20spliting%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90", element: React.createElement(MDXContent$e), preload: () => Promise.resolve().then(() => _7code_spliting_____) },
-  { path: "/%E7%AC%94%E8%AE%B0/5webpack/8magic%20comment", element: React.createElement(MDXContent$d), preload: () => Promise.resolve().then(() => _8magic_comment) },
-  { path: "/%E7%AC%94%E8%AE%B0/5webpack/99readme", element: React.createElement(MDXContent$c), preload: () => Promise.resolve().then(() => _99readme) },
-  { path: "/%E7%AC%94%E8%AE%B0/5webpack/9hash%20%E7%9A%84%E5%A2%9E%E5%BC%BA", element: React.createElement(MDXContent$b), preload: () => Promise.resolve().then(() => _9hash____) },
-  { path: "/%E7%AC%94%E8%AE%B0/6ahooks/1useLocalStorageState%E4%B8%8EuseSessionStorageState", element: React.createElement(MDXContent$a), preload: () => Promise.resolve().then(() => _1useLocalStorageState_useSessionStorageState) },
-  { path: "/%E7%AC%94%E8%AE%B0/6ahooks/2useUpdateEffect%20%E4%B8%8E%20useUpdateLayoutEffectt", element: React.createElement(MDXContent$9), preload: () => Promise.resolve().then(() => _2useUpdateEffect___useUpdateLayoutEffectt) },
-  { path: "/%E7%AC%94%E8%AE%B0/6ahooks/3useLatest%E4%B8%8EuseMemoizedFn", element: React.createElement(MDXContent$8), preload: () => Promise.resolve().then(() => _3useLatest_useMemoizedFn) },
-  { path: "/%E7%AC%94%E8%AE%B0/6ahooks/4use(Raf)Timeout%E4%B8%8Euse(Raf)Interval%E4%B8%8EuseCountDown", element: React.createElement(MDXContent$7), preload: () => Promise.resolve().then(() => _4use_Raf_Timeout_use_Raf_Interval_useCountDown) },
-  { path: "/%E7%AC%94%E8%AE%B0/6ahooks/5useRequest", element: React.createElement(MDXContent$6), preload: () => Promise.resolve().then(() => _5useRequest) },
-  { path: "/%E7%AC%94%E8%AE%B0/6ahooks/6useMount%E4%B8%8EuseUnMount%E4%B8%8EuseMountedRefx.md", element: React.createElement(MDXContent$5), preload: () => Promise.resolve().then(() => _6useMount_useUnMount_useMountedRef_mdx) },
-  { path: "/%E7%AC%94%E8%AE%B0/6ahooks/7useUpdate", element: React.createElement(MDXContent$4), preload: () => Promise.resolve().then(() => _7useUpdate) },
-  { path: "/%E7%AC%94%E8%AE%B0/6ahooks/8useCreation", element: React.createElement(MDXContent$3), preload: () => Promise.resolve().then(() => _8useCreation) },
-  { path: "/%E7%AC%94%E8%AE%B0/6ahooks/97useAnimationFrame%E5%92%8C%E8%AE%A1%E6%97%B6%E5%99%A8", element: React.createElement(MDXContent$2), preload: () => Promise.resolve().then(() => _97useAnimationFrame____) },
-  { path: "/%E7%AC%94%E8%AE%B0/6ahooks/98.%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0", element: React.createElement(MDXContent$1), preload: () => Promise.resolve().then(() => _98_____) },
-  { path: "/%E7%AC%94%E8%AE%B0/6ahooks/9useDeepCompareEffect", element: React.createElement(MDXContent), preload: () => Promise.resolve().then(() => _9useDeepCompareEffect) }
+  { path: "/", element: React__default.createElement(MDXContent$_), preload: () => Promise.resolve().then(() => index) },
+  { path: "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro", element: React__default.createElement(MDXContent$Z), preload: () => Promise.resolve().then(() => intro) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/0%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4", element: React__default.createElement(MDXContent$Y), preload: () => Promise.resolve().then(() => _0____) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/10checkout", element: React__default.createElement(MDXContent$X), preload: () => Promise.resolve().then(() => _10checkout) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/11stash", element: React__default.createElement(MDXContent$W), preload: () => Promise.resolve().then(() => _11stash) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/12log%E4%B8%8Ereflog", element: React__default.createElement(MDXContent$V), preload: () => Promise.resolve().then(() => _12log_reflog) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/13cherry-pick", element: React__default.createElement(MDXContent$U), preload: () => Promise.resolve().then(() => _13cherryPick) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/1%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FVCS", element: React__default.createElement(MDXContent$T), preload: () => Promise.resolve().then(() => _1______VCS) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/2%E5%88%86%E5%B8%83%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FDVCS", element: React__default.createElement(MDXContent$S), preload: () => Promise.resolve().then(() => _2_________DVCS) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/3HEAD%E4%B8%8Emaster%E4%B8%8Ebranch", element: React__default.createElement(MDXContent$R), preload: () => Promise.resolve().then(() => _3HEAD_master_branch) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/4push", element: React__default.createElement(MDXContent$Q), preload: () => Promise.resolve().then(() => _4push) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/5merge", element: React__default.createElement(MDXContent$P), preload: () => Promise.resolve().then(() => _5merge) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/6feature%20branch", element: React__default.createElement(MDXContent$O), preload: () => Promise.resolve().then(() => _6feature_branch) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/7rebase", element: React__default.createElement(MDXContent$N), preload: () => Promise.resolve().then(() => _7rebase) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/8revert", element: React__default.createElement(MDXContent$M), preload: () => Promise.resolve().then(() => _8revert) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/99readme", element: React__default.createElement(MDXContent$L), preload: () => Promise.resolve().then(() => _99readme$3) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/9reset", element: React__default.createElement(MDXContent$K), preload: () => Promise.resolve().then(() => _9reset) },
+  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/13%E5%86%85%E5%AD%98", element: React__default.createElement(MDXContent$J), preload: () => Promise.resolve().then(() => _13__) },
+  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/16%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF", element: React__default.createElement(MDXContent$I), preload: () => Promise.resolve().then(() => _16_________) },
+  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/1%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9B%E7%A8%8B", element: React__default.createElement(MDXContent$H), preload: () => Promise.resolve().then(() => _1_____) },
+  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/2TCP%E5%8D%8F%E8%AE%AE", element: React__default.createElement(MDXContent$G), preload: () => Promise.resolve().then(() => _2TCP__) },
+  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/3HTTP%E5%8D%8F%E8%AE%AE", element: React__default.createElement(MDXContent$F), preload: () => Promise.resolve().then(() => _3HTTP__) },
+  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/4%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98", element: React__default.createElement(MDXContent$E), preload: () => Promise.resolve().then(() => _4_____) },
+  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/5%E5%AF%BC%E8%88%AA%E6%B5%81%E7%A8%8B", element: React__default.createElement(MDXContent$D), preload: () => Promise.resolve().then(() => _5____) },
+  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/6%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B", element: React__default.createElement(MDXContent$C), preload: () => Promise.resolve().then(() => _6____) },
+  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/98%20%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84dns%E7%BC%93%E5%AD%98", element: React__default.createElement(MDXContent$B), preload: () => Promise.resolve().then(() => _98_____dns__) },
+  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/99readme", element: React__default.createElement(MDXContent$A), preload: () => Promise.resolve().then(() => _99readme$2) },
+  { path: "/%E7%AC%94%E8%AE%B0/3http/99readme", element: React__default.createElement(MDXContent$z), preload: () => Promise.resolve().then(() => _99readme$1) },
+  { path: "/%E7%AC%94%E8%AE%B0/4javascript/1%E5%BC%95%E7%94%A8", element: React__default.createElement(MDXContent$y), preload: () => Promise.resolve().then(() => _1__) },
+  { path: "/%E7%AC%94%E8%AE%B0/4javascript/2%E8%BF%90%E7%AE%97%E7%AC%A6", element: React__default.createElement(MDXContent$x), preload: () => Promise.resolve().then(() => _2___) },
+  { path: "/%E7%AC%94%E8%AE%B0/4javascript/3lodash%E6%89%8B%E5%86%99", element: React__default.createElement(MDXContent$w), preload: () => Promise.resolve().then(() => _3lodash__) },
+  { path: "/%E7%AC%94%E8%AE%B0/6ahooks/1useLocalStorageState%E4%B8%8EuseSessionStorageState", element: React__default.createElement(MDXContent$v), preload: () => Promise.resolve().then(() => _1useLocalStorageState_useSessionStorageState) },
+  { path: "/%E7%AC%94%E8%AE%B0/6ahooks/2useUpdateEffect%20%E4%B8%8E%20useUpdateLayoutEffectt", element: React__default.createElement(MDXContent$u), preload: () => Promise.resolve().then(() => _2useUpdateEffect___useUpdateLayoutEffectt) },
+  { path: "/%E7%AC%94%E8%AE%B0/6ahooks/3useLatest%E4%B8%8EuseMemoizedFn", element: React__default.createElement(MDXContent$t), preload: () => Promise.resolve().then(() => _3useLatest_useMemoizedFn) },
+  { path: "/%E7%AC%94%E8%AE%B0/6ahooks/4use(Raf)Timeout%E4%B8%8Euse(Raf)Interval%E4%B8%8EuseCountDown", element: React__default.createElement(MDXContent$s), preload: () => Promise.resolve().then(() => _4use_Raf_Timeout_use_Raf_Interval_useCountDown) },
+  { path: "/%E7%AC%94%E8%AE%B0/6ahooks/5useRequest", element: React__default.createElement(MDXContent$r), preload: () => Promise.resolve().then(() => _5useRequest) },
+  { path: "/%E7%AC%94%E8%AE%B0/6ahooks/6useMount%E4%B8%8EuseUnMount%E4%B8%8EuseMountedRefx.md", element: React__default.createElement(MDXContent$q), preload: () => Promise.resolve().then(() => _6useMount_useUnMount_useMountedRef_mdx) },
+  { path: "/%E7%AC%94%E8%AE%B0/6ahooks/7useUpdate", element: React__default.createElement(MDXContent$p), preload: () => Promise.resolve().then(() => _7useUpdate) },
+  { path: "/%E7%AC%94%E8%AE%B0/6ahooks/8useCreation", element: React__default.createElement(MDXContent$o), preload: () => Promise.resolve().then(() => _8useCreation) },
+  { path: "/%E7%AC%94%E8%AE%B0/6ahooks/97useAnimationFrame%E5%92%8C%E8%AE%A1%E6%97%B6%E5%99%A8", element: React__default.createElement(MDXContent$n), preload: () => Promise.resolve().then(() => _97useAnimationFrame____) },
+  { path: "/%E7%AC%94%E8%AE%B0/6ahooks/98.%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0", element: React__default.createElement(MDXContent$m), preload: () => Promise.resolve().then(() => _98_____) },
+  { path: "/%E7%AC%94%E8%AE%B0/6ahooks/9useDeepCompareEffect", element: React__default.createElement(MDXContent$l), preload: () => Promise.resolve().then(() => _9useDeepCompareEffect) },
+  { path: "/%E7%AC%94%E8%AE%B0/5webpack/10module%E4%B8%8Echunk%E4%B8%8Easset", element: React__default.createElement(MDXContent$k), preload: () => Promise.resolve().then(() => _10module_chunk_asset) },
+  { path: "/%E7%AC%94%E8%AE%B0/5webpack/11bundle%20spliting", element: React__default.createElement(MDXContent$j), preload: () => Promise.resolve().then(() => _11bundle_spliting) },
+  { path: "/%E7%AC%94%E8%AE%B0/5webpack/12%E9%AB%98%E6%95%88%E5%88%86%E5%8C%85", element: React__default.createElement(MDXContent$i), preload: () => Promise.resolve().then(() => _12____) },
+  { path: "/%E7%AC%94%E8%AE%B0/5webpack/13loader%E5%88%9D%E8%AF%86", element: React__default.createElement(MDXContent$h), preload: () => Promise.resolve().then(() => _13loader__) },
+  { path: "/%E7%AC%94%E8%AE%B0/5webpack/14json%E5%A4%84%E7%90%86", element: React__default.createElement(MDXContent$g), preload: () => Promise.resolve().then(() => _14json__) },
+  { path: "/%E7%AC%94%E8%AE%B0/5webpack/15import%20assertions", element: React__default.createElement(MDXContent$f), preload: () => Promise.resolve().then(() => _15import_assertions) },
+  { path: "/%E7%AC%94%E8%AE%B0/5webpack/16html%E5%A4%84%E7%90%86", element: React__default.createElement(MDXContent$e), preload: () => Promise.resolve().then(() => _16html__) },
+  { path: "/%E7%AC%94%E8%AE%B0/5webpack/17%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86", element: React__default.createElement(MDXContent$d), preload: () => Promise.resolve().then(() => _17____) },
+  { path: "/%E7%AC%94%E8%AE%B0/5webpack/18%E5%B0%8F%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86", element: React__default.createElement(MDXContent$c), preload: () => Promise.resolve().then(() => _18_____) },
+  { path: "/%E7%AC%94%E8%AE%B0/5webpack/19svg%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86", element: React__default.createElement(MDXContent$b), preload: () => Promise.resolve().then(() => _19svg____) },
+  { path: "/%E7%AC%94%E8%AE%B0/5webpack/1%E4%BD%BF%E7%94%A8%20node%20api%20%E5%AD%A6%E4%B9%A0%20webpack", element: React__default.createElement(MDXContent$a), preload: () => Promise.resolve().then(() => _1___node_api____webpack) },
+  { path: "/%E7%AC%94%E8%AE%B0/5webpack/20%E7%AE%80%E5%8D%95%E6%A0%B7%E5%BC%8F%E5%A4%84%E7%90%86", element: React__default.createElement(MDXContent$9), preload: () => Promise.resolve().then(() => _20______) },
+  { path: "/%E7%AC%94%E8%AE%B0/5webpack/2cjs%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90", element: React__default.createElement(MDXContent$8), preload: () => Promise.resolve().then(() => _2cjs_____) },
+  { path: "/%E7%AC%94%E8%AE%B0/5webpack/3cjs%E6%A8%A1%E5%9D%97%E6%94%B6%E9%9B%86%E4%B8%8East", element: React__default.createElement(MDXContent$7), preload: () => Promise.resolve().then(() => _3cjs_____ast) },
+  { path: "/%E7%AC%94%E8%AE%B0/5webpack/4%E6%96%87%E4%BB%B6%E5%90%8D%E4%B8%AD%E7%9A%84hash", element: React__default.createElement(MDXContent$6), preload: () => Promise.resolve().then(() => _4_____hash) },
+  { path: "/%E7%AC%94%E8%AE%B0/5webpack/5cjs%E4%B8%8Eesm", element: React__default.createElement(MDXContent$5), preload: () => Promise.resolve().then(() => _5cjs_esm) },
+  { path: "/%E7%AC%94%E8%AE%B0/5webpack/6esm%20to%20cjs", element: React__default.createElement(MDXContent$4), preload: () => Promise.resolve().then(() => _6esm_to_cjs) },
+  { path: "/%E7%AC%94%E8%AE%B0/5webpack/7code%20spliting%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90", element: React__default.createElement(MDXContent$3), preload: () => Promise.resolve().then(() => _7code_spliting_____) },
+  { path: "/%E7%AC%94%E8%AE%B0/5webpack/8magic%20comment", element: React__default.createElement(MDXContent$2), preload: () => Promise.resolve().then(() => _8magic_comment) },
+  { path: "/%E7%AC%94%E8%AE%B0/5webpack/99readme", element: React__default.createElement(MDXContent$1), preload: () => Promise.resolve().then(() => _99readme) },
+  { path: "/%E7%AC%94%E8%AE%B0/5webpack/9hash%20%E7%9A%84%E5%A2%9E%E5%BC%BA", element: React__default.createElement(MDXContent), preload: () => Promise.resolve().then(() => _9hash____) }
 ];
 async function getPageData(pathname) {
   var _a, _b, _c, _d;
@@ -22103,6 +22101,981 @@ function useWindowScroll() {
   }, []);
   return { x, y };
 }
+/**
+ * @remix-run/router v1.15.0
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+function _extends$1() {
+  _extends$1 = Object.assign ? Object.assign.bind() : function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends$1.apply(this, arguments);
+}
+var Action;
+(function(Action2) {
+  Action2["Pop"] = "POP";
+  Action2["Push"] = "PUSH";
+  Action2["Replace"] = "REPLACE";
+})(Action || (Action = {}));
+function invariant(value, message) {
+  if (value === false || value === null || typeof value === "undefined") {
+    throw new Error(message);
+  }
+}
+function warning(cond, message) {
+  if (!cond) {
+    if (typeof console !== "undefined")
+      console.warn(message);
+    try {
+      throw new Error(message);
+    } catch (e) {
+    }
+  }
+}
+function createPath(_ref) {
+  let {
+    pathname = "/",
+    search = "",
+    hash = ""
+  } = _ref;
+  if (search && search !== "?")
+    pathname += search.charAt(0) === "?" ? search : "?" + search;
+  if (hash && hash !== "#")
+    pathname += hash.charAt(0) === "#" ? hash : "#" + hash;
+  return pathname;
+}
+function parsePath(path) {
+  let parsedPath = {};
+  if (path) {
+    let hashIndex = path.indexOf("#");
+    if (hashIndex >= 0) {
+      parsedPath.hash = path.substr(hashIndex);
+      path = path.substr(0, hashIndex);
+    }
+    let searchIndex = path.indexOf("?");
+    if (searchIndex >= 0) {
+      parsedPath.search = path.substr(searchIndex);
+      path = path.substr(0, searchIndex);
+    }
+    if (path) {
+      parsedPath.pathname = path;
+    }
+  }
+  return parsedPath;
+}
+var ResultType;
+(function(ResultType2) {
+  ResultType2["data"] = "data";
+  ResultType2["deferred"] = "deferred";
+  ResultType2["redirect"] = "redirect";
+  ResultType2["error"] = "error";
+})(ResultType || (ResultType = {}));
+function matchRoutes(routes2, locationArg, basename) {
+  if (basename === void 0) {
+    basename = "/";
+  }
+  let location = typeof locationArg === "string" ? parsePath(locationArg) : locationArg;
+  let pathname = stripBasename(location.pathname || "/", basename);
+  if (pathname == null) {
+    return null;
+  }
+  let branches = flattenRoutes(routes2);
+  rankRouteBranches(branches);
+  let matches = null;
+  for (let i = 0; matches == null && i < branches.length; ++i) {
+    matches = matchRouteBranch(
+      branches[i],
+      // Incoming pathnames are generally encoded from either window.location
+      // or from router.navigate, but we want to match against the unencoded
+      // paths in the route definitions.  Memory router locations won't be
+      // encoded here but there also shouldn't be anything to decode so this
+      // should be a safe operation.  This avoids needing matchRoutes to be
+      // history-aware.
+      safelyDecodeURI(pathname)
+    );
+  }
+  return matches;
+}
+function flattenRoutes(routes2, branches, parentsMeta, parentPath) {
+  if (branches === void 0) {
+    branches = [];
+  }
+  if (parentsMeta === void 0) {
+    parentsMeta = [];
+  }
+  if (parentPath === void 0) {
+    parentPath = "";
+  }
+  let flattenRoute = (route, index2, relativePath) => {
+    let meta = {
+      relativePath: relativePath === void 0 ? route.path || "" : relativePath,
+      caseSensitive: route.caseSensitive === true,
+      childrenIndex: index2,
+      route
+    };
+    if (meta.relativePath.startsWith("/")) {
+      invariant(meta.relativePath.startsWith(parentPath), 'Absolute route path "' + meta.relativePath + '" nested under path ' + ('"' + parentPath + '" is not valid. An absolute child route path ') + "must start with the combined path of all its parent routes.");
+      meta.relativePath = meta.relativePath.slice(parentPath.length);
+    }
+    let path = joinPaths([parentPath, meta.relativePath]);
+    let routesMeta = parentsMeta.concat(meta);
+    if (route.children && route.children.length > 0) {
+      invariant(
+        // Our types know better, but runtime JS may not!
+        // @ts-expect-error
+        route.index !== true,
+        "Index routes must not have child routes. Please remove " + ('all child routes from route path "' + path + '".')
+      );
+      flattenRoutes(route.children, branches, routesMeta, path);
+    }
+    if (route.path == null && !route.index) {
+      return;
+    }
+    branches.push({
+      path,
+      score: computeScore(path, route.index),
+      routesMeta
+    });
+  };
+  routes2.forEach((route, index2) => {
+    var _route$path;
+    if (route.path === "" || !((_route$path = route.path) != null && _route$path.includes("?"))) {
+      flattenRoute(route, index2);
+    } else {
+      for (let exploded of explodeOptionalSegments(route.path)) {
+        flattenRoute(route, index2, exploded);
+      }
+    }
+  });
+  return branches;
+}
+function explodeOptionalSegments(path) {
+  let segments = path.split("/");
+  if (segments.length === 0)
+    return [];
+  let [first, ...rest] = segments;
+  let isOptional = first.endsWith("?");
+  let required = first.replace(/\?$/, "");
+  if (rest.length === 0) {
+    return isOptional ? [required, ""] : [required];
+  }
+  let restExploded = explodeOptionalSegments(rest.join("/"));
+  let result = [];
+  result.push(...restExploded.map((subpath) => subpath === "" ? required : [required, subpath].join("/")));
+  if (isOptional) {
+    result.push(...restExploded);
+  }
+  return result.map((exploded) => path.startsWith("/") && exploded === "" ? "/" : exploded);
+}
+function rankRouteBranches(branches) {
+  branches.sort((a, b) => a.score !== b.score ? b.score - a.score : compareIndexes(a.routesMeta.map((meta) => meta.childrenIndex), b.routesMeta.map((meta) => meta.childrenIndex)));
+}
+const paramRe = /^:[\w-]+$/;
+const dynamicSegmentValue = 3;
+const indexRouteValue = 2;
+const emptySegmentValue = 1;
+const staticSegmentValue = 10;
+const splatPenalty = -2;
+const isSplat = (s) => s === "*";
+function computeScore(path, index2) {
+  let segments = path.split("/");
+  let initialScore = segments.length;
+  if (segments.some(isSplat)) {
+    initialScore += splatPenalty;
+  }
+  if (index2) {
+    initialScore += indexRouteValue;
+  }
+  return segments.filter((s) => !isSplat(s)).reduce((score, segment) => score + (paramRe.test(segment) ? dynamicSegmentValue : segment === "" ? emptySegmentValue : staticSegmentValue), initialScore);
+}
+function compareIndexes(a, b) {
+  let siblings = a.length === b.length && a.slice(0, -1).every((n, i) => n === b[i]);
+  return siblings ? (
+    // If two routes are siblings, we should try to match the earlier sibling
+    // first. This allows people to have fine-grained control over the matching
+    // behavior by simply putting routes with identical paths in the order they
+    // want them tried.
+    a[a.length - 1] - b[b.length - 1]
+  ) : (
+    // Otherwise, it doesn't really make sense to rank non-siblings by index,
+    // so they sort equally.
+    0
+  );
+}
+function matchRouteBranch(branch, pathname) {
+  let {
+    routesMeta
+  } = branch;
+  let matchedParams = {};
+  let matchedPathname = "/";
+  let matches = [];
+  for (let i = 0; i < routesMeta.length; ++i) {
+    let meta = routesMeta[i];
+    let end = i === routesMeta.length - 1;
+    let remainingPathname = matchedPathname === "/" ? pathname : pathname.slice(matchedPathname.length) || "/";
+    let match = matchPath({
+      path: meta.relativePath,
+      caseSensitive: meta.caseSensitive,
+      end
+    }, remainingPathname);
+    if (!match)
+      return null;
+    Object.assign(matchedParams, match.params);
+    let route = meta.route;
+    matches.push({
+      // TODO: Can this as be avoided?
+      params: matchedParams,
+      pathname: joinPaths([matchedPathname, match.pathname]),
+      pathnameBase: normalizePathname(joinPaths([matchedPathname, match.pathnameBase])),
+      route
+    });
+    if (match.pathnameBase !== "/") {
+      matchedPathname = joinPaths([matchedPathname, match.pathnameBase]);
+    }
+  }
+  return matches;
+}
+function matchPath(pattern, pathname) {
+  if (typeof pattern === "string") {
+    pattern = {
+      path: pattern,
+      caseSensitive: false,
+      end: true
+    };
+  }
+  let [matcher, compiledParams] = compilePath(pattern.path, pattern.caseSensitive, pattern.end);
+  let match = pathname.match(matcher);
+  if (!match)
+    return null;
+  let matchedPathname = match[0];
+  let pathnameBase = matchedPathname.replace(/(.)\/+$/, "$1");
+  let captureGroups = match.slice(1);
+  let params = compiledParams.reduce((memo, _ref, index2) => {
+    let {
+      paramName,
+      isOptional
+    } = _ref;
+    if (paramName === "*") {
+      let splatValue = captureGroups[index2] || "";
+      pathnameBase = matchedPathname.slice(0, matchedPathname.length - splatValue.length).replace(/(.)\/+$/, "$1");
+    }
+    const value = captureGroups[index2];
+    if (isOptional && !value) {
+      memo[paramName] = void 0;
+    } else {
+      memo[paramName] = safelyDecodeURIComponent(value || "", paramName);
+    }
+    return memo;
+  }, {});
+  return {
+    params,
+    pathname: matchedPathname,
+    pathnameBase,
+    pattern
+  };
+}
+function compilePath(path, caseSensitive, end) {
+  if (caseSensitive === void 0) {
+    caseSensitive = false;
+  }
+  if (end === void 0) {
+    end = true;
+  }
+  warning(path === "*" || !path.endsWith("*") || path.endsWith("/*"), 'Route path "' + path + '" will be treated as if it were ' + ('"' + path.replace(/\*$/, "/*") + '" because the `*` character must ') + "always follow a `/` in the pattern. To get rid of this warning, " + ('please change the route path to "' + path.replace(/\*$/, "/*") + '".'));
+  let params = [];
+  let regexpSource = "^" + path.replace(/\/*\*?$/, "").replace(/^\/*/, "/").replace(/[\\.*+^${}|()[\]]/g, "\\$&").replace(/\/:([\w-]+)(\?)?/g, (_, paramName, isOptional) => {
+    params.push({
+      paramName,
+      isOptional: isOptional != null
+    });
+    return isOptional ? "/?([^\\/]+)?" : "/([^\\/]+)";
+  });
+  if (path.endsWith("*")) {
+    params.push({
+      paramName: "*"
+    });
+    regexpSource += path === "*" || path === "/*" ? "(.*)$" : "(?:\\/(.+)|\\/*)$";
+  } else if (end) {
+    regexpSource += "\\/*$";
+  } else if (path !== "" && path !== "/") {
+    regexpSource += "(?:(?=\\/|$))";
+  } else
+    ;
+  let matcher = new RegExp(regexpSource, caseSensitive ? void 0 : "i");
+  return [matcher, params];
+}
+function safelyDecodeURI(value) {
+  try {
+    return decodeURI(value);
+  } catch (error) {
+    warning(false, 'The URL path "' + value + '" could not be decoded because it is is a malformed URL segment. This is probably due to a bad percent ' + ("encoding (" + error + ")."));
+    return value;
+  }
+}
+function safelyDecodeURIComponent(value, paramName) {
+  try {
+    return decodeURIComponent(value);
+  } catch (error) {
+    warning(false, 'The value for the URL param "' + paramName + '" will not be decoded because' + (' the string "' + value + '" is a malformed URL segment. This is probably') + (" due to a bad percent encoding (" + error + ")."));
+    return value;
+  }
+}
+function stripBasename(pathname, basename) {
+  if (basename === "/")
+    return pathname;
+  if (!pathname.toLowerCase().startsWith(basename.toLowerCase())) {
+    return null;
+  }
+  let startIndex = basename.endsWith("/") ? basename.length - 1 : basename.length;
+  let nextChar = pathname.charAt(startIndex);
+  if (nextChar && nextChar !== "/") {
+    return null;
+  }
+  return pathname.slice(startIndex) || "/";
+}
+function resolvePath(to, fromPathname) {
+  if (fromPathname === void 0) {
+    fromPathname = "/";
+  }
+  let {
+    pathname: toPathname,
+    search = "",
+    hash = ""
+  } = typeof to === "string" ? parsePath(to) : to;
+  let pathname = toPathname ? toPathname.startsWith("/") ? toPathname : resolvePathname(toPathname, fromPathname) : fromPathname;
+  return {
+    pathname,
+    search: normalizeSearch(search),
+    hash: normalizeHash(hash)
+  };
+}
+function resolvePathname(relativePath, fromPathname) {
+  let segments = fromPathname.replace(/\/+$/, "").split("/");
+  let relativeSegments = relativePath.split("/");
+  relativeSegments.forEach((segment) => {
+    if (segment === "..") {
+      if (segments.length > 1)
+        segments.pop();
+    } else if (segment !== ".") {
+      segments.push(segment);
+    }
+  });
+  return segments.length > 1 ? segments.join("/") : "/";
+}
+function getInvalidPathError(char, field, dest, path) {
+  return "Cannot include a '" + char + "' character in a manually specified " + ("`to." + field + "` field [" + JSON.stringify(path) + "].  Please separate it out to the ") + ("`to." + dest + "` field. Alternatively you may provide the full path as ") + 'a string in <Link to="..."> and the router will parse it for you.';
+}
+function getPathContributingMatches(matches) {
+  return matches.filter((match, index2) => index2 === 0 || match.route.path && match.route.path.length > 0);
+}
+function getResolveToMatches(matches, v7_relativeSplatPath) {
+  let pathMatches = getPathContributingMatches(matches);
+  if (v7_relativeSplatPath) {
+    return pathMatches.map((match, idx) => idx === matches.length - 1 ? match.pathname : match.pathnameBase);
+  }
+  return pathMatches.map((match) => match.pathnameBase);
+}
+function resolveTo(toArg, routePathnames, locationPathname, isPathRelative) {
+  if (isPathRelative === void 0) {
+    isPathRelative = false;
+  }
+  let to;
+  if (typeof toArg === "string") {
+    to = parsePath(toArg);
+  } else {
+    to = _extends$1({}, toArg);
+    invariant(!to.pathname || !to.pathname.includes("?"), getInvalidPathError("?", "pathname", "search", to));
+    invariant(!to.pathname || !to.pathname.includes("#"), getInvalidPathError("#", "pathname", "hash", to));
+    invariant(!to.search || !to.search.includes("#"), getInvalidPathError("#", "search", "hash", to));
+  }
+  let isEmptyPath = toArg === "" || to.pathname === "";
+  let toPathname = isEmptyPath ? "/" : to.pathname;
+  let from;
+  if (toPathname == null) {
+    from = locationPathname;
+  } else {
+    let routePathnameIndex = routePathnames.length - 1;
+    if (!isPathRelative && toPathname.startsWith("..")) {
+      let toSegments = toPathname.split("/");
+      while (toSegments[0] === "..") {
+        toSegments.shift();
+        routePathnameIndex -= 1;
+      }
+      to.pathname = toSegments.join("/");
+    }
+    from = routePathnameIndex >= 0 ? routePathnames[routePathnameIndex] : "/";
+  }
+  let path = resolvePath(to, from);
+  let hasExplicitTrailingSlash = toPathname && toPathname !== "/" && toPathname.endsWith("/");
+  let hasCurrentTrailingSlash = (isEmptyPath || toPathname === ".") && locationPathname.endsWith("/");
+  if (!path.pathname.endsWith("/") && (hasExplicitTrailingSlash || hasCurrentTrailingSlash)) {
+    path.pathname += "/";
+  }
+  return path;
+}
+const joinPaths = (paths) => paths.join("/").replace(/\/\/+/g, "/");
+const normalizePathname = (pathname) => pathname.replace(/\/+$/, "").replace(/^\/*/, "/");
+const normalizeSearch = (search) => !search || search === "?" ? "" : search.startsWith("?") ? search : "?" + search;
+const normalizeHash = (hash) => !hash || hash === "#" ? "" : hash.startsWith("#") ? hash : "#" + hash;
+function isRouteErrorResponse(error) {
+  return error != null && typeof error.status === "number" && typeof error.statusText === "string" && typeof error.internal === "boolean" && "data" in error;
+}
+const validMutationMethodsArr = ["post", "put", "patch", "delete"];
+new Set(validMutationMethodsArr);
+const validRequestMethodsArr = ["get", ...validMutationMethodsArr];
+new Set(validRequestMethodsArr);
+/**
+ * React Router v6.22.0
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+function _extends() {
+  _extends = Object.assign ? Object.assign.bind() : function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends.apply(this, arguments);
+}
+const DataRouterContext = /* @__PURE__ */ React.createContext(null);
+if (process.env.NODE_ENV !== "production") {
+  DataRouterContext.displayName = "DataRouter";
+}
+const DataRouterStateContext = /* @__PURE__ */ React.createContext(null);
+if (process.env.NODE_ENV !== "production") {
+  DataRouterStateContext.displayName = "DataRouterState";
+}
+const AwaitContext = /* @__PURE__ */ React.createContext(null);
+if (process.env.NODE_ENV !== "production") {
+  AwaitContext.displayName = "Await";
+}
+const NavigationContext = /* @__PURE__ */ React.createContext(null);
+if (process.env.NODE_ENV !== "production") {
+  NavigationContext.displayName = "Navigation";
+}
+const LocationContext = /* @__PURE__ */ React.createContext(null);
+if (process.env.NODE_ENV !== "production") {
+  LocationContext.displayName = "Location";
+}
+const RouteContext = /* @__PURE__ */ React.createContext({
+  outlet: null,
+  matches: [],
+  isDataRoute: false
+});
+if (process.env.NODE_ENV !== "production") {
+  RouteContext.displayName = "Route";
+}
+const RouteErrorContext = /* @__PURE__ */ React.createContext(null);
+if (process.env.NODE_ENV !== "production") {
+  RouteErrorContext.displayName = "RouteError";
+}
+function useInRouterContext() {
+  return React.useContext(LocationContext) != null;
+}
+function useLocation() {
+  !useInRouterContext() ? process.env.NODE_ENV !== "production" ? invariant(
+    false,
+    // TODO: This error is probably because they somehow have 2 versions of the
+    // router loaded. We can help them understand how to avoid that.
+    "useLocation() may be used only in the context of a <Router> component."
+  ) : invariant(false) : void 0;
+  return React.useContext(LocationContext).location;
+}
+const navigateEffectWarning = "You should call navigate() in a React.useEffect(), not when your component is first rendered.";
+function useIsomorphicLayoutEffect(cb) {
+  let isStatic = React.useContext(NavigationContext).static;
+  if (!isStatic) {
+    React.useLayoutEffect(cb);
+  }
+}
+function useNavigate() {
+  let {
+    isDataRoute
+  } = React.useContext(RouteContext);
+  return isDataRoute ? useNavigateStable() : useNavigateUnstable();
+}
+function useNavigateUnstable() {
+  !useInRouterContext() ? process.env.NODE_ENV !== "production" ? invariant(
+    false,
+    // TODO: This error is probably because they somehow have 2 versions of the
+    // router loaded. We can help them understand how to avoid that.
+    "useNavigate() may be used only in the context of a <Router> component."
+  ) : invariant(false) : void 0;
+  let dataRouterContext = React.useContext(DataRouterContext);
+  let {
+    basename,
+    future,
+    navigator
+  } = React.useContext(NavigationContext);
+  let {
+    matches
+  } = React.useContext(RouteContext);
+  let {
+    pathname: locationPathname
+  } = useLocation();
+  let routePathnamesJson = JSON.stringify(getResolveToMatches(matches, future.v7_relativeSplatPath));
+  let activeRef = React.useRef(false);
+  useIsomorphicLayoutEffect(() => {
+    activeRef.current = true;
+  });
+  let navigate = React.useCallback(function(to, options) {
+    if (options === void 0) {
+      options = {};
+    }
+    process.env.NODE_ENV !== "production" ? warning(activeRef.current, navigateEffectWarning) : void 0;
+    if (!activeRef.current)
+      return;
+    if (typeof to === "number") {
+      navigator.go(to);
+      return;
+    }
+    let path = resolveTo(to, JSON.parse(routePathnamesJson), locationPathname, options.relative === "path");
+    if (dataRouterContext == null && basename !== "/") {
+      path.pathname = path.pathname === "/" ? basename : joinPaths([basename, path.pathname]);
+    }
+    (!!options.replace ? navigator.replace : navigator.push)(path, options.state, options);
+  }, [basename, navigator, routePathnamesJson, locationPathname, dataRouterContext]);
+  return navigate;
+}
+function useRoutes(routes2, locationArg) {
+  return useRoutesImpl(routes2, locationArg);
+}
+function useRoutesImpl(routes2, locationArg, dataRouterState, future) {
+  !useInRouterContext() ? process.env.NODE_ENV !== "production" ? invariant(
+    false,
+    // TODO: This error is probably because they somehow have 2 versions of the
+    // router loaded. We can help them understand how to avoid that.
+    "useRoutes() may be used only in the context of a <Router> component."
+  ) : invariant(false) : void 0;
+  let {
+    navigator
+  } = React.useContext(NavigationContext);
+  let {
+    matches: parentMatches
+  } = React.useContext(RouteContext);
+  let routeMatch = parentMatches[parentMatches.length - 1];
+  let parentParams = routeMatch ? routeMatch.params : {};
+  let parentPathname = routeMatch ? routeMatch.pathname : "/";
+  let parentPathnameBase = routeMatch ? routeMatch.pathnameBase : "/";
+  let parentRoute = routeMatch && routeMatch.route;
+  if (process.env.NODE_ENV !== "production") {
+    let parentPath = parentRoute && parentRoute.path || "";
+    warningOnce(parentPathname, !parentRoute || parentPath.endsWith("*"), "You rendered descendant <Routes> (or called `useRoutes()`) at " + ('"' + parentPathname + '" (under <Route path="' + parentPath + '">) but the ') + `parent route path has no trailing "*". This means if you navigate deeper, the parent won't match anymore and therefore the child routes will never render.
+
+` + ('Please change the parent <Route path="' + parentPath + '"> to <Route ') + ('path="' + (parentPath === "/" ? "*" : parentPath + "/*") + '">.'));
+  }
+  let locationFromContext = useLocation();
+  let location;
+  if (locationArg) {
+    var _parsedLocationArg$pa;
+    let parsedLocationArg = typeof locationArg === "string" ? parsePath(locationArg) : locationArg;
+    !(parentPathnameBase === "/" || ((_parsedLocationArg$pa = parsedLocationArg.pathname) == null ? void 0 : _parsedLocationArg$pa.startsWith(parentPathnameBase))) ? process.env.NODE_ENV !== "production" ? invariant(false, "When overriding the location using `<Routes location>` or `useRoutes(routes, location)`, the location pathname must begin with the portion of the URL pathname that was " + ('matched by all parent routes. The current pathname base is "' + parentPathnameBase + '" ') + ('but pathname "' + parsedLocationArg.pathname + '" was given in the `location` prop.')) : invariant(false) : void 0;
+    location = parsedLocationArg;
+  } else {
+    location = locationFromContext;
+  }
+  let pathname = location.pathname || "/";
+  let remainingPathname = parentPathnameBase === "/" ? pathname : pathname.slice(parentPathnameBase.length) || "/";
+  let matches = matchRoutes(routes2, {
+    pathname: remainingPathname
+  });
+  if (process.env.NODE_ENV !== "production") {
+    process.env.NODE_ENV !== "production" ? warning(parentRoute || matches != null, 'No routes matched location "' + location.pathname + location.search + location.hash + '" ') : void 0;
+    process.env.NODE_ENV !== "production" ? warning(matches == null || matches[matches.length - 1].route.element !== void 0 || matches[matches.length - 1].route.Component !== void 0 || matches[matches.length - 1].route.lazy !== void 0, 'Matched leaf route at location "' + location.pathname + location.search + location.hash + '" does not have an element or Component. This means it will render an <Outlet /> with a null value by default resulting in an "empty" page.') : void 0;
+  }
+  let renderedMatches = _renderMatches(matches && matches.map((match) => Object.assign({}, match, {
+    params: Object.assign({}, parentParams, match.params),
+    pathname: joinPaths([
+      parentPathnameBase,
+      // Re-encode pathnames that were decoded inside matchRoutes
+      navigator.encodeLocation ? navigator.encodeLocation(match.pathname).pathname : match.pathname
+    ]),
+    pathnameBase: match.pathnameBase === "/" ? parentPathnameBase : joinPaths([
+      parentPathnameBase,
+      // Re-encode pathnames that were decoded inside matchRoutes
+      navigator.encodeLocation ? navigator.encodeLocation(match.pathnameBase).pathname : match.pathnameBase
+    ])
+  })), parentMatches, dataRouterState, future);
+  if (locationArg && renderedMatches) {
+    return /* @__PURE__ */ React.createElement(LocationContext.Provider, {
+      value: {
+        location: _extends({
+          pathname: "/",
+          search: "",
+          hash: "",
+          state: null,
+          key: "default"
+        }, location),
+        navigationType: Action.Pop
+      }
+    }, renderedMatches);
+  }
+  return renderedMatches;
+}
+function DefaultErrorComponent() {
+  let error = useRouteError();
+  let message = isRouteErrorResponse(error) ? error.status + " " + error.statusText : error instanceof Error ? error.message : JSON.stringify(error);
+  let stack = error instanceof Error ? error.stack : null;
+  let lightgrey = "rgba(200,200,200, 0.5)";
+  let preStyles = {
+    padding: "0.5rem",
+    backgroundColor: lightgrey
+  };
+  let codeStyles = {
+    padding: "2px 4px",
+    backgroundColor: lightgrey
+  };
+  let devInfo = null;
+  if (process.env.NODE_ENV !== "production") {
+    console.error("Error handled by React Router default ErrorBoundary:", error);
+    devInfo = /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("p", null, "💿 Hey developer 👋"), /* @__PURE__ */ React.createElement("p", null, "You can provide a way better UX than this when your app throws errors by providing your own ", /* @__PURE__ */ React.createElement("code", {
+      style: codeStyles
+    }, "ErrorBoundary"), " or", " ", /* @__PURE__ */ React.createElement("code", {
+      style: codeStyles
+    }, "errorElement"), " prop on your route."));
+  }
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("h2", null, "Unexpected Application Error!"), /* @__PURE__ */ React.createElement("h3", {
+    style: {
+      fontStyle: "italic"
+    }
+  }, message), stack ? /* @__PURE__ */ React.createElement("pre", {
+    style: preStyles
+  }, stack) : null, devInfo);
+}
+const defaultErrorElement = /* @__PURE__ */ React.createElement(DefaultErrorComponent, null);
+class RenderErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      location: props.location,
+      revalidation: props.revalidation,
+      error: props.error
+    };
+  }
+  static getDerivedStateFromError(error) {
+    return {
+      error
+    };
+  }
+  static getDerivedStateFromProps(props, state) {
+    if (state.location !== props.location || state.revalidation !== "idle" && props.revalidation === "idle") {
+      return {
+        error: props.error,
+        location: props.location,
+        revalidation: props.revalidation
+      };
+    }
+    return {
+      error: props.error !== void 0 ? props.error : state.error,
+      location: state.location,
+      revalidation: props.revalidation || state.revalidation
+    };
+  }
+  componentDidCatch(error, errorInfo) {
+    console.error("React Router caught the following error during render", error, errorInfo);
+  }
+  render() {
+    return this.state.error !== void 0 ? /* @__PURE__ */ React.createElement(RouteContext.Provider, {
+      value: this.props.routeContext
+    }, /* @__PURE__ */ React.createElement(RouteErrorContext.Provider, {
+      value: this.state.error,
+      children: this.props.component
+    })) : this.props.children;
+  }
+}
+function RenderedRoute(_ref) {
+  let {
+    routeContext,
+    match,
+    children
+  } = _ref;
+  let dataRouterContext = React.useContext(DataRouterContext);
+  if (dataRouterContext && dataRouterContext.static && dataRouterContext.staticContext && (match.route.errorElement || match.route.ErrorBoundary)) {
+    dataRouterContext.staticContext._deepestRenderedBoundaryId = match.route.id;
+  }
+  return /* @__PURE__ */ React.createElement(RouteContext.Provider, {
+    value: routeContext
+  }, children);
+}
+function _renderMatches(matches, parentMatches, dataRouterState, future) {
+  var _dataRouterState2;
+  if (parentMatches === void 0) {
+    parentMatches = [];
+  }
+  if (dataRouterState === void 0) {
+    dataRouterState = null;
+  }
+  if (future === void 0) {
+    future = null;
+  }
+  if (matches == null) {
+    var _dataRouterState;
+    if ((_dataRouterState = dataRouterState) != null && _dataRouterState.errors) {
+      matches = dataRouterState.matches;
+    } else {
+      return null;
+    }
+  }
+  let renderedMatches = matches;
+  let errors = (_dataRouterState2 = dataRouterState) == null ? void 0 : _dataRouterState2.errors;
+  if (errors != null) {
+    let errorIndex = renderedMatches.findIndex((m) => m.route.id && (errors == null ? void 0 : errors[m.route.id]));
+    !(errorIndex >= 0) ? process.env.NODE_ENV !== "production" ? invariant(false, "Could not find a matching route for errors on route IDs: " + Object.keys(errors).join(",")) : invariant(false) : void 0;
+    renderedMatches = renderedMatches.slice(0, Math.min(renderedMatches.length, errorIndex + 1));
+  }
+  let renderFallback = false;
+  let fallbackIndex = -1;
+  if (dataRouterState && future && future.v7_partialHydration) {
+    for (let i = 0; i < renderedMatches.length; i++) {
+      let match = renderedMatches[i];
+      if (match.route.HydrateFallback || match.route.hydrateFallbackElement) {
+        fallbackIndex = i;
+      }
+      if (match.route.id) {
+        let {
+          loaderData,
+          errors: errors2
+        } = dataRouterState;
+        let needsToRunLoader = match.route.loader && loaderData[match.route.id] === void 0 && (!errors2 || errors2[match.route.id] === void 0);
+        if (match.route.lazy || needsToRunLoader) {
+          renderFallback = true;
+          if (fallbackIndex >= 0) {
+            renderedMatches = renderedMatches.slice(0, fallbackIndex + 1);
+          } else {
+            renderedMatches = [renderedMatches[0]];
+          }
+          break;
+        }
+      }
+    }
+  }
+  return renderedMatches.reduceRight((outlet, match, index2) => {
+    let error;
+    let shouldRenderHydrateFallback = false;
+    let errorElement = null;
+    let hydrateFallbackElement = null;
+    if (dataRouterState) {
+      error = errors && match.route.id ? errors[match.route.id] : void 0;
+      errorElement = match.route.errorElement || defaultErrorElement;
+      if (renderFallback) {
+        if (fallbackIndex < 0 && index2 === 0) {
+          warningOnce("route-fallback", false, "No `HydrateFallback` element provided to render during initial hydration");
+          shouldRenderHydrateFallback = true;
+          hydrateFallbackElement = null;
+        } else if (fallbackIndex === index2) {
+          shouldRenderHydrateFallback = true;
+          hydrateFallbackElement = match.route.hydrateFallbackElement || null;
+        }
+      }
+    }
+    let matches2 = parentMatches.concat(renderedMatches.slice(0, index2 + 1));
+    let getChildren = () => {
+      let children;
+      if (error) {
+        children = errorElement;
+      } else if (shouldRenderHydrateFallback) {
+        children = hydrateFallbackElement;
+      } else if (match.route.Component) {
+        children = /* @__PURE__ */ React.createElement(match.route.Component, null);
+      } else if (match.route.element) {
+        children = match.route.element;
+      } else {
+        children = outlet;
+      }
+      return /* @__PURE__ */ React.createElement(RenderedRoute, {
+        match,
+        routeContext: {
+          outlet,
+          matches: matches2,
+          isDataRoute: dataRouterState != null
+        },
+        children
+      });
+    };
+    return dataRouterState && (match.route.ErrorBoundary || match.route.errorElement || index2 === 0) ? /* @__PURE__ */ React.createElement(RenderErrorBoundary, {
+      location: dataRouterState.location,
+      revalidation: dataRouterState.revalidation,
+      component: errorElement,
+      error,
+      children: getChildren(),
+      routeContext: {
+        outlet: null,
+        matches: matches2,
+        isDataRoute: true
+      }
+    }) : getChildren();
+  }, null);
+}
+var DataRouterHook = /* @__PURE__ */ function(DataRouterHook2) {
+  DataRouterHook2["UseBlocker"] = "useBlocker";
+  DataRouterHook2["UseRevalidator"] = "useRevalidator";
+  DataRouterHook2["UseNavigateStable"] = "useNavigate";
+  return DataRouterHook2;
+}(DataRouterHook || {});
+var DataRouterStateHook = /* @__PURE__ */ function(DataRouterStateHook2) {
+  DataRouterStateHook2["UseBlocker"] = "useBlocker";
+  DataRouterStateHook2["UseLoaderData"] = "useLoaderData";
+  DataRouterStateHook2["UseActionData"] = "useActionData";
+  DataRouterStateHook2["UseRouteError"] = "useRouteError";
+  DataRouterStateHook2["UseNavigation"] = "useNavigation";
+  DataRouterStateHook2["UseRouteLoaderData"] = "useRouteLoaderData";
+  DataRouterStateHook2["UseMatches"] = "useMatches";
+  DataRouterStateHook2["UseRevalidator"] = "useRevalidator";
+  DataRouterStateHook2["UseNavigateStable"] = "useNavigate";
+  DataRouterStateHook2["UseRouteId"] = "useRouteId";
+  return DataRouterStateHook2;
+}(DataRouterStateHook || {});
+function getDataRouterConsoleError(hookName) {
+  return hookName + " must be used within a data router.  See https://reactrouter.com/routers/picking-a-router.";
+}
+function useDataRouterContext(hookName) {
+  let ctx = React.useContext(DataRouterContext);
+  !ctx ? process.env.NODE_ENV !== "production" ? invariant(false, getDataRouterConsoleError(hookName)) : invariant(false) : void 0;
+  return ctx;
+}
+function useDataRouterState(hookName) {
+  let state = React.useContext(DataRouterStateContext);
+  !state ? process.env.NODE_ENV !== "production" ? invariant(false, getDataRouterConsoleError(hookName)) : invariant(false) : void 0;
+  return state;
+}
+function useRouteContext(hookName) {
+  let route = React.useContext(RouteContext);
+  !route ? process.env.NODE_ENV !== "production" ? invariant(false, getDataRouterConsoleError(hookName)) : invariant(false) : void 0;
+  return route;
+}
+function useCurrentRouteId(hookName) {
+  let route = useRouteContext(hookName);
+  let thisRoute = route.matches[route.matches.length - 1];
+  !thisRoute.route.id ? process.env.NODE_ENV !== "production" ? invariant(false, hookName + ' can only be used on routes that contain a unique "id"') : invariant(false) : void 0;
+  return thisRoute.route.id;
+}
+function useRouteError() {
+  var _state$errors;
+  let error = React.useContext(RouteErrorContext);
+  let state = useDataRouterState(DataRouterStateHook.UseRouteError);
+  let routeId = useCurrentRouteId(DataRouterStateHook.UseRouteError);
+  if (error !== void 0) {
+    return error;
+  }
+  return (_state$errors = state.errors) == null ? void 0 : _state$errors[routeId];
+}
+function useNavigateStable() {
+  let {
+    router
+  } = useDataRouterContext(DataRouterHook.UseNavigateStable);
+  let id = useCurrentRouteId(DataRouterStateHook.UseNavigateStable);
+  let activeRef = React.useRef(false);
+  useIsomorphicLayoutEffect(() => {
+    activeRef.current = true;
+  });
+  let navigate = React.useCallback(function(to, options) {
+    if (options === void 0) {
+      options = {};
+    }
+    process.env.NODE_ENV !== "production" ? warning(activeRef.current, navigateEffectWarning) : void 0;
+    if (!activeRef.current)
+      return;
+    if (typeof to === "number") {
+      router.navigate(to);
+    } else {
+      router.navigate(to, _extends({
+        fromRouteId: id
+      }, options));
+    }
+  }, [router, id]);
+  return navigate;
+}
+const alreadyWarned = {};
+function warningOnce(key, cond, message) {
+  if (!cond && !alreadyWarned[key]) {
+    alreadyWarned[key] = true;
+    process.env.NODE_ENV !== "production" ? warning(false, message) : void 0;
+  }
+}
+function Router(_ref5) {
+  let {
+    basename: basenameProp = "/",
+    children = null,
+    location: locationProp,
+    navigationType = Action.Pop,
+    navigator,
+    static: staticProp = false,
+    future
+  } = _ref5;
+  !!useInRouterContext() ? process.env.NODE_ENV !== "production" ? invariant(false, "You cannot render a <Router> inside another <Router>. You should never have more than one in your app.") : invariant(false) : void 0;
+  let basename = basenameProp.replace(/^\/*/, "/");
+  let navigationContext = React.useMemo(() => ({
+    basename,
+    navigator,
+    static: staticProp,
+    future: _extends({
+      v7_relativeSplatPath: false
+    }, future)
+  }), [basename, future, navigator, staticProp]);
+  if (typeof locationProp === "string") {
+    locationProp = parsePath(locationProp);
+  }
+  let {
+    pathname = "/",
+    search = "",
+    hash = "",
+    state = null,
+    key = "default"
+  } = locationProp;
+  let locationContext = React.useMemo(() => {
+    let trailingPathname = stripBasename(pathname, basename);
+    if (trailingPathname == null) {
+      return null;
+    }
+    return {
+      location: {
+        pathname: trailingPathname,
+        search,
+        hash,
+        state,
+        key
+      },
+      navigationType
+    };
+  }, [basename, pathname, search, hash, state, key, navigationType]);
+  process.env.NODE_ENV !== "production" ? warning(locationContext != null, '<Router basename="' + basename + '"> is not able to match the URL ' + ('"' + pathname + search + hash + '" because it does not start with the ') + "basename, so the <Router> won't render anything.") : void 0;
+  if (locationContext == null) {
+    return null;
+  }
+  return /* @__PURE__ */ React.createElement(NavigationContext.Provider, {
+    value: navigationContext
+  }, /* @__PURE__ */ React.createElement(LocationContext.Provider, {
+    children,
+    value: locationContext
+  }));
+}
+new Promise(() => {
+});
 function Content({ location = "/" }) {
   const element = useRoutes(routes, normalizeUrl(location));
   console.log(
@@ -22111,6 +23084,68 @@ function Content({ location = "/" }) {
   );
   return element;
 }
+function getDefaultExportFromCjs(x) {
+  return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
+}
+var classnames = { exports: {} };
+/*!
+	Copyright (c) 2018 Jed Watson.
+	Licensed under the MIT License (MIT), see
+	http://jedwatson.github.io/classnames
+*/
+(function(module) {
+  (function() {
+    var hasOwn = {}.hasOwnProperty;
+    function classNames2() {
+      var classes = "";
+      for (var i = 0; i < arguments.length; i++) {
+        var arg = arguments[i];
+        if (arg) {
+          classes = appendClass(classes, parseValue(arg));
+        }
+      }
+      return classes;
+    }
+    function parseValue(arg) {
+      if (typeof arg === "string" || typeof arg === "number") {
+        return arg;
+      }
+      if (typeof arg !== "object") {
+        return "";
+      }
+      if (Array.isArray(arg)) {
+        return classNames2.apply(null, arg);
+      }
+      if (arg.toString !== Object.prototype.toString && !arg.toString.toString().includes("[native code]")) {
+        return arg.toString();
+      }
+      var classes = "";
+      for (var key in arg) {
+        if (hasOwn.call(arg, key) && arg[key]) {
+          classes = appendClass(classes, key);
+        }
+      }
+      return classes;
+    }
+    function appendClass(value, newClass) {
+      if (!newClass) {
+        return value;
+      }
+      if (value) {
+        return value + " " + newClass;
+      }
+      return value + newClass;
+    }
+    if (module.exports) {
+      classNames2.default = classNames2;
+      module.exports = classNames2;
+    } else {
+      window.classNames = classNames2;
+    }
+  })();
+})(classnames);
+var classnamesExports = classnames.exports;
+const classNames = /* @__PURE__ */ getDefaultExportFromCjs(classnamesExports);
 function Link({
   href = "/",
   className,
@@ -22502,8 +23537,8 @@ function Doc({
     /* @__PURE__ */ jsxs("div", { className: "pc:ml-sidebar ml-0 flex justify-between", children: [
       /* @__PURE__ */ jsxs("div", { className: "mx-auto w-full max-w-[768px] transition-[margin] duration-300", children: [
         /* @__PURE__ */ jsx(MobileBar, { toc }),
-        /* @__PURE__ */ jsxs("div", { className: "doc p-[48px]", children: [
-          content,
+        /* @__PURE__ */ jsxs("div", { className: "p-[48px]", children: [
+          /* @__PURE__ */ jsx("div", { className: "doc", children: content }),
           /* @__PURE__ */ jsx(Footer, {})
         ] })
       ] }),
@@ -22661,6 +23696,7 @@ function NotFound() {
 function Layout({ location = window.location.pathname }) {
   var _a;
   const { pageData } = usePageData();
+  console.log("页面数据：", pageData);
   const getPage = () => {
     const pageType = pageData == null ? void 0 : pageData.pageType;
     if (pageType === "home") {
@@ -22690,9 +23726,70 @@ function Layout({ location = window.location.pathname }) {
     getPage()
   ] });
 }
+function StaticRouter({
+  basename,
+  children,
+  location: locationProp = "/",
+  future
+}) {
+  if (typeof locationProp === "string") {
+    locationProp = parsePath(locationProp);
+  }
+  let action = Action.Pop;
+  let location = {
+    pathname: locationProp.pathname || "/",
+    search: locationProp.search || "",
+    hash: locationProp.hash || "",
+    state: locationProp.state || null,
+    key: locationProp.key || "default"
+  };
+  let staticNavigator = getStatelessNavigator();
+  return /* @__PURE__ */ React.createElement(Router, {
+    basename,
+    children,
+    location,
+    navigationType: action,
+    navigator: staticNavigator,
+    future,
+    static: true
+  });
+}
+function getStatelessNavigator() {
+  return {
+    createHref,
+    encodeLocation,
+    push(to) {
+      throw new Error(`You cannot use navigator.push() on the server because it is a stateless environment. This error was probably triggered when you did a \`navigate(${JSON.stringify(to)})\` somewhere in your app.`);
+    },
+    replace(to) {
+      throw new Error(`You cannot use navigator.replace() on the server because it is a stateless environment. This error was probably triggered when you did a \`navigate(${JSON.stringify(to)}, { replace: true })\` somewhere in your app.`);
+    },
+    go(delta) {
+      throw new Error(`You cannot use navigator.go() on the server because it is a stateless environment. This error was probably triggered when you did a \`navigate(${delta})\` somewhere in your app.`);
+    },
+    back() {
+      throw new Error(`You cannot use navigator.back() on the server because it is a stateless environment.`);
+    },
+    forward() {
+      throw new Error(`You cannot use navigator.forward() on the server because it is a stateless environment.`);
+    }
+  };
+}
+function createHref(to) {
+  return typeof to === "string" ? to : createPath(to);
+}
+function encodeLocation(to) {
+  let href = typeof to === "string" ? to : createPath(to);
+  let encoded = ABSOLUTE_URL_REGEX.test(href) ? new URL(href) : new URL(href, "http://localhost");
+  return {
+    pathname: encoded.pathname,
+    search: encoded.search,
+    hash: encoded.hash
+  };
+}
+const ABSOLUTE_URL_REGEX = /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i;
 async function render(location) {
   const pageData = await getPageData(location);
-  console.log(location, 3123123213);
   const html = renderToString(
     /* @__PURE__ */ jsx(PageDataProvider, { value: { pageData }, children: /* @__PURE__ */ jsx(StaticRouter, { location, children: /* @__PURE__ */ jsx(Layout, { location }) }) })
   );

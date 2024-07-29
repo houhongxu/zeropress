@@ -28,7 +28,7 @@ export function createPlugins({
     }),
     vitePluginVirtualConfig({ siteConfig, restartRuntimeDevServer }),
     vitePluginVirtualRoutes({ siteConfig }),
-    tsconfigPaths(), // vite-env.d.ts中declare虚拟模块引入的类型需要绝对路径，所以使用路径别名插件解析tsconfig的baseurl
+    tsconfigPaths(), // 路径别名插件解析tsconfig的baseurl和paths
     vitePluginTransformFrontmatter(),
   ]
 }

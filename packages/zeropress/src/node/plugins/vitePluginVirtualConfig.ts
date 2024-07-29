@@ -1,3 +1,4 @@
+import { CONFIG_OPTIONS } from '../consts'
 import { SiteConfig } from '@/shared/types'
 import { Plugin } from 'vite'
 
@@ -28,11 +29,11 @@ export function vitePluginVirtualConfig({
       }
     },
     async handleHotUpdate(ctx) {
-      const configPath = siteConfig.userConfigPath || ''
+      const configPath = siteConfig.userConfigPath || CONFIG_OPTIONS[0]
 
       if (ctx.file.includes(configPath)) {
         if (restartRuntimeDevServer) {
-          console.log('监听到配置文件更新，重启服务中:', ctx.file)
+          console.log('监听到配置文件更新，重启服务中:', ctx.file, configPath)
 
           await restartRuntimeDevServer()
         }

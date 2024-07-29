@@ -223,10 +223,10 @@ function vitePluginVirtualConfig({
       }
     },
     async handleHotUpdate(ctx) {
-      const configPath = siteConfig.userConfigPath || "";
+      const configPath = siteConfig.userConfigPath || CONFIG_OPTIONS[0];
       if (ctx.file.includes(configPath)) {
         if (restartRuntimeDevServer) {
-          console.log("\u76D1\u542C\u5230\u914D\u7F6E\u6587\u4EF6\u66F4\u65B0\uFF0C\u91CD\u542F\u670D\u52A1\u4E2D:", ctx.file);
+          console.log("\u76D1\u542C\u5230\u914D\u7F6E\u6587\u4EF6\u66F4\u65B0\uFF0C\u91CD\u542F\u670D\u52A1\u4E2D:", ctx.file, configPath);
           await restartRuntimeDevServer();
         }
       }
@@ -320,7 +320,7 @@ function createPlugins({
     vitePluginVirtualConfig({ siteConfig, restartRuntimeDevServer }),
     vitePluginVirtualRoutes({ siteConfig }),
     tsconfigPaths(),
-    // vite-env.d.ts中declare虚拟模块引入的类型需要绝对路径，所以使用路径别名插件解析tsconfig的baseurl
+    // 路径别名插件解析tsconfig的baseurl和paths
     vitePluginTransformFrontmatter()
   ];
 }
@@ -401,8 +401,6 @@ function viteBuild({
 }) {
   return build({
     mode: "production",
-    root: ROOT_PATH,
-    // 获取tsconfig.json等配置文件
     plugins: createPlugins({ siteConfig }),
     build: {
       ssr: isServer,

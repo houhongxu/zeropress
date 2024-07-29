@@ -18,404 +18,7 @@ function Eu(l,e){for(var s=0;s<e.length;s++){const t=e[s];if(typeof t!="string"&
 `,n.jsx(e.p,{children:"温故知新"}),`
 `,n.jsx(e.p,{children:"一开始的笔记都是机械的复制关键点重组，记忆很浅，仅方便查阅"}),`
 `,n.jsx(e.p,{children:"现在可以希望用疑问->解决->复述的方式加深记忆"})]})}function Xc(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(di,{...l})}):di(l)}const qu=()=>Ku,Yu=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:qu,GetToc:Qu,default:Xc},Symbol.toStringTag,{value:"Module"})),Ju=()=>[],Zu=void 0;function hi(l){const e={a:"a",h1:"h1",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"参考",children:[n.jsx(e.a,{className:"autolink-headings",href:"#参考",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"参考"]}),`
-`,n.jsx(e.p,{children:n.jsx(e.a,{href:"https://q.shanyue.tech/",children:"山月"})})]})}function Wc(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(hi,{...l})}):hi(l)}const ex=()=>Zu,nx=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:ex,GetToc:Ju,default:Wc},Symbol.toStringTag,{value:"Module"})),lx=()=>[{id:"c",text:"c++",depth:2},{id:"js",text:"js",depth:2}],sx=void 0;function pi(l){const e={a:"a",h1:"h1",h2:"h2",li:"li",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"引用",children:[n.jsx(e.a,{className:"autolink-headings",href:"#引用",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"引用"]}),`
-`,n.jsxs(e.h2,{id:"c",children:[n.jsx(e.a,{className:"autolink-headings",href:"#c",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"c++"]}),`
-`,n.jsxs(e.ul,{children:[`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"指针：指向的内存地址，直接访问是内存地址，通过*访问值"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"指针常量（引用） int * const p：是指针的常量，不能切换指向，和 js 无可比性"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"常量指针 const int * p：指向常量的指针"}),`
-`]}),`
-`]}),`
-`,n.jsxs(e.h2,{id:"js",children:[n.jsx(e.a,{className:"autolink-headings",href:"#js",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"js"]}),`
-`,n.jsx(e.p,{children:"js 没有指针"}),`
-`,n.jsx(e.p,{children:"js 的引用可以对比 c++的指针，同样是指向内存地址，但是 js 直接访问就是值"})]})}function Qc(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(pi,{...l})}):pi(l)}const tx=()=>sx,rx=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:tx,GetToc:lx,default:Qc},Symbol.toStringTag,{value:"Module"})),ox=()=>[],ix=void 0;function ui(l){const e={a:"a",h1:"h1",li:"li",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"运算符",children:[n.jsx(e.a,{className:"autolink-headings",href:"#运算符",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"运算符"]}),`
-`,n.jsx(e.p,{children:"赋值运算符"}),`
-`,n.jsxs(e.ul,{children:[`
-`,n.jsx(e.li,{children:"优先级"}),`
-`,n.jsx(e.li,{children:`结合性，只有在优先级相同时，结合性才发挥作用
-赋值运算符=是右结合，即从右开始加括号，如 a = b = c = 3 为 a = (b = (c = 3))`}),`
-`]})]})}function Kc(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ui,{...l})}):ui(l)}const ax=()=>ix,cx=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:ax,GetToc:ox,default:Kc},Symbol.toStringTag,{value:"Module"})),dx=()=>[{id:"keyby",text:"keyBy",depth:2},{id:"mapkeys",text:"mapKeys",depth:3},{id:"merge",text:"merge",depth:3}],hx=void 0;function xi(l){const e={a:"a",code:"code",figure:"figure",h1:"h1",h2:"h2",h3:"h3",pre:"pre",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"loadash-手写",children:[n.jsx(e.a,{className:"autolink-headings",href:"#loadash-手写",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"loadash 手写"]}),`
-`,n.jsxs(e.h2,{id:"keyby",children:[n.jsx(e.a,{className:"autolink-headings",href:"#keyby",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"keyBy"]}),`
-`,n.jsx(e.figure,{"data-rehype-pretty-code-figure":"",children:n.jsx(e.pre,{style:{backgroundColor:"#fff",color:"#24292e"},tabIndex:"0","data-language":"ts","data-theme":"github-light",children:n.jsxs(e.code,{"data-language":"ts","data-theme":"github-light",style:{display:"grid"},children:[n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"export"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" function"}),n.jsx(e.span,{style:{color:"#6F42C1"},children:" keyBy"}),n.jsx(e.span,{style:{color:"#24292E"},children:"<"}),n.jsx(e.span,{style:{color:"#6F42C1"},children:"T"}),n.jsx(e.span,{style:{color:"#24292E"},children:", "}),n.jsx(e.span,{style:{color:"#6F42C1"},children:"K"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" extends"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" keyof"}),n.jsx(e.span,{style:{color:"#6F42C1"},children:" T"}),n.jsx(e.span,{style:{color:"#24292E"},children:">("}),n.jsx(e.span,{style:{color:"#E36209"},children:"arr"}),n.jsx(e.span,{style:{color:"#D73A49"},children:":"}),n.jsx(e.span,{style:{color:"#6F42C1"},children:" T"}),n.jsx(e.span,{style:{color:"#24292E"},children:"[], "}),n.jsx(e.span,{style:{color:"#E36209"},children:"key"}),n.jsx(e.span,{style:{color:"#D73A49"},children:":"}),n.jsx(e.span,{style:{color:"#6F42C1"},children:" K"}),n.jsx(e.span,{style:{color:"#24292E"},children:") {"})]}),`
-`,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"  return"}),n.jsx(e.span,{style:{color:"#24292E"},children:" arr."}),n.jsx(e.span,{style:{color:"#6F42C1"},children:"reduce"}),n.jsx(e.span,{style:{color:"#24292E"},children:"(("}),n.jsx(e.span,{style:{color:"#E36209"},children:"pre"}),n.jsx(e.span,{style:{color:"#24292E"},children:", "}),n.jsx(e.span,{style:{color:"#E36209"},children:"cur"}),n.jsx(e.span,{style:{color:"#24292E"},children:") "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"=>"}),n.jsx(e.span,{style:{color:"#24292E"},children:" {"})]}),`
-`,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"    const"}),n.jsx(e.span,{style:{color:"#005CC5"},children:" itemKey"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" ="}),n.jsx(e.span,{style:{color:"#24292E"},children:" cur[key];"})]}),`
-`,n.jsx(e.span,{"data-line":"",children:" "}),`
-`,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"    if"}),n.jsx(e.span,{style:{color:"#24292E"},children:" ("}),n.jsx(e.span,{style:{color:"#D73A49"},children:"typeof"}),n.jsx(e.span,{style:{color:"#24292E"},children:" itemKey "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"==="}),n.jsx(e.span,{style:{color:"#032F62"},children:' "string"'}),n.jsx(e.span,{style:{color:"#D73A49"},children:" ||"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" typeof"}),n.jsx(e.span,{style:{color:"#24292E"},children:" itemKey "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"==="}),n.jsx(e.span,{style:{color:"#032F62"},children:' "number"'}),n.jsx(e.span,{style:{color:"#24292E"},children:") {"})]}),`
-`,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#24292E"},children:"      pre[itemKey "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"as"}),n.jsx(e.span,{style:{color:"#005CC5"},children:" string"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" |"}),n.jsx(e.span,{style:{color:"#005CC5"},children:" number"}),n.jsx(e.span,{style:{color:"#24292E"},children:"] "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"="}),n.jsx(e.span,{style:{color:"#24292E"},children:" cur;"})]}),`
-`,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"    }"})}),`
-`,n.jsx(e.span,{"data-line":"",children:" "}),`
-`,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"    return"}),n.jsx(e.span,{style:{color:"#24292E"},children:" pre;"})]}),`
-`,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#24292E"},children:"  }, {} "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"as"}),n.jsx(e.span,{style:{color:"#6F42C1"},children:" Record"}),n.jsx(e.span,{style:{color:"#24292E"},children:"<"}),n.jsx(e.span,{style:{color:"#005CC5"},children:"string"}),n.jsx(e.span,{style:{color:"#24292E"},children:", "}),n.jsx(e.span,{style:{color:"#6F42C1"},children:"T"}),n.jsx(e.span,{style:{color:"#24292E"},children:">);"})]}),`
-`,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"}"})})]})})}),`
-`,n.jsxs(e.h3,{id:"mapkeys",children:[n.jsx(e.a,{className:"autolink-headings",href:"#mapkeys",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"mapKeys"]}),`
-`,n.jsx(e.figure,{"data-rehype-pretty-code-figure":"",children:n.jsx(e.pre,{style:{backgroundColor:"#fff",color:"#24292e"},tabIndex:"0","data-language":"ts","data-theme":"github-light",children:n.jsx(e.code,{"data-language":"ts","data-theme":"github-light",style:{display:"grid"},children:n.jsx(e.span,{"data-line":"",children:" "})})})}),`
-`,n.jsxs(e.h3,{id:"merge",children:[n.jsx(e.a,{className:"autolink-headings",href:"#merge",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"merge"]})]})}function qc(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(xi,{...l})}):xi(l)}const px=()=>hx,ux=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:px,GetToc:dx,default:qc},Symbol.toStringTag,{value:"Module"})),xx=()=>[{id:"moduletype",text:"moduleType",depth:2},{id:"chunk",text:"chunk",depth:2}],jx=void 0;function ji(l){const e={a:"a",h1:"h1",h2:"h2",li:"li",ol:"ol",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"modulechunkasset",children:[n.jsx(e.a,{className:"autolink-headings",href:"#modulechunkasset",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"module/chunk/asset"]}),`
-`,n.jsxs(e.h2,{id:"moduletype",children:[n.jsx(e.a,{className:"autolink-headings",href:"#moduletype",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"moduleType"]}),`
-`,n.jsxs(e.ul,{children:[`
-`,n.jsx(e.li,{children:"javascript/auto：我们在项目内引入的 ESM/CommonJS 的模块 (ESM 模块要看 loader 是如何处理的，也有可能是 javascript/esm 类型，不必深究)"}),`
-`,n.jsx(e.li,{children:"javascript/esm：我们在项目内引入的 ESM Package，比如 html-to-image，在其 package.json 中含有 module 字段"}),`
-`,n.jsx(e.li,{children:"javascript/dynamic：require('./src' + xxx)，动态加载"}),`
-`,n.jsx(e.li,{children:"asset：图片等资源"}),`
-`,n.jsx(e.li,{children:"asset/resource：图片等资源"}),`
-`,n.jsx(e.li,{children:"runtime：webpack_require 下挂载的诸多方法"}),`
-`]}),`
-`,n.jsxs(e.h2,{id:"chunk",children:[n.jsx(e.a,{className:"autolink-headings",href:"#chunk",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"chunk"]}),`
-`,n.jsx(e.p,{children:"一个 chunk 包含以下属性"}),`
-`,n.jsxs(e.ul,{children:[`
-`,n.jsx(e.li,{children:"initial：是否是 initial chunk，即首次 HTML 必须加载的模块"}),`
-`,n.jsx(e.li,{children:"entry：是否是 entry chunk"}),`
-`,n.jsx(e.li,{children:"hash：chunkhash"}),`
-`]}),`
-`,n.jsxs(e.ol,{children:[`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"分析你们项目中打包后 stats 对象的 module/chunk/asset"}),`
-`,n.jsx(e.p,{children:"分析"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"contenthash 与 chunkhash 有何区别"}),`
-`,n.jsxs(e.ul,{children:[`
-`,n.jsx(e.li,{children:"chunkhash：对应 chunk 的 hash"}),`
-`,n.jsx(e.li,{children:"contenthash：对应 chunk 中每个 content 的 hash，比如一个 chunk 中既包含 js，又包含 css 时"}),`
-`]}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"什么是 Concatenated Module"}),`
-`,n.jsx(e.p,{children:"将多个模块打包为 webpack 的一个模块"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"什么是 initial chunk"}),`
-`,n.jsx(e.p,{children:"首次 HTML 必须加载的模块"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"output.filename 与 output.chunkFilename 的区别是什么"}),`
-`,n.jsxs(e.ul,{children:[`
-`,n.jsx(e.li,{children:"filename：initial chunk 的文件名"}),`
-`,n.jsx(e.li,{children:"chunkFilename：非 initial chunk 的文件名"}),`
-`]}),`
-`]}),`
-`]})]})}function Yc(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ji,{...l})}):ji(l)}const yx=()=>jx,fx=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:yx,GetToc:xx,default:Yc},Symbol.toStringTag,{value:"Module"})),mx=()=>[],Ex=void 0;function yi(l){const e={a:"a",h1:"h1",li:"li",ol:"ol",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"bundle-spliting",children:[n.jsx(e.a,{className:"autolink-headings",href:"#bundle-spliting",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"bundle spliting"]}),`
-`,n.jsxs(e.ol,{children:[`
-`,n.jsx(e.li,{children:"将示例一中的 common.js 抽出来进行单独打包"}),`
-`,n.jsx(e.li,{children:"optimization.splitChunks 中 chunks、minChunks、minSize 各参数代表什么"}),`
-`,n.jsx(e.li,{children:"如果将示例一中的 common.js 在 index.js 中引用，即被 initial chunk 引用，打包会发生什么"}),`
-`,n.jsx(e.li,{children:"如果将示例二中的 lodash.js 在 index.js 中引用，即被 initial chunk 引用，打包会发生什么"}),`
-`]})]})}function Jc(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(yi,{...l})}):yi(l)}const gx=()=>Ex,Cx=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:gx,GetToc:mx,default:Jc},Symbol.toStringTag,{value:"Module"})),vx=()=>[],Ax=void 0;function fi(l){const e={a:"a",h1:"h1",span:"span",...l.components};return n.jsxs(e.h1,{id:"高效分包",children:[n.jsx(e.a,{className:"autolink-headings",href:"#高效分包",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"高效分包"]})}function Zc(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(fi,{...l})}):fi(l)}const Dx=()=>Ax,_x=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Dx,GetToc:vx,default:Zc},Symbol.toStringTag,{value:"Module"})),kx=()=>[],Fx=void 0;function mi(l){return n.jsx(n.Fragment,{})}function ed(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(mi,{...l})}):mi()}const wx=()=>Fx,Sx=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:wx,GetToc:kx,default:ed},Symbol.toStringTag,{value:"Module"})),Tx=()=>[],Px=void 0;function Ei(l){return n.jsx(n.Fragment,{})}function nd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Ei,{...l})}):Ei()}const Mx=()=>Px,Rx=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Mx,GetToc:Tx,default:nd},Symbol.toStringTag,{value:"Module"})),Nx=()=>[],Bx=void 0;function gi(l){return n.jsx(n.Fragment,{})}function ld(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(gi,{...l})}):gi()}const Lx=()=>Bx,$x=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Lx,GetToc:Nx,default:ld},Symbol.toStringTag,{value:"Module"})),Ox=()=>[],Ix=void 0;function Ci(l){return n.jsx(n.Fragment,{})}function sd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Ci,{...l})}):Ci()}const zx=()=>Ix,Gx=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:zx,GetToc:Ox,default:sd},Symbol.toStringTag,{value:"Module"})),bx=()=>[],Ux=void 0;function vi(l){return n.jsx(n.Fragment,{})}function td(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(vi,{...l})}):vi()}const Vx=()=>Ux,Hx=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Vx,GetToc:bx,default:td},Symbol.toStringTag,{value:"Module"})),Xx=()=>[],Wx=void 0;function Ai(l){return n.jsx(n.Fragment,{})}function rd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Ai,{...l})}):Ai()}const Qx=()=>Wx,Kx=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Qx,GetToc:Xx,default:rd},Symbol.toStringTag,{value:"Module"})),qx=()=>[],Yx=void 0;function Di(l){return n.jsx(n.Fragment,{})}function od(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Di,{...l})}):Di()}const Jx=()=>Yx,Zx=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Jx,GetToc:qx,default:od},Symbol.toStringTag,{value:"Module"})),ej=()=>[],nj=void 0;function _i(l){const e={a:"a",h1:"h1",img:"img",li:"li",ol:"ol",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"使用-node-api-学习-webpack",children:[n.jsx(e.a,{className:"autolink-headings",href:"#使用-node-api-学习-webpack",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"使用 node api 学习 webpack​"]}),`
-`,n.jsxs(e.ol,{children:[`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"使用 webpack api 打包一个最简的 js 资源"}),`
-`,n.jsx(e.p,{children:n.jsx(e.img,{src:"/img/note/5/z-1-1.jpg",alt:"z-1-1"})}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"你所使用含有 webpack 的项目中，webpack 是通过 webpack-cli 打包的吗？"}),`
-`,n.jsx(e.p,{children:"是，nextjs 和 umijs 2.直播后明白并不是，nextjs 和 umijsj 将 webpack 包直接放入 compiled 文件夹 ，防止依赖更新带来的问题，所以是 api 打包的"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"如何计算每次 webpack 构建时间"}),`
-`,n.jsx(e.p,{children:`stat.toJson().time
-stat.endTime - stat.statTime`}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"断点调试 webpack 源码，了解其编译时间（startTime/endTime）是如何计算的"}),`
-`,n.jsxs(e.p,{children:[`首先进入 run 函数
-`,n.jsx(e.img,{src:"/img/note/5/z-1-2.jpg",alt:"z-1-2"}),`
-可以看到直接定义了 startTime
-下面是要找 endTime
-先看最后的调用逻辑
-`,n.jsx(e.img,{src:"/img/note/5/z-1-3.jpg",alt:"z-1-3"})]}),`
-`,n.jsxs(e.p,{children:[`如果是判断是否闲置，两种情况都执行内部的 run 函数
-`,n.jsx(e.img,{src:"/img/note/5/z-1-4.jpg",alt:"z-1-4"})]}),`
-`,n.jsxs(e.p,{children:[`再看 run 函数，如果错误执行的 finalCallback 把 err 传给用户，没有错误则执行 onCompiled 函数
-`,n.jsx(e.img,{src:"/img/note/5/z-1-5.jpg",alt:"z-1-5"})]}),`
-`,n.jsxs(e.p,{children:[`这里便赋值了 startTime 和 endTime，compilation 对象是在调用 onCompiled 时由 webpack 实例的 compile 编译函数传过来的参数
-然后 new Stats 生成 stats 实例，实例根据 Stats 里定义的
-`,n.jsx(e.img,{src:"/img/note/5/z-1-6.jpg",alt:"z-1-6"})]}),`
-`,n.jsx(e.p,{children:"get 函数即可访问 startTime 和 endTime"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"断点调试执行 webpack 命令时的流程，体验它是如何在 webpack/webpack-cli 间相互调用的"}),`
-`,n.jsxs(e.p,{children:[`首先执行 webpack/bin/webpack.js
-`,n.jsx(e.img,{src:"/img/note/5/z-1-7.jpg",alt:"z-1-7"})]}),`
-`,n.jsx(e.p,{children:`其中 runCli 函数根据传入的 cli 对象拼接路径，加载 webpack-cli/bin/cli.js
-pkg.bin[cli.binName]即 pkg.bin['webpack-cli']
-webpack-cli 的 package.json 里配置了 bin
-![z-1-8]/img/note/5/z-1-8.jpg)`}),`
-`,n.jsxs(e.p,{children:[`调用逻辑是判断是否安装 webpack，未安装时引导安装，已安装则直接调用 webpack-cli
-`,n.jsx(e.img,{src:"/img/note/5/z-1-9.jpg",alt:"z-1-9"})]}),`
-`]}),`
-`]})]})}function id(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(_i,{...l})}):_i(l)}const lj=()=>nj,sj=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:lj,GetToc:ej,default:id},Symbol.toStringTag,{value:"Module"})),tj=()=>[],rj=void 0;function ki(l){return n.jsx(n.Fragment,{})}function ad(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ki,{...l})}):ki()}const oj=()=>rj,ij=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:oj,GetToc:tj,default:ad},Symbol.toStringTag,{value:"Module"})),aj=()=>[{id:"作业",text:"作业",depth:2}],cj=void 0;function Fi(l){const e={a:"a",code:"code",h1:"h1",h2:"h2",img:"img",li:"li",ol:"ol",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"cjs-运行时分析",children:[n.jsx(e.a,{className:"autolink-headings",href:"#cjs-运行时分析",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"cjs 运行时分析"]}),`
-`,n.jsxs(e.h2,{id:"作业",children:[n.jsx(e.a,{className:"autolink-headings",href:"#作业",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"作业"]}),`
-`,n.jsxs(e.ol,{children:[`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"webpack 运行时代码进行调试三遍并理解"}),`
-`,n.jsx(e.p,{children:"调试略"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"webpack 的模块加载器是如何实现的"}),`
-`,n.jsxs(e.p,{children:[n.jsx(e.img,{src:"/img/note/5/z-2-1.jpg",alt:"z-2-1"}),`
-首先定义全局缓存对象`,n.jsx(e.code,{children:"__webpack_module_cache__"}),`
-然后定义打包器函数`,n.jsx(e.code,{children:"__webpack_require__(moduleId){}"}),`
-函数中：
-首先根据 moduleId 读取全局缓存对象
-如果存在缓存，则直接返回缓存模块的 exports 对象
-如果不存在缓存，创建新的模块对象，首先根据 moduleId 放入缓存，然后赋值给局部模块对象，此时局部模块对象仅有 exports 属性
-然后根据 moduleId 读取全局模块数组，执行该模块函数并传入函数里的局部模块对象，拿到指定模块的 exports 值
-最后导出该模块的 exports 值`]}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"webpack 的运行时代码做了那些事情"}),`
-`,n.jsxs(e.p,{children:["首先定义全局模块数组，将模块用带参数的函数包裹并根据 moduleId 放入数组的第一个位置后，第一个位置为入口模块 ",n.jsx(e.code,{children:"__webpack_modules__"}),`
-然后定义模块加载器，可以根据 moduleId 执行模块，并返回模块的 exports 值 `,n.jsx(e.code,{children:"__webpack_require__"}),`(moduleId){}
-最后执行模块加载器加载入口模块`,n.jsx(e.code,{children:"__webpack_require__(0)"})]}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsxs(e.p,{children:["CommonJS 中，如果不对 module 进行缓存有什么问题，即不实现以上的 ",n.jsx(e.code,{children:"__webpack_module_cache__"})," 数据结构"]}),`
-`,n.jsxs(e.ol,{children:[`
-`,n.jsx(e.li,{children:"避免模块反复生成"}),`
-`,n.jsx(e.li,{children:"单例模式，每个模块只在第一次被引用时产出模块对象，之后的引用都是同一个对象。"}),`
-`]}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsxs(e.p,{children:["阅读 webpack 模块加载器代码，我们在 CommonJS 中使用 ",n.jsx(e.code,{children:"module.exports"})," 与 ",n.jsx(e.code,{children:"exports"})," 有何区别"]}),`
-`,n.jsxs(e.p,{children:["module.exports 是访问 module 的 exports 属性的值，exports 是该值的引用，即类似于",n.jsx(e.code,{children:"const exports=module.exports"})]}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsxs(e.p,{children:["如何理解 webpack 运行时代码最后是 ",n.jsx(e.code,{children:"__webpack_require__(0)"})]}),`
-`,n.jsxs(e.p,{children:[n.jsx(e.img,{src:"/img/note/5/z-2-2.jpg",alt:"z-2-2"}),`
-`,n.jsx(e.img,{src:"/img/note/5/z-2-3.jpg",alt:"z-2-3"}),`
-执行打包后的 js 然后打印`,n.jsx(e.code,{children:"__webpack_modules__"}),`发现 0 的位置是空的
-所以其实 0 只是一个预留位置
-解释成是储存入口模块可能更容易理解
-且因为`,n.jsx(e.code,{children:"__webpack_modules__"}),"是根据文件的依赖关系进行深度优先遍历得来的数组，所以根节点即入口文件即 0 位置的模块"]}),`
-`]}),`
-`]})]})}function cd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Fi,{...l})}):Fi(l)}const dj=()=>cj,hj=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:dj,GetToc:aj,default:cd},Symbol.toStringTag,{value:"Module"})),pj=()=>[],uj=void 0;function wi(l){const e={a:"a",h1:"h1",img:"img",li:"li",ol:"ol",p:"p",span:"span",strong:"strong",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"cjs-模块收集与-ast",children:[n.jsx(e.a,{className:"autolink-headings",href:"#cjs-模块收集与-ast",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"cjs 模块收集与 ast"]}),`
-`,n.jsxs(e.ol,{children:[`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"了解 AST 概念"}),`
-`,n.jsxs(e.ol,{children:[`
-`,n.jsx(e.li,{children:"通过解析 parser 生成 AST"}),`
-`,n.jsx(e.li,{children:"code(词法分析)=>Token(语法分析)=>AST"}),`
-`,n.jsx(e.li,{children:"Token 可以进行代码检查，语法高亮等"}),`
-`]}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"在 AST Explore 尝试 Javascript/CSS 解析，并观察其语法树"}),`
-`,n.jsxs(e.p,{children:[n.jsx(e.img,{src:"/img/note/5/z-3-1.jpg",alt:"z-3-1"}),`
-如图是 require 的语法树，4.会用到`]}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"如何根据入口文件搜索出所有需要打包的模块"}),`
-`,n.jsxs(e.p,{children:["code 解析成 AST 后，以入口文件作为根节点开始深度优先遍历，通过 AST 找到具有 require 函数的节点,构建",n.jsx(e.strong,{children:"webpack_modules"})," 数组"]}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"如何模拟实现运行时代码的生成，实现 mini-webpack"}),`
-`,n.jsx(e.p,{children:n.jsx(e.a,{href:"https://github.com/903040380/poor-webpack",children:"示例仓库"})}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"如何去除代码中的所有 console.log"}),`
-`,n.jsxs(e.p,{children:["见",n.jsx(e.a,{href:"https://github.com/903040380/poor-webpack",children:"示例仓库"})]}),`
-`]}),`
-`]})]})}function dd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(wi,{...l})}):wi(l)}const xj=()=>uj,jj=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:xj,GetToc:pj,default:dd},Symbol.toStringTag,{value:"Module"})),yj=()=>[],fj=void 0;function Si(l){const e={a:"a",h1:"h1",li:"li",ol:"ol",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"文件名中的-hash",children:[n.jsx(e.a,{className:"autolink-headings",href:"#文件名中的-hash",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"文件名中的 hash"]}),`
-`,n.jsxs(e.ol,{children:[`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"什么是 Long Term Cache，有何作用"}),`
-`,n.jsx(e.p,{children:"在服务器对响应头设置 cache-control 的值来达到最大化缓存时间，一般指一年时间或者两年时间"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"为什么配置 output.filename 时不建议注入版本号"}),`
-`,n.jsx(e.p,{children:"因为会导致更新版本时所有文件名变化，当文件名变更时会重新进行缓存，那么更新版本会导致所有缓存失效，但是更新版本一般并不会更新所有文件"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"为什么可以配置 Long Term Cache"}),`
-`,n.jsx(e.p,{children:"因为 webpack 打包时可以配置 contenthash,只改变改变内容的文件的 hash 值，新的文件会重新进行缓存，不会导致版本问题"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"如何提升 webpack 编译时期计算 hash 的速度"}),`
-`,n.jsxs(e.p,{children:[`通过 output.hashFunction 属性,webpack5 已经支持直接配置’xxhash64‘
-`,n.jsx(e.a,{href:"https://github.com/umijs/umi/pull/9168#event-7302069734",children:"根据此方法对 umi 进行了优化"})]}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"在 Node.js 中如何进行 hash 计算"}),`
-`,n.jsx(e.p,{children:"参考大佬的回答，是用 crypto 库"}),`
-`]}),`
-`]})]})}function hd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Si,{...l})}):Si(l)}const mj=()=>fj,Ej=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:mj,GetToc:yj,default:hd},Symbol.toStringTag,{value:"Module"})),gj=()=>[],Cj=void 0;function Ti(l){const e={a:"a",h1:"h1",li:"li",ol:"ol",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"cjs-与-esm",children:[n.jsx(e.a,{className:"autolink-headings",href:"#cjs-与-esm",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"cjs 与 esm"]}),`
-`,n.jsxs(e.ol,{children:[`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"什么是 esm/commonjs"}),`
-`,n.jsx(e.p,{children:"esm:"}),`
-`,n.jsxs(e.ul,{children:[`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"是 ES 的模块规范，浏览器 node 都可运行"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"静态导入，所以可以 tree shaking，减少 js 体积，编译阶段就进行导入和导出"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"支持动态导入，执行到该行代码时才开始导入，异步加载（Promise）"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"导出的值是引用"}),`
-`]}),`
-`]}),`
-`,n.jsx(e.p,{children:"cjs: -是 node 的模块规范，webpack 和 node 都可运行，单纯浏览器环境不可以"}),`
-`,n.jsxs(e.ul,{children:[`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"动态导入，执行到该行代码时才开始导入，同步加载，加载完模块才会继续执行"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"具有缓存，可以通过 require.cache 查看，加载过的模块会通过缓存加载"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"导出的值是复制的值，类似 exports.a=a"}),`
-`]}),`
-`]}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"什么是 import(module)"}),`
-`,n.jsx(e.p,{children:"类似于 require 的动态导入，但是是异步加载（Promise）"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"了解 skypack 和 jsdeliver 两个 npm 的 cdn 网站"}),`
-`,n.jsxs(e.ul,{children:[`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:n.jsx(e.a,{href:"https://www.skypack.dev/",children:"skypack"})}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:n.jsx(e.a,{href:"https://www.jsdelivr.com/",children:"jsdeliver"})}),`
-`]}),`
-`]}),`
-`]}),`
-`]})]})}function pd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Ti,{...l})}):Ti(l)}const vj=()=>Cj,Aj=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:vj,GetToc:gj,default:pd},Symbol.toStringTag,{value:"Module"})),Dj=()=>[],_j=void 0;function Pi(l){const e={a:"a",code:"code",h1:"h1",img:"img",li:"li",ol:"ol",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"esm-to-cjs",children:[n.jsx(e.a,{className:"autolink-headings",href:"#esm-to-cjs",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"esm to cjs"]}),`
-`,n.jsxs(e.ol,{children:[`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"对含 ESM 模块的 webpack 运行时代码进行调试与理解"}),`
-`,n.jsx(e.p,{children:"ok"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"webpack 含 ESM 的运行时代码做了那些事情"}),`
-`,n.jsxs(e.p,{children:["首先根据 ast 生成的",n.jsx(e.code,{children:"__webpack_module__"}),"的中用",n.jsx(e.code,{children:"__webpack_require__"}),"的属性方法，r 给 ",n.jsx(e.code,{children:"__webpack_exports__"}),`添加鉴别是 esm 模块的属性，d 将导出的属性用 getter(setter)定义，
-属性在下方声明是因为访问时已经赋值
-`,n.jsx(e.img,{src:"/img/note/5/z-6-1.jpg",alt:"z-6-1"})]}),`
-`,n.jsxs(e.p,{children:["缓存和",n.jsx(e.code,{children:"__webpack_require__"}),`同 cjsm 模块
-`,n.jsx(e.img,{src:"/img/note/5/z-6-2.jpg",alt:"z-6-2"})]}),`
-`,n.jsxs(e.p,{children:["定义",n.jsx(e.code,{children:"__webpack_require__"}),`的属性方法，r,d,o
-`,n.jsx(e.img,{src:"/img/note/5/z-6-3.jpg",alt:"z-6-3"})]}),`
-`,n.jsxs(e.p,{children:["先和",n.jsx(e.code,{children:"__webpack_module__"}),"中模块一样执行 r,给入口模块添加 esm 标签，然后调用",n.jsx(e.code,{children:"__webpack_require__"}),"返回 sum 模块的导出"]}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsxs(e.p,{children:[n.jsx(e.code,{children:"__webpack_require__"})," 中的 d/r/o 各个变量指什么意思"]}),`
-`,n.jsxs(e.ul,{children:[`
-`,n.jsx(e.li,{children:"d:将 esm 导出的变量变成 exports 的 getter/setter 属性"}),`
-`,n.jsx(e.li,{children:"r:给 exports 添加一个属性标志这是 esm 模块"}),`
-`,n.jsx(e.li,{children:"o:相当于 Object 的 hasOwnProperty 方法"}),`
-`]}),`
-`]}),`
-`]})]})}function ud(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Pi,{...l})}):Pi(l)}const kj=()=>_j,Fj=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:kj,GetToc:Dj,default:ud},Symbol.toStringTag,{value:"Module"})),wj=()=>[],Sj=void 0;function Mi(l){const e={a:"a",code:"code",h1:"h1",img:"img",li:"li",ol:"ol",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"code-spliting-运行时分析",children:[n.jsx(e.a,{className:"autolink-headings",href:"#code-spliting-运行时分析",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"code spliting 运行时分析"]}),`
-`,n.jsxs(e.ol,{children:[`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"对 code spliting 后的代码进行调试与理解"}),`
-`,n.jsxs(e.p,{children:["见",n.jsx(e.a,{href:"https://github.com/903040380/Xwebpack/tree/master/code-spliting/example/jsonp",children:"代码中的注释"})]}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsxs(e.p,{children:[`将自己项目取消代码压缩进行打包，观察其打包后的代码骨架
-`,n.jsx(e.img,{src:"/img/note/5/z-7-1.jpg",alt:"z-7-1"})]}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"在 webpack 中如何实现 code spliting"}),`
-`,n.jsx(e.p,{children:"import() 动态导入"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"在 webpack 中，加载 chunk 脚本的 JSONP Callback 如何实现"}),`
-`,n.jsx(e.p,{children:n.jsx(e.img,{src:"/img/note/5/z-7-2.jpg",alt:"z-7-2"})}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"当 output.chunkLoading 配置为 import 时，分析其源码"}),`
-`,n.jsx(e.p,{children:n.jsx(e.img,{src:"/img/note/5/z-7-3.jpg",alt:"z-7-3"})}),`
-`,n.jsxs(e.p,{children:[n.jsx(e.code,{children:"__webpack_require__.f.j"}),`不同
-`,n.jsx(e.code,{children:"__webpack_require__.l"}),"不需要了"]}),`
-`,n.jsx(e.p,{children:n.jsx(e.img,{src:"/img/note/5/z-7-4.jpg",alt:"z-7-4"})}),`
-`,n.jsx(e.p,{children:"jsonp 不需要了，用 installChunck 替代"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsxs(e.p,{children:["当代码分割时，async chunk 所对应的源代码发生变更时，该 async chunk 路径将会发生变化，而 entry chunk 中的",n.jsx(e.code,{children:"__webpack_require__.u"})," 内容也将发生变化，导致 entry chunk 的内容发生变更，随之路径发生变更，这将导致不必要的缓存失效，如何处理该问题。"]}),`
-`,n.jsx(e.p,{children:"runtimeChunk 设置为 true 可以单独把 webpack 的运行时给独立出来，这样每次只重新请求 runtime 文件，nextjs 就是这样做的,见 hash 的增强章节"}),`
-`]}),`
-`]})]})}function xd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Mi,{...l})}):Mi(l)}const Tj=()=>Sj,Pj=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Tj,GetToc:wj,default:xd},Symbol.toStringTag,{value:"Module"})),Mj=()=>[],Rj=void 0;function Ri(l){const e={a:"a",code:"code",h1:"h1",li:"li",ol:"ol",p:"p",span:"span",strong:"strong",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"magic-comment",children:[n.jsx(e.a,{className:"autolink-headings",href:"#magic-comment",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"magic comment"]}),`
-`,n.jsxs(e.ol,{children:[`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"在 webpack 中有哪些魔法注释"}),`
-`,n.jsxs(e.ul,{children:[`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"webpackIgnore：设置为 true 时，禁用动态导入解析。"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"webpackChunkName: 新 chunk 的名称。"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"webpackMode：可以指定以不同的模式解析动态导入。"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"webpackPrefetch：告诉浏览器将来可能需要该资源来进行某些导航跳转。"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"webpackPreload：告诉浏览器在当前导航期间可能需要该资源。"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"webpackInclude：在导入解析（import resolution）过程中，用于匹配的正则表达式。只有匹配到的模块才会被打包。"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"webpackExclude：在导入解析（import resolution）过程中，用于匹配的正则表达式。所有匹配到的模块都不会被打包。"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"webpackExports: 告知 webpack 只构建指定出口的动态 import() 模块。"}),`
-`]}),`
-`]}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"在 webpack 中如何实现 prefetch 的"}),`
-`,n.jsxs(e.p,{children:["配置",n.jsx(e.code,{children:"/* webpackPrefetch: true */"}),"后，webpack 运行时，会生成",n.jsx(e.code,{children:"<link ref='prefetch'>"}),"标签并放入 dom 中，浏览器会开始预加载资源"]}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"阅读 prefetch 后的运行时代码进行理解"}),`
-`,n.jsxs(e.p,{children:["见",n.jsx(e.a,{href:"https://github.com/903040380/Xwebpack/tree/master/code-spliting/example/prefetch",children:"代码中的注释"})]}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"补充关于 preload 的问题"}),`
-`,n.jsxs(e.p,{children:[`preload chunk 会在父 chunk 加载时，以并行方式开始加载。
-prefetch chunk 会在父 chunk 加载结束后开始加载。
-所以，需要在 sumjs 里再次 preload 导入 add 才产生 preload，即`,n.jsx(e.strong,{children:"只能加载 chunk 的 chunk"})]}),`
-`]}),`
-`]})]})}function jd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Ri,{...l})}):Ri(l)}const Nj=()=>Rj,Bj=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Nj,GetToc:Mj,default:jd},Symbol.toStringTag,{value:"Module"})),Lj=()=>[],$j=void 0;function Ni(l){const e={a:"a",h1:"h1",li:"li",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"参考",children:[n.jsx(e.a,{className:"autolink-headings",href:"#参考",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"参考"]}),`
-`,n.jsxs(e.ul,{children:[`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:n.jsx(e.a,{href:"https://q.shanyue.tech/",children:"山月"})}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:n.jsx(e.a,{href:"https://github.com/903040380/webpack-demo",children:"示例仓库"})}),`
-`]}),`
-`]})]})}function yd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Ni,{...l})}):Ni(l)}const Oj=()=>$j,Ij=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Oj,GetToc:Lj,default:yd},Symbol.toStringTag,{value:"Module"})),zj=()=>[],Gj=void 0;function Bi(l){const e={a:"a",code:"code",h1:"h1",img:"img",li:"li",ol:"ol",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"hash-的增强",children:[n.jsx(e.a,{className:"autolink-headings",href:"#hash-的增强",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"hash 的增强"]}),`
-`,n.jsxs(e.ol,{children:[`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"理解 deterministic chunkIds/moduleIds，以及什么情况下 id 会发生变更"}),`
-`,n.jsxs(e.p,{children:["当模块加载顺序发生改变，模块顺序会发生改变，moduleIds 随之改变，而同时",n.jsx(e.code,{children:"__webpack_require__.u"}),"读取到的 chunkId 随 moduleIds 改变，即 chunkIds 改变"]}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"如有余力，阅读源码查看 deterministic 在 webpack 的内部实现"}),`
-`,n.jsx(e.p,{children:"根据大佬回答，只要模块的路径和文件名不做更改，那么 deterministic 后的 hash 值就是稳定的"}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"理解 runtimeChunk 选项，阅读其源码，理解它是如何运行代码的"}),`
-`,n.jsx(e.p,{children:n.jsx(e.img,{src:"/img/note/5/z-9-1.jpg",alt:"z-9-1"})}),`
-`]}),`
-`,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"阅读常见的社区以及自己公司的脚手架代码，观察是否配置了以上优化选项，如果没有，考虑是否可贡献代码"}),`
-`,n.jsx(e.p,{children:n.jsx(e.a,{href:"https://github.com/umijs/umi/pull/9541",children:"umi 已提交 pr，正在修改中"})}),`
-`]}),`
-`]})]})}function fd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Bi,{...l})}):Bi(l)}const bj=()=>Gj,Uj=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:bj,GetToc:zj,default:fd},Symbol.toStringTag,{value:"Module"})),Vj=()=>[],Hj=void 0;function Li(l){const e={a:"a",h1:"h1",span:"span",...l.components};return n.jsxs(e.h1,{id:"内存",children:[n.jsx(e.a,{className:"autolink-headings",href:"#内存",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"内存"]})}function md(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Li,{...l})}):Li(l)}const Xj=()=>Hj,Wj=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Xj,GetToc:Vj,default:md},Symbol.toStringTag,{value:"Module"})),Qj=()=>[{id:"单线程",text:"单线程",depth:2},{id:"在线程运行过程中处理新任务",text:"在线程运行过程中处理新任务",depth:2},{id:"处理其他线程发送过来的任务",text:"处理其他线程发送过来的任务",depth:2},{id:"处理其他进程发送过来的任务",text:"处理其他进程发送过来的任务",depth:2},{id:"消息队列中的任务类型",text:"消息队列中的任务类型",depth:2},{id:"页面使用单线程的缺点",text:"页面使用单线程的缺点",depth:2},{id:"总结",text:"总结",depth:2}],Kj=void 0;function $i(l){const e={a:"a",h1:"h1",h2:"h2",li:"li",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"消息队列和事件循环",children:[n.jsx(e.a,{className:"autolink-headings",href:"#消息队列和事件循环",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"消息队列和事件循环"]}),`
+`,n.jsx(e.p,{children:n.jsx(e.a,{href:"https://q.shanyue.tech/",children:"山月"})})]})}function Wc(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(hi,{...l})}):hi(l)}const ex=()=>Zu,nx=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:ex,GetToc:Ju,default:Wc},Symbol.toStringTag,{value:"Module"})),lx=()=>[],sx=void 0;function pi(l){const e={a:"a",h1:"h1",span:"span",...l.components};return n.jsxs(e.h1,{id:"内存",children:[n.jsx(e.a,{className:"autolink-headings",href:"#内存",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"内存"]})}function Qc(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(pi,{...l})}):pi(l)}const tx=()=>sx,rx=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:tx,GetToc:lx,default:Qc},Symbol.toStringTag,{value:"Module"})),ox=()=>[{id:"单线程",text:"单线程",depth:2},{id:"在线程运行过程中处理新任务",text:"在线程运行过程中处理新任务",depth:2},{id:"处理其他线程发送过来的任务",text:"处理其他线程发送过来的任务",depth:2},{id:"处理其他进程发送过来的任务",text:"处理其他进程发送过来的任务",depth:2},{id:"消息队列中的任务类型",text:"消息队列中的任务类型",depth:2},{id:"页面使用单线程的缺点",text:"页面使用单线程的缺点",depth:2},{id:"总结",text:"总结",depth:2}],ix=void 0;function ui(l){const e={a:"a",h1:"h1",h2:"h2",li:"li",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"消息队列和事件循环",children:[n.jsx(e.a,{className:"autolink-headings",href:"#消息队列和事件循环",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"消息队列和事件循环"]}),`
 `,n.jsxs(e.h2,{id:"单线程",children:[n.jsx(e.a,{className:"autolink-headings",href:"#单线程",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"单线程"]}),`
 `,n.jsx(e.p,{children:"一个线程中去执行任务"}),`
 `,n.jsxs(e.h2,{id:"在线程运行过程中处理新任务",children:[n.jsx(e.a,{className:"autolink-headings",href:"#在线程运行过程中处理新任务",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"在线程运行过程中处理新任务"]}),`
@@ -442,14 +45,14 @@ JavaScript 执行、解析 DOM、样式计算、布局计算、CSS 动画等。`
 `,n.jsx(e.li,{children:"如果要接收其他线程发送过来的任务，就需要引入消息队列，这是第三版线程模型。"}),`
 `,n.jsx(e.li,{children:"如果其他进程想要发送任务给页面主线程，那么先通过 IPC 把任务发送给渲染进程的 IO 线程，IO 线程再把任务发送给页面主线程。"}),`
 `,n.jsx(e.li,{children:"消息队列机制并不是太灵活，为了适应效率和实时性，引入了微任务。"}),`
-`]})]})}function Ed(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx($i,{...l})}):$i(l)}const qj=()=>Kj,Yj=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:qj,GetToc:Qj,default:Ed},Symbol.toStringTag,{value:"Module"})),Jj=()=>[],Zj=void 0;function Oi(l){const e={a:"a",h1:"h1",li:"li",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"浏览器进程",children:[n.jsx(e.a,{className:"autolink-headings",href:"#浏览器进程",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"浏览器进程"]}),`
+`]})]})}function Kc(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ui,{...l})}):ui(l)}const ax=()=>ix,cx=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:ax,GetToc:ox,default:Kc},Symbol.toStringTag,{value:"Module"})),dx=()=>[],hx=void 0;function xi(l){const e={a:"a",h1:"h1",li:"li",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"浏览器进程",children:[n.jsx(e.a,{className:"autolink-headings",href:"#浏览器进程",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"浏览器进程"]}),`
 `,n.jsxs(e.ul,{children:[`
 `,n.jsx(e.li,{children:"浏览器进程：界面显示、用户交互、子进程管理，同时提供存储等功能"}),`
 `,n.jsx(e.li,{children:"渲染进程：安全考虑，渲染进程都是运行在沙箱模式下，包括排版引擎 Blink 和 JavaScript 引擎 V8 ，可以将 HTML、CSS、JS 转换为页面"}),`
 `,n.jsx(e.li,{children:"GPU 进程：3D CSS、Chrome UI、网页"}),`
 `,n.jsx(e.li,{children:"网络进程：网络资源加载"}),`
 `,n.jsx(e.li,{children:"插件进程：运行插件，因为插件容易崩溃所以分离为进程"}),`
-`]})]})}function gd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Oi,{...l})}):Oi(l)}const e2=()=>Zj,n2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:e2,GetToc:Jj,default:gd},Symbol.toStringTag,{value:"Module"})),l2=()=>[{id:"ip-internet-protocol-网际协议",text:"IP Internet Protocol 网际协议",depth:2},{id:"udp-user-datagram-protocol-用户数据包协议",text:"UDP User Datagram Protocol 用户数据包协议",depth:2},{id:"tcp-transmission-control-protocol-传输控制协议",text:"TCP Transmission Control Protocol 传输控制协议",depth:2},{id:"tcpip-四层模型",text:"TCP/IP 四层模型",depth:2}],s2=void 0;function Ii(l){const e={a:"a",h1:"h1",h2:"h2",img:"img",li:"li",p:"p",span:"span",strong:"strong",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"tcp-协议",children:[n.jsx(e.a,{className:"autolink-headings",href:"#tcp-协议",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"TCP 协议"]}),`
+`]})]})}function qc(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(xi,{...l})}):xi(l)}const px=()=>hx,ux=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:px,GetToc:dx,default:qc},Symbol.toStringTag,{value:"Module"})),xx=()=>[{id:"ip-internet-protocol-网际协议",text:"IP Internet Protocol 网际协议",depth:2},{id:"udp-user-datagram-protocol-用户数据包协议",text:"UDP User Datagram Protocol 用户数据包协议",depth:2},{id:"tcp-transmission-control-protocol-传输控制协议",text:"TCP Transmission Control Protocol 传输控制协议",depth:2},{id:"tcpip-四层模型",text:"TCP/IP 四层模型",depth:2}],jx=void 0;function ji(l){const e={a:"a",h1:"h1",h2:"h2",img:"img",li:"li",p:"p",span:"span",strong:"strong",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"tcp-协议",children:[n.jsx(e.a,{className:"autolink-headings",href:"#tcp-协议",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"TCP 协议"]}),`
 `,n.jsxs(e.h2,{id:"ip-internet-protocol-网际协议",children:[n.jsx(e.a,{className:"autolink-headings",href:"#ip-internet-protocol-网际协议",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"IP Internet Protocol 网际协议"]}),`
 `,n.jsx(e.p,{children:"IP 地址就是计算机的地址，通过 IP 将数据包传递给另一个主机"}),`
 `,n.jsx(e.p,{children:"数据包会携带 IP 头"}),`
@@ -472,7 +75,7 @@ JavaScript 执行、解析 DOM、样式计算、布局计算、CSS 动画等。`
 `]}),`
 `,n.jsxs(e.h2,{id:"tcpip-四层模型",children:[n.jsx(e.a,{className:"autolink-headings",href:"#tcpip-四层模型",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"TCP/IP 四层模型"]}),`
 `,n.jsx(e.p,{children:"IEEE802->IP->TCP/UDP->HTTP"}),`
-`,n.jsx(e.p,{children:n.jsx(e.img,{src:"/img/note/2/2-1.jpg",alt:"2-1"})})]})}function Cd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Ii,{...l})}):Ii(l)}const t2=()=>s2,r2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:t2,GetToc:l2,default:Cd},Symbol.toStringTag,{value:"Module"})),o2=()=>[{id:"dns-domain-name-system-域名系统",text:"DNS Domain Name System 域名系统",depth:2},{id:"浏览器发起-http-请求的流程",text:"浏览器发起 HTTP 请求的流程",depth:2},{id:"服务器处理-http-请求的流程",text:"服务器处理 HTTP 请求的流程",depth:2}],i2=void 0;function zi(l){const e={a:"a",code:"code",h1:"h1",h2:"h2",li:"li",ol:"ol",p:"p",span:"span",strong:"strong",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"http-协议",children:[n.jsx(e.a,{className:"autolink-headings",href:"#http-协议",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"HTTP 协议"]}),`
+`,n.jsx(e.p,{children:n.jsx(e.img,{src:"/img/note/2/2-1.jpg",alt:"2-1"})})]})}function Yc(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ji,{...l})}):ji(l)}const yx=()=>jx,fx=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:yx,GetToc:xx,default:Yc},Symbol.toStringTag,{value:"Module"})),mx=()=>[{id:"dns-domain-name-system-域名系统",text:"DNS Domain Name System 域名系统",depth:2},{id:"浏览器发起-http-请求的流程",text:"浏览器发起 HTTP 请求的流程",depth:2},{id:"服务器处理-http-请求的流程",text:"服务器处理 HTTP 请求的流程",depth:2}],Ex=void 0;function yi(l){const e={a:"a",code:"code",h1:"h1",h2:"h2",li:"li",ol:"ol",p:"p",span:"span",strong:"strong",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"http-协议",children:[n.jsx(e.a,{className:"autolink-headings",href:"#http-协议",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"HTTP 协议"]}),`
 `,n.jsx(e.p,{children:"HTTP 是一种允许浏览器向服务器获取资源的协议，是 Web 的基础"}),`
 `,n.jsxs(e.h2,{id:"dns-domain-name-system-域名系统",children:[n.jsx(e.a,{className:"autolink-headings",href:"#dns-domain-name-system-域名系统",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"DNS Domain Name System 域名系统"]}),`
 `,n.jsxs(e.p,{children:[`将域名与 IP 地址做一一映射
@@ -530,7 +133,7 @@ JavaScript 执行、解析 DOM、样式计算、布局计算、CSS 动画等。`
 `,n.jsxs(e.p,{children:[`重定向
 响应头`,n.jsx(e.code,{children:"Location"})]}),`
 `]}),`
-`]})]})}function vd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(zi,{...l})}):zi(l)}const a2=()=>i2,c2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:a2,GetToc:o2,default:vd},Symbol.toStringTag,{value:"Module"})),d2=()=>[{id:"dns-缓存",text:"DNS 缓存",depth:2},{id:"页面资源缓存",text:"页面资源缓存",depth:2},{id:"登录状态",text:"登录状态",depth:2}],h2=void 0;function Gi(l){const e={a:"a",code:"code",h1:"h1",h2:"h2",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"浏览器缓存",children:[n.jsx(e.a,{className:"autolink-headings",href:"#浏览器缓存",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"浏览器缓存"]}),`
+`]})]})}function Jc(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(yi,{...l})}):yi(l)}const gx=()=>Ex,Cx=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:gx,GetToc:mx,default:Jc},Symbol.toStringTag,{value:"Module"})),vx=()=>[{id:"dns-缓存",text:"DNS 缓存",depth:2},{id:"页面资源缓存",text:"页面资源缓存",depth:2},{id:"登录状态",text:"登录状态",depth:2}],Ax=void 0;function fi(l){const e={a:"a",code:"code",h1:"h1",h2:"h2",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"浏览器缓存",children:[n.jsx(e.a,{className:"autolink-headings",href:"#浏览器缓存",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"浏览器缓存"]}),`
 `,n.jsxs(e.h2,{id:"dns-缓存",children:[n.jsx(e.a,{className:"autolink-headings",href:"#dns-缓存",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"DNS 缓存"]}),`
 `,n.jsx(e.p,{children:"缓存域名对应的 IP"}),`
 `,n.jsxs(e.h2,{id:"页面资源缓存",children:[n.jsx(e.a,{className:"autolink-headings",href:"#页面资源缓存",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"页面资源缓存"]}),`
@@ -544,7 +147,7 @@ JavaScript 执行、解析 DOM、样式计算、布局计算、CSS 动画等。`
 `,n.jsx(e.code,{children:"Set-Cookie: UID=3431uad;"})]}),`
 `,n.jsx(e.p,{children:"浏览器解析响应头后会保存在 Cookie"}),`
 `,n.jsxs(e.p,{children:["用户再次访问时浏览器会将 uid 携带在请求头",n.jsx(e.code,{children:"Cookie: UID=3431uad;"})]}),`
-`,n.jsx(e.p,{children:"服务器收到 Cookie 后会查询记录下的 uid 数据，如果已经存在，则返回登录后的用户数据"})]})}function Ad(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Gi,{...l})}):Gi(l)}const p2=()=>h2,u2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:p2,GetToc:d2,default:Ad},Symbol.toStringTag,{value:"Module"})),x2=()=>[{id:"用户输入",text:"用户输入",depth:2},{id:"网络进程",text:"网络进程",depth:2},{id:"准备渲染进程",text:"准备渲染进程",depth:2},{id:"提交文档",text:"提交文档",depth:2},{id:"渲染阶段",text:"渲染阶段",depth:2}],j2=void 0;function bi(l){const e={a:"a",h1:"h1",h2:"h2",img:"img",li:"li",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"导航流程",children:[n.jsx(e.a,{className:"autolink-headings",href:"#导航流程",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"导航流程"]}),`
+`,n.jsx(e.p,{children:"服务器收到 Cookie 后会查询记录下的 uid 数据，如果已经存在，则返回登录后的用户数据"})]})}function Zc(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(fi,{...l})}):fi(l)}const Dx=()=>Ax,_x=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Dx,GetToc:vx,default:Zc},Symbol.toStringTag,{value:"Module"})),kx=()=>[{id:"用户输入",text:"用户输入",depth:2},{id:"网络进程",text:"网络进程",depth:2},{id:"准备渲染进程",text:"准备渲染进程",depth:2},{id:"提交文档",text:"提交文档",depth:2},{id:"渲染阶段",text:"渲染阶段",depth:2}],Fx=void 0;function mi(l){const e={a:"a",h1:"h1",h2:"h2",img:"img",li:"li",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"导航流程",children:[n.jsx(e.a,{className:"autolink-headings",href:"#导航流程",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"导航流程"]}),`
 `,n.jsx(e.p,{children:n.jsx(e.img,{src:"/img/note/2/5-1.jpg",alt:"5-1"})}),`
 `,n.jsx(e.p,{children:"用户发出 URL 请求到页面开始解析的这个过程，就叫做导航"}),`
 `,n.jsxs(e.h2,{id:"用户输入",children:[n.jsx(e.a,{className:"autolink-headings",href:"#用户输入",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"用户输入"]}),`
@@ -575,14 +178,225 @@ JavaScript 执行、解析 DOM、样式计算、布局计算、CSS 动画等。`
 `,n.jsx(e.li,{children:"浏览器进程收到“确认提交”的消息后，更新浏览器界面历史状态、安全状态、URL ，然后更新页面页面"}),`
 `]}),`
 `,n.jsxs(e.h2,{id:"渲染阶段",children:[n.jsx(e.a,{className:"autolink-headings",href:"#渲染阶段",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"渲染阶段"]}),`
-`,n.jsx(e.p,{children:"文档提交后，渲染进程开始页面解析与子资源加载，并停止加载动画"})]})}function Dd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(bi,{...l})}):bi(l)}const y2=()=>j2,f2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:y2,GetToc:x2,default:Dd},Symbol.toStringTag,{value:"Module"})),m2=()=>[],E2=void 0;function Ui(l){const e={a:"a",h1:"h1",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"渲染流程",children:[n.jsx(e.a,{className:"autolink-headings",href:"#渲染流程",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"渲染流程"]}),`
+`,n.jsx(e.p,{children:"文档提交后，渲染进程开始页面解析与子资源加载，并停止加载动画"})]})}function ed(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(mi,{...l})}):mi(l)}const wx=()=>Fx,Sx=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:wx,GetToc:kx,default:ed},Symbol.toStringTag,{value:"Module"})),Tx=()=>[],Px=void 0;function Ei(l){const e={a:"a",h1:"h1",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"渲染流程",children:[n.jsx(e.a,{className:"autolink-headings",href:"#渲染流程",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"渲染流程"]}),`
 `,n.jsx(e.p,{children:`DOM 生成
 样式计算
 布局
-。。。`})]})}function _d(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Ui,{...l})}):Ui(l)}const g2=()=>E2,C2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:g2,GetToc:m2,default:_d},Symbol.toStringTag,{value:"Module"})),v2=()=>[{id:"chrome-的-dns-缓存",text:"Chrome 的 dns 缓存",depth:2}],A2=void 0;function Vi(l){const e={a:"a",h1:"h1",h2:"h2",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"浏览器的-dns-缓存",children:[n.jsx(e.a,{className:"autolink-headings",href:"#浏览器的-dns-缓存",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"浏览器的 dns 缓存"]}),`
+。。。`})]})}function nd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Ei,{...l})}):Ei(l)}const Mx=()=>Px,Rx=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Mx,GetToc:Tx,default:nd},Symbol.toStringTag,{value:"Module"})),Nx=()=>[{id:"chrome-的-dns-缓存",text:"Chrome 的 dns 缓存",depth:2}],Bx=void 0;function gi(l){const e={a:"a",h1:"h1",h2:"h2",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"浏览器的-dns-缓存",children:[n.jsx(e.a,{className:"autolink-headings",href:"#浏览器的-dns-缓存",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"浏览器的 dns 缓存"]}),`
 `,n.jsxs(e.h2,{id:"chrome-的-dns-缓存",children:[n.jsx(e.a,{className:"autolink-headings",href:"#chrome-的-dns-缓存",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"Chrome 的 dns 缓存"]}),`
-`,n.jsx(e.p,{children:"chrome://net-internals/#dns"})]})}function kd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Vi,{...l})}):Vi(l)}const D2=()=>A2,_2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:D2,GetToc:v2,default:kd},Symbol.toStringTag,{value:"Module"})),k2=()=>[],F2=void 0;function Hi(l){const e={a:"a",h1:"h1",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"参考",children:[n.jsx(e.a,{className:"autolink-headings",href:"#参考",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"参考"]}),`
-`,n.jsx(e.p,{children:n.jsx(e.a,{href:"https://time.geekbang.org/column/intro/100033601?code=nQdm4VreDyrwzIsmJOa2fcr87sMexy98JSDAIn2etJo%253D&tab=catalog",children:"李兵"})})]})}function Fd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Hi,{...l})}):Hi(l)}const w2=()=>F2,S2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:w2,GetToc:k2,default:Fd},Symbol.toStringTag,{value:"Module"})),T2=()=>[{id:"createusestoragestate",text:"createUseStorageState",depth:2}],P2=void 0;function Xi(l){const e={a:"a",code:"code",figure:"figure",h1:"h1",h2:"h2",li:"li",p:"p",pre:"pre",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"uselocalstoragestate-与-usesessionstoragestate",children:[n.jsx(e.a,{className:"autolink-headings",href:"#uselocalstoragestate-与-usesessionstoragestate",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"useLocalStorageState 与 useSessionStorageState"]}),`
+`,n.jsx(e.p,{children:"chrome://net-internals/#dns"})]})}function ld(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(gi,{...l})}):gi(l)}const Lx=()=>Bx,$x=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Lx,GetToc:Nx,default:ld},Symbol.toStringTag,{value:"Module"})),Ox=()=>[],Ix=void 0;function Ci(l){const e={a:"a",h1:"h1",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"参考",children:[n.jsx(e.a,{className:"autolink-headings",href:"#参考",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"参考"]}),`
+`,n.jsx(e.p,{children:n.jsx(e.a,{href:"https://time.geekbang.org/column/intro/100033601?code=nQdm4VreDyrwzIsmJOa2fcr87sMexy98JSDAIn2etJo%253D&tab=catalog",children:"李兵"})})]})}function sd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Ci,{...l})}):Ci(l)}const zx=()=>Ix,Gx=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:zx,GetToc:Ox,default:sd},Symbol.toStringTag,{value:"Module"})),bx=()=>[],Ux=void 0;function vi(l){const e={a:"a",h1:"h1",li:"li",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"常用命令",children:[n.jsx(e.a,{className:"autolink-headings",href:"#常用命令",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"常用命令"]}),`
+`,n.jsxs(e.ul,{children:[`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"git pull"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"git push 提交到远程仓库，--force 强制提交"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"git checkout feat/627 切换分支，-b 切换并创建"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"git merge feat/627 将 feat/627 分支合并入当前分支"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"git remote -v 查看源"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"git remote set-url --push origin no_push 禁止 push"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"git cherry-pick d4296dbde1f44c244ba8215aa55a12fa601a96ea 选中任意分支的提交到本分支"}),`
+`]}),`
+`]})]})}function td(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(vi,{...l})}):vi(l)}const Vx=()=>Ux,Hx=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Vx,GetToc:bx,default:td},Symbol.toStringTag,{value:"Module"})),Xx=()=>[{id:"checkout-和-reset-的不同",text:"checkout 和 reset 的不同",depth:2}],Wx=void 0;function Ai(l){const e={a:"a",code:"code",h1:"h1",h2:"h2",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"checkout",children:[n.jsx(e.a,{className:"autolink-headings",href:"#checkout",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"checkout"]}),`
+`,n.jsx(e.p,{children:"checkout 并不止可以切换 branch。checkout 本质上的功能其实是：签出（ checkout ）指定的 commit"}),`
+`,n.jsxs(e.p,{children:[n.jsx(e.code,{children:"git checkout branch名"})," 的本质，其实是把 HEAD 指向指定的 branch，然后签出这个 branch 所对应的 commit 的工作目录。所以同样的，checkout 的目标也可以不是 branch，而直接指定某个 commit"]}),`
+`,n.jsx(e.p,{children:n.jsx(e.code,{children:"git checkout 78a4bc"})}),`
+`,n.jsxs(e.h2,{id:"checkout-和-reset-的不同",children:[n.jsx(e.a,{className:"autolink-headings",href:"#checkout-和-reset-的不同",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"checkout 和 reset 的不同"]}),`
+`,n.jsx(e.p,{children:"reset 在移动 HEAD 时会带着它所指向的 branch 一起移动，而 checkout 不会。当你用 checkout 指向其他地方的时候，HEAD 和 它所指向的 branch 就自动脱离了"}),`
+`,n.jsx(e.p,{children:"而且，checkout 有一个专门用来只让 HEAD 和 branch 脱离而不移动 HEAD 的用法"}),`
+`,n.jsx(e.p,{children:n.jsx(e.code,{children:"git checkout --detach"})})]})}function rd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Ai,{...l})}):Ai(l)}const Qx=()=>Wx,Kx=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Qx,GetToc:Xx,default:rd},Symbol.toStringTag,{value:"Module"})),qx=()=>[{id:"stash临时存放工作目录的改动",text:"stash：临时存放工作目录的改动",depth:2}],Yx=void 0;function Di(l){const e={a:"a",code:"code",h1:"h1",h2:"h2",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"stash",children:[n.jsx(e.a,{className:"autolink-headings",href:"#stash",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"stash"]}),`
+`,n.jsxs(e.h2,{id:"stash临时存放工作目录的改动",children:[n.jsx(e.a,{className:"autolink-headings",href:"#stash临时存放工作目录的改动",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"stash：临时存放工作目录的改动"]}),`
+`,n.jsxs(e.p,{children:[n.jsx(e.code,{children:"git satsh"})," 不保存未 add 的"]}),`
+`,n.jsxs(e.p,{children:[n.jsx(e.code,{children:"git satsh -u"})," 也保存未 add 的"]})]})}function od(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Di,{...l})}):Di(l)}const Jx=()=>Yx,Zx=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Jx,GetToc:qx,default:od},Symbol.toStringTag,{value:"Module"})),ej=()=>[{id:"log",text:"log",depth:2},{id:"reflog引用的-log",text:"reflog：引用的 log",depth:2}],nj=void 0;function _i(l){const e={a:"a",h1:"h1",h2:"h2",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"reflog",children:[n.jsx(e.a,{className:"autolink-headings",href:"#reflog",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"reflog"]}),`
+`,n.jsxs(e.h2,{id:"log",children:[n.jsx(e.a,{className:"autolink-headings",href:"#log",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"log"]}),`
+`,n.jsx(e.p,{children:"查看 commit 记录"}),`
+`,n.jsxs(e.h2,{id:"reflog引用的-log",children:[n.jsx(e.a,{className:"autolink-headings",href:"#reflog引用的-log",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"reflog：引用的 log"]}),`
+`,n.jsx(e.p,{children:"可以查看 Git 仓库中的引用的移动记录。如果不指定引用，它会显示 HEAD 的移动记录"})]})}function id(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(_i,{...l})}):_i(l)}const lj=()=>nj,sj=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:lj,GetToc:ej,default:id},Symbol.toStringTag,{value:"Module"})),tj=()=>[],rj=void 0;function ki(l){const e={a:"a",h1:"h1",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"cherry-pick",children:[n.jsx(e.a,{className:"autolink-headings",href:"#cherry-pick",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"cherry-pick"]}),`
+`,n.jsx(e.p,{children:"选中任意分支的指定 commit，提到当前分支"})]})}function ad(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ki,{...l})}):ki(l)}const oj=()=>rj,ij=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:oj,GetToc:tj,default:ad},Symbol.toStringTag,{value:"Module"})),aj=()=>[{id:"版本控制最基本功能",text:"版本控制：最基本功能",depth:2},{id:"主动提交程序代码和普通文本的区别",text:"主动提交：程序代码和普通文本的区别",depth:2},{id:"多人合作的同步需求中央仓库",text:"多人合作的同步需求：中央仓库",depth:2},{id:"中央式版本控制系统",text:"中央式版本控制系统",depth:2}],cj=void 0;function Fi(l){const e={a:"a",h1:"h1",h2:"h2",li:"li",p:"p",span:"span",strong:"strong",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"版本控制系统-vcs",children:[n.jsx(e.a,{className:"autolink-headings",href:"#版本控制系统-vcs",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"版本控制系统 VCS"]}),`
+`,n.jsxs(e.h2,{id:"版本控制最基本功能",children:[n.jsx(e.a,{className:"autolink-headings",href:"#版本控制最基本功能",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"版本控制：最基本功能"]}),`
+`,n.jsxs(e.p,{children:["最简单的就是编辑器的撤回功能，撤回到上一个",n.jsx(e.strong,{children:"版本"})]}),`
+`,n.jsxs(e.h2,{id:"主动提交程序代码和普通文本的区别",children:[n.jsx(e.a,{className:"autolink-headings",href:"#主动提交程序代码和普通文本的区别",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"主动提交：程序代码和普通文本的区别"]}),`
+`,n.jsx(e.p,{children:"程序代码需要历史代码的查找，回退等功能"}),`
+`,n.jsxs(e.p,{children:["VCS 保存修改历史，使用的是",n.jsx(e.strong,{children:"主动提交"}),"改动的机制"]}),`
+`,n.jsxs(e.h2,{id:"多人合作的同步需求中央仓库",children:[n.jsx(e.a,{className:"autolink-headings",href:"#多人合作的同步需求中央仓库",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"多人合作的同步需求：中央仓库"]}),`
+`,n.jsxs(e.p,{children:["多个人共同开发需要一个",n.jsx(e.strong,{children:"中央仓库"}),"作为代码的存储中心"]}),`
+`,n.jsxs(e.h2,{id:"中央式版本控制系统",children:[n.jsx(e.a,{className:"autolink-headings",href:"#中央式版本控制系统",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"中央式版本控制系统"]}),`
+`,n.jsxs(e.ul,{children:[`
+`,n.jsx(e.li,{children:"第一次加入团队时，把中央仓库的代码取下来"}),`
+`,n.jsx(e.li,{children:"写完的新功能提交到中央仓库"}),`
+`,n.jsx(e.li,{children:"同事提交到中央仓库的新代码，及时同步下来"}),`
+`]})]})}function cd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Fi,{...l})}):Fi(l)}const dj=()=>cj,hj=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:dj,GetToc:aj,default:cd},Symbol.toStringTag,{value:"Module"})),pj=()=>[{id:"优缺点",text:"优缺点",depth:2}],uj=void 0;function wi(l){const e={a:"a",h1:"h1",h2:"h2",li:"li",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"分布式版本控制系统-dvcs",children:[n.jsx(e.a,{className:"autolink-headings",href:"#分布式版本控制系统-dvcs",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"分布式版本控制系统 DVCS"]}),`
+`,n.jsx(e.p,{children:"分布式 VCS （Distributed VCS ）和中央式的区别在于，分布式 VCS 除了中央仓库之外，还有本地仓库"}),`
+`,n.jsx(e.p,{children:"中央仓库的主要作用"}),`
+`,n.jsx(e.p,{children:"中央式 VCS :"}),`
+`,n.jsxs(e.ul,{children:[`
+`,n.jsx(e.li,{children:"保存版本历史"}),`
+`,n.jsx(e.li,{children:"同步团队代码"}),`
+`]}),`
+`,n.jsx(e.p,{children:"分布式 VCS:"}),`
+`,n.jsxs(e.ul,{children:[`
+`,n.jsx(e.li,{children:"同步团队代码"}),`
+`]}),`
+`,n.jsx(e.p,{children:"注意，分布式 VCS 也保存了历史版本，但是历史版本更多的是作为团队间的同步中转站"}),`
+`,n.jsxs(e.h2,{id:"优缺点",children:[n.jsx(e.a,{className:"autolink-headings",href:"#优缺点",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"优缺点"]}),`
+`,n.jsx(e.p,{children:"优点："}),`
+`,n.jsxs(e.ul,{children:[`
+`,n.jsx(e.li,{children:"无需联网，速度更快"}),`
+`,n.jsx(e.li,{children:"提交更细"}),`
+`]}),`
+`,n.jsx(e.p,{children:"缺点："}),`
+`,n.jsxs(e.ul,{children:[`
+`,n.jsx(e.li,{children:"clone 慢"}),`
+`,n.jsx(e.li,{children:"本地需要存储"}),`
+`]})]})}function dd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(wi,{...l})}):wi(l)}const xj=()=>uj,jj=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:xj,GetToc:pj,default:dd},Symbol.toStringTag,{value:"Module"})),yj=()=>[{id:"引用commit-的快捷方式",text:"引用：commit 的快捷方式",depth:2},{id:"head当前-commit-的引用",text:"HEAD：当前 commit 的引用",depth:2},{id:"branch-引用指向分支的最新-commit",text:"branch 引用：指向分支的最新 commit",depth:2},{id:"操作",text:"操作",depth:2},{id:"mastermain-默认-branch",text:"master/main: 默认 branch",depth:2}],fj=void 0;function Si(l){const e={a:"a",code:"code",h1:"h1",h2:"h2",li:"li",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"head-与-master-与-branch",children:[n.jsx(e.a,{className:"autolink-headings",href:"#head-与-master-与-branch",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"HEAD 与 master 与 branch"]}),`
+`,n.jsxs(e.h2,{id:"引用commit-的快捷方式",children:[n.jsx(e.a,{className:"autolink-headings",href:"#引用commit-的快捷方式",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"引用：commit 的快捷方式"]}),`
+`,n.jsxs(e.p,{children:["commit 都有一串 hash 值，很长：",n.jsx(e.code,{children:"d6687fee2c0be551e0a4819053ad88ee42dc91b9"}),`
+可以用前几位来指定这个 commit：`,n.jsx(e.code,{children:"d6687fe"})]}),`
+`,n.jsx(e.p,{children:"引用就是 字符串，如"}),`
+`,n.jsxs(e.ul,{children:[`
+`,n.jsxs(e.li,{children:["commit 的引用：",n.jsx(e.code,{children:"d6687fee2c0be551e0a4819053ad88ee42dc91b9"})]}),`
+`,n.jsxs(e.li,{children:["branch 的引用：",n.jsx(e.code,{children:"ref: refs/heads/fix"})]}),`
+`]}),`
+`,n.jsxs(e.h2,{id:"head当前-commit-的引用",children:[n.jsx(e.a,{className:"autolink-headings",href:"#head当前-commit-的引用",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"HEAD：当前 commit 的引用"]}),`
+`,n.jsx(e.p,{children:"一般是指向当前分支，当前分支指向，最新的 commit"}),`
+`,n.jsxs(e.h2,{id:"branch-引用指向分支的最新-commit",children:[n.jsx(e.a,{className:"autolink-headings",href:"#branch-引用指向分支的最新-commit",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"branch 引用：指向分支的最新 commit"]}),`
+`,n.jsx(e.p,{children:"branch 是平等的，master 不同但是并不高一级"}),`
+`,n.jsx(e.p,{children:"HEAD 除了可以指向 commit，还可以指向一个 branch，当它指向某个 branch 的时候，会通过这个 branch 来间接地指向某个 commit"}),`
+`,n.jsx(e.p,{children:"当 HEAD 在提交时自动向前移动的时候，它会像一个拖钩一样带着它所指向的 branch 一起移动"}),`
+`,n.jsx(e.p,{children:"当然通过 reset 指令可以让 HEAD 直接指向 commit"}),`
+`,n.jsxs(e.h2,{id:"操作",children:[n.jsx(e.a,{className:"autolink-headings",href:"#操作",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"操作"]}),`
+`,n.jsxs(e.ul,{children:[`
+`,n.jsxs(e.li,{children:["创建：",n.jsx(e.code,{children:"git branch feature1"})]}),`
+`,n.jsxs(e.li,{children:["切换：",n.jsx(e.code,{children:"git checkout feature1"})]}),`
+`,n.jsxs(e.li,{children:["创建并切换：",n.jsx(e.code,{children:"git checkout -b feature1"})]}),`
+`,n.jsxs(e.li,{children:["删除：",n.jsx(e.code,{children:"git branch -d feature1"})]}),`
+`]}),`
+`,n.jsx(e.p,{children:"注意："}),`
+`,n.jsxs(e.ul,{children:[`
+`,n.jsx(e.li,{children:"HEAD 指向的 branch 不能删除"}),`
+`,n.jsx(e.li,{children:"由于 Git 中的 branch 只是一个引用，所以删除 branch 的操作也只会删掉这个引用，并不会删除任何的 commit。不过如果一个 commit 不在任何一个 branch 的「路径」上，或者换句话说，如果没有任何一个 branch 可以回溯到这条 commit，它会被 Git 的回收机制删除掉"}),`
+`,n.jsx(e.li,{children:"出于安全考虑，没有被合并到 master 过的 branch 在删除时会失败，但是可以把 -d 改成 -D，小写换成大写，就能删除"}),`
+`]}),`
+`,n.jsxs(e.h2,{id:"mastermain-默认-branch",children:[n.jsx(e.a,{className:"autolink-headings",href:"#mastermain-默认-branch",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"master/main: 默认 branch"]}),`
+`,n.jsx(e.p,{children:"主分支，仅创建仓库或者下载仓库时时默认切换到此分支"})]})}function hd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Si,{...l})}):Si(l)}const mj=()=>fj,Ej=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:mj,GetToc:yj,default:hd},Symbol.toStringTag,{value:"Module"})),gj=()=>[],Cj=void 0;function Ti(l){const e={a:"a",h1:"h1",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"push-的本质",children:[n.jsx(e.a,{className:"autolink-headings",href:"#push-的本质",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"push 的本质"]}),`
+`,n.jsx(e.p,{children:"push 是把当前的分支上传到远程仓库，并把这个 branch 的路径上的所有 commits 也一并上传"}),`
+`,n.jsx(e.p,{children:"push 的时候，如果当前分支是一个本地创建的分支，需要指定远程仓库名和分支名，用 git push origin branch_name 的格式，而不能只用 git push；或者可以通过 git config 修改 push.default 来改变 push 时的行为逻辑"}),`
+`,n.jsx(e.p,{children:"push 的时候之后上传当前分支，并不会上传 HEAD；远程仓库的 HEAD 是永远指向默认分支（即 master/main）的"})]})}function pd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Ti,{...l})}):Ti(l)}const vj=()=>Cj,Aj=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:vj,GetToc:gj,default:pd},Symbol.toStringTag,{value:"Module"})),Dj=()=>[{id:"含义",text:"含义",depth:2},{id:"冲突",text:"冲突",depth:2}],_j=void 0;function Pi(l){const e={a:"a",code:"code",h1:"h1",h2:"h2",li:"li",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"merge",children:[n.jsx(e.a,{className:"autolink-headings",href:"#merge",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"merge"]}),`
+`,n.jsx(e.p,{children:"pull 的内部操作其实是把远程仓库取到本地后（使用的是 fetch），再用一次 merge 来把远端仓库的新 commits 合并到本地"}),`
+`,n.jsxs(e.p,{children:["即",n.jsx(e.code,{children:"git fetch"})," ",n.jsx(e.code,{children:"git merge origin/HEAD"})]}),`
+`,n.jsx(e.p,{children:`fetch 会更新远程仓库的本地镜像 origin/HEAD 和 origin/master
+随后 merge 针对没有冲突的 commit 会进行 fast-forward 快速前移来移动到最新 commit`}),`
+`,n.jsxs(e.h2,{id:"含义",children:[n.jsx(e.a,{className:"autolink-headings",href:"#含义",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"含义"]}),`
+`,n.jsx(e.p,{children:"从目标 commit 和当前 commit （即 HEAD 所指向的 commit）分叉的位置起，把目标 commit 的路径上的所有 commit 的内容一并应用到当前 commit，然后自动生成一个新的 commit"}),`
+`,n.jsxs(e.h2,{id:"冲突",children:[n.jsx(e.a,{className:"autolink-headings",href:"#冲突",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"冲突"]}),`
+`,n.jsx(e.p,{children:"自动合并能力："}),`
+`,n.jsxs(e.ul,{children:[`
+`,n.jsx(e.li,{children:"不同文件，A 文件，B 文件"}),`
+`,n.jsx(e.li,{children:"同一文件不同行，第 1 行，第 2 行"}),`
+`]})]})}function ud(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Pi,{...l})}):Pi(l)}const kj=()=>_j,Fj=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:kj,GetToc:Dj,default:ud},Symbol.toStringTag,{value:"Module"})),wj=()=>[],Sj=void 0;function Mi(l){const e={a:"a",h1:"h1",li:"li",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"feature-branch",children:[n.jsx(e.a,{className:"autolink-headings",href:"#feature-branch",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"feature branch"]}),`
+`,n.jsx(e.p,{children:"最流行的工作流"}),`
+`,n.jsxs(e.ul,{children:[`
+`,n.jsx(e.li,{children:"任何新的功能（feature）或 bug 修复全都新建一个 branch 来写"}),`
+`,n.jsx(e.li,{children:"branch 写完后，合并到 master，然后删掉这个 branch"}),`
+`]}),`
+`,n.jsx(e.p,{children:"会不听的分支合并分支合并，如果不想分支留着可以用 rebase"}),`
+`,n.jsx(e.p,{children:"PR 默认也是这种模式，当然也可以选择 rebase 等模式"})]})}function xd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Mi,{...l})}):Mi(l)}const Tj=()=>Sj,Pj=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Tj,GetToc:wj,default:xd},Symbol.toStringTag,{value:"Module"})),Mj=()=>[{id:"rebase--i",text:"rebase -i",depth:2}],Rj=void 0;function Ri(l){const e={a:"a",code:"code",h1:"h1",h2:"h2",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"rebase",children:[n.jsx(e.a,{className:"autolink-headings",href:"#rebase",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"rebase"]}),`
+`,n.jsx(e.p,{children:"！禁止从 master 向其他 branch 执行 rebase"}),`
+`,n.jsx(e.p,{children:"将分支 fix 的新 commit 都放在主分支 master 的最新 commit 后面"}),`
+`,n.jsx(e.p,{children:"应该在分支 fix 没有 push 到远程仓库时使用较好，如果已经 push 见以下情况："}),`
+`,n.jsx(e.p,{children:"分支 master 分支 fix 都进行了新的开发并 push"}),`
+`,n.jsx(e.p,{children:"分支 master 有了新 commit-m"}),`
+`,n.jsx(e.p,{children:"分支 fix 也有了新 commit-f"}),`
+`,n.jsxs(e.p,{children:["在分支 fix",n.jsx(e.code,{children:"git rebase master"}),"会重新 提取 commit-f 并变基到当前 maser，会处于更改后未 push 的状态"]}),`
+`,n.jsx(e.p,{children:"此时 fix 在 master 的最新 commit-m 处，origin/fix 在 fix 最新 commit-f 处"}),`
+`,n.jsxs(e.p,{children:["然后",n.jsx(e.code,{children:"git checkout master"})," ",n.jsx(e.code,{children:"git merge fix"}),"可以完成 master 的 rebase 更新，通过 merge 的 fast-forward 情况"]}),`
+`,n.jsxs(e.p,{children:["但是如果 ",n.jsx(e.code,{children:"git checkout fix"})," 再 ",n.jsx(e.code,{children:"git push"})," 会发现有两次 commit-f 提交并产生了 merge"]}),`
+`,n.jsx(e.p,{children:"因为 fix 和 origin/fix 存在冲突，fix 领先于 origin/fix，领先的就是变基操作复制的 commit-f"}),`
+`,n.jsx(e.p,{children:"因为 rebase 提取的 commit 的 hash 和之前的 commit 不同，而且对同一个文件进行了更新，所以需要 merge"}),`
+`,n.jsxs(e.p,{children:["解决方案是对 fix 直接",n.jsx(e.code,{children:"git push -f"}),"覆盖 fix 分支"]}),`
+`,n.jsx(e.p,{children:"由于是个人分支 fix 所以 -f 影响不大"}),`
+`,n.jsx(e.p,{children:"但是尽量避免这种操作，仅在分支不需要继续开发或者未 push 时进行 rebase"}),`
+`,n.jsxs(e.h2,{id:"rebase--i",children:[n.jsx(e.a,{className:"autolink-headings",href:"#rebase--i",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"rebase -i"]}),`
+`,n.jsx(e.p,{children:"常用于整理与合并 commit"}),`
+`,n.jsx(e.p,{children:`比如需要合并三个 commit 为一个，合并 432
+commit-1
+commit-2
+commit-3
+commit-4`}),`
+`,n.jsxs(e.p,{children:["则",n.jsx(e.code,{children:"git rebase -i commit-1"}),`
+对 commit-4、commit-3、commit-2 进行处理
+pick 为保留，squash 为合并入前一个 commit`]}),`
+`,n.jsx(e.p,{children:"同时可以调整顺序"}),`
+`,n.jsx(e.p,{children:`pick commit-1
+pick commit-2
+pick commit-4
+s commit-3`}),`
+`,n.jsxs(e.p,{children:["合并后因为本地与远程记录不同，提交同样需要",n.jsx(e.code,{children:"git push -f"})]})]})}function jd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Ri,{...l})}):Ri(l)}const Nj=()=>Rj,Bj=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Nj,GetToc:Mj,default:jd},Symbol.toStringTag,{value:"Module"})),Lj=()=>[],$j=void 0;function Ni(l){const e={a:"a",code:"code",h1:"h1",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"revert",children:[n.jsx(e.a,{className:"autolink-headings",href:"#revert",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"revert"]}),`
+`,n.jsxs(e.p,{children:[n.jsx(e.code,{children:"git revert HEAD^"}),`
+会增加一条新的 commit，它的内容和倒数第二个 commit 是相反的，从而和倒数第二个 commit 相互抵消，达到撤销的效果`]})]})}function yd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Ni,{...l})}):Ni(l)}const Oj=()=>$j,Ij=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Oj,GetToc:Lj,default:yd},Symbol.toStringTag,{value:"Module"})),zj=()=>[],Gj=void 0;function Bi(l){const e={a:"a",h1:"h1",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"参考",children:[n.jsx(e.a,{className:"autolink-headings",href:"#参考",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"参考"]}),`
+`,n.jsx(e.p,{children:n.jsx(e.a,{href:"https://juejin.cn/book/6844733697996881928?enter_from=search_result&utm_source=search",children:"小册"})})]})}function fd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Bi,{...l})}):Bi(l)}const bj=()=>Gj,Uj=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:bj,GetToc:zj,default:fd},Symbol.toStringTag,{value:"Module"})),Vj=()=>[{id:"reset-的本质移动-head-以及它所指向的-branch",text:"reset 的本质：移动 HEAD 以及它所指向的 branch",depth:2},{id:"reset---hard重置工作目录与-add-暂存区",text:"reset --hard：重置工作目录与 add 暂存区",depth:2},{id:"reset---soft保留工作目录与-add-暂存区",text:"reset --soft：保留工作目录与 add 暂存区",depth:2},{id:"reset-不加参数保留工作目录并清空-add-暂存区",text:"reset 不加参数：保留工作目录，并清空 add 暂存区",depth:2}],Hj=void 0;function Li(l){const e={a:"a",code:"code",h1:"h1",h2:"h2",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"reset",children:[n.jsx(e.a,{className:"autolink-headings",href:"#reset",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"reset"]}),`
+`,n.jsxs(e.h2,{id:"reset-的本质移动-head-以及它所指向的-branch",children:[n.jsx(e.a,{className:"autolink-headings",href:"#reset-的本质移动-head-以及它所指向的-branch",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"reset 的本质：移动 HEAD 以及它所指向的 branch"]}),`
+`,n.jsx(e.p,{children:"实质行为并不是撤销，而是移动 HEAD ，并且「捎带」上 HEAD 所指向的 branch（如果有的话）"}),`
+`,n.jsx(e.p,{children:"所以同理，reset --hard 不仅可以撤销提交，还可以用来把 HEAD 和 branch 移动到其他的任何地方"}),`
+`,n.jsx(e.p,{children:n.jsx(e.code,{children:"git reset --hard branch2"})}),`
+`,n.jsx(e.p,{children:"直接让 branch1 值与 branch2 相同"}),`
+`,n.jsxs(e.h2,{id:"reset---hard重置工作目录与-add-暂存区",children:[n.jsx(e.a,{className:"autolink-headings",href:"#reset---hard重置工作目录与-add-暂存区",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"reset --hard：重置工作目录与 add 暂存区"]}),`
+`,n.jsx(e.p,{children:"工作目录里的内容会被完全重置为和 HEAD 的新位置相同的内容。"}),`
+`,n.jsx(e.p,{children:"就是你的未 commit 提交的修改会被全部丢弃，但是不影响已经 commit 的内容"}),`
+`,n.jsxs(e.h2,{id:"reset---soft保留工作目录与-add-暂存区",children:[n.jsx(e.a,{className:"autolink-headings",href:"#reset---soft保留工作目录与-add-暂存区",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"reset --soft：保留工作目录与 add 暂存区"]}),`
+`,n.jsx(e.p,{children:"reset --soft 会在重置 HEAD 和 branch 时，保留工作目录和暂存区中的内容，并把重置 HEAD 所带来的新的差异放进暂存区"}),`
+`,n.jsx(e.p,{children:"就是会自动 add 不同的文件并保留之前的 add"}),`
+`,n.jsxs(e.h2,{id:"reset-不加参数保留工作目录并清空-add-暂存区",children:[n.jsx(e.a,{className:"autolink-headings",href:"#reset-不加参数保留工作目录并清空-add-暂存区",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"reset 不加参数：保留工作目录，并清空 add 暂存区"]}),`
+`,n.jsx(e.p,{children:"默认使用 --mixed 参数"}),`
+`,n.jsx(e.p,{children:"保留工作目录，并且清空暂存区。也就是说，工作目录的修改、暂存区的内容以及由 reset 所导致的新的文件差异，都会被放进工作目录"}),`
+`,n.jsx(e.p,{children:"就是撤销 add"})]})}function md(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Li,{...l})}):Li(l)}const Xj=()=>Hj,Wj=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Xj,GetToc:Vj,default:md},Symbol.toStringTag,{value:"Module"})),Qj=()=>[{id:"c",text:"c++",depth:2},{id:"js",text:"js",depth:2}],Kj=void 0;function $i(l){const e={a:"a",h1:"h1",h2:"h2",li:"li",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"引用",children:[n.jsx(e.a,{className:"autolink-headings",href:"#引用",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"引用"]}),`
+`,n.jsxs(e.h2,{id:"c",children:[n.jsx(e.a,{className:"autolink-headings",href:"#c",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"c++"]}),`
+`,n.jsxs(e.ul,{children:[`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"指针：指向的内存地址，直接访问是内存地址，通过*访问值"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"指针常量（引用） int * const p：是指针的常量，不能切换指向，和 js 无可比性"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"常量指针 const int * p：指向常量的指针"}),`
+`]}),`
+`]}),`
+`,n.jsxs(e.h2,{id:"js",children:[n.jsx(e.a,{className:"autolink-headings",href:"#js",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"js"]}),`
+`,n.jsx(e.p,{children:"js 没有指针"}),`
+`,n.jsx(e.p,{children:"js 的引用可以对比 c++的指针，同样是指向内存地址，但是 js 直接访问就是值"})]})}function Ed(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx($i,{...l})}):$i(l)}const qj=()=>Kj,Yj=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:qj,GetToc:Qj,default:Ed},Symbol.toStringTag,{value:"Module"})),Jj=()=>[],Zj=void 0;function Oi(l){const e={a:"a",h1:"h1",li:"li",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"运算符",children:[n.jsx(e.a,{className:"autolink-headings",href:"#运算符",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"运算符"]}),`
+`,n.jsx(e.p,{children:"赋值运算符"}),`
+`,n.jsxs(e.ul,{children:[`
+`,n.jsx(e.li,{children:"优先级"}),`
+`,n.jsx(e.li,{children:`结合性，只有在优先级相同时，结合性才发挥作用
+赋值运算符=是右结合，即从右开始加括号，如 a = b = c = 3 为 a = (b = (c = 3))`}),`
+`]})]})}function gd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Oi,{...l})}):Oi(l)}const e2=()=>Zj,n2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:e2,GetToc:Jj,default:gd},Symbol.toStringTag,{value:"Module"})),l2=()=>[{id:"keyby",text:"keyBy",depth:2},{id:"mapkeys",text:"mapKeys",depth:3},{id:"merge",text:"merge",depth:3}],s2=void 0;function Ii(l){const e={a:"a",code:"code",figure:"figure",h1:"h1",h2:"h2",h3:"h3",pre:"pre",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"loadash-手写",children:[n.jsx(e.a,{className:"autolink-headings",href:"#loadash-手写",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"loadash 手写"]}),`
+`,n.jsxs(e.h2,{id:"keyby",children:[n.jsx(e.a,{className:"autolink-headings",href:"#keyby",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"keyBy"]}),`
+`,n.jsx(e.figure,{"data-rehype-pretty-code-figure":"",children:n.jsx(e.pre,{style:{backgroundColor:"#fff",color:"#24292e"},tabIndex:"0","data-language":"ts","data-theme":"github-light",children:n.jsxs(e.code,{"data-language":"ts","data-theme":"github-light",style:{display:"grid"},children:[n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"export"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" function"}),n.jsx(e.span,{style:{color:"#6F42C1"},children:" keyBy"}),n.jsx(e.span,{style:{color:"#24292E"},children:"<"}),n.jsx(e.span,{style:{color:"#6F42C1"},children:"T"}),n.jsx(e.span,{style:{color:"#24292E"},children:", "}),n.jsx(e.span,{style:{color:"#6F42C1"},children:"K"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" extends"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" keyof"}),n.jsx(e.span,{style:{color:"#6F42C1"},children:" T"}),n.jsx(e.span,{style:{color:"#24292E"},children:">("}),n.jsx(e.span,{style:{color:"#E36209"},children:"arr"}),n.jsx(e.span,{style:{color:"#D73A49"},children:":"}),n.jsx(e.span,{style:{color:"#6F42C1"},children:" T"}),n.jsx(e.span,{style:{color:"#24292E"},children:"[], "}),n.jsx(e.span,{style:{color:"#E36209"},children:"key"}),n.jsx(e.span,{style:{color:"#D73A49"},children:":"}),n.jsx(e.span,{style:{color:"#6F42C1"},children:" K"}),n.jsx(e.span,{style:{color:"#24292E"},children:") {"})]}),`
+`,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"  return"}),n.jsx(e.span,{style:{color:"#24292E"},children:" arr."}),n.jsx(e.span,{style:{color:"#6F42C1"},children:"reduce"}),n.jsx(e.span,{style:{color:"#24292E"},children:"(("}),n.jsx(e.span,{style:{color:"#E36209"},children:"pre"}),n.jsx(e.span,{style:{color:"#24292E"},children:", "}),n.jsx(e.span,{style:{color:"#E36209"},children:"cur"}),n.jsx(e.span,{style:{color:"#24292E"},children:") "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"=>"}),n.jsx(e.span,{style:{color:"#24292E"},children:" {"})]}),`
+`,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"    const"}),n.jsx(e.span,{style:{color:"#005CC5"},children:" itemKey"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" ="}),n.jsx(e.span,{style:{color:"#24292E"},children:" cur[key];"})]}),`
+`,n.jsx(e.span,{"data-line":"",children:" "}),`
+`,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"    if"}),n.jsx(e.span,{style:{color:"#24292E"},children:" ("}),n.jsx(e.span,{style:{color:"#D73A49"},children:"typeof"}),n.jsx(e.span,{style:{color:"#24292E"},children:" itemKey "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"==="}),n.jsx(e.span,{style:{color:"#032F62"},children:' "string"'}),n.jsx(e.span,{style:{color:"#D73A49"},children:" ||"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" typeof"}),n.jsx(e.span,{style:{color:"#24292E"},children:" itemKey "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"==="}),n.jsx(e.span,{style:{color:"#032F62"},children:' "number"'}),n.jsx(e.span,{style:{color:"#24292E"},children:") {"})]}),`
+`,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#24292E"},children:"      pre[itemKey "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"as"}),n.jsx(e.span,{style:{color:"#005CC5"},children:" string"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" |"}),n.jsx(e.span,{style:{color:"#005CC5"},children:" number"}),n.jsx(e.span,{style:{color:"#24292E"},children:"] "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"="}),n.jsx(e.span,{style:{color:"#24292E"},children:" cur;"})]}),`
+`,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"    }"})}),`
+`,n.jsx(e.span,{"data-line":"",children:" "}),`
+`,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"    return"}),n.jsx(e.span,{style:{color:"#24292E"},children:" pre;"})]}),`
+`,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#24292E"},children:"  }, {} "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"as"}),n.jsx(e.span,{style:{color:"#6F42C1"},children:" Record"}),n.jsx(e.span,{style:{color:"#24292E"},children:"<"}),n.jsx(e.span,{style:{color:"#005CC5"},children:"string"}),n.jsx(e.span,{style:{color:"#24292E"},children:", "}),n.jsx(e.span,{style:{color:"#6F42C1"},children:"T"}),n.jsx(e.span,{style:{color:"#24292E"},children:">);"})]}),`
+`,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"}"})})]})})}),`
+`,n.jsxs(e.h3,{id:"mapkeys",children:[n.jsx(e.a,{className:"autolink-headings",href:"#mapkeys",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"mapKeys"]}),`
+`,n.jsx(e.figure,{"data-rehype-pretty-code-figure":"",children:n.jsx(e.pre,{style:{backgroundColor:"#fff",color:"#24292e"},tabIndex:"0","data-language":"ts","data-theme":"github-light",children:n.jsx(e.code,{"data-language":"ts","data-theme":"github-light",style:{display:"grid"},children:n.jsx(e.span,{"data-line":"",children:" "})})})}),`
+`,n.jsxs(e.h3,{id:"merge",children:[n.jsx(e.a,{className:"autolink-headings",href:"#merge",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"merge"]})]})}function Cd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Ii,{...l})}):Ii(l)}const t2=()=>s2,r2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:t2,GetToc:l2,default:Cd},Symbol.toStringTag,{value:"Module"})),o2=()=>[{id:"createusestoragestate",text:"createUseStorageState",depth:2}],i2=void 0;function zi(l){const e={a:"a",code:"code",figure:"figure",h1:"h1",h2:"h2",li:"li",p:"p",pre:"pre",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"uselocalstoragestate-与-usesessionstoragestate",children:[n.jsx(e.a,{className:"autolink-headings",href:"#uselocalstoragestate-与-usesessionstoragestate",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"useLocalStorageState 与 useSessionStorageState"]}),`
 `,n.jsxs(e.ul,{children:[`
 `,n.jsx(e.li,{children:"useLocalStorageState"}),`
 `,n.jsx(e.li,{children:"useSessionStorageState"}),`
@@ -679,7 +493,7 @@ JavaScript 执行、解析 DOM、样式计算、布局计算、CSS 动画等。`
 `,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"  }"})}),`
 `,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"  "})}),`
 `,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"  return"}),n.jsx(e.span,{style:{color:"#24292E"},children:" useStorageState"})]}),`
-`,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"}"})})]})})})]})}function wd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Xi,{...l})}):Xi(l)}const M2=()=>P2,R2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:M2,GetToc:T2,default:wd},Symbol.toStringTag,{value:"Module"})),N2=()=>[{id:"useupdateeffect-与-useupdatelayouteffect",text:"useUpdateEffect 与 useUpdateLayoutEffect",depth:2}],B2=void 0;function Wi(l){const e={a:"a",code:"code",figure:"figure",h1:"h1",h2:"h2",li:"li",pre:"pre",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"useupdateeffect-与-useupdatelayouteffect",children:[n.jsx(e.a,{className:"autolink-headings",href:"#useupdateeffect-与-useupdatelayouteffect",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"useUpdateEffect 与 useUpdateLayoutEffect"]}),`
+`,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"}"})})]})})})]})}function vd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(zi,{...l})}):zi(l)}const a2=()=>i2,c2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:a2,GetToc:o2,default:vd},Symbol.toStringTag,{value:"Module"})),d2=()=>[{id:"useupdateeffect-与-useupdatelayouteffect",text:"useUpdateEffect 与 useUpdateLayoutEffect",depth:2}],h2=void 0;function Gi(l){const e={a:"a",code:"code",figure:"figure",h1:"h1",h2:"h2",li:"li",pre:"pre",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"useupdateeffect-与-useupdatelayouteffect",children:[n.jsx(e.a,{className:"autolink-headings",href:"#useupdateeffect-与-useupdatelayouteffect",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"useUpdateEffect 与 useUpdateLayoutEffect"]}),`
 `,n.jsxs(e.h2,{id:"useupdateeffect-与-useupdatelayouteffect-1",children:[n.jsx(e.a,{className:"autolink-headings",href:"#useupdateeffect-与-useupdatelayouteffect-1",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"useUpdateEffect 与 useUpdateLayoutEffect"]}),`
 `,n.jsxs(e.ul,{children:[`
 `,n.jsx(e.li,{children:"useUpdateEffect：跳过第一次渲染的 useEffect"}),`
@@ -712,7 +526,7 @@ JavaScript 执行、解析 DOM、样式计算、布局计算、CSS 动画等。`
 `,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"        return"}),n.jsx(e.span,{style:{color:"#6F42C1"},children:" effect"}),n.jsx(e.span,{style:{color:"#24292E"},children:"()"})]}),`
 `,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"      }"})}),`
 `,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"    }, deps)"})}),`
-`,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"  }"})})]})})})]})}function Sd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Wi,{...l})}):Wi(l)}const L2=()=>B2,$2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:L2,GetToc:N2,default:Sd},Symbol.toStringTag,{value:"Module"})),O2=()=>[{id:"uselatest",text:"useLatest",depth:2},{id:"usememoizedfn",text:"useMemoizedFn",depth:2}],I2=void 0;function Qi(l){const e={a:"a",code:"code",figure:"figure",h1:"h1",h2:"h2",p:"p",pre:"pre",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"uselatest-与-usememoizedfn",children:[n.jsx(e.a,{className:"autolink-headings",href:"#uselatest-与-usememoizedfn",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"useLatest 与 useMemoizedFn"]}),`
+`,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"  }"})})]})})})]})}function Ad(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Gi,{...l})}):Gi(l)}const p2=()=>h2,u2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:p2,GetToc:d2,default:Ad},Symbol.toStringTag,{value:"Module"})),x2=()=>[{id:"uselatest",text:"useLatest",depth:2},{id:"usememoizedfn",text:"useMemoizedFn",depth:2}],j2=void 0;function bi(l){const e={a:"a",code:"code",figure:"figure",h1:"h1",h2:"h2",p:"p",pre:"pre",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"uselatest-与-usememoizedfn",children:[n.jsx(e.a,{className:"autolink-headings",href:"#uselatest-与-usememoizedfn",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"useLatest 与 useMemoizedFn"]}),`
 `,n.jsxs(e.h2,{id:"uselatest",children:[n.jsx(e.a,{className:"autolink-headings",href:"#uselatest",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"useLatest"]}),`
 `,n.jsx(e.p,{children:"获取最新值的 hook，但是不能避免对象的地址改变"}),`
 `,n.jsx(e.figure,{"data-rehype-pretty-code-figure":"",children:n.jsx(e.pre,{style:{backgroundColor:"#fff",color:"#24292e"},tabIndex:"0","data-language":"ts","data-theme":"github-light",children:n.jsxs(e.code,{"data-language":"ts","data-theme":"github-light",style:{display:"grid"},children:[n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#6A737D"},children:"// 每次渲染都将最新的value存到ref中，但是value如果是引用类型地址还是会变"})}),`
@@ -770,7 +584,7 @@ JavaScript 执行、解析 DOM、样式计算、布局计算、CSS 动画等。`
 `,n.jsx(e.span,{"data-line":"",children:" "}),`
 `,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#6A737D"},children:"  // 返回的memoizedFn.current始终是通过function包裹的fn.current，fn.current保证是最新的函数"})}),`
 `,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"  return"}),n.jsx(e.span,{style:{color:"#24292E"},children:" memoizedFn.current "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"as"}),n.jsx(e.span,{style:{color:"#6F42C1"},children:" T"})]}),`
-`,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"}"})})]})})})]})}function Td(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Qi,{...l})}):Qi(l)}const z2=()=>I2,G2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:z2,GetToc:O2,default:Td},Symbol.toStringTag,{value:"Module"})),b2=()=>[{id:"usetimeout",text:"useTimeout",depth:2},{id:"useraftimeout",text:"useRafTimeout",depth:2},{id:"useinterval",text:"useInterval",depth:2},{id:"userafinterval",text:"useRafInterval",depth:2},{id:"usecountdown",text:"useCountDown",depth:2}],U2=void 0;function Ki(l){const e={a:"a",code:"code",figure:"figure",h1:"h1",h2:"h2",p:"p",pre:"pre",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"useraftimeout-与-userafinterval-与-usecountdown",children:[n.jsx(e.a,{className:"autolink-headings",href:"#useraftimeout-与-userafinterval-与-usecountdown",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"use(Raf)Timeout 与 use(Raf)Interval 与 useCountDown"]}),`
+`,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"}"})})]})})})]})}function Dd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(bi,{...l})}):bi(l)}const y2=()=>j2,f2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:y2,GetToc:x2,default:Dd},Symbol.toStringTag,{value:"Module"})),m2=()=>[{id:"usetimeout",text:"useTimeout",depth:2},{id:"useraftimeout",text:"useRafTimeout",depth:2},{id:"useinterval",text:"useInterval",depth:2},{id:"userafinterval",text:"useRafInterval",depth:2},{id:"usecountdown",text:"useCountDown",depth:2}],E2=void 0;function Ui(l){const e={a:"a",code:"code",figure:"figure",h1:"h1",h2:"h2",p:"p",pre:"pre",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"useraftimeout-与-userafinterval-与-usecountdown",children:[n.jsx(e.a,{className:"autolink-headings",href:"#useraftimeout-与-userafinterval-与-usecountdown",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"use(Raf)Timeout 与 use(Raf)Interval 与 useCountDown"]}),`
 `,n.jsxs(e.h2,{id:"usetimeout",children:[n.jsx(e.a,{className:"autolink-headings",href:"#usetimeout",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"useTimeout"]}),`
 `,n.jsx(e.p,{children:"setTimeout 的 hook，返回 clear 函数来清除定时器"}),`
 `,n.jsx(e.figure,{"data-rehype-pretty-code-figure":"",children:n.jsx(e.pre,{style:{backgroundColor:"#fff",color:"#24292e"},tabIndex:"0","data-language":"ts","data-theme":"github-light",children:n.jsxs(e.code,{"data-language":"ts","data-theme":"github-light",style:{display:"grid"},children:[n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"const"}),n.jsx(e.span,{style:{color:"#6F42C1"},children:" useTimeout"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" ="}),n.jsx(e.span,{style:{color:"#24292E"},children:" ("}),n.jsx(e.span,{style:{color:"#6F42C1"},children:"fn"}),n.jsx(e.span,{style:{color:"#D73A49"},children:":"}),n.jsx(e.span,{style:{color:"#24292E"},children:" () "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"=>"}),n.jsx(e.span,{style:{color:"#005CC5"},children:" void"}),n.jsx(e.span,{style:{color:"#24292E"},children:", "}),n.jsx(e.span,{style:{color:"#E36209"},children:"delay"}),n.jsx(e.span,{style:{color:"#D73A49"},children:"?:"}),n.jsx(e.span,{style:{color:"#005CC5"},children:" number"}),n.jsx(e.span,{style:{color:"#24292E"},children:") "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"=>"}),n.jsx(e.span,{style:{color:"#24292E"},children:" {"})]}),`
@@ -1094,7 +908,7 @@ JavaScript 执行、解析 DOM、样式计算、布局计算、CSS 动画等。`
 `,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"  const"}),n.jsx(e.span,{style:{color:"#005CC5"},children:" formattedRes"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" ="}),n.jsx(e.span,{style:{color:"#6F42C1"},children:" useMemo"}),n.jsx(e.span,{style:{color:"#24292E"},children:"(() "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"=>"}),n.jsx(e.span,{style:{color:"#6F42C1"},children:" parseMs"}),n.jsx(e.span,{style:{color:"#24292E"},children:"(timeLeft), [timeLeft])"})]}),`
 `,n.jsx(e.span,{"data-line":"",children:" "}),`
 `,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"  return"}),n.jsx(e.span,{style:{color:"#24292E"},children:" [timeLeft, formattedRes] "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"as"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" const"})]}),`
-`,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"}"})})]})})})]})}function Pd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Ki,{...l})}):Ki(l)}const V2=()=>U2,H2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:V2,GetToc:b2,default:Pd},Symbol.toStringTag,{value:"Module"})),X2=()=>[{id:"userequestimplement",text:"useRequestImplement",depth:2},{id:"fetch",text:"Fetch",depth:2}],W2=void 0;function qi(l){const e={a:"a",code:"code",figure:"figure",h1:"h1",h2:"h2",p:"p",pre:"pre",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"userequest",children:[n.jsx(e.a,{className:"autolink-headings",href:"#userequest",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"useRequest"]}),`
+`,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"}"})})]})})})]})}function _d(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Ui,{...l})}):Ui(l)}const g2=()=>E2,C2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:g2,GetToc:m2,default:_d},Symbol.toStringTag,{value:"Module"})),v2=()=>[{id:"userequestimplement",text:"useRequestImplement",depth:2},{id:"fetch",text:"Fetch",depth:2}],A2=void 0;function Vi(l){const e={a:"a",code:"code",figure:"figure",h1:"h1",h2:"h2",p:"p",pre:"pre",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"userequest",children:[n.jsx(e.a,{className:"autolink-headings",href:"#userequest",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"useRequest"]}),`
 `,n.jsx(e.p,{children:`useRequest 使用的插件机制
 通过 useRequestImplement 引入插件`}),`
 `,n.jsx(e.figure,{"data-rehype-pretty-code-figure":"",children:n.jsx(e.pre,{style:{backgroundColor:"#fff",color:"#24292e"},tabIndex:"0","data-language":"ts","data-theme":"github-light",children:n.jsxs(e.code,{"data-language":"ts","data-theme":"github-light",style:{display:"grid"},children:[n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#6A737D"},children:"// function useRequest<TData, TParams extends any[], TFormated, TTFormated extends TFormated = any>("})}),`
@@ -1396,7 +1210,7 @@ JavaScript 执行、解析 DOM、样式计算、布局计算、CSS 动画等。`
 `,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"      data: targetData,"})}),`
 `,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"    })"})}),`
 `,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"  }"})}),`
-`,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"}"})})]})})})]})}function Md(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(qi,{...l})}):qi(l)}const Q2=()=>W2,K2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Q2,GetToc:X2,default:Md},Symbol.toStringTag,{value:"Module"})),q2=()=>[],Y2=void 0;function Yi(l){return n.jsx(n.Fragment,{})}function Rd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Yi,{...l})}):Yi()}const J2=()=>Y2,Z2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:J2,GetToc:q2,default:Rd},Symbol.toStringTag,{value:"Module"})),ey=()=>[],ny=void 0;function Ji(l){const e={a:"a",code:"code",figure:"figure",h1:"h1",p:"p",pre:"pre",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"useupdate",children:[n.jsx(e.a,{className:"autolink-headings",href:"#useupdate",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"useUpdate"]}),`
+`,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"}"})})]})})})]})}function kd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Vi,{...l})}):Vi(l)}const D2=()=>A2,_2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:D2,GetToc:v2,default:kd},Symbol.toStringTag,{value:"Module"})),k2=()=>[],F2=void 0;function Hi(l){return n.jsx(n.Fragment,{})}function Fd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Hi,{...l})}):Hi()}const w2=()=>F2,S2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:w2,GetToc:k2,default:Fd},Symbol.toStringTag,{value:"Module"})),T2=()=>[],P2=void 0;function Xi(l){const e={a:"a",code:"code",figure:"figure",h1:"h1",p:"p",pre:"pre",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"useupdate",children:[n.jsx(e.a,{className:"autolink-headings",href:"#useupdate",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"useUpdate"]}),`
 `,n.jsx(e.p,{children:"强制重新渲染"}),`
 `,n.jsx(e.figure,{"data-rehype-pretty-code-figure":"",children:n.jsx(e.pre,{style:{backgroundColor:"#fff",color:"#24292e"},tabIndex:"0","data-language":"ts","data-theme":"github-light",children:n.jsxs(e.code,{"data-language":"ts","data-theme":"github-light",style:{display:"grid"},children:[n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"const"}),n.jsx(e.span,{style:{color:"#6F42C1"},children:" useUpdate"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" ="}),n.jsx(e.span,{style:{color:"#24292E"},children:" () "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"=>"}),n.jsx(e.span,{style:{color:"#24292E"},children:" {"})]}),`
 `,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#6A737D"},children:"  // 初始为第一个对象字面量"})}),`
@@ -1404,7 +1218,7 @@ JavaScript 执行、解析 DOM、样式计算、布局计算、CSS 动画等。`
 `,n.jsx(e.span,{"data-line":"",children:" "}),`
 `,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#6A737D"},children:"  // 调用时更新为第二个对象字面量来触发重新渲染"})}),`
 `,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"  return"}),n.jsx(e.span,{style:{color:"#6F42C1"},children:" useCallback"}),n.jsx(e.span,{style:{color:"#24292E"},children:"(() "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"=>"}),n.jsx(e.span,{style:{color:"#6F42C1"},children:" setState"}),n.jsx(e.span,{style:{color:"#24292E"},children:"({}), [])"})]}),`
-`,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"}"})})]})})})]})}function Nd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Ji,{...l})}):Ji(l)}const ly=()=>ny,sy=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:ly,GetToc:ey,default:Nd},Symbol.toStringTag,{value:"Module"})),ty=()=>[],ry=void 0;function Zi(l){const e={a:"a",code:"code",figure:"figure",h1:"h1",li:"li",p:"p",pre:"pre",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"usecreation",children:[n.jsx(e.a,{className:"autolink-headings",href:"#usecreation",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"useCreation"]}),`
+`,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"}"})})]})})})]})}function wd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Xi,{...l})}):Xi(l)}const M2=()=>P2,R2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:M2,GetToc:T2,default:wd},Symbol.toStringTag,{value:"Module"})),N2=()=>[],B2=void 0;function Wi(l){const e={a:"a",code:"code",figure:"figure",h1:"h1",li:"li",p:"p",pre:"pre",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"usecreation",children:[n.jsx(e.a,{className:"autolink-headings",href:"#usecreation",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"useCreation"]}),`
 `,n.jsx(e.p,{children:"useCreation 是 useMemo 或 useRef 的替代品。"}),`
 `,n.jsxs(e.ul,{children:[`
 `,n.jsx(e.li,{children:"useMemo 无法保证被 memo 的值一定不会被重计算"}),`
@@ -1425,7 +1239,7 @@ JavaScript 执行、解析 DOM、样式计算、布局计算、CSS 动画等。`
 `,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#24292E"},children:"    current.initialized "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"="}),n.jsx(e.span,{style:{color:"#005CC5"},children:" true"})]}),`
 `,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"  }"})}),`
 `,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"  return"}),n.jsx(e.span,{style:{color:"#24292E"},children:" current.obj "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"as"}),n.jsx(e.span,{style:{color:"#6F42C1"},children:" T"})]}),`
-`,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"}"})})]})})})]})}function Bd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Zi,{...l})}):Zi(l)}const oy=()=>ry,iy=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:oy,GetToc:ty,default:Bd},Symbol.toStringTag,{value:"Module"})),ay=()=>[{id:"useanimationframe",text:"useAnimationFrame",depth:2},{id:"计时器",text:"计时器",depth:2}],cy=void 0;function ea(l){const e={a:"a",code:"code",figure:"figure",h1:"h1",h2:"h2",p:"p",pre:"pre",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"useanimationframe-和计时器",children:[n.jsx(e.a,{className:"autolink-headings",href:"#useanimationframe-和计时器",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"useAnimationFrame 和计时器"]}),`
+`,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"}"})})]})})})]})}function Sd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Wi,{...l})}):Wi(l)}const L2=()=>B2,$2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:L2,GetToc:N2,default:Sd},Symbol.toStringTag,{value:"Module"})),O2=()=>[{id:"useanimationframe",text:"useAnimationFrame",depth:2},{id:"计时器",text:"计时器",depth:2}],I2=void 0;function Qi(l){const e={a:"a",code:"code",figure:"figure",h1:"h1",h2:"h2",p:"p",pre:"pre",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"useanimationframe-和计时器",children:[n.jsx(e.a,{className:"autolink-headings",href:"#useanimationframe-和计时器",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"useAnimationFrame 和计时器"]}),`
 `,n.jsx(e.p,{children:"因为 setTimeout/setInterval 会因为任务阻塞延迟严重"}),`
 `,n.jsx(e.p,{children:"requestAnimationFrame 可以实现更精准的计时器"}),`
 `,n.jsx(e.p,{children:"requestAnimationFrame 是自动匹配帧率调用的 api，60 帧执行 60 次，120 帧执行 120 次"}),`
@@ -1468,7 +1282,7 @@ JavaScript 执行、解析 DOM、样式计算、布局计算、CSS 动画等。`
 `,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"}"})}),`
 `,n.jsx(e.span,{"data-line":"",children:" "}),`
 `,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"export"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" default"}),n.jsx(e.span,{style:{color:"#24292E"},children:" IndexPage"})]})]})})}),`
-`,n.jsx("p",{align:"right",children:"23.12.01"})]})}function Ld(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ea,{...l})}):ea(l)}const dy=()=>cy,hy=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:dy,GetToc:ay,default:Ld},Symbol.toStringTag,{value:"Module"})),py=()=>[],uy=void 0;function na(l){const e={a:"a",code:"code",figure:"figure",h1:"h1",pre:"pre",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"工具函数",children:[n.jsx(e.a,{className:"autolink-headings",href:"#工具函数",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"工具函数"]}),`
+`,n.jsx("p",{align:"right",children:"23.12.01"})]})}function Td(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Qi,{...l})}):Qi(l)}const z2=()=>I2,G2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:z2,GetToc:O2,default:Td},Symbol.toStringTag,{value:"Module"})),b2=()=>[],U2=void 0;function Ki(l){const e={a:"a",code:"code",figure:"figure",h1:"h1",pre:"pre",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"工具函数",children:[n.jsx(e.a,{className:"autolink-headings",href:"#工具函数",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"工具函数"]}),`
 `,n.jsx(e.figure,{"data-rehype-pretty-code-figure":"",children:n.jsx(e.pre,{style:{backgroundColor:"#fff",color:"#24292e"},tabIndex:"0","data-language":"ts","data-theme":"github-light",children:n.jsxs(e.code,{"data-language":"ts","data-theme":"github-light",style:{display:"grid"},children:[n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"const"}),n.jsx(e.span,{style:{color:"#005CC5"},children:" isBrowser"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" ="}),n.jsx(e.span,{style:{color:"#D73A49"},children:" !!"}),n.jsx(e.span,{style:{color:"#24292E"},children:"("})]}),`
 `,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"  typeof"}),n.jsx(e.span,{style:{color:"#24292E"},children:" window "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"!=="}),n.jsx(e.span,{style:{color:"#032F62"},children:" 'undefined'"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" &&"})]}),`
 `,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#24292E"},children:"  window.document "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"&&"})]}),`
@@ -1491,7 +1305,7 @@ JavaScript 执行、解析 DOM、样式计算、布局计算、CSS 动画等。`
 `,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"  typeof"}),n.jsx(e.span,{style:{color:"#24292E"},children:" value "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"==="}),n.jsx(e.span,{style:{color:"#032F62"},children:" 'undefined'"})]}),`
 `,n.jsx(e.span,{"data-line":"",children:" "}),`
 `,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"const"}),n.jsx(e.span,{style:{color:"#005CC5"},children:" isDev"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" ="})]}),`
-`,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#24292E"},children:"  process.env."}),n.jsx(e.span,{style:{color:"#005CC5"},children:"NODE_ENV"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" ==="}),n.jsx(e.span,{style:{color:"#032F62"},children:" 'development'"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" ||"}),n.jsx(e.span,{style:{color:"#24292E"},children:" process.env."}),n.jsx(e.span,{style:{color:"#005CC5"},children:"NODE_ENV"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" ==="}),n.jsx(e.span,{style:{color:"#032F62"},children:" 'test'"})]})]})})})]})}function $d(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(na,{...l})}):na(l)}const xy=()=>uy,jy=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:xy,GetToc:py,default:$d},Symbol.toStringTag,{value:"Module"})),yy=()=>[{id:"usedeepeffect",text:"useDeepEffect",depth:2}],fy=void 0;function la(l){const e={a:"a",code:"code",figure:"figure",h1:"h1",h2:"h2",pre:"pre",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"usedeepcompareeffect",children:[n.jsx(e.a,{className:"autolink-headings",href:"#usedeepcompareeffect",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"useDeepCompareEffect"]}),`
+`,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#24292E"},children:"  process.env."}),n.jsx(e.span,{style:{color:"#005CC5"},children:"NODE_ENV"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" ==="}),n.jsx(e.span,{style:{color:"#032F62"},children:" 'development'"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" ||"}),n.jsx(e.span,{style:{color:"#24292E"},children:" process.env."}),n.jsx(e.span,{style:{color:"#005CC5"},children:"NODE_ENV"}),n.jsx(e.span,{style:{color:"#D73A49"},children:" ==="}),n.jsx(e.span,{style:{color:"#032F62"},children:" 'test'"})]})]})})})]})}function Pd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Ki,{...l})}):Ki(l)}const V2=()=>U2,H2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:V2,GetToc:b2,default:Pd},Symbol.toStringTag,{value:"Module"})),X2=()=>[{id:"usedeepeffect",text:"useDeepEffect",depth:2}],W2=void 0;function qi(l){const e={a:"a",code:"code",figure:"figure",h1:"h1",h2:"h2",pre:"pre",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"usedeepcompareeffect",children:[n.jsx(e.a,{className:"autolink-headings",href:"#usedeepcompareeffect",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"useDeepCompareEffect"]}),`
 `,n.jsxs(e.h2,{id:"usedeepeffect",children:[n.jsx(e.a,{className:"autolink-headings",href:"#usedeepeffect",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"useDeepEffect"]}),`
 `,n.jsx(e.figure,{"data-rehype-pretty-code-figure":"",children:n.jsx(e.pre,{style:{backgroundColor:"#fff",color:"#24292e"},tabIndex:"0","data-language":"ts","data-theme":"github-light",children:n.jsxs(e.code,{"data-language":"ts","data-theme":"github-light",style:{display:"grid"},children:[n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"function"}),n.jsx(e.span,{style:{color:"#6F42C1"},children:" isDeepEqual"}),n.jsx(e.span,{style:{color:"#24292E"},children:"("}),n.jsx(e.span,{style:{color:"#E36209"},children:"cur"}),n.jsx(e.span,{style:{color:"#D73A49"},children:":"}),n.jsx(e.span,{style:{color:"#005CC5"},children:" any"}),n.jsx(e.span,{style:{color:"#24292E"},children:", "}),n.jsx(e.span,{style:{color:"#E36209"},children:"pre"}),n.jsx(e.span,{style:{color:"#D73A49"},children:":"}),n.jsx(e.span,{style:{color:"#005CC5"},children:" any"}),n.jsx(e.span,{style:{color:"#24292E"},children:") {"})]}),`
 `,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#D73A49"},children:"  return"}),n.jsx(e.span,{style:{color:"#005CC5"},children:" true"}),n.jsx(e.span,{style:{color:"#24292E"},children:";"})]}),`
@@ -1508,182 +1322,368 @@ JavaScript 执行、解析 DOM、样式计算、布局计算、CSS 动画等。`
 `,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#24292E"},children:"  preDeps.current "}),n.jsx(e.span,{style:{color:"#D73A49"},children:"="}),n.jsx(e.span,{style:{color:"#24292E"},children:" deps;"})]}),`
 `,n.jsx(e.span,{"data-line":"",children:" "}),`
 `,n.jsxs(e.span,{"data-line":"",children:[n.jsx(e.span,{style:{color:"#6F42C1"},children:"  useEffect"}),n.jsx(e.span,{style:{color:"#24292E"},children:"(fn, [flag.current]);"})]}),`
-`,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"}"})})]})})})]})}function Od(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(la,{...l})}):la(l)}const my=()=>fy,Ey=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:my,GetToc:yy,default:Od},Symbol.toStringTag,{value:"Module"})),gy=()=>[],Cy=void 0;function sa(l){const e={a:"a",h1:"h1",li:"li",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"常用命令",children:[n.jsx(e.a,{className:"autolink-headings",href:"#常用命令",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"常用命令"]}),`
+`,n.jsx(e.span,{"data-line":"",children:n.jsx(e.span,{style:{color:"#24292E"},children:"}"})})]})})})]})}function Md(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(qi,{...l})}):qi(l)}const Q2=()=>W2,K2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Q2,GetToc:X2,default:Md},Symbol.toStringTag,{value:"Module"})),q2=()=>[{id:"moduletype",text:"moduleType",depth:2},{id:"chunk",text:"chunk",depth:2}],Y2=void 0;function Yi(l){const e={a:"a",h1:"h1",h2:"h2",li:"li",ol:"ol",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"modulechunkasset",children:[n.jsx(e.a,{className:"autolink-headings",href:"#modulechunkasset",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"module/chunk/asset"]}),`
+`,n.jsxs(e.h2,{id:"moduletype",children:[n.jsx(e.a,{className:"autolink-headings",href:"#moduletype",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"moduleType"]}),`
+`,n.jsxs(e.ul,{children:[`
+`,n.jsx(e.li,{children:"javascript/auto：我们在项目内引入的 ESM/CommonJS 的模块 (ESM 模块要看 loader 是如何处理的，也有可能是 javascript/esm 类型，不必深究)"}),`
+`,n.jsx(e.li,{children:"javascript/esm：我们在项目内引入的 ESM Package，比如 html-to-image，在其 package.json 中含有 module 字段"}),`
+`,n.jsx(e.li,{children:"javascript/dynamic：require('./src' + xxx)，动态加载"}),`
+`,n.jsx(e.li,{children:"asset：图片等资源"}),`
+`,n.jsx(e.li,{children:"asset/resource：图片等资源"}),`
+`,n.jsx(e.li,{children:"runtime：webpack_require 下挂载的诸多方法"}),`
+`]}),`
+`,n.jsxs(e.h2,{id:"chunk",children:[n.jsx(e.a,{className:"autolink-headings",href:"#chunk",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"chunk"]}),`
+`,n.jsx(e.p,{children:"一个 chunk 包含以下属性"}),`
+`,n.jsxs(e.ul,{children:[`
+`,n.jsx(e.li,{children:"initial：是否是 initial chunk，即首次 HTML 必须加载的模块"}),`
+`,n.jsx(e.li,{children:"entry：是否是 entry chunk"}),`
+`,n.jsx(e.li,{children:"hash：chunkhash"}),`
+`]}),`
+`,n.jsxs(e.ol,{children:[`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"分析你们项目中打包后 stats 对象的 module/chunk/asset"}),`
+`,n.jsx(e.p,{children:"分析"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"contenthash 与 chunkhash 有何区别"}),`
+`,n.jsxs(e.ul,{children:[`
+`,n.jsx(e.li,{children:"chunkhash：对应 chunk 的 hash"}),`
+`,n.jsx(e.li,{children:"contenthash：对应 chunk 中每个 content 的 hash，比如一个 chunk 中既包含 js，又包含 css 时"}),`
+`]}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"什么是 Concatenated Module"}),`
+`,n.jsx(e.p,{children:"将多个模块打包为 webpack 的一个模块"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"什么是 initial chunk"}),`
+`,n.jsx(e.p,{children:"首次 HTML 必须加载的模块"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"output.filename 与 output.chunkFilename 的区别是什么"}),`
+`,n.jsxs(e.ul,{children:[`
+`,n.jsx(e.li,{children:"filename：initial chunk 的文件名"}),`
+`,n.jsx(e.li,{children:"chunkFilename：非 initial chunk 的文件名"}),`
+`]}),`
+`]}),`
+`]})]})}function Rd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Yi,{...l})}):Yi(l)}const J2=()=>Y2,Z2=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:J2,GetToc:q2,default:Rd},Symbol.toStringTag,{value:"Module"})),ey=()=>[],ny=void 0;function Ji(l){const e={a:"a",h1:"h1",li:"li",ol:"ol",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"bundle-spliting",children:[n.jsx(e.a,{className:"autolink-headings",href:"#bundle-spliting",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"bundle spliting"]}),`
+`,n.jsxs(e.ol,{children:[`
+`,n.jsx(e.li,{children:"将示例一中的 common.js 抽出来进行单独打包"}),`
+`,n.jsx(e.li,{children:"optimization.splitChunks 中 chunks、minChunks、minSize 各参数代表什么"}),`
+`,n.jsx(e.li,{children:"如果将示例一中的 common.js 在 index.js 中引用，即被 initial chunk 引用，打包会发生什么"}),`
+`,n.jsx(e.li,{children:"如果将示例二中的 lodash.js 在 index.js 中引用，即被 initial chunk 引用，打包会发生什么"}),`
+`]})]})}function Nd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Ji,{...l})}):Ji(l)}const ly=()=>ny,sy=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:ly,GetToc:ey,default:Nd},Symbol.toStringTag,{value:"Module"})),ty=()=>[],ry=void 0;function Zi(l){const e={a:"a",h1:"h1",span:"span",...l.components};return n.jsxs(e.h1,{id:"高效分包",children:[n.jsx(e.a,{className:"autolink-headings",href:"#高效分包",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"高效分包"]})}function Bd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(Zi,{...l})}):Zi(l)}const oy=()=>ry,iy=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:oy,GetToc:ty,default:Bd},Symbol.toStringTag,{value:"Module"})),ay=()=>[],cy=void 0;function ea(l){return n.jsx(n.Fragment,{})}function Ld(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ea,{...l})}):ea()}const dy=()=>cy,hy=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:dy,GetToc:ay,default:Ld},Symbol.toStringTag,{value:"Module"})),py=()=>[],uy=void 0;function na(l){return n.jsx(n.Fragment,{})}function $d(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(na,{...l})}):na()}const xy=()=>uy,jy=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:xy,GetToc:py,default:$d},Symbol.toStringTag,{value:"Module"})),yy=()=>[],fy=void 0;function la(l){return n.jsx(n.Fragment,{})}function Od(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(la,{...l})}):la()}const my=()=>fy,Ey=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:my,GetToc:yy,default:Od},Symbol.toStringTag,{value:"Module"})),gy=()=>[],Cy=void 0;function sa(l){return n.jsx(n.Fragment,{})}function Id(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(sa,{...l})}):sa()}const vy=()=>Cy,Ay=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:vy,GetToc:gy,default:Id},Symbol.toStringTag,{value:"Module"})),Dy=()=>[],_y=void 0;function ta(l){return n.jsx(n.Fragment,{})}function zd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ta,{...l})}):ta()}const ky=()=>_y,Fy=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:ky,GetToc:Dy,default:zd},Symbol.toStringTag,{value:"Module"})),wy=()=>[],Sy=void 0;function ra(l){return n.jsx(n.Fragment,{})}function Gd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ra,{...l})}):ra()}const Ty=()=>Sy,Py=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Ty,GetToc:wy,default:Gd},Symbol.toStringTag,{value:"Module"})),My=()=>[],Ry=void 0;function oa(l){return n.jsx(n.Fragment,{})}function bd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(oa,{...l})}):oa()}const Ny=()=>Ry,By=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Ny,GetToc:My,default:bd},Symbol.toStringTag,{value:"Module"})),Ly=()=>[],$y=void 0;function ia(l){const e={a:"a",h1:"h1",img:"img",li:"li",ol:"ol",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"使用-node-api-学习-webpack",children:[n.jsx(e.a,{className:"autolink-headings",href:"#使用-node-api-学习-webpack",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"使用 node api 学习 webpack​"]}),`
+`,n.jsxs(e.ol,{children:[`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"使用 webpack api 打包一个最简的 js 资源"}),`
+`,n.jsx(e.p,{children:n.jsx(e.img,{src:"/img/note/5/z-1-1.jpg",alt:"z-1-1"})}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"你所使用含有 webpack 的项目中，webpack 是通过 webpack-cli 打包的吗？"}),`
+`,n.jsx(e.p,{children:"是，nextjs 和 umijs 2.直播后明白并不是，nextjs 和 umijsj 将 webpack 包直接放入 compiled 文件夹 ，防止依赖更新带来的问题，所以是 api 打包的"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"如何计算每次 webpack 构建时间"}),`
+`,n.jsx(e.p,{children:`stat.toJson().time
+stat.endTime - stat.statTime`}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"断点调试 webpack 源码，了解其编译时间（startTime/endTime）是如何计算的"}),`
+`,n.jsxs(e.p,{children:[`首先进入 run 函数
+`,n.jsx(e.img,{src:"/img/note/5/z-1-2.jpg",alt:"z-1-2"}),`
+可以看到直接定义了 startTime
+下面是要找 endTime
+先看最后的调用逻辑
+`,n.jsx(e.img,{src:"/img/note/5/z-1-3.jpg",alt:"z-1-3"})]}),`
+`,n.jsxs(e.p,{children:[`如果是判断是否闲置，两种情况都执行内部的 run 函数
+`,n.jsx(e.img,{src:"/img/note/5/z-1-4.jpg",alt:"z-1-4"})]}),`
+`,n.jsxs(e.p,{children:[`再看 run 函数，如果错误执行的 finalCallback 把 err 传给用户，没有错误则执行 onCompiled 函数
+`,n.jsx(e.img,{src:"/img/note/5/z-1-5.jpg",alt:"z-1-5"})]}),`
+`,n.jsxs(e.p,{children:[`这里便赋值了 startTime 和 endTime，compilation 对象是在调用 onCompiled 时由 webpack 实例的 compile 编译函数传过来的参数
+然后 new Stats 生成 stats 实例，实例根据 Stats 里定义的
+`,n.jsx(e.img,{src:"/img/note/5/z-1-6.jpg",alt:"z-1-6"})]}),`
+`,n.jsx(e.p,{children:"get 函数即可访问 startTime 和 endTime"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"断点调试执行 webpack 命令时的流程，体验它是如何在 webpack/webpack-cli 间相互调用的"}),`
+`,n.jsxs(e.p,{children:[`首先执行 webpack/bin/webpack.js
+`,n.jsx(e.img,{src:"/img/note/5/z-1-7.jpg",alt:"z-1-7"})]}),`
+`,n.jsx(e.p,{children:`其中 runCli 函数根据传入的 cli 对象拼接路径，加载 webpack-cli/bin/cli.js
+pkg.bin[cli.binName]即 pkg.bin['webpack-cli']
+webpack-cli 的 package.json 里配置了 bin
+![z-1-8]/img/note/5/z-1-8.jpg)`}),`
+`,n.jsxs(e.p,{children:[`调用逻辑是判断是否安装 webpack，未安装时引导安装，已安装则直接调用 webpack-cli
+`,n.jsx(e.img,{src:"/img/note/5/z-1-9.jpg",alt:"z-1-9"})]}),`
+`]}),`
+`]})]})}function Ud(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ia,{...l})}):ia(l)}const Oy=()=>$y,Iy=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Oy,GetToc:Ly,default:Ud},Symbol.toStringTag,{value:"Module"})),zy=()=>[],Gy=void 0;function aa(l){return n.jsx(n.Fragment,{})}function Vd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(aa,{...l})}):aa()}const by=()=>Gy,Uy=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:by,GetToc:zy,default:Vd},Symbol.toStringTag,{value:"Module"})),Vy=()=>[{id:"作业",text:"作业",depth:2}],Hy=void 0;function ca(l){const e={a:"a",code:"code",h1:"h1",h2:"h2",img:"img",li:"li",ol:"ol",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"cjs-运行时分析",children:[n.jsx(e.a,{className:"autolink-headings",href:"#cjs-运行时分析",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"cjs 运行时分析"]}),`
+`,n.jsxs(e.h2,{id:"作业",children:[n.jsx(e.a,{className:"autolink-headings",href:"#作业",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"作业"]}),`
+`,n.jsxs(e.ol,{children:[`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"webpack 运行时代码进行调试三遍并理解"}),`
+`,n.jsx(e.p,{children:"调试略"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"webpack 的模块加载器是如何实现的"}),`
+`,n.jsxs(e.p,{children:[n.jsx(e.img,{src:"/img/note/5/z-2-1.jpg",alt:"z-2-1"}),`
+首先定义全局缓存对象`,n.jsx(e.code,{children:"__webpack_module_cache__"}),`
+然后定义打包器函数`,n.jsx(e.code,{children:"__webpack_require__(moduleId){}"}),`
+函数中：
+首先根据 moduleId 读取全局缓存对象
+如果存在缓存，则直接返回缓存模块的 exports 对象
+如果不存在缓存，创建新的模块对象，首先根据 moduleId 放入缓存，然后赋值给局部模块对象，此时局部模块对象仅有 exports 属性
+然后根据 moduleId 读取全局模块数组，执行该模块函数并传入函数里的局部模块对象，拿到指定模块的 exports 值
+最后导出该模块的 exports 值`]}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"webpack 的运行时代码做了那些事情"}),`
+`,n.jsxs(e.p,{children:["首先定义全局模块数组，将模块用带参数的函数包裹并根据 moduleId 放入数组的第一个位置后，第一个位置为入口模块 ",n.jsx(e.code,{children:"__webpack_modules__"}),`
+然后定义模块加载器，可以根据 moduleId 执行模块，并返回模块的 exports 值 `,n.jsx(e.code,{children:"__webpack_require__"}),`(moduleId){}
+最后执行模块加载器加载入口模块`,n.jsx(e.code,{children:"__webpack_require__(0)"})]}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsxs(e.p,{children:["CommonJS 中，如果不对 module 进行缓存有什么问题，即不实现以上的 ",n.jsx(e.code,{children:"__webpack_module_cache__"})," 数据结构"]}),`
+`,n.jsxs(e.ol,{children:[`
+`,n.jsx(e.li,{children:"避免模块反复生成"}),`
+`,n.jsx(e.li,{children:"单例模式，每个模块只在第一次被引用时产出模块对象，之后的引用都是同一个对象。"}),`
+`]}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsxs(e.p,{children:["阅读 webpack 模块加载器代码，我们在 CommonJS 中使用 ",n.jsx(e.code,{children:"module.exports"})," 与 ",n.jsx(e.code,{children:"exports"})," 有何区别"]}),`
+`,n.jsxs(e.p,{children:["module.exports 是访问 module 的 exports 属性的值，exports 是该值的引用，即类似于",n.jsx(e.code,{children:"const exports=module.exports"})]}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsxs(e.p,{children:["如何理解 webpack 运行时代码最后是 ",n.jsx(e.code,{children:"__webpack_require__(0)"})]}),`
+`,n.jsxs(e.p,{children:[n.jsx(e.img,{src:"/img/note/5/z-2-2.jpg",alt:"z-2-2"}),`
+`,n.jsx(e.img,{src:"/img/note/5/z-2-3.jpg",alt:"z-2-3"}),`
+执行打包后的 js 然后打印`,n.jsx(e.code,{children:"__webpack_modules__"}),`发现 0 的位置是空的
+所以其实 0 只是一个预留位置
+解释成是储存入口模块可能更容易理解
+且因为`,n.jsx(e.code,{children:"__webpack_modules__"}),"是根据文件的依赖关系进行深度优先遍历得来的数组，所以根节点即入口文件即 0 位置的模块"]}),`
+`]}),`
+`]})]})}function Hd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ca,{...l})}):ca(l)}const Xy=()=>Hy,Wy=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Xy,GetToc:Vy,default:Hd},Symbol.toStringTag,{value:"Module"})),Qy=()=>[],Ky=void 0;function da(l){const e={a:"a",h1:"h1",img:"img",li:"li",ol:"ol",p:"p",span:"span",strong:"strong",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"cjs-模块收集与-ast",children:[n.jsx(e.a,{className:"autolink-headings",href:"#cjs-模块收集与-ast",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"cjs 模块收集与 ast"]}),`
+`,n.jsxs(e.ol,{children:[`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"了解 AST 概念"}),`
+`,n.jsxs(e.ol,{children:[`
+`,n.jsx(e.li,{children:"通过解析 parser 生成 AST"}),`
+`,n.jsx(e.li,{children:"code(词法分析)=>Token(语法分析)=>AST"}),`
+`,n.jsx(e.li,{children:"Token 可以进行代码检查，语法高亮等"}),`
+`]}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"在 AST Explore 尝试 Javascript/CSS 解析，并观察其语法树"}),`
+`,n.jsxs(e.p,{children:[n.jsx(e.img,{src:"/img/note/5/z-3-1.jpg",alt:"z-3-1"}),`
+如图是 require 的语法树，4.会用到`]}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"如何根据入口文件搜索出所有需要打包的模块"}),`
+`,n.jsxs(e.p,{children:["code 解析成 AST 后，以入口文件作为根节点开始深度优先遍历，通过 AST 找到具有 require 函数的节点,构建",n.jsx(e.strong,{children:"webpack_modules"})," 数组"]}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"如何模拟实现运行时代码的生成，实现 mini-webpack"}),`
+`,n.jsx(e.p,{children:n.jsx(e.a,{href:"https://github.com/903040380/poor-webpack",children:"示例仓库"})}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"如何去除代码中的所有 console.log"}),`
+`,n.jsxs(e.p,{children:["见",n.jsx(e.a,{href:"https://github.com/903040380/poor-webpack",children:"示例仓库"})]}),`
+`]}),`
+`]})]})}function Xd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(da,{...l})}):da(l)}const qy=()=>Ky,Yy=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:qy,GetToc:Qy,default:Xd},Symbol.toStringTag,{value:"Module"})),Jy=()=>[],Zy=void 0;function ha(l){const e={a:"a",h1:"h1",li:"li",ol:"ol",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"文件名中的-hash",children:[n.jsx(e.a,{className:"autolink-headings",href:"#文件名中的-hash",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"文件名中的 hash"]}),`
+`,n.jsxs(e.ol,{children:[`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"什么是 Long Term Cache，有何作用"}),`
+`,n.jsx(e.p,{children:"在服务器对响应头设置 cache-control 的值来达到最大化缓存时间，一般指一年时间或者两年时间"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"为什么配置 output.filename 时不建议注入版本号"}),`
+`,n.jsx(e.p,{children:"因为会导致更新版本时所有文件名变化，当文件名变更时会重新进行缓存，那么更新版本会导致所有缓存失效，但是更新版本一般并不会更新所有文件"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"为什么可以配置 Long Term Cache"}),`
+`,n.jsx(e.p,{children:"因为 webpack 打包时可以配置 contenthash,只改变改变内容的文件的 hash 值，新的文件会重新进行缓存，不会导致版本问题"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"如何提升 webpack 编译时期计算 hash 的速度"}),`
+`,n.jsxs(e.p,{children:[`通过 output.hashFunction 属性,webpack5 已经支持直接配置’xxhash64‘
+`,n.jsx(e.a,{href:"https://github.com/umijs/umi/pull/9168#event-7302069734",children:"根据此方法对 umi 进行了优化"})]}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"在 Node.js 中如何进行 hash 计算"}),`
+`,n.jsx(e.p,{children:"参考大佬的回答，是用 crypto 库"}),`
+`]}),`
+`]})]})}function Wd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ha,{...l})}):ha(l)}const ef=()=>Zy,nf=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:ef,GetToc:Jy,default:Wd},Symbol.toStringTag,{value:"Module"})),lf=()=>[],sf=void 0;function pa(l){const e={a:"a",h1:"h1",li:"li",ol:"ol",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"cjs-与-esm",children:[n.jsx(e.a,{className:"autolink-headings",href:"#cjs-与-esm",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"cjs 与 esm"]}),`
+`,n.jsxs(e.ol,{children:[`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"什么是 esm/commonjs"}),`
+`,n.jsx(e.p,{children:"esm:"}),`
 `,n.jsxs(e.ul,{children:[`
 `,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"git pull"}),`
+`,n.jsx(e.p,{children:"是 ES 的模块规范，浏览器 node 都可运行"}),`
 `]}),`
 `,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"git push 提交到远程仓库，--force 强制提交"}),`
+`,n.jsx(e.p,{children:"静态导入，所以可以 tree shaking，减少 js 体积，编译阶段就进行导入和导出"}),`
 `]}),`
 `,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"git checkout feat/627 切换分支，-b 切换并创建"}),`
+`,n.jsx(e.p,{children:"支持动态导入，执行到该行代码时才开始导入，异步加载（Promise）"}),`
 `]}),`
 `,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"git merge feat/627 将 feat/627 分支合并入当前分支"}),`
+`,n.jsx(e.p,{children:"导出的值是引用"}),`
+`]}),`
+`]}),`
+`,n.jsx(e.p,{children:"cjs: -是 node 的模块规范，webpack 和 node 都可运行，单纯浏览器环境不可以"}),`
+`,n.jsxs(e.ul,{children:[`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"动态导入，执行到该行代码时才开始导入，同步加载，加载完模块才会继续执行"}),`
 `]}),`
 `,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"git remote -v 查看源"}),`
+`,n.jsx(e.p,{children:"具有缓存，可以通过 require.cache 查看，加载过的模块会通过缓存加载"}),`
 `]}),`
 `,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"git remote set-url --push origin no_push 禁止 push"}),`
+`,n.jsx(e.p,{children:"导出的值是复制的值，类似 exports.a=a"}),`
+`]}),`
+`]}),`
 `]}),`
 `,n.jsxs(e.li,{children:[`
-`,n.jsx(e.p,{children:"git cherry-pick d4296dbde1f44c244ba8215aa55a12fa601a96ea 选中任意分支的提交到本分支"}),`
+`,n.jsx(e.p,{children:"什么是 import(module)"}),`
+`,n.jsx(e.p,{children:"类似于 require 的动态导入，但是是异步加载（Promise）"}),`
 `]}),`
-`]})]})}function Id(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(sa,{...l})}):sa(l)}const vy=()=>Cy,Ay=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:vy,GetToc:gy,default:Id},Symbol.toStringTag,{value:"Module"})),Dy=()=>[{id:"checkout-和-reset-的不同",text:"checkout 和 reset 的不同",depth:2}],_y=void 0;function ta(l){const e={a:"a",code:"code",h1:"h1",h2:"h2",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"checkout",children:[n.jsx(e.a,{className:"autolink-headings",href:"#checkout",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"checkout"]}),`
-`,n.jsx(e.p,{children:"checkout 并不止可以切换 branch。checkout 本质上的功能其实是：签出（ checkout ）指定的 commit"}),`
-`,n.jsxs(e.p,{children:[n.jsx(e.code,{children:"git checkout branch名"})," 的本质，其实是把 HEAD 指向指定的 branch，然后签出这个 branch 所对应的 commit 的工作目录。所以同样的，checkout 的目标也可以不是 branch，而直接指定某个 commit"]}),`
-`,n.jsx(e.p,{children:n.jsx(e.code,{children:"git checkout 78a4bc"})}),`
-`,n.jsxs(e.h2,{id:"checkout-和-reset-的不同",children:[n.jsx(e.a,{className:"autolink-headings",href:"#checkout-和-reset-的不同",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"checkout 和 reset 的不同"]}),`
-`,n.jsx(e.p,{children:"reset 在移动 HEAD 时会带着它所指向的 branch 一起移动，而 checkout 不会。当你用 checkout 指向其他地方的时候，HEAD 和 它所指向的 branch 就自动脱离了"}),`
-`,n.jsx(e.p,{children:"而且，checkout 有一个专门用来只让 HEAD 和 branch 脱离而不移动 HEAD 的用法"}),`
-`,n.jsx(e.p,{children:n.jsx(e.code,{children:"git checkout --detach"})})]})}function zd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ta,{...l})}):ta(l)}const ky=()=>_y,Fy=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:ky,GetToc:Dy,default:zd},Symbol.toStringTag,{value:"Module"})),wy=()=>[{id:"stash临时存放工作目录的改动",text:"stash：临时存放工作目录的改动",depth:2}],Sy=void 0;function ra(l){const e={a:"a",code:"code",h1:"h1",h2:"h2",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"stash",children:[n.jsx(e.a,{className:"autolink-headings",href:"#stash",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"stash"]}),`
-`,n.jsxs(e.h2,{id:"stash临时存放工作目录的改动",children:[n.jsx(e.a,{className:"autolink-headings",href:"#stash临时存放工作目录的改动",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"stash：临时存放工作目录的改动"]}),`
-`,n.jsxs(e.p,{children:[n.jsx(e.code,{children:"git satsh"})," 不保存未 add 的"]}),`
-`,n.jsxs(e.p,{children:[n.jsx(e.code,{children:"git satsh -u"})," 也保存未 add 的"]})]})}function Gd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ra,{...l})}):ra(l)}const Ty=()=>Sy,Py=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Ty,GetToc:wy,default:Gd},Symbol.toStringTag,{value:"Module"})),My=()=>[{id:"log",text:"log",depth:2},{id:"reflog引用的-log",text:"reflog：引用的 log",depth:2}],Ry=void 0;function oa(l){const e={a:"a",h1:"h1",h2:"h2",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"reflog",children:[n.jsx(e.a,{className:"autolink-headings",href:"#reflog",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"reflog"]}),`
-`,n.jsxs(e.h2,{id:"log",children:[n.jsx(e.a,{className:"autolink-headings",href:"#log",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"log"]}),`
-`,n.jsx(e.p,{children:"查看 commit 记录"}),`
-`,n.jsxs(e.h2,{id:"reflog引用的-log",children:[n.jsx(e.a,{className:"autolink-headings",href:"#reflog引用的-log",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"reflog：引用的 log"]}),`
-`,n.jsx(e.p,{children:"可以查看 Git 仓库中的引用的移动记录。如果不指定引用，它会显示 HEAD 的移动记录"})]})}function bd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(oa,{...l})}):oa(l)}const Ny=()=>Ry,By=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Ny,GetToc:My,default:bd},Symbol.toStringTag,{value:"Module"})),Ly=()=>[],$y=void 0;function ia(l){const e={a:"a",h1:"h1",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"cherry-pick",children:[n.jsx(e.a,{className:"autolink-headings",href:"#cherry-pick",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"cherry-pick"]}),`
-`,n.jsx(e.p,{children:"选中任意分支的指定 commit，提到当前分支"})]})}function Ud(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ia,{...l})}):ia(l)}const Oy=()=>$y,Iy=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Oy,GetToc:Ly,default:Ud},Symbol.toStringTag,{value:"Module"})),zy=()=>[{id:"版本控制最基本功能",text:"版本控制：最基本功能",depth:2},{id:"主动提交程序代码和普通文本的区别",text:"主动提交：程序代码和普通文本的区别",depth:2},{id:"多人合作的同步需求中央仓库",text:"多人合作的同步需求：中央仓库",depth:2},{id:"中央式版本控制系统",text:"中央式版本控制系统",depth:2}],Gy=void 0;function aa(l){const e={a:"a",h1:"h1",h2:"h2",li:"li",p:"p",span:"span",strong:"strong",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"版本控制系统-vcs",children:[n.jsx(e.a,{className:"autolink-headings",href:"#版本控制系统-vcs",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"版本控制系统 VCS"]}),`
-`,n.jsxs(e.h2,{id:"版本控制最基本功能",children:[n.jsx(e.a,{className:"autolink-headings",href:"#版本控制最基本功能",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"版本控制：最基本功能"]}),`
-`,n.jsxs(e.p,{children:["最简单的就是编辑器的撤回功能，撤回到上一个",n.jsx(e.strong,{children:"版本"})]}),`
-`,n.jsxs(e.h2,{id:"主动提交程序代码和普通文本的区别",children:[n.jsx(e.a,{className:"autolink-headings",href:"#主动提交程序代码和普通文本的区别",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"主动提交：程序代码和普通文本的区别"]}),`
-`,n.jsx(e.p,{children:"程序代码需要历史代码的查找，回退等功能"}),`
-`,n.jsxs(e.p,{children:["VCS 保存修改历史，使用的是",n.jsx(e.strong,{children:"主动提交"}),"改动的机制"]}),`
-`,n.jsxs(e.h2,{id:"多人合作的同步需求中央仓库",children:[n.jsx(e.a,{className:"autolink-headings",href:"#多人合作的同步需求中央仓库",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"多人合作的同步需求：中央仓库"]}),`
-`,n.jsxs(e.p,{children:["多个人共同开发需要一个",n.jsx(e.strong,{children:"中央仓库"}),"作为代码的存储中心"]}),`
-`,n.jsxs(e.h2,{id:"中央式版本控制系统",children:[n.jsx(e.a,{className:"autolink-headings",href:"#中央式版本控制系统",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"中央式版本控制系统"]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"了解 skypack 和 jsdeliver 两个 npm 的 cdn 网站"}),`
 `,n.jsxs(e.ul,{children:[`
-`,n.jsx(e.li,{children:"第一次加入团队时，把中央仓库的代码取下来"}),`
-`,n.jsx(e.li,{children:"写完的新功能提交到中央仓库"}),`
-`,n.jsx(e.li,{children:"同事提交到中央仓库的新代码，及时同步下来"}),`
-`]})]})}function Vd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(aa,{...l})}):aa(l)}const by=()=>Gy,Uy=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:by,GetToc:zy,default:Vd},Symbol.toStringTag,{value:"Module"})),Vy=()=>[{id:"优缺点",text:"优缺点",depth:2}],Hy=void 0;function ca(l){const e={a:"a",h1:"h1",h2:"h2",li:"li",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"分布式版本控制系统-dvcs",children:[n.jsx(e.a,{className:"autolink-headings",href:"#分布式版本控制系统-dvcs",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"分布式版本控制系统 DVCS"]}),`
-`,n.jsx(e.p,{children:"分布式 VCS （Distributed VCS ）和中央式的区别在于，分布式 VCS 除了中央仓库之外，还有本地仓库"}),`
-`,n.jsx(e.p,{children:"中央仓库的主要作用"}),`
-`,n.jsx(e.p,{children:"中央式 VCS :"}),`
-`,n.jsxs(e.ul,{children:[`
-`,n.jsx(e.li,{children:"保存版本历史"}),`
-`,n.jsx(e.li,{children:"同步团队代码"}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:n.jsx(e.a,{href:"https://www.skypack.dev/",children:"skypack"})}),`
 `]}),`
-`,n.jsx(e.p,{children:"分布式 VCS:"}),`
-`,n.jsxs(e.ul,{children:[`
-`,n.jsx(e.li,{children:"同步团队代码"}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:n.jsx(e.a,{href:"https://www.jsdelivr.com/",children:"jsdeliver"})}),`
 `]}),`
-`,n.jsx(e.p,{children:"注意，分布式 VCS 也保存了历史版本，但是历史版本更多的是作为团队间的同步中转站"}),`
-`,n.jsxs(e.h2,{id:"优缺点",children:[n.jsx(e.a,{className:"autolink-headings",href:"#优缺点",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"优缺点"]}),`
-`,n.jsx(e.p,{children:"优点："}),`
-`,n.jsxs(e.ul,{children:[`
-`,n.jsx(e.li,{children:"无需联网，速度更快"}),`
-`,n.jsx(e.li,{children:"提交更细"}),`
 `]}),`
-`,n.jsx(e.p,{children:"缺点："}),`
-`,n.jsxs(e.ul,{children:[`
-`,n.jsx(e.li,{children:"clone 慢"}),`
-`,n.jsx(e.li,{children:"本地需要存储"}),`
-`]})]})}function Hd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ca,{...l})}):ca(l)}const Xy=()=>Hy,Wy=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Xy,GetToc:Vy,default:Hd},Symbol.toStringTag,{value:"Module"})),Qy=()=>[{id:"引用commit-的快捷方式",text:"引用：commit 的快捷方式",depth:2},{id:"head当前-commit-的引用",text:"HEAD：当前 commit 的引用",depth:2},{id:"branch-引用指向分支的最新-commit",text:"branch 引用：指向分支的最新 commit",depth:2},{id:"操作",text:"操作",depth:2},{id:"mastermain-默认-branch",text:"master/main: 默认 branch",depth:2}],Ky=void 0;function da(l){const e={a:"a",code:"code",h1:"h1",h2:"h2",li:"li",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"head-与-master-与-branch",children:[n.jsx(e.a,{className:"autolink-headings",href:"#head-与-master-与-branch",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"HEAD 与 master 与 branch"]}),`
-`,n.jsxs(e.h2,{id:"引用commit-的快捷方式",children:[n.jsx(e.a,{className:"autolink-headings",href:"#引用commit-的快捷方式",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"引用：commit 的快捷方式"]}),`
-`,n.jsxs(e.p,{children:["commit 都有一串 hash 值，很长：",n.jsx(e.code,{children:"d6687fee2c0be551e0a4819053ad88ee42dc91b9"}),`
-可以用前几位来指定这个 commit：`,n.jsx(e.code,{children:"d6687fe"})]}),`
-`,n.jsx(e.p,{children:"引用就是 字符串，如"}),`
-`,n.jsxs(e.ul,{children:[`
-`,n.jsxs(e.li,{children:["commit 的引用：",n.jsx(e.code,{children:"d6687fee2c0be551e0a4819053ad88ee42dc91b9"})]}),`
-`,n.jsxs(e.li,{children:["branch 的引用：",n.jsx(e.code,{children:"ref: refs/heads/fix"})]}),`
 `]}),`
-`,n.jsxs(e.h2,{id:"head当前-commit-的引用",children:[n.jsx(e.a,{className:"autolink-headings",href:"#head当前-commit-的引用",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"HEAD：当前 commit 的引用"]}),`
-`,n.jsx(e.p,{children:"一般是指向当前分支，当前分支指向，最新的 commit"}),`
-`,n.jsxs(e.h2,{id:"branch-引用指向分支的最新-commit",children:[n.jsx(e.a,{className:"autolink-headings",href:"#branch-引用指向分支的最新-commit",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"branch 引用：指向分支的最新 commit"]}),`
-`,n.jsx(e.p,{children:"branch 是平等的，master 不同但是并不高一级"}),`
-`,n.jsx(e.p,{children:"HEAD 除了可以指向 commit，还可以指向一个 branch，当它指向某个 branch 的时候，会通过这个 branch 来间接地指向某个 commit"}),`
-`,n.jsx(e.p,{children:"当 HEAD 在提交时自动向前移动的时候，它会像一个拖钩一样带着它所指向的 branch 一起移动"}),`
-`,n.jsx(e.p,{children:"当然通过 reset 指令可以让 HEAD 直接指向 commit"}),`
-`,n.jsxs(e.h2,{id:"操作",children:[n.jsx(e.a,{className:"autolink-headings",href:"#操作",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"操作"]}),`
-`,n.jsxs(e.ul,{children:[`
-`,n.jsxs(e.li,{children:["创建：",n.jsx(e.code,{children:"git branch feature1"})]}),`
-`,n.jsxs(e.li,{children:["切换：",n.jsx(e.code,{children:"git checkout feature1"})]}),`
-`,n.jsxs(e.li,{children:["创建并切换：",n.jsx(e.code,{children:"git checkout -b feature1"})]}),`
-`,n.jsxs(e.li,{children:["删除：",n.jsx(e.code,{children:"git branch -d feature1"})]}),`
+`]})]})}function Qd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(pa,{...l})}):pa(l)}const tf=()=>sf,rf=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:tf,GetToc:lf,default:Qd},Symbol.toStringTag,{value:"Module"})),of=()=>[],af=void 0;function ua(l){const e={a:"a",code:"code",h1:"h1",img:"img",li:"li",ol:"ol",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"esm-to-cjs",children:[n.jsx(e.a,{className:"autolink-headings",href:"#esm-to-cjs",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"esm to cjs"]}),`
+`,n.jsxs(e.ol,{children:[`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"对含 ESM 模块的 webpack 运行时代码进行调试与理解"}),`
+`,n.jsx(e.p,{children:"ok"}),`
 `]}),`
-`,n.jsx(e.p,{children:"注意："}),`
-`,n.jsxs(e.ul,{children:[`
-`,n.jsx(e.li,{children:"HEAD 指向的 branch 不能删除"}),`
-`,n.jsx(e.li,{children:"由于 Git 中的 branch 只是一个引用，所以删除 branch 的操作也只会删掉这个引用，并不会删除任何的 commit。不过如果一个 commit 不在任何一个 branch 的「路径」上，或者换句话说，如果没有任何一个 branch 可以回溯到这条 commit，它会被 Git 的回收机制删除掉"}),`
-`,n.jsx(e.li,{children:"出于安全考虑，没有被合并到 master 过的 branch 在删除时会失败，但是可以把 -d 改成 -D，小写换成大写，就能删除"}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"webpack 含 ESM 的运行时代码做了那些事情"}),`
+`,n.jsxs(e.p,{children:["首先根据 ast 生成的",n.jsx(e.code,{children:"__webpack_module__"}),"的中用",n.jsx(e.code,{children:"__webpack_require__"}),"的属性方法，r 给 ",n.jsx(e.code,{children:"__webpack_exports__"}),`添加鉴别是 esm 模块的属性，d 将导出的属性用 getter(setter)定义，
+属性在下方声明是因为访问时已经赋值
+`,n.jsx(e.img,{src:"/img/note/5/z-6-1.jpg",alt:"z-6-1"})]}),`
+`,n.jsxs(e.p,{children:["缓存和",n.jsx(e.code,{children:"__webpack_require__"}),`同 cjsm 模块
+`,n.jsx(e.img,{src:"/img/note/5/z-6-2.jpg",alt:"z-6-2"})]}),`
+`,n.jsxs(e.p,{children:["定义",n.jsx(e.code,{children:"__webpack_require__"}),`的属性方法，r,d,o
+`,n.jsx(e.img,{src:"/img/note/5/z-6-3.jpg",alt:"z-6-3"})]}),`
+`,n.jsxs(e.p,{children:["先和",n.jsx(e.code,{children:"__webpack_module__"}),"中模块一样执行 r,给入口模块添加 esm 标签，然后调用",n.jsx(e.code,{children:"__webpack_require__"}),"返回 sum 模块的导出"]}),`
 `]}),`
-`,n.jsxs(e.h2,{id:"mastermain-默认-branch",children:[n.jsx(e.a,{className:"autolink-headings",href:"#mastermain-默认-branch",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"master/main: 默认 branch"]}),`
-`,n.jsx(e.p,{children:"主分支，仅创建仓库或者下载仓库时时默认切换到此分支"})]})}function Xd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(da,{...l})}):da(l)}const qy=()=>Ky,Yy=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:qy,GetToc:Qy,default:Xd},Symbol.toStringTag,{value:"Module"})),Jy=()=>[],Zy=void 0;function ha(l){const e={a:"a",h1:"h1",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"push-的本质",children:[n.jsx(e.a,{className:"autolink-headings",href:"#push-的本质",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"push 的本质"]}),`
-`,n.jsx(e.p,{children:"push 是把当前的分支上传到远程仓库，并把这个 branch 的路径上的所有 commits 也一并上传"}),`
-`,n.jsx(e.p,{children:"push 的时候，如果当前分支是一个本地创建的分支，需要指定远程仓库名和分支名，用 git push origin branch_name 的格式，而不能只用 git push；或者可以通过 git config 修改 push.default 来改变 push 时的行为逻辑"}),`
-`,n.jsx(e.p,{children:"push 的时候之后上传当前分支，并不会上传 HEAD；远程仓库的 HEAD 是永远指向默认分支（即 master/main）的"})]})}function Wd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ha,{...l})}):ha(l)}const ef=()=>Zy,nf=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:ef,GetToc:Jy,default:Wd},Symbol.toStringTag,{value:"Module"})),lf=()=>[{id:"含义",text:"含义",depth:2},{id:"冲突",text:"冲突",depth:2}],sf=void 0;function pa(l){const e={a:"a",code:"code",h1:"h1",h2:"h2",li:"li",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"merge",children:[n.jsx(e.a,{className:"autolink-headings",href:"#merge",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"merge"]}),`
-`,n.jsx(e.p,{children:"pull 的内部操作其实是把远程仓库取到本地后（使用的是 fetch），再用一次 merge 来把远端仓库的新 commits 合并到本地"}),`
-`,n.jsxs(e.p,{children:["即",n.jsx(e.code,{children:"git fetch"})," ",n.jsx(e.code,{children:"git merge origin/HEAD"})]}),`
-`,n.jsx(e.p,{children:`fetch 会更新远程仓库的本地镜像 origin/HEAD 和 origin/master
-随后 merge 针对没有冲突的 commit 会进行 fast-forward 快速前移来移动到最新 commit`}),`
-`,n.jsxs(e.h2,{id:"含义",children:[n.jsx(e.a,{className:"autolink-headings",href:"#含义",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"含义"]}),`
-`,n.jsx(e.p,{children:"从目标 commit 和当前 commit （即 HEAD 所指向的 commit）分叉的位置起，把目标 commit 的路径上的所有 commit 的内容一并应用到当前 commit，然后自动生成一个新的 commit"}),`
-`,n.jsxs(e.h2,{id:"冲突",children:[n.jsx(e.a,{className:"autolink-headings",href:"#冲突",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"冲突"]}),`
-`,n.jsx(e.p,{children:"自动合并能力："}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsxs(e.p,{children:[n.jsx(e.code,{children:"__webpack_require__"})," 中的 d/r/o 各个变量指什么意思"]}),`
 `,n.jsxs(e.ul,{children:[`
-`,n.jsx(e.li,{children:"不同文件，A 文件，B 文件"}),`
-`,n.jsx(e.li,{children:"同一文件不同行，第 1 行，第 2 行"}),`
-`]})]})}function Qd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(pa,{...l})}):pa(l)}const tf=()=>sf,rf=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:tf,GetToc:lf,default:Qd},Symbol.toStringTag,{value:"Module"})),of=()=>[],af=void 0;function ua(l){const e={a:"a",h1:"h1",li:"li",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"feature-branch",children:[n.jsx(e.a,{className:"autolink-headings",href:"#feature-branch",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"feature branch"]}),`
-`,n.jsx(e.p,{children:"最流行的工作流"}),`
-`,n.jsxs(e.ul,{children:[`
-`,n.jsx(e.li,{children:"任何新的功能（feature）或 bug 修复全都新建一个 branch 来写"}),`
-`,n.jsx(e.li,{children:"branch 写完后，合并到 master，然后删掉这个 branch"}),`
+`,n.jsx(e.li,{children:"d:将 esm 导出的变量变成 exports 的 getter/setter 属性"}),`
+`,n.jsx(e.li,{children:"r:给 exports 添加一个属性标志这是 esm 模块"}),`
+`,n.jsx(e.li,{children:"o:相当于 Object 的 hasOwnProperty 方法"}),`
 `]}),`
-`,n.jsx(e.p,{children:"会不听的分支合并分支合并，如果不想分支留着可以用 rebase"}),`
-`,n.jsx(e.p,{children:"PR 默认也是这种模式，当然也可以选择 rebase 等模式"})]})}function Kd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ua,{...l})}):ua(l)}const cf=()=>af,df=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:cf,GetToc:of,default:Kd},Symbol.toStringTag,{value:"Module"})),hf=()=>[{id:"rebase--i",text:"rebase -i",depth:2}],pf=void 0;function xa(l){const e={a:"a",code:"code",h1:"h1",h2:"h2",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"rebase",children:[n.jsx(e.a,{className:"autolink-headings",href:"#rebase",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"rebase"]}),`
-`,n.jsx(e.p,{children:"！禁止从 master 向其他 branch 执行 rebase"}),`
-`,n.jsx(e.p,{children:"将分支 fix 的新 commit 都放在主分支 master 的最新 commit 后面"}),`
-`,n.jsx(e.p,{children:"应该在分支 fix 没有 push 到远程仓库时使用较好，如果已经 push 见以下情况："}),`
-`,n.jsx(e.p,{children:"分支 master 分支 fix 都进行了新的开发并 push"}),`
-`,n.jsx(e.p,{children:"分支 master 有了新 commit-m"}),`
-`,n.jsx(e.p,{children:"分支 fix 也有了新 commit-f"}),`
-`,n.jsxs(e.p,{children:["在分支 fix",n.jsx(e.code,{children:"git rebase master"}),"会重新 提取 commit-f 并变基到当前 maser，会处于更改后未 push 的状态"]}),`
-`,n.jsx(e.p,{children:"此时 fix 在 master 的最新 commit-m 处，origin/fix 在 fix 最新 commit-f 处"}),`
-`,n.jsxs(e.p,{children:["然后",n.jsx(e.code,{children:"git checkout master"})," ",n.jsx(e.code,{children:"git merge fix"}),"可以完成 master 的 rebase 更新，通过 merge 的 fast-forward 情况"]}),`
-`,n.jsxs(e.p,{children:["但是如果 ",n.jsx(e.code,{children:"git checkout fix"})," 再 ",n.jsx(e.code,{children:"git push"})," 会发现有两次 commit-f 提交并产生了 merge"]}),`
-`,n.jsx(e.p,{children:"因为 fix 和 origin/fix 存在冲突，fix 领先于 origin/fix，领先的就是变基操作复制的 commit-f"}),`
-`,n.jsx(e.p,{children:"因为 rebase 提取的 commit 的 hash 和之前的 commit 不同，而且对同一个文件进行了更新，所以需要 merge"}),`
-`,n.jsxs(e.p,{children:["解决方案是对 fix 直接",n.jsx(e.code,{children:"git push -f"}),"覆盖 fix 分支"]}),`
-`,n.jsx(e.p,{children:"由于是个人分支 fix 所以 -f 影响不大"}),`
-`,n.jsx(e.p,{children:"但是尽量避免这种操作，仅在分支不需要继续开发或者未 push 时进行 rebase"}),`
-`,n.jsxs(e.h2,{id:"rebase--i",children:[n.jsx(e.a,{className:"autolink-headings",href:"#rebase--i",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"rebase -i"]}),`
-`,n.jsx(e.p,{children:"常用于整理与合并 commit"}),`
-`,n.jsx(e.p,{children:`比如需要合并三个 commit 为一个，合并 432
-commit-1
-commit-2
-commit-3
-commit-4`}),`
-`,n.jsxs(e.p,{children:["则",n.jsx(e.code,{children:"git rebase -i commit-1"}),`
-对 commit-4、commit-3、commit-2 进行处理
-pick 为保留，squash 为合并入前一个 commit`]}),`
-`,n.jsx(e.p,{children:"同时可以调整顺序"}),`
-`,n.jsx(e.p,{children:`pick commit-1
-pick commit-2
-pick commit-4
-s commit-3`}),`
-`,n.jsxs(e.p,{children:["合并后因为本地与远程记录不同，提交同样需要",n.jsx(e.code,{children:"git push -f"})]})]})}function qd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(xa,{...l})}):xa(l)}const uf=()=>pf,xf=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:uf,GetToc:hf,default:qd},Symbol.toStringTag,{value:"Module"})),jf=()=>[],yf=void 0;function ja(l){const e={a:"a",code:"code",h1:"h1",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"revert",children:[n.jsx(e.a,{className:"autolink-headings",href:"#revert",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"revert"]}),`
-`,n.jsxs(e.p,{children:[n.jsx(e.code,{children:"git revert HEAD^"}),`
-会增加一条新的 commit，它的内容和倒数第二个 commit 是相反的，从而和倒数第二个 commit 相互抵消，达到撤销的效果`]})]})}function Yd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ja,{...l})}):ja(l)}const ff=()=>yf,mf=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:ff,GetToc:jf,default:Yd},Symbol.toStringTag,{value:"Module"})),Ef=()=>[],gf=void 0;function ya(l){const e={a:"a",h1:"h1",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"参考",children:[n.jsx(e.a,{className:"autolink-headings",href:"#参考",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"参考"]}),`
-`,n.jsx(e.p,{children:n.jsx(e.a,{href:"https://juejin.cn/book/6844733697996881928?enter_from=search_result&utm_source=search",children:"小册"})})]})}function Jd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ya,{...l})}):ya(l)}const Cf=()=>gf,vf=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Cf,GetToc:Ef,default:Jd},Symbol.toStringTag,{value:"Module"})),Af=()=>[{id:"reset-的本质移动-head-以及它所指向的-branch",text:"reset 的本质：移动 HEAD 以及它所指向的 branch",depth:2},{id:"reset---hard重置工作目录与-add-暂存区",text:"reset --hard：重置工作目录与 add 暂存区",depth:2},{id:"reset---soft保留工作目录与-add-暂存区",text:"reset --soft：保留工作目录与 add 暂存区",depth:2},{id:"reset-不加参数保留工作目录并清空-add-暂存区",text:"reset 不加参数：保留工作目录，并清空 add 暂存区",depth:2}],Df=void 0;function fa(l){const e={a:"a",code:"code",h1:"h1",h2:"h2",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"reset",children:[n.jsx(e.a,{className:"autolink-headings",href:"#reset",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"reset"]}),`
-`,n.jsxs(e.h2,{id:"reset-的本质移动-head-以及它所指向的-branch",children:[n.jsx(e.a,{className:"autolink-headings",href:"#reset-的本质移动-head-以及它所指向的-branch",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"reset 的本质：移动 HEAD 以及它所指向的 branch"]}),`
-`,n.jsx(e.p,{children:"实质行为并不是撤销，而是移动 HEAD ，并且「捎带」上 HEAD 所指向的 branch（如果有的话）"}),`
-`,n.jsx(e.p,{children:"所以同理，reset --hard 不仅可以撤销提交，还可以用来把 HEAD 和 branch 移动到其他的任何地方"}),`
-`,n.jsx(e.p,{children:n.jsx(e.code,{children:"git reset --hard branch2"})}),`
-`,n.jsx(e.p,{children:"直接让 branch1 值与 branch2 相同"}),`
-`,n.jsxs(e.h2,{id:"reset---hard重置工作目录与-add-暂存区",children:[n.jsx(e.a,{className:"autolink-headings",href:"#reset---hard重置工作目录与-add-暂存区",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"reset --hard：重置工作目录与 add 暂存区"]}),`
-`,n.jsx(e.p,{children:"工作目录里的内容会被完全重置为和 HEAD 的新位置相同的内容。"}),`
-`,n.jsx(e.p,{children:"就是你的未 commit 提交的修改会被全部丢弃，但是不影响已经 commit 的内容"}),`
-`,n.jsxs(e.h2,{id:"reset---soft保留工作目录与-add-暂存区",children:[n.jsx(e.a,{className:"autolink-headings",href:"#reset---soft保留工作目录与-add-暂存区",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"reset --soft：保留工作目录与 add 暂存区"]}),`
-`,n.jsx(e.p,{children:"reset --soft 会在重置 HEAD 和 branch 时，保留工作目录和暂存区中的内容，并把重置 HEAD 所带来的新的差异放进暂存区"}),`
-`,n.jsx(e.p,{children:"就是会自动 add 不同的文件并保留之前的 add"}),`
-`,n.jsxs(e.h2,{id:"reset-不加参数保留工作目录并清空-add-暂存区",children:[n.jsx(e.a,{className:"autolink-headings",href:"#reset-不加参数保留工作目录并清空-add-暂存区",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"reset 不加参数：保留工作目录，并清空 add 暂存区"]}),`
-`,n.jsx(e.p,{children:"默认使用 --mixed 参数"}),`
-`,n.jsx(e.p,{children:"保留工作目录，并且清空暂存区。也就是说，工作目录的修改、暂存区的内容以及由 reset 所导致的新的文件差异，都会被放进工作目录"}),`
-`,n.jsx(e.p,{children:"就是撤销 add"})]})}function Zd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(fa,{...l})}):fa(l)}const _f=()=>Df,kf=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:_f,GetToc:Af,default:Zd},Symbol.toStringTag,{value:"Module"})),cr=[{path:"/",element:k.createElement(Hc),preload:()=>w(()=>Promise.resolve().then(()=>Wu),void 0)},{path:"/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro",element:k.createElement(Xc),preload:()=>w(()=>Promise.resolve().then(()=>Yu),void 0)},{path:"/%E7%AC%94%E8%AE%B0/3http/99readme",element:k.createElement(Wc),preload:()=>w(()=>Promise.resolve().then(()=>nx),void 0)},{path:"/%E7%AC%94%E8%AE%B0/4javascript/1%E5%BC%95%E7%94%A8",element:k.createElement(Qc),preload:()=>w(()=>Promise.resolve().then(()=>rx),void 0)},{path:"/%E7%AC%94%E8%AE%B0/4javascript/2%E8%BF%90%E7%AE%97%E7%AC%A6",element:k.createElement(Kc),preload:()=>w(()=>Promise.resolve().then(()=>cx),void 0)},{path:"/%E7%AC%94%E8%AE%B0/4javascript/3lodash%E6%89%8B%E5%86%99",element:k.createElement(qc),preload:()=>w(()=>Promise.resolve().then(()=>ux),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/10module%E4%B8%8Echunk%E4%B8%8Easset",element:k.createElement(Yc),preload:()=>w(()=>Promise.resolve().then(()=>fx),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/11bundle%20spliting",element:k.createElement(Jc),preload:()=>w(()=>Promise.resolve().then(()=>Cx),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/12%E9%AB%98%E6%95%88%E5%88%86%E5%8C%85",element:k.createElement(Zc),preload:()=>w(()=>Promise.resolve().then(()=>_x),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/13loader%E5%88%9D%E8%AF%86",element:k.createElement(ed),preload:()=>w(()=>Promise.resolve().then(()=>Sx),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/14json%E5%A4%84%E7%90%86",element:k.createElement(nd),preload:()=>w(()=>Promise.resolve().then(()=>Rx),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/15import%20assertions",element:k.createElement(ld),preload:()=>w(()=>Promise.resolve().then(()=>$x),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/16html%E5%A4%84%E7%90%86",element:k.createElement(sd),preload:()=>w(()=>Promise.resolve().then(()=>Gx),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/17%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86",element:k.createElement(td),preload:()=>w(()=>Promise.resolve().then(()=>Hx),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/18%E5%B0%8F%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86",element:k.createElement(rd),preload:()=>w(()=>Promise.resolve().then(()=>Kx),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/19svg%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86",element:k.createElement(od),preload:()=>w(()=>Promise.resolve().then(()=>Zx),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/1%E4%BD%BF%E7%94%A8%20node%20api%20%E5%AD%A6%E4%B9%A0%20webpack",element:k.createElement(id),preload:()=>w(()=>Promise.resolve().then(()=>sj),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/20%E7%AE%80%E5%8D%95%E6%A0%B7%E5%BC%8F%E5%A4%84%E7%90%86",element:k.createElement(ad),preload:()=>w(()=>Promise.resolve().then(()=>ij),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/2cjs%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90",element:k.createElement(cd),preload:()=>w(()=>Promise.resolve().then(()=>hj),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/3cjs%E6%A8%A1%E5%9D%97%E6%94%B6%E9%9B%86%E4%B8%8East",element:k.createElement(dd),preload:()=>w(()=>Promise.resolve().then(()=>jj),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/4%E6%96%87%E4%BB%B6%E5%90%8D%E4%B8%AD%E7%9A%84hash",element:k.createElement(hd),preload:()=>w(()=>Promise.resolve().then(()=>Ej),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/5cjs%E4%B8%8Eesm",element:k.createElement(pd),preload:()=>w(()=>Promise.resolve().then(()=>Aj),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/6esm%20to%20cjs",element:k.createElement(ud),preload:()=>w(()=>Promise.resolve().then(()=>Fj),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/7code%20spliting%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90",element:k.createElement(xd),preload:()=>w(()=>Promise.resolve().then(()=>Pj),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/8magic%20comment",element:k.createElement(jd),preload:()=>w(()=>Promise.resolve().then(()=>Bj),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/99readme",element:k.createElement(yd),preload:()=>w(()=>Promise.resolve().then(()=>Ij),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/9hash%20%E7%9A%84%E5%A2%9E%E5%BC%BA",element:k.createElement(fd),preload:()=>w(()=>Promise.resolve().then(()=>Uj),void 0)},{path:"/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/13%E5%86%85%E5%AD%98",element:k.createElement(md),preload:()=>w(()=>Promise.resolve().then(()=>Wj),void 0)},{path:"/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/16%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF",element:k.createElement(Ed),preload:()=>w(()=>Promise.resolve().then(()=>Yj),void 0)},{path:"/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/1%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9B%E7%A8%8B",element:k.createElement(gd),preload:()=>w(()=>Promise.resolve().then(()=>n2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/2TCP%E5%8D%8F%E8%AE%AE",element:k.createElement(Cd),preload:()=>w(()=>Promise.resolve().then(()=>r2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/3HTTP%E5%8D%8F%E8%AE%AE",element:k.createElement(vd),preload:()=>w(()=>Promise.resolve().then(()=>c2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/4%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98",element:k.createElement(Ad),preload:()=>w(()=>Promise.resolve().then(()=>u2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/5%E5%AF%BC%E8%88%AA%E6%B5%81%E7%A8%8B",element:k.createElement(Dd),preload:()=>w(()=>Promise.resolve().then(()=>f2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/6%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B",element:k.createElement(_d),preload:()=>w(()=>Promise.resolve().then(()=>C2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/98%20%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84dns%E7%BC%93%E5%AD%98",element:k.createElement(kd),preload:()=>w(()=>Promise.resolve().then(()=>_2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/99readme",element:k.createElement(Fd),preload:()=>w(()=>Promise.resolve().then(()=>S2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/6ahooks/1useLocalStorageState%E4%B8%8EuseSessionStorageState",element:k.createElement(wd),preload:()=>w(()=>Promise.resolve().then(()=>R2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/6ahooks/2useUpdateEffect%20%E4%B8%8E%20useUpdateLayoutEffectt",element:k.createElement(Sd),preload:()=>w(()=>Promise.resolve().then(()=>$2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/6ahooks/3useLatest%E4%B8%8EuseMemoizedFn",element:k.createElement(Td),preload:()=>w(()=>Promise.resolve().then(()=>G2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/6ahooks/4use(Raf)Timeout%E4%B8%8Euse(Raf)Interval%E4%B8%8EuseCountDown",element:k.createElement(Pd),preload:()=>w(()=>Promise.resolve().then(()=>H2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/6ahooks/5useRequest",element:k.createElement(Md),preload:()=>w(()=>Promise.resolve().then(()=>K2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/6ahooks/6useMount%E4%B8%8EuseUnMount%E4%B8%8EuseMountedRefx.md",element:k.createElement(Rd),preload:()=>w(()=>Promise.resolve().then(()=>Z2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/6ahooks/7useUpdate",element:k.createElement(Nd),preload:()=>w(()=>Promise.resolve().then(()=>sy),void 0)},{path:"/%E7%AC%94%E8%AE%B0/6ahooks/8useCreation",element:k.createElement(Bd),preload:()=>w(()=>Promise.resolve().then(()=>iy),void 0)},{path:"/%E7%AC%94%E8%AE%B0/6ahooks/97useAnimationFrame%E5%92%8C%E8%AE%A1%E6%97%B6%E5%99%A8",element:k.createElement(Ld),preload:()=>w(()=>Promise.resolve().then(()=>hy),void 0)},{path:"/%E7%AC%94%E8%AE%B0/6ahooks/98.%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0",element:k.createElement($d),preload:()=>w(()=>Promise.resolve().then(()=>jy),void 0)},{path:"/%E7%AC%94%E8%AE%B0/6ahooks/9useDeepCompareEffect",element:k.createElement(Od),preload:()=>w(()=>Promise.resolve().then(()=>Ey),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/0%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4",element:k.createElement(Id),preload:()=>w(()=>Promise.resolve().then(()=>Ay),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/10checkout",element:k.createElement(zd),preload:()=>w(()=>Promise.resolve().then(()=>Fy),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/11stash",element:k.createElement(Gd),preload:()=>w(()=>Promise.resolve().then(()=>Py),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/12log%E4%B8%8Ereflog",element:k.createElement(bd),preload:()=>w(()=>Promise.resolve().then(()=>By),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/13cherry-pick",element:k.createElement(Ud),preload:()=>w(()=>Promise.resolve().then(()=>Iy),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/1%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FVCS",element:k.createElement(Vd),preload:()=>w(()=>Promise.resolve().then(()=>Uy),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/2%E5%88%86%E5%B8%83%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FDVCS",element:k.createElement(Hd),preload:()=>w(()=>Promise.resolve().then(()=>Wy),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/3HEAD%E4%B8%8Emaster%E4%B8%8Ebranch",element:k.createElement(Xd),preload:()=>w(()=>Promise.resolve().then(()=>Yy),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/4push",element:k.createElement(Wd),preload:()=>w(()=>Promise.resolve().then(()=>nf),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/5merge",element:k.createElement(Qd),preload:()=>w(()=>Promise.resolve().then(()=>rf),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/6feature%20branch",element:k.createElement(Kd),preload:()=>w(()=>Promise.resolve().then(()=>df),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/7rebase",element:k.createElement(qd),preload:()=>w(()=>Promise.resolve().then(()=>xf),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/8revert",element:k.createElement(Yd),preload:()=>w(()=>Promise.resolve().then(()=>mf),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/99readme",element:k.createElement(Jd),preload:()=>w(()=>Promise.resolve().then(()=>vf),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/9reset",element:k.createElement(Zd),preload:()=>w(()=>Promise.resolve().then(()=>kf),void 0)}];async function eh(l){var s,t,r,o;const e=cr.find(i=>i.path===l);if(e){const i=await e.preload();return{pageType:((t=(s=i==null?void 0:i.GetFrontMatter)==null?void 0:s.call(i))==null?void 0:t.pageType)||"doc",pagePath:l,frontmatter:((r=i.GetFrontMatter)==null?void 0:r.call(i))??{},toc:((o=i.GetToc)==null?void 0:o.call(i))??[],userConfig:ii}}return{pageType:"404",pagePath:l,toc:[],userConfig:ii}}const nh=F.createContext({}),io=()=>F.useContext(nh);function Ff({children:l,value:e}){const[s,t]=F.useState(e.pageData);return F.useEffect(()=>{}),n.jsx(nh.Provider,{value:{pageData:s,setPageData:t},children:l})}const kn=56,ao="ZEROPRESS_DARK";function wf(){return typeof window<"u"&&!!window.document&&!!window.document.createElement}function Sf(l="/"){return encodeURI(l)}function Tf(){return{toggle:Nf}}wf()&&Pf();function Pf(){const l=()=>{localStorage.getItem(ao)==="true"&&document.documentElement.classList.add("dark")};window.addEventListener("storage",l)}function Mf(){document.documentElement.classList.add("dark"),localStorage.setItem(ao,"true")}function Rf(){document.documentElement.classList.remove("dark"),localStorage.setItem(ao,"false")}function Nf(){document.documentElement.classList.contains("dark")?Rf():Mf()}function Bf(){const[l,e]=F.useState(),[s,t]=F.useState();return F.useEffect(()=>{const r=()=>{e(window.scrollX),t(window.scrollY)};return window.addEventListener("scroll",r),()=>{window.removeEventListener("scroll",r)}},[]),{x:l,y:s}}var lh={exports:{}},Ae={},sh={exports:{}},th={};/**
+`]}),`
+`]})]})}function Kd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ua,{...l})}):ua(l)}const cf=()=>af,df=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:cf,GetToc:of,default:Kd},Symbol.toStringTag,{value:"Module"})),hf=()=>[],pf=void 0;function xa(l){const e={a:"a",code:"code",h1:"h1",img:"img",li:"li",ol:"ol",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"code-spliting-运行时分析",children:[n.jsx(e.a,{className:"autolink-headings",href:"#code-spliting-运行时分析",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"code spliting 运行时分析"]}),`
+`,n.jsxs(e.ol,{children:[`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"对 code spliting 后的代码进行调试与理解"}),`
+`,n.jsxs(e.p,{children:["见",n.jsx(e.a,{href:"https://github.com/903040380/Xwebpack/tree/master/code-spliting/example/jsonp",children:"代码中的注释"})]}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsxs(e.p,{children:[`将自己项目取消代码压缩进行打包，观察其打包后的代码骨架
+`,n.jsx(e.img,{src:"/img/note/5/z-7-1.jpg",alt:"z-7-1"})]}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"在 webpack 中如何实现 code spliting"}),`
+`,n.jsx(e.p,{children:"import() 动态导入"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"在 webpack 中，加载 chunk 脚本的 JSONP Callback 如何实现"}),`
+`,n.jsx(e.p,{children:n.jsx(e.img,{src:"/img/note/5/z-7-2.jpg",alt:"z-7-2"})}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"当 output.chunkLoading 配置为 import 时，分析其源码"}),`
+`,n.jsx(e.p,{children:n.jsx(e.img,{src:"/img/note/5/z-7-3.jpg",alt:"z-7-3"})}),`
+`,n.jsxs(e.p,{children:[n.jsx(e.code,{children:"__webpack_require__.f.j"}),`不同
+`,n.jsx(e.code,{children:"__webpack_require__.l"}),"不需要了"]}),`
+`,n.jsx(e.p,{children:n.jsx(e.img,{src:"/img/note/5/z-7-4.jpg",alt:"z-7-4"})}),`
+`,n.jsx(e.p,{children:"jsonp 不需要了，用 installChunck 替代"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsxs(e.p,{children:["当代码分割时，async chunk 所对应的源代码发生变更时，该 async chunk 路径将会发生变化，而 entry chunk 中的",n.jsx(e.code,{children:"__webpack_require__.u"})," 内容也将发生变化，导致 entry chunk 的内容发生变更，随之路径发生变更，这将导致不必要的缓存失效，如何处理该问题。"]}),`
+`,n.jsx(e.p,{children:"runtimeChunk 设置为 true 可以单独把 webpack 的运行时给独立出来，这样每次只重新请求 runtime 文件，nextjs 就是这样做的,见 hash 的增强章节"}),`
+`]}),`
+`]})]})}function qd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(xa,{...l})}):xa(l)}const uf=()=>pf,xf=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:uf,GetToc:hf,default:qd},Symbol.toStringTag,{value:"Module"})),jf=()=>[],yf=void 0;function ja(l){const e={a:"a",code:"code",h1:"h1",li:"li",ol:"ol",p:"p",span:"span",strong:"strong",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"magic-comment",children:[n.jsx(e.a,{className:"autolink-headings",href:"#magic-comment",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"magic comment"]}),`
+`,n.jsxs(e.ol,{children:[`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"在 webpack 中有哪些魔法注释"}),`
+`,n.jsxs(e.ul,{children:[`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"webpackIgnore：设置为 true 时，禁用动态导入解析。"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"webpackChunkName: 新 chunk 的名称。"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"webpackMode：可以指定以不同的模式解析动态导入。"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"webpackPrefetch：告诉浏览器将来可能需要该资源来进行某些导航跳转。"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"webpackPreload：告诉浏览器在当前导航期间可能需要该资源。"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"webpackInclude：在导入解析（import resolution）过程中，用于匹配的正则表达式。只有匹配到的模块才会被打包。"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"webpackExclude：在导入解析（import resolution）过程中，用于匹配的正则表达式。所有匹配到的模块都不会被打包。"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"webpackExports: 告知 webpack 只构建指定出口的动态 import() 模块。"}),`
+`]}),`
+`]}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"在 webpack 中如何实现 prefetch 的"}),`
+`,n.jsxs(e.p,{children:["配置",n.jsx(e.code,{children:"/* webpackPrefetch: true */"}),"后，webpack 运行时，会生成",n.jsx(e.code,{children:"<link ref='prefetch'>"}),"标签并放入 dom 中，浏览器会开始预加载资源"]}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"阅读 prefetch 后的运行时代码进行理解"}),`
+`,n.jsxs(e.p,{children:["见",n.jsx(e.a,{href:"https://github.com/903040380/Xwebpack/tree/master/code-spliting/example/prefetch",children:"代码中的注释"})]}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"补充关于 preload 的问题"}),`
+`,n.jsxs(e.p,{children:[`preload chunk 会在父 chunk 加载时，以并行方式开始加载。
+prefetch chunk 会在父 chunk 加载结束后开始加载。
+所以，需要在 sumjs 里再次 preload 导入 add 才产生 preload，即`,n.jsx(e.strong,{children:"只能加载 chunk 的 chunk"})]}),`
+`]}),`
+`]})]})}function Yd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ja,{...l})}):ja(l)}const ff=()=>yf,mf=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:ff,GetToc:jf,default:Yd},Symbol.toStringTag,{value:"Module"})),Ef=()=>[],gf=void 0;function ya(l){const e={a:"a",h1:"h1",li:"li",p:"p",span:"span",ul:"ul",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"参考",children:[n.jsx(e.a,{className:"autolink-headings",href:"#参考",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"参考"]}),`
+`,n.jsxs(e.ul,{children:[`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:n.jsx(e.a,{href:"https://q.shanyue.tech/",children:"山月"})}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:n.jsx(e.a,{href:"https://github.com/903040380/webpack-demo",children:"示例仓库"})}),`
+`]}),`
+`]})]})}function Jd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(ya,{...l})}):ya(l)}const Cf=()=>gf,vf=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:Cf,GetToc:Ef,default:Jd},Symbol.toStringTag,{value:"Module"})),Af=()=>[],Df=void 0;function fa(l){const e={a:"a",code:"code",h1:"h1",img:"img",li:"li",ol:"ol",p:"p",span:"span",...l.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h1,{id:"hash-的增强",children:[n.jsx(e.a,{className:"autolink-headings",href:"#hash-的增强",children:n.jsx(e.span,{style:{marginRight:"4px"},children:"#"})}),"hash 的增强"]}),`
+`,n.jsxs(e.ol,{children:[`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"理解 deterministic chunkIds/moduleIds，以及什么情况下 id 会发生变更"}),`
+`,n.jsxs(e.p,{children:["当模块加载顺序发生改变，模块顺序会发生改变，moduleIds 随之改变，而同时",n.jsx(e.code,{children:"__webpack_require__.u"}),"读取到的 chunkId 随 moduleIds 改变，即 chunkIds 改变"]}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"如有余力，阅读源码查看 deterministic 在 webpack 的内部实现"}),`
+`,n.jsx(e.p,{children:"根据大佬回答，只要模块的路径和文件名不做更改，那么 deterministic 后的 hash 值就是稳定的"}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"理解 runtimeChunk 选项，阅读其源码，理解它是如何运行代码的"}),`
+`,n.jsx(e.p,{children:n.jsx(e.img,{src:"/img/note/5/z-9-1.jpg",alt:"z-9-1"})}),`
+`]}),`
+`,n.jsxs(e.li,{children:[`
+`,n.jsx(e.p,{children:"阅读常见的社区以及自己公司的脚手架代码，观察是否配置了以上优化选项，如果没有，考虑是否可贡献代码"}),`
+`,n.jsx(e.p,{children:n.jsx(e.a,{href:"https://github.com/umijs/umi/pull/9541",children:"umi 已提交 pr，正在修改中"})}),`
+`]}),`
+`]})]})}function Zd(l={}){const{wrapper:e}=l.components||{};return e?n.jsx(e,{...l,children:n.jsx(fa,{...l})}):fa(l)}const _f=()=>Df,kf=Object.freeze(Object.defineProperty({__proto__:null,GetFrontMatter:_f,GetToc:Af,default:Zd},Symbol.toStringTag,{value:"Module"})),cr=[{path:"/",element:k.createElement(Hc),preload:()=>w(()=>Promise.resolve().then(()=>Wu),void 0)},{path:"/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro",element:k.createElement(Xc),preload:()=>w(()=>Promise.resolve().then(()=>Yu),void 0)},{path:"/%E7%AC%94%E8%AE%B0/3http/99readme",element:k.createElement(Wc),preload:()=>w(()=>Promise.resolve().then(()=>nx),void 0)},{path:"/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/13%E5%86%85%E5%AD%98",element:k.createElement(Qc),preload:()=>w(()=>Promise.resolve().then(()=>rx),void 0)},{path:"/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/16%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF",element:k.createElement(Kc),preload:()=>w(()=>Promise.resolve().then(()=>cx),void 0)},{path:"/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/1%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9B%E7%A8%8B",element:k.createElement(qc),preload:()=>w(()=>Promise.resolve().then(()=>ux),void 0)},{path:"/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/2TCP%E5%8D%8F%E8%AE%AE",element:k.createElement(Yc),preload:()=>w(()=>Promise.resolve().then(()=>fx),void 0)},{path:"/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/3HTTP%E5%8D%8F%E8%AE%AE",element:k.createElement(Jc),preload:()=>w(()=>Promise.resolve().then(()=>Cx),void 0)},{path:"/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/4%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98",element:k.createElement(Zc),preload:()=>w(()=>Promise.resolve().then(()=>_x),void 0)},{path:"/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/5%E5%AF%BC%E8%88%AA%E6%B5%81%E7%A8%8B",element:k.createElement(ed),preload:()=>w(()=>Promise.resolve().then(()=>Sx),void 0)},{path:"/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/6%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B",element:k.createElement(nd),preload:()=>w(()=>Promise.resolve().then(()=>Rx),void 0)},{path:"/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/98%20%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84dns%E7%BC%93%E5%AD%98",element:k.createElement(ld),preload:()=>w(()=>Promise.resolve().then(()=>$x),void 0)},{path:"/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/99readme",element:k.createElement(sd),preload:()=>w(()=>Promise.resolve().then(()=>Gx),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/0%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4",element:k.createElement(td),preload:()=>w(()=>Promise.resolve().then(()=>Hx),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/10checkout",element:k.createElement(rd),preload:()=>w(()=>Promise.resolve().then(()=>Kx),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/11stash",element:k.createElement(od),preload:()=>w(()=>Promise.resolve().then(()=>Zx),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/12log%E4%B8%8Ereflog",element:k.createElement(id),preload:()=>w(()=>Promise.resolve().then(()=>sj),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/13cherry-pick",element:k.createElement(ad),preload:()=>w(()=>Promise.resolve().then(()=>ij),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/1%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FVCS",element:k.createElement(cd),preload:()=>w(()=>Promise.resolve().then(()=>hj),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/2%E5%88%86%E5%B8%83%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FDVCS",element:k.createElement(dd),preload:()=>w(()=>Promise.resolve().then(()=>jj),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/3HEAD%E4%B8%8Emaster%E4%B8%8Ebranch",element:k.createElement(hd),preload:()=>w(()=>Promise.resolve().then(()=>Ej),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/4push",element:k.createElement(pd),preload:()=>w(()=>Promise.resolve().then(()=>Aj),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/5merge",element:k.createElement(ud),preload:()=>w(()=>Promise.resolve().then(()=>Fj),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/6feature%20branch",element:k.createElement(xd),preload:()=>w(()=>Promise.resolve().then(()=>Pj),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/7rebase",element:k.createElement(jd),preload:()=>w(()=>Promise.resolve().then(()=>Bj),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/8revert",element:k.createElement(yd),preload:()=>w(()=>Promise.resolve().then(()=>Ij),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/99readme",element:k.createElement(fd),preload:()=>w(()=>Promise.resolve().then(()=>Uj),void 0)},{path:"/%E7%AC%94%E8%AE%B0/1git/9reset",element:k.createElement(md),preload:()=>w(()=>Promise.resolve().then(()=>Wj),void 0)},{path:"/%E7%AC%94%E8%AE%B0/4javascript/1%E5%BC%95%E7%94%A8",element:k.createElement(Ed),preload:()=>w(()=>Promise.resolve().then(()=>Yj),void 0)},{path:"/%E7%AC%94%E8%AE%B0/4javascript/2%E8%BF%90%E7%AE%97%E7%AC%A6",element:k.createElement(gd),preload:()=>w(()=>Promise.resolve().then(()=>n2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/4javascript/3lodash%E6%89%8B%E5%86%99",element:k.createElement(Cd),preload:()=>w(()=>Promise.resolve().then(()=>r2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/6ahooks/1useLocalStorageState%E4%B8%8EuseSessionStorageState",element:k.createElement(vd),preload:()=>w(()=>Promise.resolve().then(()=>c2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/6ahooks/2useUpdateEffect%20%E4%B8%8E%20useUpdateLayoutEffectt",element:k.createElement(Ad),preload:()=>w(()=>Promise.resolve().then(()=>u2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/6ahooks/3useLatest%E4%B8%8EuseMemoizedFn",element:k.createElement(Dd),preload:()=>w(()=>Promise.resolve().then(()=>f2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/6ahooks/4use(Raf)Timeout%E4%B8%8Euse(Raf)Interval%E4%B8%8EuseCountDown",element:k.createElement(_d),preload:()=>w(()=>Promise.resolve().then(()=>C2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/6ahooks/5useRequest",element:k.createElement(kd),preload:()=>w(()=>Promise.resolve().then(()=>_2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/6ahooks/6useMount%E4%B8%8EuseUnMount%E4%B8%8EuseMountedRefx.md",element:k.createElement(Fd),preload:()=>w(()=>Promise.resolve().then(()=>S2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/6ahooks/7useUpdate",element:k.createElement(wd),preload:()=>w(()=>Promise.resolve().then(()=>R2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/6ahooks/8useCreation",element:k.createElement(Sd),preload:()=>w(()=>Promise.resolve().then(()=>$2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/6ahooks/97useAnimationFrame%E5%92%8C%E8%AE%A1%E6%97%B6%E5%99%A8",element:k.createElement(Td),preload:()=>w(()=>Promise.resolve().then(()=>G2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/6ahooks/98.%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0",element:k.createElement(Pd),preload:()=>w(()=>Promise.resolve().then(()=>H2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/6ahooks/9useDeepCompareEffect",element:k.createElement(Md),preload:()=>w(()=>Promise.resolve().then(()=>K2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/10module%E4%B8%8Echunk%E4%B8%8Easset",element:k.createElement(Rd),preload:()=>w(()=>Promise.resolve().then(()=>Z2),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/11bundle%20spliting",element:k.createElement(Nd),preload:()=>w(()=>Promise.resolve().then(()=>sy),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/12%E9%AB%98%E6%95%88%E5%88%86%E5%8C%85",element:k.createElement(Bd),preload:()=>w(()=>Promise.resolve().then(()=>iy),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/13loader%E5%88%9D%E8%AF%86",element:k.createElement(Ld),preload:()=>w(()=>Promise.resolve().then(()=>hy),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/14json%E5%A4%84%E7%90%86",element:k.createElement($d),preload:()=>w(()=>Promise.resolve().then(()=>jy),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/15import%20assertions",element:k.createElement(Od),preload:()=>w(()=>Promise.resolve().then(()=>Ey),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/16html%E5%A4%84%E7%90%86",element:k.createElement(Id),preload:()=>w(()=>Promise.resolve().then(()=>Ay),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/17%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86",element:k.createElement(zd),preload:()=>w(()=>Promise.resolve().then(()=>Fy),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/18%E5%B0%8F%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86",element:k.createElement(Gd),preload:()=>w(()=>Promise.resolve().then(()=>Py),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/19svg%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86",element:k.createElement(bd),preload:()=>w(()=>Promise.resolve().then(()=>By),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/1%E4%BD%BF%E7%94%A8%20node%20api%20%E5%AD%A6%E4%B9%A0%20webpack",element:k.createElement(Ud),preload:()=>w(()=>Promise.resolve().then(()=>Iy),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/20%E7%AE%80%E5%8D%95%E6%A0%B7%E5%BC%8F%E5%A4%84%E7%90%86",element:k.createElement(Vd),preload:()=>w(()=>Promise.resolve().then(()=>Uy),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/2cjs%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90",element:k.createElement(Hd),preload:()=>w(()=>Promise.resolve().then(()=>Wy),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/3cjs%E6%A8%A1%E5%9D%97%E6%94%B6%E9%9B%86%E4%B8%8East",element:k.createElement(Xd),preload:()=>w(()=>Promise.resolve().then(()=>Yy),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/4%E6%96%87%E4%BB%B6%E5%90%8D%E4%B8%AD%E7%9A%84hash",element:k.createElement(Wd),preload:()=>w(()=>Promise.resolve().then(()=>nf),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/5cjs%E4%B8%8Eesm",element:k.createElement(Qd),preload:()=>w(()=>Promise.resolve().then(()=>rf),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/6esm%20to%20cjs",element:k.createElement(Kd),preload:()=>w(()=>Promise.resolve().then(()=>df),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/7code%20spliting%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90",element:k.createElement(qd),preload:()=>w(()=>Promise.resolve().then(()=>xf),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/8magic%20comment",element:k.createElement(Yd),preload:()=>w(()=>Promise.resolve().then(()=>mf),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/99readme",element:k.createElement(Jd),preload:()=>w(()=>Promise.resolve().then(()=>vf),void 0)},{path:"/%E7%AC%94%E8%AE%B0/5webpack/9hash%20%E7%9A%84%E5%A2%9E%E5%BC%BA",element:k.createElement(Zd),preload:()=>w(()=>Promise.resolve().then(()=>kf),void 0)}];async function eh(l){var s,t,r,o;const e=cr.find(i=>i.path===l);if(e){const i=await e.preload();return{pageType:((t=(s=i==null?void 0:i.GetFrontMatter)==null?void 0:s.call(i))==null?void 0:t.pageType)||"doc",pagePath:l,frontmatter:((r=i.GetFrontMatter)==null?void 0:r.call(i))??{},toc:((o=i.GetToc)==null?void 0:o.call(i))??[],userConfig:ii}}return{pageType:"404",pagePath:l,toc:[],userConfig:ii}}const nh=F.createContext({}),io=()=>F.useContext(nh);function Ff({children:l,value:e}){const[s,t]=F.useState(e.pageData);return F.useEffect(()=>{}),n.jsx(nh.Provider,{value:{pageData:s,setPageData:t},children:l})}const kn=56,ao="ZEROPRESS_DARK";function wf(){return typeof window<"u"&&!!window.document&&!!window.document.createElement}function Sf(l="/"){return encodeURI(l)}function Tf(){return{toggle:Nf}}wf()&&Pf();function Pf(){const l=()=>{localStorage.getItem(ao)==="true"&&document.documentElement.classList.add("dark")};window.addEventListener("storage",l)}function Mf(){document.documentElement.classList.add("dark"),localStorage.setItem(ao,"true")}function Rf(){document.documentElement.classList.remove("dark"),localStorage.setItem(ao,"false")}function Nf(){document.documentElement.classList.contains("dark")?Rf():Mf()}function Bf(){const[l,e]=F.useState(),[s,t]=F.useState();return F.useEffect(()=>{const r=()=>{e(window.scrollX),t(window.scrollY)};return window.addEventListener("scroll",r),()=>{window.removeEventListener("scroll",r)}},[]),{x:l,y:s}}var lh={exports:{}},Ae={},sh={exports:{}},th={};/**
  * @license React
  * scheduler.production.min.js
  *
@@ -1737,7 +1737,7 @@ Error generating stack: `+o.message+`
 	Copyright (c) 2018 Jed Watson.
 	Licensed under the MIT License (MIT), see
 	http://jedwatson.github.io/classnames
-*/(function(l){(function(){var e={}.hasOwnProperty;function s(){for(var o="",i=0;i<arguments.length;i++){var a=arguments[i];a&&(o=r(o,t(a)))}return o}function t(o){if(typeof o=="string"||typeof o=="number")return o;if(typeof o!="object")return"";if(Array.isArray(o))return s.apply(null,o);if(o.toString!==Object.prototype.toString&&!o.toString.toString().includes("[native code]"))return o.toString();var i="";for(var a in o)e.call(o,a)&&o[a]&&(i=r(i,a));return i}function r(o,i){return i?o?o+" "+i:o+i:o}l.exports?(s.default=s,l.exports=s):window.classNames=s})()})(xu);var BE=xu.exports;const me=Nc(BE);function hs({href:l="/",className:e,children:s,onClick:t}){const r=jE(),{setPageData:o}=io(),i=!(l!=null&&l.startsWith("http")),a=async()=>{const c=await eh(l);o==null||o(c),t==null||t(),r(l)};return n.jsx("a",{...i?{onClick:a}:{href:l,onClick:t},className:me("cursor-pointer",e),children:s})}function li(){var o;const{pageData:l}=io(),e=((o=l==null?void 0:l.userConfig.themeConfig)==null?void 0:o.sidebar)??{},{pathname:s}=fl(),t=Object.entries(e).find(([i])=>s.startsWith(i));return{sidebar:t==null?void 0:t[1]}}function LE(){const{sidebar:l}=li(),{pathname:e}=fl(),s=(l==null?void 0:l.map(i=>i.items??[]).flat())??[],t=s.findIndex(i=>(i==null?void 0:i.link)===e),r=s[t-1],o=s[t+1];return{prevPage:r,nextPage:o}}function $E(){const[l,e]=F.useState();return F.useEffect(()=>(window.addEventListener("scroll",()=>{const s=Pc();e(s)}),()=>{window.removeEventListener("scroll",()=>{const s=Pc();e(s)})}),[]),[l,e]}function Pc(){var s,t;const l=Array.from(document.querySelectorAll(".autolink-headings")).filter(r=>{var o;return((o=r.parentElement)==null?void 0:o.tagName)!=="H1"});if(window.scrollY+window.innerHeight>=window.document.documentElement.scrollHeight)return l.length-1;for(let r=0;r<l.length;r++){const o=l[r],i=l[r+1],a=Math.ceil(window.scrollY),c=(((s=o.parentElement)==null?void 0:s.offsetTop)??kn)-kn;if(r===0&&a<c)return;if(!i)return r;const d=(((t=i.parentElement)==null?void 0:t.offsetTop)??kn)-kn;if(a>=c&&a<d)return r}}function OE(){const{prevPage:l,nextPage:e}=LE();return n.jsx("footer",{className:"mt-[32px]",children:n.jsxs("div",{className:"border-divider flex justify-between border-t pt-[24px]",children:[n.jsx("div",{className:"w-[calc(50%-4px)]",children:l&&n.jsx(Mc,{text:l.text,link:l.link,children:"上一页"})}),n.jsx("div",{className:"w-[calc(50%-4px)]",children:e&&n.jsx(Mc,{text:e.text,link:e.link,children:"下一页"})})]})})}function Mc({children:l,text:e,link:s}){return n.jsxs(hs,{href:s,className:"border-divider hover:border-brand group block h-full w-full rounded-[8px] border px-[16px] py-[8px] transition-colors duration-300",children:[n.jsx("div",{className:"text-text-2 text-[12px] font-[500] leading-[20px]",children:l}),n.jsx("div",{className:" text-text-2 group-hover:text-brand overflow-hidden text-ellipsis whitespace-nowrap text-[14px] font-[500] leading-[20px] transition-colors duration-300",children:e})]})}function IE({visible:l,onClick:e}){const{sidebar:s}=li();return!Array.isArray(s)||s.length<1?n.jsx(n.Fragment,{}):n.jsxs(n.Fragment,{children:[n.jsx("div",{className:me("fixed inset-0 bg-[#00000060] transition-all duration-300",l?"opacity-100":"opacity-0",l?"visible":"invisible"),onClick:e}),n.jsx("aside",{className:me("w-sidebar border-divider bg-bg-sidebar fixed inset-y-0 left-0 z-40 overflow-y-auto border-r px-[28px] py-[16px] transition-transform duration-300",l?"-translate-x-0":"-translate-x-full"),children:s.map(t=>n.jsx(ju,{onClick:e,dir:t},t.text))})]})}function zE(){const{sidebar:l}=li();return!Array.isArray(l)||Object.keys(l).length<1?n.jsx(n.Fragment,{}):n.jsx("aside",{className:"mt-nav w-sidebar border-divider bg-bg-sidebar pc:-translate-x-0 fixed inset-y-0 left-0 z-40 -translate-x-full overflow-y-auto border-r px-[28px] py-[16px] transition-transform duration-300",children:l.map(e=>n.jsx(ju,{dir:e},e.text))})}function ju({dir:l,onClick:e}){var r,o;const[s,t]=F.useState(!l.collapsed);return n.jsxs("div",{className:"border-divider mt-[4px] border-t first:mt-0 first:border-t-0",children:[n.jsxs("h2",{onClick:()=>t(i=>!i),className:"text-text-1 mb-[6px] mt-[12px] flex cursor-pointer items-center justify-between font-[700]",children:[n.jsx("span",{children:l.text}),n.jsx("span",{className:me(s?"rotate-90":"rotate-0","icon-[carbon--chevron-right]","transition-transform duration-300")})]}),n.jsx("div",{style:{height:s?`${(((r=l.items)==null?void 0:r.length)??0)*27}px`:"0"},className:me("mb-[12px] flex flex-col overflow-hidden pl-[1rem] transition-[height] duration-300"),children:(o=l.items)==null?void 0:o.map(i=>n.jsx(GE,{onClick:e,item:i},i.link))})]})}function GE({item:l,onClick:e}){const{text:s,link:t}=l,{pathname:r}=fl(),o=r===t;return n.jsx(hs,{href:t,onClick:e,className:me(o?"text-brand":"text-text-2","text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]"),children:s})}function bE({visible:l,onClick:e,toc:s}){return!Array.isArray(s)||s.length<1?n.jsx(n.Fragment,{}):n.jsxs(n.Fragment,{children:[n.jsx("div",{className:me("fixed inset-0  bg-[#00000060] transition-all duration-300",l?"opacity-100":"opacity-0",l?"visible":"invisible"),onClick:e}),n.jsx("aside",{className:me("w-toc border-divider bg-bg-sidebar fixed inset-y-0 right-0 z-40  h-full border-l px-[28px] py-[16px] transition-transform duration-300",l?"translate-x-0":"translate-x-full"),children:n.jsx(yu,{onClick:e,toc:s})})]})}function UE({toc:l}){return!Array.isArray(l)||l.length<1?n.jsx(n.Fragment,{}):n.jsx("aside",{className:"w-toc full:flex sticky top-[calc(theme(spacing.nav)+48px)] hidden h-full flex-col",children:n.jsx(yu,{toc:l})})}function yu({toc:l,onClick:e}){const[s]=$E();return n.jsxs("div",{className:"border-divider pc:border-l px-[16px] font-[500]",children:[n.jsx("div",{className:"pc:block bg-brand absolute left-0 hidden h-[18px] w-px transition-[opacity,top] duration-300",style:s!==void 0?{top:s*28+33,opacity:100}:{top:33,opacity:0}}),n.jsx("div",{className:"text-[14px] font-[600] leading-[28px]",children:"本页目录"}),n.jsx("div",{children:l.map((t,r)=>n.jsx(VE,{onClick:e,active:s===r,item:t},t.id))})]})}function VE({item:l,active:e=!1,onClick:s}){return n.jsx("div",{children:n.jsx("a",{href:`#${l.id}`,className:me(e?"text-brand":"text-text-2","text-hover block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] leading-[28px]"),onClick:t=>{s==null||s(),t.preventDefault();const r=document.getElementById(l.id),o=((r==null?void 0:r.offsetTop)??kn)-kn;scrollTo({top:o})},style:{paddingLeft:`${l.depth-2}rem`},children:l.text})})}function HE({toc:l}){const[e,s]=F.useState({siderber:!1,toc:!1});return n.jsxs("div",{className:"h-nav pc:hidden bg-bg-default sticky top-0 z-50 w-full border-b",children:[n.jsxs("div",{className:"flex h-full items-center justify-between px-[24px]",children:[n.jsx("a",{className:"icon-[carbon--list] h-[24px] w-[24px] cursor-pointer",onClick:()=>{s({siderber:!0,toc:!1})}}),l&&l.length>0&&n.jsx("a",{className:"icon-[carbon--border-top] h-[24px] w-[24px] cursor-pointer",onClick:()=>{s({siderber:!1,toc:!0})}})]}),n.jsx(IE,{visible:e.siderber,onClick:()=>s({siderber:!1,toc:!1})}),n.jsx(bE,{toc:l,visible:e.toc,onClick:()=>s({siderber:!1,toc:!1})})]})}function XE(){F.useEffect(()=>{Array.from(document.querySelectorAll(".autolink-headings")).forEach(l=>{const e=l.parentElement;e&&(e.onclick=s=>{s.preventDefault(),scrollTo({top:e.offsetTop-kn})})})},[])}function WE({content:l,toc:e}){return XE(),n.jsxs("div",{className:"pt-nav",children:[n.jsx(zE,{}),n.jsxs("div",{className:"pc:ml-sidebar ml-0 flex justify-between",children:[n.jsxs("div",{className:"mx-auto w-full max-w-[768px] transition-[margin] duration-300",children:[n.jsx(HE,{toc:e}),n.jsxs("div",{className:"doc p-[48px]",children:[l,n.jsx(OE,{})]})]}),n.jsx(UE,{toc:e})]})]})}function QE({title:l,description:e}){return n.jsx(n.Fragment,{children:n.jsxs("div",{className:"pt-nav flex h-screen flex-col items-center justify-center",children:[n.jsx("div",{className:"text-[10vw]",children:l}),n.jsxs("div",{className:"text-[6vw]",children:[" ",e]})]})})}function KE({className:l,onClick:e}){return n.jsx("button",{onClick:e,className:me(l,"bg-bg-switch border-divider hover:border-gray-1 relative h-[22px] w-[40px] rounded-[11px] border transition-colors duration-300"),children:n.jsx("div",{className:"bg-bg-inverse shadow-1 absolute left-px top-px h-[18px] w-[18px] overflow-hidden rounded-[50%] transition-all duration-300 dark:translate-x-[18px]",children:n.jsxs("span",{className:me("*:text-text-2 *:absolute *:left-[3px] *:top-[3px] *:h-[12px] *:w-[12px] *:transition-opacity *:duration-300"),children:[n.jsx("div",{className:"icon-[carbon--sun] opacity-100 dark:opacity-0"}),n.jsx("div",{className:"icon-[carbon--moon] opacity-0 dark:opacity-100"})]})})})}const qE={github:"icon-[carbon--logo-github]",twitter:"icon-[carbon--logo-twitter]"};function YE({nav:l}){const{y:e}=Bf(),{pathname:s}=fl(),t=!!e,r=s!=="/",o=l==null?void 0:l.filter(c=>c.position==="left"),i=l==null?void 0:l.filter(c=>c.position==="right"||c.position===void 0),a=c=>{const{text:d,img:j,logo:x,dark:y}=c;return d?n.jsx(JE,{item:c,pathname:s}):x?n.jsx(ZE,{item:c}):j?n.jsx(e9,{item:c}):y?n.jsx(n9,{}):n.jsx(n.Fragment,{})};return!l||l.length<1?n.jsx(n.Fragment,{}):n.jsx("header",{className:"pc:fixed absolute left-0 top-0 z-50 w-full",children:n.jsx("div",{className:me(t||r?"border-divider bg-bg-default":"border-transparent bg-transparent","h-nav border-b px-[12px] pt-px transition-colors duration-300"),children:n.jsxs("div",{className:"flex h-full items-center justify-between",children:[n.jsx("div",{className:"flex h-full justify-start",children:o==null?void 0:o.map((c,d)=>n.jsx("div",{className:"h-full",children:a(c)},`${c.link}${d}`))}),n.jsx("div",{className:"flex h-full justify-end",children:i==null?void 0:i.map((c,d)=>n.jsx("div",{className:"h-full",children:a(c)},`${c.link}${d}`))})]})})})}function JE({item:l,pathname:e}){const{text:s,link:t}=l,r=(i="/")=>i.split("/").at(-2),o=r(e)===r(t);return s?n.jsx("nav",{className:"mx-[12px] h-full justify-end",children:n.jsx(hs,{href:t,className:me(o?"text-brand":"text-text-2","text-hover flex h-full items-center whitespace-nowrap text-[14px] font-[500]"),children:s})}):n.jsx(n.Fragment,{})}function ZE({item:l}){const{logo:e,link:s}=l;return e?n.jsx("nav",{className:"mx-[12px] h-full",children:n.jsx(hs,{href:s,className:"text-text-2 text-hover flex  h-full items-center",children:n.jsx("span",{className:me(qE[e],"h-[24px] w-[24px]")})})}):n.jsx(n.Fragment,{})}function e9({item:l}){const{img:e,link:s}=l;return e?n.jsx("nav",{className:"mx-[12px] flex h-full items-center",children:n.jsx(hs,{href:s,children:n.jsx("img",{src:e,className:"h-[24px] w-[24px]"})})}):n.jsx(n.Fragment,{})}function n9(){const{toggle:l}=Tf();return n.jsx("nav",{className:"mx-[4px] flex h-full items-center",children:n.jsx(KE,{onClick:l})})}function l9(){return n.jsx("div",{className:"flex h-screen items-center justify-center",children:n.jsxs("div",{className:"flex flex-col items-center text-center",children:[n.jsx("p",{className:"text-[60px] font-[600]",children:"404"}),n.jsx("h1",{className:"text-[20px] font-[700]",children:"页面失踪"}),n.jsx("div",{className:"pt-[16px]",children:n.jsx("a",{href:"/",className:"hover:border-brand hover:text-brand text-brand block rounded-[16px] border px-[16px] py-[4px] text-[14px] font-[500] transition-colors duration-300","un-hover":"",children:"返回主页"})})]})})}function s9({location:l=window.location.pathname}){var t;const{pageData:e}=io(),s=()=>{const r=e==null?void 0:e.pageType;return r==="home"?n.jsx(QE,{title:e==null?void 0:e.userConfig.title,description:e==null?void 0:e.userConfig.description}):r==="doc"?n.jsx(WE,{content:n.jsx(NE,{location:l}),toc:e==null?void 0:e.toc}):r==="404"?n.jsx(l9,{}):n.jsx(n.Fragment,{})};return n.jsxs(n.Fragment,{children:[n.jsx(YE,{nav:(t=e==null?void 0:e.userConfig.themeConfig)==null?void 0:t.nav}),s()]})}var fu,Rc=I4;Rc.createRoot,fu=Rc.hydrateRoot;async function t9(){const l=await eh(location.pathname);fu(document.getElementById("root"),n.jsx(Ff,{value:{pageData:l},children:n.jsx(RE,{children:n.jsx(s9,{})})}))}t9();
+*/(function(l){(function(){var e={}.hasOwnProperty;function s(){for(var o="",i=0;i<arguments.length;i++){var a=arguments[i];a&&(o=r(o,t(a)))}return o}function t(o){if(typeof o=="string"||typeof o=="number")return o;if(typeof o!="object")return"";if(Array.isArray(o))return s.apply(null,o);if(o.toString!==Object.prototype.toString&&!o.toString.toString().includes("[native code]"))return o.toString();var i="";for(var a in o)e.call(o,a)&&o[a]&&(i=r(i,a));return i}function r(o,i){return i?o?o+" "+i:o+i:o}l.exports?(s.default=s,l.exports=s):window.classNames=s})()})(xu);var BE=xu.exports;const me=Nc(BE);function hs({href:l="/",className:e,children:s,onClick:t}){const r=jE(),{setPageData:o}=io(),i=!(l!=null&&l.startsWith("http")),a=async()=>{const c=await eh(l);o==null||o(c),t==null||t(),r(l)};return n.jsx("a",{...i?{onClick:a}:{href:l,onClick:t},className:me("cursor-pointer",e),children:s})}function li(){var o;const{pageData:l}=io(),e=((o=l==null?void 0:l.userConfig.themeConfig)==null?void 0:o.sidebar)??{},{pathname:s}=fl(),t=Object.entries(e).find(([i])=>s.startsWith(i));return{sidebar:t==null?void 0:t[1]}}function LE(){const{sidebar:l}=li(),{pathname:e}=fl(),s=(l==null?void 0:l.map(i=>i.items??[]).flat())??[],t=s.findIndex(i=>(i==null?void 0:i.link)===e),r=s[t-1],o=s[t+1];return{prevPage:r,nextPage:o}}function $E(){const[l,e]=F.useState();return F.useEffect(()=>(window.addEventListener("scroll",()=>{const s=Pc();e(s)}),()=>{window.removeEventListener("scroll",()=>{const s=Pc();e(s)})}),[]),[l,e]}function Pc(){var s,t;const l=Array.from(document.querySelectorAll(".autolink-headings")).filter(r=>{var o;return((o=r.parentElement)==null?void 0:o.tagName)!=="H1"});if(window.scrollY+window.innerHeight>=window.document.documentElement.scrollHeight)return l.length-1;for(let r=0;r<l.length;r++){const o=l[r],i=l[r+1],a=Math.ceil(window.scrollY),c=(((s=o.parentElement)==null?void 0:s.offsetTop)??kn)-kn;if(r===0&&a<c)return;if(!i)return r;const d=(((t=i.parentElement)==null?void 0:t.offsetTop)??kn)-kn;if(a>=c&&a<d)return r}}function OE(){const{prevPage:l,nextPage:e}=LE();return n.jsx("footer",{className:"mt-[32px]",children:n.jsxs("div",{className:"border-divider flex justify-between border-t pt-[24px]",children:[n.jsx("div",{className:"w-[calc(50%-4px)]",children:l&&n.jsx(Mc,{text:l.text,link:l.link,children:"上一页"})}),n.jsx("div",{className:"w-[calc(50%-4px)]",children:e&&n.jsx(Mc,{text:e.text,link:e.link,children:"下一页"})})]})})}function Mc({children:l,text:e,link:s}){return n.jsxs(hs,{href:s,className:"border-divider hover:border-brand group block h-full w-full rounded-[8px] border px-[16px] py-[8px] transition-colors duration-300",children:[n.jsx("div",{className:"text-text-2 text-[12px] font-[500] leading-[20px]",children:l}),n.jsx("div",{className:" text-text-2 group-hover:text-brand overflow-hidden text-ellipsis whitespace-nowrap text-[14px] font-[500] leading-[20px] transition-colors duration-300",children:e})]})}function IE({visible:l,onClick:e}){const{sidebar:s}=li();return!Array.isArray(s)||s.length<1?n.jsx(n.Fragment,{}):n.jsxs(n.Fragment,{children:[n.jsx("div",{className:me("fixed inset-0 bg-[#00000060] transition-all duration-300",l?"opacity-100":"opacity-0",l?"visible":"invisible"),onClick:e}),n.jsx("aside",{className:me("w-sidebar border-divider bg-bg-sidebar fixed inset-y-0 left-0 z-40 overflow-y-auto border-r px-[28px] py-[16px] transition-transform duration-300",l?"-translate-x-0":"-translate-x-full"),children:s.map(t=>n.jsx(ju,{onClick:e,dir:t},t.text))})]})}function zE(){const{sidebar:l}=li();return!Array.isArray(l)||Object.keys(l).length<1?n.jsx(n.Fragment,{}):n.jsx("aside",{className:"mt-nav w-sidebar border-divider bg-bg-sidebar pc:-translate-x-0 fixed inset-y-0 left-0 z-40 -translate-x-full overflow-y-auto border-r px-[28px] py-[16px] transition-transform duration-300",children:l.map(e=>n.jsx(ju,{dir:e},e.text))})}function ju({dir:l,onClick:e}){var r,o;const[s,t]=F.useState(!l.collapsed);return n.jsxs("div",{className:"border-divider mt-[4px] border-t first:mt-0 first:border-t-0",children:[n.jsxs("h2",{onClick:()=>t(i=>!i),className:"text-text-1 mb-[6px] mt-[12px] flex cursor-pointer items-center justify-between font-[700]",children:[n.jsx("span",{children:l.text}),n.jsx("span",{className:me(s?"rotate-90":"rotate-0","icon-[carbon--chevron-right]","transition-transform duration-300")})]}),n.jsx("div",{style:{height:s?`${(((r=l.items)==null?void 0:r.length)??0)*27}px`:"0"},className:me("mb-[12px] flex flex-col overflow-hidden pl-[1rem] transition-[height] duration-300"),children:(o=l.items)==null?void 0:o.map(i=>n.jsx(GE,{onClick:e,item:i},i.link))})]})}function GE({item:l,onClick:e}){const{text:s,link:t}=l,{pathname:r}=fl(),o=r===t;return n.jsx(hs,{href:t,onClick:e,className:me(o?"text-brand":"text-text-2","text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]"),children:s})}function bE({visible:l,onClick:e,toc:s}){return!Array.isArray(s)||s.length<1?n.jsx(n.Fragment,{}):n.jsxs(n.Fragment,{children:[n.jsx("div",{className:me("fixed inset-0  bg-[#00000060] transition-all duration-300",l?"opacity-100":"opacity-0",l?"visible":"invisible"),onClick:e}),n.jsx("aside",{className:me("w-toc border-divider bg-bg-sidebar fixed inset-y-0 right-0 z-40  h-full border-l px-[28px] py-[16px] transition-transform duration-300",l?"translate-x-0":"translate-x-full"),children:n.jsx(yu,{onClick:e,toc:s})})]})}function UE({toc:l}){return!Array.isArray(l)||l.length<1?n.jsx(n.Fragment,{}):n.jsx("aside",{className:"w-toc full:flex sticky top-[calc(theme(spacing.nav)+48px)] hidden h-full flex-col",children:n.jsx(yu,{toc:l})})}function yu({toc:l,onClick:e}){const[s]=$E();return n.jsxs("div",{className:"border-divider pc:border-l px-[16px] font-[500]",children:[n.jsx("div",{className:"pc:block bg-brand absolute left-0 hidden h-[18px] w-px transition-[opacity,top] duration-300",style:s!==void 0?{top:s*28+33,opacity:100}:{top:33,opacity:0}}),n.jsx("div",{className:"text-[14px] font-[600] leading-[28px]",children:"本页目录"}),n.jsx("div",{children:l.map((t,r)=>n.jsx(VE,{onClick:e,active:s===r,item:t},t.id))})]})}function VE({item:l,active:e=!1,onClick:s}){return n.jsx("div",{children:n.jsx("a",{href:`#${l.id}`,className:me(e?"text-brand":"text-text-2","text-hover block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] leading-[28px]"),onClick:t=>{s==null||s(),t.preventDefault();const r=document.getElementById(l.id),o=((r==null?void 0:r.offsetTop)??kn)-kn;scrollTo({top:o})},style:{paddingLeft:`${l.depth-2}rem`},children:l.text})})}function HE({toc:l}){const[e,s]=F.useState({siderber:!1,toc:!1});return n.jsxs("div",{className:"h-nav pc:hidden bg-bg-default sticky top-0 z-50 w-full border-b",children:[n.jsxs("div",{className:"flex h-full items-center justify-between px-[24px]",children:[n.jsx("a",{className:"icon-[carbon--list] h-[24px] w-[24px] cursor-pointer",onClick:()=>{s({siderber:!0,toc:!1})}}),l&&l.length>0&&n.jsx("a",{className:"icon-[carbon--border-top] h-[24px] w-[24px] cursor-pointer",onClick:()=>{s({siderber:!1,toc:!0})}})]}),n.jsx(IE,{visible:e.siderber,onClick:()=>s({siderber:!1,toc:!1})}),n.jsx(bE,{toc:l,visible:e.toc,onClick:()=>s({siderber:!1,toc:!1})})]})}function XE(){F.useEffect(()=>{Array.from(document.querySelectorAll(".autolink-headings")).forEach(l=>{const e=l.parentElement;e&&(e.onclick=s=>{s.preventDefault(),scrollTo({top:e.offsetTop-kn})})})},[])}function WE({content:l,toc:e}){return XE(),n.jsxs("div",{className:"pt-nav",children:[n.jsx(zE,{}),n.jsxs("div",{className:"pc:ml-sidebar ml-0 flex justify-between",children:[n.jsxs("div",{className:"mx-auto w-full max-w-[768px] transition-[margin] duration-300",children:[n.jsx(HE,{toc:e}),n.jsxs("div",{className:"p-[48px]",children:[n.jsx("div",{className:"doc",children:l}),n.jsx(OE,{})]})]}),n.jsx(UE,{toc:e})]})]})}function QE({title:l,description:e}){return n.jsx(n.Fragment,{children:n.jsxs("div",{className:"pt-nav flex h-screen flex-col items-center justify-center",children:[n.jsx("div",{className:"text-[10vw]",children:l}),n.jsxs("div",{className:"text-[6vw]",children:[" ",e]})]})})}function KE({className:l,onClick:e}){return n.jsx("button",{onClick:e,className:me(l,"bg-bg-switch border-divider hover:border-gray-1 relative h-[22px] w-[40px] rounded-[11px] border transition-colors duration-300"),children:n.jsx("div",{className:"bg-bg-inverse shadow-1 absolute left-px top-px h-[18px] w-[18px] overflow-hidden rounded-[50%] transition-all duration-300 dark:translate-x-[18px]",children:n.jsxs("span",{className:me("*:text-text-2 *:absolute *:left-[3px] *:top-[3px] *:h-[12px] *:w-[12px] *:transition-opacity *:duration-300"),children:[n.jsx("div",{className:"icon-[carbon--sun] opacity-100 dark:opacity-0"}),n.jsx("div",{className:"icon-[carbon--moon] opacity-0 dark:opacity-100"})]})})})}const qE={github:"icon-[carbon--logo-github]",twitter:"icon-[carbon--logo-twitter]"};function YE({nav:l}){const{y:e}=Bf(),{pathname:s}=fl(),t=!!e,r=s!=="/",o=l==null?void 0:l.filter(c=>c.position==="left"),i=l==null?void 0:l.filter(c=>c.position==="right"||c.position===void 0),a=c=>{const{text:d,img:j,logo:x,dark:y}=c;return d?n.jsx(JE,{item:c,pathname:s}):x?n.jsx(ZE,{item:c}):j?n.jsx(e9,{item:c}):y?n.jsx(n9,{}):n.jsx(n.Fragment,{})};return!l||l.length<1?n.jsx(n.Fragment,{}):n.jsx("header",{className:"pc:fixed absolute left-0 top-0 z-50 w-full",children:n.jsx("div",{className:me(t||r?"border-divider bg-bg-default":"border-transparent bg-transparent","h-nav border-b px-[12px] pt-px transition-colors duration-300"),children:n.jsxs("div",{className:"flex h-full items-center justify-between",children:[n.jsx("div",{className:"flex h-full justify-start",children:o==null?void 0:o.map((c,d)=>n.jsx("div",{className:"h-full",children:a(c)},`${c.link}${d}`))}),n.jsx("div",{className:"flex h-full justify-end",children:i==null?void 0:i.map((c,d)=>n.jsx("div",{className:"h-full",children:a(c)},`${c.link}${d}`))})]})})})}function JE({item:l,pathname:e}){const{text:s,link:t}=l,r=(i="/")=>i.split("/").at(-2),o=r(e)===r(t);return s?n.jsx("nav",{className:"mx-[12px] h-full justify-end",children:n.jsx(hs,{href:t,className:me(o?"text-brand":"text-text-2","text-hover flex h-full items-center whitespace-nowrap text-[14px] font-[500]"),children:s})}):n.jsx(n.Fragment,{})}function ZE({item:l}){const{logo:e,link:s}=l;return e?n.jsx("nav",{className:"mx-[12px] h-full",children:n.jsx(hs,{href:s,className:"text-text-2 text-hover flex  h-full items-center",children:n.jsx("span",{className:me(qE[e],"h-[24px] w-[24px]")})})}):n.jsx(n.Fragment,{})}function e9({item:l}){const{img:e,link:s}=l;return e?n.jsx("nav",{className:"mx-[12px] flex h-full items-center",children:n.jsx(hs,{href:s,children:n.jsx("img",{src:e,className:"h-[24px] w-[24px]"})})}):n.jsx(n.Fragment,{})}function n9(){const{toggle:l}=Tf();return n.jsx("nav",{className:"mx-[4px] flex h-full items-center",children:n.jsx(KE,{onClick:l})})}function l9(){return n.jsx("div",{className:"flex h-screen items-center justify-center",children:n.jsxs("div",{className:"flex flex-col items-center text-center",children:[n.jsx("p",{className:"text-[60px] font-[600]",children:"404"}),n.jsx("h1",{className:"text-[20px] font-[700]",children:"页面失踪"}),n.jsx("div",{className:"pt-[16px]",children:n.jsx("a",{href:"/",className:"hover:border-brand hover:text-brand text-brand block rounded-[16px] border px-[16px] py-[4px] text-[14px] font-[500] transition-colors duration-300","un-hover":"",children:"返回主页"})})]})})}function s9({location:l=window.location.pathname}){var t;const{pageData:e}=io();console.log("页面数据：",e);const s=()=>{const r=e==null?void 0:e.pageType;return r==="home"?n.jsx(QE,{title:e==null?void 0:e.userConfig.title,description:e==null?void 0:e.userConfig.description}):r==="doc"?n.jsx(WE,{content:n.jsx(NE,{location:l}),toc:e==null?void 0:e.toc}):r==="404"?n.jsx(l9,{}):n.jsx(n.Fragment,{})};return n.jsxs(n.Fragment,{children:[n.jsx(YE,{nav:(t=e==null?void 0:e.userConfig.themeConfig)==null?void 0:t.nav}),s()]})}var fu,Rc=I4;Rc.createRoot,fu=Rc.hydrateRoot;async function t9(){const l=await eh(location.pathname);fu(document.getElementById("root"),n.jsx(Ff,{value:{pageData:l},children:n.jsx(RE,{children:n.jsx(s9,{})})}))}t9();
 function __vite__mapDeps(indexes) {
   if (!__vite__mapDeps.viteFileDeps) {
     __vite__mapDeps.viteFileDeps = []
