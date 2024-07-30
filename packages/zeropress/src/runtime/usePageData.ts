@@ -6,10 +6,17 @@ import routes from 'virtual:routes'
 export async function getPageData(pathname: string): Promise<PageData> {
   const matched = routes.find((route) => route.path === pathname)
 
+  let pageData: PageData = {
+    pageType: '404',
+    pagePath: pathname,
+    toc: [],
+    userConfig: config,
+  }
+
   if (matched) {
     const module = await matched.preload()
 
-    return {
+    pageData = {
       pageType: module?.GetFrontMatter?.()?.pageType || 'doc',
       pagePath: pathname,
       frontmatter: module.GetFrontMatter?.() ?? {},
@@ -18,7 +25,13 @@ export async function getPageData(pathname: string): Promise<PageData> {
     }
   }
 
-  return { pageType: '404', pagePath: pathname, toc: [], userConfig: config }
+  console.log(
+    '文件路由',
+    routes.map((i) => i.path),
+  )
+  console.log('页面数据：', pageData)
+
+  return pageData
 }
 
 interface Props {

@@ -9,10 +9,5 @@ import routes from 'virtual:routes'
 export function Content({ location = '/' }) {
   const element = useRoutes(routes, normalizeUrl(location))
 
-  console.log(
-    '文件路由',
-    routes.map((i) => i.path),
-  )
-
   return element
 }

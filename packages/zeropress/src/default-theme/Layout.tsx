@@ -11,7 +11,6 @@ import { Content, usePageData } from '@/runtime'
  */
 export function Layout({ location = window.location.pathname }) {
   const { pageData } = usePageData()
-  console.log('页面数据：', pageData)
 
   const getPage = () => {
     const pageType = pageData?.pageType
