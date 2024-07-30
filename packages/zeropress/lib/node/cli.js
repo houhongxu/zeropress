@@ -486,7 +486,7 @@ async function renderHtmls({
   const template = await fse2.readFile(HTML_PATH, "utf-8");
   await Promise.all(
     routes.map(async (route) => {
-      const file = (route.path === "/" ? "/index" : route.path) || "/index";
+      const file = route.path === "/" ? "/index.html" : route.path;
       const relativeFilePath = `${CLIENT_OUT_PATH}${file}`;
       const rendered = await render(route.path || "/");
       const html = template.replace("<!--app-html-->", rendered).replace(
