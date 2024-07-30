@@ -1,6 +1,6 @@
 {
   "name": "zeropress",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "zero config SSG framework",
   "scripts": {
     "build:comment": "echo 多入口打包，tsup不打包node_modules，--shims兼容esm与cjs的全局变量如__dirname，--no-splitting兼容shims，让shims不分割为chunk影响__dirname等路径",
