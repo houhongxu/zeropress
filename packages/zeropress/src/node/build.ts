@@ -125,7 +125,7 @@ async function renderHtmls({
     routes.map(async (route) => {
       const file = (route.path === '/' ? '/index' : route.path) || '/index'
 
-      const relativeFilePath = `${CLIENT_OUT_PATH}${file}.html`
+      const relativeFilePath = `${CLIENT_OUT_PATH}${file}`
 
       const rendered = await render(route.path || '/')
 

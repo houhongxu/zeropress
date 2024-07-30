@@ -487,7 +487,7 @@ async function renderHtmls({
   await Promise.all(
     routes.map(async (route) => {
       const file = (route.path === "/" ? "/index" : route.path) || "/index";
-      const relativeFilePath = `${CLIENT_OUT_PATH}${file}.html`;
+      const relativeFilePath = `${CLIENT_OUT_PATH}${file}`;
       const rendered = await render(route.path || "/");
       const html = template.replace("<!--app-html-->", rendered).replace(
         "</body>",

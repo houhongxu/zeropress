@@ -33,6 +33,11 @@ async function getPageData(pathname) {
       userConfig: config
     };
   }
+  console.log(
+    "\u6587\u4EF6\u8DEF\u7531",
+    routes2.map((i) => i.path)
+  );
+  console.log("\u9875\u9762\u6570\u636E\uFF1A", pageData);
   return pageData;
 }
 var PageDataContext = createContext({});
