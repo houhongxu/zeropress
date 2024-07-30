@@ -525,11 +525,11 @@ async function resolveSiteConfig({
   const navLeftIndex = userConfig.themeConfig?.nav?.findIndex(
     (item) => item.position === "left"
   ) ?? 0;
-  const nav = userConfig.themeConfig?.autoNav === false ? userConfig.themeConfig.nav ?? [] : (userConfig.themeConfig?.nav ?? []).toSpliced(
-    navLeftIndex === -1 ? 0 : navLeftIndex,
-    0,
-    ...auto.nav
-  );
+  const nav = userConfig.themeConfig?.autoNav === false ? userConfig.themeConfig.nav ?? [] : [
+    ...(userConfig.themeConfig?.nav ?? []).slice(0, navLeftIndex),
+    ...auto.nav,
+    ...(userConfig.themeConfig?.nav ?? []).slice(navLeftIndex)
+  ];
   const sidebar = userConfig.themeConfig?.autoSidebar === false ? userConfig.themeConfig.sidebar ?? {} : auto.sidebar;
   const normalizedNav = nav.map((item) => ({
     ...item,
@@ -603,15 +603,15 @@ async function autoSidebarAndNav({ docs }) {
   const nav = Object.entries(groupBy(data, "navText")).map(([navText, value]) => ({
     text: navText,
     index: keyBy(value, "navText")[navText].navIndex,
-    link: value.toSorted(
+    link: value.sort(
       (a, b) => a.siderbarDirIndex - b.siderbarDirIndex + a.fileIndex - b.fileIndex
     )[0].path
-  })).toSorted((a, b) => a.index - b.index);
+  })).sort((a, b) => a.index - b.index);
   const sidebar = Object.entries(groupBy(data, "navPath")).reduce((pre, [navPath, value]) => {
     const sidebarItemsMap = Object.entries(
       groupBy(value, "siderbarDirText")
     ).reduce((pre2, [siderbarDirText, value2]) => {
-      pre2[siderbarDirText] = value2.toSorted((a, b) => a.fileIndex - b.fileIndex).map((item) => ({
+      pre2[siderbarDirText] = value2.sort((a, b) => a.fileIndex - b.fileIndex).map((item) => ({
         text: item.fileText,
         link: item.path
       })).filter((item) => item.text);
@@ -620,7 +620,7 @@ async function autoSidebarAndNav({ docs }) {
     pre[navPath] = Object.values(
       // keyBy可以根据text字段去重，因为text相同的items也是相同的，所以不会丢失值
       keyBy(
-        value.toSorted((a, b) => a.siderbarDirIndex - b.siderbarDirIndex).map((item) => ({
+        value.sort((a, b) => a.siderbarDirIndex - b.siderbarDirIndex).map((item) => ({
           text: item.siderbarDirText,
           items: sidebarItemsMap[item.siderbarDirText],
           link: item.path

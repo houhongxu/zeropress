@@ -44,11 +44,11 @@ export async function resolveSiteConfig({
   const nav =
     userConfig.themeConfig?.autoNav === false
       ? userConfig.themeConfig.nav ?? []
-      : (userConfig.themeConfig?.nav ?? []).toSpliced(
-          navLeftIndex === -1 ? 0 : navLeftIndex,
-          0,
+      : [
+          ...(userConfig.themeConfig?.nav ?? []).slice(0, navLeftIndex),
           ...auto.nav,
-        )
+          ...(userConfig.themeConfig?.nav ?? []).slice(navLeftIndex),
+        ]
 
   const sidebar =
     userConfig.themeConfig?.autoSidebar === false
@@ -141,12 +141,12 @@ async function autoSidebarAndNav({ docs }: { docs?: string }) {
     .map<NavItem & { index: number }>(([navText, value]) => ({
       text: navText,
       index: keyBy(value, 'navText')[navText].navIndex,
-      link: value.toSorted(
+      link: value.sort(
         (a, b) =>
           a.siderbarDirIndex - b.siderbarDirIndex + a.fileIndex - b.fileIndex,
       )[0].path,
     }))
-    .toSorted((a, b) => a.index - b.index)
+    .sort((a, b) => a.index - b.index)
 
   const sidebar = Object.entries(groupBy(data, 'navPath')).reduce<
     Record<string, SidebarDir[]>
@@ -155,7 +155,7 @@ async function autoSidebarAndNav({ docs }: { docs?: string }) {
       groupBy(value, 'siderbarDirText'),
     ).reduce<Record<string, SidebarItem[]>>((pre, [siderbarDirText, value]) => {
       pre[siderbarDirText] = value
-        .toSorted((a, b) => a.fileIndex - b.fileIndex)
+        .sort((a, b) => a.fileIndex - b.fileIndex)
         .map((item) => ({
           text: item.fileText,
           link: item.path,
@@ -169,7 +169,7 @@ async function autoSidebarAndNav({ docs }: { docs?: string }) {
       // keyBy可以根据text字段去重，因为text相同的items也是相同的，所以不会丢失值
       keyBy(
         value
-          .toSorted((a, b) => a.siderbarDirIndex - b.siderbarDirIndex)
+          .sort((a, b) => a.siderbarDirIndex - b.siderbarDirIndex)
           .map((item) => ({
             text: item.siderbarDirText,
             items: sidebarItemsMap[item.siderbarDirText],
