@@ -320,7 +320,6 @@ function vitePluginVirtualRoutes({
           const pathname = relativePath.replace(path3.extname(file), "").replace(/index$/, "");
           importTemplate += `import Element${index + 1} from '${file}';
 `;
-          console.log(pathname);
           return `{ path: '/${normalizeUrl(urlWithHtml(pathname))}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },
 `;
         });
@@ -487,9 +486,9 @@ async function renderHtmls({
   const template = await fse2.readFile(HTML_PATH, "utf-8");
   await Promise.all(
     routes.map(async (route) => {
-      const location = (route.path === "/" ? "/index" : route.path) || "/index";
-      const relativeFilePath = `${CLIENT_OUT_PATH}${location}.html`;
-      const rendered = await render(location);
+      const file = (route.path === "/" ? "/index" : route.path) || "/index";
+      const relativeFilePath = `${CLIENT_OUT_PATH}${file}.html`;
+      const rendered = await render(route.path || "/");
       const html = template.replace("<!--app-html-->", rendered).replace(
         "</body>",
         `

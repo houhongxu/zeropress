@@ -5,8 +5,9 @@ import { createRoot, hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 
 async function render() {
-  const pageData = await getPageData(location.pathname)
   console.log('当前环境：', import.meta.env.PROD ? 'PROD' : 'DEV')
+
+  const pageData = await getPageData(location.pathname)
 
   if (import.meta.env.PROD) {
     hydrateRoot(

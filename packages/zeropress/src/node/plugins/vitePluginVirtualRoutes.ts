@@ -39,7 +39,6 @@ export function vitePluginVirtualRoutes({
             .replace(/index$/, '')
 
           importTemplate += `import Element${index + 1} from '${file}';\n`
-          console.log(pathname)
 
           return `{ path: '/${normalizeUrl(urlWithHtml(pathname))}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },\n`
         })

@@ -6,10 +6,18 @@ export function isBrowser() {
   )
 }
 
+/**
+ * utf8转码url
+ * @description 兼容中文url
+ */
 export function normalizeUrl(url = '/') {
   return encodeURI(url)
 }
 
+/**
+ * url添加html后缀
+ * @description 兼容服务器ssg，访问index.html之外的html需要后缀
+ */
 export function urlWithHtml(url: string) {
   return url ? url + '.html' : url
 }
