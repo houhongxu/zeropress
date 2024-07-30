@@ -275,6 +275,9 @@ function vitePluginVirtualConfig({
 function normalizeUrl(url = "/") {
   return encodeURI(url);
 }
+function urlWithHtml(url) {
+  return url ? url + ".html" : url;
+}
 function groupBy(arr, key) {
   return arr.reduce((pre, cur) => {
     const valueAsKey = cur[key];
@@ -317,7 +320,8 @@ function vitePluginVirtualRoutes({
           const pathname = relativePath.replace(path3.extname(file), "").replace(/index$/, "");
           importTemplate += `import Element${index + 1} from '${file}';
 `;
-          return `{ path: '/${normalizeUrl(pathname)}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },
+          console.log(pathname);
+          return `{ path: '/${normalizeUrl(urlWithHtml(pathname))}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },
 `;
         });
         return `
@@ -581,7 +585,7 @@ async function autoSidebarAndNav({ docs }) {
     const splitedDir = splitIndex(dir);
     const splitedFile = splitIndex(file);
     return {
-      path: `/${item.replace(path6.extname(item), "")}`,
+      path: `/${urlWithHtml(item.replace(path6.extname(item), ""))}`,
       nav: nav2,
       dir,
       file,

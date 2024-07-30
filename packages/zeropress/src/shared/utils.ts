@@ -10,6 +10,10 @@ export function normalizeUrl(url = '/') {
   return encodeURI(url)
 }
 
+export function urlWithHtml(url: string) {
+  return url ? url + '.html' : url
+}
+
 export function groupBy<T>(arr: T[], key: keyof T) {
   return arr.reduce<Record<string, T[]>>((pre, cur) => {
     const valueAsKey = cur[key] as string | number

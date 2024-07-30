@@ -8,7 +8,7 @@ import {
   SidebarDir,
   SidebarItem,
 } from '@/shared/types'
-import { groupBy, keyBy, normalizeUrl } from '@/shared/utils'
+import { groupBy, keyBy, normalizeUrl, urlWithHtml } from '@/shared/utils'
 import fse from 'fs-extra'
 import path from 'path'
 import { loadConfigFromFile } from 'vite'
@@ -120,7 +120,7 @@ async function autoSidebarAndNav({ docs }: { docs?: string }) {
     const splitedFile = splitIndex(file)
 
     return {
-      path: `/${item.replace(path.extname(item), '')}`,
+      path: `/${urlWithHtml(item.replace(path.extname(item), ''))}`,
       nav,
       dir,
       file,

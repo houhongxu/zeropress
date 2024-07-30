@@ -1,6 +1,6 @@
 import { getDocs } from '../utils'
 import { SiteConfig } from '@/shared/types'
-import { normalizeUrl } from '@/shared/utils'
+import { normalizeUrl, urlWithHtml } from '@/shared/utils'
 import path from 'path'
 import { Plugin } from 'vite'
 
@@ -39,8 +39,9 @@ export function vitePluginVirtualRoutes({
             .replace(/index$/, '')
 
           importTemplate += `import Element${index + 1} from '${file}';\n`
+          console.log(pathname)
 
-          return `{ path: '/${normalizeUrl(pathname)}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },\n`
+          return `{ path: '/${normalizeUrl(urlWithHtml(pathname))}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },\n`
         })
 
         return `
