@@ -103,7 +103,7 @@ export function Nav({ nav }: { nav?: NavItem[] }) {
         className={classNames(
           visible ? 'visible' : 'invisible',
           visible ? 'opacity-100' : 'opacity-0',
-          'bg-bg-default mt-nav fixed inset-0 z-20 transition-opacity duration-300',
+          'bg-bg-default mt-nav fixed inset-0 z-50 transition-opacity duration-300',
         )}
       >
         <div className="mt-[12px]">

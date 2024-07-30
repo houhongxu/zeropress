@@ -1,4 +1,4 @@
-import { useSidebar } from '@/default-theme/hooks'
+import { useDisableScroll, useSidebar } from '@/default-theme/hooks'
 import { Link } from '@/runtime'
 import { SidebarDir, SidebarItem } from '@/shared/types'
 import classNames from 'classnames'
@@ -13,6 +13,8 @@ export function MobileSiderbar({
   onClick?: () => void
 }) {
   const { sidebar } = useSidebar()
+
+  useDisableScroll(visible)
 
   if (!Array.isArray(sidebar) || sidebar.length < 1) {
     return <></>
@@ -31,7 +33,7 @@ export function MobileSiderbar({
 
       <aside
         className={classNames(
-          'w-sidebar border-divider bg-bg-sidebar fixed inset-y-0 left-0 z-40 overflow-y-auto border-r px-[28px] py-[16px] transition-transform duration-300',
+          'w-sidebar border-divider bg-bg-sidebar fixed inset-y-0 left-0 overflow-y-auto border-r px-[28px] py-[16px] transition-transform duration-300',
           visible ? '-translate-x-0' : '-translate-x-full',
         )}
       >
@@ -57,7 +59,7 @@ export function Siderbar() {
   }
 
   return (
-    <aside className="mt-nav w-sidebar border-divider bg-bg-sidebar pc:-translate-x-0 fixed inset-y-0 left-0 z-40 -translate-x-full overflow-y-auto border-r px-[28px] py-[16px] transition-transform duration-300">
+    <aside className="mt-nav w-sidebar border-divider bg-bg-sidebar pc:-translate-x-0 fixed inset-y-0 left-0 -translate-x-full overflow-y-auto border-r px-[28px] py-[16px] transition-transform duration-300">
       {sidebar.map((dir) => {
         return <SiderbarDir key={dir.text} dir={dir}></SiderbarDir>
       })}

@@ -10,7 +10,7 @@ export function MobileBar({ toc }: { toc?: PageData['toc'] }) {
   })
 
   return (
-    <div className="h-nav pc:hidden bg-bg-default sticky top-0 z-10 w-full border-b">
+    <div className="h-nav pc:hidden bg-bg-default sticky top-0 z-40 w-full border-b">
       <div className="flex h-full items-center justify-between px-[24px]">
         <a
           className="icon-[carbon--container-image] h-[24px] w-[24px] cursor-pointer"

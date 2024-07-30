@@ -1,5 +1,5 @@
 import { NAV_HEIGHT } from '@/default-theme/consts'
-import { useTocScroll } from '@/default-theme/hooks'
+import { useDisableScroll, useTocScroll } from '@/default-theme/hooks'
 import { PageData, TocItem as TocItemType } from '@/shared/types'
 import classNames from 'classnames'
 
@@ -12,6 +12,8 @@ export function MobileToc({
   onClick?: () => void
   toc?: PageData['toc']
 }) {
+  useDisableScroll(visible)
+
   if (!Array.isArray(toc) || toc.length < 1) {
     return <></>
   }
@@ -20,7 +22,7 @@ export function MobileToc({
     <>
       <div
         className={classNames(
-          'fixed inset-0  bg-[#00000060] transition-all duration-300',
+          'fixed inset-0 bg-[#00000060] transition-all duration-300',
           visible ? 'opacity-100' : 'opacity-0',
           visible ? 'visible' : 'invisible',
         )}
@@ -29,7 +31,7 @@ export function MobileToc({
 
       <aside
         className={classNames(
-          'w-toc border-divider bg-bg-sidebar fixed inset-y-0 right-0 z-40  h-full border-l px-[28px] py-[16px] transition-transform duration-300',
+          'w-toc border-divider bg-bg-sidebar fixed inset-y-0 right-0 h-full border-l px-[28px] py-[16px] transition-transform duration-300',
           visible ? 'translate-x-0' : 'translate-x-full',
         )}
       >
