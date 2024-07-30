@@ -102,7 +102,7 @@ function TocItem({
         href={`#${item.id}`}
         className={classNames(
           active ? 'text-brand' : 'text-text-2',
-          'text-hover block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] leading-[28px]',
+          'text-hover text-overflow block text-[13px] leading-[28px]',
         )}
         onClick={(event) => {
           onClick?.()

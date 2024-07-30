@@ -138,7 +138,7 @@ function SiderbarItem({
       onClick={onClick}
       className={classNames(
         active ? 'text-brand' : 'text-text-2',
-        'text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]',
+        'text-hover text-overflow mb-[2px] p-[2px] text-[14px]',
       )}
     >
       {text}

@@ -6,6 +6,10 @@
   .text-hover {
     @apply hover:text-brand transition-colors duration-300;
   }
+
+  .text-overflow {
+    @apply overflow-hidden text-ellipsis whitespace-nowrap;
+  }
 }
 
 /* 需要css变量来给用户控制主题颜色 */
