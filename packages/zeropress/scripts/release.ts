@@ -15,7 +15,6 @@ const __dirname = path.dirname(__filename)
 const args = minimist(process.argv.slice(2))
 
 // 是否是 dry 模式。dry 模式下只会展示命令，不会真正执行命令，用来测试。
-
 const isDry = args.dry
 
 const versionIncrements = ['patch', 'minor', 'major'] as const
@@ -44,6 +43,23 @@ async function updateVersion(version: string) {
     path.join(__dirname, '../package.json'),
     JSON.stringify({ ...pkg, version }, null, 2),
   )
+}
+
+const rollback: (Promise<unknown> | void)[] = []
+
+async function handleErr(
+  err: unknown,
+  tasks?: (Promise<unknown> | void) | (Promise<unknown> | void)[],
+) {
+  try {
+    console.log(err)
+    rollback.concat(Array.isArray(tasks) ? tasks : [tasks])
+    await Promise.all(rollback)
+  } catch (err) {
+    console.log('回退失败:', err)
+  }
+
+  exit(1)
 }
 
 // https://github.com/enquirer/enquirer#-usage
@@ -78,9 +94,7 @@ async function main() {
       step('Updating version / 更新版本中 ...')
       await updateVersion(targetVersion)
     } catch (err) {
-      console.log(err)
-      await updateVersion(currentVersion)
-      exit(1)
+      await handleErr(err, updateVersion(currentVersion))
     }
   }
 
@@ -98,10 +112,7 @@ async function main() {
     await run('git', ['add', '-A'])
     await run('git', ['commit', '-m', `release: v${targetVersion}`])
   } catch (err) {
-    console.log(err)
-    await updateVersion(currentVersion)
-    await run('git', ['reset', '--soft', 'HEAD~1'])
-    exit(1)
+    await handleErr(err, run('git', ['reset', '--soft', 'HEAD~1']))
   }
 
   // 7. git push 并打 tag
@@ -113,17 +124,19 @@ async function main() {
     // 将本地仓库中的 vxxx 标签推送到名为 origin 的远程仓库，不推送代码
     await run('git', ['push', 'origin', tagName])
   } catch (err) {
-    console.log(err)
-    await updateVersion(currentVersion)
-    await run('git', ['reset', '--soft', 'HEAD~1'])
-    await run('git', ['tag', '-d', tagName])
-    await run('git', ['push', 'origin', '--delete', 'tag', tagName])
-    exit(1)
+    await handleErr(err, [
+      run('git', ['tag', '-d', tagName]),
+      run('git', ['push', 'origin', '--delete', 'tag', tagName]),
+    ])
   }
 
   // 8. 执行 npm publish
-  step('Publishing packages / 发布包中 ...')
-  await run('pnpm', ['publish', '--access', 'public'])
+  try {
+    step('Publishing packages / 发布包中 ...')
+    await run('pnpm', ['publish', '--access', 'public'])
+  } catch (err) {
+    await handleErr(err)
+  }
 }
 
 main().catch(async (err) => {
