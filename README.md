@@ -1,7 +1,7 @@
 # ZEROPRESS SSG 框架
 
 - 🚀 基于 Vite 构建，极速的服务，极速的热更新，极速的构建
-- 📝 基于 MDX2 生产内容，Javascritp & React & MDX 的组合极其强大
+- 📝 基于 MDX2 生产内容，Javascript & React & MDX 的组合极其强大
 
 ## 一键部署
 
