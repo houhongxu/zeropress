@@ -1,11 +1,18 @@
 import { PageDataContext, getPageData } from './usePageData'
+import { useUpdateEffect } from './useUpdateEffect'
 import { ComponentProps, PropsWithChildren, useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
 export function PageDataProvider({
   children,
   value,
 }: PropsWithChildren<ComponentProps<typeof PageDataContext.Provider>>) {
   const [pageData, setPageData] = useState(value.pageData)
+  const location = useLocation()
+
+  useUpdateEffect(() => {
+    getPageData(location.pathname).then(setPageData)
+  }, [location.pathname])
 
   useEffect(() => {
     // mdx更新后重新获取pageData

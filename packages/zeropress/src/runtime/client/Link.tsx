@@ -1,4 +1,3 @@
-import { getPageData, usePageData } from '../usePageData'
 import classNames from 'classnames'
 import { PropsWithChildren } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -14,7 +13,6 @@ export function Link({
   onClick?: () => void
 }>) {
   const navigate = useNavigate()
-  const { setPageData } = usePageData()
 
   // TODO 通过配置文件区分mpa与spa模式，解决mpa的跳转后侧边栏移动等问题
   const isSpa = true
@@ -23,13 +21,9 @@ export function Link({
   const isCsg = isSpa && !href?.startsWith('http')
 
   const handleCsgNavigate = async () => {
-    const newPageData = await getPageData(href)
-
-    setPageData?.(newPageData)
-
     onClick?.()
 
-    navigate(href)
+    navigate(href.slice(1))
   }
 
   return (

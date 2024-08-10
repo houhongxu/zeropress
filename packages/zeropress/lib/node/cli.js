@@ -436,6 +436,7 @@ function viteBuild({
 }) {
   return build({
     mode: "production",
+    base: "./",
     root: ROOT_PATH,
     // 获取tsconfig.json等配置文件
     plugins: createPlugins({ siteConfig }),

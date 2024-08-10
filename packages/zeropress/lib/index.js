@@ -34,10 +34,10 @@ async function getPageData(pathname) {
     };
   }
   console.log(
-    "\u6587\u4EF6\u8DEF\u7531",
-    routes2.map((i) => i.path)
+    `${/* @__PURE__ */ new Date()}
+\u9875\u9762\u6570\u636E\uFF1A`,
+    pageData
   );
-  console.log("\u9875\u9762\u6570\u636E\uFF1A", pageData);
   return pageData;
 }
 var PageDataContext = createContext({});
@@ -56,14 +56,11 @@ function Link({
   onClick
 }) {
   const navigate = useNavigate();
-  const { setPageData } = usePageData();
   const isSpa = true;
   const isCsg = isSpa && !href?.startsWith("http");
   const handleCsgNavigate = async () => {
-    const newPageData = await getPageData(href);
-    setPageData?.(newPageData);
     onClick?.();
-    navigate(href);
+    navigate(href.slice(1));
   };
   return /* @__PURE__ */ jsx(
     "a",

@@ -12,19 +12,19 @@ async function render() {
   if (import.meta.env.PROD) {
     hydrateRoot(
       document.getElementById('root')!,
-      <PageDataProvider value={{ pageData }}>
-        <BrowserRouter>
+      <BrowserRouter>
+        <PageDataProvider value={{ pageData }}>
           <Layout></Layout>
-        </BrowserRouter>
-      </PageDataProvider>,
+        </PageDataProvider>
+      </BrowserRouter>,
     )
   } else {
     createRoot(document.getElementById('root')!).render(
-      <PageDataProvider value={{ pageData }}>
-        <BrowserRouter>
+      <BrowserRouter>
+        <PageDataProvider value={{ pageData }}>
           <Layout></Layout>
-        </BrowserRouter>
-      </PageDataProvider>,
+        </PageDataProvider>
+      </BrowserRouter>,
     )
   }
 }

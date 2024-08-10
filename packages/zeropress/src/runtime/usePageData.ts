@@ -26,10 +26,10 @@ export async function getPageData(pathname: string): Promise<PageData> {
   }
 
   console.log(
-    '文件路由',
-    routes.map((i) => i.path),
+    `${new Date()}
+页面数据：`,
+    pageData,
   )
-  console.log('页面数据：', pageData)
 
   return pageData
 }
