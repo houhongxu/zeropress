@@ -3,11 +3,12 @@ import { useUpdateEffect } from './useUpdateEffect'
 import { ComponentProps, PropsWithChildren, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
-export function PageDataProvider({
+export function ClientPageDataProvider({
   children,
   value,
 }: PropsWithChildren<ComponentProps<typeof PageDataContext.Provider>>) {
   const [pageData, setPageData] = useState(value.pageData)
+
   const location = useLocation()
 
   useUpdateEffect(() => {
@@ -22,6 +23,19 @@ export function PageDataProvider({
       )
     }
   })
+
+  return (
+    <PageDataContext.Provider value={{ pageData, setPageData }}>
+      {children}
+    </PageDataContext.Provider>
+  )
+}
+
+export function ServerPageDataProvider({
+  children,
+  value,
+}: PropsWithChildren<ComponentProps<typeof PageDataContext.Provider>>) {
+  const [pageData, setPageData] = useState(value.pageData)
 
   return (
     <PageDataContext.Provider value={{ pageData, setPageData }}>

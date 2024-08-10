@@ -1,4 +1,4 @@
-import { PageDataProvider } from '../PageDataProvider'
+import { ClientPageDataProvider } from '../PageDataProvider'
 import { getPageData } from '../usePageData'
 import { Layout } from '@/default-theme/Layout'
 import { createRoot, hydrateRoot } from 'react-dom/client'
@@ -13,17 +13,17 @@ async function render() {
     hydrateRoot(
       document.getElementById('root')!,
       <BrowserRouter>
-        <PageDataProvider value={{ pageData }}>
+        <ClientPageDataProvider value={{ pageData }}>
           <Layout></Layout>
-        </PageDataProvider>
+        </ClientPageDataProvider>
       </BrowserRouter>,
     )
   } else {
     createRoot(document.getElementById('root')!).render(
       <BrowserRouter>
-        <PageDataProvider value={{ pageData }}>
+        <ClientPageDataProvider value={{ pageData }}>
           <Layout></Layout>
-        </PageDataProvider>
+        </ClientPageDataProvider>
       </BrowserRouter>,
     )
   }

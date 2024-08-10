@@ -1,4 +1,4 @@
-import { PageDataProvider } from '../PageDataProvider'
+import { ServerPageDataProvider } from '../PageDataProvider'
 import { getPageData } from '../usePageData'
 import { Layout } from '@/default-theme/Layout'
 import { renderToString } from 'react-dom/server'
@@ -14,11 +14,11 @@ export async function render(location: string) {
 
   // https://reactrouter.com/en/main/guides/ssr#without-a-data-router
   const html = renderToString(
-    <PageDataProvider value={{ pageData }}>
+    <ServerPageDataProvider value={{ pageData }}>
       <StaticRouter location={location}>
         <Layout location={location}></Layout>
       </StaticRouter>
-    </PageDataProvider>,
+    </ServerPageDataProvider>,
   )
 
   return html
