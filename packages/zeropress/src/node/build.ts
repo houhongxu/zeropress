@@ -13,6 +13,7 @@ import { SiteConfig } from '@/shared/types'
 import autoprefixer from 'autoprefixer'
 import fse from 'fs-extra'
 import path from 'path'
+import { HelmetData } from 'react-helmet-async'
 import { RouteObject } from 'react-router-dom'
 import { RollupOutput } from 'rollup'
 import tailwindcss from 'tailwindcss'
@@ -114,10 +115,19 @@ async function renderHtmls({
   // 部署后服务路径是CLIENT_OUT_PATH文件夹所以相对路径就可以了
   const clientEntryPath = `/${clientEntryChunk?.fileName}`
 
+  // 标题上下文
+  const helmetContext = {} as HelmetData['context']
+
   const { render, routes } = (await import(serverEntryPath)) as {
-    render: (location: string) => Promise<string>
+    render: (
+      location: string,
+      helmetContext: HelmetData['context'],
+    ) => Promise<string>
     routes: RouteObject[]
   }
+
+  // 获取标题
+  const { helmet } = helmetContext
 
   const template = await fse.readFile(HTML_PATH, 'utf-8')
 
@@ -128,9 +138,12 @@ async function renderHtmls({
 
       const relativeFilePath = `${CLIENT_OUT_PATH}${file}`
 
-      const rendered = await render(route.path || '/')
+      const helmetContext = {} as HelmetData['context']
+
+      const rendered = await render(route.path || '/', helmetContext)
 
       const html = template
+        .replace('<title>ZEROPRESS</title>', helmet?.title?.toString() || '')
         .replace('<!--app-html-->', rendered)
         .replace(
           '</body>',

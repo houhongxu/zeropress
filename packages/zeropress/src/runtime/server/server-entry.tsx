@@ -1,7 +1,9 @@
 import { ServerPageDataProvider } from '../PageDataProvider'
+import { TitleHelmet } from '../TitleHelmet'
 import { getPageData } from '../usePageData'
 import { Layout } from '@/default-theme/Layout'
 import { renderToString } from 'react-dom/server'
+import { HelmetData, HelmetProvider } from 'react-helmet-async'
 import { StaticRouter } from 'react-router-dom/server'
 import routes from 'virtual:routes'
 
@@ -9,16 +11,23 @@ import routes from 'virtual:routes'
  * 渲染无请求的html
  * @description 不同的location拿到不同路由的的html，多html实现mpa路由
  */
-export async function render(location: string) {
+export async function render(
+  location: string,
+  helmetContext: HelmetData['context'],
+) {
   const pageData = await getPageData(location)
 
   // https://reactrouter.com/en/main/guides/ssr#without-a-data-router
   const html = renderToString(
-    <ServerPageDataProvider value={{ pageData }}>
-      <StaticRouter location={location}>
-        <Layout location={location}></Layout>
-      </StaticRouter>
-    </ServerPageDataProvider>,
+    <HelmetProvider context={helmetContext}>
+      <TitleHelmet pageData={pageData}></TitleHelmet>
+
+      <ServerPageDataProvider value={{ pageData }}>
+        <StaticRouter location={location}>
+          <Layout location={location}></Layout>
+        </StaticRouter>
+      </ServerPageDataProvider>
+    </HelmetProvider>,
   )
 
   return html

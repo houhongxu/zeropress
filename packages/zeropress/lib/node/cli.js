@@ -483,14 +483,17 @@ async function renderHtmls({
     serverEntryChunk?.fileName
   );
   const clientEntryPath = `/${clientEntryChunk?.fileName}`;
+  const helmetContext = {};
   const { render, routes } = await import(serverEntryPath);
+  const { helmet } = helmetContext;
   const template = await fse2.readFile(HTML_PATH, "utf-8");
   await Promise.all(
     routes.map(async (route) => {
       const file = route.path === "/" ? "/index.html" : route.path;
       const relativeFilePath = `${CLIENT_OUT_PATH}${file}`;
-      const rendered = await render(route.path || "/");
-      const html = template.replace("<!--app-html-->", rendered).replace(
+      const helmetContext2 = {};
+      const rendered = await render(route.path || "/", helmetContext2);
+      const html = template.replace("<title>ZEROPRESS</title>", helmet?.title?.toString() || "").replace("<!--app-html-->", rendered).replace(
         "</body>",
         `
     <script type="module" src="${clientEntryPath}"></script>
