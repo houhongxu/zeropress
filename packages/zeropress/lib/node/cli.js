@@ -295,6 +295,21 @@ function keyBy(arr, key) {
     return pre;
   }, {});
 }
+function splitIndex(text) {
+  const matched = text?.match(/^(\d+)(\.?\s*)(.*)$/);
+  const index = matched?.[1];
+  if (index) {
+    return {
+      index: parseInt(index),
+      text: matched?.[3] ?? ""
+    };
+  } else {
+    return {
+      index: 0,
+      text: text ?? ""
+    };
+  }
+}
 
 // src/node/plugins/vitePluginVirtualRoutes.ts
 import path3 from "path";
@@ -635,21 +650,6 @@ async function autoSidebarAndNav({ docs }) {
     return pre;
   }, {});
   return { nav, sidebar };
-}
-function splitIndex(text) {
-  const matched = text?.match(/^(\d+)(\.?\s*)(.*)$/);
-  const index = matched?.[1];
-  if (index) {
-    return {
-      index: parseInt(index),
-      text: matched?.[3] ?? ""
-    };
-  } else {
-    return {
-      index: 0,
-      text: text ?? ""
-    };
-  }
 }
 async function resolveUserConfig({
   root = process.cwd(),

@@ -1,5 +1,4 @@
 import { ClientPageDataProvider } from '../PageDataProvider'
-import { TitleHelmet } from '../TitleHelmet'
 import { getPageData } from '../usePageData'
 import { Layout } from '@/default-theme/Layout'
 import { createRoot, hydrateRoot } from 'react-dom/client'
@@ -15,8 +14,6 @@ async function render() {
     hydrateRoot(
       document.getElementById('root')!,
       <HelmetProvider>
-        <TitleHelmet pageData={pageData}></TitleHelmet>
-
         <BrowserRouter>
           <ClientPageDataProvider value={{ pageData }}>
             <Layout></Layout>
@@ -27,8 +24,6 @@ async function render() {
   } else {
     createRoot(document.getElementById('root')!).render(
       <HelmetProvider>
-        <TitleHelmet pageData={pageData}></TitleHelmet>
-
         <BrowserRouter>
           <ClientPageDataProvider value={{ pageData }}>
             <Layout></Layout>

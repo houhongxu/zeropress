@@ -1,3 +1,4 @@
+import { TitleHelmet } from './TitleHelmet'
 import { PageDataContext, getPageData } from './usePageData'
 import { useUpdateEffect } from './useUpdateEffect'
 import { ComponentProps, PropsWithChildren, useEffect, useState } from 'react'
@@ -26,6 +27,8 @@ export function ClientPageDataProvider({
 
   return (
     <PageDataContext.Provider value={{ pageData, setPageData }}>
+      <TitleHelmet pageData={pageData}></TitleHelmet>
+
       {children}
     </PageDataContext.Provider>
   )
@@ -39,6 +42,8 @@ export function ServerPageDataProvider({
 
   return (
     <PageDataContext.Provider value={{ pageData, setPageData }}>
+      <TitleHelmet pageData={pageData}></TitleHelmet>
+
       {children}
     </PageDataContext.Provider>
   )

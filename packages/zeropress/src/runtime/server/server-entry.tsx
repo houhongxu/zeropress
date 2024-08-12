@@ -1,5 +1,4 @@
 import { ServerPageDataProvider } from '../PageDataProvider'
-import { TitleHelmet } from '../TitleHelmet'
 import { getPageData } from '../usePageData'
 import { Layout } from '@/default-theme/Layout'
 import { renderToString } from 'react-dom/server'
@@ -20,8 +19,6 @@ export async function render(
   // https://reactrouter.com/en/main/guides/ssr#without-a-data-router
   const html = renderToString(
     <HelmetProvider context={helmetContext}>
-      <TitleHelmet pageData={pageData}></TitleHelmet>
-
       <ServerPageDataProvider value={{ pageData }}>
         <StaticRouter location={location}>
           <Layout location={location}></Layout>
