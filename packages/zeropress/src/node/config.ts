@@ -8,7 +8,13 @@ import {
   SidebarDir,
   SidebarItem,
 } from '@/shared/types'
-import { groupBy, keyBy, normalizeUrl, urlWithHtml } from '@/shared/utils'
+import {
+  groupBy,
+  keyBy,
+  normalizeUrl,
+  splitIndex,
+  urlWithHtml,
+} from '@/shared/utils'
 import fse from 'fs-extra'
 import path from 'path'
 import { loadConfigFromFile } from 'vite'
@@ -104,6 +110,9 @@ export async function resolveSiteConfig({
   return siteConfig
 }
 
+/**
+ * 自动生成sidebar和nav
+ */
 async function autoSidebarAndNav({ docs }: { docs?: string }) {
   // glob文件
   const files = (await getDocs(docs)).filter(
@@ -185,23 +194,9 @@ async function autoSidebarAndNav({ docs }: { docs?: string }) {
   return { nav, sidebar }
 }
 
-function splitIndex(text?: string) {
-  const matched = text?.match(/^(\d+)(\.?\s*)(.*)$/)
-  const index = matched?.[1]
-
-  if (index) {
-    return {
-      index: parseInt(index),
-      text: matched?.[3] ?? '',
-    }
-  } else {
-    return {
-      index: 0,
-      text: text ?? '',
-    }
-  }
-}
-
+/**
+ * 解析用户配置
+ */
 async function resolveUserConfig({
   root = process.cwd(),
   command,

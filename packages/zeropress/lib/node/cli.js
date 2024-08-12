@@ -295,6 +295,21 @@ function keyBy(arr, key) {
     return pre;
   }, {});
 }
+function splitIndex(text) {
+  const matched = text?.match(/^(\d+)(\.?\s*)(.*)$/);
+  const index = matched?.[1];
+  if (index) {
+    return {
+      index: parseInt(index),
+      text: matched?.[3] ?? ""
+    };
+  } else {
+    return {
+      index: 0,
+      text: text ?? ""
+    };
+  }
+}
 
 // src/node/plugins/vitePluginVirtualRoutes.ts
 import path3 from "path";
@@ -483,14 +498,17 @@ async function renderHtmls({
     serverEntryChunk?.fileName
   );
   const clientEntryPath = `/${clientEntryChunk?.fileName}`;
+  const helmetContext = {};
   const { render, routes } = await import(serverEntryPath);
+  const { helmet } = helmetContext;
   const template = await fse2.readFile(HTML_PATH, "utf-8");
   await Promise.all(
     routes.map(async (route) => {
       const file = route.path === "/" ? "/index.html" : route.path;
       const relativeFilePath = `${CLIENT_OUT_PATH}${file}`;
-      const rendered = await render(route.path || "/");
-      const html = template.replace("<!--app-html-->", rendered).replace(
+      const helmetContext2 = {};
+      const rendered = await render(route.path || "/", helmetContext2);
+      const html = template.replace("<title>ZEROPRESS</title>", helmet?.title?.toString() || "").replace("<!--app-html-->", rendered).replace(
         "</body>",
         `
     <script type="module" src="${clientEntryPath}"></script>
@@ -632,21 +650,6 @@ async function autoSidebarAndNav({ docs }) {
     return pre;
   }, {});
   return { nav, sidebar };
-}
-function splitIndex(text) {
-  const matched = text?.match(/^(\d+)(\.?\s*)(.*)$/);
-  const index = matched?.[1];
-  if (index) {
-    return {
-      index: parseInt(index),
-      text: matched?.[3] ?? ""
-    };
-  } else {
-    return {
-      index: 0,
-      text: text ?? ""
-    };
-  }
 }
 async function resolveUserConfig({
   root = process.cwd(),

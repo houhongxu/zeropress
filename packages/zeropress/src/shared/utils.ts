@@ -45,3 +45,23 @@ export function keyBy<T>(arr: T[], key: keyof T) {
     return pre
   }, {})
 }
+
+/**
+ * 分离数字和文本
+ */
+export function splitIndex(text?: string) {
+  const matched = text?.match(/^(\d+)(\.?\s*)(.*)$/)
+  const index = matched?.[1]
+
+  if (index) {
+    return {
+      index: parseInt(index),
+      text: matched?.[3] ?? '',
+    }
+  } else {
+    return {
+      index: 0,
+      text: text ?? '',
+    }
+  }
+}
