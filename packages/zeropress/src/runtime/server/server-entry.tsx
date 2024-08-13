@@ -2,8 +2,9 @@ import { ServerPageDataProvider } from '../PageDataProvider'
 import { getPageData } from '../usePageData'
 import { Layout } from '@/default-theme/Layout'
 import { renderToString } from 'react-dom/server'
-import { HelmetData, HelmetProvider } from 'react-helmet-async'
-import { StaticRouter } from 'react-router-dom/server'
+import { HelmetData } from 'react-helmet-async'
+import { StaticRouter } from 'react-router-dom/server.js'
+// server端使用cjs包
 import routes from 'virtual:routes'
 
 /**
@@ -18,13 +19,11 @@ export async function render(
 
   // https://reactrouter.com/en/main/guides/ssr#without-a-data-router
   const html = renderToString(
-    <HelmetProvider context={helmetContext}>
-      <ServerPageDataProvider value={{ pageData }}>
-        <StaticRouter location={location}>
-          <Layout location={location}></Layout>
-        </StaticRouter>
-      </ServerPageDataProvider>
-    </HelmetProvider>,
+    <ServerPageDataProvider helmetContext={helmetContext} value={{ pageData }}>
+      <StaticRouter location={location}>
+        <Layout location={location}></Layout>
+      </StaticRouter>
+    </ServerPageDataProvider>,
   )
 
   return html

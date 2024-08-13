@@ -461,11 +461,10 @@ function viteBuild({
       rollupOptions: {
         input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
         output: {
-          entryFileNames: isServer ? "server-entry.js" : "client-entry.js",
-          format: "es"
+          entryFileNames: isServer ? "server-entry.cjs" : "client-entry.js",
+          format: isServer ? "cjs" : "es"
         }
-      },
-      commonjsOptions: { include: "node_modules/react-helmet-async" }
+      }
     },
     // 配置tailwindcss
     css: {

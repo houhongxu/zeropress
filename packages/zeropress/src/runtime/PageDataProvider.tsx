@@ -2,6 +2,7 @@ import { TitleHelmet } from './TitleHelmet'
 import { PageDataContext, getPageData } from './usePageData'
 import { useUpdateEffect } from './useUpdateEffect'
 import { ComponentProps, PropsWithChildren, useEffect, useState } from 'react'
+import { HelmetData } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
 
 export function ClientPageDataProvider({
@@ -37,12 +38,20 @@ export function ClientPageDataProvider({
 export function ServerPageDataProvider({
   children,
   value,
-}: PropsWithChildren<ComponentProps<typeof PageDataContext.Provider>>) {
+  helmetContext,
+}: PropsWithChildren<
+  ComponentProps<typeof PageDataContext.Provider> & {
+    helmetContext?: HelmetData['context']
+  }
+>) {
   const [pageData, setPageData] = useState(value.pageData)
 
   return (
     <PageDataContext.Provider value={{ pageData, setPageData }}>
-      <TitleHelmet pageData={pageData}></TitleHelmet>
+      <TitleHelmet
+        helmetContext={helmetContext}
+        pageData={pageData}
+      ></TitleHelmet>
 
       {children}
     </PageDataContext.Provider>
