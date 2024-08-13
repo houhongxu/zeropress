@@ -462,7 +462,7 @@ function viteBuild({
         input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
         output: {
           entryFileNames: isServer ? "server-entry.js" : "client-entry.js",
-          format: "es"
+          format: isServer ? "cjs" : "es"
         }
       }
     },
