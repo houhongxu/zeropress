@@ -1,10 +1,38 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useRoutes, useNavigate, useLocation } from "react-router-dom";
 import classNames from "classnames";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server.mjs";
-const config = { "docs": "docs", "title": "ZEROPRESS", "description": "SSG Framework", "themeConfig": { "nav": [{ "text": "笔记", "index": 0, "link": "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro.html" }, { "text": "测试超级超级超级超级长的头部", "index": 0, "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/1%E4%BD%BF%E7%94%A8%20node%20api%20%E5%AD%A6%E4%B9%A0%20webpack.html" }, { "text": "离谱", "index": 0, "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/1useLocalStorageState%E4%B8%8EuseSessionStorageState.html" }, { "img": "/logo.jpg", "link": "/", "position": "left" }, { "dark": true, "link": "/" }, { "logo": "github", "link": "https://github.com/houhongxu/hhxpress" }], "sidebar": { "/%E7%AC%94%E8%AE%B0": [{ "text": "介绍", "items": [{ "text": "intro", "link": "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro.html" }], "link": "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro.html" }, { "text": "git", "items": [{ "text": "常用命令", "link": "/%E7%AC%94%E8%AE%B0/1git/0%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html" }, { "text": "版本控制系统VCS", "link": "/%E7%AC%94%E8%AE%B0/1git/1%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FVCS.html" }, { "text": "分布式版本控制系统DVCS", "link": "/%E7%AC%94%E8%AE%B0/1git/2%E5%88%86%E5%B8%83%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FDVCS.html" }, { "text": "HEAD与master与branch", "link": "/%E7%AC%94%E8%AE%B0/1git/3HEAD%E4%B8%8Emaster%E4%B8%8Ebranch.html" }, { "text": "push", "link": "/%E7%AC%94%E8%AE%B0/1git/4push.html" }, { "text": "merge", "link": "/%E7%AC%94%E8%AE%B0/1git/5merge.html" }, { "text": "feature branch", "link": "/%E7%AC%94%E8%AE%B0/1git/6feature%20branch.html" }, { "text": "rebase", "link": "/%E7%AC%94%E8%AE%B0/1git/7rebase.html" }, { "text": "revert", "link": "/%E7%AC%94%E8%AE%B0/1git/8revert.html" }, { "text": "reset", "link": "/%E7%AC%94%E8%AE%B0/1git/9reset.html" }, { "text": "checkout", "link": "/%E7%AC%94%E8%AE%B0/1git/10checkout.html" }, { "text": "stash", "link": "/%E7%AC%94%E8%AE%B0/1git/11stash.html" }, { "text": "log与reflog", "link": "/%E7%AC%94%E8%AE%B0/1git/12log%E4%B8%8Ereflog.html" }, { "text": "cherry-pick", "link": "/%E7%AC%94%E8%AE%B0/1git/13cherry-pick.html" }, { "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/1git/99readme.html" }], "link": "/%E7%AC%94%E8%AE%B0/1git/9reset.html" }, { "text": "浏览器", "items": [{ "text": "浏览器进程", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/1%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9B%E7%A8%8B.html" }, { "text": "TCP协议", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/2TCP%E5%8D%8F%E8%AE%AE.html" }, { "text": "HTTP协议", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/3HTTP%E5%8D%8F%E8%AE%AE.html" }, { "text": "浏览器缓存", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/4%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98.html" }, { "text": "导航流程", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/5%E5%AF%BC%E8%88%AA%E6%B5%81%E7%A8%8B.html" }, { "text": "渲染流程", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/6%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B.html" }, { "text": "内存", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/13%E5%86%85%E5%AD%98.html" }, { "text": "消息队列和事件循环", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/16%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.html" }, { "text": "浏览器的dns缓存", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/98%20%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84dns%E7%BC%93%E5%AD%98.html" }, { "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/99readme.html" }], "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/99readme.html" }, { "text": "http", "items": [{ "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/3http/99readme.html" }], "link": "/%E7%AC%94%E8%AE%B0/3http/99readme.html" }, { "text": "javascript", "items": [{ "text": "引用", "link": "/%E7%AC%94%E8%AE%B0/4javascript/1%E5%BC%95%E7%94%A8.html" }, { "text": "运算符", "link": "/%E7%AC%94%E8%AE%B0/4javascript/2%E8%BF%90%E7%AE%97%E7%AC%A6.html" }, { "text": "lodash手写", "link": "/%E7%AC%94%E8%AE%B0/4javascript/3lodash%E6%89%8B%E5%86%99.html" }], "link": "/%E7%AC%94%E8%AE%B0/4javascript/3lodash%E6%89%8B%E5%86%99.html" }, { "text": "工具函数", "items": [], "link": "/%E7%AC%94%E8%AE%B0/98.%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0.html" }], "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8": [{ "text": "webpack", "items": [{ "text": "使用 node api 学习 webpack", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/1%E4%BD%BF%E7%94%A8%20node%20api%20%E5%AD%A6%E4%B9%A0%20webpack.html" }, { "text": "cjs运行时分析", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/2cjs%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90.html" }, { "text": "cjs模块收集与ast", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/3cjs%E6%A8%A1%E5%9D%97%E6%94%B6%E9%9B%86%E4%B8%8East.html" }, { "text": "文件名中的hash", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/4%E6%96%87%E4%BB%B6%E5%90%8D%E4%B8%AD%E7%9A%84hash.html" }, { "text": "cjs与esm", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/5cjs%E4%B8%8Eesm.html" }, { "text": "esm to cjs", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/6esm%20to%20cjs.html" }, { "text": "code spliting运行时分析", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/7code%20spliting%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90.html" }, { "text": "magic comment", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/8magic%20comment.html" }, { "text": "hash 的增强", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/9hash%20%E7%9A%84%E5%A2%9E%E5%BC%BA.html" }, { "text": "module与chunk与asset", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/10module%E4%B8%8Echunk%E4%B8%8Easset.html" }, { "text": "bundle spliting", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/11bundle%20spliting.html" }, { "text": "高效分包", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/12%E9%AB%98%E6%95%88%E5%88%86%E5%8C%85.html" }, { "text": "loader初识", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/13loader%E5%88%9D%E8%AF%86.html" }, { "text": "json处理", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/14json%E5%A4%84%E7%90%86.html" }, { "text": "import assertions", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/15import%20assertions.html" }, { "text": "html处理", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/16html%E5%A4%84%E7%90%86.html" }, { "text": "图片处理", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/17%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86.html" }, { "text": "小图片处理", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/18%E5%B0%8F%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86.html" }, { "text": "svg图片处理", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/19svg%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86.html" }, { "text": "简单样式处理", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/20%E7%AE%80%E5%8D%95%E6%A0%B7%E5%BC%8F%E5%A4%84%E7%90%86.html" }, { "text": "readme", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/99readme.html" }], "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/9hash%20%E7%9A%84%E5%A2%9E%E5%BC%BA.html" }], "/%E7%A6%BB%E8%B0%B1": [{ "text": "ahooks", "items": [{ "text": "useLocalStorageState与useSessionStorageState", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/1useLocalStorageState%E4%B8%8EuseSessionStorageState.html" }, { "text": "useUpdateEffect 与 useUpdateLayoutEffectt", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/2useUpdateEffect%20%E4%B8%8E%20useUpdateLayoutEffectt.html" }, { "text": "useLatest与useMemoizedFn", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/3useLatest%E4%B8%8EuseMemoizedFn.html" }, { "text": "use(Raf)Timeout与use(Raf)Interval与useCountDown", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/4use(Raf)Timeout%E4%B8%8Euse(Raf)Interval%E4%B8%8EuseCountDown.html" }, { "text": "useRequest", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/5useRequest.html" }, { "text": "useMount与useUnMount与useMountedRefx.md", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/6useMount%E4%B8%8EuseUnMount%E4%B8%8EuseMountedRefx.md.html" }, { "text": "useUpdate", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/7useUpdate.html" }, { "text": "useCreation", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/8useCreation.html" }, { "text": "useDeepCompareEffect", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/9useDeepCompareEffect.html" }, { "text": "useAnimationFrame和计时器", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/97useAnimationFrame%E5%92%8C%E8%AE%A1%E6%97%B6%E5%99%A8.html" }], "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/9useDeepCompareEffect.html" }] }, "autoNav": true, "autoSidebar": true }, "vite": {} };
+function isBrowser() {
+  return typeof window !== "undefined" && !!window.document && !!window.document.createElement;
+}
+function normalizeUrl(url = "/") {
+  return encodeURI(url);
+}
+function splitIndex(text) {
+  const matched = text == null ? void 0 : text.match(/^(\d+)(\.?\s*)(.*)$/);
+  const index2 = matched == null ? void 0 : matched[1];
+  if (index2) {
+    return {
+      index: parseInt(index2),
+      text: (matched == null ? void 0 : matched[3]) ?? ""
+    };
+  } else {
+    return {
+      index: 0,
+      text: text ?? ""
+    };
+  }
+}
+function TitleHelmet({ pageData }) {
+  var _a;
+  const rawDocTitle = (_a = pageData == null ? void 0 : pageData.pagePath.split("/").at(-1)) == null ? void 0 : _a.split(".")[0];
+  const docTitle = decodeURI(splitIndex(rawDocTitle).text);
+  return /* @__PURE__ */ jsx(Helmet, { children: /* @__PURE__ */ jsx("title", { children: (docTitle ? `${docTitle} | ` : "") + (pageData == null ? void 0 : pageData.userConfig.title) }) });
+}
+const config = { "docs": "docs", "title": "xxx", "description": "SSG Framework", "themeConfig": { "nav": [{ "text": "笔记", "index": 0, "link": "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro.html" }, { "text": "测试超级超级超级超级长的头部", "index": 0, "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/1%E4%BD%BF%E7%94%A8%20node%20api%20%E5%AD%A6%E4%B9%A0%20webpack.html" }, { "text": "离谱", "index": 0, "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/1useLocalStorageState%E4%B8%8EuseSessionStorageState.html" }, { "img": "/logo.jpg", "link": "/", "position": "left" }, { "dark": true, "link": "/" }, { "logo": "github", "link": "https://github.com/houhongxu/hhxpress" }], "sidebar": { "/%E7%AC%94%E8%AE%B0": [{ "text": "介绍", "items": [{ "text": "intro", "link": "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro.html" }], "link": "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro.html" }, { "text": "git", "items": [{ "text": "常用命令", "link": "/%E7%AC%94%E8%AE%B0/1git/0%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html" }, { "text": "版本控制系统VCS", "link": "/%E7%AC%94%E8%AE%B0/1git/1%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FVCS.html" }, { "text": "分布式版本控制系统DVCS", "link": "/%E7%AC%94%E8%AE%B0/1git/2%E5%88%86%E5%B8%83%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FDVCS.html" }, { "text": "HEAD与master与branch", "link": "/%E7%AC%94%E8%AE%B0/1git/3HEAD%E4%B8%8Emaster%E4%B8%8Ebranch.html" }, { "text": "push", "link": "/%E7%AC%94%E8%AE%B0/1git/4push.html" }, { "text": "merge", "link": "/%E7%AC%94%E8%AE%B0/1git/5merge.html" }, { "text": "feature branch", "link": "/%E7%AC%94%E8%AE%B0/1git/6feature%20branch.html" }, { "text": "rebase", "link": "/%E7%AC%94%E8%AE%B0/1git/7rebase.html" }, { "text": "revert", "link": "/%E7%AC%94%E8%AE%B0/1git/8revert.html" }, { "text": "reset", "link": "/%E7%AC%94%E8%AE%B0/1git/9reset.html" }, { "text": "checkout", "link": "/%E7%AC%94%E8%AE%B0/1git/10checkout.html" }, { "text": "stash", "link": "/%E7%AC%94%E8%AE%B0/1git/11stash.html" }, { "text": "log与reflog", "link": "/%E7%AC%94%E8%AE%B0/1git/12log%E4%B8%8Ereflog.html" }, { "text": "cherry-pick", "link": "/%E7%AC%94%E8%AE%B0/1git/13cherry-pick.html" }, { "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/1git/99readme.html" }], "link": "/%E7%AC%94%E8%AE%B0/1git/9reset.html" }, { "text": "浏览器", "items": [{ "text": "浏览器进程", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/1%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9B%E7%A8%8B.html" }, { "text": "TCP协议", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/2TCP%E5%8D%8F%E8%AE%AE.html" }, { "text": "HTTP协议", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/3HTTP%E5%8D%8F%E8%AE%AE.html" }, { "text": "浏览器缓存", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/4%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98.html" }, { "text": "导航流程", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/5%E5%AF%BC%E8%88%AA%E6%B5%81%E7%A8%8B.html" }, { "text": "渲染流程", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/6%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B.html" }, { "text": "内存", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/13%E5%86%85%E5%AD%98.html" }, { "text": "消息队列和事件循环", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/16%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.html" }, { "text": "浏览器的dns缓存", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/98%20%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84dns%E7%BC%93%E5%AD%98.html" }, { "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/99readme.html" }], "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/99readme.html" }, { "text": "http", "items": [{ "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/3http/99readme.html" }], "link": "/%E7%AC%94%E8%AE%B0/3http/99readme.html" }, { "text": "javascript", "items": [{ "text": "引用", "link": "/%E7%AC%94%E8%AE%B0/4javascript/1%E5%BC%95%E7%94%A8.html" }, { "text": "运算符", "link": "/%E7%AC%94%E8%AE%B0/4javascript/2%E8%BF%90%E7%AE%97%E7%AC%A6.html" }, { "text": "lodash手写", "link": "/%E7%AC%94%E8%AE%B0/4javascript/3lodash%E6%89%8B%E5%86%99.html" }], "link": "/%E7%AC%94%E8%AE%B0/4javascript/3lodash%E6%89%8B%E5%86%99.html" }, { "text": "工具函数", "items": [], "link": "/%E7%AC%94%E8%AE%B0/98.%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0.html" }], "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8": [{ "text": "webpack", "items": [{ "text": "使用 node api 学习 webpack", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/1%E4%BD%BF%E7%94%A8%20node%20api%20%E5%AD%A6%E4%B9%A0%20webpack.html" }, { "text": "cjs运行时分析", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/2cjs%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90.html" }, { "text": "cjs模块收集与ast", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/3cjs%E6%A8%A1%E5%9D%97%E6%94%B6%E9%9B%86%E4%B8%8East.html" }, { "text": "文件名中的hash", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/4%E6%96%87%E4%BB%B6%E5%90%8D%E4%B8%AD%E7%9A%84hash.html" }, { "text": "cjs与esm", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/5cjs%E4%B8%8Eesm.html" }, { "text": "esm to cjs", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/6esm%20to%20cjs.html" }, { "text": "code spliting运行时分析", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/7code%20spliting%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90.html" }, { "text": "magic comment", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/8magic%20comment.html" }, { "text": "hash 的增强", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/9hash%20%E7%9A%84%E5%A2%9E%E5%BC%BA.html" }, { "text": "module与chunk与asset", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/10module%E4%B8%8Echunk%E4%B8%8Easset.html" }, { "text": "bundle spliting", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/11bundle%20spliting.html" }, { "text": "高效分包", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/12%E9%AB%98%E6%95%88%E5%88%86%E5%8C%85.html" }, { "text": "loader初识", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/13loader%E5%88%9D%E8%AF%86.html" }, { "text": "json处理", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/14json%E5%A4%84%E7%90%86.html" }, { "text": "import assertions", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/15import%20assertions.html" }, { "text": "html处理", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/16html%E5%A4%84%E7%90%86.html" }, { "text": "图片处理", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/17%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86.html" }, { "text": "小图片处理", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/18%E5%B0%8F%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86.html" }, { "text": "svg图片处理", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/19svg%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86.html" }, { "text": "简单样式处理", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/20%E7%AE%80%E5%8D%95%E6%A0%B7%E5%BC%8F%E5%A4%84%E7%90%86.html" }, { "text": "readme", "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/99readme.html" }], "link": "/%E6%B5%8B%E8%AF%95%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E8%B6%85%E7%BA%A7%E9%95%BF%E7%9A%84%E5%A4%B4%E9%83%A8/5webpack/9hash%20%E7%9A%84%E5%A2%9E%E5%BC%BA.html" }], "/%E7%A6%BB%E8%B0%B1": [{ "text": "ahooks", "items": [{ "text": "useLocalStorageState与useSessionStorageState", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/1useLocalStorageState%E4%B8%8EuseSessionStorageState.html" }, { "text": "useUpdateEffect 与 useUpdateLayoutEffectt", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/2useUpdateEffect%20%E4%B8%8E%20useUpdateLayoutEffectt.html" }, { "text": "useLatest与useMemoizedFn", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/3useLatest%E4%B8%8EuseMemoizedFn.html" }, { "text": "use(Raf)Timeout与use(Raf)Interval与useCountDown", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/4use(Raf)Timeout%E4%B8%8Euse(Raf)Interval%E4%B8%8EuseCountDown.html" }, { "text": "useRequest", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/5useRequest.html" }, { "text": "useMount与useUnMount与useMountedRefx.md", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/6useMount%E4%B8%8EuseUnMount%E4%B8%8EuseMountedRefx.md.html" }, { "text": "useUpdate", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/7useUpdate.html" }, { "text": "useCreation", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/8useCreation.html" }, { "text": "useDeepCompareEffect", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/9useDeepCompareEffect.html" }, { "text": "useAnimationFrame和计时器", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/97useAnimationFrame%E5%92%8C%E8%AE%A1%E6%97%B6%E5%99%A8.html" }], "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/9useDeepCompareEffect.html" }] }, "autoNav": true, "autoSidebar": true }, "vite": {} };
 const GetToc$_ = () => [];
 const frontmatter$_ = {
   "pageType": "home"
@@ -18923,1099 +18951,6 @@ function _createMdxContent$s(props) {
   const _components = {
     a: "a",
     h1: "h1",
-    p: "p",
-    span: "span",
-    ...props.components
-  };
-  return jsxs(Fragment, {
-    children: [jsxs(_components.h1, {
-      id: "参考",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#参考",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "参考"]
-    }), "\n", jsx(_components.p, {
-      children: jsx(_components.a, {
-        href: "https://q.shanyue.tech/",
-        children: "山月"
-      })
-    })]
-  });
-}
-function MDXContent$s(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$s, {
-      ...props
-    })
-  }) : _createMdxContent$s(props);
-}
-const GetFrontMatter$s = () => frontmatter$s;
-const _99readme$2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$s,
-  GetToc: GetToc$s,
-  default: MDXContent$s
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$r = () => [];
-const frontmatter$r = void 0;
-function _createMdxContent$r(props) {
-  const _components = {
-    a: "a",
-    h1: "h1",
-    span: "span",
-    ...props.components
-  };
-  return jsxs(_components.h1, {
-    id: "内存",
-    children: [jsx(_components.a, {
-      className: "autolink-headings",
-      href: "#内存",
-      children: jsx(_components.span, {
-        style: {
-          marginRight: "4px"
-        },
-        children: "#"
-      })
-    }), "内存"]
-  });
-}
-function MDXContent$r(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$r, {
-      ...props
-    })
-  }) : _createMdxContent$r(props);
-}
-const GetFrontMatter$r = () => frontmatter$r;
-const _13__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$r,
-  GetToc: GetToc$r,
-  default: MDXContent$r
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$q = () => [{
-  "id": "单线程",
-  "text": "单线程",
-  "depth": 2
-}, {
-  "id": "在线程运行过程中处理新任务",
-  "text": "在线程运行过程中处理新任务",
-  "depth": 2
-}, {
-  "id": "处理其他线程发送过来的任务",
-  "text": "处理其他线程发送过来的任务",
-  "depth": 2
-}, {
-  "id": "处理其他进程发送过来的任务",
-  "text": "处理其他进程发送过来的任务",
-  "depth": 2
-}, {
-  "id": "消息队列中的任务类型",
-  "text": "消息队列中的任务类型",
-  "depth": 2
-}, {
-  "id": "页面使用单线程的缺点",
-  "text": "页面使用单线程的缺点",
-  "depth": 2
-}, {
-  "id": "总结",
-  "text": "总结",
-  "depth": 2
-}];
-const frontmatter$q = void 0;
-function _createMdxContent$q(props) {
-  const _components = {
-    a: "a",
-    h1: "h1",
-    h2: "h2",
-    li: "li",
-    p: "p",
-    span: "span",
-    ul: "ul",
-    ...props.components
-  };
-  return jsxs(Fragment, {
-    children: [jsxs(_components.h1, {
-      id: "消息队列和事件循环",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#消息队列和事件循环",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "消息队列和事件循环"]
-    }), "\n", jsxs(_components.h2, {
-      id: "单线程",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#单线程",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "单线程"]
-    }), "\n", jsx(_components.p, {
-      children: "一个线程中去执行任务"
-    }), "\n", jsxs(_components.h2, {
-      id: "在线程运行过程中处理新任务",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#在线程运行过程中处理新任务",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "在线程运行过程中处理新任务"]
-    }), "\n", jsx(_components.p, {
-      children: "要想在线程运行过程中，能接收并执行新的任务，就需要采用事件(任务)循环机制\n不停的循环接受事件(任务)，接受后处理事件(任务)"
-    }), "\n", jsxs(_components.h2, {
-      id: "处理其他线程发送过来的任务",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#处理其他线程发送过来的任务",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "处理其他线程发送过来的任务"]
-    }), "\n", jsx(_components.p, {
-      children: "渲染主线程会频繁接收到来自于 IO 线程的一些任务，比如鼠标点击，资源加载完成等"
-    }), "\n", jsx(_components.p, {
-      children: "使用消息队列存放要执行的任务，IO 线程中产生的新任务添加进消息队列尾部"
-    }), "\n", jsx(_components.p, {
-      children: "事件循环从队列头部取出任务"
-    }), "\n", jsxs(_components.h2, {
-      id: "处理其他进程发送过来的任务",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#处理其他进程发送过来的任务",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "处理其他进程发送过来的任务"]
-    }), "\n", jsx(_components.p, {
-      children: "渲染进程专门有一个 IO 线程用来接收其他进程传进来的消息"
-    }), "\n", jsxs(_components.h2, {
-      id: "消息队列中的任务类型",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#消息队列中的任务类型",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "消息队列中的任务类型"]
-    }), "\n", jsx(_components.p, {
-      children: "输入事件（鼠标滚动、点击、移动）、微任务、文件读写、WebSocket、JavaScript 定时器等等。\nJavaScript 执行、解析 DOM、样式计算、布局计算、CSS 动画等。"
-    }), "\n", jsxs(_components.h2, {
-      id: "页面使用单线程的缺点",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#页面使用单线程的缺点",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "页面使用单线程的缺点"]
-    }), "\n", jsx(_components.p, {
-      children: "第一个问题是如何处理高优先级的任务。"
-    }), "\n", jsx(_components.p, {
-      children: "通常我们把消息队列中的任务称为宏任务，每个宏任务中都包含了一个微任务队列"
-    }), "\n", jsx(_components.p, {
-      children: "执行宏任务的过程中，如果 DOM 有变化，那么就会将该变化添加到微任务列表中，宏任务中的主要功能都直接完成之后，执行当前宏任务中的微任务"
-    }), "\n", jsx(_components.p, {
-      children: "微任务常用的就是 promise"
-    }), "\n", jsxs(_components.h2, {
-      id: "总结",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#总结",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "总结"]
-    }), "\n", jsxs(_components.ul, {
-      children: ["\n", jsx(_components.li, {
-        children: "如果有一些确定好的任务，可以使用一个单线程来按照顺序处理这些任务，这是第一版线程模型。"
-      }), "\n", jsx(_components.li, {
-        children: "要在线程执行过程中接收并处理新的任务，就需要引入循环语句和事件系统，这是第二版线程模型。"
-      }), "\n", jsx(_components.li, {
-        children: "如果要接收其他线程发送过来的任务，就需要引入消息队列，这是第三版线程模型。"
-      }), "\n", jsx(_components.li, {
-        children: "如果其他进程想要发送任务给页面主线程，那么先通过 IPC 把任务发送给渲染进程的 IO 线程，IO 线程再把任务发送给页面主线程。"
-      }), "\n", jsx(_components.li, {
-        children: "消息队列机制并不是太灵活，为了适应效率和实时性，引入了微任务。"
-      }), "\n"]
-    })]
-  });
-}
-function MDXContent$q(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$q, {
-      ...props
-    })
-  }) : _createMdxContent$q(props);
-}
-const GetFrontMatter$q = () => frontmatter$q;
-const _16_________ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$q,
-  GetToc: GetToc$q,
-  default: MDXContent$q
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$p = () => [];
-const frontmatter$p = void 0;
-function _createMdxContent$p(props) {
-  const _components = {
-    a: "a",
-    h1: "h1",
-    li: "li",
-    span: "span",
-    ul: "ul",
-    ...props.components
-  };
-  return jsxs(Fragment, {
-    children: [jsxs(_components.h1, {
-      id: "浏览器进程",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#浏览器进程",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "浏览器进程"]
-    }), "\n", jsxs(_components.ul, {
-      children: ["\n", jsx(_components.li, {
-        children: "浏览器进程：界面显示、用户交互、子进程管理，同时提供存储等功能"
-      }), "\n", jsx(_components.li, {
-        children: "渲染进程：安全考虑，渲染进程都是运行在沙箱模式下，包括排版引擎 Blink 和 JavaScript 引擎 V8 ，可以将 HTML、CSS、JS 转换为页面"
-      }), "\n", jsx(_components.li, {
-        children: "GPU 进程：3D CSS、Chrome UI、网页"
-      }), "\n", jsx(_components.li, {
-        children: "网络进程：网络资源加载"
-      }), "\n", jsx(_components.li, {
-        children: "插件进程：运行插件，因为插件容易崩溃所以分离为进程"
-      }), "\n"]
-    })]
-  });
-}
-function MDXContent$p(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$p, {
-      ...props
-    })
-  }) : _createMdxContent$p(props);
-}
-const GetFrontMatter$p = () => frontmatter$p;
-const _1_____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$p,
-  GetToc: GetToc$p,
-  default: MDXContent$p
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$o = () => [{
-  "id": "ip-internet-protocol-网际协议",
-  "text": "IP Internet Protocol 网际协议",
-  "depth": 2
-}, {
-  "id": "udp-user-datagram-protocol-用户数据包协议",
-  "text": "UDP User Datagram Protocol 用户数据包协议",
-  "depth": 2
-}, {
-  "id": "tcp-transmission-control-protocol-传输控制协议",
-  "text": "TCP Transmission Control Protocol 传输控制协议",
-  "depth": 2
-}, {
-  "id": "tcpip-四层模型",
-  "text": "TCP/IP 四层模型",
-  "depth": 2
-}];
-const frontmatter$o = void 0;
-function _createMdxContent$o(props) {
-  const _components = {
-    a: "a",
-    h1: "h1",
-    h2: "h2",
-    img: "img",
-    li: "li",
-    p: "p",
-    span: "span",
-    strong: "strong",
-    ul: "ul",
-    ...props.components
-  };
-  return jsxs(Fragment, {
-    children: [jsxs(_components.h1, {
-      id: "tcp-协议",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#tcp-协议",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "TCP 协议"]
-    }), "\n", jsxs(_components.h2, {
-      id: "ip-internet-protocol-网际协议",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#ip-internet-protocol-网际协议",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "IP Internet Protocol 网际协议"]
-    }), "\n", jsx(_components.p, {
-      children: "IP 地址就是计算机的地址，通过 IP 将数据包传递给另一个主机"
-    }), "\n", jsx(_components.p, {
-      children: "数据包会携带 IP 头"
-    }), "\n", jsxs(_components.h2, {
-      id: "udp-user-datagram-protocol-用户数据包协议",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#udp-user-datagram-protocol-用户数据包协议",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "UDP User Datagram Protocol 用户数据包协议"]
-    }), "\n", jsxs(_components.p, {
-      children: ["UDP 通过", jsx(_components.strong, {
-        children: "端口号"
-      }), "把数据包传递给对应的程序"]
-    }), "\n", jsx(_components.p, {
-      children: "数据包会携带 UDP 头（含本机目标端口号）和 IP 头"
-    }), "\n", jsx(_components.p, {
-      children: "对于错误的数据包，UDP 并不提供重发机制，只是丢弃当前的包，而且 UDP 在发送之后也无法知道是否能达到目的地"
-    }), "\n", jsx(_components.p, {
-      children: "UDP 不能保证数据可靠性，但是传输速度却非常快"
-    }), "\n", jsxs(_components.h2, {
-      id: "tcp-transmission-control-protocol-传输控制协议",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#tcp-transmission-control-protocol-传输控制协议",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "TCP Transmission Control Protocol 传输控制协议"]
-    }), "\n", jsx(_components.p, {
-      children: "TCP 是一种面向连接的、可靠的、基于字节流的传输层通信协议"
-    }), "\n", jsxs(_components.ul, {
-      children: ["\n", jsx(_components.li, {
-        children: "TCP 提供丢失重传机制"
-      }), "\n", jsx(_components.li, {
-        children: "TCP 引入了数据包排序机制，乱序数据包可以组合成完整文件"
-      }), "\n"]
-    }), "\n", jsx(_components.p, {
-      children: "数据包会携带 TCP 头（含本机目标端口号和序号）和 IP 头"
-    }), "\n", jsxs(_components.ul, {
-      children: ["\n", jsx(_components.li, {
-        children: "建立连接：连接过程会三次握手，会发送三个数据包才会确认连接建立"
-      }), "\n", jsx(_components.li, {
-        children: "传输数据：接受端会对每个数据包发出确认操作，发送端没有收到确认信息的会触发重发机制，而且接收端会按照 TCP 头中的序号排序数据包"
-      }), "\n", jsx(_components.li, {
-        children: "断开连接：断开过程会四次挥手，保证双方都断开连接"
-      }), "\n"]
-    }), "\n", jsxs(_components.h2, {
-      id: "tcpip-四层模型",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#tcpip-四层模型",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "TCP/IP 四层模型"]
-    }), "\n", jsx(_components.p, {
-      children: "IEEE802->IP->TCP/UDP->HTTP"
-    }), "\n", jsx(_components.p, {
-      children: jsx(_components.img, {
-        src: "/img/note/2/2-1.jpg",
-        alt: "2-1"
-      })
-    })]
-  });
-}
-function MDXContent$o(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$o, {
-      ...props
-    })
-  }) : _createMdxContent$o(props);
-}
-const GetFrontMatter$o = () => frontmatter$o;
-const _2TCP__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$o,
-  GetToc: GetToc$o,
-  default: MDXContent$o
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$n = () => [{
-  "id": "dns-domain-name-system-域名系统",
-  "text": "DNS Domain Name System 域名系统",
-  "depth": 2
-}, {
-  "id": "浏览器发起-http-请求的流程",
-  "text": "浏览器发起 HTTP 请求的流程",
-  "depth": 2
-}, {
-  "id": "服务器处理-http-请求的流程",
-  "text": "服务器处理 HTTP 请求的流程",
-  "depth": 2
-}];
-const frontmatter$n = void 0;
-function _createMdxContent$n(props) {
-  const _components = {
-    a: "a",
-    code: "code",
-    h1: "h1",
-    h2: "h2",
-    li: "li",
-    ol: "ol",
-    p: "p",
-    span: "span",
-    strong: "strong",
-    ul: "ul",
-    ...props.components
-  };
-  return jsxs(Fragment, {
-    children: [jsxs(_components.h1, {
-      id: "http-协议",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#http-协议",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "HTTP 协议"]
-    }), "\n", jsx(_components.p, {
-      children: "HTTP 是一种允许浏览器向服务器获取资源的协议，是 Web 的基础"
-    }), "\n", jsxs(_components.h2, {
-      id: "dns-domain-name-system-域名系统",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#dns-domain-name-system-域名系统",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "DNS Domain Name System 域名系统"]
-    }), "\n", jsxs(_components.p, {
-      children: ["将域名与 IP 地址做一一映射\n浏览器有 DNS", jsx(_components.strong, {
-        children: "数据缓存服务"
-      }), "，解析过的域名会缓存，减少请求"]
-    }), "\n", jsxs(_components.h2, {
-      id: "浏览器发起-http-请求的流程",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#浏览器发起-http-请求的流程",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "浏览器发起 HTTP 请求的流程"]
-    }), "\n", jsxs(_components.ol, {
-      children: ["\n", jsxs(_components.li, {
-        children: ["\n", jsxs(_components.p, {
-          children: ["构建请求行\n请求方法 + 请求 URI + HTTP 协议版本\n例如：", jsx(_components.code, {
-            children: "GET /index.html HTTP/1.1"
-          })]
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "查找缓存"
-        }), "\n", jsx(_components.p, {
-          children: "浏览器会在请求前查询浏览器缓存中是否有该文件，如果有则结束请求"
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "准备 IP 地址与端口"
-        }), "\n", jsx(_components.p, {
-          children: "现在只有 URL，HTTP 需要与服务器建立 TCP 连接就需要 IP 地址与端口，所以通过一下方式获得"
-        }), "\n", jsxs(_components.ul, {
-          children: ["\n", jsx(_components.li, {
-            children: "请求 DNS 返回域名对应的 IP 地址"
-          }), "\n", jsx(_components.li, {
-            children: "从 URL 中获取端口号，HTTP 默认为 80"
-          }), "\n"]
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "等待 TCP 队列"
-        }), "\n", jsx(_components.p, {
-          children: "Chrome 有个机制，同一个域名同时最多只能建立 6 个 TCP 连接，如果在同一个域名下同时有 10 个请求发生，那么其中 4 个请求会进入排队等待状态，直至进行中的请求完成。"
-        }), "\n", jsx(_components.p, {
-          children: "http/1.1 一个 tcp 同时只能处理一个请求，浏览器会为每个域名维护 6 个 tcp 连接"
-        }), "\n", jsx(_components.p, {
-          children: "但是每个 tcp 连接是可以复用的，也就是处理完一个请求之后，不断开这个 tcp 连接，可以用来处理下个 http 请求"
-        }), "\n", jsx(_components.p, {
-          children: "不过 http2 是可以并行请求资源的，所以如果使用 http2，浏览器只会为每个域名维护一个 tcp 连接"
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "建立 TCP 连接"
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsx(_components.p, {
-          children: "发送 HTTP 请求"
-        }), "\n", jsx(_components.p, {
-          children: "发送请求行\n发送请求头\n发送请求体(POST)"
-        }), "\n"]
-      }), "\n"]
-    }), "\n", jsxs(_components.h2, {
-      id: "服务器处理-http-请求的流程",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#服务器处理-http-请求的流程",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "服务器处理 HTTP 请求的流程"]
-    }), "\n", jsxs(_components.ol, {
-      children: ["\n", jsxs(_components.li, {
-        children: ["\n", jsxs(_components.p, {
-          children: ["返回请求\n返回响应行(协议版本+状态码 ", jsx(_components.code, {
-            children: "HTTP/1.1 200 OK"
-          }), ")\n返回响应头\n返回响应体"]
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsxs(_components.p, {
-          children: ["断开连接\n服务器返回完后会断链接\n但是如果请求头中有", jsx(_components.code, {
-            children: "Connection:Keep-Alive"
-          }), "会保持 TCP 连接"]
-        }), "\n"]
-      }), "\n", jsxs(_components.li, {
-        children: ["\n", jsxs(_components.p, {
-          children: ["重定向\n响应头", jsx(_components.code, {
-            children: "Location"
-          })]
-        }), "\n"]
-      }), "\n"]
-    })]
-  });
-}
-function MDXContent$n(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$n, {
-      ...props
-    })
-  }) : _createMdxContent$n(props);
-}
-const GetFrontMatter$n = () => frontmatter$n;
-const _3HTTP__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$n,
-  GetToc: GetToc$n,
-  default: MDXContent$n
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$m = () => [{
-  "id": "dns-缓存",
-  "text": "DNS 缓存",
-  "depth": 2
-}, {
-  "id": "页面资源缓存",
-  "text": "页面资源缓存",
-  "depth": 2
-}, {
-  "id": "登录状态",
-  "text": "登录状态",
-  "depth": 2
-}];
-const frontmatter$m = void 0;
-function _createMdxContent$m(props) {
-  const _components = {
-    a: "a",
-    code: "code",
-    h1: "h1",
-    h2: "h2",
-    p: "p",
-    span: "span",
-    ...props.components
-  };
-  return jsxs(Fragment, {
-    children: [jsxs(_components.h1, {
-      id: "浏览器缓存",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#浏览器缓存",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "浏览器缓存"]
-    }), "\n", jsxs(_components.h2, {
-      id: "dns-缓存",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#dns-缓存",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "DNS 缓存"]
-    }), "\n", jsx(_components.p, {
-      children: "缓存域名对应的 IP"
-    }), "\n", jsxs(_components.h2, {
-      id: "页面资源缓存",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#页面资源缓存",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "页面资源缓存"]
-    }), "\n", jsxs(_components.p, {
-      children: ["通过响应头", jsx(_components.code, {
-        children: "Cache-Control"
-      }), "设置是否缓存该资源"]
-    }), "\n", jsxs(_components.p, {
-      children: ["缓存过期后浏览器会继续发起请求并携带请求头", jsx(_components.code, {
-        children: 'If-None-Match:"4f80f-13c-3a1xb12a"'
-      })]
-    }), "\n", jsx(_components.p, {
-      children: "服务器会根据该请求头判断资源是否更新\n没有更新则返回 状态码 304\n如果有更新则返回新资源"
-    }), "\n", jsxs(_components.h2, {
-      id: "登录状态",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#登录状态",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "登录状态"]
-    }), "\n", jsxs(_components.p, {
-      children: ["服务器接受到账号密码后查询数据库，如果正确则生成 uid 并记录，返回在响应头\n", jsx(_components.code, {
-        children: "Set-Cookie: UID=3431uad;"
-      })]
-    }), "\n", jsx(_components.p, {
-      children: "浏览器解析响应头后会保存在 Cookie"
-    }), "\n", jsxs(_components.p, {
-      children: ["用户再次访问时浏览器会将 uid 携带在请求头", jsx(_components.code, {
-        children: "Cookie: UID=3431uad;"
-      })]
-    }), "\n", jsx(_components.p, {
-      children: "服务器收到 Cookie 后会查询记录下的 uid 数据，如果已经存在，则返回登录后的用户数据"
-    })]
-  });
-}
-function MDXContent$m(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$m, {
-      ...props
-    })
-  }) : _createMdxContent$m(props);
-}
-const GetFrontMatter$m = () => frontmatter$m;
-const _4_____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$m,
-  GetToc: GetToc$m,
-  default: MDXContent$m
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$l = () => [{
-  "id": "用户输入",
-  "text": "用户输入",
-  "depth": 2
-}, {
-  "id": "网络进程",
-  "text": "网络进程",
-  "depth": 2
-}, {
-  "id": "准备渲染进程",
-  "text": "准备渲染进程",
-  "depth": 2
-}, {
-  "id": "提交文档",
-  "text": "提交文档",
-  "depth": 2
-}, {
-  "id": "渲染阶段",
-  "text": "渲染阶段",
-  "depth": 2
-}];
-const frontmatter$l = void 0;
-function _createMdxContent$l(props) {
-  const _components = {
-    a: "a",
-    h1: "h1",
-    h2: "h2",
-    img: "img",
-    li: "li",
-    p: "p",
-    span: "span",
-    ul: "ul",
-    ...props.components
-  };
-  return jsxs(Fragment, {
-    children: [jsxs(_components.h1, {
-      id: "导航流程",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#导航流程",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "导航流程"]
-    }), "\n", jsx(_components.p, {
-      children: jsx(_components.img, {
-        src: "/img/note/2/5-1.jpg",
-        alt: "5-1"
-      })
-    }), "\n", jsx(_components.p, {
-      children: "用户发出 URL 请求到页面开始解析的这个过程，就叫做导航"
-    }), "\n", jsxs(_components.h2, {
-      id: "用户输入",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#用户输入",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "用户输入"]
-    }), "\n", jsx(_components.p, {
-      children: "输入后 地址栏会判断输入的关键字是搜索内容，还是请求的 URL："
-    }), "\n", jsxs(_components.ul, {
-      children: ["\n", jsx(_components.li, {
-        children: "搜索内容：启用搜索引擎"
-      }), "\n", jsx(_components.li, {
-        children: "URL：如果符合 URL 规则，浏览器会加上协议"
-      }), "\n"]
-    }), "\n", jsx(_components.p, {
-      children: "回车后 先触发 beforeunload 事件，可以进行询问用户是否离开等操作\n然后进入加载状态，等待提交文档"
-    }), "\n", jsxs(_components.h2, {
-      id: "网络进程",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#网络进程",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "网络进程"]
-    }), "\n", jsxs(_components.ul, {
-      children: ["\n", jsx(_components.li, {
-        children: "查找本地缓存是否缓存了该资源，如果缓存就直接返回资源"
-      }), "\n", jsx(_components.li, {
-        children: "如果没有缓存，进行 DNS 解析，获取 IP 地址"
-      }), "\n", jsx(_components.li, {
-        children: "利用 IP 地址和服务器建立 TCP 连接，如果请求协议是 HTTPS，那么还需要先建立 TLS 连接"
-      }), "\n", jsx(_components.li, {
-        children: "浏览器端会构建请求行、请求头等信息，并把和该域名相关的 Cookie 等数据附加到请求头中，然后向服务器发送"
-      }), "\n", jsx(_components.li, {
-        children: "服务器根据请求信息生成响应数据（包括响应行、响应头和响应体等信息），并发给网络进程"
-      }), "\n", jsx(_components.li, {
-        children: "重定向：状态码是 301,302,307,308 时根据响应头 Location 重定向，可以通过这个方式将 http 请求 重定向为 https 请求"
-      }), "\n", jsx(_components.li, {
-        children: "响应数据：通过 Content-Type 响应头区分响应体数据类型，比如 HTML 和 js"
-      }), "\n"]
-    }), "\n", jsxs(_components.h2, {
-      id: "准备渲染进程",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#准备渲染进程",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "准备渲染进程"]
-    }), "\n", jsx(_components.p, {
-      children: "Chrome 会为不同站页面分配一个渲染进程，进程在沙箱内"
-    }), "\n", jsxs(_components.h2, {
-      id: "提交文档",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#提交文档",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "提交文档"]
-    }), "\n", jsx(_components.p, {
-      children: "浏览器进程将网络进程接收到的 HTML 数据提交给渲染进程"
-    }), "\n", jsxs(_components.ul, {
-      children: ["\n", jsx(_components.li, {
-        children: "首先当浏览器进程接收到网络进程的响应头数据之后，便向渲染进程发起“提交文档”的消息"
-      }), "\n", jsx(_components.li, {
-        children: "渲染进程接受到“提交文档”消息后，从网络进程接受文档数据，接受完成后给浏览器进程发送“确认提交”消息"
-      }), "\n", jsx(_components.li, {
-        children: "浏览器进程收到“确认提交”的消息后，更新浏览器界面历史状态、安全状态、URL ，然后更新页面页面"
-      }), "\n"]
-    }), "\n", jsxs(_components.h2, {
-      id: "渲染阶段",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#渲染阶段",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "渲染阶段"]
-    }), "\n", jsx(_components.p, {
-      children: "文档提交后，渲染进程开始页面解析与子资源加载，并停止加载动画"
-    })]
-  });
-}
-function MDXContent$l(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$l, {
-      ...props
-    })
-  }) : _createMdxContent$l(props);
-}
-const GetFrontMatter$l = () => frontmatter$l;
-const _5____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$l,
-  GetToc: GetToc$l,
-  default: MDXContent$l
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$k = () => [];
-const frontmatter$k = void 0;
-function _createMdxContent$k(props) {
-  const _components = {
-    a: "a",
-    h1: "h1",
-    p: "p",
-    span: "span",
-    ...props.components
-  };
-  return jsxs(Fragment, {
-    children: [jsxs(_components.h1, {
-      id: "渲染流程",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#渲染流程",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "渲染流程"]
-    }), "\n", jsx(_components.p, {
-      children: "DOM 生成\n样式计算\n布局\n。。。"
-    })]
-  });
-}
-function MDXContent$k(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$k, {
-      ...props
-    })
-  }) : _createMdxContent$k(props);
-}
-const GetFrontMatter$k = () => frontmatter$k;
-const _6____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$k,
-  GetToc: GetToc$k,
-  default: MDXContent$k
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$j = () => [{
-  "id": "chrome-的-dns-缓存",
-  "text": "Chrome 的 dns 缓存",
-  "depth": 2
-}];
-const frontmatter$j = void 0;
-function _createMdxContent$j(props) {
-  const _components = {
-    a: "a",
-    h1: "h1",
-    h2: "h2",
-    p: "p",
-    span: "span",
-    ...props.components
-  };
-  return jsxs(Fragment, {
-    children: [jsxs(_components.h1, {
-      id: "浏览器的-dns-缓存",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#浏览器的-dns-缓存",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "浏览器的 dns 缓存"]
-    }), "\n", jsxs(_components.h2, {
-      id: "chrome-的-dns-缓存",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#chrome-的-dns-缓存",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "Chrome 的 dns 缓存"]
-    }), "\n", jsx(_components.p, {
-      children: "chrome://net-internals/#dns"
-    })]
-  });
-}
-function MDXContent$j(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$j, {
-      ...props
-    })
-  }) : _createMdxContent$j(props);
-}
-const GetFrontMatter$j = () => frontmatter$j;
-const _98_____dns__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$j,
-  GetToc: GetToc$j,
-  default: MDXContent$j
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$i = () => [];
-const frontmatter$i = void 0;
-function _createMdxContent$i(props) {
-  const _components = {
-    a: "a",
-    h1: "h1",
-    p: "p",
-    span: "span",
-    ...props.components
-  };
-  return jsxs(Fragment, {
-    children: [jsxs(_components.h1, {
-      id: "参考",
-      children: [jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#参考",
-        children: jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "参考"]
-    }), "\n", jsx(_components.p, {
-      children: jsx(_components.a, {
-        href: "https://time.geekbang.org/column/intro/100033601?code=nQdm4VreDyrwzIsmJOa2fcr87sMexy98JSDAIn2etJo%253D&tab=catalog",
-        children: "李兵"
-      })
-    })]
-  });
-}
-function MDXContent$i(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsx(MDXLayout, {
-    ...props,
-    children: jsx(_createMdxContent$i, {
-      ...props
-    })
-  }) : _createMdxContent$i(props);
-}
-const GetFrontMatter$i = () => frontmatter$i;
-const _99readme$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$i,
-  GetToc: GetToc$i,
-  default: MDXContent$i
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$h = () => [];
-const frontmatter$h = void 0;
-function _createMdxContent$h(props) {
-  const _components = {
-    a: "a",
-    h1: "h1",
     li: "li",
     p: "p",
     span: "span",
@@ -20068,29 +19003,29 @@ function _createMdxContent$h(props) {
     })]
   });
 }
-function MDXContent$h(props = {}) {
+function MDXContent$s(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$h, {
+    children: jsx(_createMdxContent$s, {
       ...props
     })
-  }) : _createMdxContent$h(props);
+  }) : _createMdxContent$s(props);
 }
-const GetFrontMatter$h = () => frontmatter$h;
+const GetFrontMatter$s = () => frontmatter$s;
 const _0____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$h,
-  GetToc: GetToc$h,
-  default: MDXContent$h
+  GetFrontMatter: GetFrontMatter$s,
+  GetToc: GetToc$s,
+  default: MDXContent$s
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$g = () => [{
+const GetToc$r = () => [{
   "id": "checkout-和-reset-的不同",
   "text": "checkout 和 reset 的不同",
   "depth": 2
 }];
-const frontmatter$g = void 0;
-function _createMdxContent$g(props) {
+const frontmatter$r = void 0;
+function _createMdxContent$r(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -20146,29 +19081,29 @@ function _createMdxContent$g(props) {
     })]
   });
 }
-function MDXContent$g(props = {}) {
+function MDXContent$r(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$g, {
+    children: jsx(_createMdxContent$r, {
       ...props
     })
-  }) : _createMdxContent$g(props);
+  }) : _createMdxContent$r(props);
 }
-const GetFrontMatter$g = () => frontmatter$g;
+const GetFrontMatter$r = () => frontmatter$r;
 const _10checkout = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$g,
-  GetToc: GetToc$g,
-  default: MDXContent$g
+  GetFrontMatter: GetFrontMatter$r,
+  GetToc: GetToc$r,
+  default: MDXContent$r
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$f = () => [{
+const GetToc$q = () => [{
   "id": "stash临时存放工作目录的改动",
   "text": "stash：临时存放工作目录的改动",
   "depth": 2
 }];
-const frontmatter$f = void 0;
-function _createMdxContent$f(props) {
+const frontmatter$q = void 0;
+function _createMdxContent$q(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -20214,23 +19149,23 @@ function _createMdxContent$f(props) {
     })]
   });
 }
-function MDXContent$f(props = {}) {
+function MDXContent$q(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$f, {
+    children: jsx(_createMdxContent$q, {
       ...props
     })
-  }) : _createMdxContent$f(props);
+  }) : _createMdxContent$q(props);
 }
-const GetFrontMatter$f = () => frontmatter$f;
+const GetFrontMatter$q = () => frontmatter$q;
 const _11stash = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$f,
-  GetToc: GetToc$f,
-  default: MDXContent$f
+  GetFrontMatter: GetFrontMatter$q,
+  GetToc: GetToc$q,
+  default: MDXContent$q
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$e = () => [{
+const GetToc$p = () => [{
   "id": "log",
   "text": "log",
   "depth": 2
@@ -20239,8 +19174,8 @@ const GetToc$e = () => [{
   "text": "reflog：引用的 log",
   "depth": 2
 }];
-const frontmatter$e = void 0;
-function _createMdxContent$e(props) {
+const frontmatter$p = void 0;
+function _createMdxContent$p(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -20293,25 +19228,25 @@ function _createMdxContent$e(props) {
     })]
   });
 }
-function MDXContent$e(props = {}) {
+function MDXContent$p(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$e, {
+    children: jsx(_createMdxContent$p, {
       ...props
     })
-  }) : _createMdxContent$e(props);
+  }) : _createMdxContent$p(props);
 }
-const GetFrontMatter$e = () => frontmatter$e;
+const GetFrontMatter$p = () => frontmatter$p;
 const _12log_reflog = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$e,
-  GetToc: GetToc$e,
-  default: MDXContent$e
+  GetFrontMatter: GetFrontMatter$p,
+  GetToc: GetToc$p,
+  default: MDXContent$p
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$d = () => [];
-const frontmatter$d = void 0;
-function _createMdxContent$d(props) {
+const GetToc$o = () => [];
+const frontmatter$o = void 0;
+function _createMdxContent$o(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -20337,23 +19272,23 @@ function _createMdxContent$d(props) {
     })]
   });
 }
-function MDXContent$d(props = {}) {
+function MDXContent$o(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$d, {
+    children: jsx(_createMdxContent$o, {
       ...props
     })
-  }) : _createMdxContent$d(props);
+  }) : _createMdxContent$o(props);
 }
-const GetFrontMatter$d = () => frontmatter$d;
+const GetFrontMatter$o = () => frontmatter$o;
 const _13cherryPick = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$d,
-  GetToc: GetToc$d,
-  default: MDXContent$d
+  GetFrontMatter: GetFrontMatter$o,
+  GetToc: GetToc$o,
+  default: MDXContent$o
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$c = () => [{
+const GetToc$n = () => [{
   "id": "版本控制最基本功能",
   "text": "版本控制：最基本功能",
   "depth": 2
@@ -20370,8 +19305,8 @@ const GetToc$c = () => [{
   "text": "中央式版本控制系统",
   "depth": 2
 }];
-const frontmatter$c = void 0;
-function _createMdxContent$c(props) {
+const frontmatter$n = void 0;
+function _createMdxContent$n(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -20469,29 +19404,29 @@ function _createMdxContent$c(props) {
     })]
   });
 }
-function MDXContent$c(props = {}) {
+function MDXContent$n(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$c, {
+    children: jsx(_createMdxContent$n, {
       ...props
     })
-  }) : _createMdxContent$c(props);
+  }) : _createMdxContent$n(props);
 }
-const GetFrontMatter$c = () => frontmatter$c;
+const GetFrontMatter$n = () => frontmatter$n;
 const _1______VCS = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$c,
-  GetToc: GetToc$c,
-  default: MDXContent$c
+  GetFrontMatter: GetFrontMatter$n,
+  GetToc: GetToc$n,
+  default: MDXContent$n
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$b = () => [{
+const GetToc$m = () => [{
   "id": "优缺点",
   "text": "优缺点",
   "depth": 2
 }];
-const frontmatter$b = void 0;
-function _createMdxContent$b(props) {
+const frontmatter$m = void 0;
+function _createMdxContent$m(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -20566,23 +19501,23 @@ function _createMdxContent$b(props) {
     })]
   });
 }
-function MDXContent$b(props = {}) {
+function MDXContent$m(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$b, {
+    children: jsx(_createMdxContent$m, {
       ...props
     })
-  }) : _createMdxContent$b(props);
+  }) : _createMdxContent$m(props);
 }
-const GetFrontMatter$b = () => frontmatter$b;
+const GetFrontMatter$m = () => frontmatter$m;
 const _2_________DVCS = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$b,
-  GetToc: GetToc$b,
-  default: MDXContent$b
+  GetFrontMatter: GetFrontMatter$m,
+  GetToc: GetToc$m,
+  default: MDXContent$m
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$a = () => [{
+const GetToc$l = () => [{
   "id": "引用commit-的快捷方式",
   "text": "引用：commit 的快捷方式",
   "depth": 2
@@ -20603,8 +19538,8 @@ const GetToc$a = () => [{
   "text": "master/main: 默认 branch",
   "depth": 2
 }];
-const frontmatter$a = void 0;
-function _createMdxContent$a(props) {
+const frontmatter$l = void 0;
+function _createMdxContent$l(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -20750,25 +19685,25 @@ function _createMdxContent$a(props) {
     })]
   });
 }
-function MDXContent$a(props = {}) {
+function MDXContent$l(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$a, {
+    children: jsx(_createMdxContent$l, {
       ...props
     })
-  }) : _createMdxContent$a(props);
+  }) : _createMdxContent$l(props);
 }
-const GetFrontMatter$a = () => frontmatter$a;
+const GetFrontMatter$l = () => frontmatter$l;
 const _3HEAD_master_branch = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$a,
-  GetToc: GetToc$a,
-  default: MDXContent$a
+  GetFrontMatter: GetFrontMatter$l,
+  GetToc: GetToc$l,
+  default: MDXContent$l
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$9 = () => [];
-const frontmatter$9 = void 0;
-function _createMdxContent$9(props) {
+const GetToc$k = () => [];
+const frontmatter$k = void 0;
+function _createMdxContent$k(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -20798,23 +19733,23 @@ function _createMdxContent$9(props) {
     })]
   });
 }
-function MDXContent$9(props = {}) {
+function MDXContent$k(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$9, {
+    children: jsx(_createMdxContent$k, {
       ...props
     })
-  }) : _createMdxContent$9(props);
+  }) : _createMdxContent$k(props);
 }
-const GetFrontMatter$9 = () => frontmatter$9;
+const GetFrontMatter$k = () => frontmatter$k;
 const _4push = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$9,
-  GetToc: GetToc$9,
-  default: MDXContent$9
+  GetFrontMatter: GetFrontMatter$k,
+  GetToc: GetToc$k,
+  default: MDXContent$k
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$8 = () => [{
+const GetToc$j = () => [{
   "id": "含义",
   "text": "含义",
   "depth": 2
@@ -20823,8 +19758,8 @@ const GetToc$8 = () => [{
   "text": "冲突",
   "depth": 2
 }];
-const frontmatter$8 = void 0;
-function _createMdxContent$8(props) {
+const frontmatter$j = void 0;
+function _createMdxContent$j(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -20896,25 +19831,25 @@ function _createMdxContent$8(props) {
     })]
   });
 }
-function MDXContent$8(props = {}) {
+function MDXContent$j(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$8, {
+    children: jsx(_createMdxContent$j, {
       ...props
     })
-  }) : _createMdxContent$8(props);
+  }) : _createMdxContent$j(props);
 }
-const GetFrontMatter$8 = () => frontmatter$8;
+const GetFrontMatter$j = () => frontmatter$j;
 const _5merge = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$8,
-  GetToc: GetToc$8,
-  default: MDXContent$8
+  GetFrontMatter: GetFrontMatter$j,
+  GetToc: GetToc$j,
+  default: MDXContent$j
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$7 = () => [];
-const frontmatter$7 = void 0;
-function _createMdxContent$7(props) {
+const GetToc$i = () => [];
+const frontmatter$i = void 0;
+function _createMdxContent$i(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -20952,29 +19887,29 @@ function _createMdxContent$7(props) {
     })]
   });
 }
-function MDXContent$7(props = {}) {
+function MDXContent$i(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$7, {
+    children: jsx(_createMdxContent$i, {
       ...props
     })
-  }) : _createMdxContent$7(props);
+  }) : _createMdxContent$i(props);
 }
-const GetFrontMatter$7 = () => frontmatter$7;
+const GetFrontMatter$i = () => frontmatter$i;
 const _6feature_branch = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$7,
-  GetToc: GetToc$7,
-  default: MDXContent$7
+  GetFrontMatter: GetFrontMatter$i,
+  GetToc: GetToc$i,
+  default: MDXContent$i
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$6 = () => [{
+const GetToc$h = () => [{
   "id": "rebase--i",
   "text": "rebase -i",
   "depth": 2
 }];
-const frontmatter$6 = void 0;
-function _createMdxContent$6(props) {
+const frontmatter$h = void 0;
+function _createMdxContent$h(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -21070,25 +20005,25 @@ function _createMdxContent$6(props) {
     })]
   });
 }
-function MDXContent$6(props = {}) {
+function MDXContent$h(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$6, {
+    children: jsx(_createMdxContent$h, {
       ...props
     })
-  }) : _createMdxContent$6(props);
+  }) : _createMdxContent$h(props);
 }
-const GetFrontMatter$6 = () => frontmatter$6;
+const GetFrontMatter$h = () => frontmatter$h;
 const _7rebase = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$6,
-  GetToc: GetToc$6,
-  default: MDXContent$6
+  GetFrontMatter: GetFrontMatter$h,
+  GetToc: GetToc$h,
+  default: MDXContent$h
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$5 = () => [];
-const frontmatter$5 = void 0;
-function _createMdxContent$5(props) {
+const GetToc$g = () => [];
+const frontmatter$g = void 0;
+function _createMdxContent$g(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -21117,25 +20052,25 @@ function _createMdxContent$5(props) {
     })]
   });
 }
-function MDXContent$5(props = {}) {
+function MDXContent$g(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$5, {
+    children: jsx(_createMdxContent$g, {
       ...props
     })
-  }) : _createMdxContent$5(props);
+  }) : _createMdxContent$g(props);
 }
-const GetFrontMatter$5 = () => frontmatter$5;
+const GetFrontMatter$g = () => frontmatter$g;
 const _8revert = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$5,
-  GetToc: GetToc$5,
-  default: MDXContent$5
+  GetFrontMatter: GetFrontMatter$g,
+  GetToc: GetToc$g,
+  default: MDXContent$g
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$4 = () => [];
-const frontmatter$4 = void 0;
-function _createMdxContent$4(props) {
+const GetToc$f = () => [];
+const frontmatter$f = void 0;
+function _createMdxContent$f(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -21164,23 +20099,23 @@ function _createMdxContent$4(props) {
     })]
   });
 }
-function MDXContent$4(props = {}) {
+function MDXContent$f(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$4, {
+    children: jsx(_createMdxContent$f, {
       ...props
     })
-  }) : _createMdxContent$4(props);
+  }) : _createMdxContent$f(props);
 }
-const GetFrontMatter$4 = () => frontmatter$4;
-const _99readme = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const GetFrontMatter$f = () => frontmatter$f;
+const _99readme$2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$4,
-  GetToc: GetToc$4,
-  default: MDXContent$4
+  GetFrontMatter: GetFrontMatter$f,
+  GetToc: GetToc$f,
+  default: MDXContent$f
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$3 = () => [{
+const GetToc$e = () => [{
   "id": "reset-的本质移动-head-以及它所指向的-branch",
   "text": "reset 的本质：移动 HEAD 以及它所指向的 branch",
   "depth": 2
@@ -21197,8 +20132,8 @@ const GetToc$3 = () => [{
   "text": "reset 不加参数：保留工作目录，并清空 add 暂存区",
   "depth": 2
 }];
-const frontmatter$3 = void 0;
-function _createMdxContent$3(props) {
+const frontmatter$e = void 0;
+function _createMdxContent$e(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -21296,23 +20231,1069 @@ function _createMdxContent$3(props) {
     })]
   });
 }
-function MDXContent$3(props = {}) {
+function MDXContent$e(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$3, {
+    children: jsx(_createMdxContent$e, {
       ...props
     })
-  }) : _createMdxContent$3(props);
+  }) : _createMdxContent$e(props);
 }
-const GetFrontMatter$3 = () => frontmatter$3;
+const GetFrontMatter$e = () => frontmatter$e;
 const _9reset = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$3,
-  GetToc: GetToc$3,
-  default: MDXContent$3
+  GetFrontMatter: GetFrontMatter$e,
+  GetToc: GetToc$e,
+  default: MDXContent$e
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$2 = () => [{
+const GetToc$d = () => [];
+const frontmatter$d = void 0;
+function _createMdxContent$d(props) {
+  const _components = {
+    a: "a",
+    h1: "h1",
+    span: "span",
+    ...props.components
+  };
+  return jsxs(_components.h1, {
+    id: "内存",
+    children: [jsx(_components.a, {
+      className: "autolink-headings",
+      href: "#内存",
+      children: jsx(_components.span, {
+        style: {
+          marginRight: "4px"
+        },
+        children: "#"
+      })
+    }), "内存"]
+  });
+}
+function MDXContent$d(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$d, {
+      ...props
+    })
+  }) : _createMdxContent$d(props);
+}
+const GetFrontMatter$d = () => frontmatter$d;
+const _13__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$d,
+  GetToc: GetToc$d,
+  default: MDXContent$d
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$c = () => [{
+  "id": "单线程",
+  "text": "单线程",
+  "depth": 2
+}, {
+  "id": "在线程运行过程中处理新任务",
+  "text": "在线程运行过程中处理新任务",
+  "depth": 2
+}, {
+  "id": "处理其他线程发送过来的任务",
+  "text": "处理其他线程发送过来的任务",
+  "depth": 2
+}, {
+  "id": "处理其他进程发送过来的任务",
+  "text": "处理其他进程发送过来的任务",
+  "depth": 2
+}, {
+  "id": "消息队列中的任务类型",
+  "text": "消息队列中的任务类型",
+  "depth": 2
+}, {
+  "id": "页面使用单线程的缺点",
+  "text": "页面使用单线程的缺点",
+  "depth": 2
+}, {
+  "id": "总结",
+  "text": "总结",
+  "depth": 2
+}];
+const frontmatter$c = void 0;
+function _createMdxContent$c(props) {
+  const _components = {
+    a: "a",
+    h1: "h1",
+    h2: "h2",
+    li: "li",
+    p: "p",
+    span: "span",
+    ul: "ul",
+    ...props.components
+  };
+  return jsxs(Fragment, {
+    children: [jsxs(_components.h1, {
+      id: "消息队列和事件循环",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#消息队列和事件循环",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "消息队列和事件循环"]
+    }), "\n", jsxs(_components.h2, {
+      id: "单线程",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#单线程",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "单线程"]
+    }), "\n", jsx(_components.p, {
+      children: "一个线程中去执行任务"
+    }), "\n", jsxs(_components.h2, {
+      id: "在线程运行过程中处理新任务",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#在线程运行过程中处理新任务",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "在线程运行过程中处理新任务"]
+    }), "\n", jsx(_components.p, {
+      children: "要想在线程运行过程中，能接收并执行新的任务，就需要采用事件(任务)循环机制\n不停的循环接受事件(任务)，接受后处理事件(任务)"
+    }), "\n", jsxs(_components.h2, {
+      id: "处理其他线程发送过来的任务",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#处理其他线程发送过来的任务",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "处理其他线程发送过来的任务"]
+    }), "\n", jsx(_components.p, {
+      children: "渲染主线程会频繁接收到来自于 IO 线程的一些任务，比如鼠标点击，资源加载完成等"
+    }), "\n", jsx(_components.p, {
+      children: "使用消息队列存放要执行的任务，IO 线程中产生的新任务添加进消息队列尾部"
+    }), "\n", jsx(_components.p, {
+      children: "事件循环从队列头部取出任务"
+    }), "\n", jsxs(_components.h2, {
+      id: "处理其他进程发送过来的任务",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#处理其他进程发送过来的任务",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "处理其他进程发送过来的任务"]
+    }), "\n", jsx(_components.p, {
+      children: "渲染进程专门有一个 IO 线程用来接收其他进程传进来的消息"
+    }), "\n", jsxs(_components.h2, {
+      id: "消息队列中的任务类型",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#消息队列中的任务类型",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "消息队列中的任务类型"]
+    }), "\n", jsx(_components.p, {
+      children: "输入事件（鼠标滚动、点击、移动）、微任务、文件读写、WebSocket、JavaScript 定时器等等。\nJavaScript 执行、解析 DOM、样式计算、布局计算、CSS 动画等。"
+    }), "\n", jsxs(_components.h2, {
+      id: "页面使用单线程的缺点",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#页面使用单线程的缺点",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "页面使用单线程的缺点"]
+    }), "\n", jsx(_components.p, {
+      children: "第一个问题是如何处理高优先级的任务。"
+    }), "\n", jsx(_components.p, {
+      children: "通常我们把消息队列中的任务称为宏任务，每个宏任务中都包含了一个微任务队列"
+    }), "\n", jsx(_components.p, {
+      children: "执行宏任务的过程中，如果 DOM 有变化，那么就会将该变化添加到微任务列表中，宏任务中的主要功能都直接完成之后，执行当前宏任务中的微任务"
+    }), "\n", jsx(_components.p, {
+      children: "微任务常用的就是 promise"
+    }), "\n", jsxs(_components.h2, {
+      id: "总结",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#总结",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "总结"]
+    }), "\n", jsxs(_components.ul, {
+      children: ["\n", jsx(_components.li, {
+        children: "如果有一些确定好的任务，可以使用一个单线程来按照顺序处理这些任务，这是第一版线程模型。"
+      }), "\n", jsx(_components.li, {
+        children: "要在线程执行过程中接收并处理新的任务，就需要引入循环语句和事件系统，这是第二版线程模型。"
+      }), "\n", jsx(_components.li, {
+        children: "如果要接收其他线程发送过来的任务，就需要引入消息队列，这是第三版线程模型。"
+      }), "\n", jsx(_components.li, {
+        children: "如果其他进程想要发送任务给页面主线程，那么先通过 IPC 把任务发送给渲染进程的 IO 线程，IO 线程再把任务发送给页面主线程。"
+      }), "\n", jsx(_components.li, {
+        children: "消息队列机制并不是太灵活，为了适应效率和实时性，引入了微任务。"
+      }), "\n"]
+    })]
+  });
+}
+function MDXContent$c(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$c, {
+      ...props
+    })
+  }) : _createMdxContent$c(props);
+}
+const GetFrontMatter$c = () => frontmatter$c;
+const _16_________ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$c,
+  GetToc: GetToc$c,
+  default: MDXContent$c
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$b = () => [];
+const frontmatter$b = void 0;
+function _createMdxContent$b(props) {
+  const _components = {
+    a: "a",
+    h1: "h1",
+    li: "li",
+    span: "span",
+    ul: "ul",
+    ...props.components
+  };
+  return jsxs(Fragment, {
+    children: [jsxs(_components.h1, {
+      id: "浏览器进程",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#浏览器进程",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "浏览器进程"]
+    }), "\n", jsxs(_components.ul, {
+      children: ["\n", jsx(_components.li, {
+        children: "浏览器进程：界面显示、用户交互、子进程管理，同时提供存储等功能"
+      }), "\n", jsx(_components.li, {
+        children: "渲染进程：安全考虑，渲染进程都是运行在沙箱模式下，包括排版引擎 Blink 和 JavaScript 引擎 V8 ，可以将 HTML、CSS、JS 转换为页面"
+      }), "\n", jsx(_components.li, {
+        children: "GPU 进程：3D CSS、Chrome UI、网页"
+      }), "\n", jsx(_components.li, {
+        children: "网络进程：网络资源加载"
+      }), "\n", jsx(_components.li, {
+        children: "插件进程：运行插件，因为插件容易崩溃所以分离为进程"
+      }), "\n"]
+    })]
+  });
+}
+function MDXContent$b(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$b, {
+      ...props
+    })
+  }) : _createMdxContent$b(props);
+}
+const GetFrontMatter$b = () => frontmatter$b;
+const _1_____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$b,
+  GetToc: GetToc$b,
+  default: MDXContent$b
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$a = () => [{
+  "id": "ip-internet-protocol-网际协议",
+  "text": "IP Internet Protocol 网际协议",
+  "depth": 2
+}, {
+  "id": "udp-user-datagram-protocol-用户数据包协议",
+  "text": "UDP User Datagram Protocol 用户数据包协议",
+  "depth": 2
+}, {
+  "id": "tcp-transmission-control-protocol-传输控制协议",
+  "text": "TCP Transmission Control Protocol 传输控制协议",
+  "depth": 2
+}, {
+  "id": "tcpip-四层模型",
+  "text": "TCP/IP 四层模型",
+  "depth": 2
+}];
+const frontmatter$a = void 0;
+function _createMdxContent$a(props) {
+  const _components = {
+    a: "a",
+    h1: "h1",
+    h2: "h2",
+    img: "img",
+    li: "li",
+    p: "p",
+    span: "span",
+    strong: "strong",
+    ul: "ul",
+    ...props.components
+  };
+  return jsxs(Fragment, {
+    children: [jsxs(_components.h1, {
+      id: "tcp-协议",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#tcp-协议",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "TCP 协议"]
+    }), "\n", jsxs(_components.h2, {
+      id: "ip-internet-protocol-网际协议",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#ip-internet-protocol-网际协议",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "IP Internet Protocol 网际协议"]
+    }), "\n", jsx(_components.p, {
+      children: "IP 地址就是计算机的地址，通过 IP 将数据包传递给另一个主机"
+    }), "\n", jsx(_components.p, {
+      children: "数据包会携带 IP 头"
+    }), "\n", jsxs(_components.h2, {
+      id: "udp-user-datagram-protocol-用户数据包协议",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#udp-user-datagram-protocol-用户数据包协议",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "UDP User Datagram Protocol 用户数据包协议"]
+    }), "\n", jsxs(_components.p, {
+      children: ["UDP 通过", jsx(_components.strong, {
+        children: "端口号"
+      }), "把数据包传递给对应的程序"]
+    }), "\n", jsx(_components.p, {
+      children: "数据包会携带 UDP 头（含本机目标端口号）和 IP 头"
+    }), "\n", jsx(_components.p, {
+      children: "对于错误的数据包，UDP 并不提供重发机制，只是丢弃当前的包，而且 UDP 在发送之后也无法知道是否能达到目的地"
+    }), "\n", jsx(_components.p, {
+      children: "UDP 不能保证数据可靠性，但是传输速度却非常快"
+    }), "\n", jsxs(_components.h2, {
+      id: "tcp-transmission-control-protocol-传输控制协议",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#tcp-transmission-control-protocol-传输控制协议",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "TCP Transmission Control Protocol 传输控制协议"]
+    }), "\n", jsx(_components.p, {
+      children: "TCP 是一种面向连接的、可靠的、基于字节流的传输层通信协议"
+    }), "\n", jsxs(_components.ul, {
+      children: ["\n", jsx(_components.li, {
+        children: "TCP 提供丢失重传机制"
+      }), "\n", jsx(_components.li, {
+        children: "TCP 引入了数据包排序机制，乱序数据包可以组合成完整文件"
+      }), "\n"]
+    }), "\n", jsx(_components.p, {
+      children: "数据包会携带 TCP 头（含本机目标端口号和序号）和 IP 头"
+    }), "\n", jsxs(_components.ul, {
+      children: ["\n", jsx(_components.li, {
+        children: "建立连接：连接过程会三次握手，会发送三个数据包才会确认连接建立"
+      }), "\n", jsx(_components.li, {
+        children: "传输数据：接受端会对每个数据包发出确认操作，发送端没有收到确认信息的会触发重发机制，而且接收端会按照 TCP 头中的序号排序数据包"
+      }), "\n", jsx(_components.li, {
+        children: "断开连接：断开过程会四次挥手，保证双方都断开连接"
+      }), "\n"]
+    }), "\n", jsxs(_components.h2, {
+      id: "tcpip-四层模型",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#tcpip-四层模型",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "TCP/IP 四层模型"]
+    }), "\n", jsx(_components.p, {
+      children: "IEEE802->IP->TCP/UDP->HTTP"
+    }), "\n", jsx(_components.p, {
+      children: jsx(_components.img, {
+        src: "/img/note/2/2-1.jpg",
+        alt: "2-1"
+      })
+    })]
+  });
+}
+function MDXContent$a(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$a, {
+      ...props
+    })
+  }) : _createMdxContent$a(props);
+}
+const GetFrontMatter$a = () => frontmatter$a;
+const _2TCP__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$a,
+  GetToc: GetToc$a,
+  default: MDXContent$a
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$9 = () => [{
+  "id": "dns-domain-name-system-域名系统",
+  "text": "DNS Domain Name System 域名系统",
+  "depth": 2
+}, {
+  "id": "浏览器发起-http-请求的流程",
+  "text": "浏览器发起 HTTP 请求的流程",
+  "depth": 2
+}, {
+  "id": "服务器处理-http-请求的流程",
+  "text": "服务器处理 HTTP 请求的流程",
+  "depth": 2
+}];
+const frontmatter$9 = void 0;
+function _createMdxContent$9(props) {
+  const _components = {
+    a: "a",
+    code: "code",
+    h1: "h1",
+    h2: "h2",
+    li: "li",
+    ol: "ol",
+    p: "p",
+    span: "span",
+    strong: "strong",
+    ul: "ul",
+    ...props.components
+  };
+  return jsxs(Fragment, {
+    children: [jsxs(_components.h1, {
+      id: "http-协议",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#http-协议",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "HTTP 协议"]
+    }), "\n", jsx(_components.p, {
+      children: "HTTP 是一种允许浏览器向服务器获取资源的协议，是 Web 的基础"
+    }), "\n", jsxs(_components.h2, {
+      id: "dns-domain-name-system-域名系统",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#dns-domain-name-system-域名系统",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "DNS Domain Name System 域名系统"]
+    }), "\n", jsxs(_components.p, {
+      children: ["将域名与 IP 地址做一一映射\n浏览器有 DNS", jsx(_components.strong, {
+        children: "数据缓存服务"
+      }), "，解析过的域名会缓存，减少请求"]
+    }), "\n", jsxs(_components.h2, {
+      id: "浏览器发起-http-请求的流程",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#浏览器发起-http-请求的流程",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "浏览器发起 HTTP 请求的流程"]
+    }), "\n", jsxs(_components.ol, {
+      children: ["\n", jsxs(_components.li, {
+        children: ["\n", jsxs(_components.p, {
+          children: ["构建请求行\n请求方法 + 请求 URI + HTTP 协议版本\n例如：", jsx(_components.code, {
+            children: "GET /index.html HTTP/1.1"
+          })]
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "查找缓存"
+        }), "\n", jsx(_components.p, {
+          children: "浏览器会在请求前查询浏览器缓存中是否有该文件，如果有则结束请求"
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "准备 IP 地址与端口"
+        }), "\n", jsx(_components.p, {
+          children: "现在只有 URL，HTTP 需要与服务器建立 TCP 连接就需要 IP 地址与端口，所以通过一下方式获得"
+        }), "\n", jsxs(_components.ul, {
+          children: ["\n", jsx(_components.li, {
+            children: "请求 DNS 返回域名对应的 IP 地址"
+          }), "\n", jsx(_components.li, {
+            children: "从 URL 中获取端口号，HTTP 默认为 80"
+          }), "\n"]
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "等待 TCP 队列"
+        }), "\n", jsx(_components.p, {
+          children: "Chrome 有个机制，同一个域名同时最多只能建立 6 个 TCP 连接，如果在同一个域名下同时有 10 个请求发生，那么其中 4 个请求会进入排队等待状态，直至进行中的请求完成。"
+        }), "\n", jsx(_components.p, {
+          children: "http/1.1 一个 tcp 同时只能处理一个请求，浏览器会为每个域名维护 6 个 tcp 连接"
+        }), "\n", jsx(_components.p, {
+          children: "但是每个 tcp 连接是可以复用的，也就是处理完一个请求之后，不断开这个 tcp 连接，可以用来处理下个 http 请求"
+        }), "\n", jsx(_components.p, {
+          children: "不过 http2 是可以并行请求资源的，所以如果使用 http2，浏览器只会为每个域名维护一个 tcp 连接"
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "建立 TCP 连接"
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsx(_components.p, {
+          children: "发送 HTTP 请求"
+        }), "\n", jsx(_components.p, {
+          children: "发送请求行\n发送请求头\n发送请求体(POST)"
+        }), "\n"]
+      }), "\n"]
+    }), "\n", jsxs(_components.h2, {
+      id: "服务器处理-http-请求的流程",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#服务器处理-http-请求的流程",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "服务器处理 HTTP 请求的流程"]
+    }), "\n", jsxs(_components.ol, {
+      children: ["\n", jsxs(_components.li, {
+        children: ["\n", jsxs(_components.p, {
+          children: ["返回请求\n返回响应行(协议版本+状态码 ", jsx(_components.code, {
+            children: "HTTP/1.1 200 OK"
+          }), ")\n返回响应头\n返回响应体"]
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsxs(_components.p, {
+          children: ["断开连接\n服务器返回完后会断链接\n但是如果请求头中有", jsx(_components.code, {
+            children: "Connection:Keep-Alive"
+          }), "会保持 TCP 连接"]
+        }), "\n"]
+      }), "\n", jsxs(_components.li, {
+        children: ["\n", jsxs(_components.p, {
+          children: ["重定向\n响应头", jsx(_components.code, {
+            children: "Location"
+          })]
+        }), "\n"]
+      }), "\n"]
+    })]
+  });
+}
+function MDXContent$9(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$9, {
+      ...props
+    })
+  }) : _createMdxContent$9(props);
+}
+const GetFrontMatter$9 = () => frontmatter$9;
+const _3HTTP__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$9,
+  GetToc: GetToc$9,
+  default: MDXContent$9
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$8 = () => [{
+  "id": "dns-缓存",
+  "text": "DNS 缓存",
+  "depth": 2
+}, {
+  "id": "页面资源缓存",
+  "text": "页面资源缓存",
+  "depth": 2
+}, {
+  "id": "登录状态",
+  "text": "登录状态",
+  "depth": 2
+}];
+const frontmatter$8 = void 0;
+function _createMdxContent$8(props) {
+  const _components = {
+    a: "a",
+    code: "code",
+    h1: "h1",
+    h2: "h2",
+    p: "p",
+    span: "span",
+    ...props.components
+  };
+  return jsxs(Fragment, {
+    children: [jsxs(_components.h1, {
+      id: "浏览器缓存",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#浏览器缓存",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "浏览器缓存"]
+    }), "\n", jsxs(_components.h2, {
+      id: "dns-缓存",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#dns-缓存",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "DNS 缓存"]
+    }), "\n", jsx(_components.p, {
+      children: "缓存域名对应的 IP"
+    }), "\n", jsxs(_components.h2, {
+      id: "页面资源缓存",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#页面资源缓存",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "页面资源缓存"]
+    }), "\n", jsxs(_components.p, {
+      children: ["通过响应头", jsx(_components.code, {
+        children: "Cache-Control"
+      }), "设置是否缓存该资源"]
+    }), "\n", jsxs(_components.p, {
+      children: ["缓存过期后浏览器会继续发起请求并携带请求头", jsx(_components.code, {
+        children: 'If-None-Match:"4f80f-13c-3a1xb12a"'
+      })]
+    }), "\n", jsx(_components.p, {
+      children: "服务器会根据该请求头判断资源是否更新\n没有更新则返回 状态码 304\n如果有更新则返回新资源"
+    }), "\n", jsxs(_components.h2, {
+      id: "登录状态",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#登录状态",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "登录状态"]
+    }), "\n", jsxs(_components.p, {
+      children: ["服务器接受到账号密码后查询数据库，如果正确则生成 uid 并记录，返回在响应头\n", jsx(_components.code, {
+        children: "Set-Cookie: UID=3431uad;"
+      })]
+    }), "\n", jsx(_components.p, {
+      children: "浏览器解析响应头后会保存在 Cookie"
+    }), "\n", jsxs(_components.p, {
+      children: ["用户再次访问时浏览器会将 uid 携带在请求头", jsx(_components.code, {
+        children: "Cookie: UID=3431uad;"
+      })]
+    }), "\n", jsx(_components.p, {
+      children: "服务器收到 Cookie 后会查询记录下的 uid 数据，如果已经存在，则返回登录后的用户数据"
+    })]
+  });
+}
+function MDXContent$8(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$8, {
+      ...props
+    })
+  }) : _createMdxContent$8(props);
+}
+const GetFrontMatter$8 = () => frontmatter$8;
+const _4_____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$8,
+  GetToc: GetToc$8,
+  default: MDXContent$8
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$7 = () => [{
+  "id": "用户输入",
+  "text": "用户输入",
+  "depth": 2
+}, {
+  "id": "网络进程",
+  "text": "网络进程",
+  "depth": 2
+}, {
+  "id": "准备渲染进程",
+  "text": "准备渲染进程",
+  "depth": 2
+}, {
+  "id": "提交文档",
+  "text": "提交文档",
+  "depth": 2
+}, {
+  "id": "渲染阶段",
+  "text": "渲染阶段",
+  "depth": 2
+}];
+const frontmatter$7 = void 0;
+function _createMdxContent$7(props) {
+  const _components = {
+    a: "a",
+    h1: "h1",
+    h2: "h2",
+    img: "img",
+    li: "li",
+    p: "p",
+    span: "span",
+    ul: "ul",
+    ...props.components
+  };
+  return jsxs(Fragment, {
+    children: [jsxs(_components.h1, {
+      id: "导航流程",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#导航流程",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "导航流程"]
+    }), "\n", jsx(_components.p, {
+      children: jsx(_components.img, {
+        src: "/img/note/2/5-1.jpg",
+        alt: "5-1"
+      })
+    }), "\n", jsx(_components.p, {
+      children: "用户发出 URL 请求到页面开始解析的这个过程，就叫做导航"
+    }), "\n", jsxs(_components.h2, {
+      id: "用户输入",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#用户输入",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "用户输入"]
+    }), "\n", jsx(_components.p, {
+      children: "输入后 地址栏会判断输入的关键字是搜索内容，还是请求的 URL："
+    }), "\n", jsxs(_components.ul, {
+      children: ["\n", jsx(_components.li, {
+        children: "搜索内容：启用搜索引擎"
+      }), "\n", jsx(_components.li, {
+        children: "URL：如果符合 URL 规则，浏览器会加上协议"
+      }), "\n"]
+    }), "\n", jsx(_components.p, {
+      children: "回车后 先触发 beforeunload 事件，可以进行询问用户是否离开等操作\n然后进入加载状态，等待提交文档"
+    }), "\n", jsxs(_components.h2, {
+      id: "网络进程",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#网络进程",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "网络进程"]
+    }), "\n", jsxs(_components.ul, {
+      children: ["\n", jsx(_components.li, {
+        children: "查找本地缓存是否缓存了该资源，如果缓存就直接返回资源"
+      }), "\n", jsx(_components.li, {
+        children: "如果没有缓存，进行 DNS 解析，获取 IP 地址"
+      }), "\n", jsx(_components.li, {
+        children: "利用 IP 地址和服务器建立 TCP 连接，如果请求协议是 HTTPS，那么还需要先建立 TLS 连接"
+      }), "\n", jsx(_components.li, {
+        children: "浏览器端会构建请求行、请求头等信息，并把和该域名相关的 Cookie 等数据附加到请求头中，然后向服务器发送"
+      }), "\n", jsx(_components.li, {
+        children: "服务器根据请求信息生成响应数据（包括响应行、响应头和响应体等信息），并发给网络进程"
+      }), "\n", jsx(_components.li, {
+        children: "重定向：状态码是 301,302,307,308 时根据响应头 Location 重定向，可以通过这个方式将 http 请求 重定向为 https 请求"
+      }), "\n", jsx(_components.li, {
+        children: "响应数据：通过 Content-Type 响应头区分响应体数据类型，比如 HTML 和 js"
+      }), "\n"]
+    }), "\n", jsxs(_components.h2, {
+      id: "准备渲染进程",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#准备渲染进程",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "准备渲染进程"]
+    }), "\n", jsx(_components.p, {
+      children: "Chrome 会为不同站页面分配一个渲染进程，进程在沙箱内"
+    }), "\n", jsxs(_components.h2, {
+      id: "提交文档",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#提交文档",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "提交文档"]
+    }), "\n", jsx(_components.p, {
+      children: "浏览器进程将网络进程接收到的 HTML 数据提交给渲染进程"
+    }), "\n", jsxs(_components.ul, {
+      children: ["\n", jsx(_components.li, {
+        children: "首先当浏览器进程接收到网络进程的响应头数据之后，便向渲染进程发起“提交文档”的消息"
+      }), "\n", jsx(_components.li, {
+        children: "渲染进程接受到“提交文档”消息后，从网络进程接受文档数据，接受完成后给浏览器进程发送“确认提交”消息"
+      }), "\n", jsx(_components.li, {
+        children: "浏览器进程收到“确认提交”的消息后，更新浏览器界面历史状态、安全状态、URL ，然后更新页面页面"
+      }), "\n"]
+    }), "\n", jsxs(_components.h2, {
+      id: "渲染阶段",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#渲染阶段",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "渲染阶段"]
+    }), "\n", jsx(_components.p, {
+      children: "文档提交后，渲染进程开始页面解析与子资源加载，并停止加载动画"
+    })]
+  });
+}
+function MDXContent$7(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$7, {
+      ...props
+    })
+  }) : _createMdxContent$7(props);
+}
+const GetFrontMatter$7 = () => frontmatter$7;
+const _5____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$7,
+  GetToc: GetToc$7,
+  default: MDXContent$7
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$6 = () => [];
+const frontmatter$6 = void 0;
+function _createMdxContent$6(props) {
+  const _components = {
+    a: "a",
+    h1: "h1",
+    p: "p",
+    span: "span",
+    ...props.components
+  };
+  return jsxs(Fragment, {
+    children: [jsxs(_components.h1, {
+      id: "渲染流程",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#渲染流程",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "渲染流程"]
+    }), "\n", jsx(_components.p, {
+      children: "DOM 生成\n样式计算\n布局\n。。。"
+    })]
+  });
+}
+function MDXContent$6(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$6, {
+      ...props
+    })
+  }) : _createMdxContent$6(props);
+}
+const GetFrontMatter$6 = () => frontmatter$6;
+const _6____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$6,
+  GetToc: GetToc$6,
+  default: MDXContent$6
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$5 = () => [{
+  "id": "chrome-的-dns-缓存",
+  "text": "Chrome 的 dns 缓存",
+  "depth": 2
+}];
+const frontmatter$5 = void 0;
+function _createMdxContent$5(props) {
+  const _components = {
+    a: "a",
+    h1: "h1",
+    h2: "h2",
+    p: "p",
+    span: "span",
+    ...props.components
+  };
+  return jsxs(Fragment, {
+    children: [jsxs(_components.h1, {
+      id: "浏览器的-dns-缓存",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#浏览器的-dns-缓存",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "浏览器的 dns 缓存"]
+    }), "\n", jsxs(_components.h2, {
+      id: "chrome-的-dns-缓存",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#chrome-的-dns-缓存",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "Chrome 的 dns 缓存"]
+    }), "\n", jsx(_components.p, {
+      children: "chrome://net-internals/#dns"
+    })]
+  });
+}
+function MDXContent$5(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$5, {
+      ...props
+    })
+  }) : _createMdxContent$5(props);
+}
+const GetFrontMatter$5 = () => frontmatter$5;
+const _98_____dns__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$5,
+  GetToc: GetToc$5,
+  default: MDXContent$5
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$4 = () => [];
+const frontmatter$4 = void 0;
+function _createMdxContent$4(props) {
+  const _components = {
+    a: "a",
+    h1: "h1",
+    p: "p",
+    span: "span",
+    ...props.components
+  };
+  return jsxs(Fragment, {
+    children: [jsxs(_components.h1, {
+      id: "参考",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#参考",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "参考"]
+    }), "\n", jsx(_components.p, {
+      children: jsx(_components.a, {
+        href: "https://time.geekbang.org/column/intro/100033601?code=nQdm4VreDyrwzIsmJOa2fcr87sMexy98JSDAIn2etJo%253D&tab=catalog",
+        children: "李兵"
+      })
+    })]
+  });
+}
+function MDXContent$4(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$4, {
+      ...props
+    })
+  }) : _createMdxContent$4(props);
+}
+const GetFrontMatter$4 = () => frontmatter$4;
+const _99readme$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$4,
+  GetToc: GetToc$4,
+  default: MDXContent$4
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$3 = () => [{
   "id": "c",
   "text": "c++",
   "depth": 2
@@ -21321,8 +21302,8 @@ const GetToc$2 = () => [{
   "text": "js",
   "depth": 2
 }];
-const frontmatter$2 = void 0;
-function _createMdxContent$2(props) {
+const frontmatter$3 = void 0;
+function _createMdxContent$3(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -21391,25 +21372,25 @@ function _createMdxContent$2(props) {
     })]
   });
 }
-function MDXContent$2(props = {}) {
+function MDXContent$3(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$2, {
+    children: jsx(_createMdxContent$3, {
       ...props
     })
-  }) : _createMdxContent$2(props);
+  }) : _createMdxContent$3(props);
 }
-const GetFrontMatter$2 = () => frontmatter$2;
+const GetFrontMatter$3 = () => frontmatter$3;
 const _1__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$2,
-  GetToc: GetToc$2,
-  default: MDXContent$2
+  GetFrontMatter: GetFrontMatter$3,
+  GetToc: GetToc$3,
+  default: MDXContent$3
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$1 = () => [];
-const frontmatter$1 = void 0;
-function _createMdxContent$1(props) {
+const GetToc$2 = () => [];
+const frontmatter$2 = void 0;
+function _createMdxContent$2(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -21443,23 +21424,23 @@ function _createMdxContent$1(props) {
     })]
   });
 }
-function MDXContent$1(props = {}) {
+function MDXContent$2(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
     ...props,
-    children: jsx(_createMdxContent$1, {
+    children: jsx(_createMdxContent$2, {
       ...props
     })
-  }) : _createMdxContent$1(props);
+  }) : _createMdxContent$2(props);
 }
-const GetFrontMatter$1 = () => frontmatter$1;
+const GetFrontMatter$2 = () => frontmatter$2;
 const _2___ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$1,
-  GetToc: GetToc$1,
-  default: MDXContent$1
+  GetFrontMatter: GetFrontMatter$2,
+  GetToc: GetToc$2,
+  default: MDXContent$2
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc = () => [{
+const GetToc$1 = () => [{
   "id": "keyby",
   "text": "keyBy",
   "depth": 2
@@ -21472,8 +21453,8 @@ const GetToc = () => [{
   "text": "merge",
   "depth": 3
 }];
-const frontmatter = void 0;
-function _createMdxContent(props) {
+const frontmatter$1 = void 0;
+function _createMdxContent$1(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -21936,6 +21917,53 @@ function _createMdxContent(props) {
     })]
   });
 }
+function MDXContent$1(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsx(MDXLayout, {
+    ...props,
+    children: jsx(_createMdxContent$1, {
+      ...props
+    })
+  }) : _createMdxContent$1(props);
+}
+const GetFrontMatter$1 = () => frontmatter$1;
+const _3lodash__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$1,
+  GetToc: GetToc$1,
+  default: MDXContent$1
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc = () => [];
+const frontmatter = void 0;
+function _createMdxContent(props) {
+  const _components = {
+    a: "a",
+    h1: "h1",
+    p: "p",
+    span: "span",
+    ...props.components
+  };
+  return jsxs(Fragment, {
+    children: [jsxs(_components.h1, {
+      id: "参考",
+      children: [jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#参考",
+        children: jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "参考"]
+    }), "\n", jsx(_components.p, {
+      children: jsx(_components.a, {
+        href: "https://q.shanyue.tech/",
+        children: "山月"
+      })
+    })]
+  });
+}
 function MDXContent(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsx(MDXLayout, {
@@ -21946,7 +21974,7 @@ function MDXContent(props = {}) {
   }) : _createMdxContent(props);
 }
 const GetFrontMatter = () => frontmatter;
-const _3lodash__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const _99readme = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   GetFrontMatter,
   GetToc,
@@ -21987,35 +22015,35 @@ const routes = [
   { path: "/%E7%A6%BB%E8%B0%B1/6ahooks/97useAnimationFrame%E5%92%8C%E8%AE%A1%E6%97%B6%E5%99%A8.html", element: React.createElement(MDXContent$v), preload: () => Promise.resolve().then(() => _97useAnimationFrame____) },
   { path: "/%E7%A6%BB%E8%B0%B1/6ahooks/9useDeepCompareEffect.html", element: React.createElement(MDXContent$u), preload: () => Promise.resolve().then(() => _9useDeepCompareEffect) },
   { path: "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro.html", element: React.createElement(MDXContent$t), preload: () => Promise.resolve().then(() => intro) },
-  { path: "/%E7%AC%94%E8%AE%B0/3http/99readme.html", element: React.createElement(MDXContent$s), preload: () => Promise.resolve().then(() => _99readme$2) },
-  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/13%E5%86%85%E5%AD%98.html", element: React.createElement(MDXContent$r), preload: () => Promise.resolve().then(() => _13__) },
-  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/16%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.html", element: React.createElement(MDXContent$q), preload: () => Promise.resolve().then(() => _16_________) },
-  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/1%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9B%E7%A8%8B.html", element: React.createElement(MDXContent$p), preload: () => Promise.resolve().then(() => _1_____) },
-  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/2TCP%E5%8D%8F%E8%AE%AE.html", element: React.createElement(MDXContent$o), preload: () => Promise.resolve().then(() => _2TCP__) },
-  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/3HTTP%E5%8D%8F%E8%AE%AE.html", element: React.createElement(MDXContent$n), preload: () => Promise.resolve().then(() => _3HTTP__) },
-  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/4%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98.html", element: React.createElement(MDXContent$m), preload: () => Promise.resolve().then(() => _4_____) },
-  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/5%E5%AF%BC%E8%88%AA%E6%B5%81%E7%A8%8B.html", element: React.createElement(MDXContent$l), preload: () => Promise.resolve().then(() => _5____) },
-  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/6%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B.html", element: React.createElement(MDXContent$k), preload: () => Promise.resolve().then(() => _6____) },
-  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/98%20%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84dns%E7%BC%93%E5%AD%98.html", element: React.createElement(MDXContent$j), preload: () => Promise.resolve().then(() => _98_____dns__) },
-  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/99readme.html", element: React.createElement(MDXContent$i), preload: () => Promise.resolve().then(() => _99readme$1) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/0%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html", element: React.createElement(MDXContent$h), preload: () => Promise.resolve().then(() => _0____) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/10checkout.html", element: React.createElement(MDXContent$g), preload: () => Promise.resolve().then(() => _10checkout) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/11stash.html", element: React.createElement(MDXContent$f), preload: () => Promise.resolve().then(() => _11stash) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/12log%E4%B8%8Ereflog.html", element: React.createElement(MDXContent$e), preload: () => Promise.resolve().then(() => _12log_reflog) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/13cherry-pick.html", element: React.createElement(MDXContent$d), preload: () => Promise.resolve().then(() => _13cherryPick) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/1%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FVCS.html", element: React.createElement(MDXContent$c), preload: () => Promise.resolve().then(() => _1______VCS) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/2%E5%88%86%E5%B8%83%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FDVCS.html", element: React.createElement(MDXContent$b), preload: () => Promise.resolve().then(() => _2_________DVCS) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/3HEAD%E4%B8%8Emaster%E4%B8%8Ebranch.html", element: React.createElement(MDXContent$a), preload: () => Promise.resolve().then(() => _3HEAD_master_branch) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/4push.html", element: React.createElement(MDXContent$9), preload: () => Promise.resolve().then(() => _4push) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/5merge.html", element: React.createElement(MDXContent$8), preload: () => Promise.resolve().then(() => _5merge) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/6feature%20branch.html", element: React.createElement(MDXContent$7), preload: () => Promise.resolve().then(() => _6feature_branch) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/7rebase.html", element: React.createElement(MDXContent$6), preload: () => Promise.resolve().then(() => _7rebase) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/8revert.html", element: React.createElement(MDXContent$5), preload: () => Promise.resolve().then(() => _8revert) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/99readme.html", element: React.createElement(MDXContent$4), preload: () => Promise.resolve().then(() => _99readme) },
-  { path: "/%E7%AC%94%E8%AE%B0/1git/9reset.html", element: React.createElement(MDXContent$3), preload: () => Promise.resolve().then(() => _9reset) },
-  { path: "/%E7%AC%94%E8%AE%B0/4javascript/1%E5%BC%95%E7%94%A8.html", element: React.createElement(MDXContent$2), preload: () => Promise.resolve().then(() => _1__) },
-  { path: "/%E7%AC%94%E8%AE%B0/4javascript/2%E8%BF%90%E7%AE%97%E7%AC%A6.html", element: React.createElement(MDXContent$1), preload: () => Promise.resolve().then(() => _2___) },
-  { path: "/%E7%AC%94%E8%AE%B0/4javascript/3lodash%E6%89%8B%E5%86%99.html", element: React.createElement(MDXContent), preload: () => Promise.resolve().then(() => _3lodash__) }
+  { path: "/%E7%AC%94%E8%AE%B0/1git/0%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html", element: React.createElement(MDXContent$s), preload: () => Promise.resolve().then(() => _0____) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/10checkout.html", element: React.createElement(MDXContent$r), preload: () => Promise.resolve().then(() => _10checkout) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/11stash.html", element: React.createElement(MDXContent$q), preload: () => Promise.resolve().then(() => _11stash) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/12log%E4%B8%8Ereflog.html", element: React.createElement(MDXContent$p), preload: () => Promise.resolve().then(() => _12log_reflog) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/13cherry-pick.html", element: React.createElement(MDXContent$o), preload: () => Promise.resolve().then(() => _13cherryPick) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/1%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FVCS.html", element: React.createElement(MDXContent$n), preload: () => Promise.resolve().then(() => _1______VCS) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/2%E5%88%86%E5%B8%83%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FDVCS.html", element: React.createElement(MDXContent$m), preload: () => Promise.resolve().then(() => _2_________DVCS) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/3HEAD%E4%B8%8Emaster%E4%B8%8Ebranch.html", element: React.createElement(MDXContent$l), preload: () => Promise.resolve().then(() => _3HEAD_master_branch) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/4push.html", element: React.createElement(MDXContent$k), preload: () => Promise.resolve().then(() => _4push) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/5merge.html", element: React.createElement(MDXContent$j), preload: () => Promise.resolve().then(() => _5merge) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/6feature%20branch.html", element: React.createElement(MDXContent$i), preload: () => Promise.resolve().then(() => _6feature_branch) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/7rebase.html", element: React.createElement(MDXContent$h), preload: () => Promise.resolve().then(() => _7rebase) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/8revert.html", element: React.createElement(MDXContent$g), preload: () => Promise.resolve().then(() => _8revert) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/99readme.html", element: React.createElement(MDXContent$f), preload: () => Promise.resolve().then(() => _99readme$2) },
+  { path: "/%E7%AC%94%E8%AE%B0/1git/9reset.html", element: React.createElement(MDXContent$e), preload: () => Promise.resolve().then(() => _9reset) },
+  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/13%E5%86%85%E5%AD%98.html", element: React.createElement(MDXContent$d), preload: () => Promise.resolve().then(() => _13__) },
+  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/16%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.html", element: React.createElement(MDXContent$c), preload: () => Promise.resolve().then(() => _16_________) },
+  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/1%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9B%E7%A8%8B.html", element: React.createElement(MDXContent$b), preload: () => Promise.resolve().then(() => _1_____) },
+  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/2TCP%E5%8D%8F%E8%AE%AE.html", element: React.createElement(MDXContent$a), preload: () => Promise.resolve().then(() => _2TCP__) },
+  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/3HTTP%E5%8D%8F%E8%AE%AE.html", element: React.createElement(MDXContent$9), preload: () => Promise.resolve().then(() => _3HTTP__) },
+  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/4%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98.html", element: React.createElement(MDXContent$8), preload: () => Promise.resolve().then(() => _4_____) },
+  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/5%E5%AF%BC%E8%88%AA%E6%B5%81%E7%A8%8B.html", element: React.createElement(MDXContent$7), preload: () => Promise.resolve().then(() => _5____) },
+  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/6%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B.html", element: React.createElement(MDXContent$6), preload: () => Promise.resolve().then(() => _6____) },
+  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/98%20%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84dns%E7%BC%93%E5%AD%98.html", element: React.createElement(MDXContent$5), preload: () => Promise.resolve().then(() => _98_____dns__) },
+  { path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/99readme.html", element: React.createElement(MDXContent$4), preload: () => Promise.resolve().then(() => _99readme$1) },
+  { path: "/%E7%AC%94%E8%AE%B0/4javascript/1%E5%BC%95%E7%94%A8.html", element: React.createElement(MDXContent$3), preload: () => Promise.resolve().then(() => _1__) },
+  { path: "/%E7%AC%94%E8%AE%B0/4javascript/2%E8%BF%90%E7%AE%97%E7%AC%A6.html", element: React.createElement(MDXContent$2), preload: () => Promise.resolve().then(() => _2___) },
+  { path: "/%E7%AC%94%E8%AE%B0/4javascript/3lodash%E6%89%8B%E5%86%99.html", element: React.createElement(MDXContent$1), preload: () => Promise.resolve().then(() => _3lodash__) },
+  { path: "/%E7%AC%94%E8%AE%B0/3http/99readme.html", element: React.createElement(MDXContent), preload: () => Promise.resolve().then(() => _99readme) }
 ];
 async function getPageData(pathname) {
   var _a, _b, _c, _d;
@@ -22036,29 +22064,29 @@ async function getPageData(pathname) {
       userConfig: config
     };
   }
+  console.log(
+    `${/* @__PURE__ */ new Date()}
+页面数据：`,
+    pageData
+  );
   return pageData;
 }
 const PageDataContext = createContext({});
 const usePageData = () => {
   return useContext(PageDataContext);
 };
-function PageDataProvider({
+function ServerPageDataProvider({
   children,
   value
 }) {
   const [pageData, setPageData] = useState(value.pageData);
-  useEffect(() => {
-  });
-  return /* @__PURE__ */ jsx(PageDataContext.Provider, { value: { pageData, setPageData }, children });
+  return /* @__PURE__ */ jsxs(PageDataContext.Provider, { value: { pageData, setPageData }, children: [
+    /* @__PURE__ */ jsx(TitleHelmet, { pageData }),
+    children
+  ] });
 }
 const NAV_HEIGHT = 56;
 const DARK_KEY = "ZEROPRESS_DARK";
-function isBrowser() {
-  return typeof window !== "undefined" && !!window.document && !!window.document.createElement;
-}
-function normalizeUrl(url = "/") {
-  return encodeURI(url);
-}
 function useDark() {
   return {
     toggle
@@ -22120,13 +22148,10 @@ function Link({
   onClick
 }) {
   const navigate = useNavigate();
-  const { setPageData } = usePageData();
   const isCsg = !(href == null ? void 0 : href.startsWith("http"));
   const handleCsgNavigate = async () => {
-    const newPageData = await getPageData(href);
-    setPageData == null ? void 0 : setPageData(newPageData);
     onClick == null ? void 0 : onClick();
-    navigate(href);
+    navigate(href.slice(1));
   };
   return /* @__PURE__ */ jsx(
     "a",
@@ -22745,10 +22770,10 @@ function Layout({ location = window.location.pathname }) {
     getPage()
   ] });
 }
-async function render(location) {
+async function render(location, helmetContext) {
   const pageData = await getPageData(location);
   const html = renderToString(
-    /* @__PURE__ */ jsx(PageDataProvider, { value: { pageData }, children: /* @__PURE__ */ jsx(StaticRouter, { location, children: /* @__PURE__ */ jsx(Layout, { location }) }) })
+    /* @__PURE__ */ jsx(HelmetProvider, { context: helmetContext, children: /* @__PURE__ */ jsx(ServerPageDataProvider, { value: { pageData }, children: /* @__PURE__ */ jsx(StaticRouter, { location, children: /* @__PURE__ */ jsx(Layout, { location }) }) }) })
   );
   return html;
 }
