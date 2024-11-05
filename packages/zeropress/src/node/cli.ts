@@ -1,7 +1,7 @@
 import { buildRuntime } from './build'
 import { resolveSiteConfig } from './config'
 import { ROOT_PATH } from './consts'
-import { createRuntimeDevServer } from './server.js'
+import { createRuntimeDevServer } from './server'
 import { program } from 'commander'
 import fse from 'fs-extra'
 import path from 'path'
@@ -38,6 +38,21 @@ cli
       await server.listen(port)
 
       server.printUrls()
+
+      let isRestarting = false
+
+      server.watcher.on('all', async (event, path) => {
+        if (!isRestarting && event !== 'change') {
+          console.log('监听到markdown文件增删改，重启服务中:', path)
+
+          isRestarting = true
+
+          await server.close()
+          await createServer()
+
+          isRestarting = false
+        }
+      })
     }
 
     await createServer()

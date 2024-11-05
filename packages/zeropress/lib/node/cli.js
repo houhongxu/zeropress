@@ -35,42 +35,6 @@ var DEFAULT_USER_CONFIG = {
   vite: {}
 };
 
-// src/node/utils.ts
-import fg from "fast-glob";
-async function getDocs(docs = DEFAULT_USER_CONFIG.docs, options) {
-  return await fg.glob("**/*.{jsx,tsx,md,mdx}", {
-    ignore: ["node_modules/**", "client/**", "server/**"],
-    cwd: docs,
-    deep: 3,
-    ...options
-  });
-}
-
-// src/node/plugins/vitePluginFileChange.ts
-function vitePluginFileChange({
-  siteConfig,
-  restartRuntimeDevServer
-}) {
-  let preFiles;
-  return {
-    name: "vitePluginFileChange",
-    apply: "serve",
-    async configResolved() {
-      preFiles = await getDocs(siteConfig.userConfig.docs);
-    },
-    async handleHotUpdate(ctx) {
-      const curFiles = await getDocs(siteConfig.userConfig.docs);
-      if (preFiles.length !== curFiles.length) {
-        if (restartRuntimeDevServer) {
-          console.log("\u76D1\u542C\u5230markdown\u6587\u4EF6\u589E\u5220\uFF0C\u91CD\u542F\u670D\u52A1\u4E2D:", ctx.file);
-          await restartRuntimeDevServer();
-        }
-      }
-      preFiles = curFiles;
-    }
-  };
-}
-
 // src/node/plugins/remarkMdxToc.ts
 import { parse } from "acorn";
 import Slugger from "github-slugger";
@@ -271,6 +235,17 @@ function vitePluginVirtualConfig({
   };
 }
 
+// src/node/utils.ts
+import fg from "fast-glob";
+async function getDocs(docs = DEFAULT_USER_CONFIG.docs, options) {
+  return await fg.glob("**/*.{jsx,tsx,md,mdx}", {
+    ignore: ["node_modules/**", "client/**", "server/**"],
+    cwd: docs,
+    deep: 3,
+    ...options
+  });
+}
+
 // src/shared/utils.ts
 function normalizeUrl(url = "/") {
   return encodeURI(url);
@@ -368,7 +343,6 @@ function createPlugins({
     }),
     vitePluginVirtualConfig({ siteConfig, restartRuntimeDevServer }),
     vitePluginVirtualRoutes({ siteConfig }),
-    vitePluginFileChange({ siteConfig, restartRuntimeDevServer }),
     viteTsconfigPaths(),
     // 路径别名插件解析tsconfig的baseurl和paths
     vitePluginTransformFrontmatter()
@@ -678,7 +652,7 @@ function getUserConfigPath({ root = process.cwd() }) {
 import autoprefixer2 from "autoprefixer";
 import tailwindcss2 from "tailwindcss";
 import { createServer } from "vite";
-async function createRuntimeDevServer({
+function createRuntimeDevServer({
   siteConfig,
   restartRuntimeDevServer
 }) {
@@ -686,8 +660,19 @@ async function createRuntimeDevServer({
     root: siteConfig.root,
     // 避免dev服务访问路由时直接访问静态tsx资源，所以在/开启服务，路由一般在/docs内
     server: {
-      host: true
+      host: true,
       // 开启局域网与公网ip
+      watch: {
+        cwd: ROOT_PATH,
+        ignored: [
+          "**/*",
+          // 忽略所有文件
+          `!${siteConfig.userConfig.docs}/**`,
+          // 包括 docs 目录
+          `!public/**`
+          // 包括 config 目录及其子目录
+        ]
+      }
     },
     plugins: createPlugins({
       restartRuntimeDevServer,
@@ -727,6 +712,16 @@ cli.command("dev", { isDefault: true }).description("dev server").option("-p,--p
     });
     await server.listen(port);
     server.printUrls();
+    let isRestarting = false;
+    server.watcher.on("all", async (event, path8) => {
+      if (!isRestarting && event !== "change") {
+        console.log("\u76D1\u542C\u5230markdown\u6587\u4EF6\u589E\u5220\u6539\uFF0C\u91CD\u542F\u670D\u52A1\u4E2D:", path8);
+        isRestarting = true;
+        await server.close();
+        await createServer2();
+        isRestarting = false;
+      }
+    });
   };
   await createServer2();
 });
