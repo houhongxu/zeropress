@@ -18,9 +18,9 @@ var SERVER_ENTRY_PATH = path2.join(
   RUNTIME_PATH,
   "./server/server-entry.tsx"
 );
-var SERVER_OUT_PATH = "./.zeropress";
+var SERVER_OUT_PATH = path2.join(ROOT_PATH, "./.zeropress");
 var CLIENT_OUT_PATH = "./dist";
-var PUBLIC_PATH = "./public";
+var CIIENT_PUBLIC_PATH = "./public";
 var HTML_PATH = path2.join(ROOT_PATH, "./index.html");
 var CONFIG_OPTIONS = ["zeropress.config.ts", "zeropress.config.js"];
 var DEFAULT_USER_CONFIG = {
@@ -237,11 +237,20 @@ function vitePluginVirtualConfig({
 
 // src/node/utils.ts
 import fg from "fast-glob";
-async function getDocs(docs = DEFAULT_USER_CONFIG.docs, options) {
+async function globDocs(path8 = DEFAULT_USER_CONFIG.docs, options) {
   return await fg.glob("**/*.{jsx,tsx,md,mdx}", {
     ignore: ["node_modules/**", "client/**", "server/**"],
-    cwd: docs,
+    cwd: path8,
     deep: 3,
+    ...options
+  });
+}
+async function globImgs(path8 = DEFAULT_USER_CONFIG.docs, options) {
+  return await fg.glob("**/*.{png,jpeg,jpg,git,svg,webp}", {
+    ignore: ["node_modules/**", "client/**", "server/**"],
+    cwd: path8,
+    deep: 3,
+    absolute: true,
     ...options
   });
 }
@@ -303,7 +312,7 @@ function vitePluginVirtualRoutes({
     },
     async load(id) {
       if (id === resolvedVirtualModuleId) {
-        const files = await getDocs(docs, { absolute: true });
+        const files = await globDocs(docs, { absolute: true });
         let importTemplate = 'import React from "react";\n';
         const routes = files.map((file, index) => {
           const relativePath = path3.relative(docs, file);
@@ -431,7 +440,7 @@ function viteBuild({
     plugins: createPlugins({ siteConfig }),
     build: {
       ssr: isServer,
-      outDir: isServer ? path5.join(ROOT_PATH, SERVER_OUT_PATH) : path5.join(siteConfig.root, CLIENT_OUT_PATH),
+      outDir: isServer ? SERVER_OUT_PATH : path5.join(siteConfig.root, CLIENT_OUT_PATH),
       rollupOptions: {
         input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
         output: {
@@ -463,14 +472,10 @@ async function renderHtmls({
   const styleAssets = clientBundle.output.filter(
     (chunk) => chunk.type === "asset" && chunk.fileName.endsWith(".css")
   );
-  if (await fse2.exists(PUBLIC_PATH)) {
-    await fse2.copy(PUBLIC_PATH, path5.join(CLIENT_OUT_PATH));
+  if (await fse2.exists(CIIENT_PUBLIC_PATH)) {
+    await fse2.copy(CIIENT_PUBLIC_PATH, path5.join(CLIENT_OUT_PATH));
   }
-  const serverEntryPath = path5.join(
-    ROOT_PATH,
-    SERVER_OUT_PATH,
-    serverEntryChunk?.fileName
-  );
+  const serverEntryPath = path5.join(SERVER_OUT_PATH, serverEntryChunk?.fileName);
   const clientEntryPath = `/${clientEntryChunk?.fileName}`;
   const helmetContext = {};
   const { render, routes } = await import(serverEntryPath);
@@ -566,7 +571,7 @@ async function resolveSiteConfig({
   return siteConfig;
 }
 async function autoSidebarAndNav({ docs }) {
-  const files = (await getDocs(docs)).filter(
+  const files = (await globDocs(docs)).filter(
     (item) => !item.includes("index.md")
   );
   const data = files.map((item) => {
@@ -722,6 +727,16 @@ cli.command("dev", { isDefault: true }).description("dev server").option("-p,--p
         isRestarting = false;
       }
     });
+    const imgs = await globImgs();
+    console.log(imgs);
+    await Promise.all(
+      imgs.map(
+        (img) => fse4.copyFile(
+          img,
+          path7.join(siteConfig.root, CIIENT_PUBLIC_PATH, path7.basename(img))
+        )
+      )
+    );
   };
   await createServer2();
 });

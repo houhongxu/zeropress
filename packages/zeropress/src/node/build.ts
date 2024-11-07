@@ -2,7 +2,7 @@ import {
   CLIENT_ENTRY_PATH,
   CLIENT_OUT_PATH,
   HTML_PATH,
-  PUBLIC_PATH,
+  CIIENT_PUBLIC_PATH,
   ROOT_PATH,
   SERVER_ENTRY_PATH,
   SERVER_OUT_PATH,
@@ -54,7 +54,7 @@ function viteBuild({
     build: {
       ssr: isServer,
       outDir: isServer
-        ? path.join(ROOT_PATH, SERVER_OUT_PATH)
+        ? SERVER_OUT_PATH
         : path.join(siteConfig.root, CLIENT_OUT_PATH),
       rollupOptions: {
         input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
@@ -102,15 +102,11 @@ async function renderHtmls({
   )
 
   // 静态资源拷贝到打包路径
-  if (await fse.exists(PUBLIC_PATH)) {
-    await fse.copy(PUBLIC_PATH, path.join(CLIENT_OUT_PATH))
+  if (await fse.exists(CIIENT_PUBLIC_PATH)) {
+    await fse.copy(CIIENT_PUBLIC_PATH, path.join(CLIENT_OUT_PATH))
   }
 
-  const serverEntryPath = path.join(
-    ROOT_PATH,
-    SERVER_OUT_PATH,
-    serverEntryChunk?.fileName,
-  )
+  const serverEntryPath = path.join(SERVER_OUT_PATH, serverEntryChunk?.fileName)
 
   // 部署后服务路径是CLIENT_OUT_PATH文件夹所以相对路径就可以了
   const clientEntryPath = `/${clientEntryChunk?.fileName}`

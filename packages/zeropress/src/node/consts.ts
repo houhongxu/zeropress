@@ -20,11 +20,11 @@ export const SERVER_ENTRY_PATH = path.join(
   './server/server-entry.tsx',
 )
 
-export const SERVER_OUT_PATH = './.zeropress'
+export const SERVER_OUT_PATH = path.join(ROOT_PATH, './.zeropress')
 
 export const CLIENT_OUT_PATH = './dist'
 
-export const PUBLIC_PATH = './public'
+export const CIIENT_PUBLIC_PATH = './public'
 
 export const HTML_PATH = path.join(ROOT_PATH, './index.html')
 

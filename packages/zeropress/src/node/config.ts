@@ -1,5 +1,5 @@
 import { CONFIG_OPTIONS, DEFAULT_USER_CONFIG } from './consts'
-import { getDocs } from './utils'
+import { globDocs } from './utils'
 import {
   UserConfig,
   SiteConfig,
@@ -115,7 +115,7 @@ export async function resolveSiteConfig({
  */
 async function autoSidebarAndNav({ docs }: { docs?: string }) {
   // glob文件
-  const files = (await getDocs(docs)).filter(
+  const files = (await globDocs(docs)).filter(
     (item) => !item.includes('index.md'),
   )
 

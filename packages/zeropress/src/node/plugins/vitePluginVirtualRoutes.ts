@@ -1,4 +1,4 @@
-import { getDocs } from '../utils'
+import { globDocs } from '../utils'
 import { SiteConfig } from '@/shared/types'
 import { normalizeUrl, urlWithHtml } from '@/shared/utils'
 import path from 'path'
@@ -27,7 +27,7 @@ export function vitePluginVirtualRoutes({
     async load(id) {
       if (id === resolvedVirtualModuleId) {
         // glob文件
-        const files = await getDocs(docs, { absolute: true })
+        const files = await globDocs(docs, { absolute: true })
 
         let importTemplate = 'import React from "react";\n'
 
