@@ -1,8 +1,7 @@
 import { buildRuntime } from './build'
 import { resolveSiteConfig } from './config'
-import { CIIENT_PUBLIC_PATH, ROOT_PATH } from './consts'
+import { ROOT_PATH } from './consts'
 import { createRuntimeDevServer } from './server'
-import { globImgs } from './utils'
 import { program } from 'commander'
 import fse from 'fs-extra'
 import path from 'path'
@@ -54,18 +53,6 @@ cli
           isRestarting = false
         }
       })
-
-      const imgs = await globImgs()
-      console.log(imgs)
-
-      // await Promise.all(
-      //   imgs.map((img) =>
-      //     fse.copyFile(
-      //       img,
-      //       path.join(siteConfig.root, CIIENT_PUBLIC_PATH, path.basename(img)),
-      //     ),
-      //   ),
-      // )
     }
 
     await createServer()

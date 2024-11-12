@@ -35,12 +35,55 @@ var DEFAULT_USER_CONFIG = {
   vite: {}
 };
 
+// src/node/plugins/vitePluginBuildImg.ts
+import fse from "fs-extra";
+import path3 from "path";
+var isMdx = (file) => /\.mdx?/.test(file);
+function vitePluginBuildImg({
+  siteConfig
+}) {
+  return {
+    name: "vitePluginBuildImg",
+    apply: "build",
+    transform(code, id) {
+      let newCode = code;
+      if (isMdx(id) && code.includes("_components.img")) {
+        const dirname = path3.dirname(id);
+        const [, publicDirname] = dirname.split("docs");
+        const imageRegex = /_components\.img[^}]*?\bsrc:\s*["']([^"']+)["']/g;
+        const srcs = Array.from(code.matchAll(imageRegex), (match) => match[1]);
+        srcs.forEach(async (src) => {
+          const decodeSrc = decodeURI(src);
+          if (src.startsWith("./")) {
+            const newSrc = path3.join(encodeURI(publicDirname), src);
+            newCode = newCode.replace(src, newSrc);
+            const oldPath = path3.join(dirname, decodeSrc);
+            const newPath = path3.join(
+              siteConfig.root,
+              CLIENT_OUT_PATH,
+              publicDirname,
+              decodeSrc
+            );
+            const isOldExits = await fse.exists(oldPath);
+            const isNewExits = await fse.exists(newPath);
+            if (isOldExits && !isNewExits) {
+              await fse.ensureDir(path3.dirname(newPath));
+              await fse.copyFile(oldPath, newPath);
+            }
+          }
+        });
+      }
+      return newCode;
+    }
+  };
+}
+
 // src/node/plugins/remarkMdxToc.ts
 import { parse } from "acorn";
 import Slugger from "github-slugger";
 import { visit } from "unist-util-visit";
 var remarkMdxToc = () => {
-  return function(tree) {
+  return (tree) => {
     const toc = [];
     visit(tree, "heading", (node) => {
       if (node.depth > 1 && node.depth < 8) {
@@ -87,12 +130,12 @@ import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 function vitePluginMdx() {
-  const isMdx = (file) => /\.mdx?/.test(file);
+  const isMdx2 = (file) => /\.mdx?/.test(file);
   return {
     enforce: "pre",
     // 将热更新边界拓展到接受该事件并处理的组件，提供hmr自定义事件给client
     async handleHotUpdate(ctx) {
-      if (isMdx(ctx.file)) {
+      if (isMdx2(ctx.file)) {
         console.log("\u81EA\u5B9A\u4E49hmr\u4E8B\u4EF6:", ctx.file);
         ctx.server.ws.send({
           type: "custom",
@@ -143,7 +186,7 @@ function vitePluginMdx() {
 }
 
 // src/node/plugins/vitePluginServeHtml.ts
-import fse from "fs-extra";
+import fse2 from "fs-extra";
 function vitePluginServeHtml({
   templatePath,
   entry
@@ -158,43 +201,81 @@ function vitePluginServeHtml({
           if (!req.url?.endsWith(".html") && req.url !== "/") {
             return next();
           }
-          try {
-            const template = await fse.readFile(templatePath, "utf-8");
-            const viteHtml = await server.transformIndexHtml?.(
-              req.url,
-              template,
-              req.originalUrl
-            );
-            const html = viteHtml.replace(
-              "</body>",
-              `
+          const template = await fse2.readFile(templatePath, "utf-8");
+          const viteHtml = await server.transformIndexHtml?.(
+            req.url,
+            template,
+            req.originalUrl
+          );
+          const html = viteHtml.replace(
+            "</body>",
+            `
               <script type="module" src="${entry}"></script>
               
 
               </body>
               `
-            );
-            res.statusCode = 200;
-            res.setHeader("Content-Type", "text/html");
-            res.end(html);
-          } catch (e) {
-            console.error(e);
-            return next(e);
-          }
+          );
+          res.statusCode = 200;
+          res.setHeader("Content-Type", "text/html");
+          res.end(html);
+          return;
         });
       };
     }
   };
 }
 
+// src/node/plugins/vitePluginServeImg.ts
+import fse3 from "fs-extra";
+import mime from "mime";
+import path4 from "path";
+var isImg = (filename) => {
+  if (!filename)
+    return false;
+  return /\.(jpg|jpeg|png|gif|svg|webp)$/i.test(filename);
+};
+function vitePluginServeImg({
+  siteConfig
+}) {
+  return {
+    name: "vite-plugin-fixed-image-dev",
+    apply: "serve",
+    configureServer(server) {
+      server.middlewares.use(async (req, res, next) => {
+        if (isImg(req.url)) {
+          const decodeSrc = decodeURI(req.url);
+          const isExits = await fse3.exists(
+            path4.join(siteConfig.root, CIIENT_PUBLIC_PATH, decodeSrc)
+          );
+          if (!isExits) {
+            const imgPath = path4.join(
+              siteConfig.root,
+              siteConfig.userConfig.docs,
+              decodeSrc
+            );
+            const imgType = mime.getType(imgPath);
+            if (imgType) {
+              res.setHeader("Content-Type", imgType);
+            }
+            fse3.createReadStream(imgPath).pipe(res);
+            return;
+          }
+        }
+        return next();
+      });
+    }
+  };
+}
+
 // src/node/plugins/vitePluginTransformFrontmatter.ts
 function vitePluginTransformFrontmatter() {
-  const isMdx = (file) => /\.mdx?/.test(file);
+  const isMdx2 = (file) => /\.mdx?/.test(file);
   return {
     name: "vitePluginTransformFrontmatter",
     enforce: "post",
     transform(code, id) {
-      if (isMdx(id)) {
+      if (isMdx2(id)) {
         code = code.replace("export const frontmatter", "const frontmatter");
         code += `
  export const GetFrontMatter = () => frontmatter`;
@@ -237,20 +318,11 @@ function vitePluginVirtualConfig({
 
 // src/node/utils.ts
 import fg from "fast-glob";
-async function globDocs(path8 = DEFAULT_USER_CONFIG.docs, options) {
+async function globDocs(path10 = DEFAULT_USER_CONFIG.docs, options) {
   return await fg.glob("**/*.{jsx,tsx,md,mdx}", {
     ignore: ["node_modules/**", "client/**", "server/**"],
-    cwd: path8,
+    cwd: path10,
     deep: 3,
-    ...options
-  });
-}
-async function globImgs(path8 = DEFAULT_USER_CONFIG.docs, options) {
-  return await fg.glob("**/*.{png,jpeg,jpg,git,svg,webp}", {
-    ignore: ["node_modules/**", "client/**", "server/**"],
-    cwd: path8,
-    deep: 3,
-    absolute: true,
     ...options
   });
 }
@@ -296,7 +368,7 @@ function splitIndex(text) {
 }
 
 // src/node/plugins/vitePluginVirtualRoutes.ts
-import path3 from "path";
+import path5 from "path";
 function vitePluginVirtualRoutes({
   siteConfig
 }) {
@@ -315,8 +387,8 @@ function vitePluginVirtualRoutes({
         const files = await globDocs(docs, { absolute: true });
         let importTemplate = 'import React from "react";\n';
         const routes = files.map((file, index) => {
-          const relativePath = path3.relative(docs, file);
-          const pathname = relativePath.replace(path3.extname(file), "").replace(/index$/, "");
+          const relativePath = path5.relative(docs, file);
+          const pathname = relativePath.replace(path5.extname(file), "").replace(/index$/, "");
           importTemplate += `import Element${index + 1} from '${file}';
 `;
           return `{ path: '/${normalizeUrl(urlWithHtml(pathname))}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },
@@ -354,16 +426,18 @@ function createPlugins({
     vitePluginVirtualRoutes({ siteConfig }),
     viteTsconfigPaths(),
     // 路径别名插件解析tsconfig的baseurl和paths
-    vitePluginTransformFrontmatter()
+    vitePluginTransformFrontmatter(),
+    vitePluginBuildImg({ siteConfig }),
+    vitePluginServeImg({ siteConfig })
   ];
 }
 
 // src/node/tailwind.ts
 import { addDynamicIconSelectors } from "@iconify/tailwind";
-import path4 from "path";
+import path6 from "path";
 var tailwindcssConfig = {
   content: [
-    path4.join(
+    path6.join(
       __dirname,
       "..",
       "..",
@@ -413,13 +487,13 @@ var tailwindcssConfig = {
 
 // src/node/build.ts
 import autoprefixer from "autoprefixer";
-import fse2 from "fs-extra";
-import path5 from "path";
+import fse4 from "fs-extra";
+import path7 from "path";
 import tailwindcss from "tailwindcss";
 import { build } from "vite";
 async function buildRuntime({ siteConfig }) {
   console.log("\u5220\u9664\u65E7\u4EA7\u7269\uFF1A", CLIENT_OUT_PATH);
-  await fse2.remove(CLIENT_OUT_PATH);
+  await fse4.remove(CLIENT_OUT_PATH);
   console.log("\u6784\u5EFAjs\u6587\u4EF6...");
   const [clientBundle, serverBundle] = await Promise.all([
     viteBuild({ siteConfig }),
@@ -440,7 +514,7 @@ function viteBuild({
     plugins: createPlugins({ siteConfig }),
     build: {
       ssr: isServer,
-      outDir: isServer ? SERVER_OUT_PATH : path5.join(siteConfig.root, CLIENT_OUT_PATH),
+      outDir: isServer ? SERVER_OUT_PATH : path7.join(siteConfig.root, CLIENT_OUT_PATH),
       rollupOptions: {
         input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
         output: {
@@ -472,15 +546,15 @@ async function renderHtmls({
   const styleAssets = clientBundle.output.filter(
     (chunk) => chunk.type === "asset" && chunk.fileName.endsWith(".css")
   );
-  if (await fse2.exists(CIIENT_PUBLIC_PATH)) {
-    await fse2.copy(CIIENT_PUBLIC_PATH, path5.join(CLIENT_OUT_PATH));
+  if (await fse4.exists(CIIENT_PUBLIC_PATH)) {
+    await fse4.copy(CIIENT_PUBLIC_PATH, path7.join(CLIENT_OUT_PATH));
   }
-  const serverEntryPath = path5.join(SERVER_OUT_PATH, serverEntryChunk?.fileName);
+  const serverEntryPath = path7.join(SERVER_OUT_PATH, serverEntryChunk?.fileName);
   const clientEntryPath = `/${clientEntryChunk?.fileName}`;
   const helmetContext = {};
   const { render, routes } = await import(serverEntryPath);
   const { helmet } = helmetContext;
-  const template = await fse2.readFile(HTML_PATH, "utf-8");
+  const template = await fse4.readFile(HTML_PATH, "utf-8");
   await Promise.all(
     routes.map(async (route) => {
       const file = route.path === "/" ? "/index.html" : route.path;
@@ -497,16 +571,16 @@ async function renderHtmls({
         "</head>",
         styleAssets.map((asset) => `<link rel="stylesheet" href="/${asset.fileName}">`).join("\n")
       );
-      fse2.ensureDir(path5.join(siteConfig.root, path5.dirname(relativeFilePath))).catch((e) => console.log("client\u6587\u4EF6\u5939\u4E0D\u5B58\u5728\uFF1A", e)).then(
-        () => fse2.writeFile(path5.join(siteConfig.root, relativeFilePath), html)
+      fse4.ensureDir(path7.join(siteConfig.root, path7.dirname(relativeFilePath))).catch((e) => console.log("client\u6587\u4EF6\u5939\u4E0D\u5B58\u5728\uFF1A", e)).then(
+        () => fse4.writeFile(path7.join(siteConfig.root, relativeFilePath), html)
       ).catch((e) => console.log("html\u5199\u5165\u5931\u8D25", e));
     })
   );
 }
 
 // src/node/config.ts
-import fse3 from "fs-extra";
-import path6 from "path";
+import fse5 from "fs-extra";
+import path8 from "path";
 import { loadConfigFromFile } from "vite";
 async function resolveSiteConfig({
   root = process.cwd(),
@@ -582,7 +656,7 @@ async function autoSidebarAndNav({ docs }) {
     const splitedDir = splitIndex(dir);
     const splitedFile = splitIndex(file);
     return {
-      path: `/${urlWithHtml(item.replace(path6.extname(item), ""))}`,
+      path: `/${urlWithHtml(item.replace(path8.extname(item), ""))}`,
       nav: nav2,
       dir,
       file,
@@ -591,11 +665,11 @@ async function autoSidebarAndNav({ docs }) {
       navPath: `/${nav2}`,
       siderbarDirIndex: splitedDir.index,
       siderbarDirText: splitedDir.text.replace(
-        path6.extname(splitedDir.text),
+        path8.extname(splitedDir.text),
         ""
       ),
       fileIndex: splitedFile.index,
-      fileText: splitedFile.text.replace(path6.extname(splitedFile.text), "")
+      fileText: splitedFile.text.replace(path8.extname(splitedFile.text), "")
     };
   });
   const nav = Object.entries(groupBy(data, "navText")).map(([navText, value]) => ({
@@ -648,8 +722,8 @@ async function resolveUserConfig({
 }
 function getUserConfigPath({ root = process.cwd() }) {
   const userConfigPath = CONFIG_OPTIONS.map(
-    (option) => path6.join(root, option)
-  ).find((path8) => fse3.existsSync(path8));
+    (option) => path8.join(root, option)
+  ).find((path10) => fse5.existsSync(path10));
   return userConfigPath;
 }
 
@@ -675,7 +749,7 @@ function createRuntimeDevServer({
           `!${siteConfig.userConfig.docs}/**`,
           // 包括 docs 目录
           `!public/**`
-          // 包括 config 目录及其子目录
+          // 包括 public 目录及其子目录
         ]
       }
     },
@@ -697,10 +771,10 @@ function createRuntimeDevServer({
 
 // src/node/cli.ts
 import { program } from "commander";
-import fse4 from "fs-extra";
-import path7 from "path";
+import fse6 from "fs-extra";
+import path9 from "path";
 var cli = program;
-var { version } = fse4.readJSONSync(path7.join(ROOT_PATH, "./package.json"));
+var { version } = fse6.readJSONSync(path9.join(ROOT_PATH, "./package.json"));
 cli.name("zeropress").version(version);
 cli.command("dev", { isDefault: true }).description("dev server").option("-p,--port <value>", "dev server port").action(async ({ port }) => {
   const createServer2 = async () => {
@@ -718,25 +792,15 @@ cli.command("dev", { isDefault: true }).description("dev server").option("-p,--p
     await server.listen(port);
     server.printUrls();
     let isRestarting = false;
-    server.watcher.on("all", async (event, path8) => {
+    server.watcher.on("all", async (event, path10) => {
       if (!isRestarting && event !== "change") {
-        console.log("\u76D1\u542C\u5230markdown\u6587\u4EF6\u589E\u5220\u6539\uFF0C\u91CD\u542F\u670D\u52A1\u4E2D:", path8);
+        console.log("\u76D1\u542C\u5230markdown\u6587\u4EF6\u589E\u5220\u6539\uFF0C\u91CD\u542F\u670D\u52A1\u4E2D:", path10);
         isRestarting = true;
         await server.close();
         await createServer2();
         isRestarting = false;
       }
     });
-    const imgs = await globImgs();
-    console.log(imgs);
-    await Promise.all(
-      imgs.map(
-        (img) => fse4.copyFile(
-          img,
-          path7.join(siteConfig.root, CIIENT_PUBLIC_PATH, path7.basename(img))
-        )
-      )
-    );
   };
   await createServer2();
 });

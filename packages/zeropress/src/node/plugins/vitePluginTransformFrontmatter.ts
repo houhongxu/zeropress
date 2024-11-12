@@ -12,7 +12,9 @@ export function vitePluginTransformFrontmatter(): Plugin {
     transform(code, id) {
       if (isMdx(id)) {
         code = code.replace('export const frontmatter', 'const frontmatter')
+
         code += `\n export const GetFrontMatter = () => frontmatter`
+
         return { code }
       }
     },

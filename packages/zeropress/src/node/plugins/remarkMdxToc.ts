@@ -38,7 +38,7 @@ interface ChildNode {
 
 // 导出mdx toc 对象，并使用slug id对应rehypeSlug
 export const remarkMdxToc: Plugin<[], Root> = () => {
-  return function (tree) {
+  return (tree) => {
     const toc: PageData['toc'] = []
 
     // 遍历mdast tree的heading节点

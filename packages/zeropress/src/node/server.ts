@@ -23,7 +23,7 @@ export function createRuntimeDevServer({
         ignored: [
           '**/*', // 忽略所有文件
           `!${siteConfig.userConfig.docs}/**`, // 包括 docs 目录
-          `!public/**`, // 包括 config 目录及其子目录
+          `!public/**`, // 包括 public 目录及其子目录
         ],
       },
     },

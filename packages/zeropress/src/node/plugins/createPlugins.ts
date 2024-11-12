@@ -1,6 +1,8 @@
 import { CLIENT_ENTRY_PATH, HTML_PATH } from '../consts'
+import { vitePluginBuildImg } from './vitePluginBuildImg'
 import { vitePluginMdx } from './vitePluginMdx'
 import { vitePluginServeHtml } from './vitePluginServeHtml'
+import { vitePluginServeImg } from './vitePluginServeImg'
 import { vitePluginTransformFrontmatter } from './vitePluginTransformFrontmatter'
 import { vitePluginVirtualConfig } from './vitePluginVirtualConfig'
 import { vitePluginVirtualRoutes } from './vitePluginVirtualRoutes'
@@ -30,5 +32,7 @@ export function createPlugins({
     vitePluginVirtualRoutes({ siteConfig }),
     viteTsconfigPaths(), // 路径别名插件解析tsconfig的baseurl和paths
     vitePluginTransformFrontmatter(),
+    vitePluginBuildImg({ siteConfig }),
+    vitePluginServeImg({ siteConfig }),
   ]
 }

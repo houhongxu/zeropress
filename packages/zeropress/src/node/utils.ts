@@ -12,16 +12,3 @@ export async function globDocs(
     ...options,
   })
 }
-
-export async function globImgs(
-  path = DEFAULT_USER_CONFIG.docs,
-  options?: Options | undefined,
-) {
-  return await fg.glob('**/*.{png,jpeg,jpg,git,svg,webp}', {
-    ignore: ['node_modules/**', 'client/**', 'server/**'],
-    cwd: path,
-    deep: 3,
-    absolute: true,
-    ...options,
-  })
-}

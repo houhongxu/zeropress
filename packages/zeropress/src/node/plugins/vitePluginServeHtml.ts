@@ -24,34 +24,32 @@ export function vitePluginServeHtml({
             return next()
           }
 
-          try {
-            const template = await fse.readFile(templatePath, 'utf-8')
+          const template = await fse.readFile(templatePath, 'utf-8')
 
-            // 使用vite转换html来获取vite的支持
-            const viteHtml = await server.transformIndexHtml?.(
-              req.url,
-              template,
-              req.originalUrl,
-            )
+          // 使用vite转换html来获取vite的支持
+          const viteHtml = await server.transformIndexHtml?.(
+            req.url,
+            template,
+            req.originalUrl,
+          )
 
-            // 添加客户端js入口
-            const html = viteHtml.replace(
-              '</body>',
-              `
+          // 添加客户端js入口
+          const html = viteHtml.replace(
+            '</body>',
+            `
               <script type="module" src="${entry}"></script>
               \n
               </body>
               `,
-            )
+          )
 
-            res.statusCode = 200
-            res.setHeader('Content-Type', 'text/html')
-            res.end(html)
-          } catch (e) {
-            console.error(e)
+          res.statusCode = 200
 
-            return next(e)
-          }
+          res.setHeader('Content-Type', 'text/html')
+
+          res.end(html)
+
+          return
         })
       }
     },
