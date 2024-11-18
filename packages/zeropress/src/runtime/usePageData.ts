@@ -1,20 +1,21 @@
-import { PageData } from '@/shared/types'
+import { PageData, PageModule, Route } from '@/shared/types'
 import { createContext, useContext } from 'react'
 import config from 'virtual:config'
 import routes from 'virtual:routes'
 
 export async function getPageData(pathname: string): Promise<PageData> {
-  const matched = routes.find((route) => route.path === pathname)
+  const matched = routes.find((route) => route.path === pathname) as Route
 
   let pageData: PageData = {
     pageType: '404',
     pagePath: pathname,
     toc: [],
     userConfig: config,
+    timestamp: '0',
   }
 
   if (matched) {
-    const module = await matched.preload()
+    const module: PageModule = await matched.preload()
 
     pageData = {
       pageType: module?.GetFrontMatter?.()?.pageType || 'doc',
@@ -22,6 +23,8 @@ export async function getPageData(pathname: string): Promise<PageData> {
       frontmatter: module.GetFrontMatter?.() ?? {},
       toc: module.GetToc?.() ?? [],
       userConfig: config,
+      file: matched.file,
+      timestamp: matched.timestamp,
     }
   }
 

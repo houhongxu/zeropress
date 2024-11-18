@@ -1,4 +1,4 @@
-import { globDocs } from '../utils'
+import { getGitTimestamp, globDocs } from '../utils'
 import { SiteConfig } from '@/shared/types'
 import { normalizeUrl, urlWithHtml } from '@/shared/utils'
 import path from 'path'
@@ -32,16 +32,20 @@ export function vitePluginVirtualRoutes({
         let importTemplate = 'import React from "react";\n'
 
         // 根据文件获取路由
-        const routes = files.map((file, index) => {
-          const relativePath = path.relative(docs, file)
-          const pathname = relativePath
-            .replace(path.extname(file), '')
-            .replace(/index$/, '')
+        const routes = await Promise.all(
+          files.map(async (file, index) => {
+            const relativePath = path.relative(docs, file)
+            const pathname = relativePath
+              .replace(path.extname(file), '')
+              .replace(/index$/, '')
 
-          importTemplate += `import Element${index + 1} from '${file}';\n`
+            importTemplate += `import Element${index + 1} from '${file}';\n`
 
-          return `{ path: '/${normalizeUrl(urlWithHtml(pathname))}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },\n`
-        })
+            const timestamp = await getGitTimestamp(file)
+
+            return `{ file:'${file}', timestamp:'${timestamp}', path: '/${normalizeUrl(urlWithHtml(pathname))}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },\n`
+          }),
+        )
 
         return `
         ${importTemplate}

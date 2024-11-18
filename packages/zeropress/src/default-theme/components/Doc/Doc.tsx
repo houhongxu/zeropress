@@ -3,15 +3,23 @@ import { MobileBar } from './MobileBar'
 import { Siderbar } from './SiderBar'
 import { Toc } from './Toc'
 import { useHeaderScroll } from '@/default-theme/hooks/useHeaderScroll'
-import { PageData } from '@/shared/types'
+import { PageData, ThemeConfig } from '@/shared/types'
 import { ReactNode } from 'react'
 
 export function Doc({
   content,
   toc,
+  editLink,
+  lastUpdated,
+  file,
+  timestamp,
 }: {
   content: ReactNode
   toc?: PageData['toc']
+  editLink?: ThemeConfig['editLink']
+  lastUpdated?: ThemeConfig['lastUpdated']
+  file?: PageData['file']
+  timestamp?: PageData['timestamp']
 }) {
   useHeaderScroll()
 
@@ -26,7 +34,12 @@ export function Doc({
           <div className="p-[48px]">
             <div className="doc">{content}</div>
 
-            <Footer></Footer>
+            <Footer
+              editLink={editLink}
+              lastUpdated={lastUpdated}
+              file={file}
+              timestamp={timestamp}
+            ></Footer>
           </div>
         </div>
 

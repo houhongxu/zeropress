@@ -14,9 +14,15 @@ const config: UserConfig = {
       },
       {
         logo: 'github',
-        link: 'https://github.com/houhongxu/hhxpress',
+        link: 'https://github.com/houhongxu/zeropress',
       },
     ],
+    editLink: {
+      pattern:
+        'https://github.com/houhongxu/zeropress/edit/master/apps/examples/docs/:path',
+      text: '编辑',
+    },
+    lastUpdated: {},
   },
 }
 

@@ -1,29 +1,75 @@
 import { usePrevNextPage } from '@/default-theme/hooks'
 import { Link } from '@/runtime'
+import { PageData, ThemeConfig } from '@/shared/types'
+import dayjs from 'dayjs'
 import { PropsWithChildren } from 'react'
+import { useLocation } from 'react-router-dom'
 
-export function Footer() {
+export function Footer({
+  editLink,
+  lastUpdated,
+  file,
+  timestamp,
+}: {
+  editLink?: ThemeConfig['editLink']
+  lastUpdated?: ThemeConfig['lastUpdated']
+  file?: PageData['file']
+  timestamp?: PageData['timestamp']
+}) {
   const { prevPage, nextPage } = usePrevNextPage()
+  const { pathname } = useLocation()
 
   return (
     <footer className="mt-[32px]">
-      <div className="border-divider flex justify-between border-t pt-[24px]">
-        <div className="w-[calc(50%-4px)]">
-          {prevPage && (
-            <Button text={prevPage.text} link={prevPage.link}>
-              上一页
-            </Button>
-          )}
-        </div>
+      <div className="flex justify-between text-[14px]">
+        {editLink && (
+          <div className="flex items-center gap-[4px]">
+            <span className="icon-[carbon--edit]"></span>
 
-        <div className="w-[calc(50%-4px)]">
-          {nextPage && (
-            <Button text={nextPage.text} link={nextPage.link}>
-              下一页
-            </Button>
-          )}
-        </div>
+            <Link
+              href={
+                file && editLink
+                  ? editLink.pattern.replace(
+                      '/:path',
+                      pathname.replace('.html', `.${file.split('.')[1]}`),
+                    )
+                  : undefined
+              }
+            >
+              {editLink?.text || '在 GitHub 上编辑此页面'}
+            </Link>
+          </div>
+        )}
+
+        {lastUpdated && (
+          <div className="text-gray-1 text-[14px]">
+            {lastUpdated?.text || '最后更新于：'}
+            {dayjs
+              .unix(parseInt(timestamp || '0'))
+              .format(lastUpdated?.format || 'YYYY-MM-DD')}
+          </div>
+        )}
       </div>
+
+      {(prevPage || nextPage) && (
+        <div className="border-divider flex justify-between border-t pt-[24px]">
+          <div className="w-[calc(50%-4px)]">
+            {prevPage && (
+              <Button text={prevPage.text} link={prevPage.link}>
+                上一页
+              </Button>
+            )}
+          </div>
+
+          <div className="w-[calc(50%-4px)]">
+            {nextPage && (
+              <Button text={nextPage.text} link={nextPage.link}>
+                下一页
+              </Button>
+            )}
+          </div>
+        </div>
+      )}
     </footer>
   )
 }

@@ -4,6 +4,8 @@ import { ReactElement } from 'react'
 export type PageType = 'home' | 'doc' | 'custom' | '404'
 
 export interface PageData {
+  timestamp: string
+  file?: string
   userConfig: UserConfig
   pagePath: string
   pageType: PageType

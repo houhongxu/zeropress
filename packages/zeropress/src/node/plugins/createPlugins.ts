@@ -9,7 +9,6 @@ import { vitePluginVirtualRoutes } from './vitePluginVirtualRoutes'
 import { SiteConfig } from '@/shared/types'
 import pluginReact from '@vitejs/plugin-react'
 import { PluginOption } from 'vite'
-import viteTsconfigPaths from 'vite-tsconfig-paths'
 
 export function createPlugins({
   siteConfig,
@@ -30,7 +29,6 @@ export function createPlugins({
     }),
     vitePluginVirtualConfig({ siteConfig, restartRuntimeDevServer }),
     vitePluginVirtualRoutes({ siteConfig }),
-    viteTsconfigPaths(), // 路径别名插件解析tsconfig的baseurl和paths
     vitePluginTransformFrontmatter(),
     vitePluginBuildImg({ siteConfig }),
     vitePluginServeImg({ siteConfig }),

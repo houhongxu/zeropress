@@ -286,6 +286,7 @@ function vitePluginTransformFrontmatter() {
 }
 
 // src/node/plugins/vitePluginVirtualConfig.ts
+import path5 from "path";
 function vitePluginVirtualConfig({
   siteConfig,
   restartRuntimeDevServer
@@ -305,10 +306,10 @@ function vitePluginVirtualConfig({
       }
     },
     async handleHotUpdate(ctx) {
-      const configPath = siteConfig.userConfigPath || CONFIG_OPTIONS[0];
-      if (ctx.file.includes(configPath)) {
+      const configFileName = siteConfig.userConfigPath ? path5.basename(siteConfig.userConfigPath) : void 0;
+      if (configFileName && ctx.file.includes(configFileName)) {
         if (restartRuntimeDevServer) {
-          console.log("\u76D1\u542C\u5230\u914D\u7F6E\u6587\u4EF6\u66F4\u65B0\uFF0C\u91CD\u542F\u670D\u52A1\u4E2D:", ctx.file, configPath);
+          console.log("\u76D1\u542C\u5230\u914D\u7F6E\u6587\u4EF6\u66F4\u65B0\uFF0C\u91CD\u542F\u670D\u52A1\u4E2D:", ctx.file);
           await restartRuntimeDevServer();
         }
       }
@@ -317,13 +318,40 @@ function vitePluginVirtualConfig({
 }
 
 // src/node/utils.ts
+import { spawn } from "cross-spawn";
+import dayjs from "dayjs";
 import fg from "fast-glob";
-async function globDocs(path10 = DEFAULT_USER_CONFIG.docs, options) {
+import fse4 from "fs-extra";
+import path6 from "path";
+async function globDocs(path12 = DEFAULT_USER_CONFIG.docs, options) {
   return await fg.glob("**/*.{jsx,tsx,md,mdx}", {
     ignore: ["node_modules/**", "client/**", "server/**"],
-    cwd: path10,
+    cwd: path12,
     deep: 3,
     ...options
+  });
+}
+var cache = /* @__PURE__ */ new Map();
+function getGitTimestamp(file) {
+  const cached = cache.get(file);
+  if (cached)
+    return cached;
+  if (!fse4.existsSync(file))
+    return 0;
+  return new Promise((resolve, reject) => {
+    const child = spawn(
+      "git",
+      ["log", "-1", '--pretty="%ai"', path6.basename(file)],
+      { cwd: path6.dirname(file) }
+    );
+    let output = "";
+    child.stdout.on("data", (d) => output += String(d));
+    child.on("close", () => {
+      const timestamp = dayjs(output).unix();
+      cache.set(file, timestamp);
+      resolve(timestamp);
+    });
+    child.on("error", reject);
   });
 }
 
@@ -368,7 +396,7 @@ function splitIndex(text) {
 }
 
 // src/node/plugins/vitePluginVirtualRoutes.ts
-import path5 from "path";
+import path7 from "path";
 function vitePluginVirtualRoutes({
   siteConfig
 }) {
@@ -386,14 +414,17 @@ function vitePluginVirtualRoutes({
       if (id === resolvedVirtualModuleId) {
         const files = await globDocs(docs, { absolute: true });
         let importTemplate = 'import React from "react";\n';
-        const routes = files.map((file, index) => {
-          const relativePath = path5.relative(docs, file);
-          const pathname = relativePath.replace(path5.extname(file), "").replace(/index$/, "");
-          importTemplate += `import Element${index + 1} from '${file}';
+        const routes = await Promise.all(
+          files.map(async (file, index) => {
+            const relativePath = path7.relative(docs, file);
+            const pathname = relativePath.replace(path7.extname(file), "").replace(/index$/, "");
+            importTemplate += `import Element${index + 1} from '${file}';
 `;
-          return `{ path: '/${normalizeUrl(urlWithHtml(pathname))}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },
+            const timestamp = await getGitTimestamp(file);
+            return `{ file:'${file}', timestamp:'${timestamp}', path: '/${normalizeUrl(urlWithHtml(pathname))}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },
 `;
-        });
+          })
+        );
         return `
         ${importTemplate}
         export default [${routes.join("")}]
@@ -405,7 +436,6 @@ function vitePluginVirtualRoutes({
 
 // src/node/plugins/createPlugins.ts
 import pluginReact from "@vitejs/plugin-react";
-import viteTsconfigPaths from "vite-tsconfig-paths";
 function createPlugins({
   siteConfig,
   restartRuntimeDevServer
@@ -424,8 +454,6 @@ function createPlugins({
     }),
     vitePluginVirtualConfig({ siteConfig, restartRuntimeDevServer }),
     vitePluginVirtualRoutes({ siteConfig }),
-    viteTsconfigPaths(),
-    // 路径别名插件解析tsconfig的baseurl和paths
     vitePluginTransformFrontmatter(),
     vitePluginBuildImg({ siteConfig }),
     vitePluginServeImg({ siteConfig })
@@ -434,10 +462,10 @@ function createPlugins({
 
 // src/node/tailwind.ts
 import { addDynamicIconSelectors } from "@iconify/tailwind";
-import path6 from "path";
+import path8 from "path";
 var tailwindcssConfig = {
   content: [
-    path6.join(
+    path8.join(
       __dirname,
       "..",
       "..",
@@ -487,13 +515,13 @@ var tailwindcssConfig = {
 
 // src/node/build.ts
 import autoprefixer from "autoprefixer";
-import fse4 from "fs-extra";
-import path7 from "path";
+import fse5 from "fs-extra";
+import path9 from "path";
 import tailwindcss from "tailwindcss";
 import { build } from "vite";
 async function buildRuntime({ siteConfig }) {
   console.log("\u5220\u9664\u65E7\u4EA7\u7269\uFF1A", CLIENT_OUT_PATH);
-  await fse4.remove(CLIENT_OUT_PATH);
+  await fse5.remove(CLIENT_OUT_PATH);
   console.log("\u6784\u5EFAjs\u6587\u4EF6...");
   const [clientBundle, serverBundle] = await Promise.all([
     viteBuild({ siteConfig }),
@@ -514,7 +542,7 @@ function viteBuild({
     plugins: createPlugins({ siteConfig }),
     build: {
       ssr: isServer,
-      outDir: isServer ? SERVER_OUT_PATH : path7.join(siteConfig.root, CLIENT_OUT_PATH),
+      outDir: isServer ? SERVER_OUT_PATH : path9.join(siteConfig.root, CLIENT_OUT_PATH),
       rollupOptions: {
         input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
         output: {
@@ -526,6 +554,11 @@ function viteBuild({
     // 配置tailwindcss
     css: {
       postcss: { plugins: [tailwindcss(tailwindcssConfig), autoprefixer({})] }
+    },
+    resolve: {
+      alias: {
+        "@": SRC_PATH
+      }
     }
   });
 }
@@ -546,15 +579,15 @@ async function renderHtmls({
   const styleAssets = clientBundle.output.filter(
     (chunk) => chunk.type === "asset" && chunk.fileName.endsWith(".css")
   );
-  if (await fse4.exists(CIIENT_PUBLIC_PATH)) {
-    await fse4.copy(CIIENT_PUBLIC_PATH, path7.join(CLIENT_OUT_PATH));
+  if (await fse5.exists(CIIENT_PUBLIC_PATH)) {
+    await fse5.copy(CIIENT_PUBLIC_PATH, path9.join(CLIENT_OUT_PATH));
   }
-  const serverEntryPath = path7.join(SERVER_OUT_PATH, serverEntryChunk?.fileName);
+  const serverEntryPath = path9.join(SERVER_OUT_PATH, serverEntryChunk?.fileName);
   const clientEntryPath = `/${clientEntryChunk?.fileName}`;
   const helmetContext = {};
   const { render, routes } = await import(serverEntryPath);
   const { helmet } = helmetContext;
-  const template = await fse4.readFile(HTML_PATH, "utf-8");
+  const template = await fse5.readFile(HTML_PATH, "utf-8");
   await Promise.all(
     routes.map(async (route) => {
       const file = route.path === "/" ? "/index.html" : route.path;
@@ -571,16 +604,16 @@ async function renderHtmls({
         "</head>",
         styleAssets.map((asset) => `<link rel="stylesheet" href="/${asset.fileName}">`).join("\n")
       );
-      fse4.ensureDir(path7.join(siteConfig.root, path7.dirname(relativeFilePath))).catch((e) => console.log("client\u6587\u4EF6\u5939\u4E0D\u5B58\u5728\uFF1A", e)).then(
-        () => fse4.writeFile(path7.join(siteConfig.root, relativeFilePath), html)
+      fse5.ensureDir(path9.join(siteConfig.root, path9.dirname(relativeFilePath))).catch((e) => console.log("client\u6587\u4EF6\u5939\u4E0D\u5B58\u5728\uFF1A", e)).then(
+        () => fse5.writeFile(path9.join(siteConfig.root, relativeFilePath), html)
       ).catch((e) => console.log("html\u5199\u5165\u5931\u8D25", e));
     })
   );
 }
 
 // src/node/config.ts
-import fse5 from "fs-extra";
-import path8 from "path";
+import fse6 from "fs-extra";
+import path10 from "path";
 import { loadConfigFromFile } from "vite";
 async function resolveSiteConfig({
   root = process.cwd(),
@@ -656,7 +689,7 @@ async function autoSidebarAndNav({ docs }) {
     const splitedDir = splitIndex(dir);
     const splitedFile = splitIndex(file);
     return {
-      path: `/${urlWithHtml(item.replace(path8.extname(item), ""))}`,
+      path: `/${urlWithHtml(item.replace(path10.extname(item), ""))}`,
       nav: nav2,
       dir,
       file,
@@ -665,11 +698,11 @@ async function autoSidebarAndNav({ docs }) {
       navPath: `/${nav2}`,
       siderbarDirIndex: splitedDir.index,
       siderbarDirText: splitedDir.text.replace(
-        path8.extname(splitedDir.text),
+        path10.extname(splitedDir.text),
         ""
       ),
       fileIndex: splitedFile.index,
-      fileText: splitedFile.text.replace(path8.extname(splitedFile.text), "")
+      fileText: splitedFile.text.replace(path10.extname(splitedFile.text), "")
     };
   });
   const nav = Object.entries(groupBy(data, "navText")).map(([navText, value]) => ({
@@ -722,8 +755,8 @@ async function resolveUserConfig({
 }
 function getUserConfigPath({ root = process.cwd() }) {
   const userConfigPath = CONFIG_OPTIONS.map(
-    (option) => path8.join(root, option)
-  ).find((path10) => fse5.existsSync(path10));
+    (option) => path10.join(root, option)
+  ).find((path12) => fse6.existsSync(path12));
   return userConfigPath;
 }
 
@@ -739,19 +772,8 @@ function createRuntimeDevServer({
     root: siteConfig.root,
     // 避免dev服务访问路由时直接访问静态tsx资源，所以在/开启服务，路由一般在/docs内
     server: {
-      host: true,
+      host: true
       // 开启局域网与公网ip
-      watch: {
-        cwd: ROOT_PATH,
-        ignored: [
-          "**/*",
-          // 忽略所有文件
-          `!${siteConfig.userConfig.docs}/**`,
-          // 包括 docs 目录
-          `!public/**`
-          // 包括 public 目录及其子目录
-        ]
-      }
     },
     plugins: createPlugins({
       restartRuntimeDevServer,
@@ -771,10 +793,10 @@ function createRuntimeDevServer({
 
 // src/node/cli.ts
 import { program } from "commander";
-import fse6 from "fs-extra";
-import path9 from "path";
+import fse7 from "fs-extra";
+import path11 from "path";
 var cli = program;
-var { version } = fse6.readJSONSync(path9.join(ROOT_PATH, "./package.json"));
+var { version } = fse7.readJSONSync(path11.join(ROOT_PATH, "./package.json"));
 cli.name("zeropress").version(version);
 cli.command("dev", { isDefault: true }).description("dev server").option("-p,--port <value>", "dev server port").action(async ({ port }) => {
   const createServer2 = async () => {
@@ -792,9 +814,9 @@ cli.command("dev", { isDefault: true }).description("dev server").option("-p,--p
     await server.listen(port);
     server.printUrls();
     let isRestarting = false;
-    server.watcher.on("all", async (event, path10) => {
+    server.watcher.on("all", async (event, path12) => {
       if (!isRestarting && event !== "change") {
-        console.log("\u76D1\u542C\u5230markdown\u6587\u4EF6\u589E\u5220\u6539\uFF0C\u91CD\u542F\u670D\u52A1\u4E2D:", path10);
+        console.log("\u76D1\u542C\u5230markdown\u6587\u4EF6\u589E\u5220\u6539\uFF0C\u91CD\u542F\u670D\u52A1\u4E2D:", path12);
         isRestarting = true;
         await server.close();
         await createServer2();

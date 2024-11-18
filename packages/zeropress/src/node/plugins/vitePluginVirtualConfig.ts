@@ -1,5 +1,5 @@
-import { CONFIG_OPTIONS } from '../consts'
 import { SiteConfig } from '@/shared/types'
+import path from 'path'
 import { Plugin } from 'vite'
 
 interface vitePluginVirtualConfigOptions {
@@ -29,11 +29,13 @@ export function vitePluginVirtualConfig({
       }
     },
     async handleHotUpdate(ctx) {
-      const configPath = siteConfig.userConfigPath || CONFIG_OPTIONS[0]
+      const configFileName = siteConfig.userConfigPath
+        ? path.basename(siteConfig.userConfigPath)
+        : undefined
 
-      if (ctx.file.includes(configPath)) {
+      if (configFileName && ctx.file.includes(configFileName)) {
         if (restartRuntimeDevServer) {
-          console.log('监听到配置文件更新，重启服务中:', ctx.file, configPath)
+          console.log('监听到配置文件更新，重启服务中:', ctx.file)
 
           await restartRuntimeDevServer()
         }

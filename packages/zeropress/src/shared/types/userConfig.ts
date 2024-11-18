@@ -45,6 +45,20 @@ export interface ThemeConfig {
    * 底部
    */
   footer?: Footer
+  /**
+   * 编辑页面
+   */
+  editLink?: {
+    pattern: string
+    text?: string
+  }
+  /**
+   * 更新时间
+   */
+  lastUpdated?: {
+    text?: string
+    format?: string
+  }
 }
 
 export type NavItem = {

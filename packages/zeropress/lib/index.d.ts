@@ -47,6 +47,20 @@ interface ThemeConfig {
      * 底部
      */
     footer?: Footer;
+    /**
+     * 编辑页面
+     */
+    editLink?: {
+        pattern: string;
+        text?: string;
+    };
+    /**
+     * 更新时间
+     */
+    lastUpdated?: {
+        text?: string;
+        format?: string;
+    };
 }
 type NavItem = {
     text?: string;
@@ -95,6 +109,8 @@ interface SiteConfig {
 
 type PageType = 'home' | 'doc' | 'custom' | '404';
 interface PageData {
+    timestamp: string;
+    file?: string;
     userConfig: UserConfig;
     pagePath: string;
     pageType: PageType;
@@ -119,6 +135,8 @@ interface FrontMatter {
 }
 
 interface Route {
+    timestamp: string;
+    file: string;
     path: string;
     element: React.ReactElement;
     preload: () => Promise<PageModule>;

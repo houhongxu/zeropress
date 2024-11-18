@@ -1,13 +1,13 @@
 import { DependencyList, EffectCallback, useEffect, useRef } from 'react'
 
 export function useUpdateEffect(effect: EffectCallback, deps: DependencyList) {
-  const hasMounted = useRef(false)
+  const mounted = useRef(false)
 
   useEffect(() => {
-    if (hasMounted.current) {
+    if (mounted.current) {
       return effect()
     } else {
-      hasMounted.current = true
+      mounted.current = true
     }
   }, deps)
 }

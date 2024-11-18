@@ -6,6 +6,7 @@ import {
   ROOT_PATH,
   SERVER_ENTRY_PATH,
   SERVER_OUT_PATH,
+  SRC_PATH,
 } from './consts'
 import { createPlugins } from './plugins'
 import { tailwindcssConfig } from './tailwind'
@@ -22,10 +23,12 @@ import { build } from 'vite'
 export async function buildRuntime({ siteConfig }: { siteConfig: SiteConfig }) {
   // 删除旧产物
   console.log('删除旧产物：', CLIENT_OUT_PATH)
+
   await fse.remove(CLIENT_OUT_PATH)
 
   // 分为运行时的client构建水合的js与server构建渲染html的js
   console.log('构建js文件...')
+
   const [clientBundle, serverBundle] = await Promise.all([
     viteBuild({ siteConfig }),
     viteBuild({ siteConfig, isServer: true }),
@@ -33,6 +36,7 @@ export async function buildRuntime({ siteConfig }: { siteConfig: SiteConfig }) {
 
   // 渲染html
   console.log('构建html文件...')
+
   await renderHtmls({ siteConfig, clientBundle, serverBundle })
 }
 
@@ -67,6 +71,11 @@ function viteBuild({
     // 配置tailwindcss
     css: {
       postcss: { plugins: [tailwindcss(tailwindcssConfig), autoprefixer({})] },
+    },
+    resolve: {
+      alias: {
+        '@': SRC_PATH,
+      },
     },
   }) as Promise<RollupOutput>
 }

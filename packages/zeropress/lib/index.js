@@ -21,7 +21,8 @@ async function getPageData(pathname) {
     pageType: "404",
     pagePath: pathname,
     toc: [],
-    userConfig: config
+    userConfig: config,
+    timestamp: "0"
   };
   if (matched) {
     const module = await matched.preload();
@@ -30,7 +31,9 @@ async function getPageData(pathname) {
       pagePath: pathname,
       frontmatter: module.GetFrontMatter?.() ?? {},
       toc: module.GetToc?.() ?? [],
-      userConfig: config
+      userConfig: config,
+      file: matched.file,
+      timestamp: matched.timestamp
     };
   }
   console.log(

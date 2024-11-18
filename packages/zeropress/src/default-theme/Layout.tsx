@@ -27,6 +27,10 @@ export function Layout({ location = window.location.pathname }) {
         <Doc
           content={<Content location={location}></Content>}
           toc={pageData?.toc}
+          editLink={pageData?.userConfig.themeConfig?.editLink}
+          lastUpdated={pageData?.userConfig.themeConfig?.lastUpdated}
+          file={pageData?.file}
+          timestamp={pageData?.timestamp}
         ></Doc>
       )
     } else if (pageType === '404') {
