@@ -119,7 +119,7 @@ async function main() {
   const tagName = `${currentName}-v${targetVersion}`
 
   try {
-    step('\nPushing to GitHub...')
+    step('Pushing to GitHub / 推送到github中...')
     await run('git', ['tag', tagName])
     // 将本地仓库中的 vxxx 标签推送到名为 origin 的远程仓库，不推送代码
     await run('git', ['push', 'origin', tagName])
@@ -132,7 +132,7 @@ async function main() {
 
   // 8. 执行 npm publish
   try {
-    step('Publishing packages / 发布包中 ...')
+    step('Publishing packages / 发布npm包中 ...')
     await run('pnpm', ['publish', '--access', 'public'])
   } catch (err) {
     await handleErr(err)

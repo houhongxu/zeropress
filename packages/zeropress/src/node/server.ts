@@ -1,4 +1,4 @@
-import { ROOT_PATH, SRC_PATH } from './consts'
+import { SRC_PATH } from './consts'
 import { createPlugins } from './plugins'
 import { tailwindcssConfig } from './tailwind'
 import { SiteConfig } from '@/shared/types'
@@ -18,6 +18,14 @@ export function createRuntimeDevServer({
     root: siteConfig.root, // 避免dev服务访问路由时直接访问静态tsx资源，所以在/开启服务，路由一般在/docs内
     server: {
       host: true, // 开启局域网与公网ip
+      watch: {
+        cwd: siteConfig.root,
+        ignored: [
+          '**/*', // 忽略所有文件
+          `!${siteConfig.userConfig.docs}/**`, // 包括 docs 目录
+          `!public/**`, // 包括 public 目录及其子目录
+        ],
+      },
     },
     plugins: createPlugins({
       restartRuntimeDevServer,
@@ -31,6 +39,20 @@ export function createRuntimeDevServer({
       alias: {
         '@': SRC_PATH,
       },
+    },
+    optimizeDeps: {
+      // 因为zeropress是esm包，所以内部的cjs包不会被vite主动预构建，需要标记需要预构建的依赖
+      include: [
+        'zeropress > react-fast-compare',
+        'zeropress > classnames',
+        'zeropress > invariant',
+        'zeropress > shallowequal',
+        'zeropress > dayjs',
+        'zeropress > react-dom/client',
+      ],
+
+      // 避免vite将别名和虚拟模块当成模块进行预构建
+      exclude: ['@/runtime', '@/node', '@/default-theme', '@/shared'],
     },
   })
 }

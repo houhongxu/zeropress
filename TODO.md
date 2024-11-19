@@ -24,3 +24,10 @@ http://localhost:5174/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=8b1ce0a
 http://localhost:5174/node_modules/.vite/deps/@\_runtime.js?v=3f0483f4
 
 import {Content, usePageData} from "/node_modules/.vite/deps/@\_runtime.js?v=3f0483f4";
+
+inclue exclude的相对包，是否和root有关
+
+server的root和静态资源服务public，root是zeropress就不显示图片
+
+root: config.srcDir,
+base: config.site.base 区别
