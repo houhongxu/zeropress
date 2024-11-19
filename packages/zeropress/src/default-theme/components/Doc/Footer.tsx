@@ -20,8 +20,8 @@ export function Footer({
   const { pathname } = useLocation()
 
   return (
-    <footer className="mt-[32px]">
-      <div className="flex justify-between text-[14px]">
+    <footer className="mt-[48px]">
+      <div className="flex justify-between pb-[12px] text-[14px]">
         {editLink && (
           <div className="flex items-center gap-[4px]">
             <span className="icon-[carbon--edit]"></span>

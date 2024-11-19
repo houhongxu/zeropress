@@ -25,7 +25,7 @@ async function getPageData(pathname) {
     timestamp: "0"
   };
   if (matched) {
-    const module = await matched.preload();
+    const module = await matched.load();
     pageData = {
       pageType: module?.GetFrontMatter?.()?.pageType || "doc",
       pagePath: pathname,

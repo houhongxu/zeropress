@@ -15,7 +15,7 @@ export async function getPageData(pathname: string): Promise<PageData> {
   }
 
   if (matched) {
-    const module: PageModule = await matched.preload()
+    const module: PageModule = await matched.load()
 
     pageData = {
       pageType: module?.GetFrontMatter?.()?.pageType || 'doc',

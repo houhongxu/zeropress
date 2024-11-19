@@ -43,7 +43,7 @@ cli
 
       server.watcher.on('all', async (event, path) => {
         if (!isRestarting && event !== 'change') {
-          console.log('监听到markdown文件增删改，重启服务中:', path)
+          console.log('监听到文件增删改，重启服务中:', path)
 
           isRestarting = true
 

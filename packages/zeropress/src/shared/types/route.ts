@@ -5,5 +5,5 @@ export interface Route {
   file: string
   path: string
   element: React.ReactElement
-  preload: () => Promise<PageModule>
+  load: () => Promise<PageModule>
 }

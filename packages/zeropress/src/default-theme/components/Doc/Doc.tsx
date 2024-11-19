@@ -31,7 +31,7 @@ export function Doc({
         <div className="mx-auto w-full max-w-[768px] transition-[margin] duration-300">
           <MobileBar toc={toc}></MobileBar>
 
-          <div className="p-[48px]">
+          <div className="py-[48px] pl-[120px] pr-[48px]">
             <div className="doc">{content}</div>
 
             <Footer

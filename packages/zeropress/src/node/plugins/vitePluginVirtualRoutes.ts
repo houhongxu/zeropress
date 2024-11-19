@@ -43,7 +43,11 @@ export function vitePluginVirtualRoutes({
 
             const timestamp = await getGitTimestamp(file)
 
-            return `{ file:'${file}', timestamp:'${timestamp}', path: '/${normalizeUrl(urlWithHtml(pathname))}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },\n`
+            return `{ file:'${file}', 
+            timestamp:'${timestamp}', 
+            path: '/${normalizeUrl(urlWithHtml(pathname))}', 
+            element: React.createElement(Element${index + 1}), 
+            load: ()=> import('${file}') },\n`
           }),
         )
 

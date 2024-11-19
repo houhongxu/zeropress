@@ -15,7 +15,7 @@ export function MobileToc({
   useDisableScroll(visible)
 
   if (!Array.isArray(toc) || toc.length < 1) {
-    return <></>
+    return <div className="w-toc h-[1px]"></div>
   }
 
   return (
@@ -43,7 +43,7 @@ export function MobileToc({
 
 export function Toc({ toc }: { toc?: PageData['toc'] }) {
   if (!Array.isArray(toc) || toc.length < 1) {
-    return <></>
+    return <div className="w-toc h-[1px]"></div>
   }
 
   return (

@@ -7,6 +7,13 @@ import { MdxjsEsm } from 'mdast-util-mdxjs-esm'
 import { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 
+//  mdxjsEsm 注册在 mdast
+declare module 'mdast' {
+  interface RootContentMap {
+    mdxjsEsm: MdxjsEsm
+  }
+}
+
 // node.children 是一个数组，包含几种情况:
 // 1. 文本节点，如 '## title'
 // 结构如下:
@@ -75,11 +82,11 @@ export const remarkMdxToc: Plugin<[], Root> = () => {
     // GetToc为了符合react-refresh规则
     const template = `export const GetToc = () => ${JSON.stringify(toc, null, 2)};`
 
-    // acorn解析template为esast节点，acorn类型不准确，所以需要用estree官方类型 https://github.com/acornjs/acorn/tree/master/acorn/#interface
+    // acorn解析template为esast节点，acorn类型版本和官方版本没对上，所以需要用estree官方类型 https://github.com/acornjs/acorn/tree/master/acorn/#interface
     const estree = parse(template, {
       ecmaVersion: 'latest',
       sourceType: 'module',
-    }) as unknown as Program
+    }) as Program
 
     // 组成mdast节点 https://github.com/syntax-tree/mdast-util-mdxjs-esm#syntax-tree
     const mdastNode: MdxjsEsm = {

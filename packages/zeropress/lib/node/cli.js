@@ -421,7 +421,11 @@ function vitePluginVirtualRoutes({
             importTemplate += `import Element${index + 1} from '${file}';
 `;
             const timestamp = await getGitTimestamp(file);
-            return `{ file:'${file}', timestamp:'${timestamp}', path: '/${normalizeUrl(urlWithHtml(pathname))}', element: React.createElement(Element${index + 1}), preload: ()=> import('${file}') },
+            return `{ file:'${file}', 
+            timestamp:'${timestamp}', 
+            path: '/${normalizeUrl(urlWithHtml(pathname))}', 
+            element: React.createElement(Element${index + 1}), 
+            load: ()=> import('${file}') },
 `;
           })
         );
@@ -772,19 +776,8 @@ function createRuntimeDevServer({
     root: siteConfig.root,
     // 避免dev服务访问路由时直接访问静态tsx资源，所以在/开启服务，路由一般在/docs内
     server: {
-      host: true,
+      host: true
       // 开启局域网与公网ip
-      watch: {
-        cwd: siteConfig.root,
-        ignored: [
-          "**/*",
-          // 忽略所有文件
-          `!${siteConfig.userConfig.docs}/**`,
-          // 包括 docs 目录
-          `!public/**`
-          // 包括 public 目录及其子目录
-        ]
-      }
     },
     plugins: createPlugins({
       restartRuntimeDevServer,
@@ -840,7 +833,7 @@ cli.command("dev", { isDefault: true }).description("dev server").option("-p,--p
     let isRestarting = false;
     server.watcher.on("all", async (event, path12) => {
       if (!isRestarting && event !== "change") {
-        console.log("\u76D1\u542C\u5230markdown\u6587\u4EF6\u589E\u5220\u6539\uFF0C\u91CD\u542F\u670D\u52A1\u4E2D:", path12);
+        console.log("\u76D1\u542C\u5230\u6587\u4EF6\u589E\u5220\u6539\uFF0C\u91CD\u542F\u670D\u52A1\u4E2D:", path12);
         isRestarting = true;
         await server.close();
         await createServer2();
