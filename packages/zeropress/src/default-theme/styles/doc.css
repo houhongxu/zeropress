@@ -32,6 +32,7 @@
   position: relative;
   font-weight: 600;
   outline: none;
+  overflow-wrap: break-word;
 }
 
 .doc h1 {
@@ -102,6 +103,7 @@
 .doc p {
   z-index: 2;
   line-height: 28px;
+  overflow-wrap: break-word;
 }
 
 .doc blockquote {
@@ -123,6 +125,7 @@
   color: var(--hp-c-brand);
   text-decoration-style: dotted;
   transition: color 0.25s;
+  overflow-wrap: break-word;
 }
 
 .doc a:hover {
