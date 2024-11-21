@@ -1,6 +1,5 @@
 import { DEFAULT_USER_CONFIG } from './consts'
 import { spawn } from 'cross-spawn'
-import dayjs from 'dayjs'
 import fg, { Options } from 'fast-glob'
 import fse from 'fs-extra'
 import path from 'path'
@@ -26,7 +25,7 @@ export function getGitTimestamp(file: string) {
 
   if (!fse.existsSync(file)) return 0
 
-  return new Promise<number>((resolve, reject) => {
+  return new Promise<number | undefined>((resolve, reject) => {
     const child = spawn(
       'git',
       ['log', '-1', '--pretty="%ai"', path.basename(file)],
@@ -38,11 +37,15 @@ export function getGitTimestamp(file: string) {
     child.stdout.on('data', (d) => (output += String(d)))
 
     child.on('close', () => {
-      const timestamp = +new Date(output) // dayjs不支持时区偏移
+      if (output) {
+        const timestamp = +new Date(output) // dayjs不支持时区偏移
 
-      cache.set(file, timestamp)
+        cache.set(file, timestamp)
 
-      resolve(timestamp)
+        resolve(timestamp)
+      } else {
+        resolve(undefined)
+      }
     })
 
     child.on('error', reject)

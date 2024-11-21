@@ -11,7 +11,6 @@ export async function getPageData(pathname: string): Promise<PageData> {
     pagePath: pathname,
     toc: [],
     userConfig: config,
-    timestamp: '0',
   }
 
   if (matched) {
