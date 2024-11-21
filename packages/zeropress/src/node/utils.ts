@@ -1,5 +1,6 @@
 import { DEFAULT_USER_CONFIG } from './consts'
 import { spawn } from 'cross-spawn'
+import dayjs from 'dayjs'
 import fg, { Options } from 'fast-glob'
 import fse from 'fs-extra'
 import path from 'path'
@@ -38,7 +39,7 @@ export function getGitTimestamp(file: string) {
 
     child.on('close', () => {
       if (output) {
-        const timestamp = +new Date(output) // dayjs不支持时区偏移
+        const timestamp = dayjs(output).unix()
 
         cache.set(file, timestamp)
 
