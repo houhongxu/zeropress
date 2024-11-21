@@ -41,11 +41,11 @@ export function Footer({
           </div>
         )}
 
-        {lastUpdated && (
+        {lastUpdated && timestamp && (
           <div className="text-gray-1 text-[14px]">
             {lastUpdated?.text || '最后更新于：'}
             {dayjs
-              .unix(parseInt(timestamp || '0'))
+              .unix(parseInt(timestamp))
               .format(lastUpdated?.format || 'YYYY-MM-DD')}
           </div>
         )}
