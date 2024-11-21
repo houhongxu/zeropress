@@ -38,7 +38,7 @@ export function getGitTimestamp(file: string) {
     child.stdout.on('data', (d) => (output += String(d)))
 
     child.on('close', () => {
-      const timestamp = dayjs(output).unix()
+      const timestamp = +new Date(output) // dayjs不支持时区偏移
 
       cache.set(file, timestamp)
 
