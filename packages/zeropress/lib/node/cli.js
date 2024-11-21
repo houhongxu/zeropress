@@ -425,7 +425,7 @@ function vitePluginVirtualRoutes({
 `;
             const timestamp = await getGitTimestamp(file);
             return `{ file:'${file}', 
-            timestamp:'${timestamp}', 
+            timestamp:'${timestamp ?? ""}', 
             path: '/${normalizeUrl(urlWithHtml(pathname))}', 
             element: React.createElement(Element${index + 1}), 
             load: ()=> import('${file}') },
