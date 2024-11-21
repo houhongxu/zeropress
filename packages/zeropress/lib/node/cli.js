@@ -346,9 +346,13 @@ function getGitTimestamp(file) {
     let output = "";
     child.stdout.on("data", (d) => output += String(d));
     child.on("close", () => {
-      const timestamp = +new Date(output);
-      cache.set(file, timestamp);
-      resolve(timestamp);
+      if (output) {
+        const timestamp = +new Date(output);
+        cache.set(file, timestamp);
+        resolve(timestamp);
+      } else {
+        resolve(void 0);
+      }
     });
     child.on("error", reject);
   });

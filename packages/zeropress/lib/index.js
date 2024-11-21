@@ -21,8 +21,7 @@ async function getPageData(pathname) {
     pageType: "404",
     pagePath: pathname,
     toc: [],
-    userConfig: config,
-    timestamp: "0"
+    userConfig: config
   };
   if (matched) {
     const module = await matched.load();

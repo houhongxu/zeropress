@@ -109,7 +109,7 @@ interface SiteConfig {
 
 type PageType = 'home' | 'doc' | 'custom' | '404';
 interface PageData {
-    timestamp: string;
+    timestamp?: string;
     file?: string;
     userConfig: UserConfig;
     pagePath: string;
