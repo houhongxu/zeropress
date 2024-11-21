@@ -319,7 +319,6 @@ function vitePluginVirtualConfig({
 
 // src/node/utils.ts
 import { spawn } from "cross-spawn";
-import dayjs from "dayjs";
 import fg from "fast-glob";
 import fse4 from "fs-extra";
 import path6 from "path";
@@ -347,7 +346,7 @@ function getGitTimestamp(file) {
     let output = "";
     child.stdout.on("data", (d) => output += String(d));
     child.on("close", () => {
-      const timestamp = dayjs(output).unix();
+      const timestamp = +new Date(output);
       cache.set(file, timestamp);
       resolve(timestamp);
     });
