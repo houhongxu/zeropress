@@ -8,13 +8,13 @@
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fhouhongxu%2Fzeropress-typescript.git&project-name=zeropress&repository-name=zeropress&output-directory=dist)
 
-1. 建议选择点击 Continue with Github按钮 使用github作为仓库
+1. 建议选择点击 **Continue with Github按钮** 使用github作为仓库
 
-2. 注册/登录 vercel
+2. 注册/登录 **vercel**
 
-3. 点击 Create按钮 等待部署
+3. 点击 **Create按钮** 等待部署
 
-4. 点击 Continue to DashBoard 按钮获取网站链接与配置
+4. 点击 **Continue to DashBoard 按钮** 获取网站链接与配置
 
 ## Changelog
 
