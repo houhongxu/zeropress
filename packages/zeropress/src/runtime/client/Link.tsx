@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { PropsWithChildren } from 'react'
+import { DOMAttributes, PropsWithChildren } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export function Link({
@@ -18,9 +18,13 @@ export function Link({
   const isSpa = true
 
   // spa模式是首页使用ssg请求html，后续跳转使用csg路由
-  const isCsg = isSpa && !href?.startsWith('http')
+  const isCsr = isSpa && !href?.startsWith('http')
 
-  const handleCsgNavigate = async () => {
+  const handleCsrNavigate: DOMAttributes<HTMLAnchorElement>['onClick'] = async (
+    event,
+  ) => {
+    event.preventDefault()
+
     onClick?.()
 
     navigate(href.slice(1))
@@ -28,7 +32,8 @@ export function Link({
 
   return (
     <a
-      {...(isCsg ? { onClick: handleCsgNavigate } : { href, onClick })}
+      href={href}
+      {...(isCsr ? { onClick: handleCsrNavigate } : { onClick })}
       className={classNames('cursor-pointer', className)}
     >
       {children}

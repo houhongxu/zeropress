@@ -60,15 +60,17 @@ function Link({
 }) {
   const navigate = useNavigate();
   const isSpa = true;
-  const isCsg = isSpa && !href?.startsWith("http");
-  const handleCsgNavigate = async () => {
+  const isCsr = isSpa && !href?.startsWith("http");
+  const handleCsrNavigate = async (event) => {
+    event.preventDefault();
     onClick?.();
     navigate(href.slice(1));
   };
   return /* @__PURE__ */ jsx(
     "a",
     {
-      ...isCsg ? { onClick: handleCsgNavigate } : { href, onClick },
+      href,
+      ...isCsr ? { onClick: handleCsrNavigate } : { onClick },
       className: classNames("cursor-pointer", className),
       children
     }
