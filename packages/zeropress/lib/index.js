@@ -36,11 +36,13 @@ async function getPageData(pathname) {
       timestamp: matched.timestamp
     };
   }
-  console.log(
-    `${/* @__PURE__ */ new Date()}
+  if (import.meta.env.DEV) {
+    console.log(
+      `${/* @__PURE__ */ new Date()}
 \u9875\u9762\u6570\u636E\uFF1A`,
-    pageData
-  );
+      pageData
+    );
+  }
   return pageData;
 }
 var PageDataContext = createContext({});

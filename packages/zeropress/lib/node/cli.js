@@ -358,6 +358,22 @@ function getGitTimestamp(file) {
     child.on("error", reject);
   });
 }
+async function promiseLimit(arr, limit, asyncFn) {
+  const ret = [];
+  const executing = [];
+  for (const item of arr) {
+    const p = (async () => {
+      const res = await asyncFn(item);
+      ret.push(res);
+    })();
+    executing.push(p);
+    if (executing.length >= limit) {
+      await Promise.race(executing);
+    }
+  }
+  await Promise.all(executing);
+  return ret;
+}
 
 // src/shared/utils.ts
 function normalizeUrl(url = "/") {
@@ -531,10 +547,11 @@ async function buildRuntime({ siteConfig }) {
   console.log("\u5220\u9664\u65E7\u4EA7\u7269\uFF1A", CLIENT_OUT_PATH);
   await fse5.remove(CLIENT_OUT_PATH);
   console.log("\u6784\u5EFAjs\u6587\u4EF6...");
-  const [clientBundle, serverBundle] = await Promise.all([
-    viteBuild({ siteConfig }),
-    viteBuild({ siteConfig, isServer: true })
-  ]);
+  const [clientBundle, serverBundle] = await promiseLimit(
+    [{ siteConfig }, { siteConfig, isServer: true }],
+    10,
+    viteBuild
+  );
   console.log("\u6784\u5EFAhtml\u6587\u4EF6...");
   await renderHtmls({ siteConfig, clientBundle, serverBundle });
 }
@@ -596,27 +613,25 @@ async function renderHtmls({
   const { render, routes } = await import(serverEntryPath);
   const { helmet } = helmetContext;
   const template = await fse5.readFile(HTML_PATH, "utf-8");
-  await Promise.all(
-    routes.map(async (route) => {
-      const file = route.path === "/" ? "/index.html" : route.path;
-      const relativeFilePath = `${CLIENT_OUT_PATH}${file}`;
-      const helmetContext2 = {};
-      const rendered = await render(route.path || "/", helmetContext2);
-      const html = template.replace("<title>ZEROPRESS</title>", helmet?.title?.toString() || "").replace("<!--app-html-->", rendered).replace(
-        "</body>",
-        `
+  await promiseLimit(routes, 10, async (route) => {
+    const file = route.path === "/" ? "/index.html" : route.path;
+    const relativeFilePath = `${CLIENT_OUT_PATH}${file}`;
+    const helmetContext2 = {};
+    const rendered = await render(route.path || "/", helmetContext2);
+    const html = template.replace("<title>ZEROPRESS</title>", helmet?.title?.toString() || "").replace("<!--app-html-->", rendered).replace(
+      "</body>",
+      `
     <script type="module" src="${clientEntryPath}"></script>
     </body>
     `
-      ).replace(
-        "</head>",
-        styleAssets.map((asset) => `<link rel="stylesheet" href="/${asset.fileName}">`).join("\n")
-      );
-      fse5.ensureDir(path9.join(siteConfig.root, path9.dirname(relativeFilePath))).catch((e) => console.log("client\u6587\u4EF6\u5939\u4E0D\u5B58\u5728\uFF1A", e)).then(
-        () => fse5.writeFile(path9.join(siteConfig.root, relativeFilePath), html)
-      ).catch((e) => console.log("html\u5199\u5165\u5931\u8D25", e));
-    })
-  );
+    ).replace(
+      "</head>",
+      styleAssets.map((asset) => `<link rel="stylesheet" href="/${asset.fileName}">`).join("\n")
+    );
+    fse5.ensureDir(path9.join(siteConfig.root, path9.dirname(relativeFilePath))).catch((e) => console.log("client\u6587\u4EF6\u5939\u4E0D\u5B58\u5728\uFF1A", e)).then(
+      () => fse5.writeFile(path9.join(siteConfig.root, relativeFilePath), html)
+    ).catch((e) => console.log("html\u5199\u5165\u5931\u8D25", e));
+  });
 }
 
 // src/node/config.ts
