@@ -359,12 +359,13 @@ function getGitTimestamp(file) {
   });
 }
 async function promiseLimit(arr, limit, asyncFn) {
-  const ret = [];
+  const ret = new Array(arr.length);
   const executing = [];
-  for (const item of arr) {
+  for (let i = 0; i < arr.length; i++) {
+    const item = arr[i];
     const p = (async () => {
       const res = await asyncFn(item);
-      ret.push(res);
+      ret[i] = res;
     })();
     executing.push(p);
     if (executing.length >= limit) {
@@ -607,12 +608,15 @@ async function renderHtmls({
   if (await fse5.exists(CIIENT_PUBLIC_PATH)) {
     await fse5.copy(CIIENT_PUBLIC_PATH, path9.join(CLIENT_OUT_PATH));
   }
+  console.log(0);
   const serverEntryPath = path9.join(SERVER_OUT_PATH, serverEntryChunk?.fileName);
   const clientEntryPath = `/${clientEntryChunk?.fileName}`;
+  console.log(serverEntryPath, clientEntryPath);
   const helmetContext = {};
   const { render, routes } = await import(serverEntryPath);
   const { helmet } = helmetContext;
   const template = await fse5.readFile(HTML_PATH, "utf-8");
+  console.log(2);
   await promiseLimit(routes, 10, async (route) => {
     const file = route.path === "/" ? "/index.html" : route.path;
     const relativeFilePath = `${CLIENT_OUT_PATH}${file}`;

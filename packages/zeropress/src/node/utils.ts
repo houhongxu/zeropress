@@ -58,14 +58,15 @@ export async function promiseLimit<T, R>(
   limit: number,
   asyncFn: (item: T) => Promise<R>,
 ): Promise<R[]> {
-  const ret: R[] = []
+  const ret: R[] = new Array(arr.length)
   const executing: Promise<void>[] = []
 
-  for (const item of arr) {
+  for (let i = 0; i < arr.length; i++) {
+    const item = arr[i]
     const p = (async () => {
       const res = await asyncFn(item)
 
-      ret.push(res)
+      ret[i] = res
     })()
 
     executing.push(p)

@@ -99,6 +99,7 @@ async function renderHtmls({
   const clientEntryChunk = clientBundle.output.find(
     (chunk) => chunk.type === 'chunk' && chunk.isEntry,
   )
+
   const serverEntryChunk = serverBundle.output.find(
     (chunk) => chunk.type === 'chunk' && chunk.isEntry,
   )
@@ -116,11 +117,13 @@ async function renderHtmls({
   if (await fse.exists(CIIENT_PUBLIC_PATH)) {
     await fse.copy(CIIENT_PUBLIC_PATH, path.join(CLIENT_OUT_PATH))
   }
+  console.log(0)
 
   const serverEntryPath = path.join(SERVER_OUT_PATH, serverEntryChunk?.fileName)
 
   // 部署后服务路径是CLIENT_OUT_PATH文件夹所以相对路径就可以了
   const clientEntryPath = `/${clientEntryChunk?.fileName}`
+  console.log(serverEntryPath, clientEntryPath)
 
   // 标题上下文
   const helmetContext = {} as HelmetData['context']
@@ -137,6 +140,7 @@ async function renderHtmls({
   const { helmet } = helmetContext
 
   const template = await fse.readFile(HTML_PATH, 'utf-8')
+  console.log(2)
 
   // mpa路由，每个路由都渲染为html
   await promiseLimit(routes, 10, async (route) => {
