@@ -135,6 +135,7 @@ async function main() {
     step('Publishing packages / 发布npm包中 ...')
     await run('pnpm', ['publish', '--access', 'public'])
   } catch (err) {
+    console.warn('发布失败请检查npm账号是否登录，然后手动发布即可')
     await handleErr(err)
   }
 }
