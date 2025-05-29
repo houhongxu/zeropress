@@ -28,11 +28,13 @@ export async function getPageData(pathname: string): Promise<PageData> {
     }
   }
 
-  console.log(
-    `${new Date()}
+  if (import.meta.env.DEV) {
+    console.log(
+      `${new Date()}
 页面数据：`,
-    pageData,
-  )
+      pageData,
+    )
+  }
 
   return pageData
 }

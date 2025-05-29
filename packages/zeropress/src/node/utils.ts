@@ -52,3 +52,30 @@ export function getGitTimestamp(file: string) {
     child.on('error', reject)
   })
 }
+
+export async function promiseLimit<T, R>(
+  arr: T[],
+  limit: number,
+  asyncFn: (item: T) => Promise<R>,
+): Promise<R[]> {
+  const ret: R[] = []
+  const executing: Promise<void>[] = []
+
+  for (const item of arr) {
+    const p = (async () => {
+      const res = await asyncFn(item)
+
+      ret.push(res)
+    })()
+
+    executing.push(p)
+
+    if (executing.length >= limit) {
+      await Promise.race(executing)
+    }
+  }
+
+  await Promise.all(executing)
+
+  return ret
+}

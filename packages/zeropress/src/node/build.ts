@@ -10,6 +10,7 @@ import {
 } from './consts'
 import { createPlugins } from './plugins'
 import { tailwindcssConfig } from './tailwind'
+import { promiseLimit } from './utils'
 import { SiteConfig } from '@/shared/types'
 import autoprefixer from 'autoprefixer'
 import fse from 'fs-extra'
@@ -29,10 +30,11 @@ export async function buildRuntime({ siteConfig }: { siteConfig: SiteConfig }) {
   // 分为运行时的client构建水合的js与server构建渲染html的js
   console.log('构建js文件...')
 
-  const [clientBundle, serverBundle] = await Promise.all([
-    viteBuild({ siteConfig }),
-    viteBuild({ siteConfig, isServer: true }),
-  ])
+  const [clientBundle, serverBundle] = await promiseLimit(
+    [{ siteConfig }, { siteConfig, isServer: true }],
+    10,
+    viteBuild,
+  )
 
   // 渲染html
   console.log('构建html文件...')
@@ -137,40 +139,38 @@ async function renderHtmls({
   const template = await fse.readFile(HTML_PATH, 'utf-8')
 
   // mpa路由，每个路由都渲染为html
-  await Promise.all(
-    routes.map(async (route) => {
-      const file = route.path === '/' ? '/index.html' : route.path
+  await promiseLimit(routes, 10, async (route) => {
+    const file = route.path === '/' ? '/index.html' : route.path
 
-      const relativeFilePath = `${CLIENT_OUT_PATH}${file}`
+    const relativeFilePath = `${CLIENT_OUT_PATH}${file}`
 
-      const helmetContext = {} as HelmetData['context']
+    const helmetContext = {} as HelmetData['context']
 
-      const rendered = await render(route.path || '/', helmetContext)
+    const rendered = await render(route.path || '/', helmetContext)
 
-      const html = template
-        .replace('<title>ZEROPRESS</title>', helmet?.title?.toString() || '')
-        .replace('<!--app-html-->', rendered)
-        .replace(
-          '</body>',
-          `
+    const html = template
+      .replace('<title>ZEROPRESS</title>', helmet?.title?.toString() || '')
+      .replace('<!--app-html-->', rendered)
+      .replace(
+        '</body>',
+        `
     <script type="module" src="${clientEntryPath}"></script>
     </body>
     `,
-        )
-        .replace(
-          '</head>',
-          styleAssets
-            .map((asset) => `<link rel="stylesheet" href="/${asset.fileName}">`)
-            .join('\n'),
-        )
+      )
+      .replace(
+        '</head>',
+        styleAssets
+          .map((asset) => `<link rel="stylesheet" href="/${asset.fileName}">`)
+          .join('\n'),
+      )
 
-      fse
-        .ensureDir(path.join(siteConfig.root, path.dirname(relativeFilePath)))
-        .catch((e) => console.log('client文件夹不存在：', e))
-        .then(() =>
-          fse.writeFile(path.join(siteConfig.root, relativeFilePath), html),
-        )
-        .catch((e) => console.log('html写入失败', e))
-    }),
-  )
+    fse
+      .ensureDir(path.join(siteConfig.root, path.dirname(relativeFilePath)))
+      .catch((e) => console.log('client文件夹不存在：', e))
+      .then(() =>
+        fse.writeFile(path.join(siteConfig.root, relativeFilePath), html),
+      )
+      .catch((e) => console.log('html写入失败', e))
+  })
 }
