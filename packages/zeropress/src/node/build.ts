@@ -65,7 +65,9 @@ function viteBuild({
       rollupOptions: {
         input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
         output: {
-          entryFileNames: isServer ? 'server-entry.cjs' : 'client-entry.js',
+          entryFileNames: isServer 
+            ? 'server-entry.cjs' 
+            : 'client-entry.[hash].js',
           format: isServer ? 'cjs' : 'es',
         },
       },

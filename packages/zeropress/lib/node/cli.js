@@ -572,7 +572,7 @@ function viteBuild({
       rollupOptions: {
         input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
         output: {
-          entryFileNames: isServer ? "server-entry.cjs" : "client-entry.js",
+          entryFileNames: isServer ? "server-entry.cjs" : "client-entry.[hash].js",
           format: isServer ? "cjs" : "es"
         }
       }
@@ -608,15 +608,12 @@ async function renderHtmls({
   if (await fse5.exists(CIIENT_PUBLIC_PATH)) {
     await fse5.copy(CIIENT_PUBLIC_PATH, path9.join(CLIENT_OUT_PATH));
   }
-  console.log(0);
   const serverEntryPath = path9.join(SERVER_OUT_PATH, serverEntryChunk?.fileName);
   const clientEntryPath = `/${clientEntryChunk?.fileName}`;
-  console.log(serverEntryPath, clientEntryPath);
   const helmetContext = {};
   const { render, routes } = await import(serverEntryPath);
   const { helmet } = helmetContext;
   const template = await fse5.readFile(HTML_PATH, "utf-8");
-  console.log(2);
   await promiseLimit(routes, 10, async (route) => {
     const file = route.path === "/" ? "/index.html" : route.path;
     const relativeFilePath = `${CLIENT_OUT_PATH}${file}`;

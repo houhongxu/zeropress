@@ -18247,54 +18247,6 @@ function _createMdxContent$t(props) {
   const _components = {
     a: "a",
     h1: "h1",
-    p: "p",
-    span: "span",
-    ...props.components
-  };
-  return jsxRuntime.jsxs(jsxRuntime.Fragment, {
-    children: [jsxRuntime.jsxs(_components.h1, {
-      id: "笔记",
-      children: [jsxRuntime.jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#笔记",
-        children: jsxRuntime.jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "笔记"]
-    }), "\n", jsxRuntime.jsx(_components.p, {
-      children: "温故知新"
-    }), "\n", jsxRuntime.jsx(_components.p, {
-      children: "一开始的笔记都是机械的复制关键点重组，记忆很浅，仅方便查阅"
-    }), "\n", jsxRuntime.jsx(_components.p, {
-      children: "现在可以希望用疑问->解决->复述的方式加深记忆"
-    })]
-  });
-}
-function MDXContent$t(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
-    ...props,
-    children: jsxRuntime.jsx(_createMdxContent$t, {
-      ...props
-    })
-  }) : _createMdxContent$t(props);
-}
-const GetFrontMatter$t = () => frontmatter$t;
-const intro = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$t,
-  GetToc: GetToc$t,
-  default: MDXContent$t
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$s = () => [];
-const frontmatter$s = void 0;
-function _createMdxContent$s(props) {
-  const _components = {
-    a: "a",
-    h1: "h1",
     li: "li",
     p: "p",
     span: "span",
@@ -18347,29 +18299,29 @@ function _createMdxContent$s(props) {
     })]
   });
 }
-function MDXContent$s(props = {}) {
+function MDXContent$t(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
     ...props,
-    children: jsxRuntime.jsx(_createMdxContent$s, {
+    children: jsxRuntime.jsx(_createMdxContent$t, {
       ...props
     })
-  }) : _createMdxContent$s(props);
+  }) : _createMdxContent$t(props);
 }
-const GetFrontMatter$s = () => frontmatter$s;
+const GetFrontMatter$t = () => frontmatter$t;
 const _0____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$s,
-  GetToc: GetToc$s,
-  default: MDXContent$s
+  GetFrontMatter: GetFrontMatter$t,
+  GetToc: GetToc$t,
+  default: MDXContent$t
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$r = () => [{
+const GetToc$s = () => [{
   "id": "checkout-和-reset-的不同",
   "text": "checkout 和 reset 的不同",
   "depth": 2
 }];
-const frontmatter$r = void 0;
-function _createMdxContent$r(props) {
+const frontmatter$s = void 0;
+function _createMdxContent$s(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -18425,29 +18377,29 @@ function _createMdxContent$r(props) {
     })]
   });
 }
-function MDXContent$r(props = {}) {
+function MDXContent$s(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
     ...props,
-    children: jsxRuntime.jsx(_createMdxContent$r, {
+    children: jsxRuntime.jsx(_createMdxContent$s, {
       ...props
     })
-  }) : _createMdxContent$r(props);
+  }) : _createMdxContent$s(props);
 }
-const GetFrontMatter$r = () => frontmatter$r;
+const GetFrontMatter$s = () => frontmatter$s;
 const _10checkout = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$r,
-  GetToc: GetToc$r,
-  default: MDXContent$r
+  GetFrontMatter: GetFrontMatter$s,
+  GetToc: GetToc$s,
+  default: MDXContent$s
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$q = () => [{
+const GetToc$r = () => [{
   "id": "stash临时存放工作目录的改动",
   "text": "stash：临时存放工作目录的改动",
   "depth": 2
 }];
-const frontmatter$q = void 0;
-function _createMdxContent$q(props) {
+const frontmatter$r = void 0;
+function _createMdxContent$r(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -18493,23 +18445,23 @@ function _createMdxContent$q(props) {
     })]
   });
 }
-function MDXContent$q(props = {}) {
+function MDXContent$r(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
     ...props,
-    children: jsxRuntime.jsx(_createMdxContent$q, {
+    children: jsxRuntime.jsx(_createMdxContent$r, {
       ...props
     })
-  }) : _createMdxContent$q(props);
+  }) : _createMdxContent$r(props);
 }
-const GetFrontMatter$q = () => frontmatter$q;
+const GetFrontMatter$r = () => frontmatter$r;
 const _11stash = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$q,
-  GetToc: GetToc$q,
-  default: MDXContent$q
+  GetFrontMatter: GetFrontMatter$r,
+  GetToc: GetToc$r,
+  default: MDXContent$r
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$p = () => [{
+const GetToc$q = () => [{
   "id": "log",
   "text": "log",
   "depth": 2
@@ -18518,8 +18470,8 @@ const GetToc$p = () => [{
   "text": "reflog：引用的 log",
   "depth": 2
 }];
-const frontmatter$p = void 0;
-function _createMdxContent$p(props) {
+const frontmatter$q = void 0;
+function _createMdxContent$q(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -18572,25 +18524,25 @@ function _createMdxContent$p(props) {
     })]
   });
 }
-function MDXContent$p(props = {}) {
+function MDXContent$q(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
     ...props,
-    children: jsxRuntime.jsx(_createMdxContent$p, {
+    children: jsxRuntime.jsx(_createMdxContent$q, {
       ...props
     })
-  }) : _createMdxContent$p(props);
+  }) : _createMdxContent$q(props);
 }
-const GetFrontMatter$p = () => frontmatter$p;
+const GetFrontMatter$q = () => frontmatter$q;
 const _12log_reflog = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$p,
-  GetToc: GetToc$p,
-  default: MDXContent$p
+  GetFrontMatter: GetFrontMatter$q,
+  GetToc: GetToc$q,
+  default: MDXContent$q
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$o = () => [];
-const frontmatter$o = void 0;
-function _createMdxContent$o(props) {
+const GetToc$p = () => [];
+const frontmatter$p = void 0;
+function _createMdxContent$p(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -18616,23 +18568,23 @@ function _createMdxContent$o(props) {
     })]
   });
 }
-function MDXContent$o(props = {}) {
+function MDXContent$p(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
     ...props,
-    children: jsxRuntime.jsx(_createMdxContent$o, {
+    children: jsxRuntime.jsx(_createMdxContent$p, {
       ...props
     })
-  }) : _createMdxContent$o(props);
+  }) : _createMdxContent$p(props);
 }
-const GetFrontMatter$o = () => frontmatter$o;
+const GetFrontMatter$p = () => frontmatter$p;
 const _13cherryPick = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$o,
-  GetToc: GetToc$o,
-  default: MDXContent$o
+  GetFrontMatter: GetFrontMatter$p,
+  GetToc: GetToc$p,
+  default: MDXContent$p
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$n = () => [{
+const GetToc$o = () => [{
   "id": "版本控制最基本功能1",
   "text": "版本控制：最基本功能1",
   "depth": 2
@@ -18649,8 +18601,8 @@ const GetToc$n = () => [{
   "text": "中央式版本控制系统",
   "depth": 2
 }];
-const frontmatter$n = void 0;
-function _createMdxContent$n(props) {
+const frontmatter$o = void 0;
+function _createMdxContent$o(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -18748,29 +18700,29 @@ function _createMdxContent$n(props) {
     })]
   });
 }
-function MDXContent$n(props = {}) {
+function MDXContent$o(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
     ...props,
-    children: jsxRuntime.jsx(_createMdxContent$n, {
+    children: jsxRuntime.jsx(_createMdxContent$o, {
       ...props
     })
-  }) : _createMdxContent$n(props);
+  }) : _createMdxContent$o(props);
 }
-const GetFrontMatter$n = () => frontmatter$n;
+const GetFrontMatter$o = () => frontmatter$o;
 const _1______VCS = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$n,
-  GetToc: GetToc$n,
-  default: MDXContent$n
+  GetFrontMatter: GetFrontMatter$o,
+  GetToc: GetToc$o,
+  default: MDXContent$o
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$m = () => [{
+const GetToc$n = () => [{
   "id": "优缺点",
   "text": "优缺点",
   "depth": 2
 }];
-const frontmatter$m = void 0;
-function _createMdxContent$m(props) {
+const frontmatter$n = void 0;
+function _createMdxContent$n(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -18845,23 +18797,23 @@ function _createMdxContent$m(props) {
     })]
   });
 }
-function MDXContent$m(props = {}) {
+function MDXContent$n(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
     ...props,
-    children: jsxRuntime.jsx(_createMdxContent$m, {
+    children: jsxRuntime.jsx(_createMdxContent$n, {
       ...props
     })
-  }) : _createMdxContent$m(props);
+  }) : _createMdxContent$n(props);
 }
-const GetFrontMatter$m = () => frontmatter$m;
+const GetFrontMatter$n = () => frontmatter$n;
 const _2_________DVCS = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$m,
-  GetToc: GetToc$m,
-  default: MDXContent$m
+  GetFrontMatter: GetFrontMatter$n,
+  GetToc: GetToc$n,
+  default: MDXContent$n
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$l = () => [{
+const GetToc$m = () => [{
   "id": "引用commit-的快捷方式",
   "text": "引用：commit 的快捷方式",
   "depth": 2
@@ -18882,8 +18834,8 @@ const GetToc$l = () => [{
   "text": "master/main: 默认 branch",
   "depth": 2
 }];
-const frontmatter$l = void 0;
-function _createMdxContent$l(props) {
+const frontmatter$m = void 0;
+function _createMdxContent$m(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -19029,25 +18981,25 @@ function _createMdxContent$l(props) {
     })]
   });
 }
-function MDXContent$l(props = {}) {
+function MDXContent$m(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
     ...props,
-    children: jsxRuntime.jsx(_createMdxContent$l, {
+    children: jsxRuntime.jsx(_createMdxContent$m, {
       ...props
     })
-  }) : _createMdxContent$l(props);
+  }) : _createMdxContent$m(props);
 }
-const GetFrontMatter$l = () => frontmatter$l;
+const GetFrontMatter$m = () => frontmatter$m;
 const _3HEAD_master_branch = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$l,
-  GetToc: GetToc$l,
-  default: MDXContent$l
+  GetFrontMatter: GetFrontMatter$m,
+  GetToc: GetToc$m,
+  default: MDXContent$m
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$k = () => [];
-const frontmatter$k = void 0;
-function _createMdxContent$k(props) {
+const GetToc$l = () => [];
+const frontmatter$l = void 0;
+function _createMdxContent$l(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -19077,23 +19029,23 @@ function _createMdxContent$k(props) {
     })]
   });
 }
-function MDXContent$k(props = {}) {
+function MDXContent$l(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
     ...props,
-    children: jsxRuntime.jsx(_createMdxContent$k, {
+    children: jsxRuntime.jsx(_createMdxContent$l, {
       ...props
     })
-  }) : _createMdxContent$k(props);
+  }) : _createMdxContent$l(props);
 }
-const GetFrontMatter$k = () => frontmatter$k;
+const GetFrontMatter$l = () => frontmatter$l;
 const _4push = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$k,
-  GetToc: GetToc$k,
-  default: MDXContent$k
+  GetFrontMatter: GetFrontMatter$l,
+  GetToc: GetToc$l,
+  default: MDXContent$l
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$j = () => [{
+const GetToc$k = () => [{
   "id": "含义",
   "text": "含义",
   "depth": 2
@@ -19102,8 +19054,8 @@ const GetToc$j = () => [{
   "text": "冲突",
   "depth": 2
 }];
-const frontmatter$j = void 0;
-function _createMdxContent$j(props) {
+const frontmatter$k = void 0;
+function _createMdxContent$k(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -19175,25 +19127,25 @@ function _createMdxContent$j(props) {
     })]
   });
 }
-function MDXContent$j(props = {}) {
+function MDXContent$k(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
     ...props,
-    children: jsxRuntime.jsx(_createMdxContent$j, {
+    children: jsxRuntime.jsx(_createMdxContent$k, {
       ...props
     })
-  }) : _createMdxContent$j(props);
+  }) : _createMdxContent$k(props);
 }
-const GetFrontMatter$j = () => frontmatter$j;
+const GetFrontMatter$k = () => frontmatter$k;
 const _5merge = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$j,
-  GetToc: GetToc$j,
-  default: MDXContent$j
+  GetFrontMatter: GetFrontMatter$k,
+  GetToc: GetToc$k,
+  default: MDXContent$k
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$i = () => [];
-const frontmatter$i = void 0;
-function _createMdxContent$i(props) {
+const GetToc$j = () => [];
+const frontmatter$j = void 0;
+function _createMdxContent$j(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -19231,29 +19183,29 @@ function _createMdxContent$i(props) {
     })]
   });
 }
-function MDXContent$i(props = {}) {
+function MDXContent$j(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
     ...props,
-    children: jsxRuntime.jsx(_createMdxContent$i, {
+    children: jsxRuntime.jsx(_createMdxContent$j, {
       ...props
     })
-  }) : _createMdxContent$i(props);
+  }) : _createMdxContent$j(props);
 }
-const GetFrontMatter$i = () => frontmatter$i;
+const GetFrontMatter$j = () => frontmatter$j;
 const _6feature_branch = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$i,
-  GetToc: GetToc$i,
-  default: MDXContent$i
+  GetFrontMatter: GetFrontMatter$j,
+  GetToc: GetToc$j,
+  default: MDXContent$j
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$h = () => [{
+const GetToc$i = () => [{
   "id": "rebase--i",
   "text": "rebase -i",
   "depth": 2
 }];
-const frontmatter$h = void 0;
-function _createMdxContent$h(props) {
+const frontmatter$i = void 0;
+function _createMdxContent$i(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -19349,25 +19301,25 @@ function _createMdxContent$h(props) {
     })]
   });
 }
-function MDXContent$h(props = {}) {
+function MDXContent$i(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
     ...props,
-    children: jsxRuntime.jsx(_createMdxContent$h, {
+    children: jsxRuntime.jsx(_createMdxContent$i, {
       ...props
     })
-  }) : _createMdxContent$h(props);
+  }) : _createMdxContent$i(props);
 }
-const GetFrontMatter$h = () => frontmatter$h;
+const GetFrontMatter$i = () => frontmatter$i;
 const _7rebase = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$h,
-  GetToc: GetToc$h,
-  default: MDXContent$h
+  GetFrontMatter: GetFrontMatter$i,
+  GetToc: GetToc$i,
+  default: MDXContent$i
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$g = () => [];
-const frontmatter$g = void 0;
-function _createMdxContent$g(props) {
+const GetToc$h = () => [];
+const frontmatter$h = void 0;
+function _createMdxContent$h(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -19396,25 +19348,25 @@ function _createMdxContent$g(props) {
     })]
   });
 }
-function MDXContent$g(props = {}) {
+function MDXContent$h(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
     ...props,
-    children: jsxRuntime.jsx(_createMdxContent$g, {
+    children: jsxRuntime.jsx(_createMdxContent$h, {
       ...props
     })
-  }) : _createMdxContent$g(props);
+  }) : _createMdxContent$h(props);
 }
-const GetFrontMatter$g = () => frontmatter$g;
+const GetFrontMatter$h = () => frontmatter$h;
 const _8revert = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$g,
-  GetToc: GetToc$g,
-  default: MDXContent$g
+  GetFrontMatter: GetFrontMatter$h,
+  GetToc: GetToc$h,
+  default: MDXContent$h
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$f = () => [];
-const frontmatter$f = void 0;
-function _createMdxContent$f(props) {
+const GetToc$g = () => [];
+const frontmatter$g = void 0;
+function _createMdxContent$g(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -19443,23 +19395,23 @@ function _createMdxContent$f(props) {
     })]
   });
 }
-function MDXContent$f(props = {}) {
+function MDXContent$g(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
     ...props,
-    children: jsxRuntime.jsx(_createMdxContent$f, {
+    children: jsxRuntime.jsx(_createMdxContent$g, {
       ...props
     })
-  }) : _createMdxContent$f(props);
+  }) : _createMdxContent$g(props);
 }
-const GetFrontMatter$f = () => frontmatter$f;
+const GetFrontMatter$g = () => frontmatter$g;
 const _99readme$2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$f,
-  GetToc: GetToc$f,
-  default: MDXContent$f
+  GetFrontMatter: GetFrontMatter$g,
+  GetToc: GetToc$g,
+  default: MDXContent$g
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$e = () => [{
+const GetToc$f = () => [{
   "id": "reset-的本质移动-head-以及它所指向的-branch",
   "text": "reset 的本质：移动 HEAD 以及它所指向的 branch",
   "depth": 2
@@ -19476,8 +19428,8 @@ const GetToc$e = () => [{
   "text": "reset 不加参数：保留工作目录，并清空 add 暂存区",
   "depth": 2
 }];
-const frontmatter$e = void 0;
-function _createMdxContent$e(props) {
+const frontmatter$f = void 0;
+function _createMdxContent$f(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -19575,6 +19527,53 @@ function _createMdxContent$e(props) {
     })]
   });
 }
+function MDXContent$f(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
+    ...props,
+    children: jsxRuntime.jsx(_createMdxContent$f, {
+      ...props
+    })
+  }) : _createMdxContent$f(props);
+}
+const GetFrontMatter$f = () => frontmatter$f;
+const _9reset = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$f,
+  GetToc: GetToc$f,
+  default: MDXContent$f
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$e = () => [];
+const frontmatter$e = void 0;
+function _createMdxContent$e(props) {
+  const _components = {
+    a: "a",
+    h1: "h1",
+    p: "p",
+    span: "span",
+    ...props.components
+  };
+  return jsxRuntime.jsxs(jsxRuntime.Fragment, {
+    children: [jsxRuntime.jsxs(_components.h1, {
+      id: "参考",
+      children: [jsxRuntime.jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#参考",
+        children: jsxRuntime.jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "参考"]
+    }), "\n", jsxRuntime.jsx(_components.p, {
+      children: jsxRuntime.jsx(_components.a, {
+        href: "https://q.shanyue.tech/",
+        children: "山月"
+      })
+    })]
+  });
+}
 function MDXContent$e(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
@@ -19585,7 +19584,7 @@ function MDXContent$e(props = {}) {
   }) : _createMdxContent$e(props);
 }
 const GetFrontMatter$e = () => frontmatter$e;
-const _9reset = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const _99readme$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   GetFrontMatter: GetFrontMatter$e,
   GetToc: GetToc$e,
@@ -19594,6 +19593,54 @@ const _9reset = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePrope
 const GetToc$d = () => [];
 const frontmatter$d = void 0;
 function _createMdxContent$d(props) {
+  const _components = {
+    a: "a",
+    h1: "h1",
+    p: "p",
+    span: "span",
+    ...props.components
+  };
+  return jsxRuntime.jsxs(jsxRuntime.Fragment, {
+    children: [jsxRuntime.jsxs(_components.h1, {
+      id: "笔记",
+      children: [jsxRuntime.jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#笔记",
+        children: jsxRuntime.jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "笔记"]
+    }), "\n", jsxRuntime.jsx(_components.p, {
+      children: "温故知新"
+    }), "\n", jsxRuntime.jsx(_components.p, {
+      children: "一开始的笔记都是机械的复制关键点重组，记忆很浅，仅方便查阅"
+    }), "\n", jsxRuntime.jsx(_components.p, {
+      children: "现在可以希望用疑问->解决->复述的方式加深记忆"
+    })]
+  });
+}
+function MDXContent$d(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
+    ...props,
+    children: jsxRuntime.jsx(_createMdxContent$d, {
+      ...props
+    })
+  }) : _createMdxContent$d(props);
+}
+const GetFrontMatter$d = () => frontmatter$d;
+const intro = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  GetFrontMatter: GetFrontMatter$d,
+  GetToc: GetToc$d,
+  default: MDXContent$d
+}, Symbol.toStringTag, { value: "Module" }));
+const GetToc$c = () => [];
+const frontmatter$c = void 0;
+function _createMdxContent$c(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -19614,23 +19661,23 @@ function _createMdxContent$d(props) {
     }), "内存"]
   });
 }
-function MDXContent$d(props = {}) {
+function MDXContent$c(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
     ...props,
-    children: jsxRuntime.jsx(_createMdxContent$d, {
+    children: jsxRuntime.jsx(_createMdxContent$c, {
       ...props
     })
-  }) : _createMdxContent$d(props);
+  }) : _createMdxContent$c(props);
 }
-const GetFrontMatter$d = () => frontmatter$d;
+const GetFrontMatter$c = () => frontmatter$c;
 const _13__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$d,
-  GetToc: GetToc$d,
-  default: MDXContent$d
+  GetFrontMatter: GetFrontMatter$c,
+  GetToc: GetToc$c,
+  default: MDXContent$c
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$c = () => [{
+const GetToc$b = () => [{
   "id": "单线程",
   "text": "单线程",
   "depth": 2
@@ -19659,8 +19706,8 @@ const GetToc$c = () => [{
   "text": "总结",
   "depth": 2
 }];
-const frontmatter$c = void 0;
-function _createMdxContent$c(props) {
+const frontmatter$b = void 0;
+function _createMdxContent$b(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -19805,25 +19852,25 @@ function _createMdxContent$c(props) {
     })]
   });
 }
-function MDXContent$c(props = {}) {
+function MDXContent$b(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
     ...props,
-    children: jsxRuntime.jsx(_createMdxContent$c, {
+    children: jsxRuntime.jsx(_createMdxContent$b, {
       ...props
     })
-  }) : _createMdxContent$c(props);
+  }) : _createMdxContent$b(props);
 }
-const GetFrontMatter$c = () => frontmatter$c;
+const GetFrontMatter$b = () => frontmatter$b;
 const _16_________ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$c,
-  GetToc: GetToc$c,
-  default: MDXContent$c
+  GetFrontMatter: GetFrontMatter$b,
+  GetToc: GetToc$b,
+  default: MDXContent$b
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$b = () => [];
-const frontmatter$b = void 0;
-function _createMdxContent$b(props) {
+const GetToc$a = () => [];
+const frontmatter$a = void 0;
+function _createMdxContent$a(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -19860,23 +19907,23 @@ function _createMdxContent$b(props) {
     })]
   });
 }
-function MDXContent$b(props = {}) {
+function MDXContent$a(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
     ...props,
-    children: jsxRuntime.jsx(_createMdxContent$b, {
+    children: jsxRuntime.jsx(_createMdxContent$a, {
       ...props
     })
-  }) : _createMdxContent$b(props);
+  }) : _createMdxContent$a(props);
 }
-const GetFrontMatter$b = () => frontmatter$b;
+const GetFrontMatter$a = () => frontmatter$a;
 const _1_____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$b,
-  GetToc: GetToc$b,
-  default: MDXContent$b
+  GetFrontMatter: GetFrontMatter$a,
+  GetToc: GetToc$a,
+  default: MDXContent$a
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$a = () => [{
+const GetToc$9 = () => [{
   "id": "ip-internet-protocol-网际协议",
   "text": "IP Internet Protocol 网际协议",
   "depth": 2
@@ -19893,8 +19940,8 @@ const GetToc$a = () => [{
   "text": "TCP/IP 四层模型",
   "depth": 2
 }];
-const frontmatter$a = void 0;
-function _createMdxContent$a(props) {
+const frontmatter$9 = void 0;
+function _createMdxContent$9(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -20010,23 +20057,23 @@ function _createMdxContent$a(props) {
     })]
   });
 }
-function MDXContent$a(props = {}) {
+function MDXContent$9(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
     ...props,
-    children: jsxRuntime.jsx(_createMdxContent$a, {
+    children: jsxRuntime.jsx(_createMdxContent$9, {
       ...props
     })
-  }) : _createMdxContent$a(props);
+  }) : _createMdxContent$9(props);
 }
-const GetFrontMatter$a = () => frontmatter$a;
+const GetFrontMatter$9 = () => frontmatter$9;
 const _2TCP__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$a,
-  GetToc: GetToc$a,
-  default: MDXContent$a
+  GetFrontMatter: GetFrontMatter$9,
+  GetToc: GetToc$9,
+  default: MDXContent$9
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$9 = () => [{
+const GetToc$8 = () => [{
   "id": "dns-domain-name-system-域名系统",
   "text": "DNS Domain Name System 域名系统",
   "depth": 2
@@ -20039,8 +20086,8 @@ const GetToc$9 = () => [{
   "text": "服务器处理 HTTP 请求的流程",
   "depth": 2
 }];
-const frontmatter$9 = void 0;
-function _createMdxContent$9(props) {
+const frontmatter$8 = void 0;
+function _createMdxContent$8(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -20180,23 +20227,23 @@ function _createMdxContent$9(props) {
     })]
   });
 }
-function MDXContent$9(props = {}) {
+function MDXContent$8(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
     ...props,
-    children: jsxRuntime.jsx(_createMdxContent$9, {
+    children: jsxRuntime.jsx(_createMdxContent$8, {
       ...props
     })
-  }) : _createMdxContent$9(props);
+  }) : _createMdxContent$8(props);
 }
-const GetFrontMatter$9 = () => frontmatter$9;
+const GetFrontMatter$8 = () => frontmatter$8;
 const _3HTTP__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$9,
-  GetToc: GetToc$9,
-  default: MDXContent$9
+  GetFrontMatter: GetFrontMatter$8,
+  GetToc: GetToc$8,
+  default: MDXContent$8
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$8 = () => [{
+const GetToc$7 = () => [{
   "id": "dns-缓存",
   "text": "DNS 缓存",
   "depth": 2
@@ -20209,8 +20256,8 @@ const GetToc$8 = () => [{
   "text": "登录状态",
   "depth": 2
 }];
-const frontmatter$8 = void 0;
-function _createMdxContent$8(props) {
+const frontmatter$7 = void 0;
+function _createMdxContent$7(props) {
   const _components = {
     a: "a",
     code: "code",
@@ -20296,23 +20343,23 @@ function _createMdxContent$8(props) {
     })]
   });
 }
-function MDXContent$8(props = {}) {
+function MDXContent$7(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
     ...props,
-    children: jsxRuntime.jsx(_createMdxContent$8, {
+    children: jsxRuntime.jsx(_createMdxContent$7, {
       ...props
     })
-  }) : _createMdxContent$8(props);
+  }) : _createMdxContent$7(props);
 }
-const GetFrontMatter$8 = () => frontmatter$8;
+const GetFrontMatter$7 = () => frontmatter$7;
 const _4_____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$8,
-  GetToc: GetToc$8,
-  default: MDXContent$8
+  GetFrontMatter: GetFrontMatter$7,
+  GetToc: GetToc$7,
+  default: MDXContent$7
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$7 = () => [{
+const GetToc$6 = () => [{
   "id": "用户输入",
   "text": "用户输入",
   "depth": 2
@@ -20333,8 +20380,8 @@ const GetToc$7 = () => [{
   "text": "渲染阶段",
   "depth": 2
 }];
-const frontmatter$7 = void 0;
-function _createMdxContent$7(props) {
+const frontmatter$6 = void 0;
+function _createMdxContent$6(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -20469,25 +20516,25 @@ function _createMdxContent$7(props) {
     })]
   });
 }
-function MDXContent$7(props = {}) {
+function MDXContent$6(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
     ...props,
-    children: jsxRuntime.jsx(_createMdxContent$7, {
+    children: jsxRuntime.jsx(_createMdxContent$6, {
       ...props
     })
-  }) : _createMdxContent$7(props);
+  }) : _createMdxContent$6(props);
 }
-const GetFrontMatter$7 = () => frontmatter$7;
+const GetFrontMatter$6 = () => frontmatter$6;
 const _5____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$7,
-  GetToc: GetToc$7,
-  default: MDXContent$7
+  GetFrontMatter: GetFrontMatter$6,
+  GetToc: GetToc$6,
+  default: MDXContent$6
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$6 = () => [];
-const frontmatter$6 = void 0;
-function _createMdxContent$6(props) {
+const GetToc$5 = () => [];
+const frontmatter$5 = void 0;
+function _createMdxContent$5(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -20513,29 +20560,29 @@ function _createMdxContent$6(props) {
     })]
   });
 }
-function MDXContent$6(props = {}) {
+function MDXContent$5(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
     ...props,
-    children: jsxRuntime.jsx(_createMdxContent$6, {
+    children: jsxRuntime.jsx(_createMdxContent$5, {
       ...props
     })
-  }) : _createMdxContent$6(props);
+  }) : _createMdxContent$5(props);
 }
-const GetFrontMatter$6 = () => frontmatter$6;
+const GetFrontMatter$5 = () => frontmatter$5;
 const _6____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  GetFrontMatter: GetFrontMatter$6,
-  GetToc: GetToc$6,
-  default: MDXContent$6
+  GetFrontMatter: GetFrontMatter$5,
+  GetToc: GetToc$5,
+  default: MDXContent$5
 }, Symbol.toStringTag, { value: "Module" }));
-const GetToc$5 = () => [{
+const GetToc$4 = () => [{
   "id": "chrome-的-dns-缓存",
   "text": "Chrome 的 dns 缓存",
   "depth": 2
 }];
-const frontmatter$5 = void 0;
-function _createMdxContent$5(props) {
+const frontmatter$4 = void 0;
+function _createMdxContent$4(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -20574,53 +20621,6 @@ function _createMdxContent$5(props) {
     })]
   });
 }
-function MDXContent$5(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
-    ...props,
-    children: jsxRuntime.jsx(_createMdxContent$5, {
-      ...props
-    })
-  }) : _createMdxContent$5(props);
-}
-const GetFrontMatter$5 = () => frontmatter$5;
-const _98_____dns__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$5,
-  GetToc: GetToc$5,
-  default: MDXContent$5
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$4 = () => [];
-const frontmatter$4 = void 0;
-function _createMdxContent$4(props) {
-  const _components = {
-    a: "a",
-    h1: "h1",
-    p: "p",
-    span: "span",
-    ...props.components
-  };
-  return jsxRuntime.jsxs(jsxRuntime.Fragment, {
-    children: [jsxRuntime.jsxs(_components.h1, {
-      id: "参考",
-      children: [jsxRuntime.jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#参考",
-        children: jsxRuntime.jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "参考"]
-    }), "\n", jsxRuntime.jsx(_components.p, {
-      children: jsxRuntime.jsx(_components.a, {
-        href: "https://time.geekbang.org/column/intro/100033601?code=nQdm4VreDyrwzIsmJOa2fcr87sMexy98JSDAIn2etJo%253D&tab=catalog",
-        children: "李兵"
-      })
-    })]
-  });
-}
 function MDXContent$4(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
@@ -20631,7 +20631,7 @@ function MDXContent$4(props = {}) {
   }) : _createMdxContent$4(props);
 }
 const GetFrontMatter$4 = () => frontmatter$4;
-const _99readme$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const _98_____dns__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   GetFrontMatter: GetFrontMatter$4,
   GetToc: GetToc$4,
@@ -20662,8 +20662,8 @@ function _createMdxContent$3(props) {
       }), "参考"]
     }), "\n", jsxRuntime.jsx(_components.p, {
       children: jsxRuntime.jsx(_components.a, {
-        href: "https://q.shanyue.tech/",
-        children: "山月"
+        href: "https://time.geekbang.org/column/intro/100033601?code=nQdm4VreDyrwzIsmJOa2fcr87sMexy98JSDAIn2etJo%253D&tab=catalog",
+        children: "李兵"
       })
     })]
   });
@@ -21431,191 +21431,191 @@ const routes = [
     load: () => Promise.resolve().then(() => _9useDeepCompareEffect)
   },
   {
-    file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/0介绍/intro.md",
-    timestamp: "1722072403",
-    path: "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro.html",
-    element: React.createElement(MDXContent$t),
-    load: () => Promise.resolve().then(() => intro)
-  },
-  {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/0常用命令.md",
     timestamp: "1732086747",
     path: "/%E7%AC%94%E8%AE%B0/1git/0%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html",
-    element: React.createElement(MDXContent$s),
+    element: React.createElement(MDXContent$t),
     load: () => Promise.resolve().then(() => _0____)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/10checkout.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/10checkout.html",
-    element: React.createElement(MDXContent$r),
+    element: React.createElement(MDXContent$s),
     load: () => Promise.resolve().then(() => _10checkout)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/11stash.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/11stash.html",
-    element: React.createElement(MDXContent$q),
+    element: React.createElement(MDXContent$r),
     load: () => Promise.resolve().then(() => _11stash)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/12log与reflog.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/12log%E4%B8%8Ereflog.html",
-    element: React.createElement(MDXContent$p),
+    element: React.createElement(MDXContent$q),
     load: () => Promise.resolve().then(() => _12log_reflog)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/13cherry-pick.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/13cherry-pick.html",
-    element: React.createElement(MDXContent$o),
+    element: React.createElement(MDXContent$p),
     load: () => Promise.resolve().then(() => _13cherryPick)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/1版本控制系统VCS.md",
     timestamp: "1731996627",
     path: "/%E7%AC%94%E8%AE%B0/1git/1%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FVCS.html",
-    element: React.createElement(MDXContent$n),
+    element: React.createElement(MDXContent$o),
     load: () => Promise.resolve().then(() => _1______VCS)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/2分布式版本控制系统DVCS.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/2%E5%88%86%E5%B8%83%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FDVCS.html",
-    element: React.createElement(MDXContent$m),
+    element: React.createElement(MDXContent$n),
     load: () => Promise.resolve().then(() => _2_________DVCS)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/3HEAD与master与branch.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/3HEAD%E4%B8%8Emaster%E4%B8%8Ebranch.html",
-    element: React.createElement(MDXContent$l),
+    element: React.createElement(MDXContent$m),
     load: () => Promise.resolve().then(() => _3HEAD_master_branch)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/4push.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/4push.html",
-    element: React.createElement(MDXContent$k),
+    element: React.createElement(MDXContent$l),
     load: () => Promise.resolve().then(() => _4push)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/5merge.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/5merge.html",
-    element: React.createElement(MDXContent$j),
+    element: React.createElement(MDXContent$k),
     load: () => Promise.resolve().then(() => _5merge)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/6feature branch.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/6feature%20branch.html",
-    element: React.createElement(MDXContent$i),
+    element: React.createElement(MDXContent$j),
     load: () => Promise.resolve().then(() => _6feature_branch)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/7rebase.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/7rebase.html",
-    element: React.createElement(MDXContent$h),
+    element: React.createElement(MDXContent$i),
     load: () => Promise.resolve().then(() => _7rebase)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/8revert.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/8revert.html",
-    element: React.createElement(MDXContent$g),
+    element: React.createElement(MDXContent$h),
     load: () => Promise.resolve().then(() => _8revert)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/99readme.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/99readme.html",
-    element: React.createElement(MDXContent$f),
+    element: React.createElement(MDXContent$g),
     load: () => Promise.resolve().then(() => _99readme$2)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/9reset.md",
     timestamp: "1731996627",
     path: "/%E7%AC%94%E8%AE%B0/1git/9reset.html",
-    element: React.createElement(MDXContent$e),
+    element: React.createElement(MDXContent$f),
     load: () => Promise.resolve().then(() => _9reset)
+  },
+  {
+    file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/3http/99readme.md",
+    timestamp: "1722072403",
+    path: "/%E7%AC%94%E8%AE%B0/3http/99readme.html",
+    element: React.createElement(MDXContent$e),
+    load: () => Promise.resolve().then(() => _99readme$1)
+  },
+  {
+    file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/0介绍/intro.md",
+    timestamp: "1722072403",
+    path: "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro.html",
+    element: React.createElement(MDXContent$d),
+    load: () => Promise.resolve().then(() => intro)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/2浏览器/13内存.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/13%E5%86%85%E5%AD%98.html",
-    element: React.createElement(MDXContent$d),
+    element: React.createElement(MDXContent$c),
     load: () => Promise.resolve().then(() => _13__)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/2浏览器/16消息队列和事件循环.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/16%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.html",
-    element: React.createElement(MDXContent$c),
+    element: React.createElement(MDXContent$b),
     load: () => Promise.resolve().then(() => _16_________)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/2浏览器/1浏览器进程.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/1%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9B%E7%A8%8B.html",
-    element: React.createElement(MDXContent$b),
+    element: React.createElement(MDXContent$a),
     load: () => Promise.resolve().then(() => _1_____)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/2浏览器/2TCP协议.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/2TCP%E5%8D%8F%E8%AE%AE.html",
-    element: React.createElement(MDXContent$a),
+    element: React.createElement(MDXContent$9),
     load: () => Promise.resolve().then(() => _2TCP__)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/2浏览器/3HTTP协议.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/3HTTP%E5%8D%8F%E8%AE%AE.html",
-    element: React.createElement(MDXContent$9),
+    element: React.createElement(MDXContent$8),
     load: () => Promise.resolve().then(() => _3HTTP__)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/2浏览器/4浏览器缓存.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/4%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98.html",
-    element: React.createElement(MDXContent$8),
+    element: React.createElement(MDXContent$7),
     load: () => Promise.resolve().then(() => _4_____)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/2浏览器/5导航流程.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/5%E5%AF%BC%E8%88%AA%E6%B5%81%E7%A8%8B.html",
-    element: React.createElement(MDXContent$7),
+    element: React.createElement(MDXContent$6),
     load: () => Promise.resolve().then(() => _5____)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/2浏览器/6渲染流程.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/6%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B.html",
-    element: React.createElement(MDXContent$6),
+    element: React.createElement(MDXContent$5),
     load: () => Promise.resolve().then(() => _6____)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/2浏览器/98 浏览器的dns缓存.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/98%20%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84dns%E7%BC%93%E5%AD%98.html",
-    element: React.createElement(MDXContent$5),
+    element: React.createElement(MDXContent$4),
     load: () => Promise.resolve().then(() => _98_____dns__)
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/2浏览器/99readme.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/99readme.html",
-    element: React.createElement(MDXContent$4),
-    load: () => Promise.resolve().then(() => _99readme$1)
-  },
-  {
-    file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/3http/99readme.md",
-    timestamp: "1722072403",
-    path: "/%E7%AC%94%E8%AE%B0/3http/99readme.html",
     element: React.createElement(MDXContent$3),
     load: () => Promise.resolve().then(() => _99readme)
   },
