@@ -1,7 +1,8 @@
 import { UserConfig } from 'zeropress'
 
 const config: UserConfig = {
-  title: 'xxx',
+  description: '',
+
   themeConfig: {
     nav: [
       {

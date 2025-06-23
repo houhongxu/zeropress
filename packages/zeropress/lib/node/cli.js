@@ -649,7 +649,7 @@ async function resolveSiteConfig({
     mode,
     command
   });
-  const docs = userConfig.docs || DEFAULT_USER_CONFIG.docs;
+  const docs = userConfig.docs ?? DEFAULT_USER_CONFIG.docs;
   const auto = await autoSidebarAndNav({ docs });
   const navLeftIndex = userConfig.themeConfig?.nav?.findIndex(
     (item) => item.position === "left"
@@ -677,8 +677,8 @@ async function resolveSiteConfig({
   );
   const requiredUserConfig = {
     docs,
-    title: userConfig.title || DEFAULT_USER_CONFIG.title,
-    description: userConfig.description || DEFAULT_USER_CONFIG.description,
+    title: userConfig.title ?? DEFAULT_USER_CONFIG.title,
+    description: userConfig.description ?? DEFAULT_USER_CONFIG.description,
     themeConfig: userConfig.themeConfig ? {
       ...userConfig.themeConfig,
       nav: normalizedNav,

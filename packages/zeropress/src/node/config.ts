@@ -38,7 +38,7 @@ export async function resolveSiteConfig({
     command,
   })
 
-  const docs = userConfig.docs || DEFAULT_USER_CONFIG.docs
+  const docs = userConfig.docs ?? DEFAULT_USER_CONFIG.docs
 
   const auto = await autoSidebarAndNav({ docs })
 
@@ -81,8 +81,8 @@ export async function resolveSiteConfig({
 
   const requiredUserConfig: Required<UserConfig> = {
     docs,
-    title: userConfig.title || DEFAULT_USER_CONFIG.title,
-    description: userConfig.description || DEFAULT_USER_CONFIG.description,
+    title: userConfig.title ?? DEFAULT_USER_CONFIG.title,
+    description: userConfig.description ?? DEFAULT_USER_CONFIG.description,
     themeConfig: userConfig.themeConfig
       ? {
           ...userConfig.themeConfig,
