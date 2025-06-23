@@ -32,6 +32,7 @@ var DEFAULT_USER_CONFIG = {
     autoNav: true,
     autoSidebar: true
   },
+  icp: "",
   vite: {}
 };
 
@@ -679,6 +680,7 @@ async function resolveSiteConfig({
     docs,
     title: userConfig.title ?? DEFAULT_USER_CONFIG.title,
     description: userConfig.description ?? DEFAULT_USER_CONFIG.description,
+    icp: userConfig.icp ?? DEFAULT_USER_CONFIG.icp,
     themeConfig: userConfig.themeConfig ? {
       ...userConfig.themeConfig,
       nav: normalizedNav,

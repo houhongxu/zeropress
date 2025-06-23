@@ -20,6 +20,7 @@ export function Layout({ location = window.location.pathname }) {
         <Home
           title={pageData?.userConfig.title}
           description={pageData?.userConfig.description}
+          icp={pageData?.userConfig.icp}
         ></Home>
       )
     } else if (pageType === 'doc') {

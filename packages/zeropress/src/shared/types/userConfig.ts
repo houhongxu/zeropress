@@ -22,6 +22,10 @@ export interface UserConfig {
    * vite设置
    */
   vite?: ViteUserConfig
+  /**
+   * 备案号
+   */
+  icp?: string
 }
 
 export interface ThemeConfig {

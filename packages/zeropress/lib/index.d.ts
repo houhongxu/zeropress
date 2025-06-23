@@ -25,6 +25,10 @@ interface UserConfig {
      * vite设置
      */
     vite?: UserConfig$1;
+    /**
+     * 备案号
+     */
+    icp?: string;
 }
 interface ThemeConfig {
     /**

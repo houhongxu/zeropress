@@ -39,5 +39,6 @@ export const DEFAULT_USER_CONFIG: Required<UserConfig> = {
     autoNav: true,
     autoSidebar: true,
   },
+  icp: '',
   vite: {},
 }

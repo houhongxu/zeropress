@@ -1,9 +1,11 @@
 export function Home({
   title,
   description,
+  icp,
 }: {
   title?: string
   description?: string
+  icp?: string
 }) {
   return (
     <>
@@ -20,7 +22,7 @@ export function Home({
           href="https://beian.miit.gov.cn/"
           target="_blank"
         >
-          备案号：苏ICP备2025187299号-1
+          {icp}
         </a>
       </div>
     </>
