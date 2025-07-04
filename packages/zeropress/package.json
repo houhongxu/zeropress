@@ -1,6 +1,6 @@
 {
   "name": "zeropress",
-  "version": "0.0.47",
+  "version": "0.0.48",
   "description": "zero config SSG framework",
   "scripts": {
     "build": "cross-env NODE_ENV=production tsup --format=cjs,esm ",
