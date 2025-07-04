@@ -1,4 +1,4 @@
-import { DEFAULT_USER_CONFIG } from './consts'
+import { DEFAULT_USER_CONFIG } from './constants'
 import { spawn } from 'cross-spawn'
 import dayjs from 'dayjs'
 import fg, { Options } from 'fast-glob'

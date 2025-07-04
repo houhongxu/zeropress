@@ -16,10 +16,10 @@ function normalizeUrl(url = "/") {
 }
 function splitIndex(text) {
   const matched = text == null ? void 0 : text.match(/^(\d+)(\.?\s*)(.*)$/);
-  const index2 = matched == null ? void 0 : matched[1];
-  if (index2) {
+  const index = matched == null ? void 0 : matched[1];
+  if (index) {
     return {
-      index: parseInt(index2),
+      index: parseInt(index),
       text: (matched == null ? void 0 : matched[3]) ?? ""
     };
   } else {
@@ -38,11 +38,7 @@ function TitleHelmet({
   const docTitle = decodeURI(splitIndex(rawDocTitle).text);
   return /* @__PURE__ */ jsxRuntime.jsx(reactHelmetAsync.HelmetProvider, { context: helmetContext, children: /* @__PURE__ */ jsxRuntime.jsx(reactHelmetAsync.Helmet, { children: /* @__PURE__ */ jsxRuntime.jsx("title", { children: (docTitle ? `${docTitle} | ` : "") + (pageData == null ? void 0 : pageData.userConfig.title) }) }) });
 }
-const config = { "docs": "docs", "title": "xxx", "description": "SSG Framework", "themeConfig": { "nav": [{ "text": "图片", "index": 0, "link": "/%E5%9B%BE%E7%89%87/%E6%B5%8B%E8%AF%95.html" }, { "text": "测试文件", "index": 0, "link": "/%E6%B5%8B%E8%AF%95%E6%96%87%E4%BB%B6/1%E5%95%8A1.html" }, { "text": "笔记", "index": 0, "link": "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro.html" }, { "text": "离谱", "index": 0, "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/1useLocalStorageState%E4%B8%8EuseSessionStorageState.html" }, { "img": "/logo.jpg", "link": "/", "position": "left" }, { "dark": true, "link": "/" }, { "logo": "github", "link": "https://github.com/houhongxu/zeropress" }], "editLink": { "pattern": "https://github.com/houhongxu/zeropress/edit/master/apps/examples/docs/:path", "text": "编辑" }, "lastUpdated": {}, "sidebar": { "/%E5%9B%BE%E7%89%87": [{ "text": "测试", "items": [], "link": "/%E5%9B%BE%E7%89%87/%E6%B5%8B%E8%AF%95.html" }, { "text": "构建工具分类", "items": [], "link": "/%E5%9B%BE%E7%89%87/3%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7%E5%88%86%E7%B1%BB.html" }], "/%E6%B5%8B%E8%AF%95%E6%96%87%E4%BB%B6": [{ "text": "啊1", "items": [], "link": "/%E6%B5%8B%E8%AF%95%E6%96%87%E4%BB%B6/1%E5%95%8A1.html" }], "/%E7%AC%94%E8%AE%B0": [{ "text": "介绍", "items": [{ "text": "intro", "link": "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro.html" }], "link": "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro.html" }, { "text": "git", "items": [{ "text": "常用命令", "link": "/%E7%AC%94%E8%AE%B0/1git/0%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html" }, { "text": "版本控制系统VCS", "link": "/%E7%AC%94%E8%AE%B0/1git/1%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FVCS.html" }, { "text": "分布式版本控制系统DVCS", "link": "/%E7%AC%94%E8%AE%B0/1git/2%E5%88%86%E5%B8%83%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FDVCS.html" }, { "text": "HEAD与master与branch", "link": "/%E7%AC%94%E8%AE%B0/1git/3HEAD%E4%B8%8Emaster%E4%B8%8Ebranch.html" }, { "text": "push", "link": "/%E7%AC%94%E8%AE%B0/1git/4push.html" }, { "text": "merge", "link": "/%E7%AC%94%E8%AE%B0/1git/5merge.html" }, { "text": "feature branch", "link": "/%E7%AC%94%E8%AE%B0/1git/6feature%20branch.html" }, { "text": "rebase", "link": "/%E7%AC%94%E8%AE%B0/1git/7rebase.html" }, { "text": "revert", "link": "/%E7%AC%94%E8%AE%B0/1git/8revert.html" }, { "text": "reset", "link": "/%E7%AC%94%E8%AE%B0/1git/9reset.html" }, { "text": "checkout", "link": "/%E7%AC%94%E8%AE%B0/1git/10checkout.html" }, { "text": "stash", "link": "/%E7%AC%94%E8%AE%B0/1git/11stash.html" }, { "text": "log与reflog", "link": "/%E7%AC%94%E8%AE%B0/1git/12log%E4%B8%8Ereflog.html" }, { "text": "cherry-pick", "link": "/%E7%AC%94%E8%AE%B0/1git/13cherry-pick.html" }, { "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/1git/99readme.html" }], "link": "/%E7%AC%94%E8%AE%B0/1git/9reset.html" }, { "text": "浏览器", "items": [{ "text": "浏览器进程", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/1%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9B%E7%A8%8B.html" }, { "text": "TCP协议", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/2TCP%E5%8D%8F%E8%AE%AE.html" }, { "text": "HTTP协议", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/3HTTP%E5%8D%8F%E8%AE%AE.html" }, { "text": "浏览器缓存", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/4%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98.html" }, { "text": "导航流程", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/5%E5%AF%BC%E8%88%AA%E6%B5%81%E7%A8%8B.html" }, { "text": "渲染流程", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/6%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B.html" }, { "text": "内存", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/13%E5%86%85%E5%AD%98.html" }, { "text": "消息队列和事件循环", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/16%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.html" }, { "text": "浏览器的dns缓存", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/98%20%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84dns%E7%BC%93%E5%AD%98.html" }, { "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/99readme.html" }], "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/99readme.html" }, { "text": "http", "items": [{ "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/3http/99readme.html" }], "link": "/%E7%AC%94%E8%AE%B0/3http/99readme.html" }, { "text": "javascript", "items": [{ "text": "引用", "link": "/%E7%AC%94%E8%AE%B0/4javascript/1%E5%BC%95%E7%94%A8.html" }, { "text": "运算符", "link": "/%E7%AC%94%E8%AE%B0/4javascript/2%E8%BF%90%E7%AE%97%E7%AC%A6.html" }, { "text": "lodash手写", "link": "/%E7%AC%94%E8%AE%B0/4javascript/3lodash%E6%89%8B%E5%86%99.html" }], "link": "/%E7%AC%94%E8%AE%B0/4javascript/3lodash%E6%89%8B%E5%86%99.html" }, { "text": "工具函数", "items": [], "link": "/%E7%AC%94%E8%AE%B0/98.%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0.html" }], "/%E7%A6%BB%E8%B0%B1": [{ "text": "ahooks", "items": [{ "text": "useLocalStorageState与useSessionStorageState", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/1useLocalStorageState%E4%B8%8EuseSessionStorageState.html" }, { "text": "useUpdateEffect 与 useUpdateLayoutEffectt", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/2useUpdateEffect%20%E4%B8%8E%20useUpdateLayoutEffectt.html" }, { "text": "useLatest与useMemoizedFn", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/3useLatest%E4%B8%8EuseMemoizedFn.html" }, { "text": "use(Raf)Timeout与use(Raf)Interval与useCountDown", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/4use(Raf)Timeout%E4%B8%8Euse(Raf)Interval%E4%B8%8EuseCountDown.html" }, { "text": "useRequest", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/5useRequest.html" }, { "text": "useMount与useUnMount与useMountedRefx.md", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/6useMount%E4%B8%8EuseUnMount%E4%B8%8EuseMountedRefx.md.html" }, { "text": "useUpdate", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/7useUpdate.html" }, { "text": "useCreation", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/8useCreation.html" }, { "text": "useDeepCompareEffect", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/9useDeepCompareEffect.html" }, { "text": "useAnimationFrame和计时器", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/97useAnimationFrame%E5%92%8C%E8%AE%A1%E6%97%B6%E5%99%A8.html" }], "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/9useDeepCompareEffect.html" }] }, "autoNav": true, "autoSidebar": true }, "vite": {} };
-const GetToc$I = () => [];
-const frontmatter$I = {
-  "pageType": "home"
-};
+const config = { "docs": "docs", "title": "ZEROPRESS", "description": "", "icp": "", "themeConfig": { "nav": [{ "text": "图片", "index": 0, "link": "/%E5%9B%BE%E7%89%87/%E6%B5%8B%E8%AF%95.html" }, { "text": "测试文件", "index": 0, "link": "/%E6%B5%8B%E8%AF%95%E6%96%87%E4%BB%B6/1%E5%95%8A1.html" }, { "text": "笔记", "index": 0, "link": "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro.html" }, { "text": "离谱", "index": 0, "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/1useLocalStorageState%E4%B8%8EuseSessionStorageState.html" }, { "img": "/logo.jpg", "link": "/", "position": "left" }, { "dark": true, "link": "/" }, { "logo": "github", "link": "https://github.com/houhongxu/zeropress" }], "editLink": { "pattern": "https://github.com/houhongxu/zeropress/edit/master/apps/examples/docs/:path", "text": "编辑" }, "lastUpdated": {}, "sidebar": { "/%E5%9B%BE%E7%89%87": [{ "text": "测试", "items": [], "link": "/%E5%9B%BE%E7%89%87/%E6%B5%8B%E8%AF%95.html" }, { "text": "构建工具分类", "items": [], "link": "/%E5%9B%BE%E7%89%87/3%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7%E5%88%86%E7%B1%BB.html" }], "/%E6%B5%8B%E8%AF%95%E6%96%87%E4%BB%B6": [{ "text": "啊1", "items": [], "link": "/%E6%B5%8B%E8%AF%95%E6%96%87%E4%BB%B6/1%E5%95%8A1.html" }], "/%E7%AC%94%E8%AE%B0": [{ "text": "介绍", "items": [{ "text": "intro", "link": "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro.html" }], "link": "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro.html" }, { "text": "git", "items": [{ "text": "常用命令", "link": "/%E7%AC%94%E8%AE%B0/1git/0%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html" }, { "text": "版本控制系统VCS", "link": "/%E7%AC%94%E8%AE%B0/1git/1%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FVCS.html" }, { "text": "分布式版本控制系统DVCS", "link": "/%E7%AC%94%E8%AE%B0/1git/2%E5%88%86%E5%B8%83%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FDVCS.html" }, { "text": "HEAD与master与branch", "link": "/%E7%AC%94%E8%AE%B0/1git/3HEAD%E4%B8%8Emaster%E4%B8%8Ebranch.html" }, { "text": "push", "link": "/%E7%AC%94%E8%AE%B0/1git/4push.html" }, { "text": "merge", "link": "/%E7%AC%94%E8%AE%B0/1git/5merge.html" }, { "text": "feature branch", "link": "/%E7%AC%94%E8%AE%B0/1git/6feature%20branch.html" }, { "text": "rebase", "link": "/%E7%AC%94%E8%AE%B0/1git/7rebase.html" }, { "text": "revert", "link": "/%E7%AC%94%E8%AE%B0/1git/8revert.html" }, { "text": "reset", "link": "/%E7%AC%94%E8%AE%B0/1git/9reset.html" }, { "text": "checkout", "link": "/%E7%AC%94%E8%AE%B0/1git/10checkout.html" }, { "text": "stash", "link": "/%E7%AC%94%E8%AE%B0/1git/11stash.html" }, { "text": "log与reflog", "link": "/%E7%AC%94%E8%AE%B0/1git/12log%E4%B8%8Ereflog.html" }, { "text": "cherry-pick", "link": "/%E7%AC%94%E8%AE%B0/1git/13cherry-pick.html" }, { "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/1git/99readme.html" }], "link": "/%E7%AC%94%E8%AE%B0/1git/9reset.html" }, { "text": "浏览器", "items": [{ "text": "浏览器进程", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/1%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9B%E7%A8%8B.html" }, { "text": "TCP协议", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/2TCP%E5%8D%8F%E8%AE%AE.html" }, { "text": "HTTP协议", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/3HTTP%E5%8D%8F%E8%AE%AE.html" }, { "text": "浏览器缓存", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/4%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98.html" }, { "text": "导航流程", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/5%E5%AF%BC%E8%88%AA%E6%B5%81%E7%A8%8B.html" }, { "text": "渲染流程", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/6%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B.html" }, { "text": "内存", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/13%E5%86%85%E5%AD%98.html" }, { "text": "消息队列和事件循环", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/16%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.html" }, { "text": "浏览器的dns缓存", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/98%20%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84dns%E7%BC%93%E5%AD%98.html" }, { "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/99readme.html" }], "link": "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/99readme.html" }, { "text": "http", "items": [{ "text": "readme", "link": "/%E7%AC%94%E8%AE%B0/3http/99readme.html" }], "link": "/%E7%AC%94%E8%AE%B0/3http/99readme.html" }, { "text": "javascript", "items": [{ "text": "引用", "link": "/%E7%AC%94%E8%AE%B0/4javascript/1%E5%BC%95%E7%94%A8.html" }, { "text": "运算符", "link": "/%E7%AC%94%E8%AE%B0/4javascript/2%E8%BF%90%E7%AE%97%E7%AC%A6.html" }, { "text": "lodash手写", "link": "/%E7%AC%94%E8%AE%B0/4javascript/3lodash%E6%89%8B%E5%86%99.html" }], "link": "/%E7%AC%94%E8%AE%B0/4javascript/3lodash%E6%89%8B%E5%86%99.html" }, { "text": "工具函数", "items": [], "link": "/%E7%AC%94%E8%AE%B0/98.%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0.html" }], "/%E7%A6%BB%E8%B0%B1": [{ "text": "ahooks", "items": [{ "text": "useLocalStorageState与useSessionStorageState", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/1useLocalStorageState%E4%B8%8EuseSessionStorageState.html" }, { "text": "useUpdateEffect 与 useUpdateLayoutEffectt", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/2useUpdateEffect%20%E4%B8%8E%20useUpdateLayoutEffectt.html" }, { "text": "useLatest与useMemoizedFn", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/3useLatest%E4%B8%8EuseMemoizedFn.html" }, { "text": "use(Raf)Timeout与use(Raf)Interval与useCountDown", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/4use(Raf)Timeout%E4%B8%8Euse(Raf)Interval%E4%B8%8EuseCountDown.html" }, { "text": "useRequest", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/5useRequest.html" }, { "text": "useMount与useUnMount与useMountedRefx.md", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/6useMount%E4%B8%8EuseUnMount%E4%B8%8EuseMountedRefx.md.html" }, { "text": "useUpdate", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/7useUpdate.html" }, { "text": "useCreation", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/8useCreation.html" }, { "text": "useDeepCompareEffect", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/9useDeepCompareEffect.html" }, { "text": "useAnimationFrame和计时器", "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/97useAnimationFrame%E5%92%8C%E8%AE%A1%E6%97%B6%E5%99%A8.html" }], "link": "/%E7%A6%BB%E8%B0%B1/6ahooks/9useDeepCompareEffect.html" }] }, "autoNav": true, "autoSidebar": true }, "vite": {} };
 function _createMdxContent$I(props) {
   return jsxRuntime.jsx(jsxRuntime.Fragment, {});
 }
@@ -55,31 +51,6 @@ function MDXContent$I(props = {}) {
     })
   }) : _createMdxContent$I();
 }
-const GetFrontMatter$I = () => frontmatter$I;
-const index = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$I,
-  GetToc: GetToc$I,
-  default: MDXContent$I
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$H = () => [{
-  "id": "一是脚手架",
-  "text": "一是脚手架",
-  "depth": 2
-}, {
-  "id": "二是打包工具",
-  "text": "二是打包工具",
-  "depth": 2
-}, {
-  "id": "三是转换器",
-  "text": "三是转换器",
-  "depth": 2
-}, {
-  "id": "四是解析器",
-  "text": "四是解析器",
-  "depth": 2
-}];
-const frontmatter$H = void 0;
 function _createMdxContent$H(props) {
   const _components = {
     a: "a",
@@ -708,15 +679,6 @@ function MDXContent$H(props = {}) {
     })
   }) : _createMdxContent$H(props);
 }
-const GetFrontMatter$H = () => frontmatter$H;
-const _3______ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$H,
-  GetToc: GetToc$H,
-  default: MDXContent$H
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$G = () => [];
-const frontmatter$G = void 0;
 function _createMdxContent$G(props) {
   const _components = {
     a: "a",
@@ -761,15 +723,6 @@ function MDXContent$G(props = {}) {
     })
   }) : _createMdxContent$G(props);
 }
-const GetFrontMatter$G = () => frontmatter$G;
-const __ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$G,
-  GetToc: GetToc$G,
-  default: MDXContent$G
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$F = () => [];
-const frontmatter$F = void 0;
 function _createMdxContent$F(props) {
   const _components = {
     a: "a",
@@ -800,15 +753,6 @@ function MDXContent$F(props = {}) {
     })
   }) : _createMdxContent$F(props);
 }
-const GetFrontMatter$F = () => frontmatter$F;
-const _1_1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$F,
-  GetToc: GetToc$F,
-  default: MDXContent$F
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$E = () => [];
-const frontmatter$E = void 0;
 function _createMdxContent$E(props) {
   const _components = {
     a: "a",
@@ -1682,19 +1626,6 @@ function MDXContent$E(props = {}) {
     })
   }) : _createMdxContent$E(props);
 }
-const GetFrontMatter$E = () => frontmatter$E;
-const _98_____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$E,
-  GetToc: GetToc$E,
-  default: MDXContent$E
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$D = () => [{
-  "id": "createusestoragestate",
-  "text": "createUseStorageState",
-  "depth": 2
-}];
-const frontmatter$D = void 0;
 function _createMdxContent$D(props) {
   const _components = {
     a: "a",
@@ -3386,19 +3317,6 @@ function MDXContent$D(props = {}) {
     })
   }) : _createMdxContent$D(props);
 }
-const GetFrontMatter$D = () => frontmatter$D;
-const _1useLocalStorageState_useSessionStorageState = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$D,
-  GetToc: GetToc$D,
-  default: MDXContent$D
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$C = () => [{
-  "id": "useupdateeffect-与-useupdatelayouteffect",
-  "text": "useUpdateEffect 与 useUpdateLayoutEffect",
-  "depth": 2
-}];
-const frontmatter$C = void 0;
 function _createMdxContent$C(props) {
   const _components = {
     a: "a",
@@ -3948,23 +3866,6 @@ function MDXContent$C(props = {}) {
     })
   }) : _createMdxContent$C(props);
 }
-const GetFrontMatter$C = () => frontmatter$C;
-const _2useUpdateEffect___useUpdateLayoutEffectt = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$C,
-  GetToc: GetToc$C,
-  default: MDXContent$C
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$B = () => [{
-  "id": "uselatest",
-  "text": "useLatest",
-  "depth": 2
-}, {
-  "id": "usememoizedfn",
-  "text": "useMemoizedFn",
-  "depth": 2
-}];
-const frontmatter$B = void 0;
 function _createMdxContent$B(props) {
   const _components = {
     a: "a",
@@ -5020,35 +4921,6 @@ function MDXContent$B(props = {}) {
     })
   }) : _createMdxContent$B(props);
 }
-const GetFrontMatter$B = () => frontmatter$B;
-const _3useLatest_useMemoizedFn = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$B,
-  GetToc: GetToc$B,
-  default: MDXContent$B
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$A = () => [{
-  "id": "usetimeout",
-  "text": "useTimeout",
-  "depth": 2
-}, {
-  "id": "useraftimeout",
-  "text": "useRafTimeout",
-  "depth": 2
-}, {
-  "id": "useinterval",
-  "text": "useInterval",
-  "depth": 2
-}, {
-  "id": "userafinterval",
-  "text": "useRafInterval",
-  "depth": 2
-}, {
-  "id": "usecountdown",
-  "text": "useCountDown",
-  "depth": 2
-}];
-const frontmatter$A = void 0;
 function _createMdxContent$A(props) {
   const _components = {
     a: "a",
@@ -10943,23 +10815,6 @@ function MDXContent$A(props = {}) {
     })
   }) : _createMdxContent$A(props);
 }
-const GetFrontMatter$A = () => frontmatter$A;
-const _4use_Raf_Timeout_use_Raf_Interval_useCountDown = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$A,
-  GetToc: GetToc$A,
-  default: MDXContent$A
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$z = () => [{
-  "id": "userequestimplement",
-  "text": "useRequestImplement",
-  "depth": 2
-}, {
-  "id": "fetch",
-  "text": "Fetch",
-  "depth": 2
-}];
-const frontmatter$z = void 0;
 function _createMdxContent$z(props) {
   const _components = {
     a: "a",
@@ -16283,15 +16138,6 @@ function MDXContent$z(props = {}) {
     })
   }) : _createMdxContent$z(props);
 }
-const GetFrontMatter$z = () => frontmatter$z;
-const _5useRequest = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$z,
-  GetToc: GetToc$z,
-  default: MDXContent$z
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$y = () => [];
-const frontmatter$y = void 0;
 function _createMdxContent$y(props) {
   return jsxRuntime.jsx(jsxRuntime.Fragment, {});
 }
@@ -16304,15 +16150,6 @@ function MDXContent$y(props = {}) {
     })
   }) : _createMdxContent$y();
 }
-const GetFrontMatter$y = () => frontmatter$y;
-const _6useMount_useUnMount_useMountedRef_mdx = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$y,
-  GetToc: GetToc$y,
-  default: MDXContent$y
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$x = () => [];
-const frontmatter$x = void 0;
 function _createMdxContent$x(props) {
   const _components = {
     a: "a",
@@ -16501,15 +16338,6 @@ function MDXContent$x(props = {}) {
     })
   }) : _createMdxContent$x(props);
 }
-const GetFrontMatter$x = () => frontmatter$x;
-const _7useUpdate = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$x,
-  GetToc: GetToc$x,
-  default: MDXContent$x
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$w = () => [];
-const frontmatter$w = void 0;
 function _createMdxContent$w(props) {
   const _components = {
     a: "a",
@@ -16932,23 +16760,6 @@ function MDXContent$w(props = {}) {
     })
   }) : _createMdxContent$w(props);
 }
-const GetFrontMatter$w = () => frontmatter$w;
-const _8useCreation = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$w,
-  GetToc: GetToc$w,
-  default: MDXContent$w
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$v = () => [{
-  "id": "useanimationframe",
-  "text": "useAnimationFrame",
-  "depth": 2
-}, {
-  "id": "计时器",
-  "text": "计时器",
-  "depth": 2
-}];
-const frontmatter$v = void 0;
 function _createMdxContent$v(props) {
   const _components = {
     a: "a",
@@ -17826,19 +17637,6 @@ function MDXContent$v(props = {}) {
     })
   }) : _createMdxContent$v(props);
 }
-const GetFrontMatter$v = () => frontmatter$v;
-const _97useAnimationFrame____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$v,
-  GetToc: GetToc$v,
-  default: MDXContent$v
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$u = () => [{
-  "id": "usedeepeffect",
-  "text": "useDeepEffect",
-  "depth": 2
-}];
-const frontmatter$u = void 0;
 function _createMdxContent$u(props) {
   const _components = {
     a: "a",
@@ -18234,15 +18032,6 @@ function MDXContent$u(props = {}) {
     })
   }) : _createMdxContent$u(props);
 }
-const GetFrontMatter$u = () => frontmatter$u;
-const _9useDeepCompareEffect = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$u,
-  GetToc: GetToc$u,
-  default: MDXContent$u
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$t = () => [];
-const frontmatter$t = void 0;
 function _createMdxContent$t(props) {
   const _components = {
     a: "a",
@@ -18308,19 +18097,6 @@ function MDXContent$t(props = {}) {
     })
   }) : _createMdxContent$t(props);
 }
-const GetFrontMatter$t = () => frontmatter$t;
-const _0____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$t,
-  GetToc: GetToc$t,
-  default: MDXContent$t
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$s = () => [{
-  "id": "checkout-和-reset-的不同",
-  "text": "checkout 和 reset 的不同",
-  "depth": 2
-}];
-const frontmatter$s = void 0;
 function _createMdxContent$s(props) {
   const _components = {
     a: "a",
@@ -18386,19 +18162,6 @@ function MDXContent$s(props = {}) {
     })
   }) : _createMdxContent$s(props);
 }
-const GetFrontMatter$s = () => frontmatter$s;
-const _10checkout = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$s,
-  GetToc: GetToc$s,
-  default: MDXContent$s
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$r = () => [{
-  "id": "stash临时存放工作目录的改动",
-  "text": "stash：临时存放工作目录的改动",
-  "depth": 2
-}];
-const frontmatter$r = void 0;
 function _createMdxContent$r(props) {
   const _components = {
     a: "a",
@@ -18454,23 +18217,6 @@ function MDXContent$r(props = {}) {
     })
   }) : _createMdxContent$r(props);
 }
-const GetFrontMatter$r = () => frontmatter$r;
-const _11stash = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$r,
-  GetToc: GetToc$r,
-  default: MDXContent$r
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$q = () => [{
-  "id": "log",
-  "text": "log",
-  "depth": 2
-}, {
-  "id": "reflog引用的-log",
-  "text": "reflog：引用的 log",
-  "depth": 2
-}];
-const frontmatter$q = void 0;
 function _createMdxContent$q(props) {
   const _components = {
     a: "a",
@@ -18533,15 +18279,6 @@ function MDXContent$q(props = {}) {
     })
   }) : _createMdxContent$q(props);
 }
-const GetFrontMatter$q = () => frontmatter$q;
-const _12log_reflog = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$q,
-  GetToc: GetToc$q,
-  default: MDXContent$q
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$p = () => [];
-const frontmatter$p = void 0;
 function _createMdxContent$p(props) {
   const _components = {
     a: "a",
@@ -18577,31 +18314,6 @@ function MDXContent$p(props = {}) {
     })
   }) : _createMdxContent$p(props);
 }
-const GetFrontMatter$p = () => frontmatter$p;
-const _13cherryPick = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$p,
-  GetToc: GetToc$p,
-  default: MDXContent$p
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$o = () => [{
-  "id": "版本控制最基本功能1",
-  "text": "版本控制：最基本功能1",
-  "depth": 2
-}, {
-  "id": "主动提交程序代码和普通文本的区别",
-  "text": "主动提交：程序代码和普通文本的区别",
-  "depth": 2
-}, {
-  "id": "多人合作的同步需求中央仓库",
-  "text": "多人合作的同步需求：中央仓库",
-  "depth": 2
-}, {
-  "id": "中央式版本控制系统",
-  "text": "中央式版本控制系统",
-  "depth": 2
-}];
-const frontmatter$o = void 0;
 function _createMdxContent$o(props) {
   const _components = {
     a: "a",
@@ -18709,19 +18421,6 @@ function MDXContent$o(props = {}) {
     })
   }) : _createMdxContent$o(props);
 }
-const GetFrontMatter$o = () => frontmatter$o;
-const _1______VCS = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$o,
-  GetToc: GetToc$o,
-  default: MDXContent$o
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$n = () => [{
-  "id": "优缺点",
-  "text": "优缺点",
-  "depth": 2
-}];
-const frontmatter$n = void 0;
 function _createMdxContent$n(props) {
   const _components = {
     a: "a",
@@ -18806,35 +18505,6 @@ function MDXContent$n(props = {}) {
     })
   }) : _createMdxContent$n(props);
 }
-const GetFrontMatter$n = () => frontmatter$n;
-const _2_________DVCS = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$n,
-  GetToc: GetToc$n,
-  default: MDXContent$n
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$m = () => [{
-  "id": "引用commit-的快捷方式",
-  "text": "引用：commit 的快捷方式",
-  "depth": 2
-}, {
-  "id": "head当前-commit-的引用",
-  "text": "HEAD：当前 commit 的引用",
-  "depth": 2
-}, {
-  "id": "branch-引用指向分支的最新-commit",
-  "text": "branch 引用：指向分支的最新 commit",
-  "depth": 2
-}, {
-  "id": "操作",
-  "text": "操作",
-  "depth": 2
-}, {
-  "id": "mastermain-默认-branch",
-  "text": "master/main: 默认 branch",
-  "depth": 2
-}];
-const frontmatter$m = void 0;
 function _createMdxContent$m(props) {
   const _components = {
     a: "a",
@@ -18990,15 +18660,6 @@ function MDXContent$m(props = {}) {
     })
   }) : _createMdxContent$m(props);
 }
-const GetFrontMatter$m = () => frontmatter$m;
-const _3HEAD_master_branch = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$m,
-  GetToc: GetToc$m,
-  default: MDXContent$m
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$l = () => [];
-const frontmatter$l = void 0;
 function _createMdxContent$l(props) {
   const _components = {
     a: "a",
@@ -19038,23 +18699,6 @@ function MDXContent$l(props = {}) {
     })
   }) : _createMdxContent$l(props);
 }
-const GetFrontMatter$l = () => frontmatter$l;
-const _4push = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$l,
-  GetToc: GetToc$l,
-  default: MDXContent$l
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$k = () => [{
-  "id": "含义",
-  "text": "含义",
-  "depth": 2
-}, {
-  "id": "冲突",
-  "text": "冲突",
-  "depth": 2
-}];
-const frontmatter$k = void 0;
 function _createMdxContent$k(props) {
   const _components = {
     a: "a",
@@ -19136,15 +18780,6 @@ function MDXContent$k(props = {}) {
     })
   }) : _createMdxContent$k(props);
 }
-const GetFrontMatter$k = () => frontmatter$k;
-const _5merge = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$k,
-  GetToc: GetToc$k,
-  default: MDXContent$k
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$j = () => [];
-const frontmatter$j = void 0;
 function _createMdxContent$j(props) {
   const _components = {
     a: "a",
@@ -19192,19 +18827,6 @@ function MDXContent$j(props = {}) {
     })
   }) : _createMdxContent$j(props);
 }
-const GetFrontMatter$j = () => frontmatter$j;
-const _6feature_branch = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$j,
-  GetToc: GetToc$j,
-  default: MDXContent$j
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$i = () => [{
-  "id": "rebase--i",
-  "text": "rebase -i",
-  "depth": 2
-}];
-const frontmatter$i = void 0;
 function _createMdxContent$i(props) {
   const _components = {
     a: "a",
@@ -19310,15 +18932,6 @@ function MDXContent$i(props = {}) {
     })
   }) : _createMdxContent$i(props);
 }
-const GetFrontMatter$i = () => frontmatter$i;
-const _7rebase = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$i,
-  GetToc: GetToc$i,
-  default: MDXContent$i
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$h = () => [];
-const frontmatter$h = void 0;
 function _createMdxContent$h(props) {
   const _components = {
     a: "a",
@@ -19357,15 +18970,6 @@ function MDXContent$h(props = {}) {
     })
   }) : _createMdxContent$h(props);
 }
-const GetFrontMatter$h = () => frontmatter$h;
-const _8revert = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$h,
-  GetToc: GetToc$h,
-  default: MDXContent$h
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$g = () => [];
-const frontmatter$g = void 0;
 function _createMdxContent$g(props) {
   const _components = {
     a: "a",
@@ -19404,31 +19008,6 @@ function MDXContent$g(props = {}) {
     })
   }) : _createMdxContent$g(props);
 }
-const GetFrontMatter$g = () => frontmatter$g;
-const _99readme$2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$g,
-  GetToc: GetToc$g,
-  default: MDXContent$g
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$f = () => [{
-  "id": "reset-的本质移动-head-以及它所指向的-branch",
-  "text": "reset 的本质：移动 HEAD 以及它所指向的 branch",
-  "depth": 2
-}, {
-  "id": "reset---hard重置工作目录与-add-暂存区",
-  "text": "reset --hard：重置工作目录与 add 暂存区",
-  "depth": 2
-}, {
-  "id": "reset---soft保留工作目录与-add-暂存区",
-  "text": "reset --soft：保留工作目录与 add 暂存区",
-  "depth": 2
-}, {
-  "id": "reset-不加参数保留工作目录并清空-add-暂存区",
-  "text": "reset 不加参数：保留工作目录，并清空 add 暂存区",
-  "depth": 2
-}];
-const frontmatter$f = void 0;
 function _createMdxContent$f(props) {
   const _components = {
     a: "a",
@@ -19536,63 +19115,7 @@ function MDXContent$f(props = {}) {
     })
   }) : _createMdxContent$f(props);
 }
-const GetFrontMatter$f = () => frontmatter$f;
-const _9reset = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$f,
-  GetToc: GetToc$f,
-  default: MDXContent$f
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$e = () => [];
-const frontmatter$e = void 0;
 function _createMdxContent$e(props) {
-  const _components = {
-    a: "a",
-    h1: "h1",
-    p: "p",
-    span: "span",
-    ...props.components
-  };
-  return jsxRuntime.jsxs(jsxRuntime.Fragment, {
-    children: [jsxRuntime.jsxs(_components.h1, {
-      id: "参考",
-      children: [jsxRuntime.jsx(_components.a, {
-        className: "autolink-headings",
-        href: "#参考",
-        children: jsxRuntime.jsx(_components.span, {
-          style: {
-            marginRight: "4px"
-          },
-          children: "#"
-        })
-      }), "参考"]
-    }), "\n", jsxRuntime.jsx(_components.p, {
-      children: jsxRuntime.jsx(_components.a, {
-        href: "https://q.shanyue.tech/",
-        children: "山月"
-      })
-    })]
-  });
-}
-function MDXContent$e(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
-  return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
-    ...props,
-    children: jsxRuntime.jsx(_createMdxContent$e, {
-      ...props
-    })
-  }) : _createMdxContent$e(props);
-}
-const GetFrontMatter$e = () => frontmatter$e;
-const _99readme$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$e,
-  GetToc: GetToc$e,
-  default: MDXContent$e
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$d = () => [];
-const frontmatter$d = void 0;
-function _createMdxContent$d(props) {
   const _components = {
     a: "a",
     h1: "h1",
@@ -19622,6 +19145,44 @@ function _createMdxContent$d(props) {
     })]
   });
 }
+function MDXContent$e(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
+    ...props,
+    children: jsxRuntime.jsx(_createMdxContent$e, {
+      ...props
+    })
+  }) : _createMdxContent$e(props);
+}
+function _createMdxContent$d(props) {
+  const _components = {
+    a: "a",
+    h1: "h1",
+    p: "p",
+    span: "span",
+    ...props.components
+  };
+  return jsxRuntime.jsxs(jsxRuntime.Fragment, {
+    children: [jsxRuntime.jsxs(_components.h1, {
+      id: "参考",
+      children: [jsxRuntime.jsx(_components.a, {
+        className: "autolink-headings",
+        href: "#参考",
+        children: jsxRuntime.jsx(_components.span, {
+          style: {
+            marginRight: "4px"
+          },
+          children: "#"
+        })
+      }), "参考"]
+    }), "\n", jsxRuntime.jsx(_components.p, {
+      children: jsxRuntime.jsx(_components.a, {
+        href: "https://q.shanyue.tech/",
+        children: "山月"
+      })
+    })]
+  });
+}
 function MDXContent$d(props = {}) {
   const { wrapper: MDXLayout } = props.components || {};
   return MDXLayout ? jsxRuntime.jsx(MDXLayout, {
@@ -19631,15 +19192,6 @@ function MDXContent$d(props = {}) {
     })
   }) : _createMdxContent$d(props);
 }
-const GetFrontMatter$d = () => frontmatter$d;
-const intro = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$d,
-  GetToc: GetToc$d,
-  default: MDXContent$d
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$c = () => [];
-const frontmatter$c = void 0;
 function _createMdxContent$c(props) {
   const _components = {
     a: "a",
@@ -19670,43 +19222,6 @@ function MDXContent$c(props = {}) {
     })
   }) : _createMdxContent$c(props);
 }
-const GetFrontMatter$c = () => frontmatter$c;
-const _13__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$c,
-  GetToc: GetToc$c,
-  default: MDXContent$c
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$b = () => [{
-  "id": "单线程",
-  "text": "单线程",
-  "depth": 2
-}, {
-  "id": "在线程运行过程中处理新任务",
-  "text": "在线程运行过程中处理新任务",
-  "depth": 2
-}, {
-  "id": "处理其他线程发送过来的任务",
-  "text": "处理其他线程发送过来的任务",
-  "depth": 2
-}, {
-  "id": "处理其他进程发送过来的任务",
-  "text": "处理其他进程发送过来的任务",
-  "depth": 2
-}, {
-  "id": "消息队列中的任务类型",
-  "text": "消息队列中的任务类型",
-  "depth": 2
-}, {
-  "id": "页面使用单线程的缺点",
-  "text": "页面使用单线程的缺点",
-  "depth": 2
-}, {
-  "id": "总结",
-  "text": "总结",
-  "depth": 2
-}];
-const frontmatter$b = void 0;
 function _createMdxContent$b(props) {
   const _components = {
     a: "a",
@@ -19861,15 +19376,6 @@ function MDXContent$b(props = {}) {
     })
   }) : _createMdxContent$b(props);
 }
-const GetFrontMatter$b = () => frontmatter$b;
-const _16_________ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$b,
-  GetToc: GetToc$b,
-  default: MDXContent$b
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$a = () => [];
-const frontmatter$a = void 0;
 function _createMdxContent$a(props) {
   const _components = {
     a: "a",
@@ -19916,31 +19422,6 @@ function MDXContent$a(props = {}) {
     })
   }) : _createMdxContent$a(props);
 }
-const GetFrontMatter$a = () => frontmatter$a;
-const _1_____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$a,
-  GetToc: GetToc$a,
-  default: MDXContent$a
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$9 = () => [{
-  "id": "ip-internet-protocol-网际协议",
-  "text": "IP Internet Protocol 网际协议",
-  "depth": 2
-}, {
-  "id": "udp-user-datagram-protocol-用户数据包协议",
-  "text": "UDP User Datagram Protocol 用户数据包协议",
-  "depth": 2
-}, {
-  "id": "tcp-transmission-control-protocol-传输控制协议",
-  "text": "TCP Transmission Control Protocol 传输控制协议",
-  "depth": 2
-}, {
-  "id": "tcpip-四层模型",
-  "text": "TCP/IP 四层模型",
-  "depth": 2
-}];
-const frontmatter$9 = void 0;
 function _createMdxContent$9(props) {
   const _components = {
     a: "a",
@@ -20066,27 +19547,6 @@ function MDXContent$9(props = {}) {
     })
   }) : _createMdxContent$9(props);
 }
-const GetFrontMatter$9 = () => frontmatter$9;
-const _2TCP__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$9,
-  GetToc: GetToc$9,
-  default: MDXContent$9
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$8 = () => [{
-  "id": "dns-domain-name-system-域名系统",
-  "text": "DNS Domain Name System 域名系统",
-  "depth": 2
-}, {
-  "id": "浏览器发起-http-请求的流程",
-  "text": "浏览器发起 HTTP 请求的流程",
-  "depth": 2
-}, {
-  "id": "服务器处理-http-请求的流程",
-  "text": "服务器处理 HTTP 请求的流程",
-  "depth": 2
-}];
-const frontmatter$8 = void 0;
 function _createMdxContent$8(props) {
   const _components = {
     a: "a",
@@ -20236,27 +19696,6 @@ function MDXContent$8(props = {}) {
     })
   }) : _createMdxContent$8(props);
 }
-const GetFrontMatter$8 = () => frontmatter$8;
-const _3HTTP__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$8,
-  GetToc: GetToc$8,
-  default: MDXContent$8
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$7 = () => [{
-  "id": "dns-缓存",
-  "text": "DNS 缓存",
-  "depth": 2
-}, {
-  "id": "页面资源缓存",
-  "text": "页面资源缓存",
-  "depth": 2
-}, {
-  "id": "登录状态",
-  "text": "登录状态",
-  "depth": 2
-}];
-const frontmatter$7 = void 0;
 function _createMdxContent$7(props) {
   const _components = {
     a: "a",
@@ -20352,35 +19791,6 @@ function MDXContent$7(props = {}) {
     })
   }) : _createMdxContent$7(props);
 }
-const GetFrontMatter$7 = () => frontmatter$7;
-const _4_____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$7,
-  GetToc: GetToc$7,
-  default: MDXContent$7
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$6 = () => [{
-  "id": "用户输入",
-  "text": "用户输入",
-  "depth": 2
-}, {
-  "id": "网络进程",
-  "text": "网络进程",
-  "depth": 2
-}, {
-  "id": "准备渲染进程",
-  "text": "准备渲染进程",
-  "depth": 2
-}, {
-  "id": "提交文档",
-  "text": "提交文档",
-  "depth": 2
-}, {
-  "id": "渲染阶段",
-  "text": "渲染阶段",
-  "depth": 2
-}];
-const frontmatter$6 = void 0;
 function _createMdxContent$6(props) {
   const _components = {
     a: "a",
@@ -20525,15 +19935,6 @@ function MDXContent$6(props = {}) {
     })
   }) : _createMdxContent$6(props);
 }
-const GetFrontMatter$6 = () => frontmatter$6;
-const _5____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$6,
-  GetToc: GetToc$6,
-  default: MDXContent$6
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$5 = () => [];
-const frontmatter$5 = void 0;
 function _createMdxContent$5(props) {
   const _components = {
     a: "a",
@@ -20569,19 +19970,6 @@ function MDXContent$5(props = {}) {
     })
   }) : _createMdxContent$5(props);
 }
-const GetFrontMatter$5 = () => frontmatter$5;
-const _6____ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$5,
-  GetToc: GetToc$5,
-  default: MDXContent$5
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$4 = () => [{
-  "id": "chrome-的-dns-缓存",
-  "text": "Chrome 的 dns 缓存",
-  "depth": 2
-}];
-const frontmatter$4 = void 0;
 function _createMdxContent$4(props) {
   const _components = {
     a: "a",
@@ -20630,15 +20018,6 @@ function MDXContent$4(props = {}) {
     })
   }) : _createMdxContent$4(props);
 }
-const GetFrontMatter$4 = () => frontmatter$4;
-const _98_____dns__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$4,
-  GetToc: GetToc$4,
-  default: MDXContent$4
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$3 = () => [];
-const frontmatter$3 = void 0;
 function _createMdxContent$3(props) {
   const _components = {
     a: "a",
@@ -20677,23 +20056,6 @@ function MDXContent$3(props = {}) {
     })
   }) : _createMdxContent$3(props);
 }
-const GetFrontMatter$3 = () => frontmatter$3;
-const _99readme = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$3,
-  GetToc: GetToc$3,
-  default: MDXContent$3
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$2 = () => [{
-  "id": "c",
-  "text": "c++",
-  "depth": 2
-}, {
-  "id": "js",
-  "text": "js",
-  "depth": 2
-}];
-const frontmatter$2 = void 0;
 function _createMdxContent$2(props) {
   const _components = {
     a: "a",
@@ -20772,15 +20134,6 @@ function MDXContent$2(props = {}) {
     })
   }) : _createMdxContent$2(props);
 }
-const GetFrontMatter$2 = () => frontmatter$2;
-const _1__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$2,
-  GetToc: GetToc$2,
-  default: MDXContent$2
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc$1 = () => [];
-const frontmatter$1 = void 0;
 function _createMdxContent$1(props) {
   const _components = {
     a: "a",
@@ -20824,27 +20177,6 @@ function MDXContent$1(props = {}) {
     })
   }) : _createMdxContent$1(props);
 }
-const GetFrontMatter$1 = () => frontmatter$1;
-const _2___ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter: GetFrontMatter$1,
-  GetToc: GetToc$1,
-  default: MDXContent$1
-}, Symbol.toStringTag, { value: "Module" }));
-const GetToc = () => [{
-  "id": "keyby",
-  "text": "keyBy",
-  "depth": 2
-}, {
-  "id": "mapkeys",
-  "text": "mapKeys",
-  "depth": 3
-}, {
-  "id": "merge",
-  "text": "merge",
-  "depth": 3
-}];
-const frontmatter = void 0;
 function _createMdxContent(props) {
   const _components = {
     a: "a",
@@ -21317,328 +20649,321 @@ function MDXContent(props = {}) {
     })
   }) : _createMdxContent(props);
 }
-const GetFrontMatter = () => frontmatter;
-const _3lodash__ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  GetFrontMatter,
-  GetToc,
-  default: MDXContent
-}, Symbol.toStringTag, { value: "Module" }));
 const routes = [
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/index.mdx",
     timestamp: "1722233936",
     path: "/",
     element: React.createElement(MDXContent$I),
-    load: () => Promise.resolve().then(() => index)
+    preload: () => MDXContent$I
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/图片/3构建工具分类.md",
     timestamp: "1732087389",
     path: "/%E5%9B%BE%E7%89%87/3%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7%E5%88%86%E7%B1%BB.html",
     element: React.createElement(MDXContent$H),
-    load: () => Promise.resolve().then(() => _3______)
+    preload: () => MDXContent$H
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/图片/测试.mdx",
     timestamp: "1731399347",
     path: "/%E5%9B%BE%E7%89%87/%E6%B5%8B%E8%AF%95.html",
     element: React.createElement(MDXContent$G),
-    load: () => Promise.resolve().then(() => __)
+    preload: () => MDXContent$G
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/测试文件/1啊1.md",
     timestamp: "1730789956",
     path: "/%E6%B5%8B%E8%AF%95%E6%96%87%E4%BB%B6/1%E5%95%8A1.html",
     element: React.createElement(MDXContent$F),
-    load: () => Promise.resolve().then(() => _1_1)
+    preload: () => MDXContent$F
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/98.工具函数.md",
     timestamp: "1722233936",
     path: "/%E7%AC%94%E8%AE%B0/98.%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0.html",
     element: React.createElement(MDXContent$E),
-    load: () => Promise.resolve().then(() => _98_____)
+    preload: () => MDXContent$E
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/离谱/6ahooks/1useLocalStorageState与useSessionStorageState.md",
     timestamp: "1722235635",
     path: "/%E7%A6%BB%E8%B0%B1/6ahooks/1useLocalStorageState%E4%B8%8EuseSessionStorageState.html",
     element: React.createElement(MDXContent$D),
-    load: () => Promise.resolve().then(() => _1useLocalStorageState_useSessionStorageState)
+    preload: () => MDXContent$D
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/离谱/6ahooks/2useUpdateEffect 与 useUpdateLayoutEffectt.md",
     timestamp: "1722235635",
     path: "/%E7%A6%BB%E8%B0%B1/6ahooks/2useUpdateEffect%20%E4%B8%8E%20useUpdateLayoutEffectt.html",
     element: React.createElement(MDXContent$C),
-    load: () => Promise.resolve().then(() => _2useUpdateEffect___useUpdateLayoutEffectt)
+    preload: () => MDXContent$C
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/离谱/6ahooks/3useLatest与useMemoizedFn.md",
     timestamp: "1722235635",
     path: "/%E7%A6%BB%E8%B0%B1/6ahooks/3useLatest%E4%B8%8EuseMemoizedFn.html",
     element: React.createElement(MDXContent$B),
-    load: () => Promise.resolve().then(() => _3useLatest_useMemoizedFn)
+    preload: () => MDXContent$B
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/离谱/6ahooks/4use(Raf)Timeout与use(Raf)Interval与useCountDown.md",
     timestamp: "1722235635",
     path: "/%E7%A6%BB%E8%B0%B1/6ahooks/4use(Raf)Timeout%E4%B8%8Euse(Raf)Interval%E4%B8%8EuseCountDown.html",
     element: React.createElement(MDXContent$A),
-    load: () => Promise.resolve().then(() => _4use_Raf_Timeout_use_Raf_Interval_useCountDown)
+    preload: () => MDXContent$A
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/离谱/6ahooks/5useRequest.md",
     timestamp: "1722235635",
     path: "/%E7%A6%BB%E8%B0%B1/6ahooks/5useRequest.html",
     element: React.createElement(MDXContent$z),
-    load: () => Promise.resolve().then(() => _5useRequest)
+    preload: () => MDXContent$z
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/离谱/6ahooks/6useMount与useUnMount与useMountedRef.mdx.md",
     timestamp: "1722235635",
     path: "/%E7%A6%BB%E8%B0%B1/6ahooks/6useMount%E4%B8%8EuseUnMount%E4%B8%8EuseMountedRefx.md.html",
     element: React.createElement(MDXContent$y),
-    load: () => Promise.resolve().then(() => _6useMount_useUnMount_useMountedRef_mdx)
+    preload: () => MDXContent$y
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/离谱/6ahooks/7useUpdate.md",
     timestamp: "1722235635",
     path: "/%E7%A6%BB%E8%B0%B1/6ahooks/7useUpdate.html",
     element: React.createElement(MDXContent$x),
-    load: () => Promise.resolve().then(() => _7useUpdate)
+    preload: () => MDXContent$x
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/离谱/6ahooks/8useCreation.md",
     timestamp: "1722235635",
     path: "/%E7%A6%BB%E8%B0%B1/6ahooks/8useCreation.html",
     element: React.createElement(MDXContent$w),
-    load: () => Promise.resolve().then(() => _8useCreation)
+    preload: () => MDXContent$w
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/离谱/6ahooks/97useAnimationFrame和计时器.mdx",
     timestamp: "1722235635",
     path: "/%E7%A6%BB%E8%B0%B1/6ahooks/97useAnimationFrame%E5%92%8C%E8%AE%A1%E6%97%B6%E5%99%A8.html",
     element: React.createElement(MDXContent$v),
-    load: () => Promise.resolve().then(() => _97useAnimationFrame____)
+    preload: () => MDXContent$v
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/离谱/6ahooks/9useDeepCompareEffect.md",
     timestamp: "1722235635",
     path: "/%E7%A6%BB%E8%B0%B1/6ahooks/9useDeepCompareEffect.html",
     element: React.createElement(MDXContent$u),
-    load: () => Promise.resolve().then(() => _9useDeepCompareEffect)
+    preload: () => MDXContent$u
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/0常用命令.md",
     timestamp: "1732086747",
     path: "/%E7%AC%94%E8%AE%B0/1git/0%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html",
     element: React.createElement(MDXContent$t),
-    load: () => Promise.resolve().then(() => _0____)
+    preload: () => MDXContent$t
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/10checkout.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/10checkout.html",
     element: React.createElement(MDXContent$s),
-    load: () => Promise.resolve().then(() => _10checkout)
+    preload: () => MDXContent$s
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/11stash.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/11stash.html",
     element: React.createElement(MDXContent$r),
-    load: () => Promise.resolve().then(() => _11stash)
+    preload: () => MDXContent$r
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/12log与reflog.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/12log%E4%B8%8Ereflog.html",
     element: React.createElement(MDXContent$q),
-    load: () => Promise.resolve().then(() => _12log_reflog)
+    preload: () => MDXContent$q
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/13cherry-pick.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/13cherry-pick.html",
     element: React.createElement(MDXContent$p),
-    load: () => Promise.resolve().then(() => _13cherryPick)
+    preload: () => MDXContent$p
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/1版本控制系统VCS.md",
     timestamp: "1731996627",
     path: "/%E7%AC%94%E8%AE%B0/1git/1%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FVCS.html",
     element: React.createElement(MDXContent$o),
-    load: () => Promise.resolve().then(() => _1______VCS)
+    preload: () => MDXContent$o
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/2分布式版本控制系统DVCS.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/2%E5%88%86%E5%B8%83%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9FDVCS.html",
     element: React.createElement(MDXContent$n),
-    load: () => Promise.resolve().then(() => _2_________DVCS)
+    preload: () => MDXContent$n
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/3HEAD与master与branch.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/3HEAD%E4%B8%8Emaster%E4%B8%8Ebranch.html",
     element: React.createElement(MDXContent$m),
-    load: () => Promise.resolve().then(() => _3HEAD_master_branch)
+    preload: () => MDXContent$m
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/4push.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/4push.html",
     element: React.createElement(MDXContent$l),
-    load: () => Promise.resolve().then(() => _4push)
+    preload: () => MDXContent$l
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/5merge.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/5merge.html",
     element: React.createElement(MDXContent$k),
-    load: () => Promise.resolve().then(() => _5merge)
+    preload: () => MDXContent$k
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/6feature branch.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/6feature%20branch.html",
     element: React.createElement(MDXContent$j),
-    load: () => Promise.resolve().then(() => _6feature_branch)
+    preload: () => MDXContent$j
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/7rebase.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/7rebase.html",
     element: React.createElement(MDXContent$i),
-    load: () => Promise.resolve().then(() => _7rebase)
+    preload: () => MDXContent$i
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/8revert.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/8revert.html",
     element: React.createElement(MDXContent$h),
-    load: () => Promise.resolve().then(() => _8revert)
+    preload: () => MDXContent$h
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/99readme.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/1git/99readme.html",
     element: React.createElement(MDXContent$g),
-    load: () => Promise.resolve().then(() => _99readme$2)
+    preload: () => MDXContent$g
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/1git/9reset.md",
     timestamp: "1731996627",
     path: "/%E7%AC%94%E8%AE%B0/1git/9reset.html",
     element: React.createElement(MDXContent$f),
-    load: () => Promise.resolve().then(() => _9reset)
-  },
-  {
-    file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/3http/99readme.md",
-    timestamp: "1722072403",
-    path: "/%E7%AC%94%E8%AE%B0/3http/99readme.html",
-    element: React.createElement(MDXContent$e),
-    load: () => Promise.resolve().then(() => _99readme$1)
+    preload: () => MDXContent$f
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/0介绍/intro.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/0%E4%BB%8B%E7%BB%8D/intro.html",
+    element: React.createElement(MDXContent$e),
+    preload: () => MDXContent$e
+  },
+  {
+    file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/3http/99readme.md",
+    timestamp: "1722072403",
+    path: "/%E7%AC%94%E8%AE%B0/3http/99readme.html",
     element: React.createElement(MDXContent$d),
-    load: () => Promise.resolve().then(() => intro)
+    preload: () => MDXContent$d
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/2浏览器/13内存.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/13%E5%86%85%E5%AD%98.html",
     element: React.createElement(MDXContent$c),
-    load: () => Promise.resolve().then(() => _13__)
+    preload: () => MDXContent$c
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/2浏览器/16消息队列和事件循环.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/16%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.html",
     element: React.createElement(MDXContent$b),
-    load: () => Promise.resolve().then(() => _16_________)
+    preload: () => MDXContent$b
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/2浏览器/1浏览器进程.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/1%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9B%E7%A8%8B.html",
     element: React.createElement(MDXContent$a),
-    load: () => Promise.resolve().then(() => _1_____)
+    preload: () => MDXContent$a
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/2浏览器/2TCP协议.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/2TCP%E5%8D%8F%E8%AE%AE.html",
     element: React.createElement(MDXContent$9),
-    load: () => Promise.resolve().then(() => _2TCP__)
+    preload: () => MDXContent$9
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/2浏览器/3HTTP协议.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/3HTTP%E5%8D%8F%E8%AE%AE.html",
     element: React.createElement(MDXContent$8),
-    load: () => Promise.resolve().then(() => _3HTTP__)
+    preload: () => MDXContent$8
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/2浏览器/4浏览器缓存.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/4%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98.html",
     element: React.createElement(MDXContent$7),
-    load: () => Promise.resolve().then(() => _4_____)
+    preload: () => MDXContent$7
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/2浏览器/5导航流程.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/5%E5%AF%BC%E8%88%AA%E6%B5%81%E7%A8%8B.html",
     element: React.createElement(MDXContent$6),
-    load: () => Promise.resolve().then(() => _5____)
+    preload: () => MDXContent$6
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/2浏览器/6渲染流程.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/6%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B.html",
     element: React.createElement(MDXContent$5),
-    load: () => Promise.resolve().then(() => _6____)
+    preload: () => MDXContent$5
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/2浏览器/98 浏览器的dns缓存.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/98%20%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84dns%E7%BC%93%E5%AD%98.html",
     element: React.createElement(MDXContent$4),
-    load: () => Promise.resolve().then(() => _98_____dns__)
+    preload: () => MDXContent$4
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/2浏览器/99readme.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/2%E6%B5%8F%E8%A7%88%E5%99%A8/99readme.html",
     element: React.createElement(MDXContent$3),
-    load: () => Promise.resolve().then(() => _99readme)
+    preload: () => MDXContent$3
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/4javascript/1引用.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/4javascript/1%E5%BC%95%E7%94%A8.html",
     element: React.createElement(MDXContent$2),
-    load: () => Promise.resolve().then(() => _1__)
+    preload: () => MDXContent$2
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/4javascript/2运算符.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/4javascript/2%E8%BF%90%E7%AE%97%E7%AC%A6.html",
     element: React.createElement(MDXContent$1),
-    load: () => Promise.resolve().then(() => _2___)
+    preload: () => MDXContent$1
   },
   {
     file: "/Users/houhongxu/workspace/hhx/zeropress/apps/examples/docs/笔记/4javascript/3lodash手写.md",
     timestamp: "1722072403",
     path: "/%E7%AC%94%E8%AE%B0/4javascript/3lodash%E6%89%8B%E5%86%99.html",
     element: React.createElement(MDXContent),
-    load: () => Promise.resolve().then(() => _3lodash__)
+    preload: () => MDXContent
   }
 ];
 async function getPageData(pathname) {
@@ -21652,7 +20977,7 @@ async function getPageData(pathname) {
     timestamp: ""
   };
   if (matched) {
-    const module2 = await matched.load();
+    const module2 = await matched.preload();
     pageData = {
       pageType: ((_b = (_a = module2 == null ? void 0 : module2.GetFrontMatter) == null ? void 0 : _a.call(module2)) == null ? void 0 : _b.pageType) || "doc",
       pagePath: pathname,
@@ -21740,7 +21065,7 @@ function useWindowScroll() {
 }
 function Content({ location = "/" }) {
   const element = reactRouterDom.useRoutes(routes, normalizeUrl(location));
-  return element;
+  return /* @__PURE__ */ jsxRuntime.jsx(React.Suspense, { fallback: null, children: element });
 }
 function Link({
   href = "/",
@@ -21786,7 +21111,7 @@ function usePrevNextPage() {
   return { prevPage, nextPage };
 }
 function useTocScroll() {
-  const [index2, setIndex] = React.useState();
+  const [index, setIndex] = React.useState();
   React.useEffect(() => {
     window.addEventListener("scroll", () => {
       const num = handleHighlight();
@@ -21799,7 +21124,7 @@ function useTocScroll() {
       });
     };
   }, []);
-  return [index2, setIndex];
+  return [index, setIndex];
 }
 function handleHighlight() {
   var _a, _b;
@@ -22058,13 +21383,13 @@ function TocBody({
   toc,
   onClick
 }) {
-  const [index2] = useTocScroll();
+  const [index] = useTocScroll();
   return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "border-divider pc:border-l px-[16px] font-[500]", children: [
     /* @__PURE__ */ jsxRuntime.jsx(
       "div",
       {
         className: "pc:block bg-brand absolute left-0 hidden h-[18px] w-px transition-[opacity,top] duration-300",
-        style: index2 !== void 0 ? { top: index2 * 28 + 33, opacity: 100 } : { top: 33, opacity: 0 }
+        style: index !== void 0 ? { top: index * 28 + 33, opacity: 100 } : { top: 33, opacity: 0 }
       }
     ),
     /* @__PURE__ */ jsxRuntime.jsx("div", { className: "text-[14px] font-[600] leading-[28px]", children: "本页目录" }),
@@ -22072,7 +21397,7 @@ function TocBody({
       TocItem,
       {
         onClick,
-        active: index2 === i,
+        active: index === i,
         item
       },
       item.id
@@ -22199,14 +21524,27 @@ function Doc({
 }
 function Home({
   title,
-  description
+  description,
+  icp
 }) {
-  return /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, { children: /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "pt-nav flex h-screen flex-col items-center justify-center", children: [
-    /* @__PURE__ */ jsxRuntime.jsx("div", { className: "text-[10vw]", children: title }),
-    /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "text-[6vw]", children: [
-      " ",
-      description
-    ] })
+  return /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, { children: /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "pt-nav flex h-screen flex-col items-center justify-between", children: [
+    /* @__PURE__ */ jsxRuntime.jsx("div", {}),
+    /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex flex-col items-center justify-center", children: [
+      /* @__PURE__ */ jsxRuntime.jsx("div", { className: "pc:text-[80px] text-[32px]", children: title }),
+      /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "pc:text-[40px] text-[16px]", children: [
+        " ",
+        description
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntime.jsx(
+      "a",
+      {
+        className: "pc:text-[16px] mb-[2px] text-[12px]",
+        href: "https://beian.miit.gov.cn/",
+        target: "_blank",
+        children: icp
+      }
+    )
   ] }) });
 }
 function Switch({
@@ -22278,13 +21616,13 @@ function Nav({ nav }) {
             "pc:block h-nav hidden border-b px-[12px] pt-px transition-colors duration-300"
           ),
           children: /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex h-full items-center justify-between", children: [
-            /* @__PURE__ */ jsxRuntime.jsx("div", { className: "flex h-full shrink-0 justify-start", children: left == null ? void 0 : left.map((item, index2) => /* @__PURE__ */ jsxRuntime.jsx("div", { className: "h-full", children: getItem(item) }, `${item.link}${index2}`)) }),
-            /* @__PURE__ */ jsxRuntime.jsx("div", { className: "flex h-full justify-end", children: right == null ? void 0 : right.map((item, index2) => /* @__PURE__ */ jsxRuntime.jsx("div", { className: "h-full", children: getItem(item) }, `${item.link}${index2}`)) })
+            /* @__PURE__ */ jsxRuntime.jsx("div", { className: "flex h-full shrink-0 justify-start", children: left == null ? void 0 : left.map((item, index) => /* @__PURE__ */ jsxRuntime.jsx("div", { className: "h-full", children: getItem(item) }, `${item.link}${index}`)) }),
+            /* @__PURE__ */ jsxRuntime.jsx("div", { className: "flex h-full justify-end", children: right == null ? void 0 : right.map((item, index) => /* @__PURE__ */ jsxRuntime.jsx("div", { className: "h-full", children: getItem(item) }, `${item.link}${index}`)) })
           ] })
         }
       ),
       /* @__PURE__ */ jsxRuntime.jsx("div", { className: "pc:hidden", children: /* @__PURE__ */ jsxRuntime.jsx("div", { className: "h-nav bg-bg-default border-b px-[12px] pt-px", children: /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex h-full items-center justify-between", children: [
-        /* @__PURE__ */ jsxRuntime.jsx("div", { className: "flex h-full shrink-0 justify-start", children: left == null ? void 0 : left.map((item, index2) => /* @__PURE__ */ jsxRuntime.jsx("div", { className: "h-full", children: getItem(item) }, `${item.link}${index2}`)) }),
+        /* @__PURE__ */ jsxRuntime.jsx("div", { className: "flex h-full shrink-0 justify-start", children: left == null ? void 0 : left.map((item, index) => /* @__PURE__ */ jsxRuntime.jsx("div", { className: "h-full", children: getItem(item) }, `${item.link}${index}`)) }),
         /* @__PURE__ */ jsxRuntime.jsx(
           "div",
           {
@@ -22303,14 +21641,14 @@ function Nav({ nav }) {
           visible ? "opacity-100" : "opacity-0",
           "bg-bg-default mt-nav fixed inset-0 z-50 transition-opacity duration-300"
         ),
-        children: /* @__PURE__ */ jsxRuntime.jsx("div", { className: "mt-[12px]", children: right == null ? void 0 : right.map((item, index2) => /* @__PURE__ */ jsxRuntime.jsx(
+        children: /* @__PURE__ */ jsxRuntime.jsx("div", { className: "mt-[12px]", children: right == null ? void 0 : right.map((item, index) => /* @__PURE__ */ jsxRuntime.jsx(
           "div",
           {
             onClick: () => setVisible(false),
             className: "flex items-center justify-center py-[4px]",
             children: getItem(item)
           },
-          `${item.link}${index2}`
+          `${item.link}${index}`
         )) })
       }
     )
@@ -22391,7 +21729,8 @@ function Layout({ location = window.location.pathname }) {
         Home,
         {
           title: pageData == null ? void 0 : pageData.userConfig.title,
-          description: pageData == null ? void 0 : pageData.userConfig.description
+          description: pageData == null ? void 0 : pageData.userConfig.description,
+          icp: pageData == null ? void 0 : pageData.userConfig.icp
         }
       );
     } else if (pageType === "doc") {

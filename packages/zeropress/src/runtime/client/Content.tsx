@@ -1,4 +1,5 @@
 import { normalizeUrl } from '@/shared/utils'
+import { Suspense } from 'react'
 import { useRoutes } from 'react-router-dom'
 import routes from 'virtual:routes'
 
@@ -9,5 +10,5 @@ import routes from 'virtual:routes'
 export function Content({ location = '/' }) {
   const element = useRoutes(routes, normalizeUrl(location))
 
-  return element
+  return <Suspense fallback={null}>{element}</Suspense>
 }

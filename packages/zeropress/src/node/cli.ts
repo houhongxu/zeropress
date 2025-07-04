@@ -1,6 +1,6 @@
 import { buildRuntime } from './build'
 import { resolveSiteConfig } from './config'
-import { ROOT_PATH } from './consts'
+import { ROOT_PATH } from './constants'
 import { createRuntimeDevServer } from './server'
 import { program } from 'commander'
 import fse from 'fs-extra'

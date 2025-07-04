@@ -1,4 +1,4 @@
-import { SRC_PATH } from './consts'
+import { SRC_PATH } from './constants'
 import { createPlugins } from './plugins'
 import { tailwindcssConfig } from './tailwind'
 import { SiteConfig } from '@/shared/types'

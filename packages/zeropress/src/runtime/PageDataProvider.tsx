@@ -1,5 +1,6 @@
 import { TitleHelmet } from './TitleHelmet'
-import { PageDataContext, getPageData } from './usePageData'
+import { getPageData } from './getPageData'
+import { PageDataContext } from './usePageData'
 import { useUpdateEffect } from './useUpdateEffect'
 import { ComponentProps, PropsWithChildren, useEffect, useState } from 'react'
 import { HelmetData } from 'react-helmet-async'

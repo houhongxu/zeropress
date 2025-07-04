@@ -1,4 +1,4 @@
-import { CONFIG_OPTIONS, DEFAULT_USER_CONFIG } from './consts'
+import { CONFIG_OPTIONS, DEFAULT_USER_CONFIG } from './constants'
 import { globDocs } from './utils'
 import {
   UserConfig,

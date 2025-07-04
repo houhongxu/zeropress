@@ -1,5 +1,5 @@
 import { UserConfig } from './userConfig'
-import { ReactElement } from 'react'
+import { ComponentType } from 'react'
 
 export type PageType = 'home' | 'doc' | 'custom' | '404'
 
@@ -13,8 +13,8 @@ export interface PageData {
   frontmatter?: FrontMatter
 }
 
-export interface PageModule {
-  default: ReactElement
+export interface PageModule<T extends ComponentType<unknown>> {
+  default: T
   GetFrontMatter?: () => FrontMatter
   GetToc?: () => TocItem[]
   [key: string]: unknown

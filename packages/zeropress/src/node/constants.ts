@@ -42,3 +42,12 @@ export const DEFAULT_USER_CONFIG: Required<UserConfig> = {
   icp: '',
   vite: {},
 }
+
+export const LIB_PATH = path.join(__dirname, '..')
+
+export const LIB_RUNTIME_PATH = path.join(LIB_PATH, 'runtime')
+
+export const LAZY_WITH_PRELOAD_RUNTIME_PATH = path.join(
+  LIB_RUNTIME_PATH,
+  './lazyWithPreload.js',
+)

@@ -3,9 +3,8 @@
   "version": "0.0.47",
   "description": "zero config SSG framework",
   "scripts": {
-    "build:comment": "echo 多入口打包，tsup不打包node_modules，--shims兼容esm与cjs的全局变量如__dirname，--no-splitting兼容shims，让shims不分割为chunk影响__dirname等路径",
-    "build": "tsup ./src/node/cli.ts ./src/index.ts --shims --no-splitting --format esm --dts --external virtual:routes --external virtual:config --outDir=./lib",
-    "dev": "cross-env NODE_ENV=development tsup ./src/node/cli.ts ./src/index.ts --shims --no-splitting --format esm --dts --external virtual:routes --external virtual:config --outDir=./lib --watch",
+    "build": "cross-env NODE_ENV=production tsup --format=cjs,esm ",
+    "dev": "cross-env NODE_ENV=development tsup --watch --format=cjs,esm",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "release": "tsx scripts/release.ts",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
@@ -22,7 +21,6 @@
     "src/runtime",
     "src/shared",
     "src/default-theme",
-    "src/shared",
     "tsconfig.json",
     "README.md",
     "CHANGELOG.md"

@@ -1,5 +1,5 @@
 import { ServerPageDataProvider } from '../PageDataProvider'
-import { getPageData } from '../usePageData'
+import { getPageData } from '../getPageData'
 import { Layout } from '@/default-theme/Layout'
 import { renderToString } from 'react-dom/server'
 import { HelmetData } from 'react-helmet-async'

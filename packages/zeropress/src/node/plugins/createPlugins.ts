@@ -1,4 +1,4 @@
-import { CLIENT_ENTRY_PATH, HTML_PATH } from '../consts'
+import { CLIENT_ENTRY_PATH, HTML_PATH } from '../constants'
 import { vitePluginBuildImg } from './vitePluginBuildImg'
 import { vitePluginMdx } from './vitePluginMdx'
 import { vitePluginServeHtml } from './vitePluginServeHtml'
@@ -13,9 +13,11 @@ import { PluginOption } from 'vite'
 export function createPlugins({
   siteConfig,
   restartRuntimeDevServer,
+  isServer,
 }: {
   siteConfig: SiteConfig
   restartRuntimeDevServer?: () => Promise<void>
+  isServer?: boolean
 }): PluginOption[] {
   return [
     vitePluginMdx(),
@@ -28,7 +30,7 @@ export function createPlugins({
       entry: CLIENT_ENTRY_PATH, // /@fs/是针对root之外的，当作为npm包时在nodemodules中属于root内，不需要使用 https://cn.vitejs.dev/config/server-options.html#server-fs-allow
     }),
     vitePluginVirtualConfig({ siteConfig, restartRuntimeDevServer }),
-    vitePluginVirtualRoutes({ siteConfig }),
+    vitePluginVirtualRoutes({ siteConfig, isServer }),
     vitePluginTransformFrontmatter(),
     vitePluginBuildImg({ siteConfig }),
     vitePluginServeImg({ siteConfig }),

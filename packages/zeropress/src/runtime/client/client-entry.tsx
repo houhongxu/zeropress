@@ -1,5 +1,5 @@
 import { ClientPageDataProvider } from '../PageDataProvider'
-import { getPageData } from '../usePageData'
+import { getPageData } from '../getPageData'
 import { Layout } from '@/default-theme/Layout'
 import { createRoot, hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'

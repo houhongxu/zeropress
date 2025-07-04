@@ -1,7 +1,7 @@
 // 之前尝试使用rehype插件处理imgsrc发现无法获取md路径
 // 使用插件transform移动图片到public并修改src的方式可以支持
 // dev时使用内存保存图片，通过server返回，更合适
-import { CLIENT_OUT_PATH } from '../consts'
+import { CLIENT_OUT_PATH } from '../constants'
 import { SiteConfig } from '@/shared/types'
 import fse from 'fs-extra'
 import path from 'path'

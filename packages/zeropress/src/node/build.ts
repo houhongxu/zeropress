@@ -7,7 +7,7 @@ import {
   SERVER_ENTRY_PATH,
   SERVER_OUT_PATH,
   SRC_PATH,
-} from './consts'
+} from './constants'
 import { createPlugins } from './plugins'
 import { tailwindcssConfig } from './tailwind'
 import { promiseLimit } from './utils'
@@ -56,7 +56,7 @@ function viteBuild({
     mode: 'production',
     base: './',
     root: ROOT_PATH, // 获取tsconfig.json等配置文件
-    plugins: createPlugins({ siteConfig }),
+    plugins: createPlugins({ siteConfig, isServer }),
     build: {
       ssr: isServer,
       outDir: isServer
@@ -65,8 +65,8 @@ function viteBuild({
       rollupOptions: {
         input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
         output: {
-          entryFileNames: isServer 
-            ? 'server-entry.cjs' 
+          entryFileNames: isServer
+            ? 'server-entry.cjs'
             : 'client-entry.[hash].js',
           format: isServer ? 'cjs' : 'es',
         },
